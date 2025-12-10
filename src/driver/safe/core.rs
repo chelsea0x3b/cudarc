@@ -1849,6 +1849,9 @@ impl CudaContext {
                 let name_c = CString::new(path.to_str().unwrap()).unwrap();
                 result::module::load(name_c)
             }
+            crate::nvrtc::PtxKind::Binary(data) => unsafe {
+                result::module::load_data(data.as_ptr() as *const _)
+            },
         }?;
         Ok(Arc::new(CudaModule {
             cu_module,
