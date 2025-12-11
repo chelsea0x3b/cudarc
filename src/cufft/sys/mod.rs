@@ -13,7 +13,8 @@ pub use self::cufftCompatibility_t as cufftCompatibility;
     feature = "cuda-12060",
     feature = "cuda-12080",
     feature = "cuda-12090",
-    feature = "cuda-13000"
+    feature = "cuda-13000",
+    feature = "cuda-13010"
 ))]
 pub use self::cufftProperty_t as cufftProperty;
 pub use self::cufftResult_t as cufftResult;
@@ -44,7 +45,8 @@ pub enum cufftProperty_t {
     feature = "cuda-12060",
     feature = "cuda-12080",
     feature = "cuda-12090",
-    feature = "cuda-13000"
+    feature = "cuda-13000",
+    feature = "cuda-13010"
 ))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
@@ -84,7 +86,7 @@ pub enum cufftResult_t {
     CUFFT_LICENSE_ERROR = 15,
     CUFFT_NOT_SUPPORTED = 16,
 }
-#[cfg(any(feature = "cuda-13000"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cufftResult_t {
@@ -217,7 +219,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cufftGetPlanPropertyInt64(
         plan: cufftHandle,
@@ -368,7 +371,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cufftResetPlanProperty(plan: cufftHandle, property: cufftProperty) -> cufftResult;
     pub fn cufftSetAutoAllocation(
@@ -381,7 +385,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cufftSetPlanPropertyInt64(
         plan: cufftHandle,
@@ -492,7 +497,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cufftGetPlanPropertyInt64(
         plan: cufftHandle,
@@ -690,7 +696,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cufftResetPlanProperty(
         plan: cufftHandle,
@@ -710,7 +717,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cufftSetPlanPropertyInt64(
         plan: cufftHandle,
@@ -802,7 +810,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cufftGetPlanPropertyInt64: unsafe extern "C" fn(
             plan: cufftHandle,
@@ -954,7 +963,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cufftResetPlanProperty:
             unsafe extern "C" fn(plan: cufftHandle, property: cufftProperty) -> cufftResult,
@@ -968,7 +978,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cufftSetPlanPropertyInt64: unsafe extern "C" fn(
             plan: cufftHandle,
@@ -1049,7 +1060,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cufftGetPlanPropertyInt64 = __library
                 .get(b"cufftGetPlanPropertyInt64\0")
@@ -1129,7 +1141,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cufftResetPlanProperty = __library
                 .get(b"cufftResetPlanProperty\0")
@@ -1145,7 +1158,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cufftSetPlanPropertyInt64 = __library
                 .get(b"cufftSetPlanPropertyInt64\0")
@@ -1179,7 +1193,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cufftGetPlanPropertyInt64,
                 cufftGetProperty,
@@ -1205,7 +1220,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cufftResetPlanProperty,
                 cufftSetAutoAllocation,
@@ -1215,7 +1231,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cufftSetPlanPropertyInt64,
                 cufftSetStream,

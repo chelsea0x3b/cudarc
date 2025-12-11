@@ -8,9 +8,9 @@ extern crate alloc;
 extern crate no_std_compat as std;
 pub use self::cudaDataType as cublasDataType_t;
 pub use self::cudaDataType_t as cudaDataType;
-#[cfg(any(feature = "cuda-13000"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010"))]
 pub use self::cudaEmulationMantissaControl_t as cudaEmulationMantissaControl;
-#[cfg(any(feature = "cuda-13000"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010"))]
 pub use self::cudaEmulationSpecialValuesSupport_t as cudaEmulationSpecialValuesSupport;
 pub use self::libraryPropertyType_t as libraryPropertyType;
 pub type cuComplex = cuFloatComplex;
@@ -73,7 +73,7 @@ pub enum cublasComputeType_t {
     CUBLAS_COMPUTE_32I = 72,
     CUBLAS_COMPUTE_32I_PEDANTIC = 73,
 }
-#[cfg(any(feature = "cuda-13000"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cublasComputeType_t {
@@ -97,7 +97,7 @@ pub enum cublasDiagType_t {
     CUBLAS_DIAG_NON_UNIT = 0,
     CUBLAS_DIAG_UNIT = 1,
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cublasEmulationStrategy_t {
@@ -174,7 +174,7 @@ pub enum cublasGemmAlgo_t {
     CUBLAS_GEMM_ALGO14_TENSOR_OP = 114,
     CUBLAS_GEMM_ALGO15_TENSOR_OP = 115,
 }
-#[cfg(any(feature = "cuda-13000"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010"))]
 #[repr(i32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cublasGemmAlgo_t {
@@ -257,7 +257,7 @@ pub enum cublasMath_t {
     CUBLAS_FP32_EMULATED_BF16X9_MATH = 4,
     CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION = 16,
 }
-#[cfg(any(feature = "cuda-13000"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cublasMath_t {
@@ -385,7 +385,12 @@ pub enum cudaDataType_t {
     CUDA_R_8F_E4M3 = 28,
     CUDA_R_8F_E5M2 = 29,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000"))]
+#[cfg(any(
+    feature = "cuda-12080",
+    feature = "cuda-12090",
+    feature = "cuda-13000",
+    feature = "cuda-13010"
+))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cudaDataType_t {
@@ -424,14 +429,14 @@ pub enum cudaDataType_t {
     CUDA_R_6F_E3M2 = 32,
     CUDA_R_4F_E2M1 = 33,
 }
-#[cfg(any(feature = "cuda-13000"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cudaEmulationMantissaControl_t {
     CUDA_EMULATION_MANTISSA_CONTROL_DYNAMIC = 0,
     CUDA_EMULATION_MANTISSA_CONTROL_FIXED = 1,
 }
-#[cfg(any(feature = "cuda-13000"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cudaEmulationSpecialValuesSupport_t {
@@ -481,7 +486,12 @@ impl cublasGemmAlgo_t {
 impl cublasOperation_t {
     pub const CUBLAS_OP_HERMITAN: cublasOperation_t = cublasOperation_t::CUBLAS_OP_C;
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000"))]
+#[cfg(any(
+    feature = "cuda-12080",
+    feature = "cuda-12090",
+    feature = "cuda-13000",
+    feature = "cuda-13010"
+))]
 impl cudaDataType_t {
     pub const CUDA_R_8F_UE4M3: cudaDataType_t = cudaDataType_t::CUDA_R_8F_E4M3;
 }
@@ -507,7 +517,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasAsumEx_64(
         handle: cublasHandle_t,
@@ -542,7 +553,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasAxpyEx_64(
         handle: cublasHandle_t,
@@ -576,7 +588,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCaxpy_v2_64(
         handle: cublasHandle_t,
@@ -605,7 +618,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCcopy_v2_64(
         handle: cublasHandle_t,
@@ -637,7 +651,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCdgmm_64(
         handle: cublasHandle_t,
@@ -670,7 +685,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCdotc_v2_64(
         handle: cublasHandle_t,
@@ -700,7 +716,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCdotu_v2_64(
         handle: cublasHandle_t,
@@ -737,7 +754,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgbmv_v2_64(
         handle: cublasHandle_t,
@@ -780,7 +798,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgeam_64(
         handle: cublasHandle_t,
@@ -854,7 +873,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgemm3mBatched_64(
         handle: cublasHandle_t,
@@ -902,7 +922,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgemm3mEx_64(
         handle: cublasHandle_t,
@@ -953,7 +974,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgemm3mStridedBatched_64(
         handle: cublasHandle_t,
@@ -985,7 +1007,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgemm3m_64(
         handle: cublasHandle_t,
@@ -1030,7 +1053,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgemmBatched_64(
         handle: cublasHandle_t,
@@ -1078,7 +1102,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgemmEx_64(
         handle: cublasHandle_t,
@@ -1129,7 +1154,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgemmStridedBatched_64(
         handle: cublasHandle_t,
@@ -1177,7 +1203,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgemm_v2_64(
         handle: cublasHandle_t,
@@ -1208,7 +1235,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgemvBatched(
         handle: cublasHandle_t,
@@ -1235,7 +1263,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgemvBatched_64(
         handle: cublasHandle_t,
@@ -1265,7 +1294,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgemvStridedBatched(
         handle: cublasHandle_t,
@@ -1295,7 +1325,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgemvStridedBatched_64(
         handle: cublasHandle_t,
@@ -1339,7 +1370,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgemv_v2_64(
         handle: cublasHandle_t,
@@ -1387,7 +1419,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgerc_v2_64(
         handle: cublasHandle_t,
@@ -1423,7 +1456,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCgeru_v2_64(
         handle: cublasHandle_t,
@@ -1494,7 +1528,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasChbmv_v2_64(
         handle: cublasHandle_t,
@@ -1535,7 +1570,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasChemm_v2_64(
         handle: cublasHandle_t,
@@ -1575,7 +1611,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasChemv_v2_64(
         handle: cublasHandle_t,
@@ -1612,7 +1649,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCher2_v2_64(
         handle: cublasHandle_t,
@@ -1651,7 +1689,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCher2k_v2_64(
         handle: cublasHandle_t,
@@ -1688,7 +1727,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCher_v2_64(
         handle: cublasHandle_t,
@@ -1725,7 +1765,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCherk3mEx_64(
         handle: cublasHandle_t,
@@ -1767,7 +1808,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCherkEx_64(
         handle: cublasHandle_t,
@@ -1807,7 +1849,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCherk_v2_64(
         handle: cublasHandle_t,
@@ -1847,7 +1890,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCherkx_64(
         handle: cublasHandle_t,
@@ -1886,7 +1930,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasChpmv_v2_64(
         handle: cublasHandle_t,
@@ -1921,7 +1966,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasChpr2_v2_64(
         handle: cublasHandle_t,
@@ -1953,7 +1999,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasChpr_v2_64(
         handle: cublasHandle_t,
@@ -1994,7 +2041,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCopyEx_64(
         handle: cublasHandle_t,
@@ -2027,7 +2075,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCrot_v2_64(
         handle: cublasHandle_t,
@@ -2063,7 +2112,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCscal_v2_64(
         handle: cublasHandle_t,
@@ -2092,7 +2142,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCsrot_v2_64(
         handle: cublasHandle_t,
@@ -2121,7 +2172,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCsscal_v2_64(
         handle: cublasHandle_t,
@@ -2148,7 +2200,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCswap_v2_64(
         handle: cublasHandle_t,
@@ -2183,7 +2236,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCsymm_v2_64(
         handle: cublasHandle_t,
@@ -2223,7 +2277,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCsymv_v2_64(
         handle: cublasHandle_t,
@@ -2260,7 +2315,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCsyr2_v2_64(
         handle: cublasHandle_t,
@@ -2299,7 +2355,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCsyr2k_v2_64(
         handle: cublasHandle_t,
@@ -2336,7 +2393,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCsyr_v2_64(
         handle: cublasHandle_t,
@@ -2373,7 +2431,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCsyrk3mEx_64(
         handle: cublasHandle_t,
@@ -2415,7 +2474,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCsyrkEx_64(
         handle: cublasHandle_t,
@@ -2455,7 +2515,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCsyrk_v2_64(
         handle: cublasHandle_t,
@@ -2495,7 +2556,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCsyrkx_64(
         handle: cublasHandle_t,
@@ -2534,7 +2596,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCtbmv_v2_64(
         handle: cublasHandle_t,
@@ -2570,7 +2633,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCtbsv_v2_64(
         handle: cublasHandle_t,
@@ -2604,7 +2668,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCtpmv_v2_64(
         handle: cublasHandle_t,
@@ -2636,7 +2701,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCtpsv_v2_64(
         handle: cublasHandle_t,
@@ -2682,7 +2748,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCtrmm_v2_64(
         handle: cublasHandle_t,
@@ -2721,7 +2788,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCtrmv_v2_64(
         handle: cublasHandle_t,
@@ -2759,7 +2827,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCtrsmBatched_64(
         handle: cublasHandle_t,
@@ -2800,7 +2869,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCtrsm_v2_64(
         handle: cublasHandle_t,
@@ -2837,7 +2907,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasCtrsv_v2_64(
         handle: cublasHandle_t,
@@ -2875,7 +2946,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDasum_v2_64(
         handle: cublasHandle_t,
@@ -2903,7 +2975,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDaxpy_v2_64(
         handle: cublasHandle_t,
@@ -2932,7 +3005,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDcopy_v2_64(
         handle: cublasHandle_t,
@@ -2964,7 +3038,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDdgmm_64(
         handle: cublasHandle_t,
@@ -2997,7 +3072,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDdot_v2_64(
         handle: cublasHandle_t,
@@ -3035,7 +3111,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDgbmv_v2_64(
         handle: cublasHandle_t,
@@ -3078,7 +3155,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDgeam_64(
         handle: cublasHandle_t,
@@ -3136,7 +3214,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDgemmBatched_64(
         handle: cublasHandle_t,
@@ -3161,7 +3240,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDgemmGroupedBatched(
         handle: cublasHandle_t,
@@ -3187,7 +3267,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDgemmGroupedBatched_64(
         handle: cublasHandle_t,
@@ -3237,7 +3318,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDgemmStridedBatched_64(
         handle: cublasHandle_t,
@@ -3285,7 +3367,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDgemm_v2_64(
         handle: cublasHandle_t,
@@ -3316,7 +3399,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDgemvBatched(
         handle: cublasHandle_t,
@@ -3343,7 +3427,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDgemvBatched_64(
         handle: cublasHandle_t,
@@ -3373,7 +3458,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDgemvStridedBatched(
         handle: cublasHandle_t,
@@ -3403,7 +3489,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDgemvStridedBatched_64(
         handle: cublasHandle_t,
@@ -3447,7 +3534,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDgemv_v2_64(
         handle: cublasHandle_t,
@@ -3495,7 +3583,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDger_v2_64(
         handle: cublasHandle_t,
@@ -3569,7 +3658,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDnrm2_v2_64(
         handle: cublasHandle_t,
@@ -3601,7 +3691,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDotEx_64(
         handle: cublasHandle_t,
@@ -3639,7 +3730,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDotcEx_64(
         handle: cublasHandle_t,
@@ -3674,7 +3766,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDrot_v2_64(
         handle: cublasHandle_t,
@@ -3712,7 +3805,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDrotm_v2_64(
         handle: cublasHandle_t,
@@ -3755,7 +3849,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDsbmv_v2_64(
         handle: cublasHandle_t,
@@ -3788,7 +3883,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDscal_v2_64(
         handle: cublasHandle_t,
@@ -3819,7 +3915,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDspmv_v2_64(
         handle: cublasHandle_t,
@@ -3854,7 +3951,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDspr2_v2_64(
         handle: cublasHandle_t,
@@ -3886,7 +3984,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDspr_v2_64(
         handle: cublasHandle_t,
@@ -3915,7 +4014,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDswap_v2_64(
         handle: cublasHandle_t,
@@ -3950,7 +4050,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDsymm_v2_64(
         handle: cublasHandle_t,
@@ -3990,7 +4091,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDsymv_v2_64(
         handle: cublasHandle_t,
@@ -4027,7 +4129,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDsyr2_v2_64(
         handle: cublasHandle_t,
@@ -4066,7 +4169,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDsyr2k_v2_64(
         handle: cublasHandle_t,
@@ -4103,7 +4207,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDsyr_v2_64(
         handle: cublasHandle_t,
@@ -4138,7 +4243,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDsyrk_v2_64(
         handle: cublasHandle_t,
@@ -4178,7 +4284,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDsyrkx_64(
         handle: cublasHandle_t,
@@ -4217,7 +4324,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDtbmv_v2_64(
         handle: cublasHandle_t,
@@ -4253,7 +4361,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDtbsv_v2_64(
         handle: cublasHandle_t,
@@ -4287,7 +4396,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDtpmv_v2_64(
         handle: cublasHandle_t,
@@ -4319,7 +4429,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDtpsv_v2_64(
         handle: cublasHandle_t,
@@ -4365,7 +4476,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDtrmm_v2_64(
         handle: cublasHandle_t,
@@ -4404,7 +4516,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDtrmv_v2_64(
         handle: cublasHandle_t,
@@ -4442,7 +4555,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDtrsmBatched_64(
         handle: cublasHandle_t,
@@ -4483,7 +4597,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDtrsm_v2_64(
         handle: cublasHandle_t,
@@ -4520,7 +4635,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDtrsv_v2_64(
         handle: cublasHandle_t,
@@ -4558,7 +4674,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDzasum_v2_64(
         handle: cublasHandle_t,
@@ -4584,7 +4701,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasDznrm2_v2_64(
         handle: cublasHandle_t,
@@ -4625,7 +4743,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasGemmBatchedEx_64(
         handle: cublasHandle_t,
@@ -4680,7 +4799,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasGemmEx_64(
         handle: cublasHandle_t,
@@ -4708,7 +4828,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasGemmGroupedBatchedEx(
         handle: cublasHandle_t,
@@ -4737,7 +4858,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasGemmGroupedBatchedEx_64(
         handle: cublasHandle_t,
@@ -4796,7 +4918,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasGemmStridedBatchedEx_64(
         handle: cublasHandle_t,
@@ -4828,7 +4951,7 @@ extern "C" {
         mode: *mut cublasAtomicsMode_t,
     ) -> cublasStatus_t;
     pub fn cublasGetCudartVersion() -> usize;
-    #[cfg(any(feature = "cuda-12090", feature = "cuda-13000"))]
+    #[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010"))]
     pub fn cublasGetEmulationStrategy(
         handle: cublasHandle_t,
         emulationStrategy: *mut cublasEmulationStrategy_t,
@@ -4864,7 +4987,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasGetMatrixAsync_64(
         rows: i64,
@@ -4886,7 +5010,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasGetMatrix_64(
         rows: i64,
@@ -4942,7 +5067,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasGetVectorAsync_64(
         n: i64,
@@ -4963,7 +5089,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasGetVector_64(
         n: i64,
@@ -4995,7 +5122,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasIamaxEx_64(
         handle: cublasHandle_t,
@@ -5023,7 +5151,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasIaminEx_64(
         handle: cublasHandle_t,
@@ -5050,7 +5179,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasIcamax_v2_64(
         handle: cublasHandle_t,
@@ -5076,7 +5206,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasIcamin_v2_64(
         handle: cublasHandle_t,
@@ -5102,7 +5233,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasIdamax_v2_64(
         handle: cublasHandle_t,
@@ -5128,7 +5260,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasIdamin_v2_64(
         handle: cublasHandle_t,
@@ -5154,7 +5287,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasIsamax_v2_64(
         handle: cublasHandle_t,
@@ -5180,7 +5314,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasIsamin_v2_64(
         handle: cublasHandle_t,
@@ -5206,7 +5341,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasIzamax_v2_64(
         handle: cublasHandle_t,
@@ -5232,7 +5368,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasIzamin_v2_64(
         handle: cublasHandle_t,
@@ -5267,7 +5404,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasNrm2Ex_64(
         handle: cublasHandle_t,
@@ -5303,7 +5441,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasRotEx_64(
         handle: cublasHandle_t,
@@ -5352,7 +5491,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasRotmEx_64(
         handle: cublasHandle_t,
@@ -5398,7 +5538,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSasum_v2_64(
         handle: cublasHandle_t,
@@ -5426,7 +5567,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSaxpy_v2_64(
         handle: cublasHandle_t,
@@ -5457,7 +5599,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasScalEx_64(
         handle: cublasHandle_t,
@@ -5486,7 +5629,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasScasum_v2_64(
         handle: cublasHandle_t,
@@ -5512,7 +5656,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasScnrm2_v2_64(
         handle: cublasHandle_t,
@@ -5539,7 +5684,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasScopy_v2_64(
         handle: cublasHandle_t,
@@ -5571,7 +5717,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSdgmm_64(
         handle: cublasHandle_t,
@@ -5604,7 +5751,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSdot_v2_64(
         handle: cublasHandle_t,
@@ -5619,7 +5767,7 @@ extern "C" {
         handle: cublasHandle_t,
         mode: cublasAtomicsMode_t,
     ) -> cublasStatus_t;
-    #[cfg(any(feature = "cuda-12090", feature = "cuda-13000"))]
+    #[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010"))]
     pub fn cublasSetEmulationStrategy(
         handle: cublasHandle_t,
         emulationStrategy: cublasEmulationStrategy_t,
@@ -5655,7 +5803,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSetMatrixAsync_64(
         rows: i64,
@@ -5677,7 +5826,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSetMatrix_64(
         rows: i64,
@@ -5724,7 +5874,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSetVectorAsync_64(
         n: i64,
@@ -5745,7 +5896,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSetVector_64(
         n: i64,
@@ -5786,7 +5938,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSgbmv_v2_64(
         handle: cublasHandle_t,
@@ -5829,7 +5982,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSgeam_64(
         handle: cublasHandle_t,
@@ -5887,7 +6041,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSgemmBatched_64(
         handle: cublasHandle_t,
@@ -5935,7 +6090,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSgemmEx_64(
         handle: cublasHandle_t,
@@ -5962,7 +6118,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSgemmGroupedBatched(
         handle: cublasHandle_t,
@@ -5988,7 +6145,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSgemmGroupedBatched_64(
         handle: cublasHandle_t,
@@ -6038,7 +6196,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSgemmStridedBatched_64(
         handle: cublasHandle_t,
@@ -6086,7 +6245,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSgemm_v2_64(
         handle: cublasHandle_t,
@@ -6117,7 +6277,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSgemvBatched(
         handle: cublasHandle_t,
@@ -6144,7 +6305,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSgemvBatched_64(
         handle: cublasHandle_t,
@@ -6174,7 +6336,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSgemvStridedBatched(
         handle: cublasHandle_t,
@@ -6204,7 +6367,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSgemvStridedBatched_64(
         handle: cublasHandle_t,
@@ -6248,7 +6412,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSgemv_v2_64(
         handle: cublasHandle_t,
@@ -6296,7 +6461,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSger_v2_64(
         handle: cublasHandle_t,
@@ -6370,7 +6536,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSnrm2_v2_64(
         handle: cublasHandle_t,
@@ -6399,7 +6566,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSrot_v2_64(
         handle: cublasHandle_t,
@@ -6437,7 +6605,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSrotm_v2_64(
         handle: cublasHandle_t,
@@ -6480,7 +6649,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSsbmv_v2_64(
         handle: cublasHandle_t,
@@ -6513,7 +6683,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSscal_v2_64(
         handle: cublasHandle_t,
@@ -6544,7 +6715,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSspmv_v2_64(
         handle: cublasHandle_t,
@@ -6579,7 +6751,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSspr2_v2_64(
         handle: cublasHandle_t,
@@ -6611,7 +6784,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSspr_v2_64(
         handle: cublasHandle_t,
@@ -6640,7 +6814,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSswap_v2_64(
         handle: cublasHandle_t,
@@ -6675,7 +6850,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSsymm_v2_64(
         handle: cublasHandle_t,
@@ -6715,7 +6891,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSsymv_v2_64(
         handle: cublasHandle_t,
@@ -6752,7 +6929,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSsyr2_v2_64(
         handle: cublasHandle_t,
@@ -6791,7 +6969,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSsyr2k_v2_64(
         handle: cublasHandle_t,
@@ -6828,7 +7007,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSsyr_v2_64(
         handle: cublasHandle_t,
@@ -6863,7 +7043,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSsyrk_v2_64(
         handle: cublasHandle_t,
@@ -6903,7 +7084,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSsyrkx_64(
         handle: cublasHandle_t,
@@ -6942,7 +7124,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasStbmv_v2_64(
         handle: cublasHandle_t,
@@ -6978,7 +7161,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasStbsv_v2_64(
         handle: cublasHandle_t,
@@ -7012,7 +7196,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasStpmv_v2_64(
         handle: cublasHandle_t,
@@ -7044,7 +7229,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasStpsv_v2_64(
         handle: cublasHandle_t,
@@ -7090,7 +7276,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasStrmm_v2_64(
         handle: cublasHandle_t,
@@ -7129,7 +7316,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasStrmv_v2_64(
         handle: cublasHandle_t,
@@ -7167,7 +7355,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasStrsmBatched_64(
         handle: cublasHandle_t,
@@ -7208,7 +7397,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasStrsm_v2_64(
         handle: cublasHandle_t,
@@ -7245,7 +7435,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasStrsv_v2_64(
         handle: cublasHandle_t,
@@ -7286,7 +7477,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasSwapEx_64(
         handle: cublasHandle_t,
@@ -7338,7 +7530,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZaxpy_v2_64(
         handle: cublasHandle_t,
@@ -7367,7 +7560,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZcopy_v2_64(
         handle: cublasHandle_t,
@@ -7399,7 +7593,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZdgmm_64(
         handle: cublasHandle_t,
@@ -7432,7 +7627,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZdotc_v2_64(
         handle: cublasHandle_t,
@@ -7462,7 +7658,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZdotu_v2_64(
         handle: cublasHandle_t,
@@ -7493,7 +7690,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZdrot_v2_64(
         handle: cublasHandle_t,
@@ -7522,7 +7720,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZdscal_v2_64(
         handle: cublasHandle_t,
@@ -7557,7 +7756,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZgbmv_v2_64(
         handle: cublasHandle_t,
@@ -7600,7 +7800,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZgeam_64(
         handle: cublasHandle_t,
@@ -7657,7 +7858,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZgemm3m_64(
         handle: cublasHandle_t,
@@ -7702,7 +7904,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZgemmBatched_64(
         handle: cublasHandle_t,
@@ -7751,7 +7954,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZgemmStridedBatched_64(
         handle: cublasHandle_t,
@@ -7799,7 +8003,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZgemm_v2_64(
         handle: cublasHandle_t,
@@ -7830,7 +8035,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZgemvBatched(
         handle: cublasHandle_t,
@@ -7857,7 +8063,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZgemvBatched_64(
         handle: cublasHandle_t,
@@ -7887,7 +8094,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZgemvStridedBatched(
         handle: cublasHandle_t,
@@ -7917,7 +8125,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZgemvStridedBatched_64(
         handle: cublasHandle_t,
@@ -7961,7 +8170,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZgemv_v2_64(
         handle: cublasHandle_t,
@@ -8009,7 +8219,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZgerc_v2_64(
         handle: cublasHandle_t,
@@ -8045,7 +8256,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZgeru_v2_64(
         handle: cublasHandle_t,
@@ -8116,7 +8328,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZhbmv_v2_64(
         handle: cublasHandle_t,
@@ -8157,7 +8370,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZhemm_v2_64(
         handle: cublasHandle_t,
@@ -8197,7 +8411,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZhemv_v2_64(
         handle: cublasHandle_t,
@@ -8234,7 +8449,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZher2_v2_64(
         handle: cublasHandle_t,
@@ -8273,7 +8489,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZher2k_v2_64(
         handle: cublasHandle_t,
@@ -8310,7 +8527,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZher_v2_64(
         handle: cublasHandle_t,
@@ -8345,7 +8563,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZherk_v2_64(
         handle: cublasHandle_t,
@@ -8385,7 +8604,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZherkx_64(
         handle: cublasHandle_t,
@@ -8424,7 +8644,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZhpmv_v2_64(
         handle: cublasHandle_t,
@@ -8459,7 +8680,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZhpr2_v2_64(
         handle: cublasHandle_t,
@@ -8491,7 +8713,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZhpr_v2_64(
         handle: cublasHandle_t,
@@ -8532,7 +8755,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZrot_v2_64(
         handle: cublasHandle_t,
@@ -8568,7 +8792,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZscal_v2_64(
         handle: cublasHandle_t,
@@ -8595,7 +8820,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZswap_v2_64(
         handle: cublasHandle_t,
@@ -8630,7 +8856,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZsymm_v2_64(
         handle: cublasHandle_t,
@@ -8670,7 +8897,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZsymv_v2_64(
         handle: cublasHandle_t,
@@ -8707,7 +8935,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZsyr2_v2_64(
         handle: cublasHandle_t,
@@ -8746,7 +8975,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZsyr2k_v2_64(
         handle: cublasHandle_t,
@@ -8783,7 +9013,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZsyr_v2_64(
         handle: cublasHandle_t,
@@ -8818,7 +9049,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZsyrk_v2_64(
         handle: cublasHandle_t,
@@ -8858,7 +9090,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZsyrkx_64(
         handle: cublasHandle_t,
@@ -8897,7 +9130,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZtbmv_v2_64(
         handle: cublasHandle_t,
@@ -8933,7 +9167,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZtbsv_v2_64(
         handle: cublasHandle_t,
@@ -8967,7 +9202,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZtpmv_v2_64(
         handle: cublasHandle_t,
@@ -8999,7 +9235,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZtpsv_v2_64(
         handle: cublasHandle_t,
@@ -9045,7 +9282,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZtrmm_v2_64(
         handle: cublasHandle_t,
@@ -9084,7 +9322,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZtrmv_v2_64(
         handle: cublasHandle_t,
@@ -9122,7 +9361,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZtrsmBatched_64(
         handle: cublasHandle_t,
@@ -9163,7 +9403,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZtrsm_v2_64(
         handle: cublasHandle_t,
@@ -9200,7 +9441,8 @@ extern "C" {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub fn cublasZtrsv_v2_64(
         handle: cublasHandle_t,
@@ -9247,7 +9489,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasAsumEx_64(
         handle: cublasHandle_t,
@@ -9298,7 +9541,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasAxpyEx_64(
         handle: cublasHandle_t,
@@ -9348,7 +9592,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCaxpy_v2_64(
         handle: cublasHandle_t,
@@ -9381,7 +9626,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCcopy_v2_64(
         handle: cublasHandle_t,
@@ -9417,7 +9663,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCdgmm_64(
         handle: cublasHandle_t,
@@ -9454,7 +9701,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCdotc_v2_64(
         handle: cublasHandle_t,
@@ -9488,7 +9736,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCdotu_v2_64(
         handle: cublasHandle_t,
@@ -9531,7 +9780,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgbmv_v2_64(
         handle: cublasHandle_t,
@@ -9582,7 +9832,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgeam_64(
         handle: cublasHandle_t,
@@ -9684,7 +9935,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgemm3mBatched_64(
         handle: cublasHandle_t,
@@ -9742,7 +9994,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgemm3mEx_64(
         handle: cublasHandle_t,
@@ -9803,7 +10056,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgemm3mStridedBatched_64(
         handle: cublasHandle_t,
@@ -9840,7 +10094,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgemm3m_64(
         handle: cublasHandle_t,
@@ -9894,7 +10149,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgemmBatched_64(
         handle: cublasHandle_t,
@@ -9952,7 +10208,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgemmEx_64(
         handle: cublasHandle_t,
@@ -10013,7 +10270,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgemmStridedBatched_64(
         handle: cublasHandle_t,
@@ -10070,7 +10328,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgemm_v2_64(
         handle: cublasHandle_t,
@@ -10105,7 +10364,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgemvBatched(
         handle: cublasHandle_t,
@@ -10136,7 +10396,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgemvBatched_64(
         handle: cublasHandle_t,
@@ -10170,7 +10431,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgemvStridedBatched(
         handle: cublasHandle_t,
@@ -10205,7 +10467,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgemvStridedBatched_64(
         handle: cublasHandle_t,
@@ -10256,7 +10519,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgemv_v2_64(
         handle: cublasHandle_t,
@@ -10310,7 +10574,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgerc_v2_64(
         handle: cublasHandle_t,
@@ -10350,7 +10615,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCgeru_v2_64(
         handle: cublasHandle_t,
@@ -10433,7 +10699,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasChbmv_v2_64(
         handle: cublasHandle_t,
@@ -10480,7 +10747,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasChemm_v2_64(
         handle: cublasHandle_t,
@@ -10526,7 +10794,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasChemv_v2_64(
         handle: cublasHandle_t,
@@ -10567,7 +10836,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCher2_v2_64(
         handle: cublasHandle_t,
@@ -10612,7 +10882,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCher2k_v2_64(
         handle: cublasHandle_t,
@@ -10655,7 +10926,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCher_v2_64(
         handle: cublasHandle_t,
@@ -10698,7 +10970,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCherk3mEx_64(
         handle: cublasHandle_t,
@@ -10748,7 +11021,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCherkEx_64(
         handle: cublasHandle_t,
@@ -10794,7 +11068,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCherk_v2_64(
         handle: cublasHandle_t,
@@ -10840,7 +11115,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCherkx_64(
         handle: cublasHandle_t,
@@ -10885,7 +11161,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasChpmv_v2_64(
         handle: cublasHandle_t,
@@ -10924,7 +11201,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasChpr2_v2_64(
         handle: cublasHandle_t,
@@ -10960,7 +11238,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasChpr_v2_64(
         handle: cublasHandle_t,
@@ -11007,7 +11286,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCopyEx_64(
         handle: cublasHandle_t,
@@ -11046,7 +11326,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCrot_v2_64(
         handle: cublasHandle_t,
@@ -11088,7 +11369,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCscal_v2_64(
         handle: cublasHandle_t,
@@ -11121,7 +11403,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCsrot_v2_64(
         handle: cublasHandle_t,
@@ -11154,7 +11437,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCsscal_v2_64(
         handle: cublasHandle_t,
@@ -11185,7 +11469,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCswap_v2_64(
         handle: cublasHandle_t,
@@ -11226,7 +11511,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCsymm_v2_64(
         handle: cublasHandle_t,
@@ -11272,7 +11558,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCsymv_v2_64(
         handle: cublasHandle_t,
@@ -11313,7 +11600,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCsyr2_v2_64(
         handle: cublasHandle_t,
@@ -11358,7 +11646,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCsyr2k_v2_64(
         handle: cublasHandle_t,
@@ -11401,7 +11690,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCsyr_v2_64(
         handle: cublasHandle_t,
@@ -11444,7 +11734,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCsyrk3mEx_64(
         handle: cublasHandle_t,
@@ -11494,7 +11785,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCsyrkEx_64(
         handle: cublasHandle_t,
@@ -11540,7 +11832,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCsyrk_v2_64(
         handle: cublasHandle_t,
@@ -11586,7 +11879,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCsyrkx_64(
         handle: cublasHandle_t,
@@ -11631,7 +11925,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCtbmv_v2_64(
         handle: cublasHandle_t,
@@ -11671,7 +11966,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCtbsv_v2_64(
         handle: cublasHandle_t,
@@ -11709,7 +12005,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCtpmv_v2_64(
         handle: cublasHandle_t,
@@ -11745,7 +12042,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCtpsv_v2_64(
         handle: cublasHandle_t,
@@ -11799,7 +12097,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCtrmm_v2_64(
         handle: cublasHandle_t,
@@ -11844,7 +12143,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCtrmv_v2_64(
         handle: cublasHandle_t,
@@ -11888,7 +12188,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCtrsmBatched_64(
         handle: cublasHandle_t,
@@ -11935,7 +12236,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCtrsm_v2_64(
         handle: cublasHandle_t,
@@ -11976,7 +12278,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasCtrsv_v2_64(
         handle: cublasHandle_t,
@@ -12020,7 +12323,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDasum_v2_64(
         handle: cublasHandle_t,
@@ -12052,7 +12356,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDaxpy_v2_64(
         handle: cublasHandle_t,
@@ -12085,7 +12390,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDcopy_v2_64(
         handle: cublasHandle_t,
@@ -12121,7 +12427,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDdgmm_64(
         handle: cublasHandle_t,
@@ -12158,7 +12465,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDdot_v2_64(
         handle: cublasHandle_t,
@@ -12204,7 +12512,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDgbmv_v2_64(
         handle: cublasHandle_t,
@@ -12255,7 +12564,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDgeam_64(
         handle: cublasHandle_t,
@@ -12337,7 +12647,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDgemmBatched_64(
         handle: cublasHandle_t,
@@ -12367,7 +12678,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDgemmGroupedBatched(
         handle: cublasHandle_t,
@@ -12412,7 +12724,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDgemmGroupedBatched_64(
         handle: cublasHandle_t,
@@ -12486,7 +12799,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDgemmStridedBatched_64(
         handle: cublasHandle_t,
@@ -12543,7 +12857,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDgemm_v2_64(
         handle: cublasHandle_t,
@@ -12578,7 +12893,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDgemvBatched(
         handle: cublasHandle_t,
@@ -12609,7 +12925,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDgemvBatched_64(
         handle: cublasHandle_t,
@@ -12643,7 +12960,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDgemvStridedBatched(
         handle: cublasHandle_t,
@@ -12678,7 +12996,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDgemvStridedBatched_64(
         handle: cublasHandle_t,
@@ -12729,7 +13048,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDgemv_v2_64(
         handle: cublasHandle_t,
@@ -12783,7 +13103,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDger_v2_64(
         handle: cublasHandle_t,
@@ -12871,7 +13192,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDnrm2_v2_64(
         handle: cublasHandle_t,
@@ -12919,7 +13241,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDotEx_64(
         handle: cublasHandle_t,
@@ -12985,7 +13308,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDotcEx_64(
         handle: cublasHandle_t,
@@ -13036,7 +13360,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDrot_v2_64(
         handle: cublasHandle_t,
@@ -13080,7 +13405,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDrotm_v2_64(
         handle: cublasHandle_t,
@@ -13129,7 +13455,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDsbmv_v2_64(
         handle: cublasHandle_t,
@@ -13166,7 +13493,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDscal_v2_64(
         handle: cublasHandle_t,
@@ -13201,7 +13529,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDspmv_v2_64(
         handle: cublasHandle_t,
@@ -13240,7 +13569,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDspr2_v2_64(
         handle: cublasHandle_t,
@@ -13276,7 +13606,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDspr_v2_64(
         handle: cublasHandle_t,
@@ -13309,7 +13640,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDswap_v2_64(
         handle: cublasHandle_t,
@@ -13350,7 +13682,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDsymm_v2_64(
         handle: cublasHandle_t,
@@ -13396,7 +13729,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDsymv_v2_64(
         handle: cublasHandle_t,
@@ -13437,7 +13771,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDsyr2_v2_64(
         handle: cublasHandle_t,
@@ -13482,7 +13817,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDsyr2k_v2_64(
         handle: cublasHandle_t,
@@ -13525,7 +13861,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDsyr_v2_64(
         handle: cublasHandle_t,
@@ -13564,7 +13901,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDsyrk_v2_64(
         handle: cublasHandle_t,
@@ -13610,7 +13948,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDsyrkx_64(
         handle: cublasHandle_t,
@@ -13655,7 +13994,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDtbmv_v2_64(
         handle: cublasHandle_t,
@@ -13695,7 +14035,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDtbsv_v2_64(
         handle: cublasHandle_t,
@@ -13733,7 +14074,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDtpmv_v2_64(
         handle: cublasHandle_t,
@@ -13769,7 +14111,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDtpsv_v2_64(
         handle: cublasHandle_t,
@@ -13823,7 +14166,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDtrmm_v2_64(
         handle: cublasHandle_t,
@@ -13868,7 +14212,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDtrmv_v2_64(
         handle: cublasHandle_t,
@@ -13912,7 +14257,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDtrsmBatched_64(
         handle: cublasHandle_t,
@@ -13959,7 +14305,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDtrsm_v2_64(
         handle: cublasHandle_t,
@@ -14000,7 +14347,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDtrsv_v2_64(
         handle: cublasHandle_t,
@@ -14044,7 +14392,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDzasum_v2_64(
         handle: cublasHandle_t,
@@ -14074,7 +14423,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasDznrm2_v2_64(
         handle: cublasHandle_t,
@@ -14140,7 +14490,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasGemmBatchedEx_64(
         handle: cublasHandle_t,
@@ -14240,7 +14591,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasGemmEx_64(
         handle: cublasHandle_t,
@@ -14290,7 +14642,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasGemmGroupedBatchedEx(
         handle: cublasHandle_t,
@@ -14342,7 +14695,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasGemmGroupedBatchedEx_64(
         handle: cublasHandle_t,
@@ -14450,7 +14804,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasGemmStridedBatchedEx_64(
         handle: cublasHandle_t,
@@ -14512,7 +14867,7 @@ mod loaded {
     pub unsafe fn cublasGetCudartVersion() -> usize {
         (culib().cublasGetCudartVersion)()
     }
-    #[cfg(any(feature = "cuda-12090", feature = "cuda-13000"))]
+    #[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010"))]
     pub unsafe fn cublasGetEmulationStrategy(
         handle: cublasHandle_t,
         emulationStrategy: *mut cublasEmulationStrategy_t,
@@ -14561,7 +14916,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasGetMatrixAsync_64(
         rows: i64,
@@ -14585,7 +14941,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasGetMatrix_64(
         rows: i64,
@@ -14659,7 +15016,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasGetVectorAsync_64(
         n: i64,
@@ -14682,7 +15040,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasGetVector_64(
         n: i64,
@@ -14720,7 +15079,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasIamaxEx_64(
         handle: cublasHandle_t,
@@ -14752,7 +15112,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasIaminEx_64(
         handle: cublasHandle_t,
@@ -14783,7 +15144,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasIcamax_v2_64(
         handle: cublasHandle_t,
@@ -14813,7 +15175,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasIcamin_v2_64(
         handle: cublasHandle_t,
@@ -14843,7 +15206,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasIdamax_v2_64(
         handle: cublasHandle_t,
@@ -14873,7 +15237,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasIdamin_v2_64(
         handle: cublasHandle_t,
@@ -14903,7 +15268,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasIsamax_v2_64(
         handle: cublasHandle_t,
@@ -14933,7 +15299,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasIsamin_v2_64(
         handle: cublasHandle_t,
@@ -14963,7 +15330,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasIzamax_v2_64(
         handle: cublasHandle_t,
@@ -14993,7 +15361,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasIzamin_v2_64(
         handle: cublasHandle_t,
@@ -15034,7 +15403,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasNrm2Ex_64(
         handle: cublasHandle_t,
@@ -15087,7 +15457,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasRotEx_64(
         handle: cublasHandle_t,
@@ -15167,7 +15538,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasRotmEx_64(
         handle: cublasHandle_t,
@@ -15244,7 +15616,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSasum_v2_64(
         handle: cublasHandle_t,
@@ -15276,7 +15649,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSaxpy_v2_64(
         handle: cublasHandle_t,
@@ -15311,7 +15685,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasScalEx_64(
         handle: cublasHandle_t,
@@ -15344,7 +15719,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasScasum_v2_64(
         handle: cublasHandle_t,
@@ -15374,7 +15750,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasScnrm2_v2_64(
         handle: cublasHandle_t,
@@ -15405,7 +15782,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasScopy_v2_64(
         handle: cublasHandle_t,
@@ -15441,7 +15819,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSdgmm_64(
         handle: cublasHandle_t,
@@ -15478,7 +15857,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSdot_v2_64(
         handle: cublasHandle_t,
@@ -15497,7 +15877,7 @@ mod loaded {
     ) -> cublasStatus_t {
         (culib().cublasSetAtomicsMode)(handle, mode)
     }
-    #[cfg(any(feature = "cuda-12090", feature = "cuda-13000"))]
+    #[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010"))]
     pub unsafe fn cublasSetEmulationStrategy(
         handle: cublasHandle_t,
         emulationStrategy: cublasEmulationStrategy_t,
@@ -15543,7 +15923,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSetMatrixAsync_64(
         rows: i64,
@@ -15567,7 +15948,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSetMatrix_64(
         rows: i64,
@@ -15629,7 +16011,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSetVectorAsync_64(
         n: i64,
@@ -15652,7 +16035,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSetVector_64(
         n: i64,
@@ -15701,7 +16085,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSgbmv_v2_64(
         handle: cublasHandle_t,
@@ -15752,7 +16137,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSgeam_64(
         handle: cublasHandle_t,
@@ -15834,7 +16220,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSgemmBatched_64(
         handle: cublasHandle_t,
@@ -15892,7 +16279,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSgemmEx_64(
         handle: cublasHandle_t,
@@ -15924,7 +16312,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSgemmGroupedBatched(
         handle: cublasHandle_t,
@@ -15969,7 +16358,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSgemmGroupedBatched_64(
         handle: cublasHandle_t,
@@ -16043,7 +16433,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSgemmStridedBatched_64(
         handle: cublasHandle_t,
@@ -16100,7 +16491,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSgemm_v2_64(
         handle: cublasHandle_t,
@@ -16135,7 +16527,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSgemvBatched(
         handle: cublasHandle_t,
@@ -16166,7 +16559,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSgemvBatched_64(
         handle: cublasHandle_t,
@@ -16200,7 +16594,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSgemvStridedBatched(
         handle: cublasHandle_t,
@@ -16235,7 +16630,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSgemvStridedBatched_64(
         handle: cublasHandle_t,
@@ -16286,7 +16682,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSgemv_v2_64(
         handle: cublasHandle_t,
@@ -16340,7 +16737,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSger_v2_64(
         handle: cublasHandle_t,
@@ -16428,7 +16826,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSnrm2_v2_64(
         handle: cublasHandle_t,
@@ -16461,7 +16860,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSrot_v2_64(
         handle: cublasHandle_t,
@@ -16505,7 +16905,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSrotm_v2_64(
         handle: cublasHandle_t,
@@ -16554,7 +16955,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSsbmv_v2_64(
         handle: cublasHandle_t,
@@ -16591,7 +16993,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSscal_v2_64(
         handle: cublasHandle_t,
@@ -16626,7 +17029,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSspmv_v2_64(
         handle: cublasHandle_t,
@@ -16665,7 +17069,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSspr2_v2_64(
         handle: cublasHandle_t,
@@ -16701,7 +17106,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSspr_v2_64(
         handle: cublasHandle_t,
@@ -16734,7 +17140,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSswap_v2_64(
         handle: cublasHandle_t,
@@ -16775,7 +17182,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSsymm_v2_64(
         handle: cublasHandle_t,
@@ -16821,7 +17229,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSsymv_v2_64(
         handle: cublasHandle_t,
@@ -16862,7 +17271,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSsyr2_v2_64(
         handle: cublasHandle_t,
@@ -16907,7 +17317,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSsyr2k_v2_64(
         handle: cublasHandle_t,
@@ -16950,7 +17361,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSsyr_v2_64(
         handle: cublasHandle_t,
@@ -16989,7 +17401,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSsyrk_v2_64(
         handle: cublasHandle_t,
@@ -17035,7 +17448,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSsyrkx_64(
         handle: cublasHandle_t,
@@ -17080,7 +17494,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasStbmv_v2_64(
         handle: cublasHandle_t,
@@ -17120,7 +17535,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasStbsv_v2_64(
         handle: cublasHandle_t,
@@ -17158,7 +17574,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasStpmv_v2_64(
         handle: cublasHandle_t,
@@ -17194,7 +17611,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasStpsv_v2_64(
         handle: cublasHandle_t,
@@ -17248,7 +17666,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasStrmm_v2_64(
         handle: cublasHandle_t,
@@ -17293,7 +17712,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasStrmv_v2_64(
         handle: cublasHandle_t,
@@ -17337,7 +17757,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasStrsmBatched_64(
         handle: cublasHandle_t,
@@ -17384,7 +17805,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasStrsm_v2_64(
         handle: cublasHandle_t,
@@ -17425,7 +17847,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasStrsv_v2_64(
         handle: cublasHandle_t,
@@ -17472,7 +17895,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasSwapEx_64(
         handle: cublasHandle_t,
@@ -17535,7 +17959,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZaxpy_v2_64(
         handle: cublasHandle_t,
@@ -17568,7 +17993,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZcopy_v2_64(
         handle: cublasHandle_t,
@@ -17604,7 +18030,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZdgmm_64(
         handle: cublasHandle_t,
@@ -17641,7 +18068,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZdotc_v2_64(
         handle: cublasHandle_t,
@@ -17675,7 +18103,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZdotu_v2_64(
         handle: cublasHandle_t,
@@ -17710,7 +18139,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZdrot_v2_64(
         handle: cublasHandle_t,
@@ -17743,7 +18173,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZdscal_v2_64(
         handle: cublasHandle_t,
@@ -17784,7 +18215,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZgbmv_v2_64(
         handle: cublasHandle_t,
@@ -17835,7 +18267,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZgeam_64(
         handle: cublasHandle_t,
@@ -17915,7 +18348,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZgemm3m_64(
         handle: cublasHandle_t,
@@ -17969,7 +18403,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZgemmBatched_64(
         handle: cublasHandle_t,
@@ -18028,7 +18463,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZgemmStridedBatched_64(
         handle: cublasHandle_t,
@@ -18085,7 +18521,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZgemm_v2_64(
         handle: cublasHandle_t,
@@ -18120,7 +18557,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZgemvBatched(
         handle: cublasHandle_t,
@@ -18151,7 +18589,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZgemvBatched_64(
         handle: cublasHandle_t,
@@ -18185,7 +18624,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZgemvStridedBatched(
         handle: cublasHandle_t,
@@ -18220,7 +18660,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZgemvStridedBatched_64(
         handle: cublasHandle_t,
@@ -18271,7 +18712,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZgemv_v2_64(
         handle: cublasHandle_t,
@@ -18325,7 +18767,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZgerc_v2_64(
         handle: cublasHandle_t,
@@ -18365,7 +18808,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZgeru_v2_64(
         handle: cublasHandle_t,
@@ -18448,7 +18892,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZhbmv_v2_64(
         handle: cublasHandle_t,
@@ -18495,7 +18940,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZhemm_v2_64(
         handle: cublasHandle_t,
@@ -18541,7 +18987,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZhemv_v2_64(
         handle: cublasHandle_t,
@@ -18582,7 +19029,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZher2_v2_64(
         handle: cublasHandle_t,
@@ -18627,7 +19075,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZher2k_v2_64(
         handle: cublasHandle_t,
@@ -18670,7 +19119,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZher_v2_64(
         handle: cublasHandle_t,
@@ -18709,7 +19159,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZherk_v2_64(
         handle: cublasHandle_t,
@@ -18755,7 +19206,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZherkx_64(
         handle: cublasHandle_t,
@@ -18800,7 +19252,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZhpmv_v2_64(
         handle: cublasHandle_t,
@@ -18839,7 +19292,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZhpr2_v2_64(
         handle: cublasHandle_t,
@@ -18875,7 +19329,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZhpr_v2_64(
         handle: cublasHandle_t,
@@ -18922,7 +19377,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZrot_v2_64(
         handle: cublasHandle_t,
@@ -18964,7 +19420,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZscal_v2_64(
         handle: cublasHandle_t,
@@ -18995,7 +19452,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZswap_v2_64(
         handle: cublasHandle_t,
@@ -19036,7 +19494,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZsymm_v2_64(
         handle: cublasHandle_t,
@@ -19082,7 +19541,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZsymv_v2_64(
         handle: cublasHandle_t,
@@ -19123,7 +19583,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZsyr2_v2_64(
         handle: cublasHandle_t,
@@ -19168,7 +19629,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZsyr2k_v2_64(
         handle: cublasHandle_t,
@@ -19211,7 +19673,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZsyr_v2_64(
         handle: cublasHandle_t,
@@ -19250,7 +19713,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZsyrk_v2_64(
         handle: cublasHandle_t,
@@ -19296,7 +19760,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZsyrkx_64(
         handle: cublasHandle_t,
@@ -19341,7 +19806,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZtbmv_v2_64(
         handle: cublasHandle_t,
@@ -19381,7 +19847,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZtbsv_v2_64(
         handle: cublasHandle_t,
@@ -19419,7 +19886,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZtpmv_v2_64(
         handle: cublasHandle_t,
@@ -19455,7 +19923,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZtpsv_v2_64(
         handle: cublasHandle_t,
@@ -19509,7 +19978,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZtrmm_v2_64(
         handle: cublasHandle_t,
@@ -19554,7 +20024,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZtrmv_v2_64(
         handle: cublasHandle_t,
@@ -19598,7 +20069,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZtrsmBatched_64(
         handle: cublasHandle_t,
@@ -19645,7 +20117,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZtrsm_v2_64(
         handle: cublasHandle_t,
@@ -19686,7 +20159,8 @@ mod loaded {
         feature = "cuda-12060",
         feature = "cuda-12080",
         feature = "cuda-12090",
-        feature = "cuda-13000"
+        feature = "cuda-13000",
+        feature = "cuda-13010"
     ))]
     pub unsafe fn cublasZtrsv_v2_64(
         handle: cublasHandle_t,
@@ -19733,7 +20207,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasAsumEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -19768,7 +20243,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasAxpyEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -19802,7 +20278,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCaxpy_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -19831,7 +20308,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCcopy_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -19863,7 +20341,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCdgmm_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -19896,7 +20375,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCdotc_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -19926,7 +20406,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCdotu_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -19963,7 +20444,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgbmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20006,7 +20488,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgeam_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20080,7 +20563,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgemm3mBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20128,7 +20612,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgemm3mEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20179,7 +20664,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgemm3mStridedBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20211,7 +20697,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgemm3m_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20256,7 +20743,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgemmBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20304,7 +20792,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgemmEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20355,7 +20844,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgemmStridedBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20403,7 +20893,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgemm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20434,7 +20925,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgemvBatched: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20461,7 +20953,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgemvBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20491,7 +20984,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgemvStridedBatched: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20521,7 +21015,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgemvStridedBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20565,7 +21060,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgemv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20613,7 +21109,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgerc_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20649,7 +21146,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCgeru_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20720,7 +21218,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasChbmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20761,7 +21260,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasChemm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20801,7 +21301,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasChemv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20838,7 +21339,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCher2_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20877,7 +21379,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCher2k_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20914,7 +21417,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCher_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20951,7 +21455,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCherk3mEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -20993,7 +21498,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCherkEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21033,7 +21539,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCherk_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21073,7 +21580,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCherkx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21112,7 +21620,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasChpmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21147,7 +21656,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasChpr2_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21179,7 +21689,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasChpr_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21220,7 +21731,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCopyEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21253,7 +21765,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCrot_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21289,7 +21802,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCscal_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21318,7 +21832,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCsrot_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21347,7 +21862,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCsscal_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21374,7 +21890,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCswap_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21409,7 +21926,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCsymm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21449,7 +21967,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCsymv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21486,7 +22005,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCsyr2_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21525,7 +22045,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCsyr2k_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21562,7 +22083,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCsyr_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21599,7 +22121,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCsyrk3mEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21641,7 +22164,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCsyrkEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21681,7 +22205,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCsyrk_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21721,7 +22246,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCsyrkx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21760,7 +22286,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCtbmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21796,7 +22323,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCtbsv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21830,7 +22358,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCtpmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21862,7 +22391,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCtpsv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21908,7 +22438,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCtrmm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21947,7 +22478,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCtrmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -21985,7 +22517,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCtrsmBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22026,7 +22559,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCtrsm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22063,7 +22597,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasCtrsv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22101,7 +22636,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDasum_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22129,7 +22665,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDaxpy_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22158,7 +22695,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDcopy_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22190,7 +22728,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDdgmm_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22223,7 +22762,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDdot_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22261,7 +22801,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDgbmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22304,7 +22845,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDgeam_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22362,7 +22904,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDgemmBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22387,7 +22930,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDgemmGroupedBatched: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22413,7 +22957,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDgemmGroupedBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22463,7 +23008,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDgemmStridedBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22511,7 +23057,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDgemm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22542,7 +23089,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDgemvBatched: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22569,7 +23117,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDgemvBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22599,7 +23148,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDgemvStridedBatched: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22629,7 +23179,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDgemvStridedBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22673,7 +23224,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDgemv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22721,7 +23273,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDger_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22795,7 +23348,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDnrm2_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22827,7 +23381,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDotEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22865,7 +23420,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDotcEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22900,7 +23456,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDrot_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22938,7 +23495,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDrotm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -22981,7 +23539,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDsbmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23014,7 +23573,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDscal_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23045,7 +23605,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDspmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23080,7 +23641,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDspr2_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23112,7 +23674,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDspr_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23141,7 +23704,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDswap_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23176,7 +23740,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDsymm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23216,7 +23781,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDsymv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23253,7 +23819,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDsyr2_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23292,7 +23859,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDsyr2k_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23329,7 +23897,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDsyr_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23364,7 +23933,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDsyrk_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23404,7 +23974,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDsyrkx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23443,7 +24014,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDtbmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23479,7 +24051,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDtbsv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23513,7 +24086,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDtpmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23545,7 +24119,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDtpsv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23591,7 +24166,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDtrmm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23630,7 +24206,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDtrmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23668,7 +24245,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDtrsmBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23709,7 +24287,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDtrsm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23746,7 +24325,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDtrsv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23784,7 +24364,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDzasum_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23810,7 +24391,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasDznrm2_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23851,7 +24433,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasGemmBatchedEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23906,7 +24489,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasGemmEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23934,7 +24518,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasGemmGroupedBatchedEx: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -23963,7 +24548,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasGemmGroupedBatchedEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24022,7 +24608,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasGemmStridedBatchedEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24054,7 +24641,7 @@ mod loaded {
             mode: *mut cublasAtomicsMode_t,
         ) -> cublasStatus_t,
         pub cublasGetCudartVersion: unsafe extern "C" fn() -> usize,
-        #[cfg(any(feature = "cuda-12090", feature = "cuda-13000"))]
+        #[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010"))]
         pub cublasGetEmulationStrategy: unsafe extern "C" fn(
             handle: cublasHandle_t,
             emulationStrategy: *mut cublasEmulationStrategy_t,
@@ -24092,7 +24679,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasGetMatrixAsync_64: unsafe extern "C" fn(
             rows: i64,
@@ -24114,7 +24702,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasGetMatrix_64: unsafe extern "C" fn(
             rows: i64,
@@ -24172,7 +24761,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasGetVectorAsync_64: unsafe extern "C" fn(
             n: i64,
@@ -24193,7 +24783,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasGetVector_64: unsafe extern "C" fn(
             n: i64,
@@ -24225,7 +24816,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasIamaxEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24253,7 +24845,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasIaminEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24280,7 +24873,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasIcamax_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24306,7 +24900,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasIcamin_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24332,7 +24927,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasIdamax_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24358,7 +24954,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasIdamin_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24384,7 +24981,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasIsamax_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24410,7 +25008,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasIsamin_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24436,7 +25035,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasIzamax_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24462,7 +25062,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasIzamin_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24497,7 +25098,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasNrm2Ex_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24533,7 +25135,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasRotEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24582,7 +25185,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasRotmEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24628,7 +25232,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSasum_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24656,7 +25261,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSaxpy_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24687,7 +25293,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasScalEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24716,7 +25323,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasScasum_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24742,7 +25350,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasScnrm2_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24769,7 +25378,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasScopy_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24801,7 +25411,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSdgmm_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24834,7 +25445,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSdot_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -24849,7 +25461,7 @@ mod loaded {
             handle: cublasHandle_t,
             mode: cublasAtomicsMode_t,
         ) -> cublasStatus_t,
-        #[cfg(any(feature = "cuda-12090", feature = "cuda-13000"))]
+        #[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010"))]
         pub cublasSetEmulationStrategy: unsafe extern "C" fn(
             handle: cublasHandle_t,
             emulationStrategy: cublasEmulationStrategy_t,
@@ -24887,7 +25499,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSetMatrixAsync_64: unsafe extern "C" fn(
             rows: i64,
@@ -24909,7 +25522,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSetMatrix_64: unsafe extern "C" fn(
             rows: i64,
@@ -24957,7 +25571,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSetVectorAsync_64: unsafe extern "C" fn(
             n: i64,
@@ -24978,7 +25593,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSetVector_64: unsafe extern "C" fn(
             n: i64,
@@ -25019,7 +25635,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSgbmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25062,7 +25679,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSgeam_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25120,7 +25738,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSgemmBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25168,7 +25787,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSgemmEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25195,7 +25815,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSgemmGroupedBatched: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25221,7 +25842,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSgemmGroupedBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25271,7 +25893,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSgemmStridedBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25319,7 +25942,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSgemm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25350,7 +25974,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSgemvBatched: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25377,7 +26002,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSgemvBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25407,7 +26033,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSgemvStridedBatched: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25437,7 +26064,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSgemvStridedBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25481,7 +26109,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSgemv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25529,7 +26158,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSger_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25603,7 +26233,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSnrm2_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25632,7 +26263,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSrot_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25670,7 +26302,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSrotm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25713,7 +26346,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSsbmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25746,7 +26380,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSscal_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25777,7 +26412,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSspmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25812,7 +26448,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSspr2_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25844,7 +26481,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSspr_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25873,7 +26511,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSswap_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25908,7 +26547,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSsymm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25948,7 +26588,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSsymv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -25985,7 +26626,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSsyr2_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26024,7 +26666,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSsyr2k_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26061,7 +26704,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSsyr_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26096,7 +26740,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSsyrk_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26136,7 +26781,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSsyrkx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26175,7 +26821,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasStbmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26211,7 +26858,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasStbsv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26245,7 +26893,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasStpmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26277,7 +26926,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasStpsv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26323,7 +26973,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasStrmm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26362,7 +27013,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasStrmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26400,7 +27052,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasStrsmBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26441,7 +27094,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasStrsm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26478,7 +27132,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasStrsv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26519,7 +27174,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasSwapEx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26572,7 +27228,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZaxpy_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26601,7 +27258,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZcopy_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26633,7 +27291,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZdgmm_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26666,7 +27325,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZdotc_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26696,7 +27356,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZdotu_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26727,7 +27388,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZdrot_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26756,7 +27418,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZdscal_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26791,7 +27454,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZgbmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26834,7 +27498,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZgeam_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26891,7 +27556,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZgemm3m_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26936,7 +27602,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZgemmBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -26985,7 +27652,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZgemmStridedBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27033,7 +27701,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZgemm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27064,7 +27733,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZgemvBatched: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27091,7 +27761,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZgemvBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27121,7 +27792,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZgemvStridedBatched: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27151,7 +27823,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZgemvStridedBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27195,7 +27868,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZgemv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27243,7 +27917,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZgerc_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27279,7 +27954,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZgeru_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27350,7 +28026,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZhbmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27391,7 +28068,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZhemm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27431,7 +28109,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZhemv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27468,7 +28147,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZher2_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27507,7 +28187,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZher2k_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27544,7 +28225,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZher_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27579,7 +28261,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZherk_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27619,7 +28302,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZherkx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27658,7 +28342,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZhpmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27693,7 +28378,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZhpr2_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27725,7 +28411,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZhpr_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27766,7 +28453,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZrot_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27802,7 +28490,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZscal_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27829,7 +28518,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZswap_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27864,7 +28554,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZsymm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27904,7 +28595,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZsymv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27941,7 +28633,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZsyr2_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -27980,7 +28673,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZsyr2k_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -28017,7 +28711,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZsyr_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -28052,7 +28747,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZsyrk_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -28092,7 +28788,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZsyrkx_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -28131,7 +28828,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZtbmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -28167,7 +28865,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZtbsv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -28201,7 +28900,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZtpmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -28233,7 +28933,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZtpsv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -28279,7 +28980,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZtrmm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -28318,7 +29020,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZtrmv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -28356,7 +29059,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZtrsmBatched_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -28397,7 +29101,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZtrsm_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -28434,7 +29139,8 @@ mod loaded {
             feature = "cuda-12060",
             feature = "cuda-12080",
             feature = "cuda-12090",
-            feature = "cuda-13000"
+            feature = "cuda-13000",
+            feature = "cuda-13010"
         ))]
         pub cublasZtrsv_v2_64: unsafe extern "C" fn(
             handle: cublasHandle_t,
@@ -28483,7 +29189,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasAsumEx_64 = __library
                 .get(b"cublasAsumEx_64\0")
@@ -28503,7 +29210,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasAxpyEx_64 = __library
                 .get(b"cublasAxpyEx_64\0")
@@ -28523,7 +29231,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCaxpy_v2_64 = __library
                 .get(b"cublasCaxpy_v2_64\0")
@@ -28543,7 +29252,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCcopy_v2_64 = __library
                 .get(b"cublasCcopy_v2_64\0")
@@ -28563,7 +29273,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCdgmm_64 = __library
                 .get(b"cublasCdgmm_64\0")
@@ -28583,7 +29294,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCdotc_v2_64 = __library
                 .get(b"cublasCdotc_v2_64\0")
@@ -28603,7 +29315,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCdotu_v2_64 = __library
                 .get(b"cublasCdotu_v2_64\0")
@@ -28623,7 +29336,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgbmv_v2_64 = __library
                 .get(b"cublasCgbmv_v2_64\0")
@@ -28643,7 +29357,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgeam_64 = __library
                 .get(b"cublasCgeam_64\0")
@@ -28671,7 +29386,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgemm3mBatched_64 = __library
                 .get(b"cublasCgemm3mBatched_64\0")
@@ -28691,7 +29407,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgemm3mEx_64 = __library
                 .get(b"cublasCgemm3mEx_64\0")
@@ -28711,7 +29428,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgemm3mStridedBatched_64 = __library
                 .get(b"cublasCgemm3mStridedBatched_64\0")
@@ -28727,7 +29445,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgemm3m_64 = __library
                 .get(b"cublasCgemm3m_64\0")
@@ -28747,7 +29466,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgemmBatched_64 = __library
                 .get(b"cublasCgemmBatched_64\0")
@@ -28767,7 +29487,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgemmEx_64 = __library
                 .get(b"cublasCgemmEx_64\0")
@@ -28787,7 +29508,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgemmStridedBatched_64 = __library
                 .get(b"cublasCgemmStridedBatched_64\0")
@@ -28807,7 +29529,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgemm_v2_64 = __library
                 .get(b"cublasCgemm_v2_64\0")
@@ -28826,7 +29549,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgemvBatched = __library
                 .get(b"cublasCgemvBatched\0")
@@ -28842,7 +29566,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgemvBatched_64 = __library
                 .get(b"cublasCgemvBatched_64\0")
@@ -28861,7 +29586,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgemvStridedBatched = __library
                 .get(b"cublasCgemvStridedBatched\0")
@@ -28877,7 +29603,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgemvStridedBatched_64 = __library
                 .get(b"cublasCgemvStridedBatched_64\0")
@@ -28897,7 +29624,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgemv_v2_64 = __library
                 .get(b"cublasCgemv_v2_64\0")
@@ -28921,7 +29649,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgerc_v2_64 = __library
                 .get(b"cublasCgerc_v2_64\0")
@@ -28941,7 +29670,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCgeru_v2_64 = __library
                 .get(b"cublasCgeru_v2_64\0")
@@ -28973,7 +29703,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasChbmv_v2_64 = __library
                 .get(b"cublasChbmv_v2_64\0")
@@ -28993,7 +29724,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasChemm_v2_64 = __library
                 .get(b"cublasChemm_v2_64\0")
@@ -29013,7 +29745,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasChemv_v2_64 = __library
                 .get(b"cublasChemv_v2_64\0")
@@ -29033,7 +29766,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCher2_v2_64 = __library
                 .get(b"cublasCher2_v2_64\0")
@@ -29053,7 +29787,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCher2k_v2_64 = __library
                 .get(b"cublasCher2k_v2_64\0")
@@ -29073,7 +29808,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCher_v2_64 = __library
                 .get(b"cublasCher_v2_64\0")
@@ -29093,7 +29829,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCherk3mEx_64 = __library
                 .get(b"cublasCherk3mEx_64\0")
@@ -29113,7 +29850,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCherkEx_64 = __library
                 .get(b"cublasCherkEx_64\0")
@@ -29133,7 +29871,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCherk_v2_64 = __library
                 .get(b"cublasCherk_v2_64\0")
@@ -29153,7 +29892,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCherkx_64 = __library
                 .get(b"cublasCherkx_64\0")
@@ -29173,7 +29913,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasChpmv_v2_64 = __library
                 .get(b"cublasChpmv_v2_64\0")
@@ -29193,7 +29934,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasChpr2_v2_64 = __library
                 .get(b"cublasChpr2_v2_64\0")
@@ -29213,7 +29955,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasChpr_v2_64 = __library
                 .get(b"cublasChpr_v2_64\0")
@@ -29237,7 +29980,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCopyEx_64 = __library
                 .get(b"cublasCopyEx_64\0")
@@ -29261,7 +30005,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCrot_v2_64 = __library
                 .get(b"cublasCrot_v2_64\0")
@@ -29285,7 +30030,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCscal_v2_64 = __library
                 .get(b"cublasCscal_v2_64\0")
@@ -29305,7 +30051,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCsrot_v2_64 = __library
                 .get(b"cublasCsrot_v2_64\0")
@@ -29325,7 +30072,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCsscal_v2_64 = __library
                 .get(b"cublasCsscal_v2_64\0")
@@ -29345,7 +30093,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCswap_v2_64 = __library
                 .get(b"cublasCswap_v2_64\0")
@@ -29365,7 +30114,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCsymm_v2_64 = __library
                 .get(b"cublasCsymm_v2_64\0")
@@ -29385,7 +30135,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCsymv_v2_64 = __library
                 .get(b"cublasCsymv_v2_64\0")
@@ -29405,7 +30156,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCsyr2_v2_64 = __library
                 .get(b"cublasCsyr2_v2_64\0")
@@ -29425,7 +30177,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCsyr2k_v2_64 = __library
                 .get(b"cublasCsyr2k_v2_64\0")
@@ -29445,7 +30198,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCsyr_v2_64 = __library
                 .get(b"cublasCsyr_v2_64\0")
@@ -29465,7 +30219,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCsyrk3mEx_64 = __library
                 .get(b"cublasCsyrk3mEx_64\0")
@@ -29485,7 +30240,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCsyrkEx_64 = __library
                 .get(b"cublasCsyrkEx_64\0")
@@ -29505,7 +30261,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCsyrk_v2_64 = __library
                 .get(b"cublasCsyrk_v2_64\0")
@@ -29525,7 +30282,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCsyrkx_64 = __library
                 .get(b"cublasCsyrkx_64\0")
@@ -29545,7 +30303,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCtbmv_v2_64 = __library
                 .get(b"cublasCtbmv_v2_64\0")
@@ -29565,7 +30324,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCtbsv_v2_64 = __library
                 .get(b"cublasCtbsv_v2_64\0")
@@ -29585,7 +30345,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCtpmv_v2_64 = __library
                 .get(b"cublasCtpmv_v2_64\0")
@@ -29605,7 +30366,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCtpsv_v2_64 = __library
                 .get(b"cublasCtpsv_v2_64\0")
@@ -29629,7 +30391,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCtrmm_v2_64 = __library
                 .get(b"cublasCtrmm_v2_64\0")
@@ -29649,7 +30412,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCtrmv_v2_64 = __library
                 .get(b"cublasCtrmv_v2_64\0")
@@ -29669,7 +30433,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCtrsmBatched_64 = __library
                 .get(b"cublasCtrsmBatched_64\0")
@@ -29689,7 +30454,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCtrsm_v2_64 = __library
                 .get(b"cublasCtrsm_v2_64\0")
@@ -29709,7 +30475,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasCtrsv_v2_64 = __library
                 .get(b"cublasCtrsv_v2_64\0")
@@ -29733,7 +30500,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDasum_v2_64 = __library
                 .get(b"cublasDasum_v2_64\0")
@@ -29753,7 +30521,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDaxpy_v2_64 = __library
                 .get(b"cublasDaxpy_v2_64\0")
@@ -29773,7 +30542,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDcopy_v2_64 = __library
                 .get(b"cublasDcopy_v2_64\0")
@@ -29793,7 +30563,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDdgmm_64 = __library
                 .get(b"cublasDdgmm_64\0")
@@ -29813,7 +30584,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDdot_v2_64 = __library
                 .get(b"cublasDdot_v2_64\0")
@@ -29837,7 +30609,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDgbmv_v2_64 = __library
                 .get(b"cublasDgbmv_v2_64\0")
@@ -29857,7 +30630,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDgeam_64 = __library
                 .get(b"cublasDgeam_64\0")
@@ -29881,7 +30655,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDgemmBatched_64 = __library
                 .get(b"cublasDgemmBatched_64\0")
@@ -29893,7 +30668,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDgemmGroupedBatched = __library
                 .get(b"cublasDgemmGroupedBatched\0")
@@ -29905,7 +30681,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDgemmGroupedBatched_64 = __library
                 .get(b"cublasDgemmGroupedBatched_64\0")
@@ -29925,7 +30702,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDgemmStridedBatched_64 = __library
                 .get(b"cublasDgemmStridedBatched_64\0")
@@ -29945,7 +30723,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDgemm_v2_64 = __library
                 .get(b"cublasDgemm_v2_64\0")
@@ -29964,7 +30743,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDgemvBatched = __library
                 .get(b"cublasDgemvBatched\0")
@@ -29980,7 +30760,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDgemvBatched_64 = __library
                 .get(b"cublasDgemvBatched_64\0")
@@ -29999,7 +30780,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDgemvStridedBatched = __library
                 .get(b"cublasDgemvStridedBatched\0")
@@ -30015,7 +30797,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDgemvStridedBatched_64 = __library
                 .get(b"cublasDgemvStridedBatched_64\0")
@@ -30035,7 +30818,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDgemv_v2_64 = __library
                 .get(b"cublasDgemv_v2_64\0")
@@ -30059,7 +30843,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDger_v2_64 = __library
                 .get(b"cublasDger_v2_64\0")
@@ -30095,7 +30880,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDnrm2_v2_64 = __library
                 .get(b"cublasDnrm2_v2_64\0")
@@ -30115,7 +30901,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDotEx_64 = __library
                 .get(b"cublasDotEx_64\0")
@@ -30135,7 +30922,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDotcEx_64 = __library
                 .get(b"cublasDotcEx_64\0")
@@ -30155,7 +30943,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDrot_v2_64 = __library
                 .get(b"cublasDrot_v2_64\0")
@@ -30179,7 +30968,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDrotm_v2_64 = __library
                 .get(b"cublasDrotm_v2_64\0")
@@ -30203,7 +30993,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDsbmv_v2_64 = __library
                 .get(b"cublasDsbmv_v2_64\0")
@@ -30223,7 +31014,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDscal_v2_64 = __library
                 .get(b"cublasDscal_v2_64\0")
@@ -30243,7 +31035,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDspmv_v2_64 = __library
                 .get(b"cublasDspmv_v2_64\0")
@@ -30263,7 +31056,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDspr2_v2_64 = __library
                 .get(b"cublasDspr2_v2_64\0")
@@ -30283,7 +31077,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDspr_v2_64 = __library
                 .get(b"cublasDspr_v2_64\0")
@@ -30303,7 +31098,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDswap_v2_64 = __library
                 .get(b"cublasDswap_v2_64\0")
@@ -30323,7 +31119,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDsymm_v2_64 = __library
                 .get(b"cublasDsymm_v2_64\0")
@@ -30343,7 +31140,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDsymv_v2_64 = __library
                 .get(b"cublasDsymv_v2_64\0")
@@ -30363,7 +31161,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDsyr2_v2_64 = __library
                 .get(b"cublasDsyr2_v2_64\0")
@@ -30383,7 +31182,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDsyr2k_v2_64 = __library
                 .get(b"cublasDsyr2k_v2_64\0")
@@ -30403,7 +31203,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDsyr_v2_64 = __library
                 .get(b"cublasDsyr_v2_64\0")
@@ -30423,7 +31224,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDsyrk_v2_64 = __library
                 .get(b"cublasDsyrk_v2_64\0")
@@ -30443,7 +31245,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDsyrkx_64 = __library
                 .get(b"cublasDsyrkx_64\0")
@@ -30463,7 +31266,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDtbmv_v2_64 = __library
                 .get(b"cublasDtbmv_v2_64\0")
@@ -30483,7 +31287,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDtbsv_v2_64 = __library
                 .get(b"cublasDtbsv_v2_64\0")
@@ -30503,7 +31308,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDtpmv_v2_64 = __library
                 .get(b"cublasDtpmv_v2_64\0")
@@ -30523,7 +31329,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDtpsv_v2_64 = __library
                 .get(b"cublasDtpsv_v2_64\0")
@@ -30547,7 +31354,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDtrmm_v2_64 = __library
                 .get(b"cublasDtrmm_v2_64\0")
@@ -30567,7 +31375,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDtrmv_v2_64 = __library
                 .get(b"cublasDtrmv_v2_64\0")
@@ -30587,7 +31396,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDtrsmBatched_64 = __library
                 .get(b"cublasDtrsmBatched_64\0")
@@ -30607,7 +31417,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDtrsm_v2_64 = __library
                 .get(b"cublasDtrsm_v2_64\0")
@@ -30627,7 +31438,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDtrsv_v2_64 = __library
                 .get(b"cublasDtrsv_v2_64\0")
@@ -30651,7 +31463,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDzasum_v2_64 = __library
                 .get(b"cublasDzasum_v2_64\0")
@@ -30671,7 +31484,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasDznrm2_v2_64 = __library
                 .get(b"cublasDznrm2_v2_64\0")
@@ -30691,7 +31505,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasGemmBatchedEx_64 = __library
                 .get(b"cublasGemmBatchedEx_64\0")
@@ -30711,7 +31526,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasGemmEx_64 = __library
                 .get(b"cublasGemmEx_64\0")
@@ -30722,7 +31538,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasGemmGroupedBatchedEx = __library
                 .get(b"cublasGemmGroupedBatchedEx\0")
@@ -30733,7 +31550,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasGemmGroupedBatchedEx_64 = __library
                 .get(b"cublasGemmGroupedBatchedEx_64\0")
@@ -30753,7 +31571,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasGemmStridedBatchedEx_64 = __library
                 .get(b"cublasGemmStridedBatchedEx_64\0")
@@ -30767,7 +31586,7 @@ mod loaded {
                 .get(b"cublasGetCudartVersion\0")
                 .map(|sym| *sym)
                 .expect("Expected symbol in library");
-            #[cfg(any(feature = "cuda-12090", feature = "cuda-13000"))]
+            #[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010"))]
             let cublasGetEmulationStrategy = __library
                 .get(b"cublasGetEmulationStrategy\0")
                 .map(|sym| *sym)
@@ -30798,7 +31617,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasGetMatrixAsync_64 = __library
                 .get(b"cublasGetMatrixAsync_64\0")
@@ -30814,7 +31634,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasGetMatrix_64 = __library
                 .get(b"cublasGetMatrix_64\0")
@@ -30862,7 +31683,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasGetVectorAsync_64 = __library
                 .get(b"cublasGetVectorAsync_64\0")
@@ -30878,7 +31700,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasGetVector_64 = __library
                 .get(b"cublasGetVector_64\0")
@@ -30902,7 +31725,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasIamaxEx_64 = __library
                 .get(b"cublasIamaxEx_64\0")
@@ -30922,7 +31746,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasIaminEx_64 = __library
                 .get(b"cublasIaminEx_64\0")
@@ -30942,7 +31767,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasIcamax_v2_64 = __library
                 .get(b"cublasIcamax_v2_64\0")
@@ -30962,7 +31788,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasIcamin_v2_64 = __library
                 .get(b"cublasIcamin_v2_64\0")
@@ -30982,7 +31809,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasIdamax_v2_64 = __library
                 .get(b"cublasIdamax_v2_64\0")
@@ -31002,7 +31830,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasIdamin_v2_64 = __library
                 .get(b"cublasIdamin_v2_64\0")
@@ -31022,7 +31851,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasIsamax_v2_64 = __library
                 .get(b"cublasIsamax_v2_64\0")
@@ -31042,7 +31872,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasIsamin_v2_64 = __library
                 .get(b"cublasIsamin_v2_64\0")
@@ -31062,7 +31893,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasIzamax_v2_64 = __library
                 .get(b"cublasIzamax_v2_64\0")
@@ -31082,7 +31914,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasIzamin_v2_64 = __library
                 .get(b"cublasIzamin_v2_64\0")
@@ -31106,7 +31939,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasNrm2Ex_64 = __library
                 .get(b"cublasNrm2Ex_64\0")
@@ -31126,7 +31960,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasRotEx_64 = __library
                 .get(b"cublasRotEx_64\0")
@@ -31150,7 +31985,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasRotmEx_64 = __library
                 .get(b"cublasRotmEx_64\0")
@@ -31174,7 +32010,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSasum_v2_64 = __library
                 .get(b"cublasSasum_v2_64\0")
@@ -31194,7 +32031,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSaxpy_v2_64 = __library
                 .get(b"cublasSaxpy_v2_64\0")
@@ -31214,7 +32052,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasScalEx_64 = __library
                 .get(b"cublasScalEx_64\0")
@@ -31234,7 +32073,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasScasum_v2_64 = __library
                 .get(b"cublasScasum_v2_64\0")
@@ -31254,7 +32094,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasScnrm2_v2_64 = __library
                 .get(b"cublasScnrm2_v2_64\0")
@@ -31274,7 +32115,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasScopy_v2_64 = __library
                 .get(b"cublasScopy_v2_64\0")
@@ -31294,7 +32136,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSdgmm_64 = __library
                 .get(b"cublasSdgmm_64\0")
@@ -31314,7 +32157,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSdot_v2_64 = __library
                 .get(b"cublasSdot_v2_64\0")
@@ -31324,7 +32168,7 @@ mod loaded {
                 .get(b"cublasSetAtomicsMode\0")
                 .map(|sym| *sym)
                 .expect("Expected symbol in library");
-            #[cfg(any(feature = "cuda-12090", feature = "cuda-13000"))]
+            #[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010"))]
             let cublasSetEmulationStrategy = __library
                 .get(b"cublasSetEmulationStrategy\0")
                 .map(|sym| *sym)
@@ -31355,7 +32199,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSetMatrixAsync_64 = __library
                 .get(b"cublasSetMatrixAsync_64\0")
@@ -31371,7 +32216,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSetMatrix_64 = __library
                 .get(b"cublasSetMatrix_64\0")
@@ -31407,7 +32253,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSetVectorAsync_64 = __library
                 .get(b"cublasSetVectorAsync_64\0")
@@ -31423,7 +32270,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSetVector_64 = __library
                 .get(b"cublasSetVector_64\0")
@@ -31447,7 +32295,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSgbmv_v2_64 = __library
                 .get(b"cublasSgbmv_v2_64\0")
@@ -31467,7 +32316,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSgeam_64 = __library
                 .get(b"cublasSgeam_64\0")
@@ -31491,7 +32341,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSgemmBatched_64 = __library
                 .get(b"cublasSgemmBatched_64\0")
@@ -31511,7 +32362,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSgemmEx_64 = __library
                 .get(b"cublasSgemmEx_64\0")
@@ -31523,7 +32375,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSgemmGroupedBatched = __library
                 .get(b"cublasSgemmGroupedBatched\0")
@@ -31535,7 +32388,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSgemmGroupedBatched_64 = __library
                 .get(b"cublasSgemmGroupedBatched_64\0")
@@ -31555,7 +32409,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSgemmStridedBatched_64 = __library
                 .get(b"cublasSgemmStridedBatched_64\0")
@@ -31575,7 +32430,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSgemm_v2_64 = __library
                 .get(b"cublasSgemm_v2_64\0")
@@ -31594,7 +32450,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSgemvBatched = __library
                 .get(b"cublasSgemvBatched\0")
@@ -31610,7 +32467,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSgemvBatched_64 = __library
                 .get(b"cublasSgemvBatched_64\0")
@@ -31629,7 +32487,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSgemvStridedBatched = __library
                 .get(b"cublasSgemvStridedBatched\0")
@@ -31645,7 +32504,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSgemvStridedBatched_64 = __library
                 .get(b"cublasSgemvStridedBatched_64\0")
@@ -31665,7 +32525,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSgemv_v2_64 = __library
                 .get(b"cublasSgemv_v2_64\0")
@@ -31689,7 +32550,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSger_v2_64 = __library
                 .get(b"cublasSger_v2_64\0")
@@ -31725,7 +32587,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSnrm2_v2_64 = __library
                 .get(b"cublasSnrm2_v2_64\0")
@@ -31745,7 +32608,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSrot_v2_64 = __library
                 .get(b"cublasSrot_v2_64\0")
@@ -31769,7 +32633,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSrotm_v2_64 = __library
                 .get(b"cublasSrotm_v2_64\0")
@@ -31793,7 +32658,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSsbmv_v2_64 = __library
                 .get(b"cublasSsbmv_v2_64\0")
@@ -31813,7 +32679,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSscal_v2_64 = __library
                 .get(b"cublasSscal_v2_64\0")
@@ -31833,7 +32700,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSspmv_v2_64 = __library
                 .get(b"cublasSspmv_v2_64\0")
@@ -31853,7 +32721,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSspr2_v2_64 = __library
                 .get(b"cublasSspr2_v2_64\0")
@@ -31873,7 +32742,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSspr_v2_64 = __library
                 .get(b"cublasSspr_v2_64\0")
@@ -31893,7 +32763,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSswap_v2_64 = __library
                 .get(b"cublasSswap_v2_64\0")
@@ -31913,7 +32784,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSsymm_v2_64 = __library
                 .get(b"cublasSsymm_v2_64\0")
@@ -31933,7 +32805,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSsymv_v2_64 = __library
                 .get(b"cublasSsymv_v2_64\0")
@@ -31953,7 +32826,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSsyr2_v2_64 = __library
                 .get(b"cublasSsyr2_v2_64\0")
@@ -31973,7 +32847,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSsyr2k_v2_64 = __library
                 .get(b"cublasSsyr2k_v2_64\0")
@@ -31993,7 +32868,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSsyr_v2_64 = __library
                 .get(b"cublasSsyr_v2_64\0")
@@ -32013,7 +32889,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSsyrk_v2_64 = __library
                 .get(b"cublasSsyrk_v2_64\0")
@@ -32033,7 +32910,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSsyrkx_64 = __library
                 .get(b"cublasSsyrkx_64\0")
@@ -32053,7 +32931,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasStbmv_v2_64 = __library
                 .get(b"cublasStbmv_v2_64\0")
@@ -32073,7 +32952,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasStbsv_v2_64 = __library
                 .get(b"cublasStbsv_v2_64\0")
@@ -32093,7 +32973,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasStpmv_v2_64 = __library
                 .get(b"cublasStpmv_v2_64\0")
@@ -32113,7 +32994,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasStpsv_v2_64 = __library
                 .get(b"cublasStpsv_v2_64\0")
@@ -32137,7 +33019,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasStrmm_v2_64 = __library
                 .get(b"cublasStrmm_v2_64\0")
@@ -32157,7 +33040,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasStrmv_v2_64 = __library
                 .get(b"cublasStrmv_v2_64\0")
@@ -32177,7 +33061,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasStrsmBatched_64 = __library
                 .get(b"cublasStrsmBatched_64\0")
@@ -32197,7 +33082,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasStrsm_v2_64 = __library
                 .get(b"cublasStrsm_v2_64\0")
@@ -32217,7 +33103,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasStrsv_v2_64 = __library
                 .get(b"cublasStrsv_v2_64\0")
@@ -32241,7 +33128,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasSwapEx_64 = __library
                 .get(b"cublasSwapEx_64\0")
@@ -32269,7 +33157,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZaxpy_v2_64 = __library
                 .get(b"cublasZaxpy_v2_64\0")
@@ -32289,7 +33178,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZcopy_v2_64 = __library
                 .get(b"cublasZcopy_v2_64\0")
@@ -32309,7 +33199,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZdgmm_64 = __library
                 .get(b"cublasZdgmm_64\0")
@@ -32329,7 +33220,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZdotc_v2_64 = __library
                 .get(b"cublasZdotc_v2_64\0")
@@ -32349,7 +33241,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZdotu_v2_64 = __library
                 .get(b"cublasZdotu_v2_64\0")
@@ -32369,7 +33262,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZdrot_v2_64 = __library
                 .get(b"cublasZdrot_v2_64\0")
@@ -32389,7 +33283,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZdscal_v2_64 = __library
                 .get(b"cublasZdscal_v2_64\0")
@@ -32409,7 +33304,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZgbmv_v2_64 = __library
                 .get(b"cublasZgbmv_v2_64\0")
@@ -32429,7 +33325,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZgeam_64 = __library
                 .get(b"cublasZgeam_64\0")
@@ -32453,7 +33350,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZgemm3m_64 = __library
                 .get(b"cublasZgemm3m_64\0")
@@ -32473,7 +33371,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZgemmBatched_64 = __library
                 .get(b"cublasZgemmBatched_64\0")
@@ -32493,7 +33392,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZgemmStridedBatched_64 = __library
                 .get(b"cublasZgemmStridedBatched_64\0")
@@ -32513,7 +33413,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZgemm_v2_64 = __library
                 .get(b"cublasZgemm_v2_64\0")
@@ -32532,7 +33433,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZgemvBatched = __library
                 .get(b"cublasZgemvBatched\0")
@@ -32548,7 +33450,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZgemvBatched_64 = __library
                 .get(b"cublasZgemvBatched_64\0")
@@ -32567,7 +33470,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZgemvStridedBatched = __library
                 .get(b"cublasZgemvStridedBatched\0")
@@ -32583,7 +33487,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZgemvStridedBatched_64 = __library
                 .get(b"cublasZgemvStridedBatched_64\0")
@@ -32603,7 +33508,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZgemv_v2_64 = __library
                 .get(b"cublasZgemv_v2_64\0")
@@ -32627,7 +33533,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZgerc_v2_64 = __library
                 .get(b"cublasZgerc_v2_64\0")
@@ -32647,7 +33554,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZgeru_v2_64 = __library
                 .get(b"cublasZgeru_v2_64\0")
@@ -32679,7 +33587,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZhbmv_v2_64 = __library
                 .get(b"cublasZhbmv_v2_64\0")
@@ -32699,7 +33608,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZhemm_v2_64 = __library
                 .get(b"cublasZhemm_v2_64\0")
@@ -32719,7 +33629,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZhemv_v2_64 = __library
                 .get(b"cublasZhemv_v2_64\0")
@@ -32739,7 +33650,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZher2_v2_64 = __library
                 .get(b"cublasZher2_v2_64\0")
@@ -32759,7 +33671,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZher2k_v2_64 = __library
                 .get(b"cublasZher2k_v2_64\0")
@@ -32779,7 +33692,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZher_v2_64 = __library
                 .get(b"cublasZher_v2_64\0")
@@ -32799,7 +33713,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZherk_v2_64 = __library
                 .get(b"cublasZherk_v2_64\0")
@@ -32819,7 +33734,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZherkx_64 = __library
                 .get(b"cublasZherkx_64\0")
@@ -32839,7 +33755,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZhpmv_v2_64 = __library
                 .get(b"cublasZhpmv_v2_64\0")
@@ -32859,7 +33776,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZhpr2_v2_64 = __library
                 .get(b"cublasZhpr2_v2_64\0")
@@ -32879,7 +33797,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZhpr_v2_64 = __library
                 .get(b"cublasZhpr_v2_64\0")
@@ -32903,7 +33822,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZrot_v2_64 = __library
                 .get(b"cublasZrot_v2_64\0")
@@ -32927,7 +33847,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZscal_v2_64 = __library
                 .get(b"cublasZscal_v2_64\0")
@@ -32947,7 +33868,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZswap_v2_64 = __library
                 .get(b"cublasZswap_v2_64\0")
@@ -32967,7 +33889,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZsymm_v2_64 = __library
                 .get(b"cublasZsymm_v2_64\0")
@@ -32987,7 +33910,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZsymv_v2_64 = __library
                 .get(b"cublasZsymv_v2_64\0")
@@ -33007,7 +33931,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZsyr2_v2_64 = __library
                 .get(b"cublasZsyr2_v2_64\0")
@@ -33027,7 +33952,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZsyr2k_v2_64 = __library
                 .get(b"cublasZsyr2k_v2_64\0")
@@ -33047,7 +33973,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZsyr_v2_64 = __library
                 .get(b"cublasZsyr_v2_64\0")
@@ -33067,7 +33994,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZsyrk_v2_64 = __library
                 .get(b"cublasZsyrk_v2_64\0")
@@ -33087,7 +34015,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZsyrkx_64 = __library
                 .get(b"cublasZsyrkx_64\0")
@@ -33107,7 +34036,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZtbmv_v2_64 = __library
                 .get(b"cublasZtbmv_v2_64\0")
@@ -33127,7 +34057,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZtbsv_v2_64 = __library
                 .get(b"cublasZtbsv_v2_64\0")
@@ -33147,7 +34078,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZtpmv_v2_64 = __library
                 .get(b"cublasZtpmv_v2_64\0")
@@ -33167,7 +34099,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZtpsv_v2_64 = __library
                 .get(b"cublasZtpsv_v2_64\0")
@@ -33191,7 +34124,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZtrmm_v2_64 = __library
                 .get(b"cublasZtrmm_v2_64\0")
@@ -33211,7 +34145,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZtrmv_v2_64 = __library
                 .get(b"cublasZtrmv_v2_64\0")
@@ -33231,7 +34166,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZtrsmBatched_64 = __library
                 .get(b"cublasZtrsmBatched_64\0")
@@ -33251,7 +34187,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZtrsm_v2_64 = __library
                 .get(b"cublasZtrsm_v2_64\0")
@@ -33271,7 +34208,8 @@ mod loaded {
                 feature = "cuda-12060",
                 feature = "cuda-12080",
                 feature = "cuda-12090",
-                feature = "cuda-13000"
+                feature = "cuda-13000",
+                feature = "cuda-13010"
             ))]
             let cublasZtrsv_v2_64 = __library
                 .get(b"cublasZtrsv_v2_64\0")
@@ -33294,7 +34232,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasAsumEx_64,
                 cublasAxpyEx,
@@ -33308,7 +34247,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasAxpyEx_64,
                 cublasCaxpy_v2,
@@ -33322,7 +34262,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCaxpy_v2_64,
                 cublasCcopy_v2,
@@ -33336,7 +34277,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCcopy_v2_64,
                 cublasCdgmm,
@@ -33350,7 +34292,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCdgmm_64,
                 cublasCdotc_v2,
@@ -33364,7 +34307,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCdotc_v2_64,
                 cublasCdotu_v2,
@@ -33378,7 +34322,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCdotu_v2_64,
                 cublasCgbmv_v2,
@@ -33392,7 +34337,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgbmv_v2_64,
                 cublasCgeam,
@@ -33406,7 +34352,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgeam_64,
                 cublasCgelsBatched,
@@ -33422,7 +34369,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgemm3mBatched_64,
                 cublasCgemm3mEx,
@@ -33436,7 +34384,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgemm3mEx_64,
                 cublasCgemm3mStridedBatched,
@@ -33450,7 +34399,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgemm3mStridedBatched_64,
                 #[cfg(any(
@@ -33463,7 +34413,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgemm3m_64,
                 cublasCgemmBatched,
@@ -33477,7 +34428,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgemmBatched_64,
                 cublasCgemmEx,
@@ -33491,7 +34443,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgemmEx_64,
                 cublasCgemmStridedBatched,
@@ -33505,7 +34458,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgemmStridedBatched_64,
                 cublasCgemm_v2,
@@ -33519,7 +34473,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgemm_v2_64,
                 #[cfg(any(
@@ -33535,7 +34490,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgemvBatched,
                 #[cfg(any(
@@ -33548,7 +34504,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgemvBatched_64,
                 #[cfg(any(
@@ -33564,7 +34521,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgemvStridedBatched,
                 #[cfg(any(
@@ -33577,7 +34535,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgemvStridedBatched_64,
                 cublasCgemv_v2,
@@ -33591,7 +34550,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgemv_v2_64,
                 cublasCgeqrfBatched,
@@ -33606,7 +34566,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgerc_v2_64,
                 cublasCgeru_v2,
@@ -33620,7 +34581,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCgeru_v2_64,
                 cublasCgetrfBatched,
@@ -33637,7 +34599,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasChbmv_v2_64,
                 cublasChemm_v2,
@@ -33651,7 +34614,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasChemm_v2_64,
                 cublasChemv_v2,
@@ -33665,7 +34629,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasChemv_v2_64,
                 cublasCher2_v2,
@@ -33679,7 +34644,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCher2_v2_64,
                 cublasCher2k_v2,
@@ -33693,7 +34659,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCher2k_v2_64,
                 cublasCher_v2,
@@ -33707,7 +34674,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCher_v2_64,
                 cublasCherk3mEx,
@@ -33721,7 +34689,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCherk3mEx_64,
                 cublasCherkEx,
@@ -33735,7 +34704,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCherkEx_64,
                 cublasCherk_v2,
@@ -33749,7 +34719,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCherk_v2_64,
                 cublasCherkx,
@@ -33763,7 +34734,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCherkx_64,
                 cublasChpmv_v2,
@@ -33777,7 +34749,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasChpmv_v2_64,
                 cublasChpr2_v2,
@@ -33791,7 +34764,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasChpr2_v2_64,
                 cublasChpr_v2,
@@ -33805,7 +34779,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasChpr_v2_64,
                 cublasCmatinvBatched,
@@ -33820,7 +34795,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCopyEx_64,
                 cublasCreate_v2,
@@ -33835,7 +34811,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCrot_v2_64,
                 cublasCrotg_v2,
@@ -33850,7 +34827,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCscal_v2_64,
                 cublasCsrot_v2,
@@ -33864,7 +34842,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCsrot_v2_64,
                 cublasCsscal_v2,
@@ -33878,7 +34857,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCsscal_v2_64,
                 cublasCswap_v2,
@@ -33892,7 +34872,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCswap_v2_64,
                 cublasCsymm_v2,
@@ -33906,7 +34887,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCsymm_v2_64,
                 cublasCsymv_v2,
@@ -33920,7 +34902,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCsymv_v2_64,
                 cublasCsyr2_v2,
@@ -33934,7 +34917,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCsyr2_v2_64,
                 cublasCsyr2k_v2,
@@ -33948,7 +34932,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCsyr2k_v2_64,
                 cublasCsyr_v2,
@@ -33962,7 +34947,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCsyr_v2_64,
                 cublasCsyrk3mEx,
@@ -33976,7 +34962,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCsyrk3mEx_64,
                 cublasCsyrkEx,
@@ -33990,7 +34977,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCsyrkEx_64,
                 cublasCsyrk_v2,
@@ -34004,7 +34992,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCsyrk_v2_64,
                 cublasCsyrkx,
@@ -34018,7 +35007,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCsyrkx_64,
                 cublasCtbmv_v2,
@@ -34032,7 +35022,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCtbmv_v2_64,
                 cublasCtbsv_v2,
@@ -34046,7 +35037,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCtbsv_v2_64,
                 cublasCtpmv_v2,
@@ -34060,7 +35052,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCtpmv_v2_64,
                 cublasCtpsv_v2,
@@ -34074,7 +35067,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCtpsv_v2_64,
                 cublasCtpttr,
@@ -34089,7 +35083,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCtrmm_v2_64,
                 cublasCtrmv_v2,
@@ -34103,7 +35098,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCtrmv_v2_64,
                 cublasCtrsmBatched,
@@ -34117,7 +35113,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCtrsmBatched_64,
                 cublasCtrsm_v2,
@@ -34131,7 +35128,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCtrsm_v2_64,
                 cublasCtrsv_v2,
@@ -34145,7 +35143,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasCtrsv_v2_64,
                 cublasCtrttp,
@@ -34160,7 +35159,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDasum_v2_64,
                 cublasDaxpy_v2,
@@ -34174,7 +35174,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDaxpy_v2_64,
                 cublasDcopy_v2,
@@ -34188,7 +35189,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDcopy_v2_64,
                 cublasDdgmm,
@@ -34202,7 +35204,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDdgmm_64,
                 cublasDdot_v2,
@@ -34216,7 +35219,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDdot_v2_64,
                 cublasDestroy_v2,
@@ -34231,7 +35235,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDgbmv_v2_64,
                 cublasDgeam,
@@ -34245,7 +35250,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDgeam_64,
                 cublasDgelsBatched,
@@ -34260,7 +35266,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDgemmBatched_64,
                 #[cfg(any(
@@ -34269,7 +35276,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDgemmGroupedBatched,
                 #[cfg(any(
@@ -34278,7 +35286,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDgemmGroupedBatched_64,
                 cublasDgemmStridedBatched,
@@ -34292,7 +35301,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDgemmStridedBatched_64,
                 cublasDgemm_v2,
@@ -34306,7 +35316,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDgemm_v2_64,
                 #[cfg(any(
@@ -34322,7 +35333,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDgemvBatched,
                 #[cfg(any(
@@ -34335,7 +35347,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDgemvBatched_64,
                 #[cfg(any(
@@ -34351,7 +35364,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDgemvStridedBatched,
                 #[cfg(any(
@@ -34364,7 +35378,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDgemvStridedBatched_64,
                 cublasDgemv_v2,
@@ -34378,7 +35393,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDgemv_v2_64,
                 cublasDgeqrfBatched,
@@ -34393,7 +35409,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDger_v2_64,
                 cublasDgetrfBatched,
@@ -34411,7 +35428,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDnrm2_v2_64,
                 cublasDotEx,
@@ -34425,7 +35443,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDotEx_64,
                 cublasDotcEx,
@@ -34439,7 +35458,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDotcEx_64,
                 cublasDrot_v2,
@@ -34453,7 +35473,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDrot_v2_64,
                 cublasDrotg_v2,
@@ -34468,7 +35489,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDrotm_v2_64,
                 cublasDrotmg_v2,
@@ -34483,7 +35505,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDsbmv_v2_64,
                 cublasDscal_v2,
@@ -34497,7 +35520,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDscal_v2_64,
                 cublasDspmv_v2,
@@ -34511,7 +35535,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDspmv_v2_64,
                 cublasDspr2_v2,
@@ -34525,7 +35550,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDspr2_v2_64,
                 cublasDspr_v2,
@@ -34539,7 +35565,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDspr_v2_64,
                 cublasDswap_v2,
@@ -34553,7 +35580,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDswap_v2_64,
                 cublasDsymm_v2,
@@ -34567,7 +35595,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDsymm_v2_64,
                 cublasDsymv_v2,
@@ -34581,7 +35610,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDsymv_v2_64,
                 cublasDsyr2_v2,
@@ -34595,7 +35625,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDsyr2_v2_64,
                 cublasDsyr2k_v2,
@@ -34609,7 +35640,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDsyr2k_v2_64,
                 cublasDsyr_v2,
@@ -34623,7 +35655,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDsyr_v2_64,
                 cublasDsyrk_v2,
@@ -34637,7 +35670,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDsyrk_v2_64,
                 cublasDsyrkx,
@@ -34651,7 +35685,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDsyrkx_64,
                 cublasDtbmv_v2,
@@ -34665,7 +35700,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDtbmv_v2_64,
                 cublasDtbsv_v2,
@@ -34679,7 +35715,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDtbsv_v2_64,
                 cublasDtpmv_v2,
@@ -34693,7 +35730,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDtpmv_v2_64,
                 cublasDtpsv_v2,
@@ -34707,7 +35745,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDtpsv_v2_64,
                 cublasDtpttr,
@@ -34722,7 +35761,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDtrmm_v2_64,
                 cublasDtrmv_v2,
@@ -34736,7 +35776,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDtrmv_v2_64,
                 cublasDtrsmBatched,
@@ -34750,7 +35791,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDtrsmBatched_64,
                 cublasDtrsm_v2,
@@ -34764,7 +35806,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDtrsm_v2_64,
                 cublasDtrsv_v2,
@@ -34778,7 +35821,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDtrsv_v2_64,
                 cublasDtrttp,
@@ -34793,7 +35837,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDzasum_v2_64,
                 cublasDznrm2_v2,
@@ -34807,7 +35852,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasDznrm2_v2_64,
                 cublasGemmBatchedEx,
@@ -34821,7 +35867,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasGemmBatchedEx_64,
                 cublasGemmEx,
@@ -34835,7 +35882,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasGemmEx_64,
                 #[cfg(any(
@@ -34843,7 +35891,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasGemmGroupedBatchedEx,
                 #[cfg(any(
@@ -34851,7 +35900,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasGemmGroupedBatchedEx_64,
                 cublasGemmStridedBatchedEx,
@@ -34865,12 +35915,17 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasGemmStridedBatchedEx_64,
                 cublasGetAtomicsMode,
                 cublasGetCudartVersion,
-                #[cfg(any(feature = "cuda-12090", feature = "cuda-13000"))]
+                #[cfg(any(
+                    feature = "cuda-12090",
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
+                ))]
                 cublasGetEmulationStrategy,
                 cublasGetLoggerCallback,
                 cublasGetMathMode,
@@ -34886,7 +35941,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasGetMatrixAsync_64,
                 #[cfg(any(
@@ -34899,7 +35955,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasGetMatrix_64,
                 cublasGetPointerMode_v2,
@@ -34920,7 +35977,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasGetVectorAsync_64,
                 #[cfg(any(
@@ -34933,7 +35991,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasGetVector_64,
                 cublasGetVersion_v2,
@@ -34948,7 +36007,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasIamaxEx_64,
                 cublasIaminEx,
@@ -34962,7 +36022,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasIaminEx_64,
                 cublasIcamax_v2,
@@ -34976,7 +36037,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasIcamax_v2_64,
                 cublasIcamin_v2,
@@ -34990,7 +36052,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasIcamin_v2_64,
                 cublasIdamax_v2,
@@ -35004,7 +36067,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasIdamax_v2_64,
                 cublasIdamin_v2,
@@ -35018,7 +36082,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasIdamin_v2_64,
                 cublasIsamax_v2,
@@ -35032,7 +36097,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasIsamax_v2_64,
                 cublasIsamin_v2,
@@ -35046,7 +36112,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasIsamin_v2_64,
                 cublasIzamax_v2,
@@ -35060,7 +36127,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasIzamax_v2_64,
                 cublasIzamin_v2,
@@ -35074,7 +36142,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasIzamin_v2_64,
                 cublasLoggerConfigure,
@@ -35089,7 +36158,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasNrm2Ex_64,
                 cublasRotEx,
@@ -35103,7 +36173,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasRotEx_64,
                 cublasRotgEx,
@@ -35118,7 +36189,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasRotmEx_64,
                 cublasRotmgEx,
@@ -35133,7 +36205,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSasum_v2_64,
                 cublasSaxpy_v2,
@@ -35147,7 +36220,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSaxpy_v2_64,
                 cublasScalEx,
@@ -35161,7 +36235,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasScalEx_64,
                 cublasScasum_v2,
@@ -35175,7 +36250,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasScasum_v2_64,
                 cublasScnrm2_v2,
@@ -35189,7 +36265,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasScnrm2_v2_64,
                 cublasScopy_v2,
@@ -35203,7 +36280,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasScopy_v2_64,
                 cublasSdgmm,
@@ -35217,7 +36295,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSdgmm_64,
                 cublasSdot_v2,
@@ -35231,11 +36310,16 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSdot_v2_64,
                 cublasSetAtomicsMode,
-                #[cfg(any(feature = "cuda-12090", feature = "cuda-13000"))]
+                #[cfg(any(
+                    feature = "cuda-12090",
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
+                ))]
                 cublasSetEmulationStrategy,
                 cublasSetLoggerCallback,
                 cublasSetMathMode,
@@ -35251,7 +36335,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSetMatrixAsync_64,
                 #[cfg(any(
@@ -35264,7 +36349,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSetMatrix_64,
                 cublasSetPointerMode_v2,
@@ -35282,7 +36368,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSetVectorAsync_64,
                 #[cfg(any(
@@ -35295,7 +36382,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSetVector_64,
                 cublasSetWorkspace_v2,
@@ -35310,7 +36398,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSgbmv_v2_64,
                 cublasSgeam,
@@ -35324,7 +36413,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSgeam_64,
                 cublasSgelsBatched,
@@ -35339,7 +36429,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSgemmBatched_64,
                 cublasSgemmEx,
@@ -35353,7 +36444,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSgemmEx_64,
                 #[cfg(any(
@@ -35362,7 +36454,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSgemmGroupedBatched,
                 #[cfg(any(
@@ -35371,7 +36464,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSgemmGroupedBatched_64,
                 cublasSgemmStridedBatched,
@@ -35385,7 +36479,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSgemmStridedBatched_64,
                 cublasSgemm_v2,
@@ -35399,7 +36494,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSgemm_v2_64,
                 #[cfg(any(
@@ -35415,7 +36511,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSgemvBatched,
                 #[cfg(any(
@@ -35428,7 +36525,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSgemvBatched_64,
                 #[cfg(any(
@@ -35444,7 +36542,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSgemvStridedBatched,
                 #[cfg(any(
@@ -35457,7 +36556,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSgemvStridedBatched_64,
                 cublasSgemv_v2,
@@ -35471,7 +36571,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSgemv_v2_64,
                 cublasSgeqrfBatched,
@@ -35486,7 +36587,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSger_v2_64,
                 cublasSgetrfBatched,
@@ -35504,7 +36606,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSnrm2_v2_64,
                 cublasSrot_v2,
@@ -35518,7 +36621,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSrot_v2_64,
                 cublasSrotg_v2,
@@ -35533,7 +36637,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSrotm_v2_64,
                 cublasSrotmg_v2,
@@ -35548,7 +36653,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSsbmv_v2_64,
                 cublasSscal_v2,
@@ -35562,7 +36668,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSscal_v2_64,
                 cublasSspmv_v2,
@@ -35576,7 +36683,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSspmv_v2_64,
                 cublasSspr2_v2,
@@ -35590,7 +36698,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSspr2_v2_64,
                 cublasSspr_v2,
@@ -35604,7 +36713,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSspr_v2_64,
                 cublasSswap_v2,
@@ -35618,7 +36728,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSswap_v2_64,
                 cublasSsymm_v2,
@@ -35632,7 +36743,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSsymm_v2_64,
                 cublasSsymv_v2,
@@ -35646,7 +36758,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSsymv_v2_64,
                 cublasSsyr2_v2,
@@ -35660,7 +36773,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSsyr2_v2_64,
                 cublasSsyr2k_v2,
@@ -35674,7 +36788,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSsyr2k_v2_64,
                 cublasSsyr_v2,
@@ -35688,7 +36803,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSsyr_v2_64,
                 cublasSsyrk_v2,
@@ -35702,7 +36818,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSsyrk_v2_64,
                 cublasSsyrkx,
@@ -35716,7 +36833,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSsyrkx_64,
                 cublasStbmv_v2,
@@ -35730,7 +36848,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasStbmv_v2_64,
                 cublasStbsv_v2,
@@ -35744,7 +36863,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasStbsv_v2_64,
                 cublasStpmv_v2,
@@ -35758,7 +36878,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasStpmv_v2_64,
                 cublasStpsv_v2,
@@ -35772,7 +36893,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasStpsv_v2_64,
                 cublasStpttr,
@@ -35787,7 +36909,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasStrmm_v2_64,
                 cublasStrmv_v2,
@@ -35801,7 +36924,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasStrmv_v2_64,
                 cublasStrsmBatched,
@@ -35815,7 +36939,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasStrsmBatched_64,
                 cublasStrsm_v2,
@@ -35829,7 +36954,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasStrsm_v2_64,
                 cublasStrsv_v2,
@@ -35843,7 +36969,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasStrsv_v2_64,
                 cublasStrttp,
@@ -35858,7 +36985,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasSwapEx_64,
                 cublasUint8gemmBias,
@@ -35874,7 +37002,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZaxpy_v2_64,
                 cublasZcopy_v2,
@@ -35888,7 +37017,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZcopy_v2_64,
                 cublasZdgmm,
@@ -35902,7 +37032,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZdgmm_64,
                 cublasZdotc_v2,
@@ -35916,7 +37047,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZdotc_v2_64,
                 cublasZdotu_v2,
@@ -35930,7 +37062,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZdotu_v2_64,
                 cublasZdrot_v2,
@@ -35944,7 +37077,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZdrot_v2_64,
                 cublasZdscal_v2,
@@ -35958,7 +37092,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZdscal_v2_64,
                 cublasZgbmv_v2,
@@ -35972,7 +37107,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZgbmv_v2_64,
                 cublasZgeam,
@@ -35986,7 +37122,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZgeam_64,
                 cublasZgelsBatched,
@@ -36001,7 +37138,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZgemm3m_64,
                 cublasZgemmBatched,
@@ -36015,7 +37153,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZgemmBatched_64,
                 cublasZgemmStridedBatched,
@@ -36029,7 +37168,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZgemmStridedBatched_64,
                 cublasZgemm_v2,
@@ -36043,7 +37183,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZgemm_v2_64,
                 #[cfg(any(
@@ -36059,7 +37200,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZgemvBatched,
                 #[cfg(any(
@@ -36072,7 +37214,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZgemvBatched_64,
                 #[cfg(any(
@@ -36088,7 +37231,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZgemvStridedBatched,
                 #[cfg(any(
@@ -36101,7 +37245,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZgemvStridedBatched_64,
                 cublasZgemv_v2,
@@ -36115,7 +37260,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZgemv_v2_64,
                 cublasZgeqrfBatched,
@@ -36130,7 +37276,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZgerc_v2_64,
                 cublasZgeru_v2,
@@ -36144,7 +37291,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZgeru_v2_64,
                 cublasZgetrfBatched,
@@ -36161,7 +37309,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZhbmv_v2_64,
                 cublasZhemm_v2,
@@ -36175,7 +37324,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZhemm_v2_64,
                 cublasZhemv_v2,
@@ -36189,7 +37339,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZhemv_v2_64,
                 cublasZher2_v2,
@@ -36203,7 +37354,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZher2_v2_64,
                 cublasZher2k_v2,
@@ -36217,7 +37369,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZher2k_v2_64,
                 cublasZher_v2,
@@ -36231,7 +37384,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZher_v2_64,
                 cublasZherk_v2,
@@ -36245,7 +37399,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZherk_v2_64,
                 cublasZherkx,
@@ -36259,7 +37414,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZherkx_64,
                 cublasZhpmv_v2,
@@ -36273,7 +37429,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZhpmv_v2_64,
                 cublasZhpr2_v2,
@@ -36287,7 +37444,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZhpr2_v2_64,
                 cublasZhpr_v2,
@@ -36301,7 +37459,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZhpr_v2_64,
                 cublasZmatinvBatched,
@@ -36316,7 +37475,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZrot_v2_64,
                 cublasZrotg_v2,
@@ -36331,7 +37491,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZscal_v2_64,
                 cublasZswap_v2,
@@ -36345,7 +37506,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZswap_v2_64,
                 cublasZsymm_v2,
@@ -36359,7 +37521,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZsymm_v2_64,
                 cublasZsymv_v2,
@@ -36373,7 +37536,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZsymv_v2_64,
                 cublasZsyr2_v2,
@@ -36387,7 +37551,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZsyr2_v2_64,
                 cublasZsyr2k_v2,
@@ -36401,7 +37566,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZsyr2k_v2_64,
                 cublasZsyr_v2,
@@ -36415,7 +37581,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZsyr_v2_64,
                 cublasZsyrk_v2,
@@ -36429,7 +37596,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZsyrk_v2_64,
                 cublasZsyrkx,
@@ -36443,7 +37611,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZsyrkx_64,
                 cublasZtbmv_v2,
@@ -36457,7 +37626,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZtbmv_v2_64,
                 cublasZtbsv_v2,
@@ -36471,7 +37641,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZtbsv_v2_64,
                 cublasZtpmv_v2,
@@ -36485,7 +37656,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZtpmv_v2_64,
                 cublasZtpsv_v2,
@@ -36499,7 +37671,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZtpsv_v2_64,
                 cublasZtpttr,
@@ -36514,7 +37687,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZtrmm_v2_64,
                 cublasZtrmv_v2,
@@ -36528,7 +37702,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZtrmv_v2_64,
                 cublasZtrsmBatched,
@@ -36542,7 +37717,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZtrsmBatched_64,
                 cublasZtrsm_v2,
@@ -36556,7 +37732,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZtrsm_v2_64,
                 cublasZtrsv_v2,
@@ -36570,7 +37747,8 @@ mod loaded {
                     feature = "cuda-12060",
                     feature = "cuda-12080",
                     feature = "cuda-12090",
-                    feature = "cuda-13000"
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
                 ))]
                 cublasZtrsv_v2_64,
                 cublasZtrttp,

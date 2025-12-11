@@ -16,4 +16,4 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: publish
-          args: --dry-run -F cuda-13000
+          args: --dry-run -F cuda-13010

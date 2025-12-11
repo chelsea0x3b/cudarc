@@ -276,21 +276,7 @@ pub unsafe fn write_async(
 #[cfg(any(feature = "cuda-11040", feature = "cuda-11050"))]
 mod batch_io {}
 
-#[cfg(any(
-    feature = "cuda-11060",
-    feature = "cuda-11070",
-    feature = "cuda-11080",
-    feature = "cuda-12000",
-    feature = "cuda-12010",
-    feature = "cuda-12020",
-    feature = "cuda-12030",
-    feature = "cuda-12040",
-    feature = "cuda-12050",
-    feature = "cuda-12060",
-    feature = "cuda-12080",
-    feature = "cuda-12090",
-    feature = "cuda-13000",
-))]
+#[cfg(not(any(feature = "cuda-11040", feature = "cuda-11050")))]
 mod batch_io {
     use super::*;
 
