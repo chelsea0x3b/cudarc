@@ -118,6 +118,40 @@ pub trait GroupedGemm<T: GroupedGemmDtype> {
 }
 
 impl<T: GroupedGemmDtype> GroupedGemm<T> for CudaBlas {
+    #[cfg(any(
+        feature = "cuda-11040",
+        feature = "cuda-11050",
+        feature = "cuda-11060",
+        feature = "cuda-11070",
+        feature = "cuda-11080",
+        feature = "cuda-12000",
+        feature = "cuda-12010",
+        feature = "cuda-12020",
+        feature = "cuda-12030",
+        feature = "cuda-12040",
+    ))]
+    fn grouped_gemm(
+        &self,
+        config: GroupedGemmConfig<T>,
+        a_slices: &[&CudaSlice<T>],
+        b_slices: &[&CudaSlice<T>],
+        c_slices: &mut [&mut CudaSlice<T>],
+    ) -> Result<(), CublasError> {
+        panic!("cublas GroupedGemm requires cuda 12.5+");
+    }
+
+    #[cfg(not(any(
+        feature = "cuda-11040",
+        feature = "cuda-11050",
+        feature = "cuda-11060",
+        feature = "cuda-11070",
+        feature = "cuda-11080",
+        feature = "cuda-12000",
+        feature = "cuda-12010",
+        feature = "cuda-12020",
+        feature = "cuda-12030",
+        feature = "cuda-12040",
+    )))]
     fn grouped_gemm(
         &self,
         config: GroupedGemmConfig<T>,
@@ -158,18 +192,6 @@ impl<T: GroupedGemmDtype> GroupedGemm<T> for CudaBlas {
         let ldc_array: Vec<i32> = config.ldcs.iter().map(|&x| x as i32).collect();
         let group_size: Vec<i32> = config.problem_sizes.iter().map(|&x| x as i32).collect();
 
-        #[cfg(not(any(
-            feature = "cuda-11040",
-            feature = "cuda-11050",
-            feature = "cuda-11060",
-            feature = "cuda-11070",
-            feature = "cuda-11080",
-            feature = "cuda-12000",
-            feature = "cuda-12010",
-            feature = "cuda-12020",
-            feature = "cuda-12030",
-            feature = "cuda-12040",
-        )))]
         unsafe {
             sys::cublasGemmGroupedBatchedEx(
                 self.handle,
@@ -195,20 +217,6 @@ impl<T: GroupedGemmDtype> GroupedGemm<T> for CudaBlas {
             )
             .result()?;
         };
-
-        #[cfg(any(
-            feature = "cuda-11040",
-            feature = "cuda-11050",
-            feature = "cuda-11060",
-            feature = "cuda-11070",
-            feature = "cuda-11080",
-            feature = "cuda-12000",
-            feature = "cuda-12010",
-            feature = "cuda-12020",
-            feature = "cuda-12030",
-            feature = "cuda-12040",
-        ))]
-        panic!("cublas GroupedGemm requires cuda 12.5+");
 
         Ok(())
     }
