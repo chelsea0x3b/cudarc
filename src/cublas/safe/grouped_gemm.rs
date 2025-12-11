@@ -109,12 +109,12 @@ pub trait GroupedGemm<T: GroupedGemmDtype> {
     /// * `a_slices` – device slices for matrices A for every problem (len = problem count).
     /// * `b_slices` – device slices for matrices B for every problem (len = problem count).
     /// * `c_slices` – device slices for output matrices C for every problem (len = problem count).
-    fn grouped_gemm(
+    unsafe fn grouped_gemm<A: DevicePtr<T>, B: DevicePtr<T>, C: DevicePtrMut<T>>(
         &self,
         config: GroupedGemmConfig<T>,
-        a_slices: &[&CudaSlice<T>],
-        b_slices: &[&CudaSlice<T>],
-        c_slices: &mut [&mut CudaSlice<T>],
+        a_slices: &[&A],
+        b_slices: &[&B],
+        c_slices: &mut [&mut C],
     ) -> Result<(), CublasError>;
 }
 
@@ -131,12 +131,12 @@ impl<T: GroupedGemmDtype> GroupedGemm<T> for CudaBlas {
         feature = "cuda-12030",
         feature = "cuda-12040",
     ))]
-    fn grouped_gemm(
+    unsafe fn grouped_gemm<A: DevicePtr<T>, B: DevicePtr<T>, C: DevicePtrMut<T>>(
         &self,
-        _config: GroupedGemmConfig<T>,
-        _a_slices: &[&CudaSlice<T>],
-        _b_slices: &[&CudaSlice<T>],
-        _c_slices: &mut [&mut CudaSlice<T>],
+        config: GroupedGemmConfig<T>,
+        a_slices: &[&A],
+        b_slices: &[&B],
+        c_slices: &mut [&mut C],
     ) -> Result<(), CublasError> {
         panic!("cublas GroupedGemm requires cuda 12.5+");
     }
@@ -153,12 +153,12 @@ impl<T: GroupedGemmDtype> GroupedGemm<T> for CudaBlas {
         feature = "cuda-12030",
         feature = "cuda-12040",
     )))]
-    fn grouped_gemm(
+    unsafe fn grouped_gemm<A: DevicePtr<T>, B: DevicePtr<T>, C: DevicePtrMut<T>>(
         &self,
         config: GroupedGemmConfig<T>,
-        a_slices: &[&CudaSlice<T>],
-        b_slices: &[&CudaSlice<T>],
-        c_slices: &mut [&mut CudaSlice<T>],
+        a_slices: &[&A],
+        b_slices: &[&B],
+        c_slices: &mut [&mut C],
     ) -> Result<(), CublasError> {
         config.validate();
         assert_eq!(a_slices.len(), config.problem_count());
@@ -285,14 +285,16 @@ mod tests {
             problem_sizes: vec![2, 1],
         };
 
-        handle
-            .grouped_gemm(
-                config,
-                &[&a0, &a1, &a2],
-                &[&b0, &b1, &b2],
-                &mut [&mut c0, &mut c1, &mut c2],
-            )
-            .unwrap();
+        unsafe {
+            handle
+                .grouped_gemm(
+                    config,
+                    &[&a0, &a1, &a2],
+                    &[&b0, &b1, &b2],
+                    &mut [&mut c0, &mut c1, &mut c2],
+                )
+                .unwrap();
+        }
 
         let c0_host = stream.clone_dtoh(&c0).unwrap();
         let c1_host = stream.clone_dtoh(&c1).unwrap();
@@ -363,14 +365,16 @@ mod tests {
             problem_sizes: vec![2, 1],
         };
 
-        handle
-            .grouped_gemm(
-                config,
-                &[&a0, &a1, &a2],
-                &[&b0, &b1, &b2],
-                &mut [&mut c0, &mut c1, &mut c2],
-            )
-            .unwrap();
+        unsafe {
+            handle
+                .grouped_gemm(
+                    config,
+                    &[&a0, &a1, &a2],
+                    &[&b0, &b1, &b2],
+                    &mut [&mut c0, &mut c1, &mut c2],
+                )
+                .unwrap();
+        }
 
         let c0_host = stream.clone_dtoh(&c0).unwrap();
         let c1_host = stream.clone_dtoh(&c1).unwrap();
