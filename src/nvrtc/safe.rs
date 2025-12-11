@@ -63,7 +63,7 @@ impl Ptx {
                     bytes.len(),
                 ))
             },
-            PtxKind::Src(_) | PtxKind::File(_) => None,
+            _ => None,
         }
     }
 }

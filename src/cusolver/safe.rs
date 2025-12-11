@@ -24,7 +24,7 @@ impl Drop for DnHandle {
     fn drop(&mut self) {
         let handle = std::mem::replace(&mut self.handle, std::ptr::null_mut());
         if !handle.is_null() {
-            unsafe { result::dn_destroy(self.handle) }.unwrap();
+            unsafe { result::dn_destroy(handle) }.unwrap();
         }
     }
 }
@@ -131,7 +131,7 @@ impl Drop for SpHandle {
     fn drop(&mut self) {
         let handle = std::mem::replace(&mut self.handle, std::ptr::null_mut());
         if !handle.is_null() {
-            unsafe { result::sp_destroy(self.handle) }.unwrap();
+            unsafe { result::sp_destroy(handle) }.unwrap();
         }
     }
 }
@@ -174,7 +174,7 @@ impl Drop for RfHandle {
     fn drop(&mut self) {
         let handle = std::mem::replace(&mut self.handle, std::ptr::null_mut());
         if !handle.is_null() {
-            unsafe { result::rf_destroy(self.handle) }.unwrap();
+            unsafe { result::rf_destroy(handle) }.unwrap();
         }
     }
 }
