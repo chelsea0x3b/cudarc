@@ -120,8 +120,7 @@ fn cuda_version_from_build_system() -> (usize, usize) {
     let version_number = release_section.split(' ').nth(1).unwrap();
 
     for &((major, minor), _) in SUPPORTED_CUDA_VERSIONS.iter() {
-        let expected = format!("{major}.{minor}");
-        if version_number == &expected {
+        if version_number == format!("{major}.{minor}") {
             return (major, minor);
         }
     }
