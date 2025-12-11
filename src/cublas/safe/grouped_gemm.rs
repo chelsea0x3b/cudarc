@@ -141,15 +141,6 @@ impl<T: GroupedGemmDtype> GroupedGemm<T> for CudaBlas {
             .map(|s| s.device_ptr_mut(&self.stream))
             .unzip();
 
-        // // TODO coalesce these allocations
-        // let a_ptrs_dev = htod_copy(&self.stream, &a_ptrs_host);
-        // let b_ptrs_dev = htod_copy(&self.stream, &b_ptrs_host);
-        // let c_ptrs_dev = htod_copy(&self.stream, &c_ptrs_host);
-
-        // let (a_ptrs, _a_guard) = a_ptrs_dev.device_ptr(&self.stream);
-        // let (b_ptrs, _b_guard) = b_ptrs_dev.device_ptr(&self.stream);
-        // let (c_ptrs, _c_guard) = c_ptrs_dev.device_ptr(&self.stream);
-
         let cuda_dtype = T::data_type();
         let group_count = config.group_count();
 
@@ -167,6 +158,18 @@ impl<T: GroupedGemmDtype> GroupedGemm<T> for CudaBlas {
         let ldc_array: Vec<i32> = config.ldcs.iter().map(|&x| x as i32).collect();
         let group_size: Vec<i32> = config.problem_sizes.iter().map(|&x| x as i32).collect();
 
+        #[cfg(not(any(
+            feature = "cuda-11040",
+            feature = "cuda-11050",
+            feature = "cuda-11060",
+            feature = "cuda-11070",
+            feature = "cuda-11080",
+            feature = "cuda-12000",
+            feature = "cuda-12010",
+            feature = "cuda-12020",
+            feature = "cuda-12030",
+            feature = "cuda-12040",
+        )))]
         unsafe {
             sys::cublasGemmGroupedBatchedEx(
                 self.handle,
@@ -192,6 +195,20 @@ impl<T: GroupedGemmDtype> GroupedGemm<T> for CudaBlas {
             )
             .result()?;
         };
+
+        #[cfg(any(
+            feature = "cuda-11040",
+            feature = "cuda-11050",
+            feature = "cuda-11060",
+            feature = "cuda-11070",
+            feature = "cuda-11080",
+            feature = "cuda-12000",
+            feature = "cuda-12010",
+            feature = "cuda-12020",
+            feature = "cuda-12030",
+            feature = "cuda-12040",
+        ))]
+        panic!("cublas GroupedGemm requires cuda 12.5+");
 
         Ok(())
     }
