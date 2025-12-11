@@ -109,6 +109,9 @@ pub trait GroupedGemm<T: GroupedGemmDtype> {
     /// * `a_slices` – device slices for matrices A for every problem (len = problem count).
     /// * `b_slices` – device slices for matrices B for every problem (len = problem count).
     /// * `c_slices` – device slices for output matrices C for every problem (len = problem count).
+    /// # Safety
+    /// Ensure that the slices are the correct size and length for the underlying cublas library.
+    /// Mis-sized/aligned values can result in undefined behavior.
     unsafe fn grouped_gemm<A: DevicePtr<T>, B: DevicePtr<T>, C: DevicePtrMut<T>>(
         &self,
         config: GroupedGemmConfig<T>,
