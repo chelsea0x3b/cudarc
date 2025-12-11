@@ -111,7 +111,7 @@ fn cuda_version_from_build_system() -> (usize, usize) {
         output_result => {
             #[cfg(feature = "fallback-latest")]
             {
-                let latest = (13, 0);
+                let latest = (13, 1);
                 println!("cargo:warning=Failed to run `nvcc --version`. Following `-F fallback-latest`; using CUDA {latest:?}.");
                 return latest;
             }
