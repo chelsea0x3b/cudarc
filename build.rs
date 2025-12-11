@@ -8,6 +8,49 @@ const TYPICAL_CUDA_PATH_ENV_VARS: [&str; 5] = [
     "CUDNN_LIB",
 ];
 
+const SUPPORTED_CUDA_VERSIONS: &[((usize, usize), bool)] = &[
+    ((13, 1), cfg!(feature = "cuda-13010")),
+    ((13, 0), cfg!(feature = "cuda-13000")),
+    ((12, 9), cfg!(feature = "cuda-12090")),
+    ((12, 8), cfg!(feature = "cuda-12080")),
+    ((12, 6), cfg!(feature = "cuda-12060")),
+    ((12, 5), cfg!(feature = "cuda-12050")),
+    ((12, 4), cfg!(feature = "cuda-12040")),
+    ((12, 3), cfg!(feature = "cuda-12030")),
+    ((12, 2), cfg!(feature = "cuda-12020")),
+    ((12, 1), cfg!(feature = "cuda-12010")),
+    ((12, 0), cfg!(feature = "cuda-12000")),
+    ((11, 8), cfg!(feature = "cuda-11080")),
+    ((11, 7), cfg!(feature = "cuda-11070")),
+    ((11, 6), cfg!(feature = "cuda-11060")),
+    ((11, 5), cfg!(feature = "cuda-11050")),
+    ((11, 4), cfg!(feature = "cuda-11040")),
+];
+
+fn detect_version_from_env() -> Option<(usize, usize)> {
+    match std::env::var("CUDARC_CUDA_VERSION") {
+        Ok(version) => {
+            let version = version.as_str();
+            for &((major, minor), _) in SUPPORTED_CUDA_VERSIONS.iter() {
+                if version == format!("{major}0{minor}0") {
+                    return Some((major, minor));
+                }
+            }
+            panic!("Unsupported cuda toolkit version: `$CUDARC_CUDA_VERSION={version}`. Please raise a github issue.")
+        }
+        _ => None,
+    }
+}
+
+fn detect_version_from_feature() -> Option<(usize, usize)> {
+    for &((major, minor), is_feature_set) in SUPPORTED_CUDA_VERSIONS.iter() {
+        if is_feature_set {
+            return Some((major, minor));
+        }
+    }
+    None
+}
+
 fn main() {
     #[cfg(all(
         not(feature = "dynamic-linking"),
@@ -28,60 +71,11 @@ fn main() {
         .iter()
         .for_each(|var| println!("cargo:rerun-if-env-changed={var}"));
 
-    let (major, minor): (usize, usize) = if let Ok(version) = std::env::var("CUDARC_CUDA_VERSION") {
-        let (major, minor) = match version.as_str() {
-            "13010" => (13, 1),
-            "13000" => (13, 0),
-            "12090" => (12, 9),
-            "12080" => (12, 8),
-            "12060" => (12, 6),
-            "12050" => (12, 5),
-            "12040" => (12, 4),
-            "12030" => (12, 3),
-            "12020" => (12, 2),
-            "12010" => (12, 1),
-            "12000" => (12, 0),
-            "11080" => (11, 8),
-            "11070" => (11, 7),
-            "11060" => (11, 6),
-            "11050" => (11, 5),
-            "11040" => (11, 4),
-            v => panic!("Unsupported cuda toolkit version: `{v}`. Please raise a github issue."),
-        };
+    let (major, minor): (usize, usize) = if let Some((major, minor)) = detect_version_from_env() {
         println!("cargo:rustc-cfg=feature=\"cuda-{major}0{minor}0\"");
         (major, minor)
-    } else if cfg!(feature = "cuda-13010") {
-        (13, 1)
-    } else if cfg!(feature = "cuda-13000") {
-        (13, 0)
-    } else if cfg!(feature = "cuda-12090") {
-        (12, 9)
-    } else if cfg!(feature = "cuda-12080") {
-        (12, 8)
-    } else if cfg!(feature = "cuda-12060") {
-        (12, 6)
-    } else if cfg!(feature = "cuda-12050") {
-        (12, 5)
-    } else if cfg!(feature = "cuda-12040") {
-        (12, 4)
-    } else if cfg!(feature = "cuda-12030") {
-        (12, 3)
-    } else if cfg!(feature = "cuda-12020") {
-        (12, 2)
-    } else if cfg!(feature = "cuda-12010") {
-        (12, 1)
-    } else if cfg!(feature = "cuda-12000") {
-        (12, 0)
-    } else if cfg!(feature = "cuda-11080") {
-        (11, 8)
-    } else if cfg!(feature = "cuda-11070") {
-        (11, 7)
-    } else if cfg!(feature = "cuda-11060") {
-        (11, 6)
-    } else if cfg!(feature = "cuda-11050") {
-        (11, 5)
-    } else if cfg!(feature = "cuda-11040") {
-        (11, 4)
+    } else if let Some((major, minor)) = detect_version_from_feature() {
+        (major, minor)
     } else {
         #[cfg(not(feature = "cuda-version-from-build-system"))]
         panic!("Must specify one of the following features: [cuda-version-from-build-system, cuda-13010, cuda-13000, cuda-12090, cuda-12080, cuda-12060, cuda-12050, cuda-12040, cuda-12030, cuda-12020, cuda-12010, cuda-12000, cuda-11080, cuda-11070, cuda-11060, cuda-11050, cuda-11040]");
@@ -111,7 +105,7 @@ fn cuda_version_from_build_system() -> (usize, usize) {
         output_result => {
             #[cfg(feature = "fallback-latest")]
             {
-                let latest = (13, 1);
+                let latest = SUPPORTED_CUDA_VERSIONS[0].0;
                 println!("cargo:warning=Failed to run `nvcc --version`. Following `-F fallback-latest`; using CUDA {latest:?}.");
                 return latest;
             }
@@ -125,25 +119,13 @@ fn cuda_version_from_build_system() -> (usize, usize) {
     let release_section = version_line.split(", ").nth(1).unwrap();
     let version_number = release_section.split(' ').nth(1).unwrap();
 
-    match version_number {
-        "13.1" => (13, 1),
-        "13.0" => (13, 0),
-        "12.9" => (12, 9),
-        "12.8" => (12, 8),
-        "12.6" => (12, 6),
-        "12.5" => (12, 5),
-        "12.4" => (12, 4),
-        "12.3" => (12, 3),
-        "12.2" => (12, 2),
-        "12.1" => (12, 1),
-        "12.0" => (12, 0),
-        "11.8" => (11, 8),
-        "11.7" => (11, 7),
-        "11.6" => (11, 6),
-        "11.5" => (11, 5),
-        "11.4" => (11, 4),
-        v => panic!("Unsupported cuda toolkit version: `{v}`. Please raise a github issue."),
+    for &((major, minor), _) in SUPPORTED_CUDA_VERSIONS.iter() {
+        let expected = format!("{major}.{minor}");
+        if version_number == &expected {
+            return (major, minor);
+        }
     }
+    panic!("Unsupported cuda toolkit version: `{version_number}`. Please raise a github issue.")
 }
 
 #[allow(unused)]
