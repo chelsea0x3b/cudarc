@@ -131,12 +131,15 @@ impl<T: GroupedGemmDtype> GroupedGemm<T> for CudaBlas {
         feature = "cuda-12030",
         feature = "cuda-12040",
     ))]
+    /// # Safety
+    /// Ensure that the slices are the correct size and length for the underlying cublas library.
+    /// Mis-sized/aligned values can result in undefined behavior.
     unsafe fn grouped_gemm<A: DevicePtr<T>, B: DevicePtr<T>, C: DevicePtrMut<T>>(
         &self,
-        config: GroupedGemmConfig<T>,
-        a_slices: &[&A],
-        b_slices: &[&B],
-        c_slices: &mut [&mut C],
+        _config: GroupedGemmConfig<T>,
+        _a_slices: &[&A],
+        _b_slices: &[&B],
+        _c_slices: &mut [&mut C],
     ) -> Result<(), CublasError> {
         panic!("cublas GroupedGemm requires cuda 12.5+");
     }
@@ -153,6 +156,9 @@ impl<T: GroupedGemmDtype> GroupedGemm<T> for CudaBlas {
         feature = "cuda-12030",
         feature = "cuda-12040",
     )))]
+    /// # Safety
+    /// Ensure that the slices are the correct size and length for the underlying cublas library.
+    /// Mis-sized/aligned values can result in undefined behavior.
     unsafe fn grouped_gemm<A: DevicePtr<T>, B: DevicePtr<T>, C: DevicePtrMut<T>>(
         &self,
         config: GroupedGemmConfig<T>,
