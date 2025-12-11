@@ -140,6 +140,7 @@ pub unsafe fn hgemm(
     static LIB: std::sync::OnceLock<libloading::Library> = std::sync::OnceLock::new();
     let lib = LIB
         .get_or_init(|| libloading::Library::new(libloading::library_filename("cublas")).unwrap());
+    #[allow(non_snake_case)]
     let f: unsafe extern "C" fn(
         handle: sys::cublasHandle_t,
         transa: sys::cublasOperation_t,
@@ -259,6 +260,7 @@ pub unsafe fn hgemm_strided_batched(
     static LIB: std::sync::OnceLock<libloading::Library> = std::sync::OnceLock::new();
     let lib = LIB
         .get_or_init(|| libloading::Library::new(libloading::library_filename("cublas")).unwrap());
+    #[allow(non_snake_case)]
     let f: unsafe extern "C" fn(
         handle: sys::cublasHandle_t,
         transa: sys::cublasOperation_t,
