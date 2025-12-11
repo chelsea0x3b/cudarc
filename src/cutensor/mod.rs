@@ -1,11 +1,3 @@
-#![cfg(not(any(
-    feature = "cuda-11040",
-    feature = "cuda-11050",
-    feature = "cuda-11060",
-    feature = "cuda-11070",
-    feature = "cuda-11080",
-)))]
-
 //! [CuTensor] wraps around the [cuTENSOR API](https://docs.nvidia.com/cuda/cutensor/index.html).
 //!
 //! cuTENSOR is a high-performance CUDA library for tensor primitives including:
