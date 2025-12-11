@@ -962,6 +962,7 @@ fn main() -> Result<()> {
         "cuda-12080",
         "cuda-12090",
         "cuda-13000",
+        "cuda-13010",
     ];
     if let Some(version) = args.cuda_version {
         cuda_versions.retain(|&v| v == version);
