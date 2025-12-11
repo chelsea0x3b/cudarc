@@ -12,7 +12,7 @@ Safe CUDA wrappers for:
 
 | library | dynamic load | dynamic link | static link |
 | --- | --- | --- | --- |
-| [CUDA driver](https://docs.nvidia.com/cuda/cuda-driver-api/index.html) | ✅ | ✅ | ❌ |
+| [CUDA driver](https://docs.nvidia.com/cuda/cuda-driver-api/index.html) | ✅ | ✅ | N/A |
 | [NVRTC](https://docs.nvidia.com/cuda/nvrtc/index.html) | ✅ | ✅ | ✅ |
 | [cuRAND](https://docs.nvidia.com/cuda/curand/index.html) | ✅ | ✅ | ✅ |
 | [cuBLAS](https://docs.nvidia.com/cuda/cublas/index.html) | ✅ | ✅ | ✅ |
@@ -20,10 +20,10 @@ Safe CUDA wrappers for:
 | [NCCL](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/) | ✅ | ✅ | ✅ |
 | [cuDNN](https://docs.nvidia.com/deeplearning/cudnn/backend/latest/api/overview.html) | ✅ | ✅ | ✅ |
 | [cuSPARSE](https://docs.nvidia.com/cuda/cusparse/) | ✅ | ✅ | ✅ |
-| [cuSOLVER](https://docs.nvidia.com/cuda/cusolver/) | ✅ | ✅ | ❌ |
+| [cuSOLVER](https://docs.nvidia.com/cuda/cusolver/) | ✅ | ✅ | N/A |
 | [cuFILE](https://docs.nvidia.com/gpudirect-storage/api-reference-guide/index.html#introduction) | ✅ | ✅ | ✅ |
 | [CUPTI](https://docs.nvidia.com/cupti/) | ✅ | ✅ | ✅ |
-| [nvtx](https://nvidia.github.io/NVTX/) | ✅ | ✅ | ❌ |
+| [nvtx](https://nvidia.github.io/NVTX/) | ✅ | ✅ | N/A |
 
 CUDA Versions supported
 - 11.4-11.8

@@ -129,7 +129,16 @@ pub mod cublas;
 pub mod cublaslt;
 #[cfg(feature = "cudnn")]
 pub mod cudnn;
-#[cfg(feature = "cufft")]
+#[cfg(all(
+    feature = "cufft",
+    not(any(
+        feature = "cuda-11040",
+        feature = "cuda-11050",
+        feature = "cuda-11060",
+        feature = "cuda-11070",
+        feature = "cuda-11080",
+    ))
+))]
 pub mod cufft;
 #[cfg(feature = "cufile")]
 pub mod cufile;
@@ -143,7 +152,16 @@ pub mod cusolver;
 pub mod cusolvermg;
 #[cfg(feature = "cusparse")]
 pub mod cusparse;
-#[cfg(feature = "cutensor")]
+#[cfg(all(
+    feature = "cutensor",
+    not(any(
+        feature = "cuda-11040",
+        feature = "cuda-11050",
+        feature = "cuda-11060",
+        feature = "cuda-11070",
+        feature = "cuda-11080",
+    ))
+))]
 pub mod cutensor;
 #[cfg(feature = "driver")]
 pub mod driver;
