@@ -3,6 +3,7 @@
 //! ref: https://docs.nvidia.com/cuda/cublas/index.html#cublasgemmgroupedbatchedex
 use std::vec::Vec;
 
+#[allow(unused_imports)]
 use crate::{
     cublas::{result::CublasError, sys, CudaBlas},
     driver::{CudaSlice, DevicePtr, DevicePtrMut, DeviceRepr},
@@ -83,7 +84,7 @@ impl<T: GroupedGemmDtype> GroupedGemmConfig<T> {
     }
 
     #[inline]
-    fn validate(&self) {
+    pub fn validate(&self) {
         let group_count = self.group_count();
         assert_eq!(self.transbs.len(), group_count);
         assert_eq!(self.transas.len(), group_count);
@@ -132,10 +133,10 @@ impl<T: GroupedGemmDtype> GroupedGemm<T> for CudaBlas {
     ))]
     fn grouped_gemm(
         &self,
-        config: GroupedGemmConfig<T>,
-        a_slices: &[&CudaSlice<T>],
-        b_slices: &[&CudaSlice<T>],
-        c_slices: &mut [&mut CudaSlice<T>],
+        _config: GroupedGemmConfig<T>,
+        _a_slices: &[&CudaSlice<T>],
+        _b_slices: &[&CudaSlice<T>],
+        _c_slices: &mut [&mut CudaSlice<T>],
     ) -> Result<(), CublasError> {
         panic!("cublas GroupedGemm requires cuda 12.5+");
     }
