@@ -130,7 +130,7 @@ pub mod cublaslt;
 #[cfg(feature = "cudnn")]
 pub mod cudnn;
 #[cfg(all(
-    feature = "cufft"
+    feature = "cufft",
     not(any(
         feature = "cuda-11040",
         feature = "cuda-11050",
@@ -153,7 +153,7 @@ pub mod cusolvermg;
 #[cfg(feature = "cusparse")]
 pub mod cusparse;
 #[cfg(all(
-    feature = "cutensor"
+    feature = "cutensor",
     not(any(
         feature = "cuda-11040",
         feature = "cuda-11050",
