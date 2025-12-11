@@ -8,12 +8,12 @@ use std::sync::Arc;
 mod asum;
 mod gemm;
 mod gemv;
-mod gmm;
+mod grouped_gemm;
 
 pub use asum::*;
 pub use gemm::*;
 pub use gemv::*;
-pub use gmm::*;
+pub use grouped_gemm::*;
 
 /// Wrapper around [sys::cublasHandle_t]
 ///
