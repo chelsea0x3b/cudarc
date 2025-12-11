@@ -977,7 +977,7 @@ pub mod external_memory {
             },
             size,
             flags: 0,
-            #[cfg(feature = "cuda-13000")]
+            #[cfg(any(feature = "cuda-13000", feature = "cuda-13010"))]
             reserved: [0; 16],
         };
         sys::cudaImportExternalMemory(external_memory.as_mut_ptr(), &handle_description)
