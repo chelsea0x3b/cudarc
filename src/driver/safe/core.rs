@@ -561,6 +561,7 @@ pub struct CudaSlice<T> {
     pub(crate) read: Option<CudaEvent>,
     pub(crate) write: Option<CudaEvent>,
     pub(crate) stream: Arc<CudaStream>,
+    pub(crate) owns_memory: bool,
     pub(crate) marker: PhantomData<*const T>,
 }
 
@@ -576,13 +577,15 @@ impl<T> Drop for CudaSlice<T> {
         if let Some(write) = self.write.as_ref() {
             ctx.record_err(self.stream.wait(write));
         }
-        if ctx.has_async_alloc {
-            ctx.record_err(unsafe {
-                result::free_async(self.cu_device_ptr, self.stream.cu_stream)
-            });
-        } else {
-            ctx.record_err(self.stream.synchronize());
-            ctx.record_err(unsafe { result::free_sync(self.cu_device_ptr) });
+        if self.owns_memory {
+            if ctx.has_async_alloc {
+                ctx.record_err(unsafe {
+                    result::free_async(self.cu_device_ptr, self.stream.cu_stream)
+                });
+            } else {
+                ctx.record_err(self.stream.synchronize());
+                ctx.record_err(unsafe { result::free_sync(self.cu_device_ptr) });
+            }
         }
     }
 }
@@ -1241,6 +1244,7 @@ impl CudaStream {
             read: None,
             write: None,
             stream: self.clone(),
+            owns_memory: true,
             marker: PhantomData,
         })
     }
@@ -1272,6 +1276,7 @@ impl CudaStream {
             read,
             write,
             stream: self.clone(),
+            owns_memory: true,
             marker: PhantomData,
         })
     }
@@ -1907,6 +1912,7 @@ impl CudaModule {
             read: None,
             write: None,
             stream: stream.clone(),
+            owns_memory: false,
             marker: PhantomData,
         })
     }
@@ -2172,6 +2178,7 @@ impl CudaStream {
             read,
             write,
             stream: self.clone(),
+            owns_memory: true,
             marker: PhantomData,
         }
     }
