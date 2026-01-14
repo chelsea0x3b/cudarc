@@ -571,13 +571,14 @@ unsafe impl<T> Sync for CudaSlice<T> {}
 impl<T> Drop for CudaSlice<T> {
     fn drop(&mut self) {
         let ctx = &self.stream.ctx;
-        if let Some(read) = self.read.as_ref() {
-            ctx.record_err(self.stream.wait(read));
-        }
-        if let Some(write) = self.write.as_ref() {
-            ctx.record_err(self.stream.wait(write));
-        }
         if self.owns_memory {
+            if let Some(read) = self.read.as_ref() {
+                ctx.record_err(self.stream.wait(read));
+            }
+            if let Some(write) = self.write.as_ref() {
+                ctx.record_err(self.stream.wait(write));
+            }
+
             if ctx.has_async_alloc {
                 ctx.record_err(unsafe {
                     result::free_async(self.cu_device_ptr, self.stream.cu_stream)
