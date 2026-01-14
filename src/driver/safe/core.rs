@@ -2120,26 +2120,24 @@ impl<T> CudaSlice<T> {
     ///
     /// Drops the underlying host_buf if there is one.
     pub fn leak(self) -> sys::CUdeviceptr {
-        let ctx = &self.stream.ctx;
-        // drop self.read
-        if let Some(read) = self.read.as_ref() {
-            ctx.record_err(self.stream.wait(read));
-            ctx.record_err(unsafe { result::event::destroy(read.cu_event) });
-            unsafe { Arc::decrement_strong_count(Arc::as_ptr(&read.ctx)) };
+        let mut s = std::mem::ManuallyDrop::new(self);
+        let ptr = s.cu_device_ptr;
+
+        // Ensure pending operations are complete before resources are released.
+        if let Some(read) = s.read.as_ref() {
+            s.stream.ctx.record_err(s.stream.wait(read));
+        }
+        if let Some(write) = s.write.as_ref() {
+            s.stream.ctx.record_err(s.stream.wait(write));
         }
 
-        // drop self.write
-        if let Some(write) = self.write.as_ref() {
-            ctx.record_err(self.stream.wait(write));
-            ctx.record_err(unsafe { result::event::destroy(write.cu_event) });
-            unsafe { Arc::decrement_strong_count(Arc::as_ptr(&write.ctx)) };
+        // Manually drop fields that own resources.
+        unsafe {
+            std::ptr::drop_in_place(&mut s.read);
+            std::ptr::drop_in_place(&mut s.write);
+            std::ptr::drop_in_place(&mut s.stream);
         }
 
-        // drop self.stream
-        unsafe { Arc::decrement_strong_count(Arc::as_ptr(&self.stream)) };
-
-        let ptr = self.cu_device_ptr;
-        std::mem::forget(self);
         ptr
     }
 }
