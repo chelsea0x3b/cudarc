@@ -47,7 +47,7 @@ default = [
     "driver",
     "runtime",
     "nvrtc",
-    "dynamic-loading",
+    "fallback-dynamic-loading",
 ]
 
 fallback-latest = []
@@ -69,6 +69,7 @@ cuda-12090 = []
 cuda-13000 = []
 cuda-13010 = []
 
+fallback-dynamic-loading = []
 dynamic-loading = []
 dynamic-linking = []
 static-linking = []

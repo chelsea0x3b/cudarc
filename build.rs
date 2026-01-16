@@ -55,15 +55,26 @@ fn main() {
     #[cfg(all(
         not(feature = "dynamic-linking"),
         not(feature = "static-linking"),
-        not(feature = "dynamic-loading")
+        not(feature = "dynamic-loading"),
+        not(feature = "fallback-dynamic-loading")
     ))]
-    panic!("None between `dynamic-loading`, `dynamic-linking` and `static-linking` features are active, this is a bug");
+    panic!("None between `dynamic-loading`, `dynamic-loading-fallback`, `dynamic-linking` and `static-linking` features are active, this is a bug");
     #[cfg(all(feature = "dynamic-linking", feature = "static-linking"))]
     panic!("Both `dynamic-linking` and `static-linking` features are active, this is a bug");
     #[cfg(all(feature = "dynamic-loading", feature = "static-linking"))]
     panic!("Both `dynamic-loading` and `static-linking` features are active, this is a bug");
     #[cfg(all(feature = "dynamic-loading", feature = "dynamic-linking"))]
     panic!("Both `dynamic-loading` and `dynamic-linking` features are active, this is a bug");
+
+    #[cfg(all(
+        feature = "fallback-dynamic-loading",
+        not(any(
+            feature = "dynamic-loading",
+            feature = "dynamic-linking",
+            feature = "static-linking"
+        ))
+    ))]
+    println!("cargo:rustc-cfg=feature=\"dynamic-loading\"");
 
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-env-changed=CUDARC_CUDA_VERSION");
