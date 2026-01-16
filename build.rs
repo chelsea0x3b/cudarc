@@ -58,7 +58,7 @@ fn main() {
         not(feature = "dynamic-loading"),
         not(feature = "fallback-dynamic-loading")
     ))]
-    panic!("None between `dynamic-loading`, `dynamic-loading-fallback`, `dynamic-linking` and `static-linking` features are active, this is a bug");
+    panic!("None between `dynamic-loading`, `fallback-dynamic-loading`, `dynamic-linking` and `static-linking` features are active, this is a bug");
     #[cfg(all(feature = "dynamic-linking", feature = "static-linking"))]
     panic!("Both `dynamic-linking` and `static-linking` features are active, this is a bug");
     #[cfg(all(feature = "dynamic-loading", feature = "static-linking"))]
