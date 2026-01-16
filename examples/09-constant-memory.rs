@@ -1,14 +1,14 @@
 use cudarc::{
-    driver::{CudaContext, DriverError, LaunchConfig, PushKernelArg},
-    nvrtc::Ptx,
+    driver::{CudaContext, LaunchConfig, PushKernelArg},
+    nvrtc::compile_ptx,
 };
 
-fn main() -> Result<(), DriverError> {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     let ctx = CudaContext::new(0)?;
     let stream = ctx.default_stream();
 
     // Load the module containing the kernel with constant memory
-    let module = ctx.load_module(Ptx::from_file("./examples/constant_memory.ptx"))?;
+    let module = ctx.load_module(compile_ptx(include_str!("./constant_memory.cu"))?)?;
 
     // Get the constant memory symbol as a CudaSlice<u8>
     let mut coefficients_symbol = module.get_global("coefficients", &stream)?;
@@ -21,8 +21,7 @@ fn main() -> Result<(), DriverError> {
     let coefficients = [1.0f32, 2.0, 3.0, 4.0];
 
     // Transmute the symbol to f32 and copy coefficients to constant memory
-    let mut symbol_view = coefficients_symbol.as_view_mut();
-    let mut symbol_f32 = unsafe { symbol_view.transmute_mut::<f32>(4).unwrap() };
+    let mut symbol_f32 = unsafe { coefficients_symbol.transmute_mut::<f32>(4).unwrap() };
     stream.memcpy_htod(&coefficients, &mut symbol_f32)?;
 
     // Load the kernel function

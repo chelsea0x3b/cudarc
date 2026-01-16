@@ -1896,20 +1896,20 @@ impl CudaModule {
     /// let mut symbol_f32 = unsafe { symbol_view.transmute_mut::<f32>(4).unwrap() };
     /// stream.memcpy_htod(&[1.0f32, 2.0, 3.0, 4.0], &mut symbol_f32)?;
     /// ```
-    pub fn get_global(
-        self: &Arc<Self>,
+    pub fn get_global<'a>(
+        self: &'a Arc<Self>,
         name: &str,
-        stream: &Arc<CudaStream>,
-    ) -> Result<CudaSlice<u8>, DriverError> {
+        stream: &'a Arc<CudaStream>,
+    ) -> Result<CudaViewMut<'a, u8>, DriverError> {
         let name_c =
             CString::new(name).map_err(|_| DriverError(sys::CUresult::CUDA_ERROR_INVALID_VALUE))?;
         let (cu_device_ptr, bytes) = unsafe { result::module::get_global(self.cu_module, name_c) }?;
-        Ok(CudaSlice {
-            cu_device_ptr,
+        Ok(CudaViewMut {
+            ptr: cu_device_ptr,
             len: bytes,
-            read: None,
-            write: None,
-            stream: stream.clone(),
+            read: &None,
+            write: &None,
+            stream,
             marker: PhantomData,
         })
     }
