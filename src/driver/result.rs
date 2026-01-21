@@ -1395,6 +1395,20 @@ mod tests {
     }
 
     #[test]
+    fn peer_transfer_self() -> Result<(), DriverError> {
+        let ctx1 = CudaContext::new(0)?;
+        let stream1 = ctx1.default_stream();
+        let a: CudaSlice<f64> = stream1.alloc_zeros::<f64>(10)?;
+
+        let ctx2 = CudaContext::new(0)?;
+        let stream2 = ctx2.default_stream();
+        let b = stream2.clone_dtod(&a)?;
+        let _ = stream1.clone_dtoh(&a)?;
+        let _ = stream2.clone_dtoh(&b)?;
+        Ok(())
+    }
+
+    #[test]
     fn re_associate_context_for_memory_op() -> Result<(), DriverError> {
         let ctx1 = CudaContext::new(0)?;
         if device::get_count()? < 2 {
