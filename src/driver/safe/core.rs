@@ -1388,7 +1388,7 @@ impl CudaStream {
         let src_ctx = src.stream().context();
         let dst_ctx = self.context();
 
-        let (src, _record_src) = src.device_ptr(src.stream());
+        let (src, _record_src) = src.device_ptr(self);
         let (dst, _record_dst) = dst.device_ptr_mut(self);
 
         if src_ctx == dst_ctx {
