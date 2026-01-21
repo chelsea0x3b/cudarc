@@ -1374,13 +1374,13 @@ pub mod graph {
 mod tests {
     use super::super::safe::{CudaContext, CudaSlice};
     use super::*;
+    use std::println;
 
     #[test]
     fn peer_transfer_contexts() -> Result<(), DriverError> {
         let ctx1 = CudaContext::new(0)?;
-        let count = device::get_count()?;
-        if count < 2 {
-            dbg!("Skip test because not enough cuda devices");
+        if device::get_count()? < 2 {
+            println!("Skip test because not enough cuda devices");
             return Ok(());
         }
         let stream1 = ctx1.default_stream();
@@ -1395,9 +1395,8 @@ mod tests {
     #[test]
     fn failing_peer_transfer_dtod() -> Result<(), DriverError> {
         let ctx1 = CudaContext::new(0)?;
-        let count = device::get_count()?;
-        if count < 2 {
-            dbg!("Skip test because not enough cuda devices");
+        if device::get_count()? < 2 {
+            println!("Skip test because not enough cuda devices");
             return Ok(());
         }
         let stream1 = ctx1.default_stream();
@@ -1409,5 +1408,20 @@ mod tests {
         assert!(res.is_err());
 
         Ok(())
+    }
+
+    #[test]
+    fn re_associate_context_for_memory_op() -> Result<(), DriverError> {
+        let ctx1 = CudaContext::new(0)?;
+        if device::get_count()? < 2 {
+            println!("Skip test because not enough cuda devices");
+            return Ok(());
+        }
+        let stream1 = ctx1.default_stream();
+        let a: CudaSlice<f64> = stream1.alloc_zeros::<f64>(10)?;
+
+        let _ctx2 = CudaContext::new(1)?;
+
+        stream1.clone_dtoh(&a).map(|_| ())
     }
 }
