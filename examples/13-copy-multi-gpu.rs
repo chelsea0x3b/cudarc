@@ -10,7 +10,7 @@ fn main() -> Result<(), DriverError> {
     let ctx2 = CudaContext::new(1)?;
     let stream2 = ctx2.default_stream();
 
-    let b = a.clone_peer(&stream2)?;
+    let b = stream2.clone_dtod(&a)?;
 
     stream2.clone_dtoh(&b)?;
     stream1.clone_dtoh(&a)?;

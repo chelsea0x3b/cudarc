@@ -619,27 +619,6 @@ impl<T> CudaSlice<T> {
     }
 }
 
-impl<T: DeviceRepr + ValidAsZeroBits> CudaSlice<T> {
-    pub fn clone_peer(&self, stream: &Arc<CudaStream>) -> Result<CudaSlice<T>, DriverError> {
-         let mut dst_slice = unsafe { stream.alloc::<T>(self.len()) }?;
-        {
-            let (dst, _record_dst) = dst_slice.device_ptr_mut(stream);
-            let (src, _record_src) = self.device_ptr(stream);
-            unsafe {
-                result::memcpy_peer_async(
-                    stream.ctx.cu_ctx,
-                    dst,
-                    self.stream.ctx.cu_ctx,
-                    src,
-                    self.num_bytes(),
-                    stream.cu_stream,
-                )
-            }?;
-        }
-        Ok(dst_slice)
-    }
-}
-
 impl<T: DeviceRepr> CudaSlice<T> {
     /// Allocates copy of self and schedules a device to device copy of memory.
     pub fn try_clone(&self) -> Result<Self, result::DriverError> {
@@ -1405,10 +1384,23 @@ impl CudaStream {
         self.ctx.bind_to_thread()?;
 
         let num_bytes = src.num_bytes();
-        let (src, _record_src) = src.device_ptr(self);
+
+        let src_ctx = src.stream().context();
+        let dst_ctx = self.context();
+
+        let (src, _record_src) = src.device_ptr(src.stream());
         let (dst, _record_dst) = dst.device_ptr_mut(self);
 
-        unsafe { result::memcpy_dtod_async(dst, src, num_bytes, self.cu_stream) }
+        unsafe {
+            result::memcpy_peer_async(
+                dst_ctx.cu_ctx,
+                dst,
+                src_ctx.cu_ctx,
+                src,
+                num_bytes,
+                self.cu_stream,
+            )
+        }
     }
 
     /// Copy a [`CudaSlice`]/[`CudaView`] to a new [`CudaSlice`].

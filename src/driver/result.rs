@@ -1388,25 +1388,9 @@ mod tests {
 
         let ctx2 = CudaContext::new(1)?;
         let stream2 = ctx2.default_stream();
-        let _ = a.clone_peer(&stream2)?;
-
-        Ok(())
-    }
-    #[test]
-    fn failing_peer_transfer_dtod() -> Result<(), DriverError> {
-        let ctx1 = CudaContext::new(0)?;
-        if device::get_count()? < 2 {
-            println!("Skip test because not enough cuda devices");
-            return Ok(());
-        }
-        let stream1 = ctx1.default_stream();
-        let a: CudaSlice<f64> = stream1.alloc_zeros::<f64>(10)?;
-
-        let ctx2 = CudaContext::new(1)?;
-        let stream2 = ctx2.default_stream();
-        let res = stream2.clone_dtod(&a);
-        assert!(res.is_err());
-
+        let b = stream2.clone_dtod(&a)?;
+        let _ = stream1.clone_dtoh(&a)?;
+        let _ = stream2.clone_dtoh(&b)?;
         Ok(())
     }
 
