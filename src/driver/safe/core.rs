@@ -619,6 +619,26 @@ impl<T> CudaSlice<T> {
     }
 }
 
+impl<T: DeviceRepr + ValidAsZeroBits> CudaSlice<T> {
+    pub fn clone_peer(&self, dst: &Arc<CudaStream>) -> Result<CudaSlice<T>, DriverError> {
+        let dst_slice = dst.alloc_zeros::<T>(self.len())?;
+        let _s1 = SyncOnDrop::sync_stream(&self.stream);
+        let _s2 = SyncOnDrop::sync_stream(dst);
+
+        unsafe {
+            result::memcpy_peer_async(
+                dst.context().cu_ctx,
+                dst_slice.cu_device_ptr,
+                self.context().cu_ctx,
+                self.cu_device_ptr,
+                self.num_bytes(),
+                dst.cu_stream,
+            )?
+        };
+        Ok(dst_slice)
+    }
+}
+
 impl<T: DeviceRepr> CudaSlice<T> {
     /// Allocates copy of self and schedules a device to device copy of memory.
     pub fn try_clone(&self) -> Result<Self, result::DriverError> {
@@ -1291,6 +1311,7 @@ impl CudaStream {
         self: &Arc<Self>,
         dst: &mut Dst,
     ) -> Result<(), DriverError> {
+        self.ctx.bind_to_thread()?;
         let num_bytes = dst.num_bytes();
         let (dptr, _record) = dst.device_ptr_mut(self);
         unsafe { result::memset_d8_async(dptr, 0, num_bytes, self.cu_stream) }?;
@@ -1325,6 +1346,7 @@ impl CudaStream {
         dst: &mut Dst,
     ) -> Result<(), DriverError> {
         assert!(dst.len() >= src.len());
+        self.ctx.bind_to_thread()?;
         let (src, _record_src) = unsafe { src.stream_synced_slice(self) };
         let (dst, _record_dst) = dst.device_ptr_mut(self);
         unsafe { result::memcpy_htod_async(dst, src, self.cu_stream) }
@@ -1366,6 +1388,7 @@ impl CudaStream {
         dst: &mut Dst,
     ) -> Result<(), DriverError> {
         assert!(dst.len() >= src.len());
+        self.ctx.bind_to_thread()?;
         let (src, _record_src) = src.device_ptr(self);
         let (dst, _record_dst) = unsafe { dst.stream_synced_mut_slice(self) };
         unsafe { result::memcpy_dtoh_async(dst, src, self.cu_stream) }
@@ -1378,9 +1401,18 @@ impl CudaStream {
         dst: &mut Dst,
     ) -> Result<(), DriverError> {
         assert!(dst.len() >= src.len());
+        self.ctx.bind_to_thread()?;
+
         let num_bytes = src.num_bytes();
         let (src, _record_src) = src.device_ptr(self);
         let (dst, _record_dst) = dst.device_ptr_mut(self);
+
+        let ctx1 = result::get_ctx(src)?;
+        let ctx2 = result::get_ctx(dst)?;
+        if ctx1 != ctx2 {
+            sys::cudaError_enum::CUDA_ERROR_INVALID_CONTEXT.result()?
+        }
+
         unsafe { result::memcpy_dtod_async(dst, src, num_bytes, self.cu_stream) }
     }
 

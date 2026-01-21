@@ -951,6 +951,36 @@ pub unsafe fn memcpy_dtod_sync(
     sys::cuMemcpyDtoD_v2(dst, src, num_bytes).result()
 }
 
+/// Copies device memory between two contexts asynchronously.
+///
+/// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MEM.html#group__CUDA__MEM_1g82fcecb38018e64b98616a8ac30112f2)
+///
+/// # Safety
+/// 1. Neither device pointer should not have been freed already (double free)
+pub unsafe fn memcpy_peer_async(
+    dst_ctx: sys::CUcontext,
+    dst: sys::CUdeviceptr,
+    src_ctx: sys::CUcontext,
+    src: sys::CUdeviceptr,
+    num_bytes: usize,
+    stream: sys::CUstream,
+) -> Result<(), DriverError> {
+    sys::cuMemcpyPeerAsync(dst, dst_ctx, src, src_ctx, num_bytes, stream).result()
+}
+
+pub fn get_ctx(ptr: sys::CUdeviceptr) -> Result<sys::CUcontext, DriverError> {
+    let mut dev = MaybeUninit::<sys::CUcontext>::uninit();
+    unsafe {
+        sys::cuPointerGetAttribute(
+            dev.as_mut_ptr() as *mut c_void,
+            sys::CUpointer_attribute::CU_POINTER_ATTRIBUTE_CONTEXT,
+            ptr,
+        )
+        .result()?;
+        Ok(dev.assume_init())
+    }
+}
+
 /// Returns (free, total) memory in bytes.
 ///
 /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MEM.html#group__CUDA__MEM_1g808f555540d0143a331cc42aa98835c0)
