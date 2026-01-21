@@ -621,20 +621,21 @@ impl<T> CudaSlice<T> {
 
 impl<T: DeviceRepr + ValidAsZeroBits> CudaSlice<T> {
     pub fn clone_peer(&self, dst: &Arc<CudaStream>) -> Result<CudaSlice<T>, DriverError> {
-        let dst_slice = dst.alloc_zeros::<T>(self.len())?;
-        let _s1 = SyncOnDrop::sync_stream(&self.stream);
-        let _s2 = SyncOnDrop::sync_stream(dst);
-
-        unsafe {
-            result::memcpy_peer_async(
-                dst.context().cu_ctx,
-                dst_slice.cu_device_ptr,
-                self.context().cu_ctx,
-                self.cu_device_ptr,
-                self.num_bytes(),
-                dst.cu_stream,
-            )?
-        };
+         let mut dst_slice = unsafe { stream.alloc::<T>(self.len()) }?;
+        {
+            let (dst, _record_dst) = dst_slice.device_ptr_mut(stream);
+            let (src, _record_src) = self.device_ptr(stream);
+            unsafe {
+                result::memcpy_peer_async(
+                    stream.ctx.cu_ctx,
+                    dst,
+                    self.stream.ctx.cu_ctx,
+                    src,
+                    self.num_bytes(),
+                    stream.cu_stream,
+                )
+            }?;
+        }
         Ok(dst_slice)
     }
 }
