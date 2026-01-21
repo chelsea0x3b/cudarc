@@ -620,7 +620,7 @@ impl<T> CudaSlice<T> {
 }
 
 impl<T: DeviceRepr + ValidAsZeroBits> CudaSlice<T> {
-    pub fn clone_peer(&self, dst: &Arc<CudaStream>) -> Result<CudaSlice<T>, DriverError> {
+    pub fn clone_peer(&self, stream: &Arc<CudaStream>) -> Result<CudaSlice<T>, DriverError> {
          let mut dst_slice = unsafe { stream.alloc::<T>(self.len()) }?;
         {
             let (dst, _record_dst) = dst_slice.device_ptr_mut(stream);
