@@ -1407,12 +1407,6 @@ impl CudaStream {
         let (src, _record_src) = src.device_ptr(self);
         let (dst, _record_dst) = dst.device_ptr_mut(self);
 
-        let ctx1 = result::get_ctx(src)?;
-        let ctx2 = result::get_ctx(dst)?;
-        if ctx1 != ctx2 {
-            sys::cudaError_enum::CUDA_ERROR_INVALID_CONTEXT.result()?
-        }
-
         unsafe { result::memcpy_dtod_async(dst, src, num_bytes, self.cu_stream) }
     }
 
