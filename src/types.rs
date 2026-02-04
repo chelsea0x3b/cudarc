@@ -34,3 +34,7 @@ cuda_type!(f64, "double");
 cuda_type!(half::f16, "__half");
 #[cfg(feature = "f16")]
 cuda_type!(half::bf16, "__nv_bfloat16");
+#[cfg(feature = "f8")]
+cuda_type!(float8::F8E4M3, "__nv_fp8_e4m3");
+#[cfg(feature = "f8")]
+cuda_type!(float8::F8E5M2, "__nv_fp8_e5m2");
