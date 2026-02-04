@@ -103,6 +103,6 @@ half = { version = "2", optional = true, default-features = false, features = [
     "num-traits",
     "rand_distr",
 ] }
-float8 = { version = "0.3.0", optional = true }
+float8 = { version = "0.7.0", optional = true }
 float4 = { version = "0.1.0", optional = true }
 libloading = "0.8"
