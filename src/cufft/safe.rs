@@ -126,11 +126,11 @@ impl CudaFft {
     /// - `batch`: Number of transforms to perform.
     #[allow(clippy::too_many_arguments)]
     pub fn plan_many(
-        n: &mut [c_int],
-        inembed: Option<&mut [c_int]>,
+        n: &[c_int],
+        inembed: Option<&[c_int]>,
         istride: i32,
         idist: i32,
-        onembed: Option<&mut [c_int]>,
+        onembed: Option<&[c_int]>,
         ostride: i32,
         odist: i32,
         type_: sys::cufftType,
@@ -141,17 +141,17 @@ impl CudaFft {
         ctx.record_err(ctx.bind_to_thread());
         let rank = n.len() as c_int;
         let inembed_ptr = match inembed {
-            Some(slice) => slice.as_mut_ptr(),
+            Some(slice) => slice.as_ptr() as *mut c_int,
             None => std::ptr::null_mut(),
         };
         let onembed_ptr = match onembed {
-            Some(slice) => slice.as_mut_ptr(),
+            Some(slice) => slice.as_ptr() as *mut c_int,
             None => std::ptr::null_mut(),
         };
         let handle = unsafe {
             result::plan_many(
                 rank,
-                n.as_mut_ptr(),
+                n.as_ptr() as *mut c_int,
                 inembed_ptr,
                 istride,
                 idist,
@@ -339,11 +339,11 @@ mod tests {
         let w_half = width / 2 + 1;
 
         let _fft = CudaFft::plan_many(
-            &mut [height, width],
-            Some(&mut [height, width]),
+            &[height, width],
+            Some(&[height, width]),
             1,
             height * width,
-            Some(&mut [height, w_half]),
+            Some(&[height, w_half]),
             1,
             height * w_half,
             sys::cufftType::CUFFT_R2C,
