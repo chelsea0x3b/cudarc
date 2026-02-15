@@ -109,6 +109,7 @@
 //! | nvrtc | [nvrtc::safe] | [nvrtc::result] | [nvrtc::sys] |
 //! | curand | [curand::safe] | [curand::result] | [curand::sys] |
 //! | cudnn | [cudnn::safe] | [cudnn::result] | [cudnn::sys] |
+//! | cufft | [cufft::safe] | [cufft::result] | [cufft::sys] |
 //! | cusparse | - | [cusparse::result] | [cusparse::sys] |
 //! | cusolver | [cusolver::safe] | [cusolver::result] | [cusolver::sys] |
 //! | cusolvermg | [cusolvermg::safe] | [cusolvermg::result] | [cusolvermg::sys] |
