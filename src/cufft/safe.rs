@@ -312,6 +312,7 @@ mod tests {
     use super::*;
     use crate::cufft::sys;
     use crate::driver::*;
+    use std::vec::Vec;
 
     #[test]
     fn test_plan_1d_c2c() {
