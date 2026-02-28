@@ -1368,6 +1368,16 @@ pub mod graph {
     ) -> Result<(), DriverError> {
         sys::cuGraphLaunch(graph_exec, stream).result()
     }
+
+    /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__GRAPH.html#group__CUDA__GRAPH_1gdb81438b083d42a26693f6f2bce150cd)
+    /// # Safety
+    /// graph_exec and stream must be valid
+    pub unsafe fn upload(
+        graph_exec: sys::CUgraphExec,
+        stream: sys::CUstream,
+    ) -> Result<(), DriverError> {
+        sys::cuGraphUpload(graph_exec, stream).result()
+    }
 }
 
 #[cfg(test)]
