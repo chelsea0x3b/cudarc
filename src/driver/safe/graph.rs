@@ -114,6 +114,4 @@ impl CudaGraph {
     pub fn cu_graph_exec(&self) -> sys::CUgraphExec {
         self.cu_graph_exec
     }
-
-
 }
