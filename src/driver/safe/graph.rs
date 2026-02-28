@@ -81,4 +81,37 @@ impl CudaGraph {
         self.stream.ctx.bind_to_thread()?;
         unsafe { result::graph::launch(self.cu_graph_exec, self.stream.cu_stream) }
     }
+
+    /// Pre-uploads the graph's resources to the device so that the
+    /// first [CudaGraph::launch()] does not incur setup overhead.
+    ///
+    /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__GRAPH.html#group__CUDA__GRAPH_1gdb81438b083d42a26693f6f2bce150cd)
+    pub fn upload(&self) -> Result<(), DriverError> {
+        self.stream.ctx.bind_to_thread()?;
+        unsafe { result::graph::upload(self.cu_graph_exec, self.stream.cu_stream) }
+    }
+
+    /// Get the underlying [sys::CUgraph].
+    ///
+    /// # Safety
+    /// While this function is marked as safe, actually using the
+    /// returned object is unsafe.
+    ///
+    /// **You must not destroy the graph**, as it is still
+    /// owned by the [CudaGraph].
+    pub fn cu_graph(&self) -> sys::CUgraph {
+        self.cu_graph
+    }
+
+    /// Get the underlying [sys::CUgraphExec].
+    ///
+    /// # Safety
+    /// While this function is marked as safe, actually using the
+    /// returned object is unsafe.
+    ///
+    /// **You must not destroy the graph exec**, as it is still
+    /// owned by the [CudaGraph].
+    pub fn cu_graph_exec(&self) -> sys::CUgraphExec {
+        self.cu_graph_exec
+    }
 }
