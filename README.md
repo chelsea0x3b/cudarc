@@ -24,7 +24,7 @@ Safe CUDA wrappers for:
 | [cuFILE](https://docs.nvidia.com/gpudirect-storage/api-reference-guide/index.html#introduction) | ✅ | ✅ | ✅ |
 | [CUPTI](https://docs.nvidia.com/cupti/) | ✅ | ✅ | ✅ |
 | [nvtx](https://nvidia.github.io/NVTX/) | ✅ | ✅ | N/A |
-| [cuFFT](https://docs.nvidia.com/cuda/cufft/index.html) | ✅ | ✅ | ✅ |
+| [cuFFT](https://docs.nvidia.com/cuda/cufft/index.html) | ✅ | ❌ | ❌ |
 
 CUDA Versions supported
 - 11.4-11.8
