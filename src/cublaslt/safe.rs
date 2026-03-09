@@ -4,6 +4,13 @@ use super::{result, result::CublasError, sys};
 use crate::cublaslt::result::set_matrix_layout_attribute;
 use crate::driver::sys::{CUdevice_attribute, CUdeviceptr};
 use crate::driver::{CudaSlice, CudaStream, DevicePtr, DevicePtrMut, DriverError};
+#[cfg(any(
+    feature = "cuda-12080",
+    feature = "cuda-12090",
+    feature = "cuda-13000",
+    feature = "cuda-13010",
+))]
+use crate::driver::DeviceRepr;
 use core::ffi::c_int;
 use core::mem;
 use std::sync::Arc;
@@ -233,6 +240,48 @@ impl MatmulDesc {
         }
         Ok(())
     }
+
+    #[cfg(any(
+        feature = "cuda-12080",
+        feature = "cuda-12090",
+        feature = "cuda-13000",
+        feature = "cuda-13010",
+    ))]
+    fn set_scale_mode(
+        &self,
+        attr: sys::cublasLtMatmulDescAttributes_t,
+        mode: sys::cublasLtMatmulMatrixScale_t,
+    ) -> Result<(), CublasError> {
+        unsafe {
+            result::set_matmul_desc_attribute(
+                self.handle,
+                attr,
+                (&mode) as *const _ as *const _,
+                mem::size_of::<sys::cublasLtMatmulMatrixScale_t>(),
+            )
+        }
+    }
+
+    #[cfg(any(
+        feature = "cuda-12080",
+        feature = "cuda-12090",
+        feature = "cuda-13000",
+        feature = "cuda-13010",
+    ))]
+    fn set_device_ptr_attribute(
+        &self,
+        attr: sys::cublasLtMatmulDescAttributes_t,
+        ptr: CUdeviceptr,
+    ) -> Result<(), CublasError> {
+        unsafe {
+            result::set_matmul_desc_attribute(
+                self.handle,
+                attr,
+                (&ptr) as *const CUdeviceptr as *const _,
+                mem::size_of::<CUdeviceptr>(),
+            )
+        }
+    }
 }
 
 impl Drop for MatmulDesc {
@@ -458,6 +507,346 @@ impl Matmul<half::bf16> for CudaBlasLT {
 
     fn compute_type() -> sys::cublasComputeType_t {
         sys::cublasComputeType_t::CUBLAS_COMPUTE_32F
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Scaled matmul (NVFP4 block-scaled GEMM) — requires CUDA 12.8+
+// ---------------------------------------------------------------------------
+
+#[cfg(any(
+    feature = "cuda-12080",
+    feature = "cuda-12090",
+    feature = "cuda-13000",
+    feature = "cuda-13010",
+))]
+/// Configuration for [ScaledMatmul].
+///
+/// Separate from [MatmulConfig] because scaled matmul has no `transc`,
+/// uses separate C (accumulator input) and D (output) leading dimensions,
+/// and does not support batching in its initial form.
+#[derive(Debug, Copy, Clone)]
+pub struct ScaledMatmulConfig {
+    /// Transpose matrix A.
+    pub transa: bool,
+    /// Transpose matrix B.
+    pub transb: bool,
+    /// Number of rows of the output matrix D.
+    pub m: u64,
+    /// Number of columns of the output matrix D.
+    pub n: u64,
+    /// Inner dimension (shared between A and B).
+    pub k: u64,
+    /// Host-side scalar multiplier: D = alpha*(A*B) + beta*C.
+    pub alpha: f32,
+    /// Host-side scalar multiplier for the accumulator input C.
+    pub beta: f32,
+    /// Leading dimension of A (logical elements, not bytes).
+    pub lda: i64,
+    /// Leading dimension of B (logical elements, not bytes).
+    pub ldb: i64,
+    /// Leading dimension of C (accumulator input).
+    pub ldc: i64,
+    /// Leading dimension of D (output).
+    pub ldd: i64,
+}
+
+#[cfg(any(
+    feature = "cuda-12080",
+    feature = "cuda-12090",
+    feature = "cuda-13000",
+    feature = "cuda-13010",
+))]
+/// Block-scaled matrix multiplication. See
+/// [nvidia docs](https://docs.nvidia.com/cuda/cublas/index.html#cublasltmatmul).
+///
+/// Computes D = alpha*(A*B) + beta*C with per-block scaling factors on A, B,
+/// and optionally D. This is the API used for NVFP4 inference on Blackwell GPUs.
+pub trait ScaledMatmul: MatmulShared {
+    /// Packed input type for matrices A and B (e.g. `F4E2M1x2`).
+    type Input: DeviceRepr;
+    /// Accumulator / C matrix type (e.g. `bf16`).
+    type Accum: DeviceRepr;
+    /// Output D matrix type (e.g. `bf16` or `F4E2M1x2`).
+    type Output: DeviceRepr;
+    /// Block scale factor type (e.g. `F8E4M3`).
+    type BlockScale: DeviceRepr;
+
+    /// CUDA data type for the input matrices A and B.
+    fn input_type() -> sys::cudaDataType;
+    /// CUDA data type for the accumulator matrix C.
+    fn accum_type() -> sys::cudaDataType;
+    /// CUDA data type for the output matrix D.
+    fn output_type() -> sys::cudaDataType;
+    /// Scale mode for A and B block scales.
+    fn ab_scale_mode() -> sys::cublasLtMatmulMatrixScale_t;
+    /// Scale mode for D (pre-output scaling).
+    fn d_scale_mode() -> sys::cublasLtMatmulMatrixScale_t;
+    /// Scale mode for D output block scales.
+    fn d_out_scale_mode() -> sys::cublasLtMatmulMatrixScale_t;
+
+    /// Block-scaled matrix multiplication following NVIDIA's `LtNvfp4Matmul` pattern.
+    ///
+    /// # Safety
+    /// Improper arguments (wrong dimensions, misaligned pointers, insufficient scale
+    /// buffer sizes) may lead to invalid memory accesses.
+    #[allow(clippy::too_many_arguments)]
+    unsafe fn scaled_matmul(
+        &self,
+        cfg: ScaledMatmulConfig,
+        a: &impl DevicePtr<Self::Input>,
+        b: &impl DevicePtr<Self::Input>,
+        c: &impl DevicePtr<Self::Accum>,
+        d: &mut impl DevicePtrMut<Self::Output>,
+        a_scale: &impl DevicePtr<Self::BlockScale>,
+        b_scale: &impl DevicePtr<Self::BlockScale>,
+        d_scale: &impl DevicePtr<f32>,
+        d_out_scale: &mut impl DevicePtrMut<Self::BlockScale>,
+    ) -> Result<(), CublasError> {
+        let stream = self.stream();
+        let workspace = self.workspace();
+
+        // 1. Create matmul descriptor (always f32 compute + f32 scale type)
+        let matmul_desc = MatmulDesc::new(
+            sys::cublasComputeType_t::CUBLAS_COMPUTE_32F,
+            sys::cudaDataType_t::CUDA_R_32F,
+        )?;
+
+        // 2. Set transpose
+        matmul_desc.set_transpose(cfg.transa, Matrix::A)?;
+        matmul_desc.set_transpose(cfg.transb, Matrix::B)?;
+
+        // 3. Set block scaling modes
+        matmul_desc.set_scale_mode(
+            sys::cublasLtMatmulDescAttributes_t::CUBLASLT_MATMUL_DESC_A_SCALE_MODE,
+            Self::ab_scale_mode(),
+        )?;
+        matmul_desc.set_scale_mode(
+            sys::cublasLtMatmulDescAttributes_t::CUBLASLT_MATMUL_DESC_B_SCALE_MODE,
+            Self::ab_scale_mode(),
+        )?;
+        matmul_desc.set_scale_mode(
+            sys::cublasLtMatmulDescAttributes_t::CUBLASLT_MATMUL_DESC_D_SCALE_MODE,
+            Self::d_scale_mode(),
+        )?;
+        matmul_desc.set_scale_mode(
+            sys::cublasLtMatmulDescAttributes_t::CUBLASLT_MATMUL_DESC_D_OUT_SCALE_MODE,
+            Self::d_out_scale_mode(),
+        )?;
+
+        // 4. Set device-side scale pointers
+        let (a_scale_ptr, _rec_as) = a_scale.device_ptr(stream);
+        let (b_scale_ptr, _rec_bs) = b_scale.device_ptr(stream);
+        let (d_scale_ptr, _rec_ds) = d_scale.device_ptr(stream);
+        let (d_out_scale_ptr, _rec_dos) = d_out_scale.device_ptr_mut(stream);
+
+        matmul_desc.set_device_ptr_attribute(
+            sys::cublasLtMatmulDescAttributes_t::CUBLASLT_MATMUL_DESC_A_SCALE_POINTER,
+            a_scale_ptr,
+        )?;
+        matmul_desc.set_device_ptr_attribute(
+            sys::cublasLtMatmulDescAttributes_t::CUBLASLT_MATMUL_DESC_B_SCALE_POINTER,
+            b_scale_ptr,
+        )?;
+        matmul_desc.set_device_ptr_attribute(
+            sys::cublasLtMatmulDescAttributes_t::CUBLASLT_MATMUL_DESC_D_SCALE_POINTER,
+            d_scale_ptr,
+        )?;
+        matmul_desc.set_device_ptr_attribute(
+            sys::cublasLtMatmulDescAttributes_t::CUBLASLT_MATMUL_DESC_D_OUT_SCALE_POINTER,
+            d_out_scale_ptr as CUdeviceptr,
+        )?;
+
+        // 5. Create matrix layouts
+        let (a_rows, a_cols) = if cfg.transa {
+            (cfg.k, cfg.m)
+        } else {
+            (cfg.m, cfg.k)
+        };
+        let (b_rows, b_cols) = if cfg.transb {
+            (cfg.n, cfg.k)
+        } else {
+            (cfg.k, cfg.n)
+        };
+
+        let a_layout = MatrixLayout::new(Self::input_type(), a_rows, a_cols, cfg.lda)?;
+        let b_layout = MatrixLayout::new(Self::input_type(), b_rows, b_cols, cfg.ldb)?;
+        let c_layout = MatrixLayout::new(Self::accum_type(), cfg.m, cfg.n, cfg.ldc)?;
+        let d_layout = MatrixLayout::new(Self::output_type(), cfg.m, cfg.n, cfg.ldd)?;
+
+        // 6. Heuristic search
+        let matmul_pref = MatmulPref::new()?;
+        matmul_pref.set_workspace_size(workspace.size)?;
+
+        let heuristic = result::get_matmul_algo_heuristic(
+            *self.handle(),
+            matmul_desc.handle,
+            a_layout.handle,
+            b_layout.handle,
+            c_layout.handle,
+            d_layout.handle,
+            matmul_pref.handle,
+        )?;
+
+        // 7. Execute matmul
+        let (a_ptr, _rec_a) = a.device_ptr(stream);
+        let (b_ptr, _rec_b) = b.device_ptr(stream);
+        let (c_ptr, _rec_c) = c.device_ptr(stream);
+        let (d_ptr, _rec_d) = d.device_ptr_mut(stream);
+        let (w_ptr, _rec_w) = workspace.buffer.device_ptr(stream);
+
+        result::matmul(
+            *self.handle(),
+            matmul_desc.handle,
+            (&cfg.alpha) as *const _ as *const _,
+            (&cfg.beta) as *const _ as *const _,
+            a_ptr as *const _,
+            a_layout.handle,
+            b_ptr as *const _,
+            b_layout.handle,
+            c_ptr as *const _,
+            c_layout.handle,
+            d_ptr as *mut _,
+            d_layout.handle,
+            (&heuristic.algo) as *const _,
+            w_ptr as *mut _,
+            workspace.size,
+            stream.cu_stream() as *mut _,
+        )
+    }
+}
+
+// NvFP4 → bf16 output configuration
+#[cfg(all(
+    any(
+        feature = "cuda-12080",
+        feature = "cuda-12090",
+        feature = "cuda-13000",
+        feature = "cuda-13010",
+    ),
+    feature = "f4",
+    feature = "f8",
+    feature = "f16",
+))]
+impl ScaledMatmul for CudaBlasLT {
+    type Input = float4::F4E2M1x2;
+    type Accum = half::bf16;
+    type Output = half::bf16;
+    type BlockScale = float8::F8E4M3;
+
+    fn input_type() -> sys::cudaDataType {
+        sys::cudaDataType_t::CUDA_R_4F_E2M1
+    }
+
+    fn accum_type() -> sys::cudaDataType {
+        sys::cudaDataType_t::CUDA_R_16BF
+    }
+
+    fn output_type() -> sys::cudaDataType {
+        sys::cudaDataType_t::CUDA_R_16BF
+    }
+
+    fn ab_scale_mode() -> sys::cublasLtMatmulMatrixScale_t {
+        sys::cublasLtMatmulMatrixScale_t::CUBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3
+    }
+
+    fn d_scale_mode() -> sys::cublasLtMatmulMatrixScale_t {
+        sys::cublasLtMatmulMatrixScale_t::CUBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F
+    }
+
+    fn d_out_scale_mode() -> sys::cublasLtMatmulMatrixScale_t {
+        sys::cublasLtMatmulMatrixScale_t::CUBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3
+    }
+}
+
+// NvFP4 → FP4 output configuration (via newtype wrapper)
+#[cfg(all(
+    any(
+        feature = "cuda-12080",
+        feature = "cuda-12090",
+        feature = "cuda-13000",
+        feature = "cuda-13010",
+    ),
+    feature = "f4",
+    feature = "f8",
+    feature = "f16",
+))]
+/// Newtype wrapper around [CudaBlasLT] that selects FP4 output for [ScaledMatmul].
+///
+/// Use this when you want the matmul result written back as packed FP4 (`F4E2M1x2`)
+/// instead of bf16. The kernel will also compute and write block scale factors to
+/// `d_out_scale`.
+///
+/// ```ignore
+/// let fp4_out = NvFp4Output(&blas);
+/// unsafe { fp4_out.scaled_matmul(cfg, &a, &b, &c, &mut d, ...) };
+/// ```
+pub struct NvFp4Output<'a>(pub &'a CudaBlasLT);
+
+#[cfg(all(
+    any(
+        feature = "cuda-12080",
+        feature = "cuda-12090",
+        feature = "cuda-13000",
+        feature = "cuda-13010",
+    ),
+    feature = "f4",
+    feature = "f8",
+    feature = "f16",
+))]
+impl MatmulShared for NvFp4Output<'_> {
+    fn handle(&self) -> &sys::cublasLtHandle_t {
+        self.0.handle()
+    }
+
+    fn workspace(&self) -> &Workspace {
+        self.0.workspace()
+    }
+
+    fn stream(&self) -> &Arc<CudaStream> {
+        self.0.stream()
+    }
+}
+
+#[cfg(all(
+    any(
+        feature = "cuda-12080",
+        feature = "cuda-12090",
+        feature = "cuda-13000",
+        feature = "cuda-13010",
+    ),
+    feature = "f4",
+    feature = "f8",
+    feature = "f16",
+))]
+impl ScaledMatmul for NvFp4Output<'_> {
+    type Input = float4::F4E2M1x2;
+    type Accum = half::bf16;
+    type Output = float4::F4E2M1x2;
+    type BlockScale = float8::F8E4M3;
+
+    fn input_type() -> sys::cudaDataType {
+        sys::cudaDataType_t::CUDA_R_4F_E2M1
+    }
+
+    fn accum_type() -> sys::cudaDataType {
+        sys::cudaDataType_t::CUDA_R_16BF
+    }
+
+    fn output_type() -> sys::cudaDataType {
+        sys::cudaDataType_t::CUDA_R_4F_E2M1
+    }
+
+    fn ab_scale_mode() -> sys::cublasLtMatmulMatrixScale_t {
+        sys::cublasLtMatmulMatrixScale_t::CUBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3
+    }
+
+    fn d_scale_mode() -> sys::cublasLtMatmulMatrixScale_t {
+        sys::cublasLtMatmulMatrixScale_t::CUBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F
+    }
+
+    fn d_out_scale_mode() -> sys::cublasLtMatmulMatrixScale_t {
+        sys::cublasLtMatmulMatrixScale_t::CUBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3
     }
 }
 
