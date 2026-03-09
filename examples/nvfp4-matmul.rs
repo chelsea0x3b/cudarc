@@ -60,6 +60,8 @@ fn main() {
     let d_scale_dev = stream.clone_htod(&d_scale_data).unwrap();
     let mut d_out_scale_dev = stream.clone_htod(&d_out_scale_data).unwrap();
 
+    // cuBLASLt uses column-major layout. For row-major A(M,K) * B(K,N) = D(M,N),
+    // compute D_col(N,M) = B_col(N,K) * A_col(K,M) — swap m/n and A/B.
     let cfg = ScaledMatmulConfig {
         transa: false,
         transb: false,
@@ -77,11 +79,11 @@ fn main() {
     unsafe {
         blas.scaled_matmul(
             cfg,
-            &b_dev,
-            &a_dev,
+            &b_dev, // B is "A" in column-major GEMM
+            &a_dev, // A is "B" in column-major GEMM
             &c_dev,
             &mut d_dev,
-            &b_scale_dev,
+            &b_scale_dev, // scales follow their matrix
             &a_scale_dev,
             &d_scale_dev,
             &mut d_out_scale_dev,
@@ -90,9 +92,7 @@ fn main() {
     }
 
     let result = stream.clone_dtoh(&d_dev).unwrap();
-    println!(
-        "NVFP4 scaled matmul complete. First 8 output values (bf16):"
-    );
+    println!("NVFP4 scaled matmul complete. First 8 output values (bf16):");
     for val in result.iter().take(8) {
         print!("{:.4} ", val.to_f32());
     }

@@ -3,7 +3,6 @@
 use super::{result, result::CublasError, sys};
 use crate::cublaslt::result::set_matrix_layout_attribute;
 use crate::driver::sys::{CUdevice_attribute, CUdeviceptr};
-use crate::driver::{CudaSlice, CudaStream, DevicePtr, DevicePtrMut, DriverError};
 #[cfg(any(
     feature = "cuda-12080",
     feature = "cuda-12090",
@@ -11,6 +10,7 @@ use crate::driver::{CudaSlice, CudaStream, DevicePtr, DevicePtrMut, DriverError}
     feature = "cuda-13010",
 ))]
 use crate::driver::DeviceRepr;
+use crate::driver::{CudaSlice, CudaStream, DevicePtr, DevicePtrMut, DriverError};
 use core::ffi::c_int;
 use core::mem;
 use std::sync::Arc;
