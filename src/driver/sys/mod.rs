@@ -9513,6 +9513,20 @@ extern "C" {
         flags: ::core::ffi::c_uint,
         dev: CUdevice,
     ) -> CUresult;
+    #[cfg(any(
+        feature = "cuda-12050",
+        feature = "cuda-12060",
+        feature = "cuda-12080",
+        feature = "cuda-12090",
+        feature = "cuda-13000",
+        feature = "cuda-13010"
+    ))]
+    pub fn cuCtxCreate_v4(
+        pctx: *mut CUcontext,
+        ctxCreateParams: *mut CUctxCreateParams,
+        flags: ::core::ffi::c_uint,
+        dev: CUdevice,
+    ) -> CUresult;
     pub fn cuCtxDestroy_v2(ctx: CUcontext) -> CUresult;
     pub fn cuCtxDetach(ctx: CUcontext) -> CUresult;
     pub fn cuCtxDisablePeerAccess(peerContext: CUcontext) -> CUresult;
@@ -13019,6 +13033,22 @@ mod loaded {
         dev: CUdevice,
     ) -> CUresult {
         (culib().cuCtxCreate_v3)(pctx, paramsArray, numParams, flags, dev)
+    }
+    #[cfg(any(
+        feature = "cuda-12050",
+        feature = "cuda-12060",
+        feature = "cuda-12080",
+        feature = "cuda-12090",
+        feature = "cuda-13000",
+        feature = "cuda-13010"
+    ))]
+    pub unsafe fn cuCtxCreate_v4(
+        pctx: *mut CUcontext,
+        ctxCreateParams: *mut CUctxCreateParams,
+        flags: ::core::ffi::c_uint,
+        dev: CUdevice,
+    ) -> CUresult {
+        (culib().cuCtxCreate_v4)(pctx, ctxCreateParams, flags, dev)
     }
     pub unsafe fn cuCtxDestroy_v2(ctx: CUcontext) -> CUresult {
         (culib().cuCtxDestroy_v2)(ctx)
@@ -17835,6 +17865,20 @@ mod loaded {
             flags: ::core::ffi::c_uint,
             dev: CUdevice,
         ) -> CUresult,
+        #[cfg(any(
+            feature = "cuda-12050",
+            feature = "cuda-12060",
+            feature = "cuda-12080",
+            feature = "cuda-12090",
+            feature = "cuda-13000",
+            feature = "cuda-13010"
+        ))]
+        pub cuCtxCreate_v4: unsafe extern "C" fn(
+            pctx: *mut CUcontext,
+            ctxCreateParams: *mut CUctxCreateParams,
+            flags: ::core::ffi::c_uint,
+            dev: CUdevice,
+        ) -> CUresult,
         pub cuCtxDestroy_v2: unsafe extern "C" fn(ctx: CUcontext) -> CUresult,
         pub cuCtxDetach: unsafe extern "C" fn(ctx: CUcontext) -> CUresult,
         pub cuCtxDisablePeerAccess: unsafe extern "C" fn(peerContext: CUcontext) -> CUresult,
@@ -21450,6 +21494,18 @@ mod loaded {
                 .get(b"cuCtxCreate_v3\0")
                 .map(|sym| *sym)
                 .expect("Expected symbol in library");
+            #[cfg(any(
+                feature = "cuda-12050",
+                feature = "cuda-12060",
+                feature = "cuda-12080",
+                feature = "cuda-12090",
+                feature = "cuda-13000",
+                feature = "cuda-13010"
+            ))]
+            let cuCtxCreate_v4 = __library
+                .get(b"cuCtxCreate_v4\0")
+                .map(|sym| *sym)
+                .expect("Expected symbol in library");
             let cuCtxDestroy_v2 = __library
                 .get(b"cuCtxDestroy_v2\0")
                 .map(|sym| *sym)
@@ -24821,6 +24877,15 @@ mod loaded {
                     feature = "cuda-12090"
                 ))]
                 cuCtxCreate_v3,
+                #[cfg(any(
+                    feature = "cuda-12050",
+                    feature = "cuda-12060",
+                    feature = "cuda-12080",
+                    feature = "cuda-12090",
+                    feature = "cuda-13000",
+                    feature = "cuda-13010"
+                ))]
+                cuCtxCreate_v4,
                 cuCtxDestroy_v2,
                 cuCtxDetach,
                 cuCtxDisablePeerAccess,

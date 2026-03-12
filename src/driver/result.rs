@@ -432,6 +432,65 @@ pub mod ctx {
     };
     use std::mem::MaybeUninit;
 
+    /// Creates a new non-primary CUDA context using `cuCtxCreate_v3`.
+    ///
+    /// Available on CUDA 11.04 through 12.090.
+    ///
+    /// # Safety
+    ///
+    /// `dev` must be a valid device returned from [`super::device::get`].
+    #[cfg(any(
+        feature = "cuda-11040",
+        feature = "cuda-11050",
+        feature = "cuda-11060",
+        feature = "cuda-11070",
+        feature = "cuda-11080",
+        feature = "cuda-12000",
+        feature = "cuda-12010",
+        feature = "cuda-12020",
+        feature = "cuda-12030",
+        feature = "cuda-12040",
+        feature = "cuda-12050",
+        feature = "cuda-12060",
+        feature = "cuda-12080",
+        feature = "cuda-12090"
+    ))]
+    pub unsafe fn create_v3(
+        flags: ::core::ffi::c_uint,
+        dev: sys::CUdevice,
+    ) -> Result<sys::CUcontext, DriverError> {
+        let mut ctx = MaybeUninit::uninit();
+        sys::cuCtxCreate_v3(ctx.as_mut_ptr(), std::ptr::null_mut(), 0, flags, dev).result()?;
+        Ok(ctx.assume_init())
+    }
+
+    /// Creates a new non-primary CUDA context using `cuCtxCreate_v4`.
+    ///
+    /// Available on CUDA 12.050+. Supports CiG (CUDA in Graphics) parameters
+    /// via `ctxCreateParams`.
+    ///
+    /// # Safety
+    ///
+    /// - `dev` must be a valid device returned from [`super::device::get`].
+    /// - If `ctx_create_params` is not null, it must point to a valid `CUctxCreateParams`.
+    #[cfg(any(
+        feature = "cuda-12050",
+        feature = "cuda-12060",
+        feature = "cuda-12080",
+        feature = "cuda-12090",
+        feature = "cuda-13000",
+        feature = "cuda-13010"
+    ))]
+    pub unsafe fn create_v4(
+        ctx_create_params: *mut sys::CUctxCreateParams,
+        flags: ::core::ffi::c_uint,
+        dev: sys::CUdevice,
+    ) -> Result<sys::CUcontext, DriverError> {
+        let mut ctx = MaybeUninit::uninit();
+        sys::cuCtxCreate_v4(ctx.as_mut_ptr(), ctx_create_params, flags, dev).result()?;
+        Ok(ctx.assume_init())
+    }
+
     /// Binds the specified CUDA context to the calling CPU thread.
     ///
     /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__CTX.html#group__CUDA__CTX_1gbe562ee6258b4fcc272ca6478ca2a2f7)

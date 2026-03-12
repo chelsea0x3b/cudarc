@@ -183,7 +183,7 @@ pub(crate) fn panic_no_lib_found<S: std::fmt::Debug>(lib_name: &str, choices: &[
 }
 
 #[cfg(feature = "dynamic-loading")]
-pub(crate) fn get_lib_name_candidates(lib_name: &str) -> std::vec::Vec<std::string::String> {
+pub fn get_lib_name_candidates(lib_name: &str) -> std::vec::Vec<std::string::String> {
     use std::env::consts::{DLL_PREFIX, DLL_SUFFIX};
 
     let pointer_width = if cfg!(target_pointer_width = "32") {
