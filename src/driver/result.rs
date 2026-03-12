@@ -176,6 +176,45 @@ pub mod device {
         }
         Ok(id)
     }
+
+    /// Get the default memory pool for a device.
+    ///
+    /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__DEVICE.html#group__CUDA__DEVICE_1g2170a6e24f7e596854f0c48e1e98120e)
+    ///
+    /// # Safety
+    /// Must be a device returned from [get].
+    pub unsafe fn get_default_mem_pool(
+        dev: sys::CUdevice,
+    ) -> Result<sys::CUmemoryPool, DriverError> {
+        let mut pool = MaybeUninit::uninit();
+        sys::cuDeviceGetDefaultMemPool(pool.as_mut_ptr(), dev).result()?;
+        Ok(pool.assume_init())
+    }
+
+    /// Get the current memory pool for a device.
+    ///
+    /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gccf6a0d72cf1cf1b1e0c127f053e9cb5)
+    ///
+    /// # Safety
+    /// Must be a device returned from [get].
+    pub unsafe fn get_mem_pool(dev: sys::CUdevice) -> Result<sys::CUmemoryPool, DriverError> {
+        let mut pool = MaybeUninit::uninit();
+        sys::cuDeviceGetMemPool(pool.as_mut_ptr(), dev).result()?;
+        Ok(pool.assume_init())
+    }
+
+    /// Set the memory pool for a device.
+    ///
+    /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__DEVICE.html#group__CUDA__DEVICE_1g79369dcf089d772d11b5c3ccb05e7c21)
+    ///
+    /// # Safety
+    /// Must be a device returned from [get]. Pool must be valid.
+    pub unsafe fn set_mem_pool(
+        dev: sys::CUdevice,
+        pool: sys::CUmemoryPool,
+    ) -> Result<(), DriverError> {
+        sys::cuDeviceSetMemPool(dev, pool).result()
+    }
 }
 
 pub mod function {
@@ -1377,6 +1416,98 @@ pub mod graph {
         stream: sys::CUstream,
     ) -> Result<(), DriverError> {
         sys::cuGraphUpload(graph_exec, stream).result()
+    }
+}
+
+pub mod mem_pool {
+    //! Memory pool management functions (`cuMemPool*`).
+    //!
+    //! See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MALLOC__ASYNC.html)
+
+    use super::*;
+
+    /// Create a memory pool.
+    ///
+    /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g8aa7ef8b06b0df48350794e1e8bba704)
+    ///
+    /// # Safety
+    /// `pool_props` must point to a valid [sys::CUmemPoolProps].
+    pub unsafe fn create(
+        pool_props: *const sys::CUmemPoolProps,
+    ) -> Result<sys::CUmemoryPool, DriverError> {
+        let mut pool = MaybeUninit::uninit();
+        sys::cuMemPoolCreate(pool.as_mut_ptr(), pool_props).result()?;
+        Ok(pool.assume_init())
+    }
+
+    /// Destroy a memory pool.
+    ///
+    /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1gd12c583ad4fe7e3a3338e65e413dfd1e)
+    ///
+    /// # Safety
+    /// Pool must be valid and not already destroyed.
+    pub unsafe fn destroy(pool: sys::CUmemoryPool) -> Result<(), DriverError> {
+        sys::cuMemPoolDestroy(pool).result()
+    }
+
+    /// Release unused memory back to the OS.
+    ///
+    /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g6b3f1ea779bda578c8e26101caa3d958)
+    ///
+    /// # Safety
+    /// Pool must be valid.
+    pub unsafe fn trim_to(
+        pool: sys::CUmemoryPool,
+        min_bytes_to_keep: usize,
+    ) -> Result<(), DriverError> {
+        sys::cuMemPoolTrimTo(pool, min_bytes_to_keep).result()
+    }
+
+    /// Get a pool attribute.
+    ///
+    /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1gdc3766ee0671e498e6ba03de08e00e5c)
+    ///
+    /// # Safety
+    /// Pool must be valid. `value` must point to memory of the correct
+    /// type for the given attribute.
+    pub unsafe fn get_attribute(
+        pool: sys::CUmemoryPool,
+        attr: sys::CUmemPool_attribute,
+        value: *mut core::ffi::c_void,
+    ) -> Result<(), DriverError> {
+        sys::cuMemPoolGetAttribute(pool, attr, value).result()
+    }
+
+    /// Set a pool attribute.
+    ///
+    /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g1ef006cd08dbf0ec5e4cb93bf7b044dc)
+    ///
+    /// # Safety
+    /// Pool must be valid. `value` must point to memory of the correct
+    /// type for the given attribute.
+    pub unsafe fn set_attribute(
+        pool: sys::CUmemoryPool,
+        attr: sys::CUmemPool_attribute,
+        value: *mut core::ffi::c_void,
+    ) -> Result<(), DriverError> {
+        sys::cuMemPoolSetAttribute(pool, attr, value).result()
+    }
+
+    /// Allocate memory from a pool with stream-ordered semantics.
+    ///
+    /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g0968906e6892e4f7e0e04ef5e5e0b416)
+    ///
+    /// # Safety
+    /// 1. Pool and stream must be valid.
+    /// 2. The returned memory is uninitialized.
+    pub unsafe fn alloc_async(
+        pool: sys::CUmemoryPool,
+        num_bytes: usize,
+        stream: sys::CUstream,
+    ) -> Result<sys::CUdeviceptr, DriverError> {
+        let mut dptr = MaybeUninit::uninit();
+        sys::cuMemAllocFromPoolAsync(dptr.as_mut_ptr(), num_bytes, pool, stream).result()?;
+        Ok(dptr.assume_init())
     }
 }
 
