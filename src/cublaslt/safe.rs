@@ -55,10 +55,7 @@ impl CudaBlasLT {
     /// Sets up matrix layouts, matmul descriptor, and transpose settings.
     /// Epilogue (bias/activation) is deferred to [`MatmulOperation::launch()`] so that
     /// the bias buffer's `SyncOnDrop` guard lives through the actual matmul execution.
-    pub fn matmul_op<T>(
-        &self,
-        cfg: &MatmulConfig,
-    ) -> Result<MatmulOperation<T>, CublasError>
+    pub fn matmul_op<T>(&self, cfg: &MatmulConfig) -> Result<MatmulOperation<T>, CublasError>
     where
         Self: Matmul<T>,
     {
@@ -1114,7 +1111,14 @@ mod tests {
         // Reference: use existing matmul()
         let mut c_ref = stream.alloc_zeros::<f32>(M * N).unwrap();
         unsafe {
-            blas.matmul(cfg, &b_dev, &a_dev, &mut c_ref, None::<&CudaSlice<f32>>, None)
+            blas.matmul(
+                cfg,
+                &b_dev,
+                &a_dev,
+                &mut c_ref,
+                None::<&CudaSlice<f32>>,
+                None,
+            )
         }
         .unwrap();
         let c_ref_host = stream.clone_dtoh(&c_ref).unwrap();
@@ -1127,7 +1131,17 @@ mod tests {
 
         let mut c_new = stream.alloc_zeros::<f32>(M * N).unwrap();
         unsafe {
-            op.launch(&result.algo, blas.workspace(), 1.0, 0.0, &b_dev, &a_dev, &mut c_new, None::<&CudaSlice<f32>>, None)
+            op.launch(
+                &result.algo,
+                blas.workspace(),
+                1.0,
+                0.0,
+                &b_dev,
+                &a_dev,
+                &mut c_new,
+                None::<&CudaSlice<f32>>,
+                None,
+            )
         }
         .unwrap();
         let c_new_host = stream.clone_dtoh(&c_new).unwrap();
@@ -1213,7 +1227,10 @@ mod tests {
         let mut valid_count = 0;
         for &id in &ids {
             let algo = op.algo_from_id(id).unwrap();
-            assert_eq!(algo.workspace_size, 0, "workspace_size should be 0 before check");
+            assert_eq!(
+                algo.workspace_size, 0,
+                "workspace_size should be 0 before check"
+            );
             if let Ok(_checked) = op.check_algorithm(&algo) {
                 // check_algorithm succeeded — the algorithm is valid for these descriptors
                 valid_count += 1;
@@ -1267,7 +1284,14 @@ mod tests {
         // Reference: unconstrained matmul
         let mut c_ref = stream.alloc_zeros::<f32>(M * N).unwrap();
         unsafe {
-            blas.matmul(cfg, &b_dev, &a_dev, &mut c_ref, None::<&CudaSlice<f32>>, None)
+            blas.matmul(
+                cfg,
+                &b_dev,
+                &a_dev,
+                &mut c_ref,
+                None::<&CudaSlice<f32>>,
+                None,
+            )
         }
         .unwrap();
         let c_ref_host = stream.clone_dtoh(&c_ref).unwrap();
@@ -1366,14 +1390,34 @@ mod tests {
         // Run twice with same pinned algorithm
         let mut c1 = stream.alloc_zeros::<f32>(M * N).unwrap();
         unsafe {
-            op.launch(&algo, blas.workspace(), 1.0, 0.0, &b_dev, &a_dev, &mut c1, None::<&CudaSlice<f32>>, None)
+            op.launch(
+                &algo,
+                blas.workspace(),
+                1.0,
+                0.0,
+                &b_dev,
+                &a_dev,
+                &mut c1,
+                None::<&CudaSlice<f32>>,
+                None,
+            )
         }
         .unwrap();
         let c1_host = stream.clone_dtoh(&c1).unwrap();
 
         let mut c2 = stream.alloc_zeros::<f32>(M * N).unwrap();
         unsafe {
-            op.launch(&algo, blas.workspace(), 1.0, 0.0, &b_dev, &a_dev, &mut c2, None::<&CudaSlice<f32>>, None)
+            op.launch(
+                &algo,
+                blas.workspace(),
+                1.0,
+                0.0,
+                &b_dev,
+                &a_dev,
+                &mut c2,
+                None::<&CudaSlice<f32>>,
+                None,
+            )
         }
         .unwrap();
         let c2_host = stream.clone_dtoh(&c2).unwrap();
