@@ -473,16 +473,18 @@ impl<T> MatmulOperation<T> {
 
     /// Get all compatible algorithm IDs for this operation's type combination.
     pub fn get_algo_ids(&self, max_results: c_int) -> Result<Vec<c_int>, CublasError> {
-        result::get_matmul_algo_ids(
-            self.handle,
-            self.compute_type,
-            self.scale_type,
-            self.matrix_type,
-            self.matrix_type,
-            self.matrix_type,
-            self.matrix_type,
-            max_results,
-        )
+        unsafe {
+            result::get_matmul_algo_ids(
+                self.handle,
+                self.compute_type,
+                self.scale_type,
+                self.matrix_type,
+                self.matrix_type,
+                self.matrix_type,
+                self.matrix_type,
+                max_results,
+            )
+        }
     }
 
     /// Initialize an algorithm from a known ID.
@@ -490,16 +492,18 @@ impl<T> MatmulOperation<T> {
     /// The returned `MatmulAlgorithm` has `workspace_size` set to 0.
     /// Call [`check_algorithm()`](Self::check_algorithm) to get the actual workspace requirement.
     pub fn algo_from_id(&self, algo_id: c_int) -> Result<MatmulAlgorithm, CublasError> {
-        let inner = result::matmul_algo_init(
-            self.handle,
-            self.compute_type,
-            self.scale_type,
-            self.matrix_type,
-            self.matrix_type,
-            self.matrix_type,
-            self.matrix_type,
-            algo_id,
-        )?;
+        let inner = unsafe {
+            result::matmul_algo_init(
+                self.handle,
+                self.compute_type,
+                self.scale_type,
+                self.matrix_type,
+                self.matrix_type,
+                self.matrix_type,
+                self.matrix_type,
+                algo_id,
+            )
+        }?;
         Ok(MatmulAlgorithm {
             inner,
             workspace_size: 0,

@@ -281,6 +281,7 @@ pub unsafe fn get_matmul_pref_attribute(
 ///
 /// # Safety
 /// All the parameters must not have been freed already & must be valid layouts for allocations.
+#[allow(clippy::too_many_arguments)]
 pub unsafe fn get_matmul_algo_heuristics(
     handle: sys::cublasLtHandle_t,
     matmul_desc: sys::cublasLtMatmulDesc_t,
@@ -317,7 +318,11 @@ pub unsafe fn get_matmul_algo_heuristics(
 
 /// Retrieves algorithm IDs for a given combination of compute and matrix types. See
 /// [nvidia docs](https://docs.nvidia.com/cuda/cublas/index.html#cublasltmatmulalgogetids)
-pub fn get_matmul_algo_ids(
+///
+/// # Safety
+/// `handle` must not have been freed already.
+#[allow(clippy::too_many_arguments)]
+pub unsafe fn get_matmul_algo_ids(
     handle: sys::cublasLtHandle_t,
     compute_type: sys::cublasComputeType_t,
     scale_type: sys::cudaDataType,
@@ -330,21 +335,19 @@ pub fn get_matmul_algo_ids(
     let mut algo_ids: Vec<core::ffi::c_int> = vec![0; requested_algo_count as usize];
     let mut algo_count: core::ffi::c_int = 0;
 
-    unsafe {
-        sys::cublasLtMatmulAlgoGetIds(
-            handle,
-            compute_type,
-            scale_type,
-            a_type,
-            b_type,
-            c_type,
-            d_type,
-            requested_algo_count,
-            algo_ids.as_mut_ptr(),
-            &mut algo_count,
-        )
-        .result()?;
-    }
+    sys::cublasLtMatmulAlgoGetIds(
+        handle,
+        compute_type,
+        scale_type,
+        a_type,
+        b_type,
+        c_type,
+        d_type,
+        requested_algo_count,
+        algo_ids.as_mut_ptr(),
+        &mut algo_count,
+    )
+    .result()?;
 
     algo_ids.truncate(algo_count as usize);
     Ok(algo_ids)
@@ -352,7 +355,11 @@ pub fn get_matmul_algo_ids(
 
 /// Initializes an algorithm object from an algorithm ID. See
 /// [nvidia docs](https://docs.nvidia.com/cuda/cublas/index.html#cublasltmatmulalgoinit)
-pub fn matmul_algo_init(
+///
+/// # Safety
+/// `handle` must not have been freed already.
+#[allow(clippy::too_many_arguments)]
+pub unsafe fn matmul_algo_init(
     handle: sys::cublasLtHandle_t,
     compute_type: sys::cublasComputeType_t,
     scale_type: sys::cudaDataType,
@@ -363,21 +370,19 @@ pub fn matmul_algo_init(
     algo_id: core::ffi::c_int,
 ) -> Result<cublasLtMatmulAlgo_t, CublasError> {
     let mut algo = MaybeUninit::uninit();
-    unsafe {
-        sys::cublasLtMatmulAlgoInit(
-            handle,
-            compute_type,
-            scale_type,
-            a_type,
-            b_type,
-            c_type,
-            d_type,
-            algo_id,
-            algo.as_mut_ptr(),
-        )
-        .result()?;
-        Ok(algo.assume_init())
-    }
+    sys::cublasLtMatmulAlgoInit(
+        handle,
+        compute_type,
+        scale_type,
+        a_type,
+        b_type,
+        c_type,
+        d_type,
+        algo_id,
+        algo.as_mut_ptr(),
+    )
+    .result()?;
+    Ok(algo.assume_init())
 }
 
 /// Checks if an algorithm is valid for the given operation descriptors. See
