@@ -454,7 +454,7 @@ impl<T> MatmulOperation<T> {
     pub fn pick_algorithms(
         &self,
         preference: &MatmulPreference,
-        max_results: usize,
+        max_results: c_int,
     ) -> Result<Vec<MatmulHeuristicResult>, CublasError> {
         let results = unsafe {
             result::get_matmul_algo_heuristics(
@@ -465,7 +465,7 @@ impl<T> MatmulOperation<T> {
                 self.c_layout.handle,
                 self.c_layout.handle,
                 preference.handle,
-                max_results as c_int,
+                max_results,
             )
         }?;
         Ok(results
@@ -475,7 +475,7 @@ impl<T> MatmulOperation<T> {
     }
 
     /// Get all compatible algorithm IDs for this operation's type combination.
-    pub fn get_algo_ids(&self, max_results: usize) -> Result<Vec<c_int>, CublasError> {
+    pub fn get_algo_ids(&self, max_results: c_int) -> Result<Vec<c_int>, CublasError> {
         result::get_matmul_algo_ids(
             self.handle,
             self.compute_type,
@@ -484,7 +484,7 @@ impl<T> MatmulOperation<T> {
             self.matrix_type,
             self.matrix_type,
             self.matrix_type,
-            max_results as c_int,
+            max_results,
         )
     }
 
@@ -542,7 +542,7 @@ impl<T> MatmulOperation<T> {
     /// this operation.
     #[allow(clippy::too_many_arguments)]
     pub unsafe fn launch<I: DevicePtr<T>, O: DevicePtrMut<T>>(
-        &self,
+        &mut self,
         algo: &MatmulAlgorithm,
         workspace: &Workspace,
         alpha: f32,
@@ -1120,7 +1120,7 @@ mod tests {
         let c_ref_host = stream.clone_dtoh(&c_ref).unwrap();
 
         // New API: use MatmulOperation
-        let op = blas.matmul_op::<f32>(&cfg).unwrap();
+        let mut op = blas.matmul_op::<f32>(&cfg).unwrap();
         let pref = MatmulPreference::new().unwrap();
         pref.set_max_workspace_bytes(blas.workspace().size).unwrap();
         let result = op.pick_algorithm(&pref).unwrap();
@@ -1167,7 +1167,7 @@ mod tests {
             batch_size: None,
         };
 
-        let op = blas.matmul_op::<f32>(&cfg).unwrap();
+        let mut op = blas.matmul_op::<f32>(&cfg).unwrap();
         let pref = MatmulPreference::new().unwrap();
         pref.set_max_workspace_bytes(blas.workspace().size).unwrap();
 
@@ -1203,7 +1203,7 @@ mod tests {
             batch_size: None,
         };
 
-        let op = blas.matmul_op::<f32>(&cfg).unwrap();
+        let mut op = blas.matmul_op::<f32>(&cfg).unwrap();
 
         // Get algorithm IDs
         let ids = op.get_algo_ids(32).unwrap();
@@ -1273,7 +1273,7 @@ mod tests {
         let c_ref_host = stream.clone_dtoh(&c_ref).unwrap();
 
         // Constrained: workspace = 0 bytes (most restrictive)
-        let op = blas.matmul_op::<f32>(&cfg).unwrap();
+        let mut op = blas.matmul_op::<f32>(&cfg).unwrap();
         let pref = MatmulPreference::new().unwrap();
         pref.set_max_workspace_bytes(0).unwrap();
         let result = op.pick_algorithm(&pref).unwrap();
@@ -1347,7 +1347,7 @@ mod tests {
             batch_size: None,
         };
 
-        let op = blas.matmul_op::<f32>(&cfg).unwrap();
+        let mut op = blas.matmul_op::<f32>(&cfg).unwrap();
 
         // Find a valid algorithm via enumeration
         let ids = op.get_algo_ids(32).unwrap();
