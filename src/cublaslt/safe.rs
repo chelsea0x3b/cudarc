@@ -5,6 +5,7 @@ use crate::cublaslt::result::set_matrix_layout_attribute;
 use crate::driver::sys::{CUdevice_attribute, CUdeviceptr};
 use crate::driver::{CudaSlice, CudaStream, DevicePtr, DevicePtrMut, DriverError};
 use core::ffi::c_int;
+use core::marker::PhantomData;
 use core::mem;
 use std::sync::Arc;
 
@@ -45,6 +46,70 @@ impl Drop for CudaBlasLT {
         if !handle.is_null() {
             unsafe { result::destroy_handle(handle) }.unwrap();
         }
+    }
+}
+
+impl CudaBlasLT {
+    /// Prepare a matmul operation with the given configuration.
+    ///
+    /// Sets up matrix layouts, matmul descriptor, and transpose settings.
+    /// Epilogue (bias/activation) is deferred to [`MatmulOperation::launch()`] so that
+    /// the bias buffer's `SyncOnDrop` guard lives through the actual matmul execution.
+    pub fn matmul_op<T>(
+        &self,
+        cfg: &MatmulConfig,
+    ) -> Result<MatmulOperation<T>, CublasError>
+    where
+        Self: Matmul<T>,
+    {
+        let compute_type = <Self as Matmul<T>>::compute_type();
+        let matrix_type = <Self as Matmul<T>>::matrix_type();
+        let scale_type = sys::cudaDataType_t::CUDA_R_32F;
+
+        let (a_rows, a_cols) = if cfg.transa {
+            (cfg.k, cfg.m)
+        } else {
+            (cfg.m, cfg.k)
+        };
+        let (b_rows, b_cols) = if cfg.transb {
+            (cfg.n, cfg.k)
+        } else {
+            (cfg.k, cfg.n)
+        };
+
+        let a_layout = MatrixLayout::new(matrix_type, a_rows, a_cols, cfg.lda)?;
+        if let (Some(batch_size), Some(stride_a)) = (cfg.batch_size, cfg.stride_a) {
+            a_layout.set_batch(batch_size, stride_a)?;
+        }
+
+        let b_layout = MatrixLayout::new(matrix_type, b_rows, b_cols, cfg.ldb)?;
+        if let (Some(batch_size), Some(stride_b)) = (cfg.batch_size, cfg.stride_b) {
+            b_layout.set_batch(batch_size, stride_b)?;
+        }
+
+        let c_layout = MatrixLayout::new(matrix_type, cfg.m, cfg.n, cfg.ldc)?;
+        if let (Some(batch_size), Some(stride_c)) = (cfg.batch_size, cfg.stride_c) {
+            c_layout.set_batch(batch_size, stride_c)?;
+        }
+
+        let matmul_desc = MatmulDesc::new(compute_type, scale_type)?;
+        matmul_desc.set_transpose(cfg.transa, Matrix::A)?;
+        matmul_desc.set_transpose(cfg.transb, Matrix::B)?;
+        matmul_desc.set_transpose(cfg.transc, Matrix::C)?;
+
+        Ok(MatmulOperation {
+            handle: self.handle,
+            stream: self.stream.clone(),
+            matmul_desc,
+            a_layout,
+            b_layout,
+            c_layout,
+            compute_type,
+            scale_type,
+            matrix_type,
+            stride_bias: cfg.stride_bias,
+            _marker: PhantomData,
+        })
     }
 }
 
@@ -241,34 +306,279 @@ impl Drop for MatmulDesc {
     }
 }
 
-/// MatmulPref helper type
-struct MatmulPref {
-    handle: sys::cublasLtMatmulPreference_t,
+/// Matmul algorithm search preferences.
+///
+/// Controls how the heuristic algorithm search behaves.
+/// Create with [`MatmulPreference::new()`], configure, then pass to
+/// [`MatmulOperation::pick_algorithm()`] or [`MatmulOperation::pick_algorithms()`].
+#[derive(Debug)]
+pub struct MatmulPreference {
+    pub(crate) handle: sys::cublasLtMatmulPreference_t,
 }
 
-impl MatmulPref {
-    fn new() -> Result<Self, CublasError> {
+impl MatmulPreference {
+    /// Creates a new matmul preference descriptor with default settings.
+    pub fn new() -> Result<Self, CublasError> {
         let handle = result::create_matmul_pref()?;
         Ok(Self { handle })
     }
 
-    fn set_workspace_size(&self, size: usize) -> Result<(), CublasError> {
+    /// Set maximum workspace size the heuristic may assume (bytes).
+    ///
+    /// This is the key control for preventing the heuristic from selecting
+    /// algorithms that assume more workspace than is available, which can
+    /// cause incorrect results under memory pressure.
+    pub fn set_max_workspace_bytes(&self, size: usize) -> Result<(), CublasError> {
         unsafe {
-            // Set workspace size
             result::set_matmul_pref_attribute(
                 self.handle,
                 sys::cublasLtMatmulPreferenceAttributes_t::CUBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES,
                 (&size) as *const _ as *const _,
                 mem::size_of::<usize>(),
+            )
+        }
+    }
+
+    /// Get maximum workspace size setting (bytes).
+    pub fn max_workspace_bytes(&self) -> Result<usize, CublasError> {
+        let mut size: usize = 0;
+        let mut size_written: usize = 0;
+        unsafe {
+            result::get_matmul_pref_attribute(
+                self.handle,
+                sys::cublasLtMatmulPreferenceAttributes_t::CUBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES,
+                (&mut size) as *mut _ as *mut _,
+                mem::size_of::<usize>(),
+                &mut size_written,
             )?;
         }
-        Ok(())
+        Ok(size)
     }
 }
 
-impl Drop for MatmulPref {
+impl Drop for MatmulPreference {
     fn drop(&mut self) {
-        unsafe { result::destroy_matmul_pref(self.handle).expect("Unable to destroy matmul pref") }
+        let handle = mem::replace(&mut self.handle, std::ptr::null_mut());
+        if !handle.is_null() {
+            unsafe { result::destroy_matmul_pref(handle).expect("Unable to destroy matmul pref") }
+        }
+    }
+}
+
+/// A selected matmul algorithm.
+///
+/// Obtained from [`MatmulOperation::pick_algorithm()`],
+/// [`MatmulOperation::pick_algorithms()`], or [`MatmulOperation::algo_from_id()`].
+///
+/// Note: `workspace_size` is only populated after heuristic search or `check_algorithm()`.
+/// When obtained via `algo_from_id()`, `workspace_size` is 0 — call `check_algorithm()`
+/// to get the actual requirement.
+#[derive(Debug, Clone, Copy)]
+pub struct MatmulAlgorithm {
+    pub(crate) inner: sys::cublasLtMatmulAlgo_t,
+    /// Workspace bytes required. 0 if not yet validated via heuristic or check_algorithm().
+    pub workspace_size: usize,
+}
+
+/// Result from heuristic algorithm search or algorithm validation.
+#[derive(Debug, Clone, Copy)]
+pub struct MatmulHeuristicResult {
+    /// The selected algorithm with workspace size populated.
+    pub algo: MatmulAlgorithm,
+    /// Estimated number of GPU waves for this algorithm.
+    pub waves_count: f32,
+}
+
+impl MatmulHeuristicResult {
+    fn from_sys(r: sys::cublasLtMatmulHeuristicResult_t) -> Self {
+        Self {
+            algo: MatmulAlgorithm {
+                inner: r.algo,
+                workspace_size: r.workspaceSize,
+            },
+            waves_count: r.wavesCount,
+        }
+    }
+}
+
+/// A prepared matmul operation with all descriptors set up.
+///
+/// Follows the cuDNN ConvForward pattern:
+/// 1. Create via [`CudaBlasLT::matmul_op()`]
+/// 2. [`MatmulOperation::pick_algorithm()`] — heuristic selection
+/// 3. [`MatmulOperation::launch()`] — execute with chosen algorithm
+///
+/// For algorithm enumeration:
+/// - [`MatmulOperation::get_algo_ids()`] — enumerate compatible algorithm IDs
+/// - [`MatmulOperation::algo_from_id()`] — initialize from a known ID
+/// - [`MatmulOperation::check_algorithm()`] — validate an algorithm
+pub struct MatmulOperation<T> {
+    handle: sys::cublasLtHandle_t,
+    stream: Arc<CudaStream>,
+    matmul_desc: MatmulDesc,
+    a_layout: MatrixLayout,
+    b_layout: MatrixLayout,
+    c_layout: MatrixLayout,
+    compute_type: sys::cublasComputeType_t,
+    scale_type: sys::cudaDataType,
+    matrix_type: sys::cudaDataType,
+    stride_bias: Option<i64>,
+    _marker: PhantomData<T>,
+}
+
+impl<T> MatmulOperation<T> {
+    /// Pick the best algorithm using heuristics.
+    ///
+    /// A `MatmulPreference` is always required (it is cheap to create via
+    /// `MatmulPreference::new()`). Call `set_max_workspace_bytes()` on it to constrain
+    /// workspace assumptions.
+    pub fn pick_algorithm(
+        &self,
+        preference: &MatmulPreference,
+    ) -> Result<MatmulHeuristicResult, CublasError> {
+        let heuristic = unsafe {
+            result::get_matmul_algo_heuristic(
+                self.handle,
+                self.matmul_desc.handle,
+                self.a_layout.handle,
+                self.b_layout.handle,
+                self.c_layout.handle,
+                self.c_layout.handle,
+                preference.handle,
+            )
+        }?;
+        Ok(MatmulHeuristicResult::from_sys(heuristic))
+    }
+
+    /// Pick multiple algorithms ranked by estimated performance.
+    pub fn pick_algorithms(
+        &self,
+        preference: &MatmulPreference,
+        max_results: usize,
+    ) -> Result<Vec<MatmulHeuristicResult>, CublasError> {
+        let results = unsafe {
+            result::get_matmul_algo_heuristics(
+                self.handle,
+                self.matmul_desc.handle,
+                self.a_layout.handle,
+                self.b_layout.handle,
+                self.c_layout.handle,
+                self.c_layout.handle,
+                preference.handle,
+                max_results as c_int,
+            )
+        }?;
+        Ok(results
+            .into_iter()
+            .map(MatmulHeuristicResult::from_sys)
+            .collect())
+    }
+
+    /// Get all compatible algorithm IDs for this operation's type combination.
+    pub fn get_algo_ids(&self, max_results: usize) -> Result<Vec<c_int>, CublasError> {
+        result::get_matmul_algo_ids(
+            self.handle,
+            self.compute_type,
+            self.scale_type,
+            self.matrix_type,
+            self.matrix_type,
+            self.matrix_type,
+            self.matrix_type,
+            max_results as c_int,
+        )
+    }
+
+    /// Initialize an algorithm from a known ID.
+    ///
+    /// The returned `MatmulAlgorithm` has `workspace_size` set to 0.
+    /// Call [`check_algorithm()`](Self::check_algorithm) to get the actual workspace requirement.
+    pub fn algo_from_id(&self, algo_id: c_int) -> Result<MatmulAlgorithm, CublasError> {
+        let inner = result::matmul_algo_init(
+            self.handle,
+            self.compute_type,
+            self.scale_type,
+            self.matrix_type,
+            self.matrix_type,
+            self.matrix_type,
+            self.matrix_type,
+            algo_id,
+        )?;
+        Ok(MatmulAlgorithm {
+            inner,
+            workspace_size: 0,
+        })
+    }
+
+    /// Validate that an algorithm works for this operation's descriptors.
+    ///
+    /// Returns a `MatmulHeuristicResult` with the actual workspace size populated.
+    pub fn check_algorithm(
+        &self,
+        algo: &MatmulAlgorithm,
+    ) -> Result<MatmulHeuristicResult, CublasError> {
+        let heuristic = unsafe {
+            result::matmul_algo_check(
+                self.handle,
+                self.matmul_desc.handle,
+                self.a_layout.handle,
+                self.b_layout.handle,
+                self.c_layout.handle,
+                self.c_layout.handle,
+                &algo.inner as *const _,
+            )
+        }?;
+        Ok(MatmulHeuristicResult::from_sys(heuristic))
+    }
+
+    /// Execute the matmul with an explicitly chosen algorithm and workspace.
+    ///
+    /// `alpha` and `beta` are `f32` because the current scale type is always `CUDA_R_32F`.
+    /// The workspace must have at least `algo.workspace_size` bytes available.
+    /// Bias and activation epilogue are set here (not at construction) so that the
+    /// bias buffer's `SyncOnDrop` guard lives through the matmul execution.
+    ///
+    /// # Safety
+    /// The a/b/c buffer sizes and types must match the MatmulConfig used to create
+    /// this operation.
+    #[allow(clippy::too_many_arguments)]
+    pub unsafe fn launch<I: DevicePtr<T>, O: DevicePtrMut<T>>(
+        &self,
+        algo: &MatmulAlgorithm,
+        workspace: &Workspace,
+        alpha: f32,
+        beta: f32,
+        a: &I,
+        b: &I,
+        c: &mut O,
+        bias: Option<&I>,
+        act: Option<&Activation>,
+    ) -> Result<(), CublasError> {
+        let (bias_ptr, _record_bias) = bias.map(|b| b.device_ptr(&self.stream)).unzip();
+        self.matmul_desc
+            .set_epilogue(act, bias_ptr.as_ref(), self.stride_bias)?;
+
+        let (a, _record_a) = a.device_ptr(&self.stream);
+        let (b, _record_b) = b.device_ptr(&self.stream);
+        let (c, _record_c) = c.device_ptr_mut(&self.stream);
+        let (w, _record_w) = workspace.buffer.device_ptr(&self.stream);
+        result::matmul(
+            self.handle,
+            self.matmul_desc.handle,
+            (&alpha) as *const _ as *const _,
+            (&beta) as *const _ as *const _,
+            a as *const _,
+            self.a_layout.handle,
+            b as *const _,
+            self.b_layout.handle,
+            c as *const _,
+            self.c_layout.handle,
+            c as *mut _,
+            self.c_layout.handle,
+            (&algo.inner) as *const _,
+            w as *mut _,
+            workspace.size,
+            self.stream.cu_stream() as *mut _,
+        )
     }
 }
 
@@ -373,10 +683,10 @@ pub trait Matmul<T>: MatmulShared {
         matmul_desc.set_epilogue(act, bias.as_ref(), cfg.stride_bias)?;
 
         // Create matmul heuristic search preferences
-        let matmul_pref = MatmulPref::new()?;
+        let matmul_pref = MatmulPreference::new()?;
 
         // Set workspace size
-        matmul_pref.set_workspace_size(self.workspace().size)?;
+        matmul_pref.set_max_workspace_bytes(self.workspace().size)?;
 
         // Get heuristic given Config, bias, act and workspace size
         let heuristic = result::get_matmul_algo_heuristic(
