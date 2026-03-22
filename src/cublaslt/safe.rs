@@ -1068,4 +1068,325 @@ mod tests {
             }
         }
     }
+
+    #[test]
+    fn test_matmul_op_pick_algorithm() {
+        let ctx = CudaContext::new(0).unwrap();
+        let stream = ctx.default_stream();
+        let blas = CudaBlasLT::new(stream.clone()).unwrap();
+        const M: usize = 3;
+        const K: usize = 4;
+        const N: usize = 5;
+
+        #[rustfmt::skip]
+        let a_dev = stream.clone_htod(&[
+            -0.5944882f32, 1.8055636, 0.52204555, -0.00397902,
+            -0.38346434, -0.38013917, 0.4198623, -0.22479166,
+            -1.6661372, -0.4568837, -0.9043474, 0.39125723,
+        ]).unwrap();
+        #[rustfmt::skip]
+        let b_dev = stream.clone_htod(&[
+            1.1292169f32, -0.13450263, 0.62789696, -0.5685516, 0.21946938,
+            1.0585804, -0.39789402, 0.90205914, 0.989318, -0.3443096,
+            1.3412506, 0.3059701, -0.9714474, -0.36113533, -1.6809629,
+            3.4746711, -1.0930681, 0.16502666, -0.59988785, 0.41375792,
+        ]).unwrap();
+
+        let cfg = MatmulConfig {
+            transa: false,
+            transb: false,
+            transc: false,
+            m: N as u64,
+            n: M as u64,
+            k: K as u64,
+            alpha: 1.0,
+            lda: N as i64,
+            ldb: K as i64,
+            beta: 0.0,
+            ldc: N as i64,
+            stride_a: None,
+            stride_b: None,
+            stride_c: None,
+            stride_bias: None,
+            batch_size: None,
+        };
+
+        // Reference: use existing matmul()
+        let mut c_ref = stream.alloc_zeros::<f32>(M * N).unwrap();
+        unsafe {
+            blas.matmul(cfg, &b_dev, &a_dev, &mut c_ref, None::<&CudaSlice<f32>>, None)
+        }
+        .unwrap();
+        let c_ref_host = stream.clone_dtoh(&c_ref).unwrap();
+
+        // New API: use MatmulOperation
+        let op = blas.matmul_op::<f32>(&cfg).unwrap();
+        let pref = MatmulPreference::new().unwrap();
+        pref.set_max_workspace_bytes(blas.workspace().size).unwrap();
+        let result = op.pick_algorithm(&pref).unwrap();
+
+        let mut c_new = stream.alloc_zeros::<f32>(M * N).unwrap();
+        unsafe {
+            op.launch(&result.algo, blas.workspace(), 1.0, 0.0, &b_dev, &a_dev, &mut c_new, None::<&CudaSlice<f32>>, None)
+        }
+        .unwrap();
+        let c_new_host = stream.clone_dtoh(&c_new).unwrap();
+
+        for i in 0..(M * N) {
+            assert!(
+                (c_ref_host[i] - c_new_host[i]).abs() <= 1e-6,
+                "index={i}, ref={}, new={}",
+                c_ref_host[i],
+                c_new_host[i]
+            );
+        }
+    }
+
+    #[test]
+    fn test_matmul_op_pick_algorithms() {
+        let ctx = CudaContext::new(0).unwrap();
+        let stream = ctx.default_stream();
+        let blas = CudaBlasLT::new(stream.clone()).unwrap();
+
+        let cfg = MatmulConfig {
+            transa: false,
+            transb: false,
+            transc: false,
+            m: 64,
+            n: 64,
+            k: 64,
+            alpha: 1.0,
+            lda: 64,
+            ldb: 64,
+            beta: 0.0,
+            ldc: 64,
+            stride_a: None,
+            stride_b: None,
+            stride_c: None,
+            stride_bias: None,
+            batch_size: None,
+        };
+
+        let op = blas.matmul_op::<f32>(&cfg).unwrap();
+        let pref = MatmulPreference::new().unwrap();
+        pref.set_max_workspace_bytes(blas.workspace().size).unwrap();
+
+        let results = op.pick_algorithms(&pref, 8).unwrap();
+        assert!(
+            !results.is_empty(),
+            "Expected at least one algorithm from heuristic search"
+        );
+    }
+
+    #[test]
+    fn test_matmul_op_algo_enumeration() {
+        let ctx = CudaContext::new(0).unwrap();
+        let stream = ctx.default_stream();
+        let blas = CudaBlasLT::new(stream.clone()).unwrap();
+
+        let cfg = MatmulConfig {
+            transa: false,
+            transb: false,
+            transc: false,
+            m: 32,
+            n: 32,
+            k: 32,
+            alpha: 1.0,
+            lda: 32,
+            ldb: 32,
+            beta: 0.0,
+            ldc: 32,
+            stride_a: None,
+            stride_b: None,
+            stride_c: None,
+            stride_bias: None,
+            batch_size: None,
+        };
+
+        let op = blas.matmul_op::<f32>(&cfg).unwrap();
+
+        // Get algorithm IDs
+        let ids = op.get_algo_ids(32).unwrap();
+        assert!(!ids.is_empty(), "Expected at least one algorithm ID");
+
+        // Initialize from ID and check
+        let mut valid_count = 0;
+        for &id in &ids {
+            let algo = op.algo_from_id(id).unwrap();
+            assert_eq!(algo.workspace_size, 0, "workspace_size should be 0 before check");
+            if let Ok(_checked) = op.check_algorithm(&algo) {
+                // check_algorithm succeeded — the algorithm is valid for these descriptors
+                valid_count += 1;
+            }
+        }
+        assert!(valid_count > 0, "Expected at least one valid algorithm");
+    }
+
+    #[test]
+    fn test_workspace_constrained_correctness() {
+        let ctx = CudaContext::new(0).unwrap();
+        let stream = ctx.default_stream();
+        let blas = CudaBlasLT::new(stream.clone()).unwrap();
+        const M: usize = 3;
+        const K: usize = 4;
+        const N: usize = 5;
+
+        #[rustfmt::skip]
+        let a_dev = stream.clone_htod(&[
+            -0.5944882f32, 1.8055636, 0.52204555, -0.00397902,
+            -0.38346434, -0.38013917, 0.4198623, -0.22479166,
+            -1.6661372, -0.4568837, -0.9043474, 0.39125723,
+        ]).unwrap();
+        #[rustfmt::skip]
+        let b_dev = stream.clone_htod(&[
+            1.1292169f32, -0.13450263, 0.62789696, -0.5685516, 0.21946938,
+            1.0585804, -0.39789402, 0.90205914, 0.989318, -0.3443096,
+            1.3412506, 0.3059701, -0.9714474, -0.36113533, -1.6809629,
+            3.4746711, -1.0930681, 0.16502666, -0.59988785, 0.41375792,
+        ]).unwrap();
+
+        let cfg = MatmulConfig {
+            transa: false,
+            transb: false,
+            transc: false,
+            m: N as u64,
+            n: M as u64,
+            k: K as u64,
+            alpha: 1.0,
+            lda: N as i64,
+            ldb: K as i64,
+            beta: 0.0,
+            ldc: N as i64,
+            stride_a: None,
+            stride_b: None,
+            stride_c: None,
+            stride_bias: None,
+            batch_size: None,
+        };
+
+        // Reference: unconstrained matmul
+        let mut c_ref = stream.alloc_zeros::<f32>(M * N).unwrap();
+        unsafe {
+            blas.matmul(cfg, &b_dev, &a_dev, &mut c_ref, None::<&CudaSlice<f32>>, None)
+        }
+        .unwrap();
+        let c_ref_host = stream.clone_dtoh(&c_ref).unwrap();
+
+        // Constrained: workspace = 0 bytes (most restrictive)
+        let op = blas.matmul_op::<f32>(&cfg).unwrap();
+        let pref = MatmulPreference::new().unwrap();
+        pref.set_max_workspace_bytes(0).unwrap();
+        let result = op.pick_algorithm(&pref).unwrap();
+
+        let mut c_constrained = stream.alloc_zeros::<f32>(M * N).unwrap();
+        unsafe {
+            op.launch(
+                &result.algo,
+                blas.workspace(),
+                1.0,
+                0.0,
+                &b_dev,
+                &a_dev,
+                &mut c_constrained,
+                None::<&CudaSlice<f32>>,
+                None,
+            )
+        }
+        .unwrap();
+        let c_constrained_host = stream.clone_dtoh(&c_constrained).unwrap();
+
+        for i in 0..(M * N) {
+            assert!(
+                (c_ref_host[i] - c_constrained_host[i]).abs() <= 1e-5,
+                "Workspace-constrained result differs at index={i}: ref={}, constrained={}",
+                c_ref_host[i],
+                c_constrained_host[i]
+            );
+        }
+    }
+
+    #[test]
+    fn test_pinned_algorithm_reproducibility() {
+        let ctx = CudaContext::new(0).unwrap();
+        let stream = ctx.default_stream();
+        let blas = CudaBlasLT::new(stream.clone()).unwrap();
+        const M: usize = 3;
+        const K: usize = 4;
+        const N: usize = 5;
+
+        #[rustfmt::skip]
+        let a_dev = stream.clone_htod(&[
+            -0.5944882f32, 1.8055636, 0.52204555, -0.00397902,
+            -0.38346434, -0.38013917, 0.4198623, -0.22479166,
+            -1.6661372, -0.4568837, -0.9043474, 0.39125723,
+        ]).unwrap();
+        #[rustfmt::skip]
+        let b_dev = stream.clone_htod(&[
+            1.1292169f32, -0.13450263, 0.62789696, -0.5685516, 0.21946938,
+            1.0585804, -0.39789402, 0.90205914, 0.989318, -0.3443096,
+            1.3412506, 0.3059701, -0.9714474, -0.36113533, -1.6809629,
+            3.4746711, -1.0930681, 0.16502666, -0.59988785, 0.41375792,
+        ]).unwrap();
+
+        let cfg = MatmulConfig {
+            transa: false,
+            transb: false,
+            transc: false,
+            m: N as u64,
+            n: M as u64,
+            k: K as u64,
+            alpha: 1.0,
+            lda: N as i64,
+            ldb: K as i64,
+            beta: 0.0,
+            ldc: N as i64,
+            stride_a: None,
+            stride_b: None,
+            stride_c: None,
+            stride_bias: None,
+            batch_size: None,
+        };
+
+        let op = blas.matmul_op::<f32>(&cfg).unwrap();
+
+        // Find a valid algorithm via enumeration
+        let ids = op.get_algo_ids(32).unwrap();
+        let mut pinned_algo = None;
+        for &id in &ids {
+            let algo = op.algo_from_id(id).unwrap();
+            if let Ok(checked) = op.check_algorithm(&algo) {
+                if checked.algo.workspace_size <= blas.workspace().size {
+                    pinned_algo = Some(checked.algo);
+                    break;
+                }
+            }
+        }
+        let algo = pinned_algo.expect("Expected at least one valid algorithm");
+
+        // Run twice with same pinned algorithm
+        let mut c1 = stream.alloc_zeros::<f32>(M * N).unwrap();
+        unsafe {
+            op.launch(&algo, blas.workspace(), 1.0, 0.0, &b_dev, &a_dev, &mut c1, None::<&CudaSlice<f32>>, None)
+        }
+        .unwrap();
+        let c1_host = stream.clone_dtoh(&c1).unwrap();
+
+        let mut c2 = stream.alloc_zeros::<f32>(M * N).unwrap();
+        unsafe {
+            op.launch(&algo, blas.workspace(), 1.0, 0.0, &b_dev, &a_dev, &mut c2, None::<&CudaSlice<f32>>, None)
+        }
+        .unwrap();
+        let c2_host = stream.clone_dtoh(&c2).unwrap();
+
+        // Bitwise identical results
+        for i in 0..(M * N) {
+            assert_eq!(
+                c1_host[i].to_bits(),
+                c2_host[i].to_bits(),
+                "Pinned algorithm produced different results at index={i}: run1={}, run2={}",
+                c1_host[i],
+                c2_host[i]
+            );
+        }
+    }
 }
