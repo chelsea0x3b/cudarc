@@ -257,3 +257,160 @@ pub unsafe fn matmul(
     )
     .result()
 }
+
+/// Gets the value of the specified attribute belonging to a previously created matrix multiply
+/// preferences descriptor. See
+/// [nvidia docs](https://docs.nvidia.com/cuda/cublas/index.html#cublasltmatmulpreferencegetattribute)
+///
+/// # Safety
+/// `matmul_pref` must not have been freed already.
+pub unsafe fn get_matmul_pref_attribute(
+    matmul_pref: sys::cublasLtMatmulPreference_t,
+    attr: sys::cublasLtMatmulPreferenceAttributes_t,
+    buf: *mut c_void,
+    buf_size: usize,
+    size_written: *mut usize,
+) -> Result<(), CublasError> {
+    sys::cublasLtMatmulPreferenceGetAttribute(matmul_pref, attr, buf, buf_size, size_written)
+        .result()
+}
+
+/// Retrieves multiple algorithms for the matrix multiply operation, ranked by estimated
+/// performance. See
+/// [nvidia docs](https://docs.nvidia.com/cuda/cublas/index.html#cublasltmatmulalgogetheuristic)
+///
+/// # Safety
+/// All the parameters must not have been freed already & must be valid layouts for allocations.
+pub unsafe fn get_matmul_algo_heuristics(
+    handle: sys::cublasLtHandle_t,
+    matmul_desc: sys::cublasLtMatmulDesc_t,
+    a_layout: sys::cublasLtMatrixLayout_t,
+    b_layout: sys::cublasLtMatrixLayout_t,
+    c_layout: sys::cublasLtMatrixLayout_t,
+    d_layout: sys::cublasLtMatrixLayout_t,
+    matmul_pref: sys::cublasLtMatmulPreference_t,
+    requested_algo_count: core::ffi::c_int,
+) -> Result<Vec<sys::cublasLtMatmulHeuristicResult_t>, CublasError> {
+    let mut results: Vec<sys::cublasLtMatmulHeuristicResult_t> =
+        vec![core::mem::zeroed(); requested_algo_count as usize];
+    let mut algo_count: core::ffi::c_int = 0;
+
+    sys::cublasLtMatmulAlgoGetHeuristic(
+        handle,
+        matmul_desc,
+        a_layout,
+        b_layout,
+        c_layout,
+        d_layout,
+        matmul_pref,
+        requested_algo_count,
+        results.as_mut_ptr(),
+        &mut algo_count,
+    )
+    .result()?;
+
+    results.truncate(algo_count as usize);
+    // Filter to only results with successful state
+    results.retain(|r| r.state == sys::cublasStatus_t::CUBLAS_STATUS_SUCCESS);
+    Ok(results)
+}
+
+/// Retrieves algorithm IDs for a given combination of compute and matrix types. See
+/// [nvidia docs](https://docs.nvidia.com/cuda/cublas/index.html#cublasltmatmulalgogetids)
+pub fn get_matmul_algo_ids(
+    handle: sys::cublasLtHandle_t,
+    compute_type: sys::cublasComputeType_t,
+    scale_type: sys::cudaDataType,
+    a_type: sys::cudaDataType,
+    b_type: sys::cudaDataType,
+    c_type: sys::cudaDataType,
+    d_type: sys::cudaDataType,
+    requested_algo_count: core::ffi::c_int,
+) -> Result<Vec<core::ffi::c_int>, CublasError> {
+    let mut algo_ids: Vec<core::ffi::c_int> = vec![0; requested_algo_count as usize];
+    let mut algo_count: core::ffi::c_int = 0;
+
+    unsafe {
+        sys::cublasLtMatmulAlgoGetIds(
+            handle,
+            compute_type,
+            scale_type,
+            a_type,
+            b_type,
+            c_type,
+            d_type,
+            requested_algo_count,
+            algo_ids.as_mut_ptr(),
+            &mut algo_count,
+        )
+        .result()?;
+    }
+
+    algo_ids.truncate(algo_count as usize);
+    Ok(algo_ids)
+}
+
+/// Initializes an algorithm object from an algorithm ID. See
+/// [nvidia docs](https://docs.nvidia.com/cuda/cublas/index.html#cublasltmatmulalgoinit)
+pub fn matmul_algo_init(
+    handle: sys::cublasLtHandle_t,
+    compute_type: sys::cublasComputeType_t,
+    scale_type: sys::cudaDataType,
+    a_type: sys::cudaDataType,
+    b_type: sys::cudaDataType,
+    c_type: sys::cudaDataType,
+    d_type: sys::cudaDataType,
+    algo_id: core::ffi::c_int,
+) -> Result<cublasLtMatmulAlgo_t, CublasError> {
+    let mut algo = MaybeUninit::uninit();
+    unsafe {
+        sys::cublasLtMatmulAlgoInit(
+            handle,
+            compute_type,
+            scale_type,
+            a_type,
+            b_type,
+            c_type,
+            d_type,
+            algo_id,
+            algo.as_mut_ptr(),
+        )
+        .result()?;
+        Ok(algo.assume_init())
+    }
+}
+
+/// Checks if an algorithm is valid for the given operation descriptors. See
+/// [nvidia docs](https://docs.nvidia.com/cuda/cublas/index.html#cublasltmatmulalgocheck)
+///
+/// # Safety
+/// All descriptors must not have been freed already & must be valid.
+#[allow(clippy::too_many_arguments)]
+pub unsafe fn matmul_algo_check(
+    handle: sys::cublasLtHandle_t,
+    matmul_desc: sys::cublasLtMatmulDesc_t,
+    a_layout: sys::cublasLtMatrixLayout_t,
+    b_layout: sys::cublasLtMatrixLayout_t,
+    c_layout: sys::cublasLtMatrixLayout_t,
+    d_layout: sys::cublasLtMatrixLayout_t,
+    algo: *const cublasLtMatmulAlgo_t,
+) -> Result<sys::cublasLtMatmulHeuristicResult_t, CublasError> {
+    let mut heuristic_result = MaybeUninit::uninit();
+
+    sys::cublasLtMatmulAlgoCheck(
+        handle,
+        matmul_desc,
+        a_layout,
+        b_layout,
+        c_layout,
+        d_layout,
+        algo,
+        heuristic_result.as_mut_ptr(),
+    )
+    .result()?;
+
+    let heuristic_result = heuristic_result.assume_init();
+    heuristic_result.state.result()?;
+
+    Ok(heuristic_result)
+}
