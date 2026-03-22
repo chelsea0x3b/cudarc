@@ -325,27 +325,27 @@ impl MatmulPreference {
     /// This is the key control for preventing the heuristic from selecting
     /// algorithms that assume more workspace than is available, which can
     /// cause incorrect results under memory pressure.
-    pub fn set_max_workspace_bytes(&self, size: usize) -> Result<(), CublasError> {
+    pub fn set_max_workspace_bytes(&self, size: u64) -> Result<(), CublasError> {
         unsafe {
             result::set_matmul_pref_attribute(
                 self.handle,
                 sys::cublasLtMatmulPreferenceAttributes_t::CUBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES,
                 (&size) as *const _ as *const _,
-                mem::size_of::<usize>(),
+                mem::size_of::<u64>(),
             )
         }
     }
 
     /// Get maximum workspace size setting (bytes).
-    pub fn max_workspace_bytes(&self) -> Result<usize, CublasError> {
-        let mut size: usize = 0;
+    pub fn max_workspace_bytes(&self) -> Result<u64, CublasError> {
+        let mut size: u64 = 0;
         let mut size_written: usize = 0;
         unsafe {
             result::get_matmul_pref_attribute(
                 self.handle,
                 sys::cublasLtMatmulPreferenceAttributes_t::CUBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES,
                 (&mut size) as *mut _ as *mut _,
-                mem::size_of::<usize>(),
+                mem::size_of::<u64>(),
                 &mut size_written,
             )?;
         }
@@ -687,7 +687,7 @@ pub trait Matmul<T>: MatmulShared {
         let matmul_pref = MatmulPreference::new()?;
 
         // Set workspace size
-        matmul_pref.set_max_workspace_bytes(self.workspace().size)?;
+        matmul_pref.set_max_workspace_bytes(self.workspace().size as u64)?;
 
         // Get heuristic given Config, bias, act and workspace size
         let heuristic = result::get_matmul_algo_heuristic(
@@ -1130,7 +1130,7 @@ mod tests {
         // New API: use MatmulOperation
         let mut op = blas.matmul_op::<f32>(&cfg).unwrap();
         let pref = MatmulPreference::new().unwrap();
-        pref.set_max_workspace_bytes(blas.workspace().size).unwrap();
+        pref.set_max_workspace_bytes(blas.workspace().size as u64).unwrap();
         let result = op.pick_algorithm(&pref).unwrap();
 
         let mut c_new = stream.alloc_zeros::<f32>(M * N).unwrap();
@@ -1187,7 +1187,7 @@ mod tests {
 
         let op = blas.matmul_op::<f32>(&cfg).unwrap();
         let pref = MatmulPreference::new().unwrap();
-        pref.set_max_workspace_bytes(blas.workspace().size).unwrap();
+        pref.set_max_workspace_bytes(blas.workspace().size as u64).unwrap();
 
         let results = op.pick_algorithms(&pref, 8).unwrap();
         assert!(
