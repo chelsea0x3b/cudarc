@@ -8,6 +8,7 @@ use core::ffi::c_int;
 use core::marker::PhantomData;
 use core::mem;
 use std::sync::Arc;
+use std::vec::Vec;
 
 /// Wrapper around [sys::cublasLtHandle_t]
 ///

@@ -2,6 +2,7 @@ use super::sys::{self};
 use crate::cublaslt::sys::cublasLtMatmulAlgo_t;
 use core::ffi::c_void;
 use core::mem::MaybeUninit;
+use std::{vec, vec::Vec};
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub struct CublasError(pub sys::cublasStatus_t);
