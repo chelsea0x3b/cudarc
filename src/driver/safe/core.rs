@@ -762,7 +762,20 @@ impl CudaStream {
 /// This object is thread safe.
 #[derive(Debug)]
 pub struct CudaSlice<T> {
-    pub(crate) cu_device_ptr: sys::CUdeviceptr,
+    /// Raw CUDA device pointer.
+    ///
+    /// This is public for advanced use cases like direct `cuMemcpyDtoDAsync` calls
+    /// that bypass cudarc's event tracking.
+    ///
+    /// # Safety
+    ///
+    /// The pointer is owned by the `CudaSlice` and will be freed when it is dropped.
+    /// The caller **must** ensure that this pointer is not used after the `CudaSlice`
+    /// has been dropped, otherwise it will be a dangling pointer.
+    ///
+    /// The caller is also responsible for all synchronization when using this pointer.
+    /// Using this pointer directly bypasses cudarc's automatic stream synchronization.
+    pub cu_device_ptr: sys::CUdeviceptr,
     pub(crate) len: usize,
     pub(crate) read: Option<CudaEvent>,
     pub(crate) write: Option<CudaEvent>,
