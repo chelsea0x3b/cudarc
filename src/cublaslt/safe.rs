@@ -1167,7 +1167,7 @@ mod tests {
             batch_size: None,
         };
 
-        let mut op = blas.matmul_op::<f32>(&cfg).unwrap();
+        let op = blas.matmul_op::<f32>(&cfg).unwrap();
         let pref = MatmulPreference::new().unwrap();
         pref.set_max_workspace_bytes(blas.workspace().size).unwrap();
 
@@ -1203,7 +1203,7 @@ mod tests {
             batch_size: None,
         };
 
-        let mut op = blas.matmul_op::<f32>(&cfg).unwrap();
+        let op = blas.matmul_op::<f32>(&cfg).unwrap();
 
         // Get algorithm IDs
         let ids = op.get_algo_ids(32).unwrap();
