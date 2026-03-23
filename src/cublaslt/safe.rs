@@ -56,7 +56,7 @@ impl CudaBlasLT {
     /// Sets up matrix layouts, matmul descriptor, and transpose settings.
     /// Epilogue (bias/activation) is deferred to [`MatmulOperation::launch()`] so that
     /// the bias buffer's `SyncOnDrop` guard lives through the actual matmul execution.
-    pub fn matmul_op<T>(&self, cfg: &MatmulConfig) -> Result<MatmulOperation<T>, CublasError>
+    pub fn matmul_op<T>(&self, cfg: &MatmulConfig) -> Result<MatmulOperation<'_, T>, CublasError>
     where
         Self: Matmul<T>,
     {
@@ -96,8 +96,7 @@ impl CudaBlasLT {
         matmul_desc.set_transpose(cfg.transc, Matrix::C)?;
 
         Ok(MatmulOperation {
-            handle: self.handle,
-            stream: self.stream.clone(),
+            blas: self,
             matmul_desc,
             a_layout,
             b_layout,
@@ -367,34 +366,18 @@ impl Drop for MatmulPreference {
 ///
 /// Obtained from [`MatmulOperation::pick_algorithm()`],
 /// [`MatmulOperation::pick_algorithms()`], or [`MatmulOperation::algo_from_id()`].
-///
-/// Note: `workspace_size` is only populated after heuristic search or `check_algorithm()`.
-/// When obtained via `algo_from_id()`, `workspace_size` is 0 — call `check_algorithm()`
-/// to get the actual requirement.
 #[derive(Debug, Clone, Copy)]
 pub struct MatmulAlgorithm {
     pub(crate) inner: sys::cublasLtMatmulAlgo_t,
-    /// Workspace bytes required. 0 if not yet validated via heuristic or check_algorithm().
+    /// Workspace bytes required by this algorithm.
     pub workspace_size: usize,
 }
 
-/// Result from heuristic algorithm search or algorithm validation.
-#[derive(Debug, Clone, Copy)]
-pub struct MatmulHeuristicResult {
-    /// The selected algorithm with workspace size populated.
-    pub algo: MatmulAlgorithm,
-    /// Estimated number of GPU waves for this algorithm.
-    pub waves_count: f32,
-}
-
-impl MatmulHeuristicResult {
+impl MatmulAlgorithm {
     fn from_sys(r: sys::cublasLtMatmulHeuristicResult_t) -> Self {
         Self {
-            algo: MatmulAlgorithm {
-                inner: r.algo,
-                workspace_size: r.workspaceSize,
-            },
-            waves_count: r.wavesCount,
+            inner: r.algo,
+            workspace_size: r.workspaceSize,
         }
     }
 }
@@ -406,13 +389,12 @@ impl MatmulHeuristicResult {
 /// 2. [`MatmulOperation::pick_algorithm()`] — heuristic selection
 /// 3. [`MatmulOperation::launch()`] — execute with chosen algorithm
 ///
-/// For algorithm enumeration:
-/// - [`MatmulOperation::get_algo_ids()`] — enumerate compatible algorithm IDs
-/// - [`MatmulOperation::algo_from_id()`] — initialize from a known ID
-/// - [`MatmulOperation::check_algorithm()`] — validate an algorithm
-pub struct MatmulOperation<T> {
-    handle: sys::cublasLtHandle_t,
-    stream: Arc<CudaStream>,
+/// Algorithm enumeration is also available via [`MatmulOperation::get_algo_ids()`]
+/// and [`MatmulOperation::algo_from_id()`].
+///
+/// Borrows the [`CudaBlasLT`] handle to prevent use-after-free.
+pub struct MatmulOperation<'a, T> {
+    blas: &'a CudaBlasLT,
     matmul_desc: MatmulDesc,
     a_layout: MatrixLayout,
     b_layout: MatrixLayout,
@@ -424,7 +406,7 @@ pub struct MatmulOperation<T> {
     _marker: PhantomData<T>,
 }
 
-impl<T> MatmulOperation<T> {
+impl<T> MatmulOperation<'_, T> {
     /// Pick the best algorithm using heuristics.
     ///
     /// A `MatmulPreference` is always required (it is cheap to create via
@@ -433,10 +415,10 @@ impl<T> MatmulOperation<T> {
     pub fn pick_algorithm(
         &self,
         preference: &MatmulPreference,
-    ) -> Result<MatmulHeuristicResult, CublasError> {
+    ) -> Result<MatmulAlgorithm, CublasError> {
         let heuristic = unsafe {
             result::get_matmul_algo_heuristic(
-                self.handle,
+                self.blas.handle,
                 self.matmul_desc.handle,
                 self.a_layout.handle,
                 self.b_layout.handle,
@@ -445,7 +427,7 @@ impl<T> MatmulOperation<T> {
                 preference.handle,
             )
         }?;
-        Ok(MatmulHeuristicResult::from_sys(heuristic))
+        Ok(MatmulAlgorithm::from_sys(heuristic))
     }
 
     /// Pick multiple algorithms ranked by estimated performance.
@@ -453,10 +435,10 @@ impl<T> MatmulOperation<T> {
         &self,
         preference: &MatmulPreference,
         max_results: c_int,
-    ) -> Result<Vec<MatmulHeuristicResult>, CublasError> {
+    ) -> Result<Vec<MatmulAlgorithm>, CublasError> {
         let results = unsafe {
             result::get_matmul_algo_heuristics(
-                self.handle,
+                self.blas.handle,
                 self.matmul_desc.handle,
                 self.a_layout.handle,
                 self.b_layout.handle,
@@ -466,17 +448,14 @@ impl<T> MatmulOperation<T> {
                 max_results,
             )
         }?;
-        Ok(results
-            .into_iter()
-            .map(MatmulHeuristicResult::from_sys)
-            .collect())
+        Ok(results.into_iter().map(MatmulAlgorithm::from_sys).collect())
     }
 
     /// Get all compatible algorithm IDs for this operation's type combination.
     pub fn get_algo_ids(&self, max_results: c_int) -> Result<Vec<c_int>, CublasError> {
         unsafe {
             result::get_matmul_algo_ids(
-                self.handle,
+                self.blas.handle,
                 self.compute_type,
                 self.scale_type,
                 self.matrix_type,
@@ -488,14 +467,15 @@ impl<T> MatmulOperation<T> {
         }
     }
 
-    /// Initialize an algorithm from a known ID.
+    /// Initialize and validate an algorithm from a known ID.
     ///
-    /// The returned `MatmulAlgorithm` has `workspace_size` set to 0.
-    /// Call [`check_algorithm()`](Self::check_algorithm) to get the actual workspace requirement.
+    /// Combines initialization and validation in one step — returns a fully
+    /// validated `MatmulAlgorithm` with `workspace_size` populated, or an error
+    /// if the algorithm is incompatible with this operation's descriptors.
     pub fn algo_from_id(&self, algo_id: c_int) -> Result<MatmulAlgorithm, CublasError> {
         let inner = unsafe {
             result::matmul_algo_init(
-                self.handle,
+                self.blas.handle,
                 self.compute_type,
                 self.scale_type,
                 self.matrix_type,
@@ -505,22 +485,13 @@ impl<T> MatmulOperation<T> {
                 algo_id,
             )
         }?;
-        Ok(MatmulAlgorithm {
+        let algo = MatmulAlgorithm {
             inner,
             workspace_size: 0,
-        })
-    }
-
-    /// Validate that an algorithm works for this operation's descriptors.
-    ///
-    /// Returns a `MatmulHeuristicResult` with the actual workspace size populated.
-    pub fn check_algorithm(
-        &self,
-        algo: &MatmulAlgorithm,
-    ) -> Result<MatmulHeuristicResult, CublasError> {
+        };
         let heuristic = unsafe {
             result::matmul_algo_check(
-                self.handle,
+                self.blas.handle,
                 self.matmul_desc.handle,
                 self.a_layout.handle,
                 self.b_layout.handle,
@@ -529,7 +500,7 @@ impl<T> MatmulOperation<T> {
                 &algo.inner as *const _,
             )
         }?;
-        Ok(MatmulHeuristicResult::from_sys(heuristic))
+        Ok(MatmulAlgorithm::from_sys(heuristic))
     }
 
     /// Execute the matmul with an explicitly chosen algorithm and workspace.
@@ -555,16 +526,17 @@ impl<T> MatmulOperation<T> {
         bias: Option<&I>,
         act: Option<&Activation>,
     ) -> Result<(), CublasError> {
-        let (bias_ptr, _record_bias) = bias.map(|b| b.device_ptr(&self.stream)).unzip();
+        let stream = &self.blas.stream;
+        let (bias_ptr, _record_bias) = bias.map(|b| b.device_ptr(stream)).unzip();
         self.matmul_desc
             .set_epilogue(act, bias_ptr.as_ref(), self.stride_bias)?;
 
-        let (a, _record_a) = a.device_ptr(&self.stream);
-        let (b, _record_b) = b.device_ptr(&self.stream);
-        let (c, _record_c) = c.device_ptr_mut(&self.stream);
-        let (w, _record_w) = workspace.buffer.device_ptr(&self.stream);
+        let (a, _record_a) = a.device_ptr(stream);
+        let (b, _record_b) = b.device_ptr(stream);
+        let (c, _record_c) = c.device_ptr_mut(stream);
+        let (w, _record_w) = workspace.buffer.device_ptr(stream);
         result::matmul(
-            self.handle,
+            self.blas.handle,
             self.matmul_desc.handle,
             (&alpha) as *const _ as *const _,
             (&beta) as *const _ as *const _,
@@ -579,7 +551,7 @@ impl<T> MatmulOperation<T> {
             (&algo.inner) as *const _,
             w as *mut _,
             workspace.size,
-            self.stream.cu_stream() as *mut _,
+            stream.cu_stream() as *mut _,
         )
     }
 }
@@ -1131,13 +1103,14 @@ mod tests {
         // New API: use MatmulOperation
         let mut op = blas.matmul_op::<f32>(&cfg).unwrap();
         let pref = MatmulPreference::new().unwrap();
-        pref.set_max_workspace_bytes(blas.workspace().size as u64).unwrap();
-        let result = op.pick_algorithm(&pref).unwrap();
+        pref.set_max_workspace_bytes(blas.workspace().size as u64)
+            .unwrap();
+        let algo = op.pick_algorithm(&pref).unwrap();
 
         let mut c_new = stream.alloc_zeros::<f32>(M * N).unwrap();
         unsafe {
             op.launch(
-                &result.algo,
+                &algo,
                 blas.workspace(),
                 1.0,
                 0.0,
@@ -1188,11 +1161,12 @@ mod tests {
 
         let op = blas.matmul_op::<f32>(&cfg).unwrap();
         let pref = MatmulPreference::new().unwrap();
-        pref.set_max_workspace_bytes(blas.workspace().size as u64).unwrap();
+        pref.set_max_workspace_bytes(blas.workspace().size as u64)
+            .unwrap();
 
-        let results = op.pick_algorithms(&pref, 8).unwrap();
+        let algos = op.pick_algorithms(&pref, 8).unwrap();
         assert!(
-            !results.is_empty(),
+            !algos.is_empty(),
             "Expected at least one algorithm from heuristic search"
         );
     }
@@ -1228,16 +1202,10 @@ mod tests {
         let ids = op.get_algo_ids(32).unwrap();
         assert!(!ids.is_empty(), "Expected at least one algorithm ID");
 
-        // Initialize from ID and check
+        // Initialize and validate from ID
         let mut valid_count = 0;
         for &id in &ids {
-            let algo = op.algo_from_id(id).unwrap();
-            assert_eq!(
-                algo.workspace_size, 0,
-                "workspace_size should be 0 before check"
-            );
-            if let Ok(_checked) = op.check_algorithm(&algo) {
-                // check_algorithm succeeded — the algorithm is valid for these descriptors
+            if op.algo_from_id(id).is_ok() {
                 valid_count += 1;
             }
         }
@@ -1305,12 +1273,12 @@ mod tests {
         let mut op = blas.matmul_op::<f32>(&cfg).unwrap();
         let pref = MatmulPreference::new().unwrap();
         pref.set_max_workspace_bytes(0).unwrap();
-        let result = op.pick_algorithm(&pref).unwrap();
+        let algo = op.pick_algorithm(&pref).unwrap();
 
         let mut c_constrained = stream.alloc_zeros::<f32>(M * N).unwrap();
         unsafe {
             op.launch(
-                &result.algo,
+                &algo,
                 blas.workspace(),
                 1.0,
                 0.0,
@@ -1382,10 +1350,9 @@ mod tests {
         let ids = op.get_algo_ids(32).unwrap();
         let mut pinned_algo = None;
         for &id in &ids {
-            let algo = op.algo_from_id(id).unwrap();
-            if let Ok(checked) = op.check_algorithm(&algo) {
-                if checked.algo.workspace_size <= blas.workspace().size {
-                    pinned_algo = Some(checked.algo);
+            if let Ok(algo) = op.algo_from_id(id) {
+                if algo.workspace_size <= blas.workspace().size {
+                    pinned_algo = Some(algo);
                     break;
                 }
             }
