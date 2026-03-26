@@ -1516,6 +1516,42 @@ impl CudaStream {
         })
     }
 
+    /// Allocates a [CudaSlice] with `len` elements of type `T` from the
+    /// specified memory pool.
+    ///
+    /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g0968906e6892e4f7e0e04ef5e5e0b416)
+    ///
+    /// # Safety
+    /// This is unsafe because the memory is unset.
+    pub unsafe fn alloc_from_pool<T: DeviceRepr>(
+        self: &Arc<Self>,
+        len: usize,
+        pool: &super::mem_pool::CudaMemPool,
+    ) -> Result<CudaSlice<T>, DriverError> {
+        self.ctx.bind_to_thread()?;
+        let cu_device_ptr = result::mem_pool::alloc_async(
+            pool.pool,
+            len * std::mem::size_of::<T>(),
+            self.cu_stream,
+        )?;
+        let (read, write) = if self.ctx.is_event_tracking() {
+            (
+                Some(self.ctx.new_event(None)?),
+                Some(self.ctx.new_event(None)?),
+            )
+        } else {
+            (None, None)
+        };
+        Ok(CudaSlice {
+            cu_device_ptr,
+            len,
+            read,
+            write,
+            stream: self.clone(),
+            marker: PhantomData,
+        })
+    }
+
     /// Allocates a [CudaSlice] with `len` elements of type `T`. All values are zero'd out.
     pub fn alloc_zeros<T: DeviceRepr + ValidAsZeroBits>(
         self: &Arc<Self>,
