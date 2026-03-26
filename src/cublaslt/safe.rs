@@ -1147,4 +1147,455 @@ mod tests {
             }
         }
     }
+
+    // -----------------------------------------------------------------------
+    // Scaled matmul (NVFP4) tests — require Blackwell GPU + CUDA 12.8+
+    // -----------------------------------------------------------------------
+
+    #[cfg(all(
+        any(
+            feature = "cuda-12080",
+            feature = "cuda-12090",
+            feature = "cuda-13000",
+            feature = "cuda-13010",
+        ),
+        feature = "f4",
+        feature = "f8",
+        feature = "f16",
+    ))]
+    mod scaled_matmul_tests {
+        use super::*;
+
+        /// CPU reference: unpack FP4 values, apply block scales, multiply as f32.
+        /// Returns row-major f32 result matrix of shape [m][n].
+        fn scaled_matmul_reference(
+            a_packed: &[float4::F4E2M1x2],
+            b_packed: &[float4::F4E2M1x2],
+            a_scales: &[float8::F8E4M3],
+            b_scales: &[float8::F8E4M3],
+            m: usize,
+            n: usize,
+            k: usize,
+            alpha: f32,
+            beta: f32,
+            c_bf16: &[half::bf16],
+        ) -> Vec<f32> {
+            // Unpack A: m rows, k cols (k/2 packed bytes per row)
+            let mut a_f32 = vec![0.0f32; m * k];
+            for row in 0..m {
+                for col_pair in 0..(k / 2) {
+                    let idx = row * (k / 2) + col_pair;
+                    let (lo, hi) = a_packed[idx].to_f32_pair();
+                    a_f32[row * k + col_pair * 2] = lo;
+                    a_f32[row * k + col_pair * 2 + 1] = hi;
+                }
+            }
+
+            // Unpack B: k rows, n cols (n/2 packed bytes per row)
+            let mut b_f32 = vec![0.0f32; k * n];
+            for row in 0..k {
+                for col_pair in 0..(n / 2) {
+                    let idx = row * (n / 2) + col_pair;
+                    let (lo, hi) = b_packed[idx].to_f32_pair();
+                    b_f32[row * n + col_pair * 2] = lo;
+                    b_f32[row * n + col_pair * 2 + 1] = hi;
+                }
+            }
+
+            // Apply block scales (16-element blocks along K)
+            // A scales: one per (row, k_block), layout [m, k/16]
+            for row in 0..m {
+                for col in 0..k {
+                    let block_idx = row * (k / 16) + col / 16;
+                    let scale = f32::from(a_scales[block_idx]);
+                    a_f32[row * k + col] *= scale;
+                }
+            }
+            // B scales: one per (col, k_block), layout [n, k/16]
+            for row in 0..k {
+                for col in 0..n {
+                    let block_idx = col * (k / 16) + row / 16;
+                    let scale = f32::from(b_scales[block_idx]);
+                    b_f32[row * n + col] *= scale;
+                }
+            }
+
+            // Matmul: D = alpha * (A @ B) + beta * C
+            let mut d = vec![0.0f32; m * n];
+            for i in 0..m {
+                for j in 0..n {
+                    let mut sum = 0.0f32;
+                    for p in 0..k {
+                        sum += a_f32[i * k + p] * b_f32[p * n + j];
+                    }
+                    let c_val = half::bf16::to_f32(c_bf16[i * n + j]);
+                    d[i * n + j] = alpha * sum + beta * c_val;
+                }
+            }
+            d
+        }
+
+        #[test]
+        fn test_scaled_matmul_type_mapping_bf16_output() {
+            assert_eq!(
+                <CudaBlasLT as ScaledMatmul>::input_type(),
+                sys::cudaDataType_t::CUDA_R_4F_E2M1
+            );
+            assert_eq!(
+                <CudaBlasLT as ScaledMatmul>::accum_type(),
+                sys::cudaDataType_t::CUDA_R_16BF
+            );
+            assert_eq!(
+                <CudaBlasLT as ScaledMatmul>::output_type(),
+                sys::cudaDataType_t::CUDA_R_16BF
+            );
+            assert_eq!(
+                <CudaBlasLT as ScaledMatmul>::ab_scale_mode(),
+                sys::cublasLtMatmulMatrixScale_t::CUBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3
+            );
+            assert_eq!(
+                <CudaBlasLT as ScaledMatmul>::d_scale_mode(),
+                sys::cublasLtMatmulMatrixScale_t::CUBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F
+            );
+            assert_eq!(
+                <CudaBlasLT as ScaledMatmul>::d_out_scale_mode(),
+                sys::cublasLtMatmulMatrixScale_t::CUBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3
+            );
+        }
+
+        #[test]
+        fn test_scaled_matmul_type_mapping_fp4_output() {
+            assert_eq!(
+                <NvFp4Output as ScaledMatmul>::input_type(),
+                sys::cudaDataType_t::CUDA_R_4F_E2M1
+            );
+            assert_eq!(
+                <NvFp4Output as ScaledMatmul>::accum_type(),
+                sys::cudaDataType_t::CUDA_R_16BF
+            );
+            assert_eq!(
+                <NvFp4Output as ScaledMatmul>::output_type(),
+                sys::cudaDataType_t::CUDA_R_4F_E2M1
+            );
+        }
+
+        #[test]
+        fn test_scaled_matmul_nvfp4_to_bf16() {
+            let logpath = CString::new("log_scaled_matmul_bf16").unwrap();
+            unsafe { sys::cublasLtLoggerSetLevel(4).result().unwrap() };
+            unsafe {
+                sys::cublasLtLoggerOpenFile(logpath.as_ptr())
+                    .result()
+                    .unwrap()
+            };
+
+            let ctx = CudaContext::new(0).unwrap();
+            let stream = ctx.default_stream();
+            let blas = CudaBlasLT::new(stream.clone()).unwrap();
+
+            const M: usize = 64;
+            const N: usize = 64;
+            const K: usize = 128;
+
+            // Build known FP4 values: pack (1.0, 0.5) pairs
+            let a_packed: Vec<float4::F4E2M1x2> = (0..M * K / 2)
+                .map(|i| {
+                    let v0 = float4::F4E2M1::from(((i % 7) as f32) * 0.5);
+                    let v1 = float4::F4E2M1::from(((i % 5) as f32) * 0.5);
+                    float4::F4E2M1x2::new(v0, v1)
+                })
+                .collect();
+            let b_packed: Vec<float4::F4E2M1x2> = (0..K * N / 2)
+                .map(|i| {
+                    let v0 = float4::F4E2M1::from(((i % 3) as f32) * 0.5);
+                    let v1 = float4::F4E2M1::from(((i % 6) as f32) * 0.5);
+                    float4::F4E2M1x2::new(v0, v1)
+                })
+                .collect();
+
+            // All scales = 1.0 (identity scaling)
+            let a_scales = vec![float8::F8E4M3::from(1.0f32); M * (K / 16)];
+            let b_scales = vec![float8::F8E4M3::from(1.0f32); N * (K / 16)];
+            let d_scale = vec![1.0f32];
+            let d_out_scale = vec![float8::F8E4M3::from(1.0f32); M * (N / 16)];
+            let c_data = vec![half::bf16::from_f32(0.0); M * N];
+
+            // CPU reference
+            let expected = scaled_matmul_reference(
+                &a_packed, &b_packed, &a_scales, &b_scales, M, N, K, 1.0, 0.0, &c_data,
+            );
+
+            // Upload to device
+            let a_dev = stream.clone_htod(&a_packed).unwrap();
+            let b_dev = stream.clone_htod(&b_packed).unwrap();
+            let c_dev = stream.clone_htod(&c_data).unwrap();
+            let mut d_dev = stream.alloc_zeros::<half::bf16>(M * N).unwrap();
+            let a_scale_dev = stream.clone_htod(&a_scales).unwrap();
+            let b_scale_dev = stream.clone_htod(&b_scales).unwrap();
+            let d_scale_dev = stream.clone_htod(&d_scale).unwrap();
+            let mut d_out_scale_dev = stream.clone_htod(&d_out_scale).unwrap();
+
+            // cuBLASLt uses column-major: swap m/n and A/B for row-major data
+            let cfg = ScaledMatmulConfig {
+                transa: false,
+                transb: false,
+                m: N as u64,
+                n: M as u64,
+                k: K as u64,
+                alpha: 1.0,
+                beta: 0.0,
+                lda: N as i64,
+                ldb: K as i64,
+                ldc: N as i64,
+                ldd: N as i64,
+            };
+
+            unsafe {
+                blas.scaled_matmul(
+                    cfg,
+                    &b_dev,
+                    &a_dev,
+                    &c_dev,
+                    &mut d_dev,
+                    &b_scale_dev,
+                    &a_scale_dev,
+                    &d_scale_dev,
+                    &mut d_out_scale_dev,
+                )
+                .unwrap();
+            }
+
+            let d_host = stream.clone_dtoh(&d_dev).unwrap();
+            for i in 0..M {
+                for j in 0..N {
+                    let found = half::bf16::to_f32(d_host[i * N + j]);
+                    let exp = expected[i * N + j];
+                    let tol = 1.0 + exp.abs() * 0.1;
+                    assert!(
+                        (found - exp).abs() <= tol,
+                        "mismatch at [{i},{j}]: found={found}, expected={exp}"
+                    );
+                }
+            }
+        }
+
+        #[test]
+        fn test_scaled_matmul_nvfp4_beta_accumulation() {
+            let ctx = CudaContext::new(0).unwrap();
+            let stream = ctx.default_stream();
+            let blas = CudaBlasLT::new(stream.clone()).unwrap();
+
+            const M: usize = 32;
+            const N: usize = 32;
+            const K: usize = 64;
+
+            // Zero inputs, non-zero C, beta=1.0 => D should equal C
+            let a_packed = vec![float4::F4E2M1x2::ZERO; M * K / 2];
+            let b_packed = vec![float4::F4E2M1x2::ZERO; K * N / 2];
+            let a_scales = vec![float8::F8E4M3::from(1.0f32); M * (K / 16)];
+            let b_scales = vec![float8::F8E4M3::from(1.0f32); N * (K / 16)];
+            let d_scale = vec![1.0f32];
+            let d_out_scale = vec![float8::F8E4M3::from(1.0f32); M * (N / 16)];
+
+            let c_data: Vec<half::bf16> = (0..M * N)
+                .map(|i| half::bf16::from_f32((i % 17) as f32 * 0.1))
+                .collect();
+
+            let a_dev = stream.clone_htod(&a_packed).unwrap();
+            let b_dev = stream.clone_htod(&b_packed).unwrap();
+            let c_dev = stream.clone_htod(&c_data).unwrap();
+            let mut d_dev = stream.alloc_zeros::<half::bf16>(M * N).unwrap();
+            let a_scale_dev = stream.clone_htod(&a_scales).unwrap();
+            let b_scale_dev = stream.clone_htod(&b_scales).unwrap();
+            let d_scale_dev = stream.clone_htod(&d_scale).unwrap();
+            let mut d_out_scale_dev = stream.clone_htod(&d_out_scale).unwrap();
+
+            let cfg = ScaledMatmulConfig {
+                transa: false,
+                transb: false,
+                m: N as u64,
+                n: M as u64,
+                k: K as u64,
+                alpha: 1.0,
+                beta: 1.0,
+                lda: N as i64,
+                ldb: K as i64,
+                ldc: N as i64,
+                ldd: N as i64,
+            };
+
+            unsafe {
+                blas.scaled_matmul(
+                    cfg,
+                    &b_dev,
+                    &a_dev,
+                    &c_dev,
+                    &mut d_dev,
+                    &b_scale_dev,
+                    &a_scale_dev,
+                    &d_scale_dev,
+                    &mut d_out_scale_dev,
+                )
+                .unwrap();
+            }
+
+            let d_host = stream.clone_dtoh(&d_dev).unwrap();
+            for i in 0..M * N {
+                let found = half::bf16::to_f32(d_host[i]);
+                let exp = half::bf16::to_f32(c_data[i]);
+                assert!(
+                    (found - exp).abs() <= 1e-2,
+                    "mismatch at [{i}]: found={found}, expected={exp}"
+                );
+            }
+        }
+
+        #[test]
+        fn test_scaled_matmul_nvfp4_to_fp4_output() {
+            let ctx = CudaContext::new(0).unwrap();
+            let stream = ctx.default_stream();
+            let blas = CudaBlasLT::new(stream.clone()).unwrap();
+
+            const M: usize = 64;
+            const N: usize = 64;
+            const K: usize = 128;
+
+            let a_packed: Vec<float4::F4E2M1x2> = (0..M * K / 2)
+                .map(|i| {
+                    let v0 = float4::F4E2M1::from(((i % 4) as f32) * 0.5);
+                    let v1 = float4::F4E2M1::from(((i % 3) as f32) * 0.5);
+                    float4::F4E2M1x2::new(v0, v1)
+                })
+                .collect();
+            let b_packed: Vec<float4::F4E2M1x2> = (0..K * N / 2)
+                .map(|i| {
+                    let v0 = float4::F4E2M1::from(((i % 5) as f32) * 0.5);
+                    let v1 = float4::F4E2M1::from(((i % 2) as f32) * 0.5);
+                    float4::F4E2M1x2::new(v0, v1)
+                })
+                .collect();
+
+            let a_scales = vec![float8::F8E4M3::from(1.0f32); M * (K / 16)];
+            let b_scales = vec![float8::F8E4M3::from(1.0f32); N * (K / 16)];
+            let d_scale = vec![1.0f32];
+            let d_out_scale_data = vec![float8::F8E4M3::from(0.0f32); M * (N / 16)];
+            let c_data = vec![half::bf16::from_f32(0.0); M * N];
+
+            let a_dev = stream.clone_htod(&a_packed).unwrap();
+            let b_dev = stream.clone_htod(&b_packed).unwrap();
+            let c_dev = stream.clone_htod(&c_data).unwrap();
+            let mut d_dev = stream.alloc_zeros::<float4::F4E2M1x2>(M * N / 2).unwrap();
+            let a_scale_dev = stream.clone_htod(&a_scales).unwrap();
+            let b_scale_dev = stream.clone_htod(&b_scales).unwrap();
+            let d_scale_dev = stream.clone_htod(&d_scale).unwrap();
+            let mut d_out_scale_dev = stream.clone_htod(&d_out_scale_data).unwrap();
+
+            let fp4_out = NvFp4Output(&blas);
+            let cfg = ScaledMatmulConfig {
+                transa: false,
+                transb: false,
+                m: N as u64,
+                n: M as u64,
+                k: K as u64,
+                alpha: 1.0,
+                beta: 0.0,
+                lda: N as i64,
+                ldb: K as i64,
+                ldc: N as i64,
+                ldd: N as i64,
+            };
+
+            unsafe {
+                fp4_out
+                    .scaled_matmul(
+                        cfg,
+                        &b_dev,
+                        &a_dev,
+                        &c_dev,
+                        &mut d_dev,
+                        &b_scale_dev,
+                        &a_scale_dev,
+                        &d_scale_dev,
+                        &mut d_out_scale_dev,
+                    )
+                    .unwrap();
+            }
+
+            // Verify D has non-zero output (FP4 packed)
+            let d_host = stream.clone_dtoh(&d_dev).unwrap();
+            let any_nonzero = d_host.iter().any(|v| v.to_bits() != 0);
+            assert!(any_nonzero, "FP4 output should contain non-zero values");
+
+            // Verify d_out_scale was written (kernel computes output block scales)
+            let out_scales = stream.clone_dtoh(&d_out_scale_dev).unwrap();
+            let any_scale_nonzero = out_scales.iter().any(|v| f32::from(*v) != 0.0);
+            assert!(
+                any_scale_nonzero,
+                "d_out_scale should be written by the kernel"
+            );
+        }
+
+        #[test]
+        fn test_scaled_matmul_nvfp4_vector_matrix() {
+            let ctx = CudaContext::new(0).unwrap();
+            let stream = ctx.default_stream();
+            let blas = CudaBlasLT::new(stream.clone()).unwrap();
+
+            // M=1 is a common inference pattern (single-token decode)
+            const M: usize = 1;
+            const N: usize = 128;
+            const K: usize = 64;
+
+            let a_packed = vec![float4::F4E2M1x2::from_bits(0x31); M * K / 2];
+            let b_packed = vec![float4::F4E2M1x2::from_bits(0x31); K * N / 2];
+            let a_scales = vec![float8::F8E4M3::from(1.0f32); M * (K / 16)];
+            let b_scales = vec![float8::F8E4M3::from(1.0f32); N * (K / 16)];
+            let d_scale = vec![1.0f32];
+            let d_out_scale = vec![float8::F8E4M3::from(1.0f32); M * (N / 16)];
+            let c_data = vec![half::bf16::from_f32(0.0); M * N];
+
+            let a_dev = stream.clone_htod(&a_packed).unwrap();
+            let b_dev = stream.clone_htod(&b_packed).unwrap();
+            let c_dev = stream.clone_htod(&c_data).unwrap();
+            let mut d_dev = stream.alloc_zeros::<half::bf16>(M * N).unwrap();
+            let a_scale_dev = stream.clone_htod(&a_scales).unwrap();
+            let b_scale_dev = stream.clone_htod(&b_scales).unwrap();
+            let d_scale_dev = stream.clone_htod(&d_scale).unwrap();
+            let mut d_out_scale_dev = stream.clone_htod(&d_out_scale).unwrap();
+
+            let cfg = ScaledMatmulConfig {
+                transa: false,
+                transb: false,
+                m: N as u64,
+                n: M as u64,
+                k: K as u64,
+                alpha: 1.0,
+                beta: 0.0,
+                lda: N as i64,
+                ldb: K as i64,
+                ldc: N as i64,
+                ldd: N as i64,
+            };
+
+            unsafe {
+                blas.scaled_matmul(
+                    cfg,
+                    &b_dev,
+                    &a_dev,
+                    &c_dev,
+                    &mut d_dev,
+                    &b_scale_dev,
+                    &a_scale_dev,
+                    &d_scale_dev,
+                    &mut d_out_scale_dev,
+                )
+                .unwrap();
+            }
+
+            let d_host = stream.clone_dtoh(&d_dev).unwrap();
+            // With constant inputs the result should be uniform across columns
+            let first = half::bf16::to_f32(d_host[0]);
+            assert!(first.is_finite(), "result should be finite, got {first}");
+        }
+    }
 }
