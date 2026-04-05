@@ -817,4 +817,90 @@ extern \"C\" __global__ void slow_worker(const float *data, const size_t len, fl
             .expect_err("Should've had device side assert");
         Ok(())
     }
+
+    /// Test that memcpy_dtod (peer path) waits for the src stream to finish before copying.
+    ///
+    /// Uses slow_worker to occupy stream1 for long enough that stream2's peer copy
+    /// would race ahead and read stale zeros if the fix is absent.
+    #[cfg(feature = "nvrtc")]
+    #[cfg(any(
+        feature = "cuda-12050",
+        feature = "cuda-12060",
+        feature = "cuda-12080",
+        feature = "cuda-12090",
+        feature = "cuda-13000",
+        feature = "cuda-13010"
+    ))]
+    #[test]
+    fn test_peer_memcpy_waits_for_src_stream() -> Result<(), DriverError> {
+        use crate::driver::CudaContext;
+
+        let ptx = compile_ptx_with_opts(SLOW_KERNELS, Default::default()).unwrap();
+
+        // Primary vs non-primary gives distinct cu_ctx → memcpy_dtod takes the peer path.
+        let ctx1 = CudaContext::new(0)?;
+        let ctx2 = CudaContext::new(1)?;
+
+        let module = ctx1.load_module(ptx)?;
+        let slow_worker = module.load_function("slow_worker")?;
+
+        let stream1 = ctx1.new_stream()?;
+        let stream2 = ctx2.new_stream()?;
+
+        let n = 1000usize;
+
+        // src is 1.0s: slow_worker will accumulate 1M * 1.0 = 1e6 into tmp_out.
+        // tmp_out starts at 0.0, so result is only non-zero if the copy happens after the kernel.
+        let src = stream1.clone_htod(&vec![1.0f32; n])?;
+
+        let mut tmp_out = stream1.alloc_zeros::<f32>(1)?;
+        let mut dst = stream2.alloc_zeros::<f32>(1)?;
+
+        stream1.synchronize()?;
+        stream2.synchronize()?;
+
+        // Queue slow_worker on stream1: reads 1.0s from src and writes ~1e6 to tmp_out.
+        // Spins for 1M iterations, keeping stream1 busy while stream2 races below.
+        let numel = src.len();
+        unsafe {
+            stream1
+                .launch_builder(&slow_worker)
+                .arg(&src)
+                .arg(&numel)
+                .arg(&mut tmp_out)
+                .launch(LaunchConfig::for_num_elems(1))?
+        };
+
+        // Peer-copy tmp_out to dst on stream2 immediately, without waiting for stream1.
+        // Without the fix: copies the initial 0.0 (kernel not done yet).
+        // With the fix: copies the kernel result ~1e6.
+        stream2.memcpy_dtod(&tmp_out, &mut dst)?;
+
+        // Non-pinned Vec forces an implicit sync of stream2 on the D2H copy.
+        let result = stream2.clone_dtoh(&dst)?;
+        let truth = stream1.clone_dtoh(&tmp_out)?;
+
+        stream2.memcpy_dtod(&tmp_out, &mut dst)?;
+
+        let result2 = stream2.clone_dtoh(&dst)?;
+
+        println!("truth: {truth:?}");
+        println!("result: {result:?}");
+        println!("result2: {result2:?}");
+        assert!(
+            result2 == truth,
+            "peer copy might be broken?; result={} truth={}",
+            result2[0],
+            truth[0]
+        );
+
+        assert!(
+            result == truth,
+            "peer copy read pre-kernel data; result={} truth={}",
+            result[0],
+            truth[0]
+        );
+
+        Ok(())
+    }
 }

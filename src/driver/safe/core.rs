@@ -764,9 +764,6 @@ impl CudaStream {
     ///
     /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__STREAM.html#group__CUDA__STREAM_1g6a898b652dfc6aa1d5c8d97062618b2f)
     pub fn wait(&self, event: &CudaEvent) -> Result<(), DriverError> {
-        if self.ctx != event.ctx {
-            return Err(DriverError(sys::cudaError_enum::CUDA_ERROR_INVALID_CONTEXT));
-        }
         self.ctx.bind_to_thread()?;
         unsafe {
             result::stream::wait_event(
@@ -1628,18 +1625,29 @@ impl CudaStream {
         let src_ctx = src.stream().context();
         let dst_ctx = self.context();
 
-        let (src, _record_src) = src.device_ptr(src.stream());
-        let (dst, _record_dst) = dst.device_ptr_mut(self);
+        // NOTE: Although we want the current stream to wait on src to be ready,
+        // we can't use src.device_ptr(self). When `_record_src` is dropped,
+        // we record an event from the src_stream onto dst_stream. This is not
+        // allowed in CUDA, and will return a CUDA_ERROR_INVALID_HANDLE.
+        let (src_ptr, _record_src) = src.device_ptr(src.stream());
+        let (dst_ptr, _record_dst) = dst.device_ptr_mut(self);
 
         if src_ctx == dst_ctx {
-            unsafe { result::memcpy_dtod_async(dst, src, num_bytes, self.cu_stream) }
+            unsafe { result::memcpy_dtod_async(dst_ptr, src_ptr, num_bytes, self.cu_stream) }
         } else {
+            // NOTE: Although we can't record events from other streams onto this stream,
+            // we can *wait* on events from others streams on this streams. To verify that
+            // src is ready, we'll create an event from src_stream and wait on it in this
+            // stream.
+            // OPTIM: Ideally we could wait on the src.events, but we can artificially
+            // insert an event which would guarantee src is available
+            self.wait(&src.stream().record_event(None)?);
             unsafe {
                 result::memcpy_peer_async(
                     dst_ctx.cu_ctx,
-                    dst,
+                    dst_ptr,
                     src_ctx.cu_ctx,
-                    src,
+                    src_ptr,
                     num_bytes,
                     self.cu_stream,
                 )
