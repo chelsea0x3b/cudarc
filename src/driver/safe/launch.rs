@@ -852,7 +852,7 @@ extern \"C\" __global__ void slow_worker(const float *data, const size_t len, fl
 
         // src is 1.0s: slow_worker will accumulate 1M * 1.0 = 1e6 into tmp_out.
         // tmp_out starts at 0.0, so result is only non-zero if the copy happens after the kernel.
-        let src = stream1.clone_htod(&vec![1.0f32; n])?;
+        let src = stream1.clone_htod(&std::vec![1.0f32; n])?;
 
         let mut tmp_out = stream1.alloc_zeros::<f32>(1)?;
         let mut dst = stream2.alloc_zeros::<f32>(1)?;

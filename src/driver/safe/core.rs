@@ -1625,17 +1625,18 @@ impl CudaStream {
         let src_ctx = src.stream().context();
         let dst_ctx = self.context();
 
-        // NOTE: Although we want the current stream to wait on src to be ready,
-        // we can't use src.device_ptr(self). When `_record_src` is dropped,
-        // we record an event from the src_stream onto dst_stream (i.e., self). This is not
-        // allowed in CUDA, and will return a CUDA_ERROR_INVALID_HANDLE
-        // https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__CTX.html#group__CUDA__CTX_1gf3ee63561a7a371fa9d4dc0e31f94afd
-        let (src_ptr, _record_src) = src.device_ptr(src.stream());
-        let (dst_ptr, _record_dst) = dst.device_ptr_mut(self);
-
         if src_ctx == dst_ctx {
+            let (src_ptr, _record_src) = src.device_ptr(self);
+            let (dst_ptr, _record_dst) = dst.device_ptr_mut(self);
             unsafe { result::memcpy_dtod_async(dst_ptr, src_ptr, num_bytes, self.cu_stream) }
         } else {
+            // NOTE: Although we want the current stream to wait on src to be ready,
+            // we can't use src.device_ptr(self). When `_record_src` is dropped,
+            // we record an event from the src_stream onto dst_stream (i.e., self). This is not
+            // allowed in CUDA, and will return a CUDA_ERROR_INVALID_HANDLE
+            // https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__CTX.html#group__CUDA__CTX_1gf3ee63561a7a371fa9d4dc0e31f94afd
+            let (src_ptr, _record_src) = src.device_ptr(src.stream());
+            let (dst_ptr, _record_dst) = dst.device_ptr_mut(self);
             // NOTE: Although we can't record events on streams they weren't created on,
             // we can *wait* on events from any stream. We can leverage this and wait on
             // a src event.
