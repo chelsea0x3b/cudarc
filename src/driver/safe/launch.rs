@@ -832,6 +832,7 @@ extern \"C\" __global__ void slow_worker(const float *data, const size_t len, fl
         feature = "cuda-13010"
     ))]
     #[test]
+    #[ignore = "must be executed with multiple gpus"]
     fn test_peer_memcpy_waits_for_src_stream() -> Result<(), DriverError> {
         use crate::driver::CudaContext;
 
@@ -872,21 +873,17 @@ extern \"C\" __global__ void slow_worker(const float *data, const size_t len, fl
         };
 
         // Peer-copy tmp_out to dst on stream2 immediately, without waiting for stream1.
-        // Without the fix: copies the initial 0.0 (kernel not done yet).
-        // With the fix: copies the kernel result ~1e6.
         stream2.memcpy_dtod(&tmp_out, &mut dst)?;
 
-        // Non-pinned Vec forces an implicit sync of stream2 on the D2H copy.
         let result = stream2.clone_dtoh(&dst)?;
         let truth = stream1.clone_dtoh(&tmp_out)?;
 
-        stream2.memcpy_dtod(&tmp_out, &mut dst)?;
+        //synchronize and then re-pull from device
+        stream1.synchronize()?;
+        stream2.synchronize()?;
 
         let result2 = stream2.clone_dtoh(&dst)?;
 
-        println!("truth: {truth:?}");
-        println!("result: {result:?}");
-        println!("result2: {result2:?}");
         assert!(
             result2 == truth,
             "peer copy might be broken?; result={} truth={}",
@@ -896,7 +893,7 @@ extern \"C\" __global__ void slow_worker(const float *data, const size_t len, fl
 
         assert!(
             result == truth,
-            "peer copy read pre-kernel data; result={} truth={}",
+            "peer copy read from pre-kernel data; result={} truth={}",
             result[0],
             truth[0]
         );

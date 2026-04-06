@@ -1623,12 +1623,9 @@ mod tests {
     use std::println;
 
     #[test]
+    #[ignore = "must be executed with multiple gpus"]
     fn peer_transfer_contexts() -> Result<(), DriverError> {
         let ctx1 = CudaContext::new(0)?;
-        if device::get_count()? < 2 {
-            println!("Skip test because not enough cuda devices");
-            return Ok(());
-        }
         let stream1 = ctx1.default_stream();
         let a: CudaSlice<f64> = stream1.alloc_zeros::<f64>(10)?;
 
