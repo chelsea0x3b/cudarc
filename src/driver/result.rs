@@ -1652,7 +1652,7 @@ mod tests {
     }
 
     #[test]
-    #[ignore = "must be executed with  gpus"]
+    #[ignore = "must be executed with multiple gpus"]
     fn re_associate_context_for_memory_op() -> Result<(), DriverError> {
         let ctx1 = CudaContext::new(0)?;
         let stream1 = ctx1.default_stream();
