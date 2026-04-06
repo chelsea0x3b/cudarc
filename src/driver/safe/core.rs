@@ -1627,20 +1627,20 @@ impl CudaStream {
 
         // NOTE: Although we want the current stream to wait on src to be ready,
         // we can't use src.device_ptr(self). When `_record_src` is dropped,
-        // we record an event from the src_stream onto dst_stream. This is not
-        // allowed in CUDA, and will return a CUDA_ERROR_INVALID_HANDLE.
+        // we record an event from the src_stream onto dst_stream (i.e., self). This is not
+        // allowed in CUDA, and will return a CUDA_ERROR_INVALID_HANDLE
+        // https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__CTX.html#group__CUDA__CTX_1gf3ee63561a7a371fa9d4dc0e31f94afd
         let (src_ptr, _record_src) = src.device_ptr(src.stream());
         let (dst_ptr, _record_dst) = dst.device_ptr_mut(self);
 
         if src_ctx == dst_ctx {
             unsafe { result::memcpy_dtod_async(dst_ptr, src_ptr, num_bytes, self.cu_stream) }
         } else {
-            // NOTE: Although we can't record events from other streams onto this stream,
-            // we can *wait* on events from others streams on this streams. To verify that
-            // src is ready, we'll create an event from src_stream and wait on it in this
-            // stream.
-            // OPTIM: Ideally we could wait on the src.events, but we can artificially
-            // insert an event which would guarantee src is available
+            // NOTE: Although we can't record events on streams they weren't created on,
+            // we can *wait* on events from any stream. We can leverage this and wait on
+            // a src event.
+            // OPTIM: Ideally we could wait on the src write_events, but we can artificially
+            // insert an event which guarantees src is available.
             self.wait(&src.stream().record_event(None)?);
             unsafe {
                 result::memcpy_peer_async(
