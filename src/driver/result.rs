@@ -1620,7 +1620,6 @@ pub mod mem_pool {
 mod tests {
     use super::super::safe::{CudaContext, CudaSlice};
     use super::*;
-    use std::println;
 
     #[test]
     #[ignore = "must be executed with multiple gpus"]
