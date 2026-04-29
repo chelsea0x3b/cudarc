@@ -5661,46 +5661,6 @@ pub enum CUmemAllocationGranularity_flags_enum {
     feature = "cuda-11080",
     feature = "cuda-12000",
     feature = "cuda-12010",
-    feature = "cuda-12020"
-))]
-#[repr(u32)]
-#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
-pub enum CUmemAllocationHandleType_enum {
-    CU_MEM_HANDLE_TYPE_NONE = 0,
-    CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR = 1,
-    CU_MEM_HANDLE_TYPE_WIN32 = 2,
-    CU_MEM_HANDLE_TYPE_WIN32_KMT = 4,
-    CU_MEM_HANDLE_TYPE_MAX = 2147483647,
-}
-#[cfg(any(
-    feature = "cuda-12030",
-    feature = "cuda-12040",
-    feature = "cuda-12050",
-    feature = "cuda-12060",
-    feature = "cuda-12080",
-    feature = "cuda-12090",
-    feature = "cuda-13000",
-    feature = "cuda-13010",
-    feature = "cuda-13020"
-))]
-#[repr(u32)]
-#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
-pub enum CUmemAllocationHandleType_enum {
-    CU_MEM_HANDLE_TYPE_NONE = 0,
-    CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR = 1,
-    CU_MEM_HANDLE_TYPE_WIN32 = 2,
-    CU_MEM_HANDLE_TYPE_WIN32_KMT = 4,
-    CU_MEM_HANDLE_TYPE_FABRIC = 8,
-    CU_MEM_HANDLE_TYPE_MAX = 2147483647,
-}
-#[cfg(any(
-    feature = "cuda-11040",
-    feature = "cuda-11050",
-    feature = "cuda-11060",
-    feature = "cuda-11070",
-    feature = "cuda-11080",
-    feature = "cuda-12000",
-    feature = "cuda-12010",
     feature = "cuda-12020",
     feature = "cuda-12030",
     feature = "cuda-12040",
@@ -9076,6 +9036,9 @@ pub struct CUmemAccessDesc_st {
     pub location: CUmemLocation,
     pub flags: CUmemAccess_flags,
 }
+#[repr(transparent)]
+#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
+pub struct CUmemAllocationHandleType_enum(pub ::core::ffi::c_uint);
 #[cfg(any(
     feature = "cuda-11040",
     feature = "cuda-11050",
@@ -9530,10 +9493,56 @@ impl CUdevice_attribute_enum {
     pub const CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED: CUdevice_attribute_enum =
         CUdevice_attribute_enum::CU_DEVICE_ATTRIBUTE_VIRTUAL_ADDRESS_MANAGEMENT_SUPPORTED;
 }
+#[cfg(any(
+    feature = "cuda-12030",
+    feature = "cuda-12040",
+    feature = "cuda-12050",
+    feature = "cuda-12060",
+    feature = "cuda-12080",
+    feature = "cuda-12090",
+    feature = "cuda-13000",
+    feature = "cuda-13010",
+    feature = "cuda-13020"
+))]
+impl CUmemAllocationHandleType_enum {
+    pub const CU_MEM_HANDLE_TYPE_FABRIC: CUmemAllocationHandleType_enum =
+        CUmemAllocationHandleType_enum(8);
+}
+impl CUmemAllocationHandleType_enum {
+    pub const CU_MEM_HANDLE_TYPE_MAX: CUmemAllocationHandleType_enum =
+        CUmemAllocationHandleType_enum(2147483647);
+}
+impl CUmemAllocationHandleType_enum {
+    pub const CU_MEM_HANDLE_TYPE_NONE: CUmemAllocationHandleType_enum =
+        CUmemAllocationHandleType_enum(0);
+}
+impl CUmemAllocationHandleType_enum {
+    pub const CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR: CUmemAllocationHandleType_enum =
+        CUmemAllocationHandleType_enum(1);
+}
+impl CUmemAllocationHandleType_enum {
+    pub const CU_MEM_HANDLE_TYPE_WIN32: CUmemAllocationHandleType_enum =
+        CUmemAllocationHandleType_enum(2);
+}
+impl CUmemAllocationHandleType_enum {
+    pub const CU_MEM_HANDLE_TYPE_WIN32_KMT: CUmemAllocationHandleType_enum =
+        CUmemAllocationHandleType_enum(4);
+}
 #[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
 impl CUmemLocationType_enum {
     pub const CU_MEM_LOCATION_TYPE_NONE: CUmemLocationType_enum =
         CUmemLocationType_enum::CU_MEM_LOCATION_TYPE_INVALID;
+}
+impl ::core::ops::BitOr for CUmemAllocationHandleType_enum {
+    type Output = Self;
+    fn bitor(self, rhs: Self) -> Self {
+        Self(self.0 | rhs.0)
+    }
+}
+impl ::core::ops::BitOrAssign for CUmemAllocationHandleType_enum {
+    fn bitor_assign(&mut self, rhs: Self) {
+        self.0 |= rhs.0;
+    }
 }
 #[repr(C)]
 #[derive(Copy, Clone)]
