@@ -38,7 +38,7 @@ pub const CUPTI_API_VERSION: u32 = 130001;
 #[cfg(any(feature = "cuda-13010"))]
 pub const CUPTI_API_VERSION: u32 = 130101;
 #[cfg(any(feature = "cuda-13020"))]
-pub const CUPTI_API_VERSION: u32 = 130200;
+pub const CUPTI_API_VERSION: u32 = 130201;
 pub const CUPTI_AUTO_BOOST_INVALID_CLIENT_PID: u32 = 0;
 pub const CUPTI_CORRELATION_ID_UNKNOWN: u32 = 0;
 #[cfg(any(
@@ -4710,7 +4710,10 @@ pub enum CUpti_ActivityGreenContextFieldIds {
     GREEN_CONTEXT_FIELD_NUM_TPCS = 5,
     GREEN_CONTEXT_FIELD_LOGICAL_TPC_MASK_SIZE = 6,
     GREEN_CONTEXT_FIELD_LOGICAL_TPC_MASK = 7,
-    GREEN_CONTEXT_FIELD_MAX = 8,
+    GREEN_CONTEXT_FIELD_WORKQUEUE_RESOURCE_ID = 8,
+    GREEN_CONTEXT_FIELD_WORKQUEUE_CONCURRENCY_LIMIT = 9,
+    GREEN_CONTEXT_FIELD_WORKQUEUE_SHARING_SCOPE = 10,
+    GREEN_CONTEXT_FIELD_MAX = 11,
 }
 #[cfg(any(feature = "cuda-13020"))]
 #[repr(u32)]
@@ -25066,6 +25069,23 @@ pub struct CUpti_ActivityGreenContext {
     pub logicalTpcMaskSize: u8,
     pub padding: u8,
     pub logicalTpcMask: [u32; 32usize],
+}
+#[cfg(any(feature = "cuda-13020"))]
+#[repr(C, packed(8))]
+#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
+pub struct CUpti_ActivityGreenContext2 {
+    pub kind: CUpti_ActivityKind,
+    pub contextId: u32,
+    pub parentContextId: u32,
+    pub deviceId: u32,
+    pub numTpcs: u32,
+    pub numMultiprocessors: u16,
+    pub logicalTpcMaskSize: u8,
+    pub padding: u8,
+    pub logicalTpcMask: [u32; 32usize],
+    pub workqueueResourceId: u64,
+    pub workqueueConcurrencyLimit: u32,
+    pub workqueueSharingScope: u32,
 }
 #[cfg(any(feature = "cuda-13010", feature = "cuda-13020"))]
 #[repr(C)]

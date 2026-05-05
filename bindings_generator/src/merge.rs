@@ -1,8 +1,8 @@
 use anyhow::{Context, Result};
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 use proc_macro2::TokenStream;
-use rayon::prelude::*;
 use quote::{ToTokens, quote};
+use rayon::prelude::*;
 use std::collections::BTreeMap;
 use std::fs;
 use std::path::Path;
@@ -481,23 +481,19 @@ pub fn merge<P: AsRef<Path>>(
         .and_then(|c| c.as_os_str().to_str())
         .unwrap_or("unknown");
 
-    let entries: Vec<_> = fs::read_dir(binding_dir)?
-        .collect::<std::io::Result<_>>()?;
+    let entries: Vec<_> = fs::read_dir(binding_dir)?.collect::<std::io::Result<_>>()?;
 
     let pb = multi_progress.add(ProgressBar::new(entries.len() as u64));
-    pb.set_style(
-        ProgressStyle::default_bar()
-            .template("{msg} {wide_bar} {pos}/{len}")?,
-    );
+    pb.set_style(ProgressStyle::default_bar().template("{msg} {wide_bar} {pos}/{len}")?);
     pb.set_message(format!("merge {module_name}"));
 
     let mut merger = BindingMerger::new(lib_names, feature_prefix.to_string());
     for entry in entries {
         let path = entry.path();
         if path.is_file() {
-            if let Ok(version) = extract_version_from_filename(&path.display().to_string()) {
-                merger.process_file(&path, &version)?;
-            }
+            let version =
+                extract_version_from_filename(feature_prefix, &path.display().to_string()).unwrap();
+            merger.process_file(&path, &version)?;
         }
         pb.inc(1);
     }
@@ -510,30 +506,46 @@ pub fn merge<P: AsRef<Path>>(
     Ok(())
 }
 
-fn extract_version_from_filename(cuda_version: &str) -> Result<Version> {
+fn extract_version_from_filename(feature_prefix: &str, cuda_version: &str) -> Result<Version> {
     let number = cuda_version
         .split('_')
         .last()
         .context(format!("Invalid CUDA version format: {}", cuda_version))?;
 
-    let major = number[..2].parse().context(format!(
-        "Failed to parse major version from {}",
-        cuda_version
-    ))?;
-    let minor = number[2..4].parse().context(format!(
-        "Failed to parse minor version from {}",
-        cuda_version
-    ))?;
-    let patch = number[4..5].parse().context(format!(
-        "Failed to parse patch version from {}",
-        cuda_version
-    ))?;
+    if feature_prefix == "cuda" {
+        let major = number[..2].parse().context(format!(
+            "Failed to parse major version from {}",
+            cuda_version
+        ))?;
+        let minor = number[2..4].parse().context(format!(
+            "Failed to parse minor version from {}",
+            cuda_version
+        ))?;
+        let patch = number[4..5].parse().context(format!(
+            "Failed to parse patch version from {}",
+            cuda_version
+        ))?;
 
-    Ok(Version {
-        major,
-        minor,
-        patch,
-    })
+        Ok(Version {
+            major,
+            minor,
+            patch,
+        })
+    } else {
+        let major = number[..2].parse().context(format!(
+            "Failed to parse major version from {}",
+            cuda_version
+        ))?;
+        let minor = number[2..5].parse().context(format!(
+            "Failed to parse minor version from {}",
+            cuda_version
+        ))?;
+        Ok(Version {
+            major,
+            minor,
+            patch: 0,
+        })
+    }
 }
 
 pub fn merge_bindings(modules: &[ModuleConfig]) -> Result<()> {

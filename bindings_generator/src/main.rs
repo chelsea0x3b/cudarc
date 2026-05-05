@@ -1023,7 +1023,7 @@ fn get_redist_lib_archive(
         .and_then(|k| primary_archives_map.get(k))
         .unwrap();
     module.run_bindgen(
-        &format!("{major:02}{minor:02}"),
+        &format!("{major:02}{minor:03}"),
         &archive_dir,
         primary_archives,
     )
