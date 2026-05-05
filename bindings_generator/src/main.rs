@@ -744,9 +744,21 @@ fn create_bindings(modules: &[ModuleConfig], cuda_versions: &[&str]) -> Result<(
     }
 
     // Phase C: library-versioned modules (NCCL, cuDNN, cuTENSOR).
-    for module in modules.iter().filter(|m| !m.lib_versions.is_empty()) {
-        for &lib_version in &module.lib_versions {
-            if module.cudarc_name == "nccl" {
+    let lib_tasks: Vec<(&ModuleConfig, (u32, u32, u32))> = modules
+        .iter()
+        .filter(|m| !m.lib_versions.is_empty())
+        .flat_map(|m| m.lib_versions.iter().map(move |&v| (m, v)))
+        .collect();
+
+    let pb = multi_progress.add(ProgressBar::new(lib_tasks.len() as u64));
+    pb.set_style(
+        ProgressStyle::default_bar().template("{msg} {wide_bar} {pos}/{len} ({eta})")?,
+    );
+
+    lib_tasks
+        .into_par_iter()
+        .map(|(module, lib_version)| {
+            let result = if module.cudarc_name == "nccl" {
                 get_nccl_archive(
                     lib_version,
                     module,
@@ -762,13 +774,16 @@ fn create_bindings(modules: &[ModuleConfig], cuda_versions: &[&str]) -> Result<(
                     &downloads_dir,
                     &multi_progress,
                 )
-            }
-            .context(format!(
+            };
+            pb.inc(1);
+            result.context(format!(
                 "Failed to generate {} {lib_version:?}",
                 module.cudarc_name
-            ))?;
-        }
-    }
+            ))
+        })
+        .collect::<Result<Vec<_>>>()?;
+
+    pb.finish_with_message("lib-versioned modules done");
 
     Ok(())
 }
@@ -908,11 +923,12 @@ fn get_nccl_archive(
             let path = e.path();
             let name = path.file_name()?.to_str()?;
             if path.is_dir() && name.starts_with(&cached_prefix) {
-                // Parse cuda major from directory name e.g. "nccl_2.30.4-1+cuda13.2_x86_64"
+                // Parse cuda major/minor from directory name e.g. "nccl_2.30.4-1+cuda13.2_x86_64"
                 let after_cuda = name.strip_prefix(&cached_prefix)?;
-                let mut version_number = after_cuda.split('_');
-                let cuda_major: u32 = version_number.next().unwrap().parse().unwrap();
-                let cuda_minor: u32 = version_number.next().unwrap().parse().unwrap();
+                let cuda_ver = after_cuda.split('_').next()?;
+                let (maj_str, min_str) = cuda_ver.split_once('.')?;
+                let cuda_major: u32 = maj_str.parse().ok()?;
+                let cuda_minor: u32 = min_str.parse().ok()?;
                 Some((path, cuda_major, cuda_minor))
             } else {
                 None
