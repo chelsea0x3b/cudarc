@@ -1,5 +1,17 @@
 use std::path::PathBuf;
 
+// NCCL_VERSION = major*10000 + minor*100 + patch  (matches NCCL_VERSION() macro in nccl.h)
+const SUPPORTED_NCCL_VERSIONS: &[usize] = &[
+    21805, 21903, 22005, 22105, 22203, 22403, 22501, 22605, 22706, 22809, 22907, 23004,
+];
+
+// cuDNN encoded as major*10000 + minor*100 + patch (same scheme as NCCL/cuTENSOR).
+// Note: differs from CUDNN_VERSION in cudnn_version.h (major*1000) which overflows for 9.10+.
+const SUPPORTED_CUDNN_VERSIONS: &[usize] = &[80907, 91002, 92101];
+
+// CUTENSOR_VERSION = major*10000 + minor*100 + patch  (matches CUTENSOR_VERSION macro in cutensor.h)
+const SUPPORTED_CUTENSOR_VERSIONS: &[usize] = &[10700, 20000, 20200, 20301];
+
 const TYPICAL_CUDA_PATH_ENV_VARS: [&str; 5] = [
     "CUDA_HOME",
     "CUDA_PATH",
@@ -82,6 +94,22 @@ fn main() {
     TYPICAL_CUDA_PATH_ENV_VARS
         .iter()
         .for_each(|var| println!("cargo:rerun-if-env-changed={var}"));
+
+    #[cfg(feature = "nccl-version-from-build-system")]
+    {
+        let code = nccl_version_from_build_system();
+        println!("cargo:rustc-cfg=feature=\"nccl-{code}\"");
+    }
+    #[cfg(feature = "cudnn-version-from-build-system")]
+    {
+        let code = cudnn_version_from_build_system();
+        println!("cargo:rustc-cfg=feature=\"cudnn-{code}\"");
+    }
+    #[cfg(feature = "cutensor-version-from-build-system")]
+    {
+        let code = cutensor_version_from_build_system();
+        println!("cargo:rustc-cfg=feature=\"cutensor-{code}\"");
+    }
 
     let (major, minor): (usize, usize) = if let Some((major, minor)) = detect_version_from_env() {
         println!("cargo:rustc-cfg=feature=\"cuda-{major}0{minor}0\"");
@@ -315,4 +343,83 @@ fn link_searches(major: usize, minor: usize) -> Vec<PathBuf> {
     }
 
     candidates
+}
+
+/// Parse `#define NAME value` lines from a header file and return the integer value.
+fn parse_define(header: &std::path::Path, name: &str) -> Option<usize> {
+    let content = std::fs::read_to_string(header).ok()?;
+    for line in content.lines() {
+        let line = line.trim();
+        if line.starts_with("#define") {
+            let rest = line["#define".len()..].trim();
+            if rest.starts_with(name) {
+                let after = rest[name.len()..].trim();
+                if after.chars().next().map_or(true, |c| c.is_ascii_whitespace()) {
+                    return after.trim().parse().ok();
+                }
+            }
+        }
+    }
+    None
+}
+
+/// Search standard include paths for a header file.
+fn find_header(filename: &str) -> Option<std::path::PathBuf> {
+    let search_dirs = [
+        "/usr/local/cuda/include",
+        "/usr/local/include",
+        "/opt/cuda/include",
+        "/usr/include",
+    ];
+    for dir in search_dirs {
+        let path = std::path::Path::new(dir).join(filename);
+        if path.exists() {
+            return Some(path);
+        }
+    }
+    None
+}
+
+#[allow(unused)]
+fn nccl_version_from_build_system() -> usize {
+    let header = find_header("nccl.h")
+        .expect("nccl.h not found — install NCCL development headers or set NCCL_HOME");
+    let major = parse_define(&header, "NCCL_MAJOR").expect("NCCL_MAJOR not found in nccl.h");
+    let minor = parse_define(&header, "NCCL_MINOR").expect("NCCL_MINOR not found in nccl.h");
+    let patch = parse_define(&header, "NCCL_PATCH").expect("NCCL_PATCH not found in nccl.h");
+    let code = major * 10000 + minor * 100 + patch;
+    if !SUPPORTED_NCCL_VERSIONS.contains(&code) {
+        panic!("Unsupported NCCL version {major}.{minor}.{patch} (code {code}). Please raise a github issue.");
+    }
+    code
+}
+
+#[allow(unused)]
+fn cudnn_version_from_build_system() -> usize {
+    let header = find_header("cudnn_version.h")
+        .or_else(|| find_header("cudnn.h"))
+        .expect("cudnn_version.h not found — install cuDNN development headers");
+    let major = parse_define(&header, "CUDNN_MAJOR").expect("CUDNN_MAJOR not found");
+    let minor = parse_define(&header, "CUDNN_MINOR").expect("CUDNN_MINOR not found");
+    let patch = parse_define(&header, "CUDNN_PATCHLEVEL").expect("CUDNN_PATCHLEVEL not found");
+    // Use 10000 multiplier (not CUDNN_VERSION's 1000) to avoid codes > 10000 for 9.10+.
+    let code = major * 10000 + minor * 100 + patch;
+    if !SUPPORTED_CUDNN_VERSIONS.contains(&code) {
+        panic!("Unsupported cuDNN version {major}.{minor}.{patch} (code {code}). Please raise a github issue.");
+    }
+    code
+}
+
+#[allow(unused)]
+fn cutensor_version_from_build_system() -> usize {
+    let header = find_header("cutensor.h")
+        .expect("cutensor.h not found — install cuTENSOR development headers");
+    let major = parse_define(&header, "CUTENSOR_MAJOR").expect("CUTENSOR_MAJOR not found");
+    let minor = parse_define(&header, "CUTENSOR_MINOR").expect("CUTENSOR_MINOR not found");
+    let patch = parse_define(&header, "CUTENSOR_PATCH").expect("CUTENSOR_PATCH not found");
+    let code = major * 10000 + minor * 100 + patch;
+    if !SUPPORTED_CUTENSOR_VERSIONS.contains(&code) {
+        panic!("Unsupported cuTENSOR version {major}.{minor}.{patch} (code {code}). Please raise a github issue.");
+    }
+    code
 }
