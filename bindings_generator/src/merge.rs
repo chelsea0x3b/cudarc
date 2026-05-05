@@ -400,8 +400,12 @@ impl BindingMerger {
             for (version, decl) in &info.declarations {
                 if let Some(prev_decl) = prev_decl {
                     if prev_decl != decl {
-                        let element =
-                            LibItem::new(prev_decl, &versions, self.n_versions, &self.feature_prefix);
+                        let element = LibItem::new(
+                            prev_decl,
+                            &versions,
+                            self.n_versions,
+                            &self.feature_prefix,
+                        );
                         elements.push(element);
                         versions.clear();
                     }

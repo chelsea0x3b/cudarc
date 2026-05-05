@@ -751,9 +751,7 @@ fn create_bindings(modules: &[ModuleConfig], cuda_versions: &[&str]) -> Result<(
         .collect();
 
     let pb = multi_progress.add(ProgressBar::new(lib_tasks.len() as u64));
-    pb.set_style(
-        ProgressStyle::default_bar().template("{msg} {wide_bar} {pos}/{len} ({eta})")?,
-    );
+    pb.set_style(ProgressStyle::default_bar().template("{msg} {wide_bar} {pos}/{len} ({eta})")?);
 
     lib_tasks
         .into_par_iter()
@@ -888,19 +886,6 @@ fn generate_sys(
     Ok(archive_dir)
 }
 
-fn primary_archives_for_cuda_major<'a>(
-    cuda_major: u32,
-    primary_archives_map: &'a HashMap<&str, Vec<PathBuf>>,
-) -> Option<&'a [PathBuf]> {
-    let prefix = format!("cuda-{:02}", cuda_major);
-    primary_archives_map
-        .keys()
-        .filter(|k| k.starts_with(&prefix))
-        .max()
-        .and_then(|k| primary_archives_map.get(k))
-        .map(|v| v.as_slice())
-}
-
 fn get_nccl_archive(
     (major, minor, patch): (u32, u32, u32),
     module: &ModuleConfig,
@@ -1030,8 +1015,13 @@ fn get_redist_lib_archive(
             .context("Extracting archive")?;
     }
 
-    let primary_archives = primary_archives_for_cuda_major(cuda_major, primary_archives_map)
-        .context(format!("No primary archives for CUDA {cuda_major}"))?;
+    let prefix = format!("cuda-{:02}", cuda_major);
+    let primary_archives = primary_archives_map
+        .keys()
+        .filter(|k| k.starts_with(&prefix))
+        .max()
+        .and_then(|k| primary_archives_map.get(k))
+        .unwrap();
     module.run_bindgen(
         &format!("{major:02}{minor:02}{patch}"),
         &archive_dir,
