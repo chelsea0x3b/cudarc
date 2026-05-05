@@ -12,14 +12,6 @@ use syn::{
 
 use crate::ModuleConfig;
 
-fn to_feature(prefix: &str, v: &Version) -> String {
-    if prefix == "cuda" {
-        format!("cuda-{:02}{:02}{}", v.major, v.minor, v.patch)
-    } else {
-        format!("{prefix}-{}", v.major * 10000 + v.minor * 100 + v.patch)
-    }
-}
-
 #[derive(Debug, Ord, PartialEq, PartialOrd, Eq, Clone, Copy)]
 struct Version {
     pub major: u32,
@@ -55,7 +47,7 @@ impl LibItem {
         let parser = Field::parse_named;
         let features = versions
             .iter()
-            .map(|v| to_feature(feature_prefix, v))
+            .map(|v| version_to_feature(feature_prefix, v))
             .collect::<Vec<_>>();
         let feature_tok = if versions.len() == n_versions {
             quote! {}
@@ -353,7 +345,7 @@ impl BindingMerger {
                         }
                         let features = versions
                             .iter()
-                            .map(|v| to_feature(&self.feature_prefix, v))
+                            .map(|v| version_to_feature(&self.feature_prefix, v))
                             .collect::<Vec<_>>();
                         output.extend(quote! {
                             #[cfg(any(#(feature = #features), *))]
@@ -372,7 +364,7 @@ impl BindingMerger {
                     } else {
                         let features = versions
                             .iter()
-                            .map(|v| to_feature(&self.feature_prefix, v))
+                            .map(|v| version_to_feature(&self.feature_prefix, v))
                             .collect::<Vec<_>>();
                         output.extend(quote! {
                             #[cfg(any(#(feature = #features),*))]
@@ -463,6 +455,10 @@ impl BindingMerger {
 
         })
     }
+}
+
+fn version_to_feature(prefix: &str, v: &Version) -> String {
+    format!("{prefix}-{:02}{:02}{}", v.major, v.minor, v.patch)
 }
 
 pub fn merge<P: AsRef<Path>>(
