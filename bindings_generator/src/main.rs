@@ -939,7 +939,7 @@ fn get_nccl_archive(
     };
 
     module.run_bindgen(
-        &format!("{major:02}{minor:02}{patch}"),
+        &format!("{major:02}{minor:03}"),
         &archive_dir,
         &primary_archives_map[format!("cuda-{cuda_major:02}{cuda_minor:02}0").as_str()],
     )
@@ -1023,7 +1023,7 @@ fn get_redist_lib_archive(
         .and_then(|k| primary_archives_map.get(k))
         .unwrap();
     module.run_bindgen(
-        &format!("{major:02}{minor:02}{patch}"),
+        &format!("{major:02}{minor:02}"),
         &archive_dir,
         primary_archives,
     )

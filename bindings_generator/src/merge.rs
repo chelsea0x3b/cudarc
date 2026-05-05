@@ -460,7 +460,11 @@ impl BindingMerger {
 }
 
 fn version_to_feature(prefix: &str, v: &Version) -> String {
-    format!("{prefix}-{:02}{:02}{}", v.major, v.minor, v.patch)
+    if prefix == "cuda" {
+        format!("{prefix}-{:02}{:02}{}", v.major, v.minor, v.patch)
+    } else {
+        format!("{prefix}-{:02}{:03}", v.major, v.minor)
+    }
 }
 
 pub fn merge<P: AsRef<Path>>(

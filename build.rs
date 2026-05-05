@@ -28,32 +28,32 @@ const SUPPORTED_CUDA_VERSIONS: &[((usize, usize), bool)] = &[
     ((11, 4), cfg!(feature = "cuda-11040")),
 ];
 
-const SUPPORTED_NCCL_VERSIONS: &[(usize, bool)] = &[
-    (21805, cfg!(feature = "nccl-21805")),
-    (21903, cfg!(feature = "nccl-21903")),
-    (22005, cfg!(feature = "nccl-22005")),
-    (22105, cfg!(feature = "nccl-22105")),
-    (22203, cfg!(feature = "nccl-22203")),
-    (22403, cfg!(feature = "nccl-22403")),
-    (22501, cfg!(feature = "nccl-22501")),
-    (22605, cfg!(feature = "nccl-22605")),
-    (22706, cfg!(feature = "nccl-22706")),
-    (22809, cfg!(feature = "nccl-22809")),
-    (22907, cfg!(feature = "nccl-22907")),
-    (23004, cfg!(feature = "nccl-23004")),
+const SUPPORTED_NCCL_VERSIONS: &[((u32, u32), bool)] = &[
+    ((2, 30), cfg!(feature = "nccl-02030")),
+    ((2, 29), cfg!(feature = "nccl-02029")),
+    ((2, 28), cfg!(feature = "nccl-02028")),
+    ((2, 27), cfg!(feature = "nccl-02027")),
+    ((2, 26), cfg!(feature = "nccl-02026")),
+    ((2, 25), cfg!(feature = "nccl-02025")),
+    ((2, 24), cfg!(feature = "nccl-02024")),
+    ((2, 22), cfg!(feature = "nccl-02022")),
+    ((2, 21), cfg!(feature = "nccl-02021")),
+    ((2, 20), cfg!(feature = "nccl-02020")),
+    ((2, 19), cfg!(feature = "nccl-02019")),
+    ((2, 18), cfg!(feature = "nccl-02018")),
 ];
 
-const SUPPORTED_CUDNN_VERSIONS: &[(usize, bool)] = &[
-    (80907, cfg!(feature = "cudnn-80907")),
-    (91002, cfg!(feature = "cudnn-91002")),
-    (92101, cfg!(feature = "cudnn-92101")),
+const SUPPORTED_CUDNN_VERSIONS: &[((u32, u32), bool)] = &[
+    ((9, 21), cfg!(feature = "cudnn-09021")),
+    ((9, 10), cfg!(feature = "cudnn-09010")),
+    ((8, 9), cfg!(feature = "cudnn-08009")),
 ];
 
-const SUPPORTED_CUTENSOR_VERSIONS: &[(usize, bool)] = &[
-    (20301, cfg!(feature = "cutensor-20301")),
-    (20401, cfg!(feature = "cutensor-20401")),
-    (20500, cfg!(feature = "cutensor-20500")),
-    (20600, cfg!(feature = "cutensor-20600")),
+const SUPPORTED_CUTENSOR_VERSIONS: &[((u32, u32), bool)] = &[
+    ((2, 6), cfg!(feature = "cutensor-02006")),
+    ((2, 5), cfg!(feature = "cutensor-02005")),
+    ((2, 4), cfg!(feature = "cutensor-02004")),
+    ((2, 3), cfg!(feature = "cutensor-02003")),
 ];
 
 fn detect_version_from_env() -> Option<(usize, usize)> {
@@ -133,18 +133,18 @@ fn main() {
 
     #[cfg(feature = "nccl-version-from-build-system")]
     {
-        let code = nccl_version_from_build_system();
-        println!("cargo:rustc-cfg=feature=\"nccl-{code}\"");
+        let (major, minor) = nccl_version_from_build_system();
+        println!("cargo:rustc-cfg=feature=\"nccl-{major}.{minor}\"");
     }
     #[cfg(feature = "cudnn-version-from-build-system")]
     {
-        let code = cudnn_version_from_build_system();
-        println!("cargo:rustc-cfg=feature=\"cudnn-{code}\"");
+        let (major, minor) = cudnn_version_from_build_system();
+        println!("cargo:rustc-cfg=feature=\"cudnn-{major}.{minor}\"");
     }
     #[cfg(feature = "cutensor-version-from-build-system")]
     {
-        let code = cutensor_version_from_build_system();
-        println!("cargo:rustc-cfg=feature=\"cutensor-{code}\"");
+        let (major, minor) = cutensor_version_from_build_system();
+        println!("cargo:rustc-cfg=feature=\"cutensor-{major}.{minor}\"");
     }
 
     #[cfg(feature = "dynamic-linking")]
@@ -361,26 +361,62 @@ fn link_searches(major: usize, minor: usize) -> Vec<PathBuf> {
     candidates
 }
 
-/// Parse `#define NAME value` lines from a header file and return the integer value.
-fn parse_define(header: &std::path::Path, name: &str) -> Option<usize> {
-    let content = std::fs::read_to_string(header).ok()?;
-    for line in content.lines() {
-        let line = line.trim();
-        if line.starts_with("#define") {
-            let rest = line["#define".len()..].trim();
-            if rest.starts_with(name) {
-                let after = rest[name.len()..].trim();
-                if after
-                    .chars()
-                    .next()
-                    .map_or(true, |c| c.is_ascii_whitespace())
-                {
-                    return after.trim().parse().ok();
-                }
-            }
-        }
+#[allow(unused)]
+fn nccl_version_from_build_system() -> (u32, u32) {
+    let header = find_header("nccl.h")
+        .expect("nccl.h not found — install NCCL development headers or set NCCL_HOME");
+    let major = parse_define(&header, "NCCL_MAJOR").expect("NCCL_MAJOR not found in nccl.h");
+    let minor = parse_define(&header, "NCCL_MINOR").expect("NCCL_MINOR not found in nccl.h");
+    if !SUPPORTED_NCCL_VERSIONS
+        .iter()
+        .any(|&(v, _)| v == (major, minor))
+    {
+        #[cfg(feature = "fallback-latest")]
+        return SUPPORTED_NCCL_VERSIONS[0].0;
+
+        #[cfg(not(feature = "fallback-latest"))]
+        panic!("Unsupported NCCL version {major}.{minor}. Please raise a github issue.");
     }
-    None
+    (major, minor)
+}
+
+#[allow(unused)]
+fn cudnn_version_from_build_system() -> (u32, u32) {
+    let header = find_header("cudnn_version.h")
+        .or_else(|| find_header("cudnn.h"))
+        .expect("cudnn_version.h not found — install cuDNN development headers");
+    let major = parse_define(&header, "CUDNN_MAJOR").expect("CUDNN_MAJOR not found");
+    let minor = parse_define(&header, "CUDNN_MINOR").expect("CUDNN_MINOR not found");
+    if !SUPPORTED_CUDNN_VERSIONS
+        .iter()
+        .any(|&(v, _)| v == (major, minor))
+    {
+        #[cfg(feature = "fallback-latest")]
+        return SUPPORTED_CUDNN_VERSIONS[0].0;
+
+        #[cfg(not(feature = "fallback-latest"))]
+        panic!("Unsupported cuDNN version {major}.{minor}). Please raise a github issue.");
+    }
+    (major, minor)
+}
+
+#[allow(unused)]
+fn cutensor_version_from_build_system() -> (u32, u32) {
+    let header = find_header("cutensor.h")
+        .expect("cutensor.h not found — install cuTENSOR development headers");
+    let major = parse_define(&header, "CUTENSOR_MAJOR").expect("CUTENSOR_MAJOR not found");
+    let minor = parse_define(&header, "CUTENSOR_MINOR").expect("CUTENSOR_MINOR not found");
+    if !SUPPORTED_CUTENSOR_VERSIONS
+        .iter()
+        .any(|&(v, _)| v == (major, minor))
+    {
+        #[cfg(feature = "fallback-latest")]
+        return SUPPORTED_CUTENSOR_VERSIONS[0].0;
+
+        #[cfg(not(feature = "fallback-latest"))]
+        panic!("Unsupported cuTENSOR version {major}.{minor}). Please raise a github issue.");
+    }
+    (major, minor)
 }
 
 /// Search standard include paths for a header file.
@@ -400,46 +436,24 @@ fn find_header(filename: &str) -> Option<std::path::PathBuf> {
     None
 }
 
-#[allow(unused)]
-fn nccl_version_from_build_system() -> usize {
-    let header = find_header("nccl.h")
-        .expect("nccl.h not found — install NCCL development headers or set NCCL_HOME");
-    let major = parse_define(&header, "NCCL_MAJOR").expect("NCCL_MAJOR not found in nccl.h");
-    let minor = parse_define(&header, "NCCL_MINOR").expect("NCCL_MINOR not found in nccl.h");
-    let patch = parse_define(&header, "NCCL_PATCH").expect("NCCL_PATCH not found in nccl.h");
-    let code = major * 10000 + minor * 100 + patch;
-    if !SUPPORTED_NCCL_VERSIONS.iter().any(|&(v, _)| v == code) {
-        panic!("Unsupported NCCL version {major}.{minor}.{patch} (code {code}). Please raise a github issue.");
+/// Parse `#define NAME value` lines from a header file and return the integer value.
+fn parse_define(header: &std::path::Path, name: &str) -> Option<u32> {
+    let content = std::fs::read_to_string(header).ok()?;
+    for line in content.lines() {
+        let line = line.trim();
+        if line.starts_with("#define") {
+            let rest = line["#define".len()..].trim();
+            if rest.starts_with(name) {
+                let after = rest[name.len()..].trim();
+                if after
+                    .chars()
+                    .next()
+                    .map_or(true, |c| c.is_ascii_whitespace())
+                {
+                    return after.trim().parse().ok();
+                }
+            }
+        }
     }
-    code
-}
-
-#[allow(unused)]
-fn cudnn_version_from_build_system() -> usize {
-    let header = find_header("cudnn_version.h")
-        .or_else(|| find_header("cudnn.h"))
-        .expect("cudnn_version.h not found — install cuDNN development headers");
-    let major = parse_define(&header, "CUDNN_MAJOR").expect("CUDNN_MAJOR not found");
-    let minor = parse_define(&header, "CUDNN_MINOR").expect("CUDNN_MINOR not found");
-    let patch = parse_define(&header, "CUDNN_PATCHLEVEL").expect("CUDNN_PATCHLEVEL not found");
-    // Use 10000 multiplier (not CUDNN_VERSION's 1000) to avoid codes > 10000 for 9.10+.
-    let code = major * 10000 + minor * 100 + patch;
-    if !SUPPORTED_CUDNN_VERSIONS.iter().any(|&(v, _)| v == code) {
-        panic!("Unsupported cuDNN version {major}.{minor}.{patch} (code {code}). Please raise a github issue.");
-    }
-    code
-}
-
-#[allow(unused)]
-fn cutensor_version_from_build_system() -> usize {
-    let header = find_header("cutensor.h")
-        .expect("cutensor.h not found — install cuTENSOR development headers");
-    let major = parse_define(&header, "CUTENSOR_MAJOR").expect("CUTENSOR_MAJOR not found");
-    let minor = parse_define(&header, "CUTENSOR_MINOR").expect("CUTENSOR_MINOR not found");
-    let patch = parse_define(&header, "CUTENSOR_PATCH").expect("CUTENSOR_PATCH not found");
-    let code = major * 10000 + minor * 100 + patch;
-    if !SUPPORTED_CUTENSOR_VERSIONS.iter().any(|&(v, _)| v == code) {
-        panic!("Unsupported cuTENSOR version {major}.{minor}.{patch} (code {code}). Please raise a github issue.");
-    }
-    code
+    None
 }
