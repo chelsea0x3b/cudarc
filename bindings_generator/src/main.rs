@@ -442,7 +442,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             min_cuda_version: None,
             module_dependencies: vec![],
             feature_prefix: "cutensor",
-            lib_versions: vec![(1, 7, 0), (2, 0, 0), (2, 2, 0), (2, 3, 1)],
+            lib_versions: vec![(2, 3, 1), (2, 4, 1), (2, 5, 0), (2, 6, 0)],
         },
         ModuleConfig {
             cudarc_name: "cufft",
@@ -843,9 +843,9 @@ fn get_archive(
     log::debug!("Archive dir {archive_dir:?}");
 
     if !archive_dir.exists() {
-        fs::create_dir_all(&archive_dir).context(format!(
+        fs::create_dir_all(&output_dir).context(format!(
             "Failed to create directory {}",
-            archive_dir.display()
+            output_dir.display()
         ))?;
         let out_path = output_dir.join(
             Path::new(path)

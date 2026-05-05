@@ -1,5 +1,7 @@
 use anyhow::{Context, Result};
+use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 use proc_macro2::TokenStream;
+use rayon::prelude::*;
 use quote::{ToTokens, quote};
 use std::collections::BTreeMap;
 use std::fs;
@@ -466,25 +468,41 @@ pub fn merge<P: AsRef<Path>>(
     output_filename: P,
     lib_names: Vec<String>,
     feature_prefix: &str,
+    multi_progress: &MultiProgress,
 ) -> Result<()> {
     let binding_dir = binding_dir.as_ref();
-    let mut merger = BindingMerger::new(lib_names, feature_prefix.to_string());
+    let module_name = binding_dir
+        .components()
+        .nth(1)
+        .and_then(|c| c.as_os_str().to_str())
+        .unwrap_or("unknown");
 
-    let entries = fs::read_dir(binding_dir)?;
+    let entries: Vec<_> = fs::read_dir(binding_dir)?
+        .collect::<std::io::Result<_>>()?;
+
+    let pb = multi_progress.add(ProgressBar::new(entries.len() as u64));
+    pb.set_style(
+        ProgressStyle::default_bar()
+            .template("{msg} {wide_bar} {pos}/{len}")?,
+    );
+    pb.set_message(format!("merge {module_name}"));
+
+    let mut merger = BindingMerger::new(lib_names, feature_prefix.to_string());
     for entry in entries {
-        let entry = entry?;
         let path = entry.path();
         if path.is_file() {
             if let Ok(version) = extract_version_from_filename(&path.display().to_string()) {
                 merger.process_file(&path, &version)?;
             }
         }
+        pb.inc(1);
     }
 
     let unified = merger.generate_unified_bindings();
     let parsed = syn::parse2(unified.clone())
         .with_context(|| format!("In module {:?}", binding_dir.display()))?;
     std::fs::write(&output_filename, prettyplease::unparse(&parsed))?;
+    pb.finish_with_message(format!("done  {module_name}"));
     Ok(())
 }
 
@@ -515,13 +533,14 @@ fn extract_version_from_filename(cuda_version: &str) -> Result<Version> {
 }
 
 pub fn merge_bindings(modules: &[ModuleConfig]) -> Result<()> {
-    for config in modules {
+    let multi_progress = MultiProgress::new();
+    modules.par_iter().try_for_each(|config| {
         merge(
             format!("out/{}/sys/linked", config.cudarc_name),
             format!("../src/{}/sys/mod.rs", config.cudarc_name),
             config.libs.iter().map(|&s| s.into()).collect(),
             config.feature_prefix,
-        )?;
-    }
-    Ok(())
+            &multi_progress,
+        )
+    })
 }

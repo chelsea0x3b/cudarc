@@ -50,10 +50,10 @@ const SUPPORTED_CUDNN_VERSIONS: &[(usize, bool)] = &[
 ];
 
 const SUPPORTED_CUTENSOR_VERSIONS: &[(usize, bool)] = &[
-    (10700, cfg!(feature = "cutensor-10700")),
-    (20000, cfg!(feature = "cutensor-20000")),
-    (20200, cfg!(feature = "cutensor-20200")),
     (20301, cfg!(feature = "cutensor-20301")),
+    (20401, cfg!(feature = "cutensor-20401")),
+    (20500, cfg!(feature = "cutensor-20500")),
+    (20600, cfg!(feature = "cutensor-20600")),
 ];
 
 fn detect_version_from_env() -> Option<(usize, usize)> {
