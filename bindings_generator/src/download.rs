@@ -233,3 +233,38 @@ pub fn cuda_redist(
     serde_json::from_str(&content)
         .context(format!("Failed to parse JSON from {}", out_path.display()))
 }
+
+pub fn nccl_cuda_pairings(full_version: &str, base_url: &str) -> Result<Vec<(u32, u32)>> {
+    let dir_url = format!("{base_url}/v{full_version}/");
+    let content = get(&dir_url)
+        .context("Fetching NCCL directory listing")?
+        .error_for_status()
+        .context(format!("NCCL v{full_version} directory not found"))?
+        .text()?;
+
+    let prefix = format!("nccl_{full_version}-1+cuda");
+    let suffix = "_x86_64.txz";
+    let mut pairings = Vec::new();
+    let mut search = content.as_str();
+    while let Some(pos) = search.find(prefix.as_str()) {
+        search = &search[pos + prefix.len()..];
+        if let Some(end) = search.find(suffix) {
+            let cuda_ver = &search[..end];
+            if let Some((maj, min)) = cuda_ver.split_once('.') {
+                if let (Ok(major), Ok(minor)) = (maj.parse::<u32>(), min.parse::<u32>()) {
+                    pairings.push((major, minor));
+                }
+            }
+        }
+    }
+
+    if pairings.is_empty() {
+        return Err(anyhow::anyhow!(
+            "No x86_64 CUDA pairings found for NCCL {full_version}"
+        ));
+    }
+
+    pairings.sort_by(|a, b| b.cmp(a));
+    pairings.dedup();
+    Ok(pairings)
+}
