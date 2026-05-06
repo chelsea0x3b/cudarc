@@ -60,24 +60,19 @@ fn build_adapter(
         #feature_tok
         pub unsafe fn #fn_name(#inputs) #output {
             #[cfg(feature = "dynamic-loading")]
-            let __result = {
-                type __SymFn = unsafe extern "C" fn(#inputs) #output;
-                static SYM: std::sync::OnceLock<__SymFn> = std::sync::OnceLock::new();
-                let f = SYM.get_or_init(|| unsafe {
-                    *culib()
-                        .get::<__SymFn>(#symbol_cstr)
-                        .unwrap_or_else(|e| panic!("Failed to load symbol {}: {e}", #symbol_str))
+            {
+                type _F = unsafe extern "C" fn(#inputs) #output;
+                static _S: OnceLock<_F> = OnceLock::new();
+                let _f = _S.get_or_init(|| unsafe {
+                    *culib().get::<_F>(#symbol_cstr).unwrap_or_else(|e| panic!("Missing symbol {}: {e}", #symbol_str))
                 });
-                f(#(#arg_names),*)
-            };
+                _f(#(#arg_names),*)
+            }
             #[cfg(not(feature = "dynamic-loading"))]
-            let __result = {
-                extern "C" {
-                    fn #fn_name(#inputs) #output;
-                }
+            {
+                extern "C" fn #fn_name(#inputs) #output;
                 #fn_name(#(#arg_names),*)
-            };
-            __result
+            }
         }
     };
     syn::parse2(tokens).unwrap()
@@ -221,6 +216,8 @@ impl BindingMerger {
             #![allow(non_snake_case)]
             #![allow(dead_code)]
 
+            use std::sync::OnceLock;
+
             #[cfg(feature = "no-std")]
             extern crate alloc;
             #[cfg(feature = "no-std")]
@@ -259,7 +256,7 @@ impl BindingMerger {
 
             #[cfg(feature = "dynamic-loading")]
             pub unsafe fn culib() -> &'static ::libloading::Library {
-                static LIB: std::sync::OnceLock<::libloading::Library> = std::sync::OnceLock::new();
+                static LIB: OnceLock<::libloading::Library> = OnceLock::new();
                 LIB.get_or_init(|| {
                     let lib_names = std::vec![#(#lib_names),*];
                     let choices: std::vec::Vec<_> = lib_names
