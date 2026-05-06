@@ -26,16 +26,18 @@ Safe CUDA wrappers for:
 | [nvtx](https://nvidia.github.io/NVTX/) | ✅ | ✅ | N/A |
 | [cuFFT](https://docs.nvidia.com/cuda/cufft/index.html) | ✅ | ❌ | ❌ |
 
-CUDA Versions supported
+CUDA Versions supported (choose with `-F cuda-<version>`, like `cuda-13010`):
 - 11.4-11.8
 - 12.0-12.9
 - 13.0
 
-CUDNN versions supported:
-- 9.12.0
+CUDNN versions supported (choose with `-F cudnn-<version>`, like `cudnn-09021`):
+- 8.9.7
+- 9.10.2
+- 9.21.1
 
-NCCL versions supported:
-- 2.28.3
+NCCL versions supported (choose with `-F nccl-<version>`, like `nccl-02023`):
+- 2.22-2.30
 
 # Configuring CUDA version
 
