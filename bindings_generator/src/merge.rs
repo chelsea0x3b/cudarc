@@ -56,10 +56,10 @@ impl LibItem {
         let inputs = &func.sig.inputs;
         let output = &func.sig.output;
         let arg_names = inputs.iter().filter_map(|arg| {
-            if let FnArg::Typed(pat_type) = arg {
-                if let Pat::Ident(pat_ident) = *pat_type.pat.clone() {
-                    return Some(pat_ident.ident.clone());
-                }
+            if let FnArg::Typed(pat_type) = arg
+                && let Pat::Ident(pat_ident) = *pat_type.pat.clone()
+            {
+                return Some(pat_ident.ident.clone());
             }
             None
         });
@@ -137,7 +137,7 @@ impl<T> Default for FunctionInfo<T> {
 
 impl<T> FunctionInfo<T> {
     fn insert(&mut self, version: &Version, value: T) -> Option<T> {
-        self.declarations.insert(version.clone(), value)
+        self.declarations.insert(*version, value)
     }
 }
 
@@ -372,24 +372,24 @@ impl BindingMerger {
             let mut prev_decl: Option<&T> = None;
             let mut versions: Vec<Version> = vec![];
             for (version, decl) in &info.declarations {
-                if let Some(prev_decl) = prev_decl {
-                    if prev_decl != decl {
-                        if !versions.is_empty() {
-                            log::debug!("Breaking change detected in {version} for {name}");
-                        }
-                        let features = versions
-                            .iter()
-                            .map(|v| v.feature_name(&self.feature_prefix))
-                            .collect::<Vec<_>>();
-                        output.extend(quote! {
-                            #[cfg(any(#(feature = #features), *))]
-                            #prev_decl
-                        });
-                        versions.clear();
+                if let Some(prev_decl) = prev_decl
+                    && prev_decl != decl
+                {
+                    if !versions.is_empty() {
+                        log::debug!("Breaking change detected in {version} for {name}");
                     }
+                    let features = versions
+                        .iter()
+                        .map(|v| v.feature_name(&self.feature_prefix))
+                        .collect::<Vec<_>>();
+                    output.extend(quote! {
+                        #[cfg(any(#(feature = #features), *))]
+                        #prev_decl
+                    });
+                    versions.clear();
                 }
                 versions.push(*version);
-                prev_decl = Some(decl.into());
+                prev_decl = Some(decl);
             }
             if !versions.is_empty() {
                 if let Some(decl) = prev_decl {
@@ -420,31 +420,26 @@ impl BindingMerger {
         info: &BTreeMap<String, FunctionInfo<ForeignItemFn>>,
     ) -> Result<TokenStream> {
         let mut elements = vec![];
-        for (_name, info) in info {
+        for info in info.values() {
             let mut prev_decl: Option<&ForeignItemFn> = None;
             let mut versions = vec![];
             for (version, decl) in &info.declarations {
-                if let Some(prev_decl) = prev_decl {
-                    if prev_decl != decl {
-                        let element = LibItem::new(
-                            prev_decl,
-                            &versions,
-                            self.n_versions,
-                            &self.feature_prefix,
-                        );
-                        elements.push(element);
-                        versions.clear();
-                    }
+                if let Some(prev_decl) = prev_decl
+                    && prev_decl != decl
+                {
+                    let element =
+                        LibItem::new(prev_decl, &versions, self.n_versions, &self.feature_prefix);
+                    elements.push(element);
+                    versions.clear();
                 }
                 versions.push(version);
-                prev_decl = Some(decl.into());
+                prev_decl = Some(decl);
             }
-            if !versions.is_empty() {
-                if let Some(decl) = prev_decl {
-                    let element =
-                        LibItem::new(decl, &versions, self.n_versions, &self.feature_prefix);
-                    elements.push(element);
-                }
+            if !versions.is_empty()
+                && let Some(decl) = prev_decl
+            {
+                let element = LibItem::new(decl, &versions, self.n_versions, &self.feature_prefix);
+                elements.push(element);
             }
         }
 

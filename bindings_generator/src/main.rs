@@ -543,7 +543,7 @@ impl ModuleConfig {
     ) -> Result<()> {
         let sysdir = Path::new(".")
             .join("out")
-            .join(&self.cudarc_name)
+            .join(self.cudarc_name)
             .join("sys");
         fs::create_dir_all(&sysdir)
             .context(format!("Failed to create directory {}", sysdir.display()))?;
@@ -604,14 +604,11 @@ impl ModuleConfig {
 
         let parent_sysdir = Path::new("..")
             .join("src")
-            .join(&self.cudarc_name)
+            .join(self.cudarc_name)
             .join("sys");
         let wrapper_h = parent_sysdir.join("wrapper.h");
         let cuda_directory = archive_directory.join("include");
-        let primary_includes: Vec<_> = primary_archives
-            .into_iter()
-            .map(|c| c.join("include"))
-            .collect();
+        let primary_includes: Vec<_> = primary_archives.iter().map(|c| c.join("include")).collect();
         log::debug!("Include directories {}", cuda_directory.display());
         log::debug!(
             "Include primary directories {:?}",
@@ -880,8 +877,8 @@ fn generate_sys(
 ) -> Result<PathBuf> {
     let archive_dir = get_archive(
         cuda_version,
-        &module.redist_name,
-        &module.cudarc_name,
+        module.redist_name,
+        module.cudarc_name,
         downloads_dir,
         multi_progress,
     )?;

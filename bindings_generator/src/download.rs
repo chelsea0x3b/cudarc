@@ -204,7 +204,7 @@ fn get_redistrib_path(
     let url = format!("{}/{}", base_url, filename);
     log::debug!("Trying {}", url);
 
-    let out_path = downloads_dir.join(&filename);
+    let out_path = downloads_dir.join(filename);
 
     if to_file(&url, &out_path, multi_progress).is_ok() {
         let mut lock = REVISION.lock().unwrap();
@@ -243,10 +243,10 @@ pub fn nccl_cuda_pairings(nccl_version: Version, base_url: &str) -> Result<Vec<V
         search = &search[pos + prefix.len()..];
         if let Some(end) = search.find(suffix) {
             let cuda_ver = &search[..end];
-            if let Some((maj, min)) = cuda_ver.split_once('.') {
-                if let (Ok(major), Ok(minor)) = (maj.parse::<u32>(), min.parse::<u32>()) {
-                    pairings.push(Version::new(major, minor, 0));
-                }
+            if let Some((maj, min)) = cuda_ver.split_once('.')
+                && let (Ok(major), Ok(minor)) = (maj.parse::<u32>(), min.parse::<u32>())
+            {
+                pairings.push(Version::new(major, minor, 0));
             }
         }
     }
