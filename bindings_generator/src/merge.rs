@@ -167,14 +167,16 @@ struct BindingMerger {
     lib_names: Vec<String>,
     n_versions: usize,
     feature_prefix: String,
+    bitflag_types: Vec<String>,
 }
 
 impl BindingMerger {
-    pub fn new(lib_names: Vec<String>, feature_prefix: String) -> Self {
+    pub fn new(lib_names: Vec<String>, feature_prefix: String, bitflag_types: Vec<String>) -> Self {
         Self {
             lib_names,
             n_versions: 0,
             feature_prefix,
+            bitflag_types,
             ..Default::default()
         }
     }
@@ -239,6 +241,42 @@ impl BindingMerger {
         Ok(())
     }
 
+    fn generate_bitflag_impls(&self) -> TokenStream {
+        let mut output = TokenStream::new();
+        for type_name in &self.bitflag_types {
+            let Some(info) = self.structs.get(type_name.as_str()) else {
+                continue;
+            };
+            let all_versions: Vec<&Version> = info.declarations.keys().collect();
+            if all_versions.is_empty() {
+                continue;
+            }
+            let features: Vec<String> = all_versions.iter().map(|v| version_to_feature(v)).collect();
+            let type_ident: proc_macro2::Ident = syn::parse_str(type_name).unwrap();
+            let cfg = if all_versions.len() == self.n_versions {
+                quote! {}
+            } else {
+                quote! { #[cfg(any(#(feature = #features),*))] }
+            };
+            output.extend(quote! {
+                #cfg
+                impl ::core::ops::BitOr for #type_ident {
+                    type Output = Self;
+                    fn bitor(self, rhs: Self) -> Self {
+                        Self(self.0 | rhs.0)
+                    }
+                }
+                #cfg
+                impl ::core::ops::BitOrAssign for #type_ident {
+                    fn bitor_assign(&mut self, rhs: Self) {
+                        self.0 |= rhs.0;
+                    }
+                }
+            });
+        }
+        output
+    }
+
     pub fn generate_unified_bindings(&self) -> TokenStream {
         let enums = self.write_to_output(&self.enums).expect("Write to output");
         let impls = self.write_to_output(&self.impls).expect("Write to output");
@@ -252,6 +290,7 @@ impl BindingMerger {
         let functions = self
             .write_to_output(&self.functions)
             .expect("Write to output");
+        let bitflag_impls = self.generate_bitflag_impls();
 
         let lib_names = &self.lib_names;
 
@@ -283,6 +322,8 @@ impl BindingMerger {
             #structs
 
             #impls
+
+            #bitflag_impls
 
             #unions
 
@@ -472,6 +513,7 @@ pub fn merge<P: AsRef<Path>>(
     output_filename: P,
     lib_names: Vec<String>,
     feature_prefix: &str,
+    bitflag_types: Vec<String>,
     multi_progress: &MultiProgress,
 ) -> Result<()> {
     let binding_dir = binding_dir.as_ref();
@@ -487,7 +529,7 @@ pub fn merge<P: AsRef<Path>>(
     pb.set_style(ProgressStyle::default_bar().template("{msg} {wide_bar} {pos}/{len}")?);
     pb.set_message(format!("merge {module_name}"));
 
-    let mut merger = BindingMerger::new(lib_names, feature_prefix.to_string());
+    let mut merger = BindingMerger::new(lib_names, feature_prefix.to_string(), bitflag_types);
     for entry in entries {
         let path = entry.path();
         if path.is_file() {
@@ -556,6 +598,7 @@ pub fn merge_bindings(modules: &[ModuleConfig]) -> Result<()> {
             format!("../src/{}/sys/mod.rs", config.cudarc_name),
             config.libs.iter().map(|&s| s.into()).collect(),
             config.feature_prefix,
+            config.bitflag_enums.iter().map(|&s| s.into()).collect(),
             &multi_progress,
         )
     })
