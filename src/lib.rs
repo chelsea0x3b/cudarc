@@ -128,7 +128,11 @@ extern crate no_std_compat as std;
 pub mod cublas;
 #[cfg(feature = "cublaslt")]
 pub mod cublaslt;
-#[cfg(feature = "cudnn")]
+#[cfg(any(
+    feature = "cudnn-08009",
+    feature = "cudnn-09010",
+    feature = "cudnn-09021",
+))]
 pub mod cudnn;
 #[cfg(all(
     feature = "cufft",
@@ -154,7 +158,12 @@ pub mod cusolvermg;
 #[cfg(feature = "cusparse")]
 pub mod cusparse;
 #[cfg(all(
-    feature = "cutensor",
+    any(
+        feature = "cutensor-02003",
+        feature = "cutensor-02004",
+        feature = "cutensor-02005",
+        feature = "cutensor-02006",
+    ),
     not(any(
         feature = "cuda-11040",
         feature = "cuda-11050",
@@ -166,7 +175,16 @@ pub mod cusparse;
 pub mod cutensor;
 #[cfg(feature = "driver")]
 pub mod driver;
-#[cfg(feature = "nccl")]
+#[cfg(any(
+    feature = "nccl-02022",
+    feature = "nccl-02024",
+    feature = "nccl-02025",
+    feature = "nccl-02026",
+    feature = "nccl-02027",
+    feature = "nccl-02028",
+    feature = "nccl-02029",
+    feature = "nccl-02030",
+))]
 pub mod nccl;
 #[cfg(feature = "nvrtc")]
 pub mod nvrtc;

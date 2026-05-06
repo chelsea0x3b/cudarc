@@ -26,56 +26,6 @@ pub type cutensorOperationDescriptor_t = *mut cutensorOperationDescriptor;
 pub type cutensorPlanPreference_t = *mut cutensorPlanPreference;
 pub type cutensorPlan_t = *mut cutensorPlan;
 pub type cutensorTensorDescriptor_t = *mut cutensorTensorDescriptor;
-#[cfg(any(
-    feature = "cuda-12000",
-    feature = "cuda-12010",
-    feature = "cuda-12020",
-    feature = "cuda-12030",
-    feature = "cuda-12040",
-    feature = "cuda-12050",
-    feature = "cuda-12060"
-))]
-#[repr(u32)]
-#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
-pub enum cudaDataType_t {
-    CUDA_R_16F = 2,
-    CUDA_C_16F = 6,
-    CUDA_R_16BF = 14,
-    CUDA_C_16BF = 15,
-    CUDA_R_32F = 0,
-    CUDA_C_32F = 4,
-    CUDA_R_64F = 1,
-    CUDA_C_64F = 5,
-    CUDA_R_4I = 16,
-    CUDA_C_4I = 17,
-    CUDA_R_4U = 18,
-    CUDA_C_4U = 19,
-    CUDA_R_8I = 3,
-    CUDA_C_8I = 7,
-    CUDA_R_8U = 8,
-    CUDA_C_8U = 9,
-    CUDA_R_16I = 20,
-    CUDA_C_16I = 21,
-    CUDA_R_16U = 22,
-    CUDA_C_16U = 23,
-    CUDA_R_32I = 10,
-    CUDA_C_32I = 11,
-    CUDA_R_32U = 12,
-    CUDA_C_32U = 13,
-    CUDA_R_64I = 24,
-    CUDA_C_64I = 25,
-    CUDA_R_64U = 26,
-    CUDA_C_64U = 27,
-    CUDA_R_8F_E4M3 = 28,
-    CUDA_R_8F_E5M2 = 29,
-}
-#[cfg(any(
-    feature = "cuda-12080",
-    feature = "cuda-12090",
-    feature = "cuda-13000",
-    feature = "cuda-13010",
-    feature = "cuda-13020"
-))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cudaDataType_t {
@@ -194,6 +144,11 @@ pub enum cutensorOperator_t {
 pub enum cutensorPlanAttribute_t {
     CUTENSOR_PLAN_REQUIRED_WORKSPACE = 0,
 }
+#[cfg(any(
+    feature = "cutensor-02003",
+    feature = "cutensor-02004",
+    feature = "cutensor-02005"
+))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cutensorPlanPreferenceAttribute_t {
@@ -203,6 +158,18 @@ pub enum cutensorPlanPreferenceAttribute_t {
     CUTENSOR_PLAN_PREFERENCE_ALGO = 3,
     CUTENSOR_PLAN_PREFERENCE_KERNEL_RANK = 4,
     CUTENSOR_PLAN_PREFERENCE_JIT = 5,
+}
+#[cfg(any(feature = "cutensor-02006"))]
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
+pub enum cutensorPlanPreferenceAttribute_t {
+    CUTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE = 0,
+    CUTENSOR_PLAN_PREFERENCE_CACHE_MODE = 1,
+    CUTENSOR_PLAN_PREFERENCE_INCREMENTAL_COUNT = 2,
+    CUTENSOR_PLAN_PREFERENCE_ALGO = 3,
+    CUTENSOR_PLAN_PREFERENCE_KERNEL_RANK = 4,
+    CUTENSOR_PLAN_PREFERENCE_JIT = 5,
+    CUTENSOR_PLAN_PREFERENCE_GPU_ARCH = 6,
 }
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
@@ -318,13 +285,6 @@ pub struct cutensorPlanPreference {
 pub struct cutensorTensorDescriptor {
     _unused: [u8; 0],
 }
-#[cfg(any(
-    feature = "cuda-12080",
-    feature = "cuda-12090",
-    feature = "cuda-13000",
-    feature = "cuda-13010",
-    feature = "cuda-13020"
-))]
 impl cudaDataType_t {
     pub const CUDA_R_8F_UE4M3: cudaDataType_t = cudaDataType_t::CUDA_R_8F_E4M3;
 }
@@ -598,6 +558,18 @@ extern "C" {
         handle: cutensorHandle_t,
         plan: cutensorPlan_t,
         attr: cutensorPlanAttribute_t,
+        buf: *mut ::core::ffi::c_void,
+        sizeInBytes: usize,
+    ) -> cutensorStatus_t;
+    #[cfg(any(
+        feature = "cutensor-02004",
+        feature = "cutensor-02005",
+        feature = "cutensor-02006"
+    ))]
+    pub fn cutensorPlanPreferenceGetAttribute(
+        handle: cutensorHandle_t,
+        pref: cutensorPlanPreference_t,
+        attr: cutensorPlanPreferenceAttribute_t,
         buf: *mut ::core::ffi::c_void,
         sizeInBytes: usize,
     ) -> cutensorStatus_t;
@@ -1152,6 +1124,20 @@ mod loaded {
     ) -> cutensorStatus_t {
         (culib().cutensorPlanGetAttribute)(handle, plan, attr, buf, sizeInBytes)
     }
+    #[cfg(any(
+        feature = "cutensor-02004",
+        feature = "cutensor-02005",
+        feature = "cutensor-02006"
+    ))]
+    pub unsafe fn cutensorPlanPreferenceGetAttribute(
+        handle: cutensorHandle_t,
+        pref: cutensorPlanPreference_t,
+        attr: cutensorPlanPreferenceAttribute_t,
+        buf: *mut ::core::ffi::c_void,
+        sizeInBytes: usize,
+    ) -> cutensorStatus_t {
+        (culib().cutensorPlanPreferenceGetAttribute)(handle, pref, attr, buf, sizeInBytes)
+    }
     pub unsafe fn cutensorPlanPreferenceSetAttribute(
         handle: cutensorHandle_t,
         pref: cutensorPlanPreference_t,
@@ -1475,6 +1461,18 @@ mod loaded {
             buf: *mut ::core::ffi::c_void,
             sizeInBytes: usize,
         ) -> cutensorStatus_t,
+        #[cfg(any(
+            feature = "cutensor-02004",
+            feature = "cutensor-02005",
+            feature = "cutensor-02006"
+        ))]
+        pub cutensorPlanPreferenceGetAttribute: unsafe extern "C" fn(
+            handle: cutensorHandle_t,
+            pref: cutensorPlanPreference_t,
+            attr: cutensorPlanPreferenceAttribute_t,
+            buf: *mut ::core::ffi::c_void,
+            sizeInBytes: usize,
+        ) -> cutensorStatus_t,
         pub cutensorPlanPreferenceSetAttribute: unsafe extern "C" fn(
             handle: cutensorHandle_t,
             pref: cutensorPlanPreference_t,
@@ -1676,6 +1674,15 @@ mod loaded {
                 .get(b"cutensorPlanGetAttribute\0")
                 .map(|sym| *sym)
                 .expect("Expected symbol in library");
+            #[cfg(any(
+                feature = "cutensor-02004",
+                feature = "cutensor-02005",
+                feature = "cutensor-02006"
+            ))]
+            let cutensorPlanPreferenceGetAttribute = __library
+                .get(b"cutensorPlanPreferenceGetAttribute\0")
+                .map(|sym| *sym)
+                .expect("Expected symbol in library");
             let cutensorPlanPreferenceSetAttribute = __library
                 .get(b"cutensorPlanPreferenceSetAttribute\0")
                 .map(|sym| *sym)
@@ -1734,6 +1741,12 @@ mod loaded {
                 cutensorOperationDescriptorSetAttribute,
                 cutensorPermute,
                 cutensorPlanGetAttribute,
+                #[cfg(any(
+                    feature = "cutensor-02004",
+                    feature = "cutensor-02005",
+                    feature = "cutensor-02006"
+                ))]
+                cutensorPlanPreferenceGetAttribute,
                 cutensorPlanPreferenceSetAttribute,
                 cutensorReadKernelCacheFromFile,
                 cutensorReduce,

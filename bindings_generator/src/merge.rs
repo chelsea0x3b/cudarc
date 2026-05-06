@@ -1,6 +1,8 @@
 use anyhow::{Context, Result};
+use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 use proc_macro2::TokenStream;
 use quote::{ToTokens, quote};
+use rayon::prelude::*;
 use std::collections::BTreeMap;
 use std::fs;
 use std::path::Path;
@@ -20,12 +22,7 @@ struct Version {
 }
 
 impl std::fmt::Display for Version {
-    // This trait requires `fmt` with this exact signature.
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        // Write strictly the first element into the supplied output
-        // stream: `f`. Returns `fmt::Result` which indicates whether the
-        // operation succeeded or failed. Note that `write!` uses syntax which
-        // is very similar to `log::debug!`.
         write!(f, "{}.{}.{}", self.major, self.minor, self.patch)
     }
 }
@@ -43,11 +40,16 @@ struct LibItems {
     init_fields: Vec<Expr>,
 }
 impl LibItem {
-    fn new(func: &ForeignItemFn, versions: &[&Version], n_versions: usize) -> Self {
+    fn new(
+        func: &ForeignItemFn,
+        versions: &[&Version],
+        n_versions: usize,
+        feature_prefix: &str,
+    ) -> Self {
         let parser = Field::parse_named;
         let features = versions
             .iter()
-            .map(|v| version_to_feature(v))
+            .map(|v| version_to_feature(feature_prefix, v))
             .collect::<Vec<_>>();
         let feature_tok = if versions.len() == n_versions {
             quote! {}
@@ -65,7 +67,6 @@ impl LibItem {
         let fn_name = &sig.ident;
         let inputs = &func.sig.inputs;
         let output = &func.sig.output;
-        // Extract only argument names (without types)
         let arg_names = inputs.iter().filter_map(|arg| {
             if let FnArg::Typed(pat_type) = arg {
                 if let Pat::Ident(pat_ident) = *pat_type.pat.clone() {
@@ -135,7 +136,7 @@ impl From<Vec<LibItem>> for LibItems {
 
 #[derive(Debug)]
 struct FunctionInfo<T> {
-    declarations: BTreeMap<Version, T>, // version -> declaration
+    declarations: BTreeMap<Version, T>,
 }
 
 impl<T> Default for FunctionInfo<T> {
@@ -165,15 +166,17 @@ struct BindingMerger {
 
     lib_names: Vec<String>,
     n_versions: usize,
+    feature_prefix: String,
     bitflag_types: Vec<String>,
 }
 
 impl BindingMerger {
-    pub fn new(lib_names: Vec<String>, bitflag_types: Vec<String>) -> Self {
+    pub fn new(lib_names: Vec<String>, feature_prefix: String, bitflag_types: Vec<String>) -> Self {
         Self {
             lib_names,
-            bitflag_types,
             n_versions: 0,
+            feature_prefix,
+            bitflag_types,
             ..Default::default()
         }
     }
@@ -248,7 +251,7 @@ impl BindingMerger {
             if all_versions.is_empty() {
                 continue;
             }
-            let features: Vec<String> = all_versions.iter().map(|v| version_to_feature(v)).collect();
+            let features: Vec<String> = all_versions.iter().map(|v| version_to_feature(&self.feature_prefix, v)).collect();
             let type_ident: proc_macro2::Ident = syn::parse_str(type_name).unwrap();
             let cfg = if all_versions.len() == self.n_versions {
                 quote! {}
@@ -375,7 +378,6 @@ impl BindingMerger {
     ) -> Result<TokenStream> {
         let mut output = TokenStream::new();
         for (name, info) in info {
-            // Function with version-specific declarations
             let mut prev_decl: Option<&T> = None;
             let mut versions = vec![];
             for (version, decl) in &info.declarations {
@@ -386,7 +388,7 @@ impl BindingMerger {
                         }
                         let features = versions
                             .iter()
-                            .map(|v| version_to_feature(v))
+                            .map(|v| version_to_feature(&self.feature_prefix, v))
                             .collect::<Vec<_>>();
                         output.extend(quote! {
                             #[cfg(any(#(feature = #features), *))]
@@ -401,13 +403,11 @@ impl BindingMerger {
             if !versions.is_empty() {
                 if let Some(decl) = prev_decl {
                     if versions.len() == self.n_versions {
-                        // XXX small nicety, if every single version implements
-                        // a function, just remove the feature flags.
                         output.extend(decl.into_token_stream());
                     } else {
                         let features = versions
                             .iter()
-                            .map(|v| version_to_feature(v))
+                            .map(|v| version_to_feature(&self.feature_prefix, v))
                             .collect::<Vec<_>>();
                         output.extend(quote! {
                             #[cfg(any(#(feature = #features),*))]
@@ -430,13 +430,17 @@ impl BindingMerger {
     ) -> Result<TokenStream> {
         let mut elements = vec![];
         for (_name, info) in info {
-            // Function with version-specific declarations
             let mut prev_decl: Option<&ForeignItemFn> = None;
             let mut versions = vec![];
             for (version, decl) in &info.declarations {
                 if let Some(prev_decl) = prev_decl {
                     if prev_decl != decl {
-                        let element = LibItem::new(prev_decl, &versions, self.n_versions);
+                        let element = LibItem::new(
+                            prev_decl,
+                            &versions,
+                            self.n_versions,
+                            &self.feature_prefix,
+                        );
                         elements.push(element);
                         versions.clear();
                     }
@@ -446,7 +450,8 @@ impl BindingMerger {
             }
             if !versions.is_empty() {
                 if let Some(decl) = prev_decl {
-                    let element = LibItem::new(decl, &versions, self.n_versions);
+                    let element =
+                        LibItem::new(decl, &versions, self.n_versions, &self.feature_prefix);
                     elements.push(element);
                 }
             }
@@ -495,75 +500,106 @@ impl BindingMerger {
     }
 }
 
-fn version_to_feature(version: &Version) -> String {
-    format!(
-        "cuda-{:0>2}{:0>2}{}",
-        version.major, version.minor, version.patch
-    )
+fn version_to_feature(prefix: &str, v: &Version) -> String {
+    if prefix == "cuda" {
+        format!("{prefix}-{:02}{:02}{}", v.major, v.minor, v.patch)
+    } else {
+        format!("{prefix}-{:02}{:03}", v.major, v.minor)
+    }
 }
 
 pub fn merge<P: AsRef<Path>>(
     binding_dir: P,
     output_filename: P,
     lib_names: Vec<String>,
+    feature_prefix: &str,
     bitflag_types: Vec<String>,
+    multi_progress: &MultiProgress,
 ) -> Result<()> {
     let binding_dir = binding_dir.as_ref();
-    let mut merger = BindingMerger::new(lib_names, bitflag_types);
+    let module_name = binding_dir
+        .components()
+        .nth(1)
+        .and_then(|c| c.as_os_str().to_str())
+        .unwrap_or("unknown");
 
-    let entries = fs::read_dir(binding_dir)?;
+    let entries: Vec<_> = fs::read_dir(binding_dir)?.collect::<std::io::Result<_>>()?;
+
+    let pb = multi_progress.add(ProgressBar::new(entries.len() as u64));
+    pb.set_style(ProgressStyle::default_bar().template("{msg} {wide_bar} {pos}/{len}")?);
+    pb.set_message(format!("merge {module_name}"));
+
+    let mut merger = BindingMerger::new(lib_names, feature_prefix.to_string(), bitflag_types);
     for entry in entries {
-        let entry = entry?;
         let path = entry.path();
         if path.is_file() {
-            if let Ok(version) = extract_version_from_filename(&path.display().to_string()) {
-                merger.process_file(&path, &version)?;
-            }
+            let version =
+                extract_version_from_filename(feature_prefix, &path.display().to_string()).unwrap();
+            merger.process_file(&path, &version)?;
         }
+        pb.inc(1);
     }
 
-    // Generate unified output
     let unified = merger.generate_unified_bindings();
     let parsed = syn::parse2(unified.clone())
         .with_context(|| format!("In module {:?}", binding_dir.display()))?;
     std::fs::write(&output_filename, prettyplease::unparse(&parsed))?;
+    pb.finish_with_message(format!("done  {module_name}"));
     Ok(())
 }
 
-fn extract_version_from_filename(cuda_version: &str) -> Result<Version> {
+fn extract_version_from_filename(feature_prefix: &str, cuda_version: &str) -> Result<Version> {
     let number = cuda_version
         .split('_')
         .last()
         .context(format!("Invalid CUDA version format: {}", cuda_version))?;
 
-    let major = number[..2].parse().context(format!(
-        "Failed to parse major version from {}",
-        cuda_version
-    ))?;
-    let minor = number[2..4].parse().context(format!(
-        "Failed to parse minor version from {}",
-        cuda_version
-    ))?;
-    let patch = number[4..5].parse().context(format!(
-        "Failed to parse patch version from {}",
-        cuda_version
-    ))?;
+    if feature_prefix == "cuda" {
+        let major = number[..2].parse().context(format!(
+            "Failed to parse major version from {}",
+            cuda_version
+        ))?;
+        let minor = number[2..4].parse().context(format!(
+            "Failed to parse minor version from {}",
+            cuda_version
+        ))?;
+        let patch = number[4..5].parse().context(format!(
+            "Failed to parse patch version from {}",
+            cuda_version
+        ))?;
 
-    Ok(Version {
-        major,
-        minor,
-        patch,
-    })
+        Ok(Version {
+            major,
+            minor,
+            patch,
+        })
+    } else {
+        let major = number[..2].parse().context(format!(
+            "Failed to parse major version from {}",
+            cuda_version
+        ))?;
+        let minor = number[2..5].parse().context(format!(
+            "Failed to parse minor version from {}",
+            cuda_version
+        ))?;
+        Ok(Version {
+            major,
+            minor,
+            patch: 0,
+        })
+    }
 }
 
 pub fn merge_bindings(modules: &[ModuleConfig]) -> Result<()> {
-    for config in modules {
+    let multi_progress = MultiProgress::new();
+    modules.par_iter().try_for_each(|config| {
         merge(
             format!("out/{}/sys/linked", config.cudarc_name),
             format!("../src/{}/sys/mod.rs", config.cudarc_name),
             config.libs.iter().map(|&s| s.into()).collect(),
+            config.feature_prefix,
             config.bitflag_enums.iter().map(|&s| s.into()).collect(),
-        )?;
-    }
-    Ok(())
+            &multi_progress,
+        )
+    })
 }
