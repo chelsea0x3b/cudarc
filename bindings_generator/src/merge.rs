@@ -13,19 +13,7 @@ use syn::{
 };
 
 use crate::ModuleConfig;
-
-#[derive(Debug, Ord, PartialEq, PartialOrd, Eq, Clone, Copy)]
-struct Version {
-    pub major: u32,
-    pub minor: u32,
-    pub patch: u32,
-}
-
-impl std::fmt::Display for Version {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(f, "{}.{}.{}", self.major, self.minor, self.patch)
-    }
-}
+use crate::version::Version;
 
 struct LibItem {
     adapter_function: ItemFn,
@@ -49,7 +37,7 @@ impl LibItem {
         let parser = Field::parse_named;
         let features = versions
             .iter()
-            .map(|v| version_to_feature(feature_prefix, v))
+            .map(|v| v.feature_name(feature_prefix))
             .collect::<Vec<_>>();
         let feature_tok = if versions.len() == n_versions {
             quote! {}
@@ -251,7 +239,10 @@ impl BindingMerger {
             if all_versions.is_empty() {
                 continue;
             }
-            let features: Vec<String> = all_versions.iter().map(|v| version_to_feature(&self.feature_prefix, v)).collect();
+            let features: Vec<String> = all_versions
+                .iter()
+                .map(|v| v.feature_name(&self.feature_prefix))
+                .collect();
             let type_ident: proc_macro2::Ident = syn::parse_str(type_name).unwrap();
             let cfg = if all_versions.len() == self.n_versions {
                 quote! {}
@@ -379,7 +370,7 @@ impl BindingMerger {
         let mut output = TokenStream::new();
         for (name, info) in info {
             let mut prev_decl: Option<&T> = None;
-            let mut versions = vec![];
+            let mut versions: Vec<Version> = vec![];
             for (version, decl) in &info.declarations {
                 if let Some(prev_decl) = prev_decl {
                     if prev_decl != decl {
@@ -388,7 +379,7 @@ impl BindingMerger {
                         }
                         let features = versions
                             .iter()
-                            .map(|v| version_to_feature(&self.feature_prefix, v))
+                            .map(|v| v.feature_name(&self.feature_prefix))
                             .collect::<Vec<_>>();
                         output.extend(quote! {
                             #[cfg(any(#(feature = #features), *))]
@@ -407,7 +398,7 @@ impl BindingMerger {
                     } else {
                         let features = versions
                             .iter()
-                            .map(|v| version_to_feature(&self.feature_prefix, v))
+                            .map(|v| v.feature_name(&self.feature_prefix))
                             .collect::<Vec<_>>();
                         output.extend(quote! {
                             #[cfg(any(#(feature = #features),*))]
@@ -500,14 +491,6 @@ impl BindingMerger {
     }
 }
 
-fn version_to_feature(prefix: &str, v: &Version) -> String {
-    if prefix == "cuda" {
-        format!("{prefix}-{:02}{:02}{}", v.major, v.minor, v.patch)
-    } else {
-        format!("{prefix}-{:02}{:03}", v.major, v.minor)
-    }
-}
-
 pub fn merge<P: AsRef<Path>>(
     binding_dir: P,
     output_filename: P,
@@ -533,8 +516,7 @@ pub fn merge<P: AsRef<Path>>(
     for entry in entries {
         let path = entry.path();
         if path.is_file() {
-            let version =
-                extract_version_from_filename(feature_prefix, &path.display().to_string()).unwrap();
+            let version = parse_version_from_filename(&path)?;
             merger.process_file(&path, &version)?;
         }
         pb.inc(1);
@@ -548,46 +530,17 @@ pub fn merge<P: AsRef<Path>>(
     Ok(())
 }
 
-fn extract_version_from_filename(feature_prefix: &str, cuda_version: &str) -> Result<Version> {
-    let number = cuda_version
-        .split('_')
-        .last()
-        .context(format!("Invalid CUDA version format: {}", cuda_version))?;
-
-    if feature_prefix == "cuda" {
-        let major = number[..2].parse().context(format!(
-            "Failed to parse major version from {}",
-            cuda_version
-        ))?;
-        let minor = number[2..4].parse().context(format!(
-            "Failed to parse minor version from {}",
-            cuda_version
-        ))?;
-        let patch = number[4..5].parse().context(format!(
-            "Failed to parse patch version from {}",
-            cuda_version
-        ))?;
-
-        Ok(Version {
-            major,
-            minor,
-            patch,
-        })
-    } else {
-        let major = number[..2].parse().context(format!(
-            "Failed to parse major version from {}",
-            cuda_version
-        ))?;
-        let minor = number[2..5].parse().context(format!(
-            "Failed to parse minor version from {}",
-            cuda_version
-        ))?;
-        Ok(Version {
-            major,
-            minor,
-            patch: 0,
-        })
-    }
+fn parse_version_from_filename(path: &Path) -> Result<Version> {
+    let stem = path
+        .file_stem()
+        .and_then(|s| s.to_str())
+        .with_context(|| format!("non-utf8 filename: {}", path.display()))?;
+    let version_str = stem
+        .strip_prefix("sys_")
+        .with_context(|| format!("expected 'sys_' prefix in {}", path.display()))?;
+    version_str
+        .parse()
+        .with_context(|| format!("parsing version from {}", path.display()))
 }
 
 pub fn merge_bindings(modules: &[ModuleConfig]) -> Result<()> {

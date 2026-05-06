@@ -13,10 +13,11 @@ use reqwest::blocking::{Response, get};
 use serde_json::Value;
 use sha2::{Digest, Sha256};
 
+use crate::version::Version;
+
 lazy_static! {
     static ref DOWNLOAD_CACHE: Mutex<HashMap<String, PathBuf>> = Mutex::new(HashMap::new());
-    static ref REVISION: Mutex<HashMap<(u32, u32, u32, String), PathBuf>> =
-        Mutex::new(HashMap::new());
+    static ref REVISION: Mutex<HashMap<(Version, String), PathBuf>> = Mutex::new(HashMap::new());
 }
 
 fn download_response(url: &str) -> Result<Response> {
@@ -170,16 +171,14 @@ pub fn to_file_with_checksum(
 }
 
 fn get_redistrib_path(
-    major: u32,
-    minor: u32,
-    patch: u32,
+    version: Version,
     base_url: &str,
     downloads_dir: &Path,
     multi_progress: &MultiProgress,
 ) -> Result<PathBuf> {
     {
         let revision = REVISION.lock().unwrap();
-        if let Some(out_path) = revision.get(&(major, minor, patch, base_url.to_string())) {
+        if let Some(out_path) = revision.get(&(version, base_url.to_string())) {
             log::debug!("Already downloaded redistrib {}", out_path.display());
             return Ok(out_path.to_path_buf());
         }
@@ -190,7 +189,7 @@ fn get_redistrib_path(
     let content = response.text()?;
     let mut redist = None;
     for chunk in content.split("'") {
-        if chunk.starts_with(&format!("redistrib_{major}.{minor}"))
+        if chunk.starts_with(&format!("redistrib_{}.{}", version.major, version.minor))
             && chunk.ends_with(".json")
             // NOTE: some of the versions have a 4th part, and are formatted differently.
             && chunk.chars().filter(|&c| c == '.').count() == 3
@@ -199,8 +198,8 @@ fn get_redistrib_path(
         }
     }
 
-    let filename =
-        redist.expect("Expected a redistrib.json file for {major}.{minor}.{patch} at {base_url}");
+    let filename = redist
+        .with_context(|| format!("Expected a redistrib.json file for {version} at {base_url}"))?;
 
     let url = format!("{}/{}", base_url, filename);
     log::debug!("Trying {}", url);
@@ -209,40 +208,34 @@ fn get_redistrib_path(
 
     if to_file(&url, &out_path, multi_progress).is_ok() {
         let mut lock = REVISION.lock().unwrap();
-        lock.insert(
-            (major, minor, patch, base_url.to_string()),
-            out_path.clone(),
-        );
+        lock.insert((version, base_url.to_string()), out_path.clone());
         return Ok(out_path);
     }
     Err(anyhow::anyhow!("Couldn't find a suitable patch"))
 }
 
 pub fn cuda_redist(
-    major: u32,
-    minor: u32,
-    patch: u32,
+    version: Version,
     base_url: &str,
     downloads_dir: &Path,
     multi_progress: &MultiProgress,
 ) -> Result<Value> {
-    let out_path =
-        get_redistrib_path(major, minor, patch, base_url, downloads_dir, multi_progress)?;
+    let out_path = get_redistrib_path(version, base_url, downloads_dir, multi_progress)?;
     let content = fs::read_to_string(&out_path)
         .context(format!("Failed to read cached file {}", out_path.display()))?;
     serde_json::from_str(&content)
         .context(format!("Failed to parse JSON from {}", out_path.display()))
 }
 
-pub fn nccl_cuda_pairings(full_version: &str, base_url: &str) -> Result<Vec<(u32, u32)>> {
-    let dir_url = format!("{base_url}/v{full_version}/");
+pub fn nccl_cuda_pairings(nccl_version: Version, base_url: &str) -> Result<Vec<Version>> {
+    let dir_url = format!("{base_url}/v{nccl_version}/");
     let content = get(&dir_url)
         .context("Fetching NCCL directory listing")?
         .error_for_status()
-        .context(format!("NCCL v{full_version} directory not found"))?
+        .context(format!("NCCL v{nccl_version} directory not found"))?
         .text()?;
 
-    let prefix = format!("nccl_{full_version}-1+cuda");
+    let prefix = format!("nccl_{nccl_version}-1+cuda");
     let suffix = "_x86_64.txz";
     let mut pairings = Vec::new();
     let mut search = content.as_str();
@@ -252,7 +245,7 @@ pub fn nccl_cuda_pairings(full_version: &str, base_url: &str) -> Result<Vec<(u32
             let cuda_ver = &search[..end];
             if let Some((maj, min)) = cuda_ver.split_once('.') {
                 if let (Ok(major), Ok(minor)) = (maj.parse::<u32>(), min.parse::<u32>()) {
-                    pairings.push((major, minor));
+                    pairings.push(Version::new(major, minor, 0));
                 }
             }
         }
@@ -260,7 +253,7 @@ pub fn nccl_cuda_pairings(full_version: &str, base_url: &str) -> Result<Vec<(u32
 
     if pairings.is_empty() {
         return Err(anyhow::anyhow!(
-            "No x86_64 CUDA pairings found for NCCL {full_version}"
+            "No x86_64 CUDA pairings found for NCCL {nccl_version}"
         ));
     }
 
