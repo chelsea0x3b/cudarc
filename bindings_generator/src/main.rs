@@ -21,6 +21,15 @@ use crate::version::Version;
 /// Those configs decide how to download and
 /// export bindings with bindgen. See [`ModuleConfig`].
 fn create_modules() -> Vec<ModuleConfig> {
+    macro_rules! filters_prefix {
+        ($p:literal) => {
+            Filters {
+                types: vec![concat!("^", $p, ".*")],
+                functions: vec![concat!("^", $p, ".*")],
+                vars: vec![concat!("^", $p, ".*")],
+            }
+        };
+    }
     vec![
         ModuleConfig {
             cudarc_name: "runtime",
@@ -30,21 +39,13 @@ fn create_modules() -> Vec<ModuleConfig> {
                 functions: vec!["^[Cc][Uu][Dd][Aa].*"],
                 vars: vec!["^[Cc][Uu][Dd][Aa].*"],
             },
-            allowlist_recursively: true,
             blocklist: Filters {
                 // NOTE: See https://github.com/chelsea0x3b/cudarc/issues/397
-                types: vec![],
                 functions: vec!["cudaDeviceGetNvSciSyncAttributes"],
-                vars: vec![],
+                ..Filters::none()
             },
             libs: vec!["cudart"],
-            clang_args: vec![],
-            raw_lines: vec![],
-            min_cuda_version: None,
-            module_dependencies: vec![],
-            feature_prefix: "cuda",
-            lib_versions: vec![],
-            bitflag_enums: vec![],
+            ..Default::default()
         },
         ModuleConfig {
             cudarc_name: "driver",
@@ -61,33 +62,21 @@ fn create_modules() -> Vec<ModuleConfig> {
                 functions: vec!["^cu.*"],
                 vars: vec!["^CU.*"],
             },
-            allowlist_recursively: true,
             blocklist: Filters {
                 // NOTE: See https://github.com/chelsea0x3b/cudarc/issues/385
                 types: vec!["^cuCheckpoint.*"],
                 functions: vec!["^cuCheckpoint.*", "cuDeviceGetNvSciSyncAttributes"],
-                vars: vec![],
+                ..Filters::none()
             },
             libs: vec!["cuda", "nvcuda"],
-            clang_args: vec![],
-            raw_lines: vec![],
-            min_cuda_version: None,
-            module_dependencies: vec![],
-            feature_prefix: "cuda",
-            lib_versions: vec![],
             bitflag_enums: vec!["CUmemAllocationHandleType_enum"],
+            ..Default::default()
         },
         ModuleConfig {
             cudarc_name: "cublas",
             redist_name: "libcublas",
-            allowlist: Filters {
-                types: vec!["^cublas.*"],
-                functions: vec!["^cublas.*"],
-                vars: vec!["^cublas.*"],
-            },
-            allowlist_recursively: true,
+            allowlist: filters_prefix!("cublas"),
             blocklist: Filters {
-                types: vec![],
                 functions: vec![
                     // NOTE: see https://github.com/chelsea0x3b/cudarc/issues/489
                     "cublasGetEmulationSpecialValuesSupport",
@@ -101,74 +90,38 @@ fn create_modules() -> Vec<ModuleConfig> {
                     "cublasSetFixedPointEmulationMantissaControl",
                     "cublasSetFixedPointEmulationMaxMantissaBitCount",
                 ],
-                vars: vec![],
+                ..Filters::none()
             },
             libs: vec!["cublas"],
-            clang_args: vec![],
-            raw_lines: vec![],
-            min_cuda_version: None,
-            module_dependencies: vec![],
-            feature_prefix: "cuda",
-            lib_versions: vec![],
-            bitflag_enums: vec![],
+            ..Default::default()
         },
         ModuleConfig {
             cudarc_name: "cublaslt",
             redist_name: "libcublas",
-            allowlist: Filters {
-                types: vec!["^cublasLt.*"],
-                functions: vec!["^cublasLt.*"],
-                vars: vec!["^cublasLt.*"],
-            },
-            allowlist_recursively: true,
+            allowlist: filters_prefix!("cublasLt"),
             blocklist: Filters {
-                types: vec![],
                 functions: vec!["cublasLtDisableCpuInstructionsSetMask"],
-                vars: vec![],
+                ..Filters::none()
             },
             libs: vec!["cublasLt"],
-            clang_args: vec![],
-            raw_lines: vec![],
-            min_cuda_version: None,
-            module_dependencies: vec![],
-            feature_prefix: "cuda",
-            lib_versions: vec![],
-            bitflag_enums: vec![],
+            ..Default::default()
         },
         ModuleConfig {
             cudarc_name: "curand",
             redist_name: "libcurand",
-            allowlist: Filters {
-                types: vec!["^curand.*"],
-                functions: vec!["^curand.*"],
-                vars: vec!["^curand.*"],
-            },
-            allowlist_recursively: true,
+            allowlist: filters_prefix!("curand"),
             blocklist: Filters {
-                types: vec![],
                 functions: vec!["curandGenerateBinomial", "curandGenerateBinomialMethod"],
-                vars: vec![],
+                ..Filters::none()
             },
             libs: vec!["curand"],
-            clang_args: vec![],
-            raw_lines: vec![],
-            min_cuda_version: None,
-            module_dependencies: vec![],
-            feature_prefix: "cuda",
-            lib_versions: vec![],
-            bitflag_enums: vec![],
+            ..Default::default()
         },
         ModuleConfig {
             cudarc_name: "nvrtc",
             redist_name: "cuda_nvrtc",
-            allowlist: Filters {
-                types: vec!["^nvrtc.*"],
-                functions: vec!["^nvrtc.*"],
-                vars: vec!["^nvrtc.*"],
-            },
-            allowlist_recursively: true,
+            allowlist: filters_prefix!("nvrtc"),
             blocklist: Filters {
-                types: vec![],
                 functions: vec![
                     // NOTE: see https://github.com/chelsea0x3b/cudarc/pull/431
                     "nvrtcGetPCHCreateStatus",
@@ -180,55 +133,29 @@ fn create_modules() -> Vec<ModuleConfig> {
                     "nvrtcGetNVVM",
                     "nvrtcGetNVVMSize",
                 ],
-                vars: vec![],
+                ..Filters::none()
             },
             libs: vec!["nvrtc"],
-            clang_args: vec![],
-            raw_lines: vec![],
-            min_cuda_version: None,
-            module_dependencies: vec![],
-            feature_prefix: "cuda",
-            lib_versions: vec![],
-            bitflag_enums: vec![],
+            ..Default::default()
         },
         ModuleConfig {
             cudarc_name: "cudnn",
             redist_name: "cudnn",
-            allowlist: Filters {
-                types: vec!["^cudnn.*"],
-                functions: vec!["^cudnn.*"],
-                vars: vec!["^cudnn.*"],
-            },
-            allowlist_recursively: true,
-            blocklist: Filters::none(),
+            allowlist: filters_prefix!("cudnn"),
             libs: vec!["cudnn"],
-            clang_args: vec![],
-            raw_lines: vec![],
-            min_cuda_version: None,
-            module_dependencies: vec![],
             feature_prefix: "cudnn",
             lib_versions: vec![
                 Version::new(8, 9, 7),
                 Version::new(9, 10, 2),
                 Version::new(9, 21, 1),
             ],
-            bitflag_enums: vec![],
+            ..Default::default()
         },
         ModuleConfig {
             cudarc_name: "nccl",
             redist_name: "libnccl",
-            allowlist: Filters {
-                types: vec!["^nccl.*"],
-                functions: vec!["^nccl.*"],
-                vars: vec!["^nccl.*"],
-            },
-            allowlist_recursively: true,
-            blocklist: Filters::none(),
+            allowlist: filters_prefix!("nccl"),
             libs: vec!["nccl"],
-            clang_args: vec![],
-            raw_lines: vec![],
-            min_cuda_version: None,
-            module_dependencies: vec![],
             feature_prefix: "nccl",
             lib_versions: vec![
                 Version::new(2, 22, 3),
@@ -240,19 +167,13 @@ fn create_modules() -> Vec<ModuleConfig> {
                 Version::new(2, 29, 7),
                 Version::new(2, 30, 4),
             ],
-            bitflag_enums: vec![],
+            ..Default::default()
         },
         ModuleConfig {
             cudarc_name: "cusparse",
             redist_name: "libcusparse",
-            allowlist: Filters {
-                types: vec!["^cusparse.*"],
-                functions: vec!["^cusparse.*"],
-                vars: vec!["^cusparse.*"],
-            },
-            allowlist_recursively: true,
+            allowlist: filters_prefix!("cusparse"),
             blocklist: Filters {
-                types: vec![],
                 functions: vec![
                     "cusparseCbsric02_bufferSizeExt",
                     "cusparseCbsrilu02_bufferSizeExt",
@@ -292,60 +213,33 @@ fn create_modules() -> Vec<ModuleConfig> {
                     "cusparseZgebsr2gebsc_bufferSizeExt",
                     "cusparseZgebsr2gebsr_bufferSizeExt",
                 ],
-                vars: vec![],
+                ..Filters::none()
             },
             libs: vec!["cusparse"],
-            clang_args: vec![],
-            raw_lines: vec![],
-            min_cuda_version: None,
-            module_dependencies: vec![],
-            feature_prefix: "cuda",
-            lib_versions: vec![],
-            bitflag_enums: vec![],
+            ..Default::default()
         },
         ModuleConfig {
             cudarc_name: "cusolver",
             redist_name: "libcusolver",
-            allowlist: Filters {
-                types: vec!["^cusolver.*"],
-                functions: vec!["^cusolver.*"],
-                vars: vec!["^cusolver.*"],
-            },
-            allowlist_recursively: true,
+            allowlist: filters_prefix!("cusolver"),
             blocklist: Filters {
                 types: vec!["^cusolverMg.*"],
                 functions: vec!["^cusolverMg.*", "^cusolverDnLogger.*"],
                 vars: vec!["^cusolverMg.*"],
             },
             libs: vec!["cusolver"],
-            clang_args: vec![],
-            raw_lines: vec![],
-            min_cuda_version: None,
             // cusolverDn.h transitively includes cublas_v2.h
             module_dependencies: vec!["cublas", "cusparse"],
-            feature_prefix: "cuda",
-            lib_versions: vec![],
-            bitflag_enums: vec![],
+            ..Default::default()
         },
         ModuleConfig {
             cudarc_name: "cusolvermg",
             redist_name: "libcusolver",
-            allowlist: Filters {
-                types: vec!["^cusolverMg.*"],
-                functions: vec!["^cusolverMg.*"],
-                vars: vec!["^cusolverMg.*"],
-            },
-            allowlist_recursively: true,
-            blocklist: Filters::none(),
+            allowlist: filters_prefix!("cusolverMg"),
             libs: vec!["cusolverMg"],
-            clang_args: vec![],
-            raw_lines: vec![],
-            min_cuda_version: None,
             // cusolverMg.h transitively includes cublas_v2.h
             module_dependencies: vec!["cublas", "cusparse"],
-            feature_prefix: "cuda",
-            lib_versions: vec![],
-            bitflag_enums: vec![],
+            ..Default::default()
         },
         ModuleConfig {
             cudarc_name: "cufile",
@@ -353,41 +247,22 @@ fn create_modules() -> Vec<ModuleConfig> {
             allowlist: Filters {
                 types: vec!["^[Cc][Uu][Ff][Ii][Ll][Ee].*"],
                 functions: vec!["^cuFile.*"],
-                vars: vec![],
+                ..Filters::none()
             },
-            allowlist_recursively: true,
-            blocklist: Filters::none(),
             libs: vec!["cufile"],
-            clang_args: vec![],
-            raw_lines: vec![],
-            min_cuda_version: None,
-            module_dependencies: vec![],
-            feature_prefix: "cuda",
-            lib_versions: vec![],
-            bitflag_enums: vec![],
+            ..Default::default()
         },
         ModuleConfig {
             cudarc_name: "nvtx",
             redist_name: "cuda_nvtx",
-            allowlist: Filters {
-                types: vec!["^nvtx.*"],
-                functions: vec!["^nvtx.*"],
-                vars: vec!["^nvtx.*"],
-            },
-            allowlist_recursively: true,
+            allowlist: filters_prefix!("nvtx"),
             blocklist: Filters {
-                types: vec![],
                 functions: vec!["nvtxInitialize"],
-                vars: vec![],
+                ..Filters::none()
             },
             libs: vec!["nvToolsExt"],
             clang_args: vec!["-DNVTX_NO_IMPL=0", "-DNVTX_DECLSPEC="],
-            raw_lines: vec![],
-            min_cuda_version: None,
-            module_dependencies: vec![],
-            feature_prefix: "cuda",
-            lib_versions: vec![],
-            bitflag_enums: vec![],
+            ..Default::default()
         },
         ModuleConfig {
             cudarc_name: "cupti",
@@ -431,33 +306,17 @@ fn create_modules() -> Vec<ModuleConfig> {
                     "cudaWaitExternalSemaphoresAsync_v10000_params_st",
                     "cudaWaitExternalSemaphoresAsync_v10000_params",
                 ],
-                functions: vec![],
-                vars: vec![],
+                ..Filters::none()
             },
             libs: vec!["cupti"],
-            clang_args: vec![],
             raw_lines: vec!["use crate::driver::sys::*;", "use crate::runtime::sys::*;"],
-            min_cuda_version: None,
-            module_dependencies: vec![],
-            feature_prefix: "cuda",
-            lib_versions: vec![],
-            bitflag_enums: vec![],
+            ..Default::default()
         },
         ModuleConfig {
             cudarc_name: "cutensor",
             redist_name: "libcutensor",
-            allowlist: Filters {
-                types: vec!["^cutensor.*"],
-                functions: vec!["^cutensor.*"],
-                vars: vec!["^cutensor.*"],
-            },
-            allowlist_recursively: true,
-            blocklist: Filters::none(),
+            allowlist: filters_prefix!("cutensor"),
             libs: vec!["cutensor"],
-            clang_args: vec![],
-            raw_lines: vec![],
-            min_cuda_version: None,
-            module_dependencies: vec![],
             feature_prefix: "cutensor",
             lib_versions: vec![
                 Version::new(2, 3, 1),
@@ -465,26 +324,15 @@ fn create_modules() -> Vec<ModuleConfig> {
                 Version::new(2, 5, 0),
                 Version::new(2, 6, 0),
             ],
-            bitflag_enums: vec![],
+            ..Default::default()
         },
         ModuleConfig {
             cudarc_name: "cufft",
             redist_name: "libcufft",
-            allowlist: Filters {
-                types: vec!["^cufft.*"],
-                functions: vec!["^cufft.*"],
-                vars: vec!["^cufft.*"],
-            },
-            allowlist_recursively: true,
-            blocklist: Filters::none(),
+            allowlist: filters_prefix!("cufft"),
             libs: vec!["cufft"],
-            clang_args: vec![],
-            raw_lines: vec![],
             min_cuda_version: Some(Version::new(12, 0, 0)),
-            module_dependencies: vec![],
-            feature_prefix: "cuda",
-            lib_versions: vec![],
-            bitflag_enums: vec![],
+            ..Default::default()
         },
     ]
 }
@@ -524,6 +372,26 @@ struct ModuleConfig {
     /// These are generated as transparent newtypes instead of Rust enums so that bitwise OR
     /// is well-defined, and `BitOr`/`BitOrAssign` impls are emitted for them.
     bitflag_enums: Vec<&'static str>,
+}
+
+impl Default for ModuleConfig {
+    fn default() -> Self {
+        Self {
+            cudarc_name: "",
+            redist_name: "",
+            allowlist: Filters::none(),
+            blocklist: Filters::none(),
+            libs: vec![],
+            clang_args: vec![],
+            allowlist_recursively: true,
+            raw_lines: vec![],
+            min_cuda_version: None,
+            module_dependencies: vec![],
+            feature_prefix: "cuda",
+            lib_versions: vec![],
+            bitflag_enums: vec![],
+        }
+    }
 }
 
 impl ModuleConfig {
