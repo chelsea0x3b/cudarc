@@ -39,6 +39,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             raw_lines: vec![],
             min_cuda_version: None,
             module_dependencies: vec![],
+            bitflag_enums: vec![],
         },
         ModuleConfig {
             cudarc_name: "driver",
@@ -67,6 +68,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             raw_lines: vec![],
             min_cuda_version: None,
             module_dependencies: vec![],
+            bitflag_enums: vec!["CUmemAllocationHandleType_enum"],
         },
         ModuleConfig {
             cudarc_name: "cublas",
@@ -99,6 +101,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             raw_lines: vec![],
             min_cuda_version: None,
             module_dependencies: vec![],
+            bitflag_enums: vec![],
         },
         ModuleConfig {
             cudarc_name: "cublaslt",
@@ -119,6 +122,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             raw_lines: vec![],
             min_cuda_version: None,
             module_dependencies: vec![],
+            bitflag_enums: vec![],
         },
         ModuleConfig {
             cudarc_name: "curand",
@@ -139,6 +143,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             raw_lines: vec![],
             min_cuda_version: None,
             module_dependencies: vec![],
+            bitflag_enums: vec![],
         },
         ModuleConfig {
             cudarc_name: "nvrtc",
@@ -169,6 +174,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             raw_lines: vec![],
             min_cuda_version: None,
             module_dependencies: vec![],
+            bitflag_enums: vec![],
         },
         ModuleConfig {
             cudarc_name: "cudnn",
@@ -185,6 +191,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             raw_lines: vec![],
             min_cuda_version: None,
             module_dependencies: vec![],
+            bitflag_enums: vec![],
         },
         ModuleConfig {
             cudarc_name: "nccl",
@@ -201,6 +208,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             raw_lines: vec![],
             min_cuda_version: None,
             module_dependencies: vec![],
+            bitflag_enums: vec![],
         },
         ModuleConfig {
             cudarc_name: "cusparse",
@@ -259,6 +267,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             raw_lines: vec![],
             min_cuda_version: None,
             module_dependencies: vec![],
+            bitflag_enums: vec![],
         },
         ModuleConfig {
             cudarc_name: "cusolver",
@@ -280,6 +289,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             min_cuda_version: None,
             // cusolverDn.h transitively includes cublas_v2.h
             module_dependencies: vec!["cublas", "cusparse"],
+            bitflag_enums: vec![],
         },
         ModuleConfig {
             cudarc_name: "cusolvermg",
@@ -297,6 +307,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             min_cuda_version: None,
             // cusolverMg.h transitively includes cublas_v2.h
             module_dependencies: vec!["cublas", "cusparse"],
+            bitflag_enums: vec![],
         },
         ModuleConfig {
             cudarc_name: "cufile",
@@ -313,6 +324,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             raw_lines: vec![],
             min_cuda_version: None,
             module_dependencies: vec![],
+            bitflag_enums: vec![],
         },
         ModuleConfig {
             cudarc_name: "nvtx",
@@ -333,6 +345,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             raw_lines: vec![],
             min_cuda_version: None,
             module_dependencies: vec![],
+            bitflag_enums: vec![],
         },
         ModuleConfig {
             cudarc_name: "cupti",
@@ -384,6 +397,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             raw_lines: vec!["use crate::driver::sys::*;", "use crate::runtime::sys::*;"],
             min_cuda_version: None,
             module_dependencies: vec![],
+            bitflag_enums: vec![],
         },
         ModuleConfig {
             cudarc_name: "cutensor",
@@ -400,6 +414,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             raw_lines: vec![],
             min_cuda_version: Some("cuda-12000"),
             module_dependencies: vec![],
+            bitflag_enums: vec![],
         },
         ModuleConfig {
             cudarc_name: "cufft",
@@ -416,6 +431,7 @@ fn create_modules() -> Vec<ModuleConfig> {
             raw_lines: vec![],
             min_cuda_version: Some("cuda-12000"),
             module_dependencies: vec![],
+            bitflag_enums: vec![],
         },
     ]
 }
@@ -447,6 +463,10 @@ struct ModuleConfig {
     /// Modules with dependencies are processed in a second wave, after all independent
     /// modules have been downloaded, extracted, and had bindings generated.
     module_dependencies: Vec<&'static str>,
+    /// C enum names that are bitflags (values are powers of 2 meant to be OR-ed together).
+    /// These are generated as transparent newtypes instead of Rust enums so that bitwise OR
+    /// is well-defined, and `BitOr`/`BitOrAssign` impls are emitted for them.
+    bitflag_enums: Vec<&'static str>,
 }
 
 impl ModuleConfig {
@@ -521,6 +541,10 @@ impl ModuleConfig {
 
         for &raw_line in self.raw_lines.iter() {
             builder = builder.raw_line(raw_line);
+        }
+
+        for &n in self.bitflag_enums.iter() {
+            builder = builder.newtype_enum(n);
         }
 
         let parent_sysdir = Path::new("..")
