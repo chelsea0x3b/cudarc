@@ -451,8 +451,16 @@ pub unsafe fn create_dn_mat(
     order: sys::cusparseOrder_t,
 ) -> Result<sys::cusparseDnMatDescr_t, CusparseError> {
     let mut descr = MaybeUninit::uninit();
-    sys::cusparseCreateDnMat(descr.as_mut_ptr(), rows, cols, ld, values, value_type, order)
-        .result()?;
+    sys::cusparseCreateDnMat(
+        descr.as_mut_ptr(),
+        rows,
+        cols,
+        ld,
+        values,
+        value_type,
+        order,
+    )
+    .result()?;
     Ok(descr.assume_init())
 }
 
