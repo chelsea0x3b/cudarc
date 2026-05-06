@@ -467,7 +467,7 @@ impl ModuleConfig {
         }
 
         for &n in self.bitflag_enums.iter() {
-            builder = builder.newtype_enum(n);
+            builder = builder.bitfield_enum(n);
         }
 
         let parent_sysdir = Path::new("..")
