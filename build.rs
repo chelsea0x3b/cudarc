@@ -537,18 +537,11 @@ fn find_header(filename: &str) -> Option<std::path::PathBuf> {
 /// Parse `#define NAME value` lines from a header file and return the integer value.
 fn parse_define(header: &std::path::Path, name: &str) -> Option<u32> {
     let content = std::fs::read_to_string(header).ok()?;
-    for line in content.lines() {
-        let line = line.trim();
-        if line.starts_with("#define") {
-            let rest = line["#define".len()..].trim();
-            if rest.starts_with(name) {
-                let after = rest[name.len()..].trim();
-                if after
-                    .chars()
-                    .next()
-                    .map_or(true, |c| c.is_ascii_whitespace())
-                {
-                    return after.trim().parse().ok();
+    for line in content.lines().map(str::trim) {
+        if let Some(name_value) = line.strip_prefix("#define").map(str::trim) {
+            if let Some(value) = name_value.strip_prefix(name).map(str::trim) {
+                if let Ok(v) = value.parse() {
+                    return Some(v);
                 }
             }
         }
