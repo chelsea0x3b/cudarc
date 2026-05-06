@@ -6,97 +6,81 @@ use rayon::prelude::*;
 use std::collections::BTreeMap;
 use std::fs;
 use std::path::Path;
-use syn::parse::Parser;
 use syn::{
-    Expr, Field, FnArg, ForeignItemFn, Item, ItemConst, ItemEnum, ItemFn, ItemImpl, ItemStruct,
-    ItemType, ItemUnion, ItemUse, Pat, Stmt,
+    FnArg, ForeignItemFn, Item, ItemConst, ItemEnum, ItemFn, ItemImpl, ItemStruct, ItemType,
+    ItemUnion, ItemUse, Pat,
 };
 
 use crate::ModuleConfig;
 use crate::version::Version;
 
-struct LibItem {
-    adapter_function: ItemFn,
-    member: Field,
-    init_member: Stmt,
-    init_decl: Expr,
-}
-struct LibItems {
-    adapter_functions: Vec<ItemFn>,
-    members: Vec<Field>,
-    init_members: Vec<Stmt>,
-    init_fields: Vec<Expr>,
-}
-impl LibItem {
-    fn new(
-        func: &ForeignItemFn,
-        versions: &[&Version],
-        n_versions: usize,
-        feature_prefix: &str,
-    ) -> Self {
-        let parser = Field::parse_named;
-        let features = versions
-            .iter()
-            .map(|v| v.feature_name(feature_prefix))
-            .collect::<Vec<_>>();
-        let feature_tok = if versions.len() == n_versions {
-            quote! {}
-        } else {
-            quote! {
-                #[cfg(any(#(feature=#features),*))]
-            }
-        };
-        let ForeignItemFn {
-            attrs: _,
-            vis: _,
-            sig,
-            semi_token: _,
-        } = func;
-        let fn_name = &sig.ident;
-        let inputs = &func.sig.inputs;
-        let output = &func.sig.output;
-        let arg_names = inputs.iter().filter_map(|arg| {
+/// Build a unified adapter for a single foreign function.
+///
+/// The emitted adapter has both link strategies inside its body, gated on the
+/// `dynamic-loading` feature: a per-symbol `OnceLock` that resolves the symbol
+/// on first call when dynamic loading is enabled, or a plain `extern "C"` decl
+/// + call when it's not. The outer `pub unsafe fn` and its signature are the
+/// same in both modes, so callers don't see a difference.
+fn build_adapter(
+    func: &ForeignItemFn,
+    versions: &[&Version],
+    n_versions: usize,
+    feature_prefix: &str,
+) -> ItemFn {
+    let features = versions
+        .iter()
+        .map(|v| v.feature_name(feature_prefix))
+        .collect::<Vec<_>>();
+    let feature_tok = if versions.len() == n_versions {
+        quote! {}
+    } else {
+        quote! {
+            #[cfg(any(#(feature=#features),*))]
+        }
+    };
+    let sig = &func.sig;
+    let fn_name = &sig.ident;
+    let inputs = &sig.inputs;
+    let output = &sig.output;
+    let arg_names: Vec<_> = inputs
+        .iter()
+        .filter_map(|arg| {
             if let FnArg::Typed(pat_type) = arg
-                && let Pat::Ident(pat_ident) = *pat_type.pat.clone()
+                && let Pat::Ident(pat_ident) = &*pat_type.pat
             {
                 return Some(pat_ident.ident.clone());
             }
             None
-        });
+        })
+        .collect();
+    let symbol_cstr = cstr_expr(fn_name.to_string());
+    let symbol_str = fn_name.to_string();
 
-        let args = arg_names;
-        let c = quote! {
-            #feature_tok
-            pub unsafe fn #fn_name(#inputs) #output{
-                (culib().#fn_name)(#(#args),*)
-            }
-        };
-        let adapter_function: ItemFn = syn::parse2(c.clone()).unwrap();
-        let symbol_cstr = cstr_expr(fn_name.to_string());
-        let init_member = syn::parse2(quote! {
-            #feature_tok
-            let #fn_name = __library
-                .get(#symbol_cstr)
-                .map(|sym| *sym).expect("Expected symbol in library");
-        })
-        .unwrap();
-        let init_decl = syn::parse2(quote! {
-            #feature_tok
-            #fn_name
-        })
-        .unwrap();
-        let c = quote! {
-            #feature_tok
-            pub #fn_name: unsafe extern "C" fn(#inputs) #output
-        };
-        let member = parser.parse2(c).unwrap();
-        Self {
-            adapter_function,
-            init_member,
-            init_decl,
-            member,
+    let tokens = quote! {
+        #feature_tok
+        pub unsafe fn #fn_name(#inputs) #output {
+            #[cfg(feature = "dynamic-loading")]
+            let __result = {
+                type __SymFn = unsafe extern "C" fn(#inputs) #output;
+                static SYM: std::sync::OnceLock<__SymFn> = std::sync::OnceLock::new();
+                let f = SYM.get_or_init(|| unsafe {
+                    *culib()
+                        .get::<__SymFn>(#symbol_cstr)
+                        .unwrap_or_else(|e| panic!("Failed to load symbol {}: {e}", #symbol_str))
+                });
+                f(#(#arg_names),*)
+            };
+            #[cfg(not(feature = "dynamic-loading"))]
+            let __result = {
+                extern "C" {
+                    fn #fn_name(#inputs) #output;
+                }
+                #fn_name(#(#arg_names),*)
+            };
+            __result
         }
-    }
+    };
+    syn::parse2(tokens).unwrap()
 }
 
 pub fn cstr_expr(mut string: String) -> TokenStream {
@@ -104,21 +88,6 @@ pub fn cstr_expr(mut string: String) -> TokenStream {
     let b = proc_macro2::Literal::byte_string(string.as_bytes());
     quote! {
         #b
-    }
-}
-
-impl From<Vec<LibItem>> for LibItems {
-    fn from(value: Vec<LibItem>) -> Self {
-        let (adapter_functions, members, init_members, init_fields) = value
-            .into_iter()
-            .map(|v| (v.adapter_function, v.member, v.init_member, v.init_decl))
-            .collect();
-        Self {
-            adapter_functions,
-            members,
-            init_members,
-            init_fields,
-        }
     }
 }
 
@@ -237,14 +206,11 @@ impl BindingMerger {
         let uses = self.write_to_output(&self.uses).expect("Write to output");
         let unions = self.write_to_output(&self.unions).expect("Write to output");
         let consts = self.write_to_output(&self.consts).expect("Write to output");
-        let functions = self
-            .write_to_output(&self.functions)
-            .expect("Write to output");
 
         let lib_names = &self.lib_names;
 
-        let loading_lib = self
-            .create_loading_lib(&self.functions)
+        let adapters = self
+            .create_unified_adapters(&self.functions)
             .expect("Write to output");
 
         TokenStream::from(quote! {
@@ -274,48 +240,41 @@ impl BindingMerger {
 
             #unions
 
-            #[cfg(not(feature="dynamic-loading"))]
-            extern "C" {
-                #functions
+            #adapters
+
+            #[cfg(feature = "dynamic-loading")]
+            pub unsafe fn is_culib_present() -> bool {
+                let lib_names = [#(#lib_names),*];
+                let choices = lib_names
+                    .iter()
+                    .map(|l| crate::get_lib_name_candidates(l))
+                    .flatten();
+                for choice in choices {
+                    if ::libloading::Library::new(choice).is_ok() {
+                        return true;
+                    }
+                }
+                false
             }
 
-            #[cfg(feature="dynamic-loading")]
-            mod loaded{
-               use super::*;
-
-               #loading_lib
-
-               pub unsafe fn is_culib_present() -> bool {
-                   let lib_names = [#(#lib_names),*];
-                   let choices = lib_names
-                       .iter()
-                       .map(|l| crate::get_lib_name_candidates(l))
-                       .flatten();
-                   for choice in choices {
-                       if Lib::new(choice).is_ok() {
-                           return true;
-                       }
-                   }
-                   false
-               }
-
-               pub unsafe fn culib() -> &'static Lib {
-                   static LIB: std::sync::OnceLock<Lib> = std::sync::OnceLock::new();
-                   LIB.get_or_init(|| {
-                       let lib_names = std::vec![#(#lib_names),*];
-                       let choices: std::vec::Vec<_> = lib_names.iter().map(|l| crate::get_lib_name_candidates(l)).flatten().collect();
-                       for choice in choices.iter() {
-                           if let Ok(lib) = Lib::new(choice) {
-                               return lib;
-                           }
-                       }
-                       crate::panic_no_lib_found(lib_names[0], &choices);
-                   })
-               }
-
+            #[cfg(feature = "dynamic-loading")]
+            pub unsafe fn culib() -> &'static ::libloading::Library {
+                static LIB: std::sync::OnceLock<::libloading::Library> = std::sync::OnceLock::new();
+                LIB.get_or_init(|| {
+                    let lib_names = std::vec![#(#lib_names),*];
+                    let choices: std::vec::Vec<_> = lib_names
+                        .iter()
+                        .map(|l| crate::get_lib_name_candidates(l))
+                        .flatten()
+                        .collect();
+                    for choice in choices.iter() {
+                        if let Ok(lib) = ::libloading::Library::new(choice) {
+                            return lib;
+                        }
+                    }
+                    crate::panic_no_lib_found(lib_names[0], &choices);
+                })
             }
-            #[cfg(feature="dynamic-loading")]
-            pub use loaded::*;
         })
     }
 
@@ -371,11 +330,11 @@ impl BindingMerger {
         Ok(output)
     }
 
-    fn create_loading_lib(
+    fn create_unified_adapters(
         &self,
         info: &BTreeMap<String, FunctionInfo<ForeignItemFn>>,
     ) -> Result<TokenStream> {
-        let mut elements = vec![];
+        let mut adapters: Vec<ItemFn> = vec![];
         for info in info.values() {
             let mut prev_decl: Option<&ForeignItemFn> = None;
             let mut versions = vec![];
@@ -383,9 +342,12 @@ impl BindingMerger {
                 if let Some(prev_decl) = prev_decl
                     && prev_decl != decl
                 {
-                    let element =
-                        LibItem::new(prev_decl, &versions, self.n_versions, &self.feature_prefix);
-                    elements.push(element);
+                    adapters.push(build_adapter(
+                        prev_decl,
+                        &versions,
+                        self.n_versions,
+                        &self.feature_prefix,
+                    ));
                     versions.clear();
                 }
                 versions.push(version);
@@ -394,50 +356,17 @@ impl BindingMerger {
             if !versions.is_empty()
                 && let Some(decl) = prev_decl
             {
-                let element = LibItem::new(decl, &versions, self.n_versions, &self.feature_prefix);
-                elements.push(element);
+                adapters.push(build_adapter(
+                    decl,
+                    &versions,
+                    self.n_versions,
+                    &self.feature_prefix,
+                ));
             }
         }
 
-        let LibItems {
-            adapter_functions,
-            members,
-            init_members,
-            init_fields,
-        } = elements.into();
         Ok(quote! {
-            #(#adapter_functions)
-            *
-
-            pub struct Lib{
-                __library: ::libloading::Library,
-                #(#members),
-                *
-            }
-
-            impl Lib{
-                pub unsafe fn new<P>(path: P) -> Result<Self, ::libloading::Error>
-                where
-                    P: AsRef<::std::ffi::OsStr>,
-                {
-                    let library = ::libloading::Library::new(path.as_ref())?;
-                    Self::from_library(library)
-                }
-                pub unsafe fn from_library<L>(library: L) -> Result<Self, ::libloading::Error>
-                where
-                    L: Into<::libloading::Library>,
-                {
-                    let __library = library.into();
-                    #(#init_members);
-                    *
-                    Ok(Self{
-                        __library,
-                        #(#init_fields), *
-                    })
-                }
-
-            }
-
+            #(#adapters)*
         })
     }
 }
