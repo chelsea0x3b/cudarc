@@ -182,6 +182,20 @@ pub(crate) fn panic_no_lib_found<S: std::fmt::Debug>(lib_name: &str, choices: &[
     panic!("Unable to dynamically load the \"{lib_name}\" shared library - searched for library names: {choices:?}. Ensure that `LD_LIBRARY_PATH` has the correct path to the installed library. If the shared library is present on the system under a different name than one of those listed above, please open a GitHub issue.");
 }
 
+/// Returns the candidate filenames cudarc will try to `dlopen` when looking up
+/// a dynamically-loaded CUDA sub-library (e.g. `"cudart"`, `"cublas"`).
+///
+/// By default the candidates are bare filenames (e.g. `libcudart.so`,
+/// `libcudart.so.13`, …) and the OS loader resolves them via
+/// `LD_LIBRARY_PATH` / `ld.so.cache` / `DT_RPATH`.
+///
+/// If the `CUDARC_LIBRARY_DIR` environment variable is set, every candidate
+/// is *also* tried with that directory prepended (as an absolute path),
+/// ahead of the bare names. This lets callers pin resolution to a specific
+/// CUDA toolkit install on systems where multiple toolkits coexist and the
+/// loader would otherwise pick the wrong one for the bare `libcudart.so`
+/// symlink. Bare-name fallback is preserved so a misconfigured path does
+/// not break users who rely on the loader.
 #[cfg(feature = "dynamic-loading")]
 pub fn get_lib_name_candidates(lib_name: &str) -> std::vec::Vec<std::string::String> {
     use std::env::consts::{DLL_PREFIX, DLL_SUFFIX};
@@ -197,7 +211,7 @@ pub fn get_lib_name_candidates(lib_name: &str) -> std::vec::Vec<std::string::Str
     let major = env!("CUDA_MAJOR_VERSION");
     let minor = env!("CUDA_MINOR_VERSION");
 
-    [
+    let bare: std::vec::Vec<std::string::String> = std::vec![
         std::format!("{DLL_PREFIX}{lib_name}{DLL_SUFFIX}"),
         std::format!("{DLL_PREFIX}{lib_name}{pointer_width}{DLL_SUFFIX}"),
         std::format!("{DLL_PREFIX}{lib_name}{pointer_width}_{major}{DLL_SUFFIX}"),
@@ -220,6 +234,15 @@ pub fn get_lib_name_candidates(lib_name: &str) -> std::vec::Vec<std::string::Str
         std::format!("{DLL_PREFIX}{lib_name}{DLL_SUFFIX}.9"),
         // See issue #296
         std::format!("{DLL_PREFIX}{lib_name}{DLL_SUFFIX}.1"),
-    ]
-    .into()
+    ];
+
+    if let Some(dir) = std::env::var_os("CUDARC_LIBRARY_DIR") {
+        let dir = std::path::PathBuf::from(dir);
+        bare.iter()
+            .map(|name| dir.join(name).to_string_lossy().into_owned())
+            .chain(bare.iter().cloned())
+            .collect()
+    } else {
+        bare
+    }
 }
