@@ -417,7 +417,10 @@ fn nccl_version_from_build_system() -> (u32, u32) {
         #[cfg(feature = "fallback-latest")]
         {
             let latest = SUPPORTED_NCCL_VERSIONS[0].0;
-            println!("cargo:warning=nccl.h not found. Following `-F fallback-latest`; using NCCL {}.{}.", latest.0, latest.1);
+            println!(
+                "cargo:warning=nccl.h not found. Following `-F fallback-latest`; using NCCL {}.{}.",
+                latest.0, latest.1
+            );
             return latest;
         }
         #[cfg(not(feature = "fallback-latest"))]
@@ -506,11 +509,9 @@ fn find_header(filename: &str) -> Option<std::path::PathBuf> {
     // Windows cuDNN versioned install dirs (only the active version)
     for &((major, minor), active) in SUPPORTED_CUDNN_VERSIONS {
         if active {
-            search_dirs.push(
-                std::path::PathBuf::from(format!(
-                    "C:/Program Files/NVIDIA/CUDNN/v{major}.{minor}/include"
-                ))
-            );
+            search_dirs.push(std::path::PathBuf::from(format!(
+                "C:/Program Files/NVIDIA/CUDNN/v{major}.{minor}/include"
+            )));
         }
     }
 
