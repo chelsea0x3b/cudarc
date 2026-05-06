@@ -7,7 +7,11 @@ use tar::Archive;
 use xz2::read::XzDecoder;
 
 fn extract_tar_gz(tarball_path: &Path) -> Result<PathBuf> {
-    let output_dir = tarball_path.with_extension("");
+    let output_dir = match tarball_path.extension().and_then(|s| s.to_str()) {
+        Some("tgz") => tarball_path.with_extension(""),
+        Some("gz") => tarball_path.with_extension("").with_extension(""),
+        _ => unreachable!(),
+    };
     if output_dir.exists() && output_dir.read_dir().unwrap().next().is_some() {
         // no work to be done
         return Ok(output_dir);
@@ -19,19 +23,25 @@ fn extract_tar_gz(tarball_path: &Path) -> Result<PathBuf> {
     let decompressed = GzDecoder::new(tarball);
     let mut archive = Archive::new(decompressed);
 
-    archive.unpack(&output_dir).with_context(|| {
-        format!(
-            "Failed to unpack {} to {}",
-            tarball_path.display(),
-            output_dir.display()
-        )
-    })?;
+    archive
+        .unpack(tarball_path.parent().unwrap())
+        .with_context(|| {
+            format!(
+                "Failed to unpack {} to {}",
+                tarball_path.display(),
+                output_dir.display()
+            )
+        })?;
 
     Ok(output_dir)
 }
 
 fn extract_tar_xz(tarball_path: &Path) -> Result<PathBuf> {
-    let output_dir = tarball_path.with_extension("");
+    let output_dir = match tarball_path.extension().and_then(|s| s.to_str()) {
+        Some("txz") => tarball_path.with_extension(""),
+        Some("xz") => tarball_path.with_extension("").with_extension(""),
+        _ => unreachable!(),
+    };
     if output_dir.exists() && output_dir.read_dir().unwrap().next().is_some() {
         // no work to be done
         return Ok(output_dir);
@@ -43,13 +53,15 @@ fn extract_tar_xz(tarball_path: &Path) -> Result<PathBuf> {
     let decompressed = XzDecoder::new(tarball);
     let mut archive = Archive::new(decompressed);
 
-    archive.unpack(&output_dir).with_context(|| {
-        format!(
-            "Failed to unpack {} to {}",
-            tarball_path.display(),
-            output_dir.display()
-        )
-    })?;
+    archive
+        .unpack(tarball_path.parent().unwrap())
+        .with_context(|| {
+            format!(
+                "Failed to unpack {} to {}",
+                tarball_path.display(),
+                output_dir.display()
+            )
+        })?;
 
     Ok(output_dir)
 }
