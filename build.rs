@@ -134,17 +134,19 @@ fn main() {
     #[cfg(feature = "nccl-version-from-build-system")]
     {
         let (major, minor) = nccl_version_from_build_system();
-        println!("cargo:rustc-cfg=feature=\"nccl-{major}.{minor}\"");
+        println!("cargo:rustc-cfg=feature=\"nccl-{major:02}{minor:02}\"");
     }
+
     #[cfg(feature = "cudnn-version-from-build-system")]
     {
         let (major, minor) = cudnn_version_from_build_system();
-        println!("cargo:rustc-cfg=feature=\"cudnn-{major}.{minor}\"");
+        println!("cargo:rustc-cfg=feature=\"cudnn-{major:02}{minor:02}\"");
     }
+
     #[cfg(feature = "cutensor-version-from-build-system")]
     {
         let (major, minor) = cutensor_version_from_build_system();
-        println!("cargo:rustc-cfg=feature=\"cutensor-{major}.{minor}\"");
+        println!("cargo:rustc-cfg=feature=\"cutensor-{major:02}{minor:02}\"");
     }
 
     #[cfg(feature = "dynamic-linking")]
@@ -191,7 +193,22 @@ fn dynamic_linking(major: usize, minor: usize) {
 
     #[cfg(feature = "driver")]
     println!("cargo:rustc-link-lib=dylib=cuda");
-    #[cfg(feature = "nccl")]
+    #[cfg(any(
+        feature = "nccl",
+        feature = "nccl-version-from-build-system",
+        feature = "nccl-02018",
+        feature = "nccl-02019",
+        feature = "nccl-02020",
+        feature = "nccl-02021",
+        feature = "nccl-02022",
+        feature = "nccl-02024",
+        feature = "nccl-02025",
+        feature = "nccl-02026",
+        feature = "nccl-02027",
+        feature = "nccl-02028",
+        feature = "nccl-02029",
+        feature = "nccl-02030",
+    ))]
     println!("cargo:rustc-link-lib=dylib=nccl");
     #[cfg(feature = "nvrtc")]
     println!("cargo:rustc-link-lib=dylib=nvrtc");
@@ -209,7 +226,13 @@ fn dynamic_linking(major: usize, minor: usize) {
     println!("cargo:rustc-link-lib=dylib=cusolver");
     #[cfg(feature = "cusolvermg")]
     println!("cargo:rustc-link-lib=dylib=cusolverMg");
-    #[cfg(feature = "cudnn")]
+    #[cfg(any(
+        feature = "cudnn",
+        feature = "cudnn-version-from-build-system",
+        feature = "cudnn-08009",
+        feature = "cudnn-09010",
+        feature = "cudnn-09021",
+    ))]
     println!("cargo:rustc-link-lib=dylib=cudnn");
     #[cfg(feature = "runtime")]
     println!("cargo:rustc-link-lib=dylib=cudart");
@@ -220,7 +243,14 @@ fn dynamic_linking(major: usize, minor: usize) {
     }
     #[cfg(feature = "nvtx")]
     println!("cargo:rustc-link-lib=dylib=nvToolsExt");
-    #[cfg(feature = "cutensor")]
+    #[cfg(any(
+        feature = "cutensor",
+        feature = "cutensor-version-from-build-system",
+        feature = "cutensor-02003",
+        feature = "cutensor-02004",
+        feature = "cutensor-02005",
+        feature = "cutensor-02006",
+    ))]
     println!("cargo:rustc-link-lib=dylib=cutensor");
 }
 
@@ -236,7 +266,22 @@ fn static_linking(major: usize, minor: usize) {
         println!("cargo:rustc-link-lib=dylib=cuda");
         println!("cargo:rustc-link-lib=static:+whole-archive=cudart_static");
     }
-    #[cfg(feature = "nccl")]
+    #[cfg(any(
+        feature = "nccl",
+        feature = "nccl-version-from-build-system",
+        feature = "nccl-02018",
+        feature = "nccl-02019",
+        feature = "nccl-02020",
+        feature = "nccl-02021",
+        feature = "nccl-02022",
+        feature = "nccl-02024",
+        feature = "nccl-02025",
+        feature = "nccl-02026",
+        feature = "nccl-02027",
+        feature = "nccl-02028",
+        feature = "nccl-02029",
+        feature = "nccl-02030",
+    ))]
     println!("cargo:rustc-link-lib=static:+whole-archive=nccl_static");
     #[cfg(feature = "nvrtc")]
     {
@@ -270,7 +315,13 @@ fn static_linking(major: usize, minor: usize) {
     }
     #[cfg(feature = "cusolvermg")]
     println!("cargo:rustc-link-lib=dylib=cusolverMg");
-    #[cfg(feature = "cudnn")]
+    #[cfg(any(
+        feature = "cudnn",
+        feature = "cudnn-version-from-build-system",
+        feature = "cudnn-08009",
+        feature = "cudnn-09010",
+        feature = "cudnn-09021",
+    ))]
     println!("cargo:rustc-link-lib=static:+whole-archive=cudnn");
     #[cfg(feature = "cufile")]
     {
@@ -279,7 +330,14 @@ fn static_linking(major: usize, minor: usize) {
     }
     #[cfg(feature = "nvtx")]
     println!("cargo:rustc-link-lib=dylib=nvToolsExt");
-    #[cfg(feature = "cutensor")]
+    #[cfg(any(
+        feature = "cutensor",
+        feature = "cutensor-version-from-build-system",
+        feature = "cutensor-02003",
+        feature = "cutensor-02004",
+        feature = "cutensor-02005",
+        feature = "cutensor-02006",
+    ))]
     println!("cargo:rustc-link-lib=static:+whole-archive=cutensor_static");
 }
 
@@ -300,34 +358,26 @@ fn link_searches(major: usize, minor: usize) -> Vec<PathBuf> {
         println!("cargo::warning=Detected $CONDA_PREFIX, but no CUDA path was set through one of: {TYPICAL_CUDA_PATH_ENV_VARS:?}. Linking to system CUDA libraries; linker errors may occur. To use CUDA installed via conda please ensure the environment contains all required dependencies (e.g. the \"cuda-driver-dev\") and retry building with CUDA_HOME=$CONDA_PREFIX.")
     }
 
-    let typical_locations = [
-        "/usr",
-        "/usr/local/cuda",
-        "/opt/cuda",
-        "/usr/lib/cuda",
-        "C:/Program Files/NVIDIA GPU Computing Toolkit",
-        "C:/Program Files/NVIDIA",
-        "C:/CUDA",
-        // See issue #260 & #409
-        // TODO figure out how to handle all of these automatically
-        "C:/Program Files/NVIDIA/CUDNN/v9.10",
-        "C:/Program Files/NVIDIA/CUDNN/v9.9",
-        "C:/Program Files/NVIDIA/CUDNN/v9.8",
-        "C:/Program Files/NVIDIA/CUDNN/v9.7",
-        "C:/Program Files/NVIDIA/CUDNN/v9.6",
-        "C:/Program Files/NVIDIA/CUDNN/v9.5",
-        "C:/Program Files/NVIDIA/CUDNN/v9.4",
-        "C:/Program Files/NVIDIA/CUDNN/v9.3",
-        "C:/Program Files/NVIDIA/CUDNN/v9.2",
-        "C:/Program Files/NVIDIA/CUDNN/v9.1",
-        "C:/Program Files/NVIDIA/CUDNN/v9.0",
+    let mut typical_locations: Vec<String> = vec![
+        "/usr".into(),
+        "/usr/local/cuda".into(),
+        "/opt/cuda".into(),
+        "/usr/lib/cuda".into(),
+        "C:/Program Files/NVIDIA GPU Computing Toolkit".into(),
+        "C:/Program Files/NVIDIA".into(),
+        "C:/CUDA".into(),
     ];
+    // See issue #260 & #409 — add only the active cuDNN version's install dir
+    for &((cudnn_major, cudnn_minor), active) in SUPPORTED_CUDNN_VERSIONS {
+        if active {
+            typical_locations.push(format!(
+                "C:/Program Files/NVIDIA/CUDNN/v{cudnn_major}.{cudnn_minor}"
+            ));
+        }
+    }
 
     let possible_locations = if env_vars.is_empty() {
         typical_locations
-            .into_iter()
-            .map(Into::<String>::into)
-            .collect()
     } else {
         env_vars
     };
@@ -363,8 +413,16 @@ fn link_searches(major: usize, minor: usize) -> Vec<PathBuf> {
 
 #[allow(unused)]
 fn nccl_version_from_build_system() -> (u32, u32) {
-    let header = find_header("nccl.h")
-        .expect("nccl.h not found — install NCCL development headers or set NCCL_HOME");
+    let Some(header) = find_header("nccl.h") else {
+        #[cfg(feature = "fallback-latest")]
+        {
+            let latest = SUPPORTED_NCCL_VERSIONS[0].0;
+            println!("cargo:warning=nccl.h not found. Following `-F fallback-latest`; using NCCL {}.{}.", latest.0, latest.1);
+            return latest;
+        }
+        #[cfg(not(feature = "fallback-latest"))]
+        panic!("nccl.h not found — install NCCL development headers or set NCCL_HOME");
+    };
     let major = parse_define(&header, "NCCL_MAJOR").expect("NCCL_MAJOR not found in nccl.h");
     let minor = parse_define(&header, "NCCL_MINOR").expect("NCCL_MINOR not found in nccl.h");
     if !SUPPORTED_NCCL_VERSIONS
@@ -382,9 +440,16 @@ fn nccl_version_from_build_system() -> (u32, u32) {
 
 #[allow(unused)]
 fn cudnn_version_from_build_system() -> (u32, u32) {
-    let header = find_header("cudnn_version.h")
-        .or_else(|| find_header("cudnn.h"))
-        .expect("cudnn_version.h not found — install cuDNN development headers");
+    let Some(header) = find_header("cudnn_version.h").or_else(|| find_header("cudnn.h")) else {
+        #[cfg(feature = "fallback-latest")]
+        {
+            let latest = SUPPORTED_CUDNN_VERSIONS[0].0;
+            println!("cargo:warning=cudnn_version.h not found. Following `-F fallback-latest`; using cuDNN {}.{}.", latest.0, latest.1);
+            return latest;
+        }
+        #[cfg(not(feature = "fallback-latest"))]
+        panic!("cudnn_version.h not found — install cuDNN development headers");
+    };
     let major = parse_define(&header, "CUDNN_MAJOR").expect("CUDNN_MAJOR not found");
     let minor = parse_define(&header, "CUDNN_MINOR").expect("CUDNN_MINOR not found");
     if !SUPPORTED_CUDNN_VERSIONS
@@ -402,8 +467,16 @@ fn cudnn_version_from_build_system() -> (u32, u32) {
 
 #[allow(unused)]
 fn cutensor_version_from_build_system() -> (u32, u32) {
-    let header = find_header("cutensor.h")
-        .expect("cutensor.h not found — install cuTENSOR development headers");
+    let Some(header) = find_header("cutensor.h") else {
+        #[cfg(feature = "fallback-latest")]
+        {
+            let latest = SUPPORTED_CUTENSOR_VERSIONS[0].0;
+            println!("cargo:warning=cutensor.h not found. Following `-F fallback-latest`; using cuTENSOR {}.{}.", latest.0, latest.1);
+            return latest;
+        }
+        #[cfg(not(feature = "fallback-latest"))]
+        panic!("cutensor.h not found — install cuTENSOR development headers");
+    };
     let major = parse_define(&header, "CUTENSOR_MAJOR").expect("CUTENSOR_MAJOR not found");
     let minor = parse_define(&header, "CUTENSOR_MINOR").expect("CUTENSOR_MINOR not found");
     if !SUPPORTED_CUTENSOR_VERSIONS
@@ -421,14 +494,38 @@ fn cutensor_version_from_build_system() -> (u32, u32) {
 
 /// Search standard include paths for a header file.
 fn find_header(filename: &str) -> Option<std::path::PathBuf> {
-    let search_dirs = [
+    let mut search_dirs: Vec<std::path::PathBuf> = Vec::new();
+
+    // Env var roots (CUDA_PATH, CUDNN_PATH, etc.)
+    for var in &["CUDA_PATH", "CUDA_HOME", "CUDNN_PATH", "CUTENSOR_PATH"] {
+        if let Ok(val) = std::env::var(var) {
+            search_dirs.push(std::path::PathBuf::from(val).join("include"));
+        }
+    }
+
+    // Windows cuDNN versioned install dirs (only the active version)
+    for &((major, minor), active) in SUPPORTED_CUDNN_VERSIONS {
+        if active {
+            search_dirs.push(
+                std::path::PathBuf::from(format!(
+                    "C:/Program Files/NVIDIA/CUDNN/v{major}.{minor}/include"
+                ))
+            );
+        }
+    }
+
+    // Standard Linux paths
+    for dir in &[
         "/usr/local/cuda/include",
         "/usr/local/include",
         "/opt/cuda/include",
         "/usr/include",
-    ];
+    ] {
+        search_dirs.push(std::path::Path::new(dir).to_path_buf());
+    }
+
     for dir in search_dirs {
-        let path = std::path::Path::new(dir).join(filename);
+        let path = dir.join(filename);
         if path.exists() {
             return Some(path);
         }
