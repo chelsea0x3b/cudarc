@@ -176,10 +176,6 @@ pub mod cutensor;
 #[cfg(feature = "driver")]
 pub mod driver;
 #[cfg(any(
-    feature = "nccl-02018",
-    feature = "nccl-02019",
-    feature = "nccl-02020",
-    feature = "nccl-02021",
     feature = "nccl-02022",
     feature = "nccl-02024",
     feature = "nccl-02025",

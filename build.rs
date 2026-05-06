@@ -37,10 +37,6 @@ const SUPPORTED_NCCL_VERSIONS: &[((u32, u32), bool)] = &[
     ((2, 25), cfg!(feature = "nccl-02025")),
     ((2, 24), cfg!(feature = "nccl-02024")),
     ((2, 22), cfg!(feature = "nccl-02022")),
-    ((2, 21), cfg!(feature = "nccl-02021")),
-    ((2, 20), cfg!(feature = "nccl-02020")),
-    ((2, 19), cfg!(feature = "nccl-02019")),
-    ((2, 18), cfg!(feature = "nccl-02018")),
 ];
 
 const SUPPORTED_CUDNN_VERSIONS: &[((u32, u32), bool)] = &[
@@ -196,10 +192,6 @@ fn dynamic_linking(major: usize, minor: usize) {
     #[cfg(any(
         feature = "nccl",
         feature = "nccl-version-from-build-system",
-        feature = "nccl-02018",
-        feature = "nccl-02019",
-        feature = "nccl-02020",
-        feature = "nccl-02021",
         feature = "nccl-02022",
         feature = "nccl-02024",
         feature = "nccl-02025",
@@ -269,10 +261,6 @@ fn static_linking(major: usize, minor: usize) {
     #[cfg(any(
         feature = "nccl",
         feature = "nccl-version-from-build-system",
-        feature = "nccl-02018",
-        feature = "nccl-02019",
-        feature = "nccl-02020",
-        feature = "nccl-02021",
         feature = "nccl-02022",
         feature = "nccl-02024",
         feature = "nccl-02025",

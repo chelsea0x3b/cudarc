@@ -224,10 +224,6 @@ fn create_modules() -> Vec<ModuleConfig> {
             module_dependencies: vec![],
             feature_prefix: "nccl",
             lib_versions: vec![
-                (2, 18, 5),
-                (2, 19, 3),
-                (2, 20, 5),
-                (2, 21, 5),
                 (2, 22, 3),
                 (2, 24, 3),
                 (2, 25, 1),
