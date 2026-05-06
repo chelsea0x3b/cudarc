@@ -9,10 +9,6 @@ extern crate no_std_compat as std;
 pub type cudaStream_t = *mut CUstream_st;
 pub type ncclComm_t = *mut ncclComm;
 #[cfg(any(
-    feature = "nccl-02018",
-    feature = "nccl-02019",
-    feature = "nccl-02020",
-    feature = "nccl-02021",
     feature = "nccl-02022",
     feature = "nccl-02024",
     feature = "nccl-02025",
@@ -25,16 +21,6 @@ pub type ncclConfig_t = ncclConfig_v22700;
 pub type ncclConfig_t = ncclConfig_v22800;
 #[cfg(any(feature = "nccl-02030"))]
 pub type ncclParamHandle_t = ncclParamHandle;
-#[cfg(any(
-    feature = "nccl-02022",
-    feature = "nccl-02024",
-    feature = "nccl-02025",
-    feature = "nccl-02026",
-    feature = "nccl-02027",
-    feature = "nccl-02028",
-    feature = "nccl-02029",
-    feature = "nccl-02030"
-))]
 pub type ncclSimInfo_t = ncclSimInfo_v22200;
 #[cfg(any(feature = "nccl-02027"))]
 pub type ncclWindow_t = *mut ncclWindow;
@@ -49,13 +35,7 @@ pub enum ncclCommMemStat_t {
     ncclStatGpuMemPersist = 2,
     ncclStatGpuMemTotal = 3,
 }
-#[cfg(any(
-    feature = "nccl-02018",
-    feature = "nccl-02019",
-    feature = "nccl-02020",
-    feature = "nccl-02021",
-    feature = "nccl-02022"
-))]
+#[cfg(any(feature = "nccl-02022"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum ncclDataType_t {
@@ -113,10 +93,6 @@ pub enum ncclRedOp_t {
     ncclMaxRedOp = 2147483647,
 }
 #[cfg(any(
-    feature = "nccl-02018",
-    feature = "nccl-02019",
-    feature = "nccl-02020",
-    feature = "nccl-02021",
     feature = "nccl-02022",
     feature = "nccl-02024",
     feature = "nccl-02025",
@@ -169,15 +145,7 @@ pub struct CUstream_st {
 pub struct ncclComm {
     _unused: [u8; 0],
 }
-#[cfg(any(
-    feature = "nccl-02018",
-    feature = "nccl-02019",
-    feature = "nccl-02020",
-    feature = "nccl-02021",
-    feature = "nccl-02022",
-    feature = "nccl-02024",
-    feature = "nccl-02025"
-))]
+#[cfg(any(feature = "nccl-02022", feature = "nccl-02024", feature = "nccl-02025"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct ncclConfig_v21700 {
@@ -303,16 +271,6 @@ pub struct ncclConfig_v22800 {
 pub struct ncclParamHandle {
     _unused: [u8; 0],
 }
-#[cfg(any(
-    feature = "nccl-02022",
-    feature = "nccl-02024",
-    feature = "nccl-02025",
-    feature = "nccl-02026",
-    feature = "nccl-02027",
-    feature = "nccl-02028",
-    feature = "nccl-02029",
-    feature = "nccl-02030"
-))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, PartialOrd, PartialEq)]
 pub struct ncclSimInfo_v22200 {
@@ -410,19 +368,6 @@ extern "C" {
     pub fn ncclCommAbort(comm: ncclComm_t) -> ncclResult_t;
     pub fn ncclCommCount(comm: ncclComm_t, count: *mut ::core::ffi::c_int) -> ncclResult_t;
     pub fn ncclCommCuDevice(comm: ncclComm_t, device: *mut ::core::ffi::c_int) -> ncclResult_t;
-    #[cfg(any(
-        feature = "nccl-02019",
-        feature = "nccl-02020",
-        feature = "nccl-02021",
-        feature = "nccl-02022",
-        feature = "nccl-02024",
-        feature = "nccl-02025",
-        feature = "nccl-02026",
-        feature = "nccl-02027",
-        feature = "nccl-02028",
-        feature = "nccl-02029",
-        feature = "nccl-02030"
-    ))]
     pub fn ncclCommDeregister(comm: ncclComm_t, handle: *mut ::core::ffi::c_void) -> ncclResult_t;
     pub fn ncclCommDestroy(comm: ncclComm_t) -> ncclResult_t;
     pub fn ncclCommFinalize(comm: ncclComm_t) -> ncclResult_t;
@@ -479,19 +424,6 @@ extern "C" {
         stat: ncclCommMemStat_t,
         value: *mut u64,
     ) -> ncclResult_t;
-    #[cfg(any(
-        feature = "nccl-02019",
-        feature = "nccl-02020",
-        feature = "nccl-02021",
-        feature = "nccl-02022",
-        feature = "nccl-02024",
-        feature = "nccl-02025",
-        feature = "nccl-02026",
-        feature = "nccl-02027",
-        feature = "nccl-02028",
-        feature = "nccl-02029",
-        feature = "nccl-02030"
-    ))]
     pub fn ncclCommRegister(
         comm: ncclComm_t,
         buff: *mut ::core::ffi::c_void,
@@ -561,45 +493,9 @@ extern "C" {
     pub fn ncclGetUniqueId(uniqueId: *mut ncclUniqueId) -> ncclResult_t;
     pub fn ncclGetVersion(version: *mut ::core::ffi::c_int) -> ncclResult_t;
     pub fn ncclGroupEnd() -> ncclResult_t;
-    #[cfg(any(
-        feature = "nccl-02022",
-        feature = "nccl-02024",
-        feature = "nccl-02025",
-        feature = "nccl-02026",
-        feature = "nccl-02027",
-        feature = "nccl-02028",
-        feature = "nccl-02029",
-        feature = "nccl-02030"
-    ))]
     pub fn ncclGroupSimulateEnd(simInfo: *mut ncclSimInfo_t) -> ncclResult_t;
     pub fn ncclGroupStart() -> ncclResult_t;
-    #[cfg(any(
-        feature = "nccl-02019",
-        feature = "nccl-02020",
-        feature = "nccl-02021",
-        feature = "nccl-02022",
-        feature = "nccl-02024",
-        feature = "nccl-02025",
-        feature = "nccl-02026",
-        feature = "nccl-02027",
-        feature = "nccl-02028",
-        feature = "nccl-02029",
-        feature = "nccl-02030"
-    ))]
     pub fn ncclMemAlloc(ptr: *mut *mut ::core::ffi::c_void, size: usize) -> ncclResult_t;
-    #[cfg(any(
-        feature = "nccl-02019",
-        feature = "nccl-02020",
-        feature = "nccl-02021",
-        feature = "nccl-02022",
-        feature = "nccl-02024",
-        feature = "nccl-02025",
-        feature = "nccl-02026",
-        feature = "nccl-02027",
-        feature = "nccl-02028",
-        feature = "nccl-02029",
-        feature = "nccl-02030"
-    ))]
     pub fn ncclMemFree(ptr: *mut ::core::ffi::c_void) -> ncclResult_t;
     #[cfg(any(feature = "nccl-02030"))]
     pub fn ncclParamBind(
@@ -814,19 +710,6 @@ mod loaded {
     ) -> ncclResult_t {
         (culib().ncclCommCuDevice)(comm, device)
     }
-    #[cfg(any(
-        feature = "nccl-02019",
-        feature = "nccl-02020",
-        feature = "nccl-02021",
-        feature = "nccl-02022",
-        feature = "nccl-02024",
-        feature = "nccl-02025",
-        feature = "nccl-02026",
-        feature = "nccl-02027",
-        feature = "nccl-02028",
-        feature = "nccl-02029",
-        feature = "nccl-02030"
-    ))]
     pub unsafe fn ncclCommDeregister(
         comm: ncclComm_t,
         handle: *mut ::core::ffi::c_void,
@@ -914,19 +797,6 @@ mod loaded {
     ) -> ncclResult_t {
         (culib().ncclCommMemStats)(comm, stat, value)
     }
-    #[cfg(any(
-        feature = "nccl-02019",
-        feature = "nccl-02020",
-        feature = "nccl-02021",
-        feature = "nccl-02022",
-        feature = "nccl-02024",
-        feature = "nccl-02025",
-        feature = "nccl-02026",
-        feature = "nccl-02027",
-        feature = "nccl-02028",
-        feature = "nccl-02029",
-        feature = "nccl-02030"
-    ))]
     pub unsafe fn ncclCommRegister(
         comm: ncclComm_t,
         buff: *mut ::core::ffi::c_void,
@@ -1039,51 +909,15 @@ mod loaded {
     pub unsafe fn ncclGroupEnd() -> ncclResult_t {
         (culib().ncclGroupEnd)()
     }
-    #[cfg(any(
-        feature = "nccl-02022",
-        feature = "nccl-02024",
-        feature = "nccl-02025",
-        feature = "nccl-02026",
-        feature = "nccl-02027",
-        feature = "nccl-02028",
-        feature = "nccl-02029",
-        feature = "nccl-02030"
-    ))]
     pub unsafe fn ncclGroupSimulateEnd(simInfo: *mut ncclSimInfo_t) -> ncclResult_t {
         (culib().ncclGroupSimulateEnd)(simInfo)
     }
     pub unsafe fn ncclGroupStart() -> ncclResult_t {
         (culib().ncclGroupStart)()
     }
-    #[cfg(any(
-        feature = "nccl-02019",
-        feature = "nccl-02020",
-        feature = "nccl-02021",
-        feature = "nccl-02022",
-        feature = "nccl-02024",
-        feature = "nccl-02025",
-        feature = "nccl-02026",
-        feature = "nccl-02027",
-        feature = "nccl-02028",
-        feature = "nccl-02029",
-        feature = "nccl-02030"
-    ))]
     pub unsafe fn ncclMemAlloc(ptr: *mut *mut ::core::ffi::c_void, size: usize) -> ncclResult_t {
         (culib().ncclMemAlloc)(ptr, size)
     }
-    #[cfg(any(
-        feature = "nccl-02019",
-        feature = "nccl-02020",
-        feature = "nccl-02021",
-        feature = "nccl-02022",
-        feature = "nccl-02024",
-        feature = "nccl-02025",
-        feature = "nccl-02026",
-        feature = "nccl-02027",
-        feature = "nccl-02028",
-        feature = "nccl-02029",
-        feature = "nccl-02030"
-    ))]
     pub unsafe fn ncclMemFree(ptr: *mut ::core::ffi::c_void) -> ncclResult_t {
         (culib().ncclMemFree)(ptr)
     }
@@ -1345,19 +1179,6 @@ mod loaded {
             unsafe extern "C" fn(comm: ncclComm_t, count: *mut ::core::ffi::c_int) -> ncclResult_t,
         pub ncclCommCuDevice:
             unsafe extern "C" fn(comm: ncclComm_t, device: *mut ::core::ffi::c_int) -> ncclResult_t,
-        #[cfg(any(
-            feature = "nccl-02019",
-            feature = "nccl-02020",
-            feature = "nccl-02021",
-            feature = "nccl-02022",
-            feature = "nccl-02024",
-            feature = "nccl-02025",
-            feature = "nccl-02026",
-            feature = "nccl-02027",
-            feature = "nccl-02028",
-            feature = "nccl-02029",
-            feature = "nccl-02030"
-        ))]
         pub ncclCommDeregister: unsafe extern "C" fn(
             comm: ncclComm_t,
             handle: *mut ::core::ffi::c_void,
@@ -1419,19 +1240,6 @@ mod loaded {
             stat: ncclCommMemStat_t,
             value: *mut u64,
         ) -> ncclResult_t,
-        #[cfg(any(
-            feature = "nccl-02019",
-            feature = "nccl-02020",
-            feature = "nccl-02021",
-            feature = "nccl-02022",
-            feature = "nccl-02024",
-            feature = "nccl-02025",
-            feature = "nccl-02026",
-            feature = "nccl-02027",
-            feature = "nccl-02028",
-            feature = "nccl-02029",
-            feature = "nccl-02030"
-        ))]
         pub ncclCommRegister: unsafe extern "C" fn(
             comm: ncclComm_t,
             buff: *mut ::core::ffi::c_void,
@@ -1506,46 +1314,10 @@ mod loaded {
         pub ncclGetUniqueId: unsafe extern "C" fn(uniqueId: *mut ncclUniqueId) -> ncclResult_t,
         pub ncclGetVersion: unsafe extern "C" fn(version: *mut ::core::ffi::c_int) -> ncclResult_t,
         pub ncclGroupEnd: unsafe extern "C" fn() -> ncclResult_t,
-        #[cfg(any(
-            feature = "nccl-02022",
-            feature = "nccl-02024",
-            feature = "nccl-02025",
-            feature = "nccl-02026",
-            feature = "nccl-02027",
-            feature = "nccl-02028",
-            feature = "nccl-02029",
-            feature = "nccl-02030"
-        ))]
         pub ncclGroupSimulateEnd: unsafe extern "C" fn(simInfo: *mut ncclSimInfo_t) -> ncclResult_t,
         pub ncclGroupStart: unsafe extern "C" fn() -> ncclResult_t,
-        #[cfg(any(
-            feature = "nccl-02019",
-            feature = "nccl-02020",
-            feature = "nccl-02021",
-            feature = "nccl-02022",
-            feature = "nccl-02024",
-            feature = "nccl-02025",
-            feature = "nccl-02026",
-            feature = "nccl-02027",
-            feature = "nccl-02028",
-            feature = "nccl-02029",
-            feature = "nccl-02030"
-        ))]
         pub ncclMemAlloc:
             unsafe extern "C" fn(ptr: *mut *mut ::core::ffi::c_void, size: usize) -> ncclResult_t,
-        #[cfg(any(
-            feature = "nccl-02019",
-            feature = "nccl-02020",
-            feature = "nccl-02021",
-            feature = "nccl-02022",
-            feature = "nccl-02024",
-            feature = "nccl-02025",
-            feature = "nccl-02026",
-            feature = "nccl-02027",
-            feature = "nccl-02028",
-            feature = "nccl-02029",
-            feature = "nccl-02030"
-        ))]
         pub ncclMemFree: unsafe extern "C" fn(ptr: *mut ::core::ffi::c_void) -> ncclResult_t,
         #[cfg(any(feature = "nccl-02030"))]
         pub ncclParamBind: unsafe extern "C" fn(
@@ -1747,19 +1519,6 @@ mod loaded {
                 .get(b"ncclCommCuDevice\0")
                 .map(|sym| *sym)
                 .expect("Expected symbol in library");
-            #[cfg(any(
-                feature = "nccl-02019",
-                feature = "nccl-02020",
-                feature = "nccl-02021",
-                feature = "nccl-02022",
-                feature = "nccl-02024",
-                feature = "nccl-02025",
-                feature = "nccl-02026",
-                feature = "nccl-02027",
-                feature = "nccl-02028",
-                feature = "nccl-02029",
-                feature = "nccl-02030"
-            ))]
             let ncclCommDeregister = __library
                 .get(b"ncclCommDeregister\0")
                 .map(|sym| *sym)
@@ -1816,19 +1575,6 @@ mod loaded {
                 .get(b"ncclCommMemStats\0")
                 .map(|sym| *sym)
                 .expect("Expected symbol in library");
-            #[cfg(any(
-                feature = "nccl-02019",
-                feature = "nccl-02020",
-                feature = "nccl-02021",
-                feature = "nccl-02022",
-                feature = "nccl-02024",
-                feature = "nccl-02025",
-                feature = "nccl-02026",
-                feature = "nccl-02027",
-                feature = "nccl-02028",
-                feature = "nccl-02029",
-                feature = "nccl-02030"
-            ))]
             let ncclCommRegister = __library
                 .get(b"ncclCommRegister\0")
                 .map(|sym| *sym)
@@ -1911,16 +1657,6 @@ mod loaded {
                 .get(b"ncclGroupEnd\0")
                 .map(|sym| *sym)
                 .expect("Expected symbol in library");
-            #[cfg(any(
-                feature = "nccl-02022",
-                feature = "nccl-02024",
-                feature = "nccl-02025",
-                feature = "nccl-02026",
-                feature = "nccl-02027",
-                feature = "nccl-02028",
-                feature = "nccl-02029",
-                feature = "nccl-02030"
-            ))]
             let ncclGroupSimulateEnd = __library
                 .get(b"ncclGroupSimulateEnd\0")
                 .map(|sym| *sym)
@@ -1929,36 +1665,10 @@ mod loaded {
                 .get(b"ncclGroupStart\0")
                 .map(|sym| *sym)
                 .expect("Expected symbol in library");
-            #[cfg(any(
-                feature = "nccl-02019",
-                feature = "nccl-02020",
-                feature = "nccl-02021",
-                feature = "nccl-02022",
-                feature = "nccl-02024",
-                feature = "nccl-02025",
-                feature = "nccl-02026",
-                feature = "nccl-02027",
-                feature = "nccl-02028",
-                feature = "nccl-02029",
-                feature = "nccl-02030"
-            ))]
             let ncclMemAlloc = __library
                 .get(b"ncclMemAlloc\0")
                 .map(|sym| *sym)
                 .expect("Expected symbol in library");
-            #[cfg(any(
-                feature = "nccl-02019",
-                feature = "nccl-02020",
-                feature = "nccl-02021",
-                feature = "nccl-02022",
-                feature = "nccl-02024",
-                feature = "nccl-02025",
-                feature = "nccl-02026",
-                feature = "nccl-02027",
-                feature = "nccl-02028",
-                feature = "nccl-02029",
-                feature = "nccl-02030"
-            ))]
             let ncclMemFree = __library
                 .get(b"ncclMemFree\0")
                 .map(|sym| *sym)
@@ -2109,19 +1819,6 @@ mod loaded {
                 ncclCommAbort,
                 ncclCommCount,
                 ncclCommCuDevice,
-                #[cfg(any(
-                    feature = "nccl-02019",
-                    feature = "nccl-02020",
-                    feature = "nccl-02021",
-                    feature = "nccl-02022",
-                    feature = "nccl-02024",
-                    feature = "nccl-02025",
-                    feature = "nccl-02026",
-                    feature = "nccl-02027",
-                    feature = "nccl-02028",
-                    feature = "nccl-02029",
-                    feature = "nccl-02030"
-                ))]
                 ncclCommDeregister,
                 ncclCommDestroy,
                 ncclCommFinalize,
@@ -2145,19 +1842,6 @@ mod loaded {
                 ncclCommInitRankScalable,
                 #[cfg(any(feature = "nccl-02029", feature = "nccl-02030"))]
                 ncclCommMemStats,
-                #[cfg(any(
-                    feature = "nccl-02019",
-                    feature = "nccl-02020",
-                    feature = "nccl-02021",
-                    feature = "nccl-02022",
-                    feature = "nccl-02024",
-                    feature = "nccl-02025",
-                    feature = "nccl-02026",
-                    feature = "nccl-02027",
-                    feature = "nccl-02028",
-                    feature = "nccl-02029",
-                    feature = "nccl-02030"
-                ))]
                 ncclCommRegister,
                 #[cfg(any(feature = "nccl-02029", feature = "nccl-02030"))]
                 ncclCommResume,
@@ -2203,45 +1887,9 @@ mod loaded {
                 ncclGetUniqueId,
                 ncclGetVersion,
                 ncclGroupEnd,
-                #[cfg(any(
-                    feature = "nccl-02022",
-                    feature = "nccl-02024",
-                    feature = "nccl-02025",
-                    feature = "nccl-02026",
-                    feature = "nccl-02027",
-                    feature = "nccl-02028",
-                    feature = "nccl-02029",
-                    feature = "nccl-02030"
-                ))]
                 ncclGroupSimulateEnd,
                 ncclGroupStart,
-                #[cfg(any(
-                    feature = "nccl-02019",
-                    feature = "nccl-02020",
-                    feature = "nccl-02021",
-                    feature = "nccl-02022",
-                    feature = "nccl-02024",
-                    feature = "nccl-02025",
-                    feature = "nccl-02026",
-                    feature = "nccl-02027",
-                    feature = "nccl-02028",
-                    feature = "nccl-02029",
-                    feature = "nccl-02030"
-                ))]
                 ncclMemAlloc,
-                #[cfg(any(
-                    feature = "nccl-02019",
-                    feature = "nccl-02020",
-                    feature = "nccl-02021",
-                    feature = "nccl-02022",
-                    feature = "nccl-02024",
-                    feature = "nccl-02025",
-                    feature = "nccl-02026",
-                    feature = "nccl-02027",
-                    feature = "nccl-02028",
-                    feature = "nccl-02029",
-                    feature = "nccl-02030"
-                ))]
                 ncclMemFree,
                 #[cfg(any(feature = "nccl-02030"))]
                 ncclParamBind,

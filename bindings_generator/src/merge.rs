@@ -251,7 +251,7 @@ impl BindingMerger {
             if all_versions.is_empty() {
                 continue;
             }
-            let features: Vec<String> = all_versions.iter().map(|v| version_to_feature(v)).collect();
+            let features: Vec<String> = all_versions.iter().map(|v| version_to_feature(&self.feature_prefix, v)).collect();
             let type_ident: proc_macro2::Ident = syn::parse_str(type_name).unwrap();
             let cfg = if all_versions.len() == self.n_versions {
                 quote! {}
