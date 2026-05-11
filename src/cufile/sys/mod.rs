@@ -1,3 +1,4 @@
+#![rustfmt::skip]
 #![cfg_attr(feature = "no-std", no_std)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]

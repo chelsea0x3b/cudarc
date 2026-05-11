@@ -389,6 +389,9 @@ pub fn merge<P: AsRef<Path>>(
         .arg(output_filename.as_ref())
         .status()
         .unwrap();
+    let mut contents = std::fs::read_to_string(&output_filename)?;
+    contents.insert_str(0, "#![rustfmt::skip]\n");
+    std::fs::write(&output_filename, contents)?;
     Ok(())
 }
 
