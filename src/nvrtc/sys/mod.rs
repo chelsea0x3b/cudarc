@@ -2,19 +2,17 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(dead_code)]
+use std::sync::OnceLock;
 #[cfg(feature = "no-std")]
 extern crate alloc;
 #[cfg(feature = "no-std")]
 extern crate no_std_compat as std;
+#[cfg(feature = "dynamic-loading")]
+fn load<F: Copy>(name: &str) -> F {
+    unsafe { *culib().get::<F>(name.as_bytes()).unwrap_or_else(|e| panic!("Missing symbol {name}: {e}")) }
+}
 pub type nvrtcProgram = *mut _nvrtcProgram;
-#[cfg(any(
-    feature = "cuda-11040",
-    feature = "cuda-11050",
-    feature = "cuda-11060",
-    feature = "cuda-11070",
-    feature = "cuda-11080",
-    feature = "cuda-12000"
-))]
+#[cfg(any(feature = "cuda-11040", feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum nvrtcResult {
@@ -31,14 +29,7 @@ pub enum nvrtcResult {
     NVRTC_ERROR_NAME_EXPRESSION_NOT_VALID = 10,
     NVRTC_ERROR_INTERNAL_ERROR = 11,
 }
-#[cfg(any(
-    feature = "cuda-12010",
-    feature = "cuda-12020",
-    feature = "cuda-12030",
-    feature = "cuda-12040",
-    feature = "cuda-12050",
-    feature = "cuda-12060"
-))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum nvrtcResult {
@@ -106,670 +97,328 @@ pub enum nvrtcResult {
 pub struct _nvrtcProgram {
     _unused: [u8; 0],
 }
-#[cfg(not(feature = "dynamic-loading"))]
-extern "C" {
-    pub fn nvrtcAddNameExpression(
-        prog: nvrtcProgram,
-        name_expression: *const ::core::ffi::c_char,
-    ) -> nvrtcResult;
-    pub fn nvrtcCompileProgram(
-        prog: nvrtcProgram,
-        numOptions: ::core::ffi::c_int,
-        options: *const *const ::core::ffi::c_char,
-    ) -> nvrtcResult;
-    pub fn nvrtcCreateProgram(
-        prog: *mut nvrtcProgram,
-        src: *const ::core::ffi::c_char,
-        name: *const ::core::ffi::c_char,
-        numHeaders: ::core::ffi::c_int,
-        headers: *const *const ::core::ffi::c_char,
-        includeNames: *const *const ::core::ffi::c_char,
-    ) -> nvrtcResult;
-    pub fn nvrtcDestroyProgram(prog: *mut nvrtcProgram) -> nvrtcResult;
-    pub fn nvrtcGetCUBIN(prog: nvrtcProgram, cubin: *mut ::core::ffi::c_char) -> nvrtcResult;
-    pub fn nvrtcGetCUBINSize(prog: nvrtcProgram, cubinSizeRet: *mut usize) -> nvrtcResult;
-    pub fn nvrtcGetErrorString(result: nvrtcResult) -> *const ::core::ffi::c_char;
-    #[cfg(any(
-        feature = "cuda-12000",
-        feature = "cuda-12010",
-        feature = "cuda-12020",
-        feature = "cuda-12030",
-        feature = "cuda-12040",
-        feature = "cuda-12050",
-        feature = "cuda-12060",
-        feature = "cuda-12080",
-        feature = "cuda-12090",
-        feature = "cuda-13000",
-        feature = "cuda-13010",
-        feature = "cuda-13020"
-    ))]
-    pub fn nvrtcGetLTOIR(prog: nvrtcProgram, LTOIR: *mut ::core::ffi::c_char) -> nvrtcResult;
-    #[cfg(any(
-        feature = "cuda-12000",
-        feature = "cuda-12010",
-        feature = "cuda-12020",
-        feature = "cuda-12030",
-        feature = "cuda-12040",
-        feature = "cuda-12050",
-        feature = "cuda-12060",
-        feature = "cuda-12080",
-        feature = "cuda-12090",
-        feature = "cuda-13000",
-        feature = "cuda-13010",
-        feature = "cuda-13020"
-    ))]
-    pub fn nvrtcGetLTOIRSize(prog: nvrtcProgram, LTOIRSizeRet: *mut usize) -> nvrtcResult;
-    pub fn nvrtcGetLoweredName(
-        prog: nvrtcProgram,
-        name_expression: *const ::core::ffi::c_char,
-        lowered_name: *mut *const ::core::ffi::c_char,
-    ) -> nvrtcResult;
-    pub fn nvrtcGetNumSupportedArchs(numArchs: *mut ::core::ffi::c_int) -> nvrtcResult;
-    #[cfg(any(
-        feature = "cuda-12000",
-        feature = "cuda-12010",
-        feature = "cuda-12020",
-        feature = "cuda-12030",
-        feature = "cuda-12040",
-        feature = "cuda-12050",
-        feature = "cuda-12060",
-        feature = "cuda-12080",
-        feature = "cuda-12090",
-        feature = "cuda-13000",
-        feature = "cuda-13010",
-        feature = "cuda-13020"
-    ))]
-    pub fn nvrtcGetOptiXIR(prog: nvrtcProgram, optixir: *mut ::core::ffi::c_char) -> nvrtcResult;
-    #[cfg(any(
-        feature = "cuda-12000",
-        feature = "cuda-12010",
-        feature = "cuda-12020",
-        feature = "cuda-12030",
-        feature = "cuda-12040",
-        feature = "cuda-12050",
-        feature = "cuda-12060",
-        feature = "cuda-12080",
-        feature = "cuda-12090",
-        feature = "cuda-13000",
-        feature = "cuda-13010",
-        feature = "cuda-13020"
-    ))]
-    pub fn nvrtcGetOptiXIRSize(prog: nvrtcProgram, optixirSizeRet: *mut usize) -> nvrtcResult;
-    pub fn nvrtcGetPTX(prog: nvrtcProgram, ptx: *mut ::core::ffi::c_char) -> nvrtcResult;
-    pub fn nvrtcGetPTXSize(prog: nvrtcProgram, ptxSizeRet: *mut usize) -> nvrtcResult;
-    pub fn nvrtcGetProgramLog(prog: nvrtcProgram, log: *mut ::core::ffi::c_char) -> nvrtcResult;
-    pub fn nvrtcGetProgramLogSize(prog: nvrtcProgram, logSizeRet: *mut usize) -> nvrtcResult;
-    pub fn nvrtcGetSupportedArchs(supportedArchs: *mut ::core::ffi::c_int) -> nvrtcResult;
-    #[cfg(any(feature = "cuda-13020"))]
-    pub fn nvrtcGetTileIR(prog: nvrtcProgram, TileIR: *mut ::core::ffi::c_char) -> nvrtcResult;
-    #[cfg(any(feature = "cuda-13020"))]
-    pub fn nvrtcGetTileIRSize(prog: nvrtcProgram, TileIRSizeRet: *mut usize) -> nvrtcResult;
-    pub fn nvrtcVersion(
-        major: *mut ::core::ffi::c_int,
-        minor: *mut ::core::ffi::c_int,
-    ) -> nvrtcResult;
+pub unsafe fn nvrtcAddNameExpression(prog: nvrtcProgram, name_expression: *const ::core::ffi::c_char) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcProgram, *const ::core::ffi::c_char) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcAddNameExpression") });
+        _f(prog, name_expression)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcAddNameExpression(prog: nvrtcProgram, name_expression: *const ::core::ffi::c_char) -> nvrtcResult;
+        nvrtcAddNameExpression(prog, name_expression)
+    }
 }
-#[cfg(feature = "dynamic-loading")]
-mod loaded {
-    use super::*;
-    pub unsafe fn nvrtcAddNameExpression(
-        prog: nvrtcProgram,
-        name_expression: *const ::core::ffi::c_char,
-    ) -> nvrtcResult {
-        (culib().nvrtcAddNameExpression)(prog, name_expression)
+pub unsafe fn nvrtcCompileProgram(prog: nvrtcProgram, numOptions: ::core::ffi::c_int, options: *const *const ::core::ffi::c_char) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcProgram, ::core::ffi::c_int, *const *const ::core::ffi::c_char) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcCompileProgram") });
+        _f(prog, numOptions, options)
     }
-    pub unsafe fn nvrtcCompileProgram(
-        prog: nvrtcProgram,
-        numOptions: ::core::ffi::c_int,
-        options: *const *const ::core::ffi::c_char,
-    ) -> nvrtcResult {
-        (culib().nvrtcCompileProgram)(prog, numOptions, options)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcCompileProgram(prog: nvrtcProgram, numOptions: ::core::ffi::c_int, options: *const *const ::core::ffi::c_char) -> nvrtcResult;
+        nvrtcCompileProgram(prog, numOptions, options)
     }
-    pub unsafe fn nvrtcCreateProgram(
-        prog: *mut nvrtcProgram,
-        src: *const ::core::ffi::c_char,
-        name: *const ::core::ffi::c_char,
-        numHeaders: ::core::ffi::c_int,
-        headers: *const *const ::core::ffi::c_char,
-        includeNames: *const *const ::core::ffi::c_char,
-    ) -> nvrtcResult {
-        (culib().nvrtcCreateProgram)(prog, src, name, numHeaders, headers, includeNames)
+}
+pub unsafe fn nvrtcCreateProgram(prog: *mut nvrtcProgram, src: *const ::core::ffi::c_char, name: *const ::core::ffi::c_char, numHeaders: ::core::ffi::c_int, headers: *const *const ::core::ffi::c_char, includeNames: *const *const ::core::ffi::c_char) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*mut nvrtcProgram, *const ::core::ffi::c_char, *const ::core::ffi::c_char, ::core::ffi::c_int, *const *const ::core::ffi::c_char, *const *const ::core::ffi::c_char) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcCreateProgram") });
+        _f(prog, src, name, numHeaders, headers, includeNames)
     }
-    pub unsafe fn nvrtcDestroyProgram(prog: *mut nvrtcProgram) -> nvrtcResult {
-        (culib().nvrtcDestroyProgram)(prog)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcCreateProgram(prog: *mut nvrtcProgram, src: *const ::core::ffi::c_char, name: *const ::core::ffi::c_char, numHeaders: ::core::ffi::c_int, headers: *const *const ::core::ffi::c_char, includeNames: *const *const ::core::ffi::c_char) -> nvrtcResult;
+        nvrtcCreateProgram(prog, src, name, numHeaders, headers, includeNames)
     }
-    pub unsafe fn nvrtcGetCUBIN(
-        prog: nvrtcProgram,
-        cubin: *mut ::core::ffi::c_char,
-    ) -> nvrtcResult {
-        (culib().nvrtcGetCUBIN)(prog, cubin)
+}
+pub unsafe fn nvrtcDestroyProgram(prog: *mut nvrtcProgram) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*mut nvrtcProgram) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcDestroyProgram") });
+        _f(prog)
     }
-    pub unsafe fn nvrtcGetCUBINSize(prog: nvrtcProgram, cubinSizeRet: *mut usize) -> nvrtcResult {
-        (culib().nvrtcGetCUBINSize)(prog, cubinSizeRet)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcDestroyProgram(prog: *mut nvrtcProgram) -> nvrtcResult;
+        nvrtcDestroyProgram(prog)
     }
-    pub unsafe fn nvrtcGetErrorString(result: nvrtcResult) -> *const ::core::ffi::c_char {
-        (culib().nvrtcGetErrorString)(result)
+}
+pub unsafe fn nvrtcGetCUBIN(prog: nvrtcProgram, cubin: *mut ::core::ffi::c_char) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcProgram, *mut ::core::ffi::c_char) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetCUBIN") });
+        _f(prog, cubin)
     }
-    #[cfg(any(
-        feature = "cuda-12000",
-        feature = "cuda-12010",
-        feature = "cuda-12020",
-        feature = "cuda-12030",
-        feature = "cuda-12040",
-        feature = "cuda-12050",
-        feature = "cuda-12060",
-        feature = "cuda-12080",
-        feature = "cuda-12090",
-        feature = "cuda-13000",
-        feature = "cuda-13010",
-        feature = "cuda-13020"
-    ))]
-    pub unsafe fn nvrtcGetLTOIR(
-        prog: nvrtcProgram,
-        LTOIR: *mut ::core::ffi::c_char,
-    ) -> nvrtcResult {
-        (culib().nvrtcGetLTOIR)(prog, LTOIR)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetCUBIN(prog: nvrtcProgram, cubin: *mut ::core::ffi::c_char) -> nvrtcResult;
+        nvrtcGetCUBIN(prog, cubin)
     }
-    #[cfg(any(
-        feature = "cuda-12000",
-        feature = "cuda-12010",
-        feature = "cuda-12020",
-        feature = "cuda-12030",
-        feature = "cuda-12040",
-        feature = "cuda-12050",
-        feature = "cuda-12060",
-        feature = "cuda-12080",
-        feature = "cuda-12090",
-        feature = "cuda-13000",
-        feature = "cuda-13010",
-        feature = "cuda-13020"
-    ))]
-    pub unsafe fn nvrtcGetLTOIRSize(prog: nvrtcProgram, LTOIRSizeRet: *mut usize) -> nvrtcResult {
-        (culib().nvrtcGetLTOIRSize)(prog, LTOIRSizeRet)
+}
+pub unsafe fn nvrtcGetCUBINSize(prog: nvrtcProgram, cubinSizeRet: *mut usize) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcProgram, *mut usize) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetCUBINSize") });
+        _f(prog, cubinSizeRet)
     }
-    pub unsafe fn nvrtcGetLoweredName(
-        prog: nvrtcProgram,
-        name_expression: *const ::core::ffi::c_char,
-        lowered_name: *mut *const ::core::ffi::c_char,
-    ) -> nvrtcResult {
-        (culib().nvrtcGetLoweredName)(prog, name_expression, lowered_name)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetCUBINSize(prog: nvrtcProgram, cubinSizeRet: *mut usize) -> nvrtcResult;
+        nvrtcGetCUBINSize(prog, cubinSizeRet)
     }
-    pub unsafe fn nvrtcGetNumSupportedArchs(numArchs: *mut ::core::ffi::c_int) -> nvrtcResult {
-        (culib().nvrtcGetNumSupportedArchs)(numArchs)
+}
+pub unsafe fn nvrtcGetErrorString(result: nvrtcResult) -> *const ::core::ffi::c_char {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcResult) -> *const ::core::ffi::c_char;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetErrorString") });
+        _f(result)
     }
-    #[cfg(any(
-        feature = "cuda-12000",
-        feature = "cuda-12010",
-        feature = "cuda-12020",
-        feature = "cuda-12030",
-        feature = "cuda-12040",
-        feature = "cuda-12050",
-        feature = "cuda-12060",
-        feature = "cuda-12080",
-        feature = "cuda-12090",
-        feature = "cuda-13000",
-        feature = "cuda-13010",
-        feature = "cuda-13020"
-    ))]
-    pub unsafe fn nvrtcGetOptiXIR(
-        prog: nvrtcProgram,
-        optixir: *mut ::core::ffi::c_char,
-    ) -> nvrtcResult {
-        (culib().nvrtcGetOptiXIR)(prog, optixir)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetErrorString(result: nvrtcResult) -> *const ::core::ffi::c_char;
+        nvrtcGetErrorString(result)
     }
-    #[cfg(any(
-        feature = "cuda-12000",
-        feature = "cuda-12010",
-        feature = "cuda-12020",
-        feature = "cuda-12030",
-        feature = "cuda-12040",
-        feature = "cuda-12050",
-        feature = "cuda-12060",
-        feature = "cuda-12080",
-        feature = "cuda-12090",
-        feature = "cuda-13000",
-        feature = "cuda-13010",
-        feature = "cuda-13020"
-    ))]
-    pub unsafe fn nvrtcGetOptiXIRSize(
-        prog: nvrtcProgram,
-        optixirSizeRet: *mut usize,
-    ) -> nvrtcResult {
-        (culib().nvrtcGetOptiXIRSize)(prog, optixirSizeRet)
+}
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+pub unsafe fn nvrtcGetLTOIR(prog: nvrtcProgram, LTOIR: *mut ::core::ffi::c_char) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcProgram, *mut ::core::ffi::c_char) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetLTOIR") });
+        _f(prog, LTOIR)
     }
-    pub unsafe fn nvrtcGetPTX(prog: nvrtcProgram, ptx: *mut ::core::ffi::c_char) -> nvrtcResult {
-        (culib().nvrtcGetPTX)(prog, ptx)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetLTOIR(prog: nvrtcProgram, LTOIR: *mut ::core::ffi::c_char) -> nvrtcResult;
+        nvrtcGetLTOIR(prog, LTOIR)
     }
-    pub unsafe fn nvrtcGetPTXSize(prog: nvrtcProgram, ptxSizeRet: *mut usize) -> nvrtcResult {
-        (culib().nvrtcGetPTXSize)(prog, ptxSizeRet)
+}
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+pub unsafe fn nvrtcGetLTOIRSize(prog: nvrtcProgram, LTOIRSizeRet: *mut usize) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcProgram, *mut usize) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetLTOIRSize") });
+        _f(prog, LTOIRSizeRet)
     }
-    pub unsafe fn nvrtcGetProgramLog(
-        prog: nvrtcProgram,
-        log: *mut ::core::ffi::c_char,
-    ) -> nvrtcResult {
-        (culib().nvrtcGetProgramLog)(prog, log)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetLTOIRSize(prog: nvrtcProgram, LTOIRSizeRet: *mut usize) -> nvrtcResult;
+        nvrtcGetLTOIRSize(prog, LTOIRSizeRet)
     }
-    pub unsafe fn nvrtcGetProgramLogSize(
-        prog: nvrtcProgram,
-        logSizeRet: *mut usize,
-    ) -> nvrtcResult {
-        (culib().nvrtcGetProgramLogSize)(prog, logSizeRet)
+}
+pub unsafe fn nvrtcGetLoweredName(prog: nvrtcProgram, name_expression: *const ::core::ffi::c_char, lowered_name: *mut *const ::core::ffi::c_char) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcProgram, *const ::core::ffi::c_char, *mut *const ::core::ffi::c_char) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetLoweredName") });
+        _f(prog, name_expression, lowered_name)
     }
-    pub unsafe fn nvrtcGetSupportedArchs(supportedArchs: *mut ::core::ffi::c_int) -> nvrtcResult {
-        (culib().nvrtcGetSupportedArchs)(supportedArchs)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetLoweredName(prog: nvrtcProgram, name_expression: *const ::core::ffi::c_char, lowered_name: *mut *const ::core::ffi::c_char) -> nvrtcResult;
+        nvrtcGetLoweredName(prog, name_expression, lowered_name)
     }
-    #[cfg(any(feature = "cuda-13020"))]
-    pub unsafe fn nvrtcGetTileIR(
-        prog: nvrtcProgram,
-        TileIR: *mut ::core::ffi::c_char,
-    ) -> nvrtcResult {
-        (culib().nvrtcGetTileIR)(prog, TileIR)
+}
+pub unsafe fn nvrtcGetNumSupportedArchs(numArchs: *mut ::core::ffi::c_int) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*mut ::core::ffi::c_int) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetNumSupportedArchs") });
+        _f(numArchs)
     }
-    #[cfg(any(feature = "cuda-13020"))]
-    pub unsafe fn nvrtcGetTileIRSize(prog: nvrtcProgram, TileIRSizeRet: *mut usize) -> nvrtcResult {
-        (culib().nvrtcGetTileIRSize)(prog, TileIRSizeRet)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetNumSupportedArchs(numArchs: *mut ::core::ffi::c_int) -> nvrtcResult;
+        nvrtcGetNumSupportedArchs(numArchs)
     }
-    pub unsafe fn nvrtcVersion(
-        major: *mut ::core::ffi::c_int,
-        minor: *mut ::core::ffi::c_int,
-    ) -> nvrtcResult {
-        (culib().nvrtcVersion)(major, minor)
+}
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+pub unsafe fn nvrtcGetOptiXIR(prog: nvrtcProgram, optixir: *mut ::core::ffi::c_char) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcProgram, *mut ::core::ffi::c_char) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetOptiXIR") });
+        _f(prog, optixir)
     }
-    pub struct Lib {
-        __library: ::libloading::Library,
-        pub nvrtcAddNameExpression: unsafe extern "C" fn(
-            prog: nvrtcProgram,
-            name_expression: *const ::core::ffi::c_char,
-        ) -> nvrtcResult,
-        pub nvrtcCompileProgram: unsafe extern "C" fn(
-            prog: nvrtcProgram,
-            numOptions: ::core::ffi::c_int,
-            options: *const *const ::core::ffi::c_char,
-        ) -> nvrtcResult,
-        pub nvrtcCreateProgram: unsafe extern "C" fn(
-            prog: *mut nvrtcProgram,
-            src: *const ::core::ffi::c_char,
-            name: *const ::core::ffi::c_char,
-            numHeaders: ::core::ffi::c_int,
-            headers: *const *const ::core::ffi::c_char,
-            includeNames: *const *const ::core::ffi::c_char,
-        ) -> nvrtcResult,
-        pub nvrtcDestroyProgram: unsafe extern "C" fn(prog: *mut nvrtcProgram) -> nvrtcResult,
-        pub nvrtcGetCUBIN: unsafe extern "C" fn(
-            prog: nvrtcProgram,
-            cubin: *mut ::core::ffi::c_char,
-        ) -> nvrtcResult,
-        pub nvrtcGetCUBINSize:
-            unsafe extern "C" fn(prog: nvrtcProgram, cubinSizeRet: *mut usize) -> nvrtcResult,
-        pub nvrtcGetErrorString:
-            unsafe extern "C" fn(result: nvrtcResult) -> *const ::core::ffi::c_char,
-        #[cfg(any(
-            feature = "cuda-12000",
-            feature = "cuda-12010",
-            feature = "cuda-12020",
-            feature = "cuda-12030",
-            feature = "cuda-12040",
-            feature = "cuda-12050",
-            feature = "cuda-12060",
-            feature = "cuda-12080",
-            feature = "cuda-12090",
-            feature = "cuda-13000",
-            feature = "cuda-13010",
-            feature = "cuda-13020"
-        ))]
-        pub nvrtcGetLTOIR: unsafe extern "C" fn(
-            prog: nvrtcProgram,
-            LTOIR: *mut ::core::ffi::c_char,
-        ) -> nvrtcResult,
-        #[cfg(any(
-            feature = "cuda-12000",
-            feature = "cuda-12010",
-            feature = "cuda-12020",
-            feature = "cuda-12030",
-            feature = "cuda-12040",
-            feature = "cuda-12050",
-            feature = "cuda-12060",
-            feature = "cuda-12080",
-            feature = "cuda-12090",
-            feature = "cuda-13000",
-            feature = "cuda-13010",
-            feature = "cuda-13020"
-        ))]
-        pub nvrtcGetLTOIRSize:
-            unsafe extern "C" fn(prog: nvrtcProgram, LTOIRSizeRet: *mut usize) -> nvrtcResult,
-        pub nvrtcGetLoweredName: unsafe extern "C" fn(
-            prog: nvrtcProgram,
-            name_expression: *const ::core::ffi::c_char,
-            lowered_name: *mut *const ::core::ffi::c_char,
-        ) -> nvrtcResult,
-        pub nvrtcGetNumSupportedArchs:
-            unsafe extern "C" fn(numArchs: *mut ::core::ffi::c_int) -> nvrtcResult,
-        #[cfg(any(
-            feature = "cuda-12000",
-            feature = "cuda-12010",
-            feature = "cuda-12020",
-            feature = "cuda-12030",
-            feature = "cuda-12040",
-            feature = "cuda-12050",
-            feature = "cuda-12060",
-            feature = "cuda-12080",
-            feature = "cuda-12090",
-            feature = "cuda-13000",
-            feature = "cuda-13010",
-            feature = "cuda-13020"
-        ))]
-        pub nvrtcGetOptiXIR: unsafe extern "C" fn(
-            prog: nvrtcProgram,
-            optixir: *mut ::core::ffi::c_char,
-        ) -> nvrtcResult,
-        #[cfg(any(
-            feature = "cuda-12000",
-            feature = "cuda-12010",
-            feature = "cuda-12020",
-            feature = "cuda-12030",
-            feature = "cuda-12040",
-            feature = "cuda-12050",
-            feature = "cuda-12060",
-            feature = "cuda-12080",
-            feature = "cuda-12090",
-            feature = "cuda-13000",
-            feature = "cuda-13010",
-            feature = "cuda-13020"
-        ))]
-        pub nvrtcGetOptiXIRSize:
-            unsafe extern "C" fn(prog: nvrtcProgram, optixirSizeRet: *mut usize) -> nvrtcResult,
-        pub nvrtcGetPTX:
-            unsafe extern "C" fn(prog: nvrtcProgram, ptx: *mut ::core::ffi::c_char) -> nvrtcResult,
-        pub nvrtcGetPTXSize:
-            unsafe extern "C" fn(prog: nvrtcProgram, ptxSizeRet: *mut usize) -> nvrtcResult,
-        pub nvrtcGetProgramLog:
-            unsafe extern "C" fn(prog: nvrtcProgram, log: *mut ::core::ffi::c_char) -> nvrtcResult,
-        pub nvrtcGetProgramLogSize:
-            unsafe extern "C" fn(prog: nvrtcProgram, logSizeRet: *mut usize) -> nvrtcResult,
-        pub nvrtcGetSupportedArchs:
-            unsafe extern "C" fn(supportedArchs: *mut ::core::ffi::c_int) -> nvrtcResult,
-        #[cfg(any(feature = "cuda-13020"))]
-        pub nvrtcGetTileIR: unsafe extern "C" fn(
-            prog: nvrtcProgram,
-            TileIR: *mut ::core::ffi::c_char,
-        ) -> nvrtcResult,
-        #[cfg(any(feature = "cuda-13020"))]
-        pub nvrtcGetTileIRSize:
-            unsafe extern "C" fn(prog: nvrtcProgram, TileIRSizeRet: *mut usize) -> nvrtcResult,
-        pub nvrtcVersion: unsafe extern "C" fn(
-            major: *mut ::core::ffi::c_int,
-            minor: *mut ::core::ffi::c_int,
-        ) -> nvrtcResult,
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetOptiXIR(prog: nvrtcProgram, optixir: *mut ::core::ffi::c_char) -> nvrtcResult;
+        nvrtcGetOptiXIR(prog, optixir)
     }
-    impl Lib {
-        pub unsafe fn new<P>(path: P) -> Result<Self, ::libloading::Error>
-        where
-            P: AsRef<::std::ffi::OsStr>,
-        {
-            let library = ::libloading::Library::new(path.as_ref())?;
-            Self::from_library(library)
-        }
-        pub unsafe fn from_library<L>(library: L) -> Result<Self, ::libloading::Error>
-        where
-            L: Into<::libloading::Library>,
-        {
-            let __library = library.into();
-            let nvrtcAddNameExpression = __library
-                .get(b"nvrtcAddNameExpression\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let nvrtcCompileProgram = __library
-                .get(b"nvrtcCompileProgram\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let nvrtcCreateProgram = __library
-                .get(b"nvrtcCreateProgram\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let nvrtcDestroyProgram = __library
-                .get(b"nvrtcDestroyProgram\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let nvrtcGetCUBIN = __library
-                .get(b"nvrtcGetCUBIN\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let nvrtcGetCUBINSize = __library
-                .get(b"nvrtcGetCUBINSize\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let nvrtcGetErrorString = __library
-                .get(b"nvrtcGetErrorString\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            #[cfg(any(
-                feature = "cuda-12000",
-                feature = "cuda-12010",
-                feature = "cuda-12020",
-                feature = "cuda-12030",
-                feature = "cuda-12040",
-                feature = "cuda-12050",
-                feature = "cuda-12060",
-                feature = "cuda-12080",
-                feature = "cuda-12090",
-                feature = "cuda-13000",
-                feature = "cuda-13010",
-                feature = "cuda-13020"
-            ))]
-            let nvrtcGetLTOIR = __library
-                .get(b"nvrtcGetLTOIR\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            #[cfg(any(
-                feature = "cuda-12000",
-                feature = "cuda-12010",
-                feature = "cuda-12020",
-                feature = "cuda-12030",
-                feature = "cuda-12040",
-                feature = "cuda-12050",
-                feature = "cuda-12060",
-                feature = "cuda-12080",
-                feature = "cuda-12090",
-                feature = "cuda-13000",
-                feature = "cuda-13010",
-                feature = "cuda-13020"
-            ))]
-            let nvrtcGetLTOIRSize = __library
-                .get(b"nvrtcGetLTOIRSize\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let nvrtcGetLoweredName = __library
-                .get(b"nvrtcGetLoweredName\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let nvrtcGetNumSupportedArchs = __library
-                .get(b"nvrtcGetNumSupportedArchs\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            #[cfg(any(
-                feature = "cuda-12000",
-                feature = "cuda-12010",
-                feature = "cuda-12020",
-                feature = "cuda-12030",
-                feature = "cuda-12040",
-                feature = "cuda-12050",
-                feature = "cuda-12060",
-                feature = "cuda-12080",
-                feature = "cuda-12090",
-                feature = "cuda-13000",
-                feature = "cuda-13010",
-                feature = "cuda-13020"
-            ))]
-            let nvrtcGetOptiXIR = __library
-                .get(b"nvrtcGetOptiXIR\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            #[cfg(any(
-                feature = "cuda-12000",
-                feature = "cuda-12010",
-                feature = "cuda-12020",
-                feature = "cuda-12030",
-                feature = "cuda-12040",
-                feature = "cuda-12050",
-                feature = "cuda-12060",
-                feature = "cuda-12080",
-                feature = "cuda-12090",
-                feature = "cuda-13000",
-                feature = "cuda-13010",
-                feature = "cuda-13020"
-            ))]
-            let nvrtcGetOptiXIRSize = __library
-                .get(b"nvrtcGetOptiXIRSize\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let nvrtcGetPTX = __library
-                .get(b"nvrtcGetPTX\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let nvrtcGetPTXSize = __library
-                .get(b"nvrtcGetPTXSize\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let nvrtcGetProgramLog = __library
-                .get(b"nvrtcGetProgramLog\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let nvrtcGetProgramLogSize = __library
-                .get(b"nvrtcGetProgramLogSize\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let nvrtcGetSupportedArchs = __library
-                .get(b"nvrtcGetSupportedArchs\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            #[cfg(any(feature = "cuda-13020"))]
-            let nvrtcGetTileIR = __library
-                .get(b"nvrtcGetTileIR\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            #[cfg(any(feature = "cuda-13020"))]
-            let nvrtcGetTileIRSize = __library
-                .get(b"nvrtcGetTileIRSize\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let nvrtcVersion = __library
-                .get(b"nvrtcVersion\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            Ok(Self {
-                __library,
-                nvrtcAddNameExpression,
-                nvrtcCompileProgram,
-                nvrtcCreateProgram,
-                nvrtcDestroyProgram,
-                nvrtcGetCUBIN,
-                nvrtcGetCUBINSize,
-                nvrtcGetErrorString,
-                #[cfg(any(
-                    feature = "cuda-12000",
-                    feature = "cuda-12010",
-                    feature = "cuda-12020",
-                    feature = "cuda-12030",
-                    feature = "cuda-12040",
-                    feature = "cuda-12050",
-                    feature = "cuda-12060",
-                    feature = "cuda-12080",
-                    feature = "cuda-12090",
-                    feature = "cuda-13000",
-                    feature = "cuda-13010",
-                    feature = "cuda-13020"
-                ))]
-                nvrtcGetLTOIR,
-                #[cfg(any(
-                    feature = "cuda-12000",
-                    feature = "cuda-12010",
-                    feature = "cuda-12020",
-                    feature = "cuda-12030",
-                    feature = "cuda-12040",
-                    feature = "cuda-12050",
-                    feature = "cuda-12060",
-                    feature = "cuda-12080",
-                    feature = "cuda-12090",
-                    feature = "cuda-13000",
-                    feature = "cuda-13010",
-                    feature = "cuda-13020"
-                ))]
-                nvrtcGetLTOIRSize,
-                nvrtcGetLoweredName,
-                nvrtcGetNumSupportedArchs,
-                #[cfg(any(
-                    feature = "cuda-12000",
-                    feature = "cuda-12010",
-                    feature = "cuda-12020",
-                    feature = "cuda-12030",
-                    feature = "cuda-12040",
-                    feature = "cuda-12050",
-                    feature = "cuda-12060",
-                    feature = "cuda-12080",
-                    feature = "cuda-12090",
-                    feature = "cuda-13000",
-                    feature = "cuda-13010",
-                    feature = "cuda-13020"
-                ))]
-                nvrtcGetOptiXIR,
-                #[cfg(any(
-                    feature = "cuda-12000",
-                    feature = "cuda-12010",
-                    feature = "cuda-12020",
-                    feature = "cuda-12030",
-                    feature = "cuda-12040",
-                    feature = "cuda-12050",
-                    feature = "cuda-12060",
-                    feature = "cuda-12080",
-                    feature = "cuda-12090",
-                    feature = "cuda-13000",
-                    feature = "cuda-13010",
-                    feature = "cuda-13020"
-                ))]
-                nvrtcGetOptiXIRSize,
-                nvrtcGetPTX,
-                nvrtcGetPTXSize,
-                nvrtcGetProgramLog,
-                nvrtcGetProgramLogSize,
-                nvrtcGetSupportedArchs,
-                #[cfg(any(feature = "cuda-13020"))]
-                nvrtcGetTileIR,
-                #[cfg(any(feature = "cuda-13020"))]
-                nvrtcGetTileIRSize,
-                nvrtcVersion,
-            })
-        }
+}
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+pub unsafe fn nvrtcGetOptiXIRSize(prog: nvrtcProgram, optixirSizeRet: *mut usize) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcProgram, *mut usize) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetOptiXIRSize") });
+        _f(prog, optixirSizeRet)
     }
-    pub unsafe fn is_culib_present() -> bool {
-        let lib_names = ["nvrtc"];
-        let choices = lib_names
-            .iter()
-            .map(|l| crate::get_lib_name_candidates(l))
-            .flatten();
-        for choice in choices {
-            if Lib::new(choice).is_ok() {
-                return true;
-            }
-        }
-        false
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetOptiXIRSize(prog: nvrtcProgram, optixirSizeRet: *mut usize) -> nvrtcResult;
+        nvrtcGetOptiXIRSize(prog, optixirSizeRet)
     }
-    pub unsafe fn culib() -> &'static Lib {
-        static LIB: std::sync::OnceLock<Lib> = std::sync::OnceLock::new();
-        LIB.get_or_init(|| {
-            let lib_names = std::vec!["nvrtc"];
-            let choices: std::vec::Vec<_> = lib_names
-                .iter()
-                .map(|l| crate::get_lib_name_candidates(l))
-                .flatten()
-                .collect();
-            for choice in choices.iter() {
-                if let Ok(lib) = Lib::new(choice) {
-                    return lib;
-                }
-            }
-            crate::panic_no_lib_found(lib_names[0], &choices);
-        })
+}
+pub unsafe fn nvrtcGetPTX(prog: nvrtcProgram, ptx: *mut ::core::ffi::c_char) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcProgram, *mut ::core::ffi::c_char) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetPTX") });
+        _f(prog, ptx)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetPTX(prog: nvrtcProgram, ptx: *mut ::core::ffi::c_char) -> nvrtcResult;
+        nvrtcGetPTX(prog, ptx)
+    }
+}
+pub unsafe fn nvrtcGetPTXSize(prog: nvrtcProgram, ptxSizeRet: *mut usize) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcProgram, *mut usize) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetPTXSize") });
+        _f(prog, ptxSizeRet)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetPTXSize(prog: nvrtcProgram, ptxSizeRet: *mut usize) -> nvrtcResult;
+        nvrtcGetPTXSize(prog, ptxSizeRet)
+    }
+}
+pub unsafe fn nvrtcGetProgramLog(prog: nvrtcProgram, log: *mut ::core::ffi::c_char) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcProgram, *mut ::core::ffi::c_char) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetProgramLog") });
+        _f(prog, log)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetProgramLog(prog: nvrtcProgram, log: *mut ::core::ffi::c_char) -> nvrtcResult;
+        nvrtcGetProgramLog(prog, log)
+    }
+}
+pub unsafe fn nvrtcGetProgramLogSize(prog: nvrtcProgram, logSizeRet: *mut usize) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcProgram, *mut usize) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetProgramLogSize") });
+        _f(prog, logSizeRet)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetProgramLogSize(prog: nvrtcProgram, logSizeRet: *mut usize) -> nvrtcResult;
+        nvrtcGetProgramLogSize(prog, logSizeRet)
+    }
+}
+pub unsafe fn nvrtcGetSupportedArchs(supportedArchs: *mut ::core::ffi::c_int) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*mut ::core::ffi::c_int) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetSupportedArchs") });
+        _f(supportedArchs)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetSupportedArchs(supportedArchs: *mut ::core::ffi::c_int) -> nvrtcResult;
+        nvrtcGetSupportedArchs(supportedArchs)
+    }
+}
+#[cfg(any(feature = "cuda-13020"))]
+pub unsafe fn nvrtcGetTileIR(prog: nvrtcProgram, TileIR: *mut ::core::ffi::c_char) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcProgram, *mut ::core::ffi::c_char) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetTileIR") });
+        _f(prog, TileIR)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetTileIR(prog: nvrtcProgram, TileIR: *mut ::core::ffi::c_char) -> nvrtcResult;
+        nvrtcGetTileIR(prog, TileIR)
+    }
+}
+#[cfg(any(feature = "cuda-13020"))]
+pub unsafe fn nvrtcGetTileIRSize(prog: nvrtcProgram, TileIRSizeRet: *mut usize) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(nvrtcProgram, *mut usize) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcGetTileIRSize") });
+        _f(prog, TileIRSizeRet)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcGetTileIRSize(prog: nvrtcProgram, TileIRSizeRet: *mut usize) -> nvrtcResult;
+        nvrtcGetTileIRSize(prog, TileIRSizeRet)
+    }
+}
+pub unsafe fn nvrtcVersion(major: *mut ::core::ffi::c_int, minor: *mut ::core::ffi::c_int) -> nvrtcResult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*mut ::core::ffi::c_int, *mut ::core::ffi::c_int) -> nvrtcResult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("nvrtcVersion") });
+        _f(major, minor)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn nvrtcVersion(major: *mut ::core::ffi::c_int, minor: *mut ::core::ffi::c_int) -> nvrtcResult;
+        nvrtcVersion(major, minor)
     }
 }
 #[cfg(feature = "dynamic-loading")]
-pub use loaded::*;
+pub unsafe fn is_culib_present() -> bool {
+    let lib_names = ["nvrtc"];
+    let choices = lib_names.iter().map(|l| crate::get_lib_name_candidates(l)).flatten();
+    for choice in choices {
+        if ::libloading::Library::new(choice).is_ok() {
+            return true;
+        }
+    }
+    false
+}
+#[cfg(feature = "dynamic-loading")]
+pub unsafe fn culib() -> &'static ::libloading::Library {
+    static LIB: OnceLock<::libloading::Library> = OnceLock::new();
+    LIB.get_or_init(|| {
+        let lib_names = std::vec!["nvrtc"];
+        let choices: std::vec::Vec<_> = lib_names.iter().map(|l| crate::get_lib_name_candidates(l)).flatten().collect();
+        for choice in choices.iter() {
+            if let Ok(lib) = ::libloading::Library::new(choice) {
+                return lib;
+            }
+        }
+        crate::panic_no_lib_found(lib_names[0], &choices);
+    })
+}

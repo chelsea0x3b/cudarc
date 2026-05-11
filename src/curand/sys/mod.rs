@@ -2,10 +2,15 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(dead_code)]
+use std::sync::OnceLock;
 #[cfg(feature = "no-std")]
 extern crate alloc;
 #[cfg(feature = "no-std")]
 extern crate no_std_compat as std;
+#[cfg(feature = "dynamic-loading")]
+fn load<F: Copy>(name: &str) -> F {
+    unsafe { *culib().get::<F>(name.as_bytes()).unwrap_or_else(|e| panic!("Missing symbol {name}: {e}")) }
+}
 pub use self::curandDirectionVectorSet as curandDirectionVectorSet_t;
 pub use self::curandMethod as curandMethod_t;
 pub use self::curandOrdering as curandOrdering_t;
@@ -62,24 +67,7 @@ pub enum curandOrdering {
     CURAND_ORDERING_PSEUDO_LEGACY = 103,
     CURAND_ORDERING_QUASI_DEFAULT = 201,
 }
-#[cfg(any(
-    feature = "cuda-11050",
-    feature = "cuda-11060",
-    feature = "cuda-11070",
-    feature = "cuda-11080",
-    feature = "cuda-12000",
-    feature = "cuda-12010",
-    feature = "cuda-12020",
-    feature = "cuda-12030",
-    feature = "cuda-12040",
-    feature = "cuda-12050",
-    feature = "cuda-12060",
-    feature = "cuda-12080",
-    feature = "cuda-12090",
-    feature = "cuda-13000",
-    feature = "cuda-13010",
-    feature = "cuda-13020"
-))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum curandOrdering {
@@ -160,601 +148,406 @@ pub struct curandGenerator_st {
 pub struct curandHistogramM2_st {
     _unused: [u8; 0],
 }
-#[cfg(not(feature = "dynamic-loading"))]
-extern "C" {
-    pub fn curandCreateGenerator(
-        generator: *mut curandGenerator_t,
-        rng_type: curandRngType_t,
-    ) -> curandStatus_t;
-    pub fn curandCreateGeneratorHost(
-        generator: *mut curandGenerator_t,
-        rng_type: curandRngType_t,
-    ) -> curandStatus_t;
-    pub fn curandCreatePoissonDistribution(
-        lambda: f64,
-        discrete_distribution: *mut curandDiscreteDistribution_t,
-    ) -> curandStatus_t;
-    pub fn curandDestroyDistribution(
-        discrete_distribution: curandDiscreteDistribution_t,
-    ) -> curandStatus_t;
-    pub fn curandDestroyGenerator(generator: curandGenerator_t) -> curandStatus_t;
-    pub fn curandGenerate(
-        generator: curandGenerator_t,
-        outputPtr: *mut ::core::ffi::c_uint,
-        num: usize,
-    ) -> curandStatus_t;
-    pub fn curandGenerateLogNormal(
-        generator: curandGenerator_t,
-        outputPtr: *mut f32,
-        n: usize,
-        mean: f32,
-        stddev: f32,
-    ) -> curandStatus_t;
-    pub fn curandGenerateLogNormalDouble(
-        generator: curandGenerator_t,
-        outputPtr: *mut f64,
-        n: usize,
-        mean: f64,
-        stddev: f64,
-    ) -> curandStatus_t;
-    pub fn curandGenerateLongLong(
-        generator: curandGenerator_t,
-        outputPtr: *mut ::core::ffi::c_ulonglong,
-        num: usize,
-    ) -> curandStatus_t;
-    pub fn curandGenerateNormal(
-        generator: curandGenerator_t,
-        outputPtr: *mut f32,
-        n: usize,
-        mean: f32,
-        stddev: f32,
-    ) -> curandStatus_t;
-    pub fn curandGenerateNormalDouble(
-        generator: curandGenerator_t,
-        outputPtr: *mut f64,
-        n: usize,
-        mean: f64,
-        stddev: f64,
-    ) -> curandStatus_t;
-    pub fn curandGeneratePoisson(
-        generator: curandGenerator_t,
-        outputPtr: *mut ::core::ffi::c_uint,
-        n: usize,
-        lambda: f64,
-    ) -> curandStatus_t;
-    pub fn curandGeneratePoissonMethod(
-        generator: curandGenerator_t,
-        outputPtr: *mut ::core::ffi::c_uint,
-        n: usize,
-        lambda: f64,
-        method: curandMethod_t,
-    ) -> curandStatus_t;
-    pub fn curandGenerateSeeds(generator: curandGenerator_t) -> curandStatus_t;
-    pub fn curandGenerateUniform(
-        generator: curandGenerator_t,
-        outputPtr: *mut f32,
-        num: usize,
-    ) -> curandStatus_t;
-    pub fn curandGenerateUniformDouble(
-        generator: curandGenerator_t,
-        outputPtr: *mut f64,
-        num: usize,
-    ) -> curandStatus_t;
-    pub fn curandGetDirectionVectors32(
-        vectors: *mut *mut curandDirectionVectors32_t,
-        set: curandDirectionVectorSet_t,
-    ) -> curandStatus_t;
-    pub fn curandGetDirectionVectors64(
-        vectors: *mut *mut curandDirectionVectors64_t,
-        set: curandDirectionVectorSet_t,
-    ) -> curandStatus_t;
-    pub fn curandGetProperty(
-        type_: libraryPropertyType,
-        value: *mut ::core::ffi::c_int,
-    ) -> curandStatus_t;
-    pub fn curandGetScrambleConstants32(constants: *mut *mut ::core::ffi::c_uint)
-        -> curandStatus_t;
-    pub fn curandGetScrambleConstants64(
-        constants: *mut *mut ::core::ffi::c_ulonglong,
-    ) -> curandStatus_t;
-    pub fn curandGetVersion(version: *mut ::core::ffi::c_int) -> curandStatus_t;
-    pub fn curandSetGeneratorOffset(
-        generator: curandGenerator_t,
-        offset: ::core::ffi::c_ulonglong,
-    ) -> curandStatus_t;
-    pub fn curandSetGeneratorOrdering(
-        generator: curandGenerator_t,
-        order: curandOrdering_t,
-    ) -> curandStatus_t;
-    pub fn curandSetPseudoRandomGeneratorSeed(
-        generator: curandGenerator_t,
-        seed: ::core::ffi::c_ulonglong,
-    ) -> curandStatus_t;
-    pub fn curandSetQuasiRandomGeneratorDimensions(
-        generator: curandGenerator_t,
-        num_dimensions: ::core::ffi::c_uint,
-    ) -> curandStatus_t;
-    pub fn curandSetStream(generator: curandGenerator_t, stream: cudaStream_t) -> curandStatus_t;
+pub unsafe fn curandCreateGenerator(generator: *mut curandGenerator_t, rng_type: curandRngType_t) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*mut curandGenerator_t, curandRngType_t) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandCreateGenerator") });
+        _f(generator, rng_type)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandCreateGenerator(generator: *mut curandGenerator_t, rng_type: curandRngType_t) -> curandStatus_t;
+        curandCreateGenerator(generator, rng_type)
+    }
 }
-#[cfg(feature = "dynamic-loading")]
-mod loaded {
-    use super::*;
-    pub unsafe fn curandCreateGenerator(
-        generator: *mut curandGenerator_t,
-        rng_type: curandRngType_t,
-    ) -> curandStatus_t {
-        (culib().curandCreateGenerator)(generator, rng_type)
+pub unsafe fn curandCreateGeneratorHost(generator: *mut curandGenerator_t, rng_type: curandRngType_t) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*mut curandGenerator_t, curandRngType_t) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandCreateGeneratorHost") });
+        _f(generator, rng_type)
     }
-    pub unsafe fn curandCreateGeneratorHost(
-        generator: *mut curandGenerator_t,
-        rng_type: curandRngType_t,
-    ) -> curandStatus_t {
-        (culib().curandCreateGeneratorHost)(generator, rng_type)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandCreateGeneratorHost(generator: *mut curandGenerator_t, rng_type: curandRngType_t) -> curandStatus_t;
+        curandCreateGeneratorHost(generator, rng_type)
     }
-    pub unsafe fn curandCreatePoissonDistribution(
-        lambda: f64,
-        discrete_distribution: *mut curandDiscreteDistribution_t,
-    ) -> curandStatus_t {
-        (culib().curandCreatePoissonDistribution)(lambda, discrete_distribution)
+}
+pub unsafe fn curandCreatePoissonDistribution(lambda: f64, discrete_distribution: *mut curandDiscreteDistribution_t) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(f64, *mut curandDiscreteDistribution_t) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandCreatePoissonDistribution") });
+        _f(lambda, discrete_distribution)
     }
-    pub unsafe fn curandDestroyDistribution(
-        discrete_distribution: curandDiscreteDistribution_t,
-    ) -> curandStatus_t {
-        (culib().curandDestroyDistribution)(discrete_distribution)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandCreatePoissonDistribution(lambda: f64, discrete_distribution: *mut curandDiscreteDistribution_t) -> curandStatus_t;
+        curandCreatePoissonDistribution(lambda, discrete_distribution)
     }
-    pub unsafe fn curandDestroyGenerator(generator: curandGenerator_t) -> curandStatus_t {
-        (culib().curandDestroyGenerator)(generator)
+}
+pub unsafe fn curandDestroyDistribution(discrete_distribution: curandDiscreteDistribution_t) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandDiscreteDistribution_t) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandDestroyDistribution") });
+        _f(discrete_distribution)
     }
-    pub unsafe fn curandGenerate(
-        generator: curandGenerator_t,
-        outputPtr: *mut ::core::ffi::c_uint,
-        num: usize,
-    ) -> curandStatus_t {
-        (culib().curandGenerate)(generator, outputPtr, num)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandDestroyDistribution(discrete_distribution: curandDiscreteDistribution_t) -> curandStatus_t;
+        curandDestroyDistribution(discrete_distribution)
     }
-    pub unsafe fn curandGenerateLogNormal(
-        generator: curandGenerator_t,
-        outputPtr: *mut f32,
-        n: usize,
-        mean: f32,
-        stddev: f32,
-    ) -> curandStatus_t {
-        (culib().curandGenerateLogNormal)(generator, outputPtr, n, mean, stddev)
+}
+pub unsafe fn curandDestroyGenerator(generator: curandGenerator_t) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandDestroyGenerator") });
+        _f(generator)
     }
-    pub unsafe fn curandGenerateLogNormalDouble(
-        generator: curandGenerator_t,
-        outputPtr: *mut f64,
-        n: usize,
-        mean: f64,
-        stddev: f64,
-    ) -> curandStatus_t {
-        (culib().curandGenerateLogNormalDouble)(generator, outputPtr, n, mean, stddev)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandDestroyGenerator(generator: curandGenerator_t) -> curandStatus_t;
+        curandDestroyGenerator(generator)
     }
-    pub unsafe fn curandGenerateLongLong(
-        generator: curandGenerator_t,
-        outputPtr: *mut ::core::ffi::c_ulonglong,
-        num: usize,
-    ) -> curandStatus_t {
-        (culib().curandGenerateLongLong)(generator, outputPtr, num)
+}
+pub unsafe fn curandGenerate(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_uint, num: usize) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t, *mut ::core::ffi::c_uint, usize) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGenerate") });
+        _f(generator, outputPtr, num)
     }
-    pub unsafe fn curandGenerateNormal(
-        generator: curandGenerator_t,
-        outputPtr: *mut f32,
-        n: usize,
-        mean: f32,
-        stddev: f32,
-    ) -> curandStatus_t {
-        (culib().curandGenerateNormal)(generator, outputPtr, n, mean, stddev)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGenerate(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_uint, num: usize) -> curandStatus_t;
+        curandGenerate(generator, outputPtr, num)
     }
-    pub unsafe fn curandGenerateNormalDouble(
-        generator: curandGenerator_t,
-        outputPtr: *mut f64,
-        n: usize,
-        mean: f64,
-        stddev: f64,
-    ) -> curandStatus_t {
-        (culib().curandGenerateNormalDouble)(generator, outputPtr, n, mean, stddev)
+}
+pub unsafe fn curandGenerateLogNormal(generator: curandGenerator_t, outputPtr: *mut f32, n: usize, mean: f32, stddev: f32) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t, *mut f32, usize, f32, f32) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGenerateLogNormal") });
+        _f(generator, outputPtr, n, mean, stddev)
     }
-    pub unsafe fn curandGeneratePoisson(
-        generator: curandGenerator_t,
-        outputPtr: *mut ::core::ffi::c_uint,
-        n: usize,
-        lambda: f64,
-    ) -> curandStatus_t {
-        (culib().curandGeneratePoisson)(generator, outputPtr, n, lambda)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGenerateLogNormal(generator: curandGenerator_t, outputPtr: *mut f32, n: usize, mean: f32, stddev: f32) -> curandStatus_t;
+        curandGenerateLogNormal(generator, outputPtr, n, mean, stddev)
     }
-    pub unsafe fn curandGeneratePoissonMethod(
-        generator: curandGenerator_t,
-        outputPtr: *mut ::core::ffi::c_uint,
-        n: usize,
-        lambda: f64,
-        method: curandMethod_t,
-    ) -> curandStatus_t {
-        (culib().curandGeneratePoissonMethod)(generator, outputPtr, n, lambda, method)
+}
+pub unsafe fn curandGenerateLogNormalDouble(generator: curandGenerator_t, outputPtr: *mut f64, n: usize, mean: f64, stddev: f64) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t, *mut f64, usize, f64, f64) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGenerateLogNormalDouble") });
+        _f(generator, outputPtr, n, mean, stddev)
     }
-    pub unsafe fn curandGenerateSeeds(generator: curandGenerator_t) -> curandStatus_t {
-        (culib().curandGenerateSeeds)(generator)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGenerateLogNormalDouble(generator: curandGenerator_t, outputPtr: *mut f64, n: usize, mean: f64, stddev: f64) -> curandStatus_t;
+        curandGenerateLogNormalDouble(generator, outputPtr, n, mean, stddev)
     }
-    pub unsafe fn curandGenerateUniform(
-        generator: curandGenerator_t,
-        outputPtr: *mut f32,
-        num: usize,
-    ) -> curandStatus_t {
-        (culib().curandGenerateUniform)(generator, outputPtr, num)
+}
+pub unsafe fn curandGenerateLongLong(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_ulonglong, num: usize) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t, *mut ::core::ffi::c_ulonglong, usize) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGenerateLongLong") });
+        _f(generator, outputPtr, num)
     }
-    pub unsafe fn curandGenerateUniformDouble(
-        generator: curandGenerator_t,
-        outputPtr: *mut f64,
-        num: usize,
-    ) -> curandStatus_t {
-        (culib().curandGenerateUniformDouble)(generator, outputPtr, num)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGenerateLongLong(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_ulonglong, num: usize) -> curandStatus_t;
+        curandGenerateLongLong(generator, outputPtr, num)
     }
-    pub unsafe fn curandGetDirectionVectors32(
-        vectors: *mut *mut curandDirectionVectors32_t,
-        set: curandDirectionVectorSet_t,
-    ) -> curandStatus_t {
-        (culib().curandGetDirectionVectors32)(vectors, set)
+}
+pub unsafe fn curandGenerateNormal(generator: curandGenerator_t, outputPtr: *mut f32, n: usize, mean: f32, stddev: f32) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t, *mut f32, usize, f32, f32) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGenerateNormal") });
+        _f(generator, outputPtr, n, mean, stddev)
     }
-    pub unsafe fn curandGetDirectionVectors64(
-        vectors: *mut *mut curandDirectionVectors64_t,
-        set: curandDirectionVectorSet_t,
-    ) -> curandStatus_t {
-        (culib().curandGetDirectionVectors64)(vectors, set)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGenerateNormal(generator: curandGenerator_t, outputPtr: *mut f32, n: usize, mean: f32, stddev: f32) -> curandStatus_t;
+        curandGenerateNormal(generator, outputPtr, n, mean, stddev)
     }
-    pub unsafe fn curandGetProperty(
-        type_: libraryPropertyType,
-        value: *mut ::core::ffi::c_int,
-    ) -> curandStatus_t {
-        (culib().curandGetProperty)(type_, value)
+}
+pub unsafe fn curandGenerateNormalDouble(generator: curandGenerator_t, outputPtr: *mut f64, n: usize, mean: f64, stddev: f64) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t, *mut f64, usize, f64, f64) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGenerateNormalDouble") });
+        _f(generator, outputPtr, n, mean, stddev)
     }
-    pub unsafe fn curandGetScrambleConstants32(
-        constants: *mut *mut ::core::ffi::c_uint,
-    ) -> curandStatus_t {
-        (culib().curandGetScrambleConstants32)(constants)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGenerateNormalDouble(generator: curandGenerator_t, outputPtr: *mut f64, n: usize, mean: f64, stddev: f64) -> curandStatus_t;
+        curandGenerateNormalDouble(generator, outputPtr, n, mean, stddev)
     }
-    pub unsafe fn curandGetScrambleConstants64(
-        constants: *mut *mut ::core::ffi::c_ulonglong,
-    ) -> curandStatus_t {
-        (culib().curandGetScrambleConstants64)(constants)
+}
+pub unsafe fn curandGeneratePoisson(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_uint, n: usize, lambda: f64) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t, *mut ::core::ffi::c_uint, usize, f64) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGeneratePoisson") });
+        _f(generator, outputPtr, n, lambda)
     }
-    pub unsafe fn curandGetVersion(version: *mut ::core::ffi::c_int) -> curandStatus_t {
-        (culib().curandGetVersion)(version)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGeneratePoisson(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_uint, n: usize, lambda: f64) -> curandStatus_t;
+        curandGeneratePoisson(generator, outputPtr, n, lambda)
     }
-    pub unsafe fn curandSetGeneratorOffset(
-        generator: curandGenerator_t,
-        offset: ::core::ffi::c_ulonglong,
-    ) -> curandStatus_t {
-        (culib().curandSetGeneratorOffset)(generator, offset)
+}
+pub unsafe fn curandGeneratePoissonMethod(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_uint, n: usize, lambda: f64, method: curandMethod_t) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t, *mut ::core::ffi::c_uint, usize, f64, curandMethod_t) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGeneratePoissonMethod") });
+        _f(generator, outputPtr, n, lambda, method)
     }
-    pub unsafe fn curandSetGeneratorOrdering(
-        generator: curandGenerator_t,
-        order: curandOrdering_t,
-    ) -> curandStatus_t {
-        (culib().curandSetGeneratorOrdering)(generator, order)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGeneratePoissonMethod(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_uint, n: usize, lambda: f64, method: curandMethod_t) -> curandStatus_t;
+        curandGeneratePoissonMethod(generator, outputPtr, n, lambda, method)
     }
-    pub unsafe fn curandSetPseudoRandomGeneratorSeed(
-        generator: curandGenerator_t,
-        seed: ::core::ffi::c_ulonglong,
-    ) -> curandStatus_t {
-        (culib().curandSetPseudoRandomGeneratorSeed)(generator, seed)
+}
+pub unsafe fn curandGenerateSeeds(generator: curandGenerator_t) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGenerateSeeds") });
+        _f(generator)
     }
-    pub unsafe fn curandSetQuasiRandomGeneratorDimensions(
-        generator: curandGenerator_t,
-        num_dimensions: ::core::ffi::c_uint,
-    ) -> curandStatus_t {
-        (culib().curandSetQuasiRandomGeneratorDimensions)(generator, num_dimensions)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGenerateSeeds(generator: curandGenerator_t) -> curandStatus_t;
+        curandGenerateSeeds(generator)
     }
-    pub unsafe fn curandSetStream(
-        generator: curandGenerator_t,
-        stream: cudaStream_t,
-    ) -> curandStatus_t {
-        (culib().curandSetStream)(generator, stream)
+}
+pub unsafe fn curandGenerateUniform(generator: curandGenerator_t, outputPtr: *mut f32, num: usize) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t, *mut f32, usize) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGenerateUniform") });
+        _f(generator, outputPtr, num)
     }
-    pub struct Lib {
-        __library: ::libloading::Library,
-        pub curandCreateGenerator: unsafe extern "C" fn(
-            generator: *mut curandGenerator_t,
-            rng_type: curandRngType_t,
-        ) -> curandStatus_t,
-        pub curandCreateGeneratorHost: unsafe extern "C" fn(
-            generator: *mut curandGenerator_t,
-            rng_type: curandRngType_t,
-        ) -> curandStatus_t,
-        pub curandCreatePoissonDistribution: unsafe extern "C" fn(
-            lambda: f64,
-            discrete_distribution: *mut curandDiscreteDistribution_t,
-        ) -> curandStatus_t,
-        pub curandDestroyDistribution: unsafe extern "C" fn(
-            discrete_distribution: curandDiscreteDistribution_t,
-        ) -> curandStatus_t,
-        pub curandDestroyGenerator:
-            unsafe extern "C" fn(generator: curandGenerator_t) -> curandStatus_t,
-        pub curandGenerate: unsafe extern "C" fn(
-            generator: curandGenerator_t,
-            outputPtr: *mut ::core::ffi::c_uint,
-            num: usize,
-        ) -> curandStatus_t,
-        pub curandGenerateLogNormal: unsafe extern "C" fn(
-            generator: curandGenerator_t,
-            outputPtr: *mut f32,
-            n: usize,
-            mean: f32,
-            stddev: f32,
-        ) -> curandStatus_t,
-        pub curandGenerateLogNormalDouble: unsafe extern "C" fn(
-            generator: curandGenerator_t,
-            outputPtr: *mut f64,
-            n: usize,
-            mean: f64,
-            stddev: f64,
-        ) -> curandStatus_t,
-        pub curandGenerateLongLong: unsafe extern "C" fn(
-            generator: curandGenerator_t,
-            outputPtr: *mut ::core::ffi::c_ulonglong,
-            num: usize,
-        ) -> curandStatus_t,
-        pub curandGenerateNormal: unsafe extern "C" fn(
-            generator: curandGenerator_t,
-            outputPtr: *mut f32,
-            n: usize,
-            mean: f32,
-            stddev: f32,
-        ) -> curandStatus_t,
-        pub curandGenerateNormalDouble: unsafe extern "C" fn(
-            generator: curandGenerator_t,
-            outputPtr: *mut f64,
-            n: usize,
-            mean: f64,
-            stddev: f64,
-        ) -> curandStatus_t,
-        pub curandGeneratePoisson: unsafe extern "C" fn(
-            generator: curandGenerator_t,
-            outputPtr: *mut ::core::ffi::c_uint,
-            n: usize,
-            lambda: f64,
-        ) -> curandStatus_t,
-        pub curandGeneratePoissonMethod: unsafe extern "C" fn(
-            generator: curandGenerator_t,
-            outputPtr: *mut ::core::ffi::c_uint,
-            n: usize,
-            lambda: f64,
-            method: curandMethod_t,
-        ) -> curandStatus_t,
-        pub curandGenerateSeeds:
-            unsafe extern "C" fn(generator: curandGenerator_t) -> curandStatus_t,
-        pub curandGenerateUniform: unsafe extern "C" fn(
-            generator: curandGenerator_t,
-            outputPtr: *mut f32,
-            num: usize,
-        ) -> curandStatus_t,
-        pub curandGenerateUniformDouble: unsafe extern "C" fn(
-            generator: curandGenerator_t,
-            outputPtr: *mut f64,
-            num: usize,
-        ) -> curandStatus_t,
-        pub curandGetDirectionVectors32: unsafe extern "C" fn(
-            vectors: *mut *mut curandDirectionVectors32_t,
-            set: curandDirectionVectorSet_t,
-        ) -> curandStatus_t,
-        pub curandGetDirectionVectors64: unsafe extern "C" fn(
-            vectors: *mut *mut curandDirectionVectors64_t,
-            set: curandDirectionVectorSet_t,
-        ) -> curandStatus_t,
-        pub curandGetProperty: unsafe extern "C" fn(
-            type_: libraryPropertyType,
-            value: *mut ::core::ffi::c_int,
-        ) -> curandStatus_t,
-        pub curandGetScrambleConstants32:
-            unsafe extern "C" fn(constants: *mut *mut ::core::ffi::c_uint) -> curandStatus_t,
-        pub curandGetScrambleConstants64:
-            unsafe extern "C" fn(constants: *mut *mut ::core::ffi::c_ulonglong) -> curandStatus_t,
-        pub curandGetVersion:
-            unsafe extern "C" fn(version: *mut ::core::ffi::c_int) -> curandStatus_t,
-        pub curandSetGeneratorOffset: unsafe extern "C" fn(
-            generator: curandGenerator_t,
-            offset: ::core::ffi::c_ulonglong,
-        ) -> curandStatus_t,
-        pub curandSetGeneratorOrdering: unsafe extern "C" fn(
-            generator: curandGenerator_t,
-            order: curandOrdering_t,
-        ) -> curandStatus_t,
-        pub curandSetPseudoRandomGeneratorSeed: unsafe extern "C" fn(
-            generator: curandGenerator_t,
-            seed: ::core::ffi::c_ulonglong,
-        ) -> curandStatus_t,
-        pub curandSetQuasiRandomGeneratorDimensions: unsafe extern "C" fn(
-            generator: curandGenerator_t,
-            num_dimensions: ::core::ffi::c_uint,
-        )
-            -> curandStatus_t,
-        pub curandSetStream: unsafe extern "C" fn(
-            generator: curandGenerator_t,
-            stream: cudaStream_t,
-        ) -> curandStatus_t,
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGenerateUniform(generator: curandGenerator_t, outputPtr: *mut f32, num: usize) -> curandStatus_t;
+        curandGenerateUniform(generator, outputPtr, num)
     }
-    impl Lib {
-        pub unsafe fn new<P>(path: P) -> Result<Self, ::libloading::Error>
-        where
-            P: AsRef<::std::ffi::OsStr>,
-        {
-            let library = ::libloading::Library::new(path.as_ref())?;
-            Self::from_library(library)
-        }
-        pub unsafe fn from_library<L>(library: L) -> Result<Self, ::libloading::Error>
-        where
-            L: Into<::libloading::Library>,
-        {
-            let __library = library.into();
-            let curandCreateGenerator = __library
-                .get(b"curandCreateGenerator\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandCreateGeneratorHost = __library
-                .get(b"curandCreateGeneratorHost\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandCreatePoissonDistribution = __library
-                .get(b"curandCreatePoissonDistribution\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandDestroyDistribution = __library
-                .get(b"curandDestroyDistribution\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandDestroyGenerator = __library
-                .get(b"curandDestroyGenerator\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGenerate = __library
-                .get(b"curandGenerate\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGenerateLogNormal = __library
-                .get(b"curandGenerateLogNormal\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGenerateLogNormalDouble = __library
-                .get(b"curandGenerateLogNormalDouble\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGenerateLongLong = __library
-                .get(b"curandGenerateLongLong\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGenerateNormal = __library
-                .get(b"curandGenerateNormal\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGenerateNormalDouble = __library
-                .get(b"curandGenerateNormalDouble\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGeneratePoisson = __library
-                .get(b"curandGeneratePoisson\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGeneratePoissonMethod = __library
-                .get(b"curandGeneratePoissonMethod\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGenerateSeeds = __library
-                .get(b"curandGenerateSeeds\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGenerateUniform = __library
-                .get(b"curandGenerateUniform\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGenerateUniformDouble = __library
-                .get(b"curandGenerateUniformDouble\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGetDirectionVectors32 = __library
-                .get(b"curandGetDirectionVectors32\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGetDirectionVectors64 = __library
-                .get(b"curandGetDirectionVectors64\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGetProperty = __library
-                .get(b"curandGetProperty\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGetScrambleConstants32 = __library
-                .get(b"curandGetScrambleConstants32\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGetScrambleConstants64 = __library
-                .get(b"curandGetScrambleConstants64\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandGetVersion = __library
-                .get(b"curandGetVersion\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandSetGeneratorOffset = __library
-                .get(b"curandSetGeneratorOffset\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandSetGeneratorOrdering = __library
-                .get(b"curandSetGeneratorOrdering\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandSetPseudoRandomGeneratorSeed = __library
-                .get(b"curandSetPseudoRandomGeneratorSeed\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandSetQuasiRandomGeneratorDimensions = __library
-                .get(b"curandSetQuasiRandomGeneratorDimensions\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let curandSetStream = __library
-                .get(b"curandSetStream\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            Ok(Self {
-                __library,
-                curandCreateGenerator,
-                curandCreateGeneratorHost,
-                curandCreatePoissonDistribution,
-                curandDestroyDistribution,
-                curandDestroyGenerator,
-                curandGenerate,
-                curandGenerateLogNormal,
-                curandGenerateLogNormalDouble,
-                curandGenerateLongLong,
-                curandGenerateNormal,
-                curandGenerateNormalDouble,
-                curandGeneratePoisson,
-                curandGeneratePoissonMethod,
-                curandGenerateSeeds,
-                curandGenerateUniform,
-                curandGenerateUniformDouble,
-                curandGetDirectionVectors32,
-                curandGetDirectionVectors64,
-                curandGetProperty,
-                curandGetScrambleConstants32,
-                curandGetScrambleConstants64,
-                curandGetVersion,
-                curandSetGeneratorOffset,
-                curandSetGeneratorOrdering,
-                curandSetPseudoRandomGeneratorSeed,
-                curandSetQuasiRandomGeneratorDimensions,
-                curandSetStream,
-            })
-        }
+}
+pub unsafe fn curandGenerateUniformDouble(generator: curandGenerator_t, outputPtr: *mut f64, num: usize) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t, *mut f64, usize) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGenerateUniformDouble") });
+        _f(generator, outputPtr, num)
     }
-    pub unsafe fn is_culib_present() -> bool {
-        let lib_names = ["curand"];
-        let choices = lib_names
-            .iter()
-            .map(|l| crate::get_lib_name_candidates(l))
-            .flatten();
-        for choice in choices {
-            if Lib::new(choice).is_ok() {
-                return true;
-            }
-        }
-        false
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGenerateUniformDouble(generator: curandGenerator_t, outputPtr: *mut f64, num: usize) -> curandStatus_t;
+        curandGenerateUniformDouble(generator, outputPtr, num)
     }
-    pub unsafe fn culib() -> &'static Lib {
-        static LIB: std::sync::OnceLock<Lib> = std::sync::OnceLock::new();
-        LIB.get_or_init(|| {
-            let lib_names = std::vec!["curand"];
-            let choices: std::vec::Vec<_> = lib_names
-                .iter()
-                .map(|l| crate::get_lib_name_candidates(l))
-                .flatten()
-                .collect();
-            for choice in choices.iter() {
-                if let Ok(lib) = Lib::new(choice) {
-                    return lib;
-                }
-            }
-            crate::panic_no_lib_found(lib_names[0], &choices);
-        })
+}
+pub unsafe fn curandGetDirectionVectors32(vectors: *mut *mut curandDirectionVectors32_t, set: curandDirectionVectorSet_t) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*mut *mut curandDirectionVectors32_t, curandDirectionVectorSet_t) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGetDirectionVectors32") });
+        _f(vectors, set)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGetDirectionVectors32(vectors: *mut *mut curandDirectionVectors32_t, set: curandDirectionVectorSet_t) -> curandStatus_t;
+        curandGetDirectionVectors32(vectors, set)
+    }
+}
+pub unsafe fn curandGetDirectionVectors64(vectors: *mut *mut curandDirectionVectors64_t, set: curandDirectionVectorSet_t) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*mut *mut curandDirectionVectors64_t, curandDirectionVectorSet_t) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGetDirectionVectors64") });
+        _f(vectors, set)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGetDirectionVectors64(vectors: *mut *mut curandDirectionVectors64_t, set: curandDirectionVectorSet_t) -> curandStatus_t;
+        curandGetDirectionVectors64(vectors, set)
+    }
+}
+pub unsafe fn curandGetProperty(type_: libraryPropertyType, value: *mut ::core::ffi::c_int) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(libraryPropertyType, *mut ::core::ffi::c_int) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGetProperty") });
+        _f(type_, value)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGetProperty(type_: libraryPropertyType, value: *mut ::core::ffi::c_int) -> curandStatus_t;
+        curandGetProperty(type_, value)
+    }
+}
+pub unsafe fn curandGetScrambleConstants32(constants: *mut *mut ::core::ffi::c_uint) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*mut *mut ::core::ffi::c_uint) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGetScrambleConstants32") });
+        _f(constants)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGetScrambleConstants32(constants: *mut *mut ::core::ffi::c_uint) -> curandStatus_t;
+        curandGetScrambleConstants32(constants)
+    }
+}
+pub unsafe fn curandGetScrambleConstants64(constants: *mut *mut ::core::ffi::c_ulonglong) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*mut *mut ::core::ffi::c_ulonglong) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGetScrambleConstants64") });
+        _f(constants)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGetScrambleConstants64(constants: *mut *mut ::core::ffi::c_ulonglong) -> curandStatus_t;
+        curandGetScrambleConstants64(constants)
+    }
+}
+pub unsafe fn curandGetVersion(version: *mut ::core::ffi::c_int) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*mut ::core::ffi::c_int) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandGetVersion") });
+        _f(version)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandGetVersion(version: *mut ::core::ffi::c_int) -> curandStatus_t;
+        curandGetVersion(version)
+    }
+}
+pub unsafe fn curandSetGeneratorOffset(generator: curandGenerator_t, offset: ::core::ffi::c_ulonglong) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t, ::core::ffi::c_ulonglong) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandSetGeneratorOffset") });
+        _f(generator, offset)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandSetGeneratorOffset(generator: curandGenerator_t, offset: ::core::ffi::c_ulonglong) -> curandStatus_t;
+        curandSetGeneratorOffset(generator, offset)
+    }
+}
+pub unsafe fn curandSetGeneratorOrdering(generator: curandGenerator_t, order: curandOrdering_t) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t, curandOrdering_t) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandSetGeneratorOrdering") });
+        _f(generator, order)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandSetGeneratorOrdering(generator: curandGenerator_t, order: curandOrdering_t) -> curandStatus_t;
+        curandSetGeneratorOrdering(generator, order)
+    }
+}
+pub unsafe fn curandSetPseudoRandomGeneratorSeed(generator: curandGenerator_t, seed: ::core::ffi::c_ulonglong) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t, ::core::ffi::c_ulonglong) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandSetPseudoRandomGeneratorSeed") });
+        _f(generator, seed)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandSetPseudoRandomGeneratorSeed(generator: curandGenerator_t, seed: ::core::ffi::c_ulonglong) -> curandStatus_t;
+        curandSetPseudoRandomGeneratorSeed(generator, seed)
+    }
+}
+pub unsafe fn curandSetQuasiRandomGeneratorDimensions(generator: curandGenerator_t, num_dimensions: ::core::ffi::c_uint) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t, ::core::ffi::c_uint) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandSetQuasiRandomGeneratorDimensions") });
+        _f(generator, num_dimensions)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandSetQuasiRandomGeneratorDimensions(generator: curandGenerator_t, num_dimensions: ::core::ffi::c_uint) -> curandStatus_t;
+        curandSetQuasiRandomGeneratorDimensions(generator, num_dimensions)
+    }
+}
+pub unsafe fn curandSetStream(generator: curandGenerator_t, stream: cudaStream_t) -> curandStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(curandGenerator_t, cudaStream_t) -> curandStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("curandSetStream") });
+        _f(generator, stream)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn curandSetStream(generator: curandGenerator_t, stream: cudaStream_t) -> curandStatus_t;
+        curandSetStream(generator, stream)
     }
 }
 #[cfg(feature = "dynamic-loading")]
-pub use loaded::*;
+pub unsafe fn is_culib_present() -> bool {
+    let lib_names = ["curand"];
+    let choices = lib_names.iter().map(|l| crate::get_lib_name_candidates(l)).flatten();
+    for choice in choices {
+        if ::libloading::Library::new(choice).is_ok() {
+            return true;
+        }
+    }
+    false
+}
+#[cfg(feature = "dynamic-loading")]
+pub unsafe fn culib() -> &'static ::libloading::Library {
+    static LIB: OnceLock<::libloading::Library> = OnceLock::new();
+    LIB.get_or_init(|| {
+        let lib_names = std::vec!["curand"];
+        let choices: std::vec::Vec<_> = lib_names.iter().map(|l| crate::get_lib_name_candidates(l)).flatten().collect();
+        for choice in choices.iter() {
+            if let Ok(lib) = ::libloading::Library::new(choice) {
+                return lib;
+            }
+        }
+        crate::panic_no_lib_found(lib_names[0], &choices);
+    })
+}

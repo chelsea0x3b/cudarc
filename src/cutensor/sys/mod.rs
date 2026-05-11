@@ -2,10 +2,15 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(dead_code)]
+use std::sync::OnceLock;
 #[cfg(feature = "no-std")]
 extern crate alloc;
 #[cfg(feature = "no-std")]
 extern crate no_std_compat as std;
+#[cfg(feature = "dynamic-loading")]
+fn load<F: Copy>(name: &str) -> F {
+    unsafe { *culib().get::<F>(name.as_bytes()).unwrap_or_else(|e| panic!("Missing symbol {name}: {e}")) }
+}
 pub use self::cudaDataType_t as cutensorDataType_t;
 pub type FILE = _IO_FILE;
 pub type _IO_lock_t = ::core::ffi::c_void;
@@ -15,13 +20,7 @@ pub type cudaStream_t = *mut CUstream_st;
 pub type cutensorBlockSparseTensorDescriptor_t = *mut cutensorBlockSparseTensorDescriptor;
 pub type cutensorComputeDescriptor_t = *mut cutensorComputeDescriptor;
 pub type cutensorHandle_t = *mut cutensorHandle;
-pub type cutensorLoggerCallback_t = ::core::option::Option<
-    unsafe extern "C" fn(
-        logLevel: i32,
-        functionName: *const ::core::ffi::c_char,
-        message: *const ::core::ffi::c_char,
-    ),
->;
+pub type cutensorLoggerCallback_t = ::core::option::Option<unsafe extern "C" fn(logLevel: i32, functionName: *const ::core::ffi::c_char, message: *const ::core::ffi::c_char)>;
 pub type cutensorOperationDescriptor_t = *mut cutensorOperationDescriptor;
 pub type cutensorPlanPreference_t = *mut cutensorPlanPreference;
 pub type cutensorPlan_t = *mut cutensorPlan;
@@ -144,11 +143,7 @@ pub enum cutensorOperator_t {
 pub enum cutensorPlanAttribute_t {
     CUTENSOR_PLAN_REQUIRED_WORKSPACE = 0,
 }
-#[cfg(any(
-    feature = "cutensor-02003",
-    feature = "cutensor-02004",
-    feature = "cutensor-02005"
-))]
+#[cfg(any(feature = "cutensor-02003", feature = "cutensor-02004", feature = "cutensor-02005"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cutensorPlanPreferenceAttribute_t {
@@ -288,1502 +283,659 @@ pub struct cutensorTensorDescriptor {
 impl cudaDataType_t {
     pub const CUDA_R_8F_UE4M3: cudaDataType_t = cudaDataType_t::CUDA_R_8F_E4M3;
 }
-#[cfg(not(feature = "dynamic-loading"))]
-extern "C" {
-    pub fn cutensorBlockSparseContract(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        alpha: *const ::core::ffi::c_void,
-        A: *const *const ::core::ffi::c_void,
-        B: *const *const ::core::ffi::c_void,
-        beta: *const ::core::ffi::c_void,
-        C: *const *const ::core::ffi::c_void,
-        D: *const *mut ::core::ffi::c_void,
-        workspace: *mut ::core::ffi::c_void,
-        workspaceSize: u64,
-        stream: cudaStream_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorContract(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        alpha: *const ::core::ffi::c_void,
-        A: *const ::core::ffi::c_void,
-        B: *const ::core::ffi::c_void,
-        beta: *const ::core::ffi::c_void,
-        C: *const ::core::ffi::c_void,
-        D: *mut ::core::ffi::c_void,
-        workspace: *mut ::core::ffi::c_void,
-        workspaceSize: u64,
-        stream: cudaStream_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorContractTrinary(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        alpha: *const ::core::ffi::c_void,
-        A: *const ::core::ffi::c_void,
-        B: *const ::core::ffi::c_void,
-        C: *const ::core::ffi::c_void,
-        beta: *const ::core::ffi::c_void,
-        D: *const ::core::ffi::c_void,
-        E: *mut ::core::ffi::c_void,
-        workspace: *mut ::core::ffi::c_void,
-        workspaceSize: u64,
-        stream: cudaStream_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorCreate(handle: *mut cutensorHandle_t) -> cutensorStatus_t;
-    pub fn cutensorCreateBlockSparseContraction(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorOperationDescriptor_t,
-        descA: cutensorBlockSparseTensorDescriptor_t,
-        modeA: *const i32,
-        opA: cutensorOperator_t,
-        descB: cutensorBlockSparseTensorDescriptor_t,
-        modeB: *const i32,
-        opB: cutensorOperator_t,
-        descC: cutensorBlockSparseTensorDescriptor_t,
-        modeC: *const i32,
-        opC: cutensorOperator_t,
-        descD: cutensorBlockSparseTensorDescriptor_t,
-        modeD: *const i32,
-        descCompute: cutensorComputeDescriptor_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorCreateBlockSparseTensorDescriptor(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorBlockSparseTensorDescriptor_t,
-        numModes: u32,
-        numNonZeroBlocks: u64,
-        numSectionsPerMode: *const u32,
-        extent: *const i64,
-        nonZeroCoordinates: *const i32,
-        stride: *const i64,
-        dataType: cudaDataType_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorCreateContraction(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorOperationDescriptor_t,
-        descA: cutensorTensorDescriptor_t,
-        modeA: *const i32,
-        opA: cutensorOperator_t,
-        descB: cutensorTensorDescriptor_t,
-        modeB: *const i32,
-        opB: cutensorOperator_t,
-        descC: cutensorTensorDescriptor_t,
-        modeC: *const i32,
-        opC: cutensorOperator_t,
-        descD: cutensorTensorDescriptor_t,
-        modeD: *const i32,
-        descCompute: cutensorComputeDescriptor_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorCreateContractionTrinary(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorOperationDescriptor_t,
-        descA: cutensorTensorDescriptor_t,
-        modeA: *const i32,
-        opA: cutensorOperator_t,
-        descB: cutensorTensorDescriptor_t,
-        modeB: *const i32,
-        opB: cutensorOperator_t,
-        descC: cutensorTensorDescriptor_t,
-        modeC: *const i32,
-        opC: cutensorOperator_t,
-        descD: cutensorTensorDescriptor_t,
-        modeD: *const i32,
-        opD: cutensorOperator_t,
-        descE: cutensorTensorDescriptor_t,
-        modeE: *const i32,
-        descCompute: cutensorComputeDescriptor_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorCreateElementwiseBinary(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorOperationDescriptor_t,
-        descA: cutensorTensorDescriptor_t,
-        modeA: *const i32,
-        opA: cutensorOperator_t,
-        descC: cutensorTensorDescriptor_t,
-        modeC: *const i32,
-        opC: cutensorOperator_t,
-        descD: cutensorTensorDescriptor_t,
-        modeD: *const i32,
-        opAC: cutensorOperator_t,
-        descCompute: cutensorComputeDescriptor_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorCreateElementwiseTrinary(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorOperationDescriptor_t,
-        descA: cutensorTensorDescriptor_t,
-        modeA: *const i32,
-        opA: cutensorOperator_t,
-        descB: cutensorTensorDescriptor_t,
-        modeB: *const i32,
-        opB: cutensorOperator_t,
-        descC: cutensorTensorDescriptor_t,
-        modeC: *const i32,
-        opC: cutensorOperator_t,
-        descD: cutensorTensorDescriptor_t,
-        modeD: *const i32,
-        opAB: cutensorOperator_t,
-        opABC: cutensorOperator_t,
-        descCompute: cutensorComputeDescriptor_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorCreatePermutation(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorOperationDescriptor_t,
-        descA: cutensorTensorDescriptor_t,
-        modeA: *const i32,
-        opA: cutensorOperator_t,
-        descB: cutensorTensorDescriptor_t,
-        modeB: *const i32,
-        descCompute: cutensorComputeDescriptor_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorCreatePlan(
-        handle: cutensorHandle_t,
-        plan: *mut cutensorPlan_t,
-        desc: cutensorOperationDescriptor_t,
-        pref: cutensorPlanPreference_t,
-        workspaceSizeLimit: u64,
-    ) -> cutensorStatus_t;
-    pub fn cutensorCreatePlanPreference(
-        handle: cutensorHandle_t,
-        pref: *mut cutensorPlanPreference_t,
-        algo: cutensorAlgo_t,
-        jitMode: cutensorJitMode_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorCreateReduction(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorOperationDescriptor_t,
-        descA: cutensorTensorDescriptor_t,
-        modeA: *const i32,
-        opA: cutensorOperator_t,
-        descC: cutensorTensorDescriptor_t,
-        modeC: *const i32,
-        opC: cutensorOperator_t,
-        descD: cutensorTensorDescriptor_t,
-        modeD: *const i32,
-        opReduce: cutensorOperator_t,
-        descCompute: cutensorComputeDescriptor_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorCreateTensorDescriptor(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorTensorDescriptor_t,
-        numModes: u32,
-        extent: *const i64,
-        stride: *const i64,
-        dataType: cudaDataType_t,
-        alignmentRequirement: u32,
-    ) -> cutensorStatus_t;
-    pub fn cutensorDestroy(handle: cutensorHandle_t) -> cutensorStatus_t;
-    pub fn cutensorDestroyBlockSparseTensorDescriptor(
-        desc: cutensorBlockSparseTensorDescriptor_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorDestroyOperationDescriptor(
-        desc: cutensorOperationDescriptor_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorDestroyPlan(plan: cutensorPlan_t) -> cutensorStatus_t;
-    pub fn cutensorDestroyPlanPreference(pref: cutensorPlanPreference_t) -> cutensorStatus_t;
-    pub fn cutensorDestroyTensorDescriptor(desc: cutensorTensorDescriptor_t) -> cutensorStatus_t;
-    pub fn cutensorElementwiseBinaryExecute(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        alpha: *const ::core::ffi::c_void,
-        A: *const ::core::ffi::c_void,
-        gamma: *const ::core::ffi::c_void,
-        C: *const ::core::ffi::c_void,
-        D: *mut ::core::ffi::c_void,
-        stream: cudaStream_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorElementwiseTrinaryExecute(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        alpha: *const ::core::ffi::c_void,
-        A: *const ::core::ffi::c_void,
-        beta: *const ::core::ffi::c_void,
-        B: *const ::core::ffi::c_void,
-        gamma: *const ::core::ffi::c_void,
-        C: *const ::core::ffi::c_void,
-        D: *mut ::core::ffi::c_void,
-        stream: cudaStream_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorEstimateWorkspaceSize(
-        handle: cutensorHandle_t,
-        desc: cutensorOperationDescriptor_t,
-        planPref: cutensorPlanPreference_t,
-        workspacePref: cutensorWorksizePreference_t,
-        workspaceSizeEstimate: *mut u64,
-    ) -> cutensorStatus_t;
-    pub fn cutensorGetCudartVersion() -> usize;
-    pub fn cutensorGetErrorString(error: cutensorStatus_t) -> *const ::core::ffi::c_char;
-    pub fn cutensorGetVersion() -> usize;
-    pub fn cutensorHandleReadPlanCacheFromFile(
-        handle: cutensorHandle_t,
-        filename: *const ::core::ffi::c_char,
-        numCachelinesRead: *mut u32,
-    ) -> cutensorStatus_t;
-    pub fn cutensorHandleResizePlanCache(
-        handle: cutensorHandle_t,
-        numEntries: u32,
-    ) -> cutensorStatus_t;
-    pub fn cutensorHandleWritePlanCacheToFile(
-        handle: cutensorHandle_t,
-        filename: *const ::core::ffi::c_char,
-    ) -> cutensorStatus_t;
-    pub fn cutensorLoggerForceDisable() -> cutensorStatus_t;
-    pub fn cutensorLoggerOpenFile(logFile: *const ::core::ffi::c_char) -> cutensorStatus_t;
-    pub fn cutensorLoggerSetCallback(callback: cutensorLoggerCallback_t) -> cutensorStatus_t;
-    pub fn cutensorLoggerSetFile(file: *mut FILE) -> cutensorStatus_t;
-    pub fn cutensorLoggerSetLevel(level: i32) -> cutensorStatus_t;
-    pub fn cutensorLoggerSetMask(mask: i32) -> cutensorStatus_t;
-    pub fn cutensorOperationDescriptorGetAttribute(
-        handle: cutensorHandle_t,
-        desc: cutensorOperationDescriptor_t,
-        attr: cutensorOperationDescriptorAttribute_t,
-        buf: *mut ::core::ffi::c_void,
-        sizeInBytes: usize,
-    ) -> cutensorStatus_t;
-    pub fn cutensorOperationDescriptorSetAttribute(
-        handle: cutensorHandle_t,
-        desc: cutensorOperationDescriptor_t,
-        attr: cutensorOperationDescriptorAttribute_t,
-        buf: *const ::core::ffi::c_void,
-        sizeInBytes: usize,
-    ) -> cutensorStatus_t;
-    pub fn cutensorPermute(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        alpha: *const ::core::ffi::c_void,
-        A: *const ::core::ffi::c_void,
-        B: *mut ::core::ffi::c_void,
-        stream: cudaStream_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorPlanGetAttribute(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        attr: cutensorPlanAttribute_t,
-        buf: *mut ::core::ffi::c_void,
-        sizeInBytes: usize,
-    ) -> cutensorStatus_t;
-    #[cfg(any(
-        feature = "cutensor-02004",
-        feature = "cutensor-02005",
-        feature = "cutensor-02006"
-    ))]
-    pub fn cutensorPlanPreferenceGetAttribute(
-        handle: cutensorHandle_t,
-        pref: cutensorPlanPreference_t,
-        attr: cutensorPlanPreferenceAttribute_t,
-        buf: *mut ::core::ffi::c_void,
-        sizeInBytes: usize,
-    ) -> cutensorStatus_t;
-    pub fn cutensorPlanPreferenceSetAttribute(
-        handle: cutensorHandle_t,
-        pref: cutensorPlanPreference_t,
-        attr: cutensorPlanPreferenceAttribute_t,
-        buf: *const ::core::ffi::c_void,
-        sizeInBytes: usize,
-    ) -> cutensorStatus_t;
-    pub fn cutensorReadKernelCacheFromFile(
-        handle: cutensorHandle_t,
-        filename: *const ::core::ffi::c_char,
-    ) -> cutensorStatus_t;
-    pub fn cutensorReduce(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        alpha: *const ::core::ffi::c_void,
-        A: *const ::core::ffi::c_void,
-        beta: *const ::core::ffi::c_void,
-        C: *const ::core::ffi::c_void,
-        D: *mut ::core::ffi::c_void,
-        workspace: *mut ::core::ffi::c_void,
-        workspaceSize: u64,
-        stream: cudaStream_t,
-    ) -> cutensorStatus_t;
-    pub fn cutensorWriteKernelCacheToFile(
-        handle: cutensorHandle_t,
-        filename: *const ::core::ffi::c_char,
-    ) -> cutensorStatus_t;
+pub unsafe fn cutensorBlockSparseContract(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const *const ::core::ffi::c_void, B: *const *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, C: *const *const ::core::ffi::c_void, D: *const *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, cutensorPlan_t, *const ::core::ffi::c_void, *const *const ::core::ffi::c_void, *const *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const *const ::core::ffi::c_void, *const *mut ::core::ffi::c_void, *mut ::core::ffi::c_void, u64, cudaStream_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorBlockSparseContract") });
+        _f(handle, plan, alpha, A, B, beta, C, D, workspace, workspaceSize, stream)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorBlockSparseContract(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const *const ::core::ffi::c_void, B: *const *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, C: *const *const ::core::ffi::c_void, D: *const *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t;
+        cutensorBlockSparseContract(handle, plan, alpha, A, B, beta, C, D, workspace, workspaceSize, stream)
+    }
 }
-#[cfg(feature = "dynamic-loading")]
-mod loaded {
-    use super::*;
-    pub unsafe fn cutensorBlockSparseContract(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        alpha: *const ::core::ffi::c_void,
-        A: *const *const ::core::ffi::c_void,
-        B: *const *const ::core::ffi::c_void,
-        beta: *const ::core::ffi::c_void,
-        C: *const *const ::core::ffi::c_void,
-        D: *const *mut ::core::ffi::c_void,
-        workspace: *mut ::core::ffi::c_void,
-        workspaceSize: u64,
-        stream: cudaStream_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorBlockSparseContract)(
-            handle,
-            plan,
-            alpha,
-            A,
-            B,
-            beta,
-            C,
-            D,
-            workspace,
-            workspaceSize,
-            stream,
-        )
+pub unsafe fn cutensorContract(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, B: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, cutensorPlan_t, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *mut ::core::ffi::c_void, *mut ::core::ffi::c_void, u64, cudaStream_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorContract") });
+        _f(handle, plan, alpha, A, B, beta, C, D, workspace, workspaceSize, stream)
     }
-    pub unsafe fn cutensorContract(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        alpha: *const ::core::ffi::c_void,
-        A: *const ::core::ffi::c_void,
-        B: *const ::core::ffi::c_void,
-        beta: *const ::core::ffi::c_void,
-        C: *const ::core::ffi::c_void,
-        D: *mut ::core::ffi::c_void,
-        workspace: *mut ::core::ffi::c_void,
-        workspaceSize: u64,
-        stream: cudaStream_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorContract)(
-            handle,
-            plan,
-            alpha,
-            A,
-            B,
-            beta,
-            C,
-            D,
-            workspace,
-            workspaceSize,
-            stream,
-        )
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorContract(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, B: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t;
+        cutensorContract(handle, plan, alpha, A, B, beta, C, D, workspace, workspaceSize, stream)
     }
-    pub unsafe fn cutensorContractTrinary(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        alpha: *const ::core::ffi::c_void,
-        A: *const ::core::ffi::c_void,
-        B: *const ::core::ffi::c_void,
-        C: *const ::core::ffi::c_void,
-        beta: *const ::core::ffi::c_void,
-        D: *const ::core::ffi::c_void,
-        E: *mut ::core::ffi::c_void,
-        workspace: *mut ::core::ffi::c_void,
-        workspaceSize: u64,
-        stream: cudaStream_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorContractTrinary)(
-            handle,
-            plan,
-            alpha,
-            A,
-            B,
-            C,
-            beta,
-            D,
-            E,
-            workspace,
-            workspaceSize,
-            stream,
-        )
+}
+pub unsafe fn cutensorContractTrinary(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, B: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, D: *const ::core::ffi::c_void, E: *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, cutensorPlan_t, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *mut ::core::ffi::c_void, *mut ::core::ffi::c_void, u64, cudaStream_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorContractTrinary") });
+        _f(handle, plan, alpha, A, B, C, beta, D, E, workspace, workspaceSize, stream)
     }
-    pub unsafe fn cutensorCreate(handle: *mut cutensorHandle_t) -> cutensorStatus_t {
-        (culib().cutensorCreate)(handle)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorContractTrinary(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, B: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, D: *const ::core::ffi::c_void, E: *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t;
+        cutensorContractTrinary(handle, plan, alpha, A, B, C, beta, D, E, workspace, workspaceSize, stream)
     }
-    pub unsafe fn cutensorCreateBlockSparseContraction(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorOperationDescriptor_t,
-        descA: cutensorBlockSparseTensorDescriptor_t,
-        modeA: *const i32,
-        opA: cutensorOperator_t,
-        descB: cutensorBlockSparseTensorDescriptor_t,
-        modeB: *const i32,
-        opB: cutensorOperator_t,
-        descC: cutensorBlockSparseTensorDescriptor_t,
-        modeC: *const i32,
-        opC: cutensorOperator_t,
-        descD: cutensorBlockSparseTensorDescriptor_t,
-        modeD: *const i32,
-        descCompute: cutensorComputeDescriptor_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorCreateBlockSparseContraction)(
-            handle,
-            desc,
-            descA,
-            modeA,
-            opA,
-            descB,
-            modeB,
-            opB,
-            descC,
-            modeC,
-            opC,
-            descD,
-            modeD,
-            descCompute,
-        )
+}
+pub unsafe fn cutensorCreate(handle: *mut cutensorHandle_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*mut cutensorHandle_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorCreate") });
+        _f(handle)
     }
-    pub unsafe fn cutensorCreateBlockSparseTensorDescriptor(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorBlockSparseTensorDescriptor_t,
-        numModes: u32,
-        numNonZeroBlocks: u64,
-        numSectionsPerMode: *const u32,
-        extent: *const i64,
-        nonZeroCoordinates: *const i32,
-        stride: *const i64,
-        dataType: cudaDataType_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorCreateBlockSparseTensorDescriptor)(
-            handle,
-            desc,
-            numModes,
-            numNonZeroBlocks,
-            numSectionsPerMode,
-            extent,
-            nonZeroCoordinates,
-            stride,
-            dataType,
-        )
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorCreate(handle: *mut cutensorHandle_t) -> cutensorStatus_t;
+        cutensorCreate(handle)
     }
-    pub unsafe fn cutensorCreateContraction(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorOperationDescriptor_t,
-        descA: cutensorTensorDescriptor_t,
-        modeA: *const i32,
-        opA: cutensorOperator_t,
-        descB: cutensorTensorDescriptor_t,
-        modeB: *const i32,
-        opB: cutensorOperator_t,
-        descC: cutensorTensorDescriptor_t,
-        modeC: *const i32,
-        opC: cutensorOperator_t,
-        descD: cutensorTensorDescriptor_t,
-        modeD: *const i32,
-        descCompute: cutensorComputeDescriptor_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorCreateContraction)(
-            handle,
-            desc,
-            descA,
-            modeA,
-            opA,
-            descB,
-            modeB,
-            opB,
-            descC,
-            modeC,
-            opC,
-            descD,
-            modeD,
-            descCompute,
-        )
+}
+pub unsafe fn cutensorCreateBlockSparseContraction(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorBlockSparseTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorBlockSparseTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorBlockSparseTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorBlockSparseTensorDescriptor_t, modeD: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, *mut cutensorOperationDescriptor_t, cutensorBlockSparseTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorBlockSparseTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorBlockSparseTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorBlockSparseTensorDescriptor_t, *const i32, cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorCreateBlockSparseContraction") });
+        _f(handle, desc, descA, modeA, opA, descB, modeB, opB, descC, modeC, opC, descD, modeD, descCompute)
     }
-    pub unsafe fn cutensorCreateContractionTrinary(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorOperationDescriptor_t,
-        descA: cutensorTensorDescriptor_t,
-        modeA: *const i32,
-        opA: cutensorOperator_t,
-        descB: cutensorTensorDescriptor_t,
-        modeB: *const i32,
-        opB: cutensorOperator_t,
-        descC: cutensorTensorDescriptor_t,
-        modeC: *const i32,
-        opC: cutensorOperator_t,
-        descD: cutensorTensorDescriptor_t,
-        modeD: *const i32,
-        opD: cutensorOperator_t,
-        descE: cutensorTensorDescriptor_t,
-        modeE: *const i32,
-        descCompute: cutensorComputeDescriptor_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorCreateContractionTrinary)(
-            handle,
-            desc,
-            descA,
-            modeA,
-            opA,
-            descB,
-            modeB,
-            opB,
-            descC,
-            modeC,
-            opC,
-            descD,
-            modeD,
-            opD,
-            descE,
-            modeE,
-            descCompute,
-        )
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorCreateBlockSparseContraction(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorBlockSparseTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorBlockSparseTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorBlockSparseTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorBlockSparseTensorDescriptor_t, modeD: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        cutensorCreateBlockSparseContraction(handle, desc, descA, modeA, opA, descB, modeB, opB, descC, modeC, opC, descD, modeD, descCompute)
     }
-    pub unsafe fn cutensorCreateElementwiseBinary(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorOperationDescriptor_t,
-        descA: cutensorTensorDescriptor_t,
-        modeA: *const i32,
-        opA: cutensorOperator_t,
-        descC: cutensorTensorDescriptor_t,
-        modeC: *const i32,
-        opC: cutensorOperator_t,
-        descD: cutensorTensorDescriptor_t,
-        modeD: *const i32,
-        opAC: cutensorOperator_t,
-        descCompute: cutensorComputeDescriptor_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorCreateElementwiseBinary)(
-            handle,
-            desc,
-            descA,
-            modeA,
-            opA,
-            descC,
-            modeC,
-            opC,
-            descD,
-            modeD,
-            opAC,
-            descCompute,
-        )
+}
+pub unsafe fn cutensorCreateBlockSparseTensorDescriptor(handle: cutensorHandle_t, desc: *mut cutensorBlockSparseTensorDescriptor_t, numModes: u32, numNonZeroBlocks: u64, numSectionsPerMode: *const u32, extent: *const i64, nonZeroCoordinates: *const i32, stride: *const i64, dataType: cudaDataType_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, *mut cutensorBlockSparseTensorDescriptor_t, u32, u64, *const u32, *const i64, *const i32, *const i64, cudaDataType_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorCreateBlockSparseTensorDescriptor") });
+        _f(handle, desc, numModes, numNonZeroBlocks, numSectionsPerMode, extent, nonZeroCoordinates, stride, dataType)
     }
-    pub unsafe fn cutensorCreateElementwiseTrinary(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorOperationDescriptor_t,
-        descA: cutensorTensorDescriptor_t,
-        modeA: *const i32,
-        opA: cutensorOperator_t,
-        descB: cutensorTensorDescriptor_t,
-        modeB: *const i32,
-        opB: cutensorOperator_t,
-        descC: cutensorTensorDescriptor_t,
-        modeC: *const i32,
-        opC: cutensorOperator_t,
-        descD: cutensorTensorDescriptor_t,
-        modeD: *const i32,
-        opAB: cutensorOperator_t,
-        opABC: cutensorOperator_t,
-        descCompute: cutensorComputeDescriptor_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorCreateElementwiseTrinary)(
-            handle,
-            desc,
-            descA,
-            modeA,
-            opA,
-            descB,
-            modeB,
-            opB,
-            descC,
-            modeC,
-            opC,
-            descD,
-            modeD,
-            opAB,
-            opABC,
-            descCompute,
-        )
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorCreateBlockSparseTensorDescriptor(handle: cutensorHandle_t, desc: *mut cutensorBlockSparseTensorDescriptor_t, numModes: u32, numNonZeroBlocks: u64, numSectionsPerMode: *const u32, extent: *const i64, nonZeroCoordinates: *const i32, stride: *const i64, dataType: cudaDataType_t) -> cutensorStatus_t;
+        cutensorCreateBlockSparseTensorDescriptor(handle, desc, numModes, numNonZeroBlocks, numSectionsPerMode, extent, nonZeroCoordinates, stride, dataType)
     }
-    pub unsafe fn cutensorCreatePermutation(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorOperationDescriptor_t,
-        descA: cutensorTensorDescriptor_t,
-        modeA: *const i32,
-        opA: cutensorOperator_t,
-        descB: cutensorTensorDescriptor_t,
-        modeB: *const i32,
-        descCompute: cutensorComputeDescriptor_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorCreatePermutation)(
-            handle,
-            desc,
-            descA,
-            modeA,
-            opA,
-            descB,
-            modeB,
-            descCompute,
-        )
+}
+pub unsafe fn cutensorCreateContraction(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, *mut cutensorOperationDescriptor_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorTensorDescriptor_t, *const i32, cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorCreateContraction") });
+        _f(handle, desc, descA, modeA, opA, descB, modeB, opB, descC, modeC, opC, descD, modeD, descCompute)
     }
-    pub unsafe fn cutensorCreatePlan(
-        handle: cutensorHandle_t,
-        plan: *mut cutensorPlan_t,
-        desc: cutensorOperationDescriptor_t,
-        pref: cutensorPlanPreference_t,
-        workspaceSizeLimit: u64,
-    ) -> cutensorStatus_t {
-        (culib().cutensorCreatePlan)(handle, plan, desc, pref, workspaceSizeLimit)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorCreateContraction(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        cutensorCreateContraction(handle, desc, descA, modeA, opA, descB, modeB, opB, descC, modeC, opC, descD, modeD, descCompute)
     }
-    pub unsafe fn cutensorCreatePlanPreference(
-        handle: cutensorHandle_t,
-        pref: *mut cutensorPlanPreference_t,
-        algo: cutensorAlgo_t,
-        jitMode: cutensorJitMode_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorCreatePlanPreference)(handle, pref, algo, jitMode)
+}
+pub unsafe fn cutensorCreateContractionTrinary(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opD: cutensorOperator_t, descE: cutensorTensorDescriptor_t, modeE: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, *mut cutensorOperationDescriptor_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorTensorDescriptor_t, *const i32, cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorCreateContractionTrinary") });
+        _f(handle, desc, descA, modeA, opA, descB, modeB, opB, descC, modeC, opC, descD, modeD, opD, descE, modeE, descCompute)
     }
-    pub unsafe fn cutensorCreateReduction(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorOperationDescriptor_t,
-        descA: cutensorTensorDescriptor_t,
-        modeA: *const i32,
-        opA: cutensorOperator_t,
-        descC: cutensorTensorDescriptor_t,
-        modeC: *const i32,
-        opC: cutensorOperator_t,
-        descD: cutensorTensorDescriptor_t,
-        modeD: *const i32,
-        opReduce: cutensorOperator_t,
-        descCompute: cutensorComputeDescriptor_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorCreateReduction)(
-            handle,
-            desc,
-            descA,
-            modeA,
-            opA,
-            descC,
-            modeC,
-            opC,
-            descD,
-            modeD,
-            opReduce,
-            descCompute,
-        )
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorCreateContractionTrinary(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opD: cutensorOperator_t, descE: cutensorTensorDescriptor_t, modeE: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        cutensorCreateContractionTrinary(handle, desc, descA, modeA, opA, descB, modeB, opB, descC, modeC, opC, descD, modeD, opD, descE, modeE, descCompute)
     }
-    pub unsafe fn cutensorCreateTensorDescriptor(
-        handle: cutensorHandle_t,
-        desc: *mut cutensorTensorDescriptor_t,
-        numModes: u32,
-        extent: *const i64,
-        stride: *const i64,
-        dataType: cudaDataType_t,
-        alignmentRequirement: u32,
-    ) -> cutensorStatus_t {
-        (culib().cutensorCreateTensorDescriptor)(
-            handle,
-            desc,
-            numModes,
-            extent,
-            stride,
-            dataType,
-            alignmentRequirement,
-        )
+}
+pub unsafe fn cutensorCreateElementwiseBinary(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opAC: cutensorOperator_t, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, *mut cutensorOperationDescriptor_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorCreateElementwiseBinary") });
+        _f(handle, desc, descA, modeA, opA, descC, modeC, opC, descD, modeD, opAC, descCompute)
     }
-    pub unsafe fn cutensorDestroy(handle: cutensorHandle_t) -> cutensorStatus_t {
-        (culib().cutensorDestroy)(handle)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorCreateElementwiseBinary(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opAC: cutensorOperator_t, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        cutensorCreateElementwiseBinary(handle, desc, descA, modeA, opA, descC, modeC, opC, descD, modeD, opAC, descCompute)
     }
-    pub unsafe fn cutensorDestroyBlockSparseTensorDescriptor(
-        desc: cutensorBlockSparseTensorDescriptor_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorDestroyBlockSparseTensorDescriptor)(desc)
+}
+pub unsafe fn cutensorCreateElementwiseTrinary(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opAB: cutensorOperator_t, opABC: cutensorOperator_t, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, *mut cutensorOperationDescriptor_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorOperator_t, cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorCreateElementwiseTrinary") });
+        _f(handle, desc, descA, modeA, opA, descB, modeB, opB, descC, modeC, opC, descD, modeD, opAB, opABC, descCompute)
     }
-    pub unsafe fn cutensorDestroyOperationDescriptor(
-        desc: cutensorOperationDescriptor_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorDestroyOperationDescriptor)(desc)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorCreateElementwiseTrinary(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opAB: cutensorOperator_t, opABC: cutensorOperator_t, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        cutensorCreateElementwiseTrinary(handle, desc, descA, modeA, opA, descB, modeB, opB, descC, modeC, opC, descD, modeD, opAB, opABC, descCompute)
     }
-    pub unsafe fn cutensorDestroyPlan(plan: cutensorPlan_t) -> cutensorStatus_t {
-        (culib().cutensorDestroyPlan)(plan)
+}
+pub unsafe fn cutensorCreatePermutation(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, *mut cutensorOperationDescriptor_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorTensorDescriptor_t, *const i32, cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorCreatePermutation") });
+        _f(handle, desc, descA, modeA, opA, descB, modeB, descCompute)
     }
-    pub unsafe fn cutensorDestroyPlanPreference(
-        pref: cutensorPlanPreference_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorDestroyPlanPreference)(pref)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorCreatePermutation(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        cutensorCreatePermutation(handle, desc, descA, modeA, opA, descB, modeB, descCompute)
     }
-    pub unsafe fn cutensorDestroyTensorDescriptor(
-        desc: cutensorTensorDescriptor_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorDestroyTensorDescriptor)(desc)
+}
+pub unsafe fn cutensorCreatePlan(handle: cutensorHandle_t, plan: *mut cutensorPlan_t, desc: cutensorOperationDescriptor_t, pref: cutensorPlanPreference_t, workspaceSizeLimit: u64) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, *mut cutensorPlan_t, cutensorOperationDescriptor_t, cutensorPlanPreference_t, u64) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorCreatePlan") });
+        _f(handle, plan, desc, pref, workspaceSizeLimit)
     }
-    pub unsafe fn cutensorElementwiseBinaryExecute(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        alpha: *const ::core::ffi::c_void,
-        A: *const ::core::ffi::c_void,
-        gamma: *const ::core::ffi::c_void,
-        C: *const ::core::ffi::c_void,
-        D: *mut ::core::ffi::c_void,
-        stream: cudaStream_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorElementwiseBinaryExecute)(handle, plan, alpha, A, gamma, C, D, stream)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorCreatePlan(handle: cutensorHandle_t, plan: *mut cutensorPlan_t, desc: cutensorOperationDescriptor_t, pref: cutensorPlanPreference_t, workspaceSizeLimit: u64) -> cutensorStatus_t;
+        cutensorCreatePlan(handle, plan, desc, pref, workspaceSizeLimit)
     }
-    pub unsafe fn cutensorElementwiseTrinaryExecute(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        alpha: *const ::core::ffi::c_void,
-        A: *const ::core::ffi::c_void,
-        beta: *const ::core::ffi::c_void,
-        B: *const ::core::ffi::c_void,
-        gamma: *const ::core::ffi::c_void,
-        C: *const ::core::ffi::c_void,
-        D: *mut ::core::ffi::c_void,
-        stream: cudaStream_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorElementwiseTrinaryExecute)(
-            handle, plan, alpha, A, beta, B, gamma, C, D, stream,
-        )
+}
+pub unsafe fn cutensorCreatePlanPreference(handle: cutensorHandle_t, pref: *mut cutensorPlanPreference_t, algo: cutensorAlgo_t, jitMode: cutensorJitMode_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, *mut cutensorPlanPreference_t, cutensorAlgo_t, cutensorJitMode_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorCreatePlanPreference") });
+        _f(handle, pref, algo, jitMode)
     }
-    pub unsafe fn cutensorEstimateWorkspaceSize(
-        handle: cutensorHandle_t,
-        desc: cutensorOperationDescriptor_t,
-        planPref: cutensorPlanPreference_t,
-        workspacePref: cutensorWorksizePreference_t,
-        workspaceSizeEstimate: *mut u64,
-    ) -> cutensorStatus_t {
-        (culib().cutensorEstimateWorkspaceSize)(
-            handle,
-            desc,
-            planPref,
-            workspacePref,
-            workspaceSizeEstimate,
-        )
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorCreatePlanPreference(handle: cutensorHandle_t, pref: *mut cutensorPlanPreference_t, algo: cutensorAlgo_t, jitMode: cutensorJitMode_t) -> cutensorStatus_t;
+        cutensorCreatePlanPreference(handle, pref, algo, jitMode)
     }
-    pub unsafe fn cutensorGetCudartVersion() -> usize {
-        (culib().cutensorGetCudartVersion)()
+}
+pub unsafe fn cutensorCreateReduction(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opReduce: cutensorOperator_t, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, *mut cutensorOperationDescriptor_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorTensorDescriptor_t, *const i32, cutensorOperator_t, cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorCreateReduction") });
+        _f(handle, desc, descA, modeA, opA, descC, modeC, opC, descD, modeD, opReduce, descCompute)
     }
-    pub unsafe fn cutensorGetErrorString(error: cutensorStatus_t) -> *const ::core::ffi::c_char {
-        (culib().cutensorGetErrorString)(error)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorCreateReduction(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opReduce: cutensorOperator_t, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        cutensorCreateReduction(handle, desc, descA, modeA, opA, descC, modeC, opC, descD, modeD, opReduce, descCompute)
     }
-    pub unsafe fn cutensorGetVersion() -> usize {
-        (culib().cutensorGetVersion)()
+}
+pub unsafe fn cutensorCreateTensorDescriptor(handle: cutensorHandle_t, desc: *mut cutensorTensorDescriptor_t, numModes: u32, extent: *const i64, stride: *const i64, dataType: cudaDataType_t, alignmentRequirement: u32) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, *mut cutensorTensorDescriptor_t, u32, *const i64, *const i64, cudaDataType_t, u32) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorCreateTensorDescriptor") });
+        _f(handle, desc, numModes, extent, stride, dataType, alignmentRequirement)
     }
-    pub unsafe fn cutensorHandleReadPlanCacheFromFile(
-        handle: cutensorHandle_t,
-        filename: *const ::core::ffi::c_char,
-        numCachelinesRead: *mut u32,
-    ) -> cutensorStatus_t {
-        (culib().cutensorHandleReadPlanCacheFromFile)(handle, filename, numCachelinesRead)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorCreateTensorDescriptor(handle: cutensorHandle_t, desc: *mut cutensorTensorDescriptor_t, numModes: u32, extent: *const i64, stride: *const i64, dataType: cudaDataType_t, alignmentRequirement: u32) -> cutensorStatus_t;
+        cutensorCreateTensorDescriptor(handle, desc, numModes, extent, stride, dataType, alignmentRequirement)
     }
-    pub unsafe fn cutensorHandleResizePlanCache(
-        handle: cutensorHandle_t,
-        numEntries: u32,
-    ) -> cutensorStatus_t {
-        (culib().cutensorHandleResizePlanCache)(handle, numEntries)
+}
+pub unsafe fn cutensorDestroy(handle: cutensorHandle_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorDestroy") });
+        _f(handle)
     }
-    pub unsafe fn cutensorHandleWritePlanCacheToFile(
-        handle: cutensorHandle_t,
-        filename: *const ::core::ffi::c_char,
-    ) -> cutensorStatus_t {
-        (culib().cutensorHandleWritePlanCacheToFile)(handle, filename)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorDestroy(handle: cutensorHandle_t) -> cutensorStatus_t;
+        cutensorDestroy(handle)
     }
-    pub unsafe fn cutensorLoggerForceDisable() -> cutensorStatus_t {
-        (culib().cutensorLoggerForceDisable)()
+}
+pub unsafe fn cutensorDestroyBlockSparseTensorDescriptor(desc: cutensorBlockSparseTensorDescriptor_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorBlockSparseTensorDescriptor_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorDestroyBlockSparseTensorDescriptor") });
+        _f(desc)
     }
-    pub unsafe fn cutensorLoggerOpenFile(logFile: *const ::core::ffi::c_char) -> cutensorStatus_t {
-        (culib().cutensorLoggerOpenFile)(logFile)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorDestroyBlockSparseTensorDescriptor(desc: cutensorBlockSparseTensorDescriptor_t) -> cutensorStatus_t;
+        cutensorDestroyBlockSparseTensorDescriptor(desc)
     }
-    pub unsafe fn cutensorLoggerSetCallback(
-        callback: cutensorLoggerCallback_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorLoggerSetCallback)(callback)
+}
+pub unsafe fn cutensorDestroyOperationDescriptor(desc: cutensorOperationDescriptor_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorOperationDescriptor_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorDestroyOperationDescriptor") });
+        _f(desc)
     }
-    pub unsafe fn cutensorLoggerSetFile(file: *mut FILE) -> cutensorStatus_t {
-        (culib().cutensorLoggerSetFile)(file)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorDestroyOperationDescriptor(desc: cutensorOperationDescriptor_t) -> cutensorStatus_t;
+        cutensorDestroyOperationDescriptor(desc)
     }
-    pub unsafe fn cutensorLoggerSetLevel(level: i32) -> cutensorStatus_t {
-        (culib().cutensorLoggerSetLevel)(level)
+}
+pub unsafe fn cutensorDestroyPlan(plan: cutensorPlan_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorPlan_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorDestroyPlan") });
+        _f(plan)
     }
-    pub unsafe fn cutensorLoggerSetMask(mask: i32) -> cutensorStatus_t {
-        (culib().cutensorLoggerSetMask)(mask)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorDestroyPlan(plan: cutensorPlan_t) -> cutensorStatus_t;
+        cutensorDestroyPlan(plan)
     }
-    pub unsafe fn cutensorOperationDescriptorGetAttribute(
-        handle: cutensorHandle_t,
-        desc: cutensorOperationDescriptor_t,
-        attr: cutensorOperationDescriptorAttribute_t,
-        buf: *mut ::core::ffi::c_void,
-        sizeInBytes: usize,
-    ) -> cutensorStatus_t {
-        (culib().cutensorOperationDescriptorGetAttribute)(handle, desc, attr, buf, sizeInBytes)
+}
+pub unsafe fn cutensorDestroyPlanPreference(pref: cutensorPlanPreference_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorPlanPreference_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorDestroyPlanPreference") });
+        _f(pref)
     }
-    pub unsafe fn cutensorOperationDescriptorSetAttribute(
-        handle: cutensorHandle_t,
-        desc: cutensorOperationDescriptor_t,
-        attr: cutensorOperationDescriptorAttribute_t,
-        buf: *const ::core::ffi::c_void,
-        sizeInBytes: usize,
-    ) -> cutensorStatus_t {
-        (culib().cutensorOperationDescriptorSetAttribute)(handle, desc, attr, buf, sizeInBytes)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorDestroyPlanPreference(pref: cutensorPlanPreference_t) -> cutensorStatus_t;
+        cutensorDestroyPlanPreference(pref)
     }
-    pub unsafe fn cutensorPermute(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        alpha: *const ::core::ffi::c_void,
-        A: *const ::core::ffi::c_void,
-        B: *mut ::core::ffi::c_void,
-        stream: cudaStream_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorPermute)(handle, plan, alpha, A, B, stream)
+}
+pub unsafe fn cutensorDestroyTensorDescriptor(desc: cutensorTensorDescriptor_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorTensorDescriptor_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorDestroyTensorDescriptor") });
+        _f(desc)
     }
-    pub unsafe fn cutensorPlanGetAttribute(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        attr: cutensorPlanAttribute_t,
-        buf: *mut ::core::ffi::c_void,
-        sizeInBytes: usize,
-    ) -> cutensorStatus_t {
-        (culib().cutensorPlanGetAttribute)(handle, plan, attr, buf, sizeInBytes)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorDestroyTensorDescriptor(desc: cutensorTensorDescriptor_t) -> cutensorStatus_t;
+        cutensorDestroyTensorDescriptor(desc)
     }
-    #[cfg(any(
-        feature = "cutensor-02004",
-        feature = "cutensor-02005",
-        feature = "cutensor-02006"
-    ))]
-    pub unsafe fn cutensorPlanPreferenceGetAttribute(
-        handle: cutensorHandle_t,
-        pref: cutensorPlanPreference_t,
-        attr: cutensorPlanPreferenceAttribute_t,
-        buf: *mut ::core::ffi::c_void,
-        sizeInBytes: usize,
-    ) -> cutensorStatus_t {
-        (culib().cutensorPlanPreferenceGetAttribute)(handle, pref, attr, buf, sizeInBytes)
+}
+pub unsafe fn cutensorElementwiseBinaryExecute(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, gamma: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, stream: cudaStream_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, cutensorPlan_t, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *mut ::core::ffi::c_void, cudaStream_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorElementwiseBinaryExecute") });
+        _f(handle, plan, alpha, A, gamma, C, D, stream)
     }
-    pub unsafe fn cutensorPlanPreferenceSetAttribute(
-        handle: cutensorHandle_t,
-        pref: cutensorPlanPreference_t,
-        attr: cutensorPlanPreferenceAttribute_t,
-        buf: *const ::core::ffi::c_void,
-        sizeInBytes: usize,
-    ) -> cutensorStatus_t {
-        (culib().cutensorPlanPreferenceSetAttribute)(handle, pref, attr, buf, sizeInBytes)
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorElementwiseBinaryExecute(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, gamma: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, stream: cudaStream_t) -> cutensorStatus_t;
+        cutensorElementwiseBinaryExecute(handle, plan, alpha, A, gamma, C, D, stream)
     }
-    pub unsafe fn cutensorReadKernelCacheFromFile(
-        handle: cutensorHandle_t,
-        filename: *const ::core::ffi::c_char,
-    ) -> cutensorStatus_t {
-        (culib().cutensorReadKernelCacheFromFile)(handle, filename)
+}
+pub unsafe fn cutensorElementwiseTrinaryExecute(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, B: *const ::core::ffi::c_void, gamma: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, stream: cudaStream_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, cutensorPlan_t, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *mut ::core::ffi::c_void, cudaStream_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorElementwiseTrinaryExecute") });
+        _f(handle, plan, alpha, A, beta, B, gamma, C, D, stream)
     }
-    pub unsafe fn cutensorReduce(
-        handle: cutensorHandle_t,
-        plan: cutensorPlan_t,
-        alpha: *const ::core::ffi::c_void,
-        A: *const ::core::ffi::c_void,
-        beta: *const ::core::ffi::c_void,
-        C: *const ::core::ffi::c_void,
-        D: *mut ::core::ffi::c_void,
-        workspace: *mut ::core::ffi::c_void,
-        workspaceSize: u64,
-        stream: cudaStream_t,
-    ) -> cutensorStatus_t {
-        (culib().cutensorReduce)(
-            handle,
-            plan,
-            alpha,
-            A,
-            beta,
-            C,
-            D,
-            workspace,
-            workspaceSize,
-            stream,
-        )
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorElementwiseTrinaryExecute(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, B: *const ::core::ffi::c_void, gamma: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, stream: cudaStream_t) -> cutensorStatus_t;
+        cutensorElementwiseTrinaryExecute(handle, plan, alpha, A, beta, B, gamma, C, D, stream)
     }
-    pub unsafe fn cutensorWriteKernelCacheToFile(
-        handle: cutensorHandle_t,
-        filename: *const ::core::ffi::c_char,
-    ) -> cutensorStatus_t {
-        (culib().cutensorWriteKernelCacheToFile)(handle, filename)
+}
+pub unsafe fn cutensorEstimateWorkspaceSize(handle: cutensorHandle_t, desc: cutensorOperationDescriptor_t, planPref: cutensorPlanPreference_t, workspacePref: cutensorWorksizePreference_t, workspaceSizeEstimate: *mut u64) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, cutensorOperationDescriptor_t, cutensorPlanPreference_t, cutensorWorksizePreference_t, *mut u64) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorEstimateWorkspaceSize") });
+        _f(handle, desc, planPref, workspacePref, workspaceSizeEstimate)
     }
-    pub struct Lib {
-        __library: ::libloading::Library,
-        pub cutensorBlockSparseContract: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            plan: cutensorPlan_t,
-            alpha: *const ::core::ffi::c_void,
-            A: *const *const ::core::ffi::c_void,
-            B: *const *const ::core::ffi::c_void,
-            beta: *const ::core::ffi::c_void,
-            C: *const *const ::core::ffi::c_void,
-            D: *const *mut ::core::ffi::c_void,
-            workspace: *mut ::core::ffi::c_void,
-            workspaceSize: u64,
-            stream: cudaStream_t,
-        ) -> cutensorStatus_t,
-        pub cutensorContract: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            plan: cutensorPlan_t,
-            alpha: *const ::core::ffi::c_void,
-            A: *const ::core::ffi::c_void,
-            B: *const ::core::ffi::c_void,
-            beta: *const ::core::ffi::c_void,
-            C: *const ::core::ffi::c_void,
-            D: *mut ::core::ffi::c_void,
-            workspace: *mut ::core::ffi::c_void,
-            workspaceSize: u64,
-            stream: cudaStream_t,
-        ) -> cutensorStatus_t,
-        pub cutensorContractTrinary: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            plan: cutensorPlan_t,
-            alpha: *const ::core::ffi::c_void,
-            A: *const ::core::ffi::c_void,
-            B: *const ::core::ffi::c_void,
-            C: *const ::core::ffi::c_void,
-            beta: *const ::core::ffi::c_void,
-            D: *const ::core::ffi::c_void,
-            E: *mut ::core::ffi::c_void,
-            workspace: *mut ::core::ffi::c_void,
-            workspaceSize: u64,
-            stream: cudaStream_t,
-        ) -> cutensorStatus_t,
-        pub cutensorCreate: unsafe extern "C" fn(handle: *mut cutensorHandle_t) -> cutensorStatus_t,
-        pub cutensorCreateBlockSparseContraction: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            desc: *mut cutensorOperationDescriptor_t,
-            descA: cutensorBlockSparseTensorDescriptor_t,
-            modeA: *const i32,
-            opA: cutensorOperator_t,
-            descB: cutensorBlockSparseTensorDescriptor_t,
-            modeB: *const i32,
-            opB: cutensorOperator_t,
-            descC: cutensorBlockSparseTensorDescriptor_t,
-            modeC: *const i32,
-            opC: cutensorOperator_t,
-            descD: cutensorBlockSparseTensorDescriptor_t,
-            modeD: *const i32,
-            descCompute: cutensorComputeDescriptor_t,
-        ) -> cutensorStatus_t,
-        pub cutensorCreateBlockSparseTensorDescriptor: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            desc: *mut cutensorBlockSparseTensorDescriptor_t,
-            numModes: u32,
-            numNonZeroBlocks: u64,
-            numSectionsPerMode: *const u32,
-            extent: *const i64,
-            nonZeroCoordinates: *const i32,
-            stride: *const i64,
-            dataType: cudaDataType_t,
-        )
-            -> cutensorStatus_t,
-        pub cutensorCreateContraction: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            desc: *mut cutensorOperationDescriptor_t,
-            descA: cutensorTensorDescriptor_t,
-            modeA: *const i32,
-            opA: cutensorOperator_t,
-            descB: cutensorTensorDescriptor_t,
-            modeB: *const i32,
-            opB: cutensorOperator_t,
-            descC: cutensorTensorDescriptor_t,
-            modeC: *const i32,
-            opC: cutensorOperator_t,
-            descD: cutensorTensorDescriptor_t,
-            modeD: *const i32,
-            descCompute: cutensorComputeDescriptor_t,
-        ) -> cutensorStatus_t,
-        pub cutensorCreateContractionTrinary: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            desc: *mut cutensorOperationDescriptor_t,
-            descA: cutensorTensorDescriptor_t,
-            modeA: *const i32,
-            opA: cutensorOperator_t,
-            descB: cutensorTensorDescriptor_t,
-            modeB: *const i32,
-            opB: cutensorOperator_t,
-            descC: cutensorTensorDescriptor_t,
-            modeC: *const i32,
-            opC: cutensorOperator_t,
-            descD: cutensorTensorDescriptor_t,
-            modeD: *const i32,
-            opD: cutensorOperator_t,
-            descE: cutensorTensorDescriptor_t,
-            modeE: *const i32,
-            descCompute: cutensorComputeDescriptor_t,
-        ) -> cutensorStatus_t,
-        pub cutensorCreateElementwiseBinary: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            desc: *mut cutensorOperationDescriptor_t,
-            descA: cutensorTensorDescriptor_t,
-            modeA: *const i32,
-            opA: cutensorOperator_t,
-            descC: cutensorTensorDescriptor_t,
-            modeC: *const i32,
-            opC: cutensorOperator_t,
-            descD: cutensorTensorDescriptor_t,
-            modeD: *const i32,
-            opAC: cutensorOperator_t,
-            descCompute: cutensorComputeDescriptor_t,
-        ) -> cutensorStatus_t,
-        pub cutensorCreateElementwiseTrinary: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            desc: *mut cutensorOperationDescriptor_t,
-            descA: cutensorTensorDescriptor_t,
-            modeA: *const i32,
-            opA: cutensorOperator_t,
-            descB: cutensorTensorDescriptor_t,
-            modeB: *const i32,
-            opB: cutensorOperator_t,
-            descC: cutensorTensorDescriptor_t,
-            modeC: *const i32,
-            opC: cutensorOperator_t,
-            descD: cutensorTensorDescriptor_t,
-            modeD: *const i32,
-            opAB: cutensorOperator_t,
-            opABC: cutensorOperator_t,
-            descCompute: cutensorComputeDescriptor_t,
-        ) -> cutensorStatus_t,
-        pub cutensorCreatePermutation: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            desc: *mut cutensorOperationDescriptor_t,
-            descA: cutensorTensorDescriptor_t,
-            modeA: *const i32,
-            opA: cutensorOperator_t,
-            descB: cutensorTensorDescriptor_t,
-            modeB: *const i32,
-            descCompute: cutensorComputeDescriptor_t,
-        ) -> cutensorStatus_t,
-        pub cutensorCreatePlan: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            plan: *mut cutensorPlan_t,
-            desc: cutensorOperationDescriptor_t,
-            pref: cutensorPlanPreference_t,
-            workspaceSizeLimit: u64,
-        ) -> cutensorStatus_t,
-        pub cutensorCreatePlanPreference: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            pref: *mut cutensorPlanPreference_t,
-            algo: cutensorAlgo_t,
-            jitMode: cutensorJitMode_t,
-        ) -> cutensorStatus_t,
-        pub cutensorCreateReduction: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            desc: *mut cutensorOperationDescriptor_t,
-            descA: cutensorTensorDescriptor_t,
-            modeA: *const i32,
-            opA: cutensorOperator_t,
-            descC: cutensorTensorDescriptor_t,
-            modeC: *const i32,
-            opC: cutensorOperator_t,
-            descD: cutensorTensorDescriptor_t,
-            modeD: *const i32,
-            opReduce: cutensorOperator_t,
-            descCompute: cutensorComputeDescriptor_t,
-        ) -> cutensorStatus_t,
-        pub cutensorCreateTensorDescriptor: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            desc: *mut cutensorTensorDescriptor_t,
-            numModes: u32,
-            extent: *const i64,
-            stride: *const i64,
-            dataType: cudaDataType_t,
-            alignmentRequirement: u32,
-        ) -> cutensorStatus_t,
-        pub cutensorDestroy: unsafe extern "C" fn(handle: cutensorHandle_t) -> cutensorStatus_t,
-        pub cutensorDestroyBlockSparseTensorDescriptor:
-            unsafe extern "C" fn(desc: cutensorBlockSparseTensorDescriptor_t) -> cutensorStatus_t,
-        pub cutensorDestroyOperationDescriptor:
-            unsafe extern "C" fn(desc: cutensorOperationDescriptor_t) -> cutensorStatus_t,
-        pub cutensorDestroyPlan: unsafe extern "C" fn(plan: cutensorPlan_t) -> cutensorStatus_t,
-        pub cutensorDestroyPlanPreference:
-            unsafe extern "C" fn(pref: cutensorPlanPreference_t) -> cutensorStatus_t,
-        pub cutensorDestroyTensorDescriptor:
-            unsafe extern "C" fn(desc: cutensorTensorDescriptor_t) -> cutensorStatus_t,
-        pub cutensorElementwiseBinaryExecute: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            plan: cutensorPlan_t,
-            alpha: *const ::core::ffi::c_void,
-            A: *const ::core::ffi::c_void,
-            gamma: *const ::core::ffi::c_void,
-            C: *const ::core::ffi::c_void,
-            D: *mut ::core::ffi::c_void,
-            stream: cudaStream_t,
-        ) -> cutensorStatus_t,
-        pub cutensorElementwiseTrinaryExecute: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            plan: cutensorPlan_t,
-            alpha: *const ::core::ffi::c_void,
-            A: *const ::core::ffi::c_void,
-            beta: *const ::core::ffi::c_void,
-            B: *const ::core::ffi::c_void,
-            gamma: *const ::core::ffi::c_void,
-            C: *const ::core::ffi::c_void,
-            D: *mut ::core::ffi::c_void,
-            stream: cudaStream_t,
-        ) -> cutensorStatus_t,
-        pub cutensorEstimateWorkspaceSize: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            desc: cutensorOperationDescriptor_t,
-            planPref: cutensorPlanPreference_t,
-            workspacePref: cutensorWorksizePreference_t,
-            workspaceSizeEstimate: *mut u64,
-        ) -> cutensorStatus_t,
-        pub cutensorGetCudartVersion: unsafe extern "C" fn() -> usize,
-        pub cutensorGetErrorString:
-            unsafe extern "C" fn(error: cutensorStatus_t) -> *const ::core::ffi::c_char,
-        pub cutensorGetVersion: unsafe extern "C" fn() -> usize,
-        pub cutensorHandleReadPlanCacheFromFile: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            filename: *const ::core::ffi::c_char,
-            numCachelinesRead: *mut u32,
-        ) -> cutensorStatus_t,
-        pub cutensorHandleResizePlanCache:
-            unsafe extern "C" fn(handle: cutensorHandle_t, numEntries: u32) -> cutensorStatus_t,
-        pub cutensorHandleWritePlanCacheToFile: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            filename: *const ::core::ffi::c_char,
-        ) -> cutensorStatus_t,
-        pub cutensorLoggerForceDisable: unsafe extern "C" fn() -> cutensorStatus_t,
-        pub cutensorLoggerOpenFile:
-            unsafe extern "C" fn(logFile: *const ::core::ffi::c_char) -> cutensorStatus_t,
-        pub cutensorLoggerSetCallback:
-            unsafe extern "C" fn(callback: cutensorLoggerCallback_t) -> cutensorStatus_t,
-        pub cutensorLoggerSetFile: unsafe extern "C" fn(file: *mut FILE) -> cutensorStatus_t,
-        pub cutensorLoggerSetLevel: unsafe extern "C" fn(level: i32) -> cutensorStatus_t,
-        pub cutensorLoggerSetMask: unsafe extern "C" fn(mask: i32) -> cutensorStatus_t,
-        pub cutensorOperationDescriptorGetAttribute: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            desc: cutensorOperationDescriptor_t,
-            attr: cutensorOperationDescriptorAttribute_t,
-            buf: *mut ::core::ffi::c_void,
-            sizeInBytes: usize,
-        )
-            -> cutensorStatus_t,
-        pub cutensorOperationDescriptorSetAttribute: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            desc: cutensorOperationDescriptor_t,
-            attr: cutensorOperationDescriptorAttribute_t,
-            buf: *const ::core::ffi::c_void,
-            sizeInBytes: usize,
-        )
-            -> cutensorStatus_t,
-        pub cutensorPermute: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            plan: cutensorPlan_t,
-            alpha: *const ::core::ffi::c_void,
-            A: *const ::core::ffi::c_void,
-            B: *mut ::core::ffi::c_void,
-            stream: cudaStream_t,
-        ) -> cutensorStatus_t,
-        pub cutensorPlanGetAttribute: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            plan: cutensorPlan_t,
-            attr: cutensorPlanAttribute_t,
-            buf: *mut ::core::ffi::c_void,
-            sizeInBytes: usize,
-        ) -> cutensorStatus_t,
-        #[cfg(any(
-            feature = "cutensor-02004",
-            feature = "cutensor-02005",
-            feature = "cutensor-02006"
-        ))]
-        pub cutensorPlanPreferenceGetAttribute: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            pref: cutensorPlanPreference_t,
-            attr: cutensorPlanPreferenceAttribute_t,
-            buf: *mut ::core::ffi::c_void,
-            sizeInBytes: usize,
-        ) -> cutensorStatus_t,
-        pub cutensorPlanPreferenceSetAttribute: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            pref: cutensorPlanPreference_t,
-            attr: cutensorPlanPreferenceAttribute_t,
-            buf: *const ::core::ffi::c_void,
-            sizeInBytes: usize,
-        ) -> cutensorStatus_t,
-        pub cutensorReadKernelCacheFromFile: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            filename: *const ::core::ffi::c_char,
-        ) -> cutensorStatus_t,
-        pub cutensorReduce: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            plan: cutensorPlan_t,
-            alpha: *const ::core::ffi::c_void,
-            A: *const ::core::ffi::c_void,
-            beta: *const ::core::ffi::c_void,
-            C: *const ::core::ffi::c_void,
-            D: *mut ::core::ffi::c_void,
-            workspace: *mut ::core::ffi::c_void,
-            workspaceSize: u64,
-            stream: cudaStream_t,
-        ) -> cutensorStatus_t,
-        pub cutensorWriteKernelCacheToFile: unsafe extern "C" fn(
-            handle: cutensorHandle_t,
-            filename: *const ::core::ffi::c_char,
-        ) -> cutensorStatus_t,
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorEstimateWorkspaceSize(handle: cutensorHandle_t, desc: cutensorOperationDescriptor_t, planPref: cutensorPlanPreference_t, workspacePref: cutensorWorksizePreference_t, workspaceSizeEstimate: *mut u64) -> cutensorStatus_t;
+        cutensorEstimateWorkspaceSize(handle, desc, planPref, workspacePref, workspaceSizeEstimate)
     }
-    impl Lib {
-        pub unsafe fn new<P>(path: P) -> Result<Self, ::libloading::Error>
-        where
-            P: AsRef<::std::ffi::OsStr>,
-        {
-            let library = ::libloading::Library::new(path.as_ref())?;
-            Self::from_library(library)
-        }
-        pub unsafe fn from_library<L>(library: L) -> Result<Self, ::libloading::Error>
-        where
-            L: Into<::libloading::Library>,
-        {
-            let __library = library.into();
-            let cutensorBlockSparseContract = __library
-                .get(b"cutensorBlockSparseContract\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorContract = __library
-                .get(b"cutensorContract\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorContractTrinary = __library
-                .get(b"cutensorContractTrinary\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorCreate = __library
-                .get(b"cutensorCreate\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorCreateBlockSparseContraction = __library
-                .get(b"cutensorCreateBlockSparseContraction\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorCreateBlockSparseTensorDescriptor = __library
-                .get(b"cutensorCreateBlockSparseTensorDescriptor\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorCreateContraction = __library
-                .get(b"cutensorCreateContraction\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorCreateContractionTrinary = __library
-                .get(b"cutensorCreateContractionTrinary\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorCreateElementwiseBinary = __library
-                .get(b"cutensorCreateElementwiseBinary\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorCreateElementwiseTrinary = __library
-                .get(b"cutensorCreateElementwiseTrinary\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorCreatePermutation = __library
-                .get(b"cutensorCreatePermutation\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorCreatePlan = __library
-                .get(b"cutensorCreatePlan\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorCreatePlanPreference = __library
-                .get(b"cutensorCreatePlanPreference\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorCreateReduction = __library
-                .get(b"cutensorCreateReduction\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorCreateTensorDescriptor = __library
-                .get(b"cutensorCreateTensorDescriptor\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorDestroy = __library
-                .get(b"cutensorDestroy\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorDestroyBlockSparseTensorDescriptor = __library
-                .get(b"cutensorDestroyBlockSparseTensorDescriptor\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorDestroyOperationDescriptor = __library
-                .get(b"cutensorDestroyOperationDescriptor\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorDestroyPlan = __library
-                .get(b"cutensorDestroyPlan\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorDestroyPlanPreference = __library
-                .get(b"cutensorDestroyPlanPreference\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorDestroyTensorDescriptor = __library
-                .get(b"cutensorDestroyTensorDescriptor\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorElementwiseBinaryExecute = __library
-                .get(b"cutensorElementwiseBinaryExecute\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorElementwiseTrinaryExecute = __library
-                .get(b"cutensorElementwiseTrinaryExecute\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorEstimateWorkspaceSize = __library
-                .get(b"cutensorEstimateWorkspaceSize\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorGetCudartVersion = __library
-                .get(b"cutensorGetCudartVersion\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorGetErrorString = __library
-                .get(b"cutensorGetErrorString\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorGetVersion = __library
-                .get(b"cutensorGetVersion\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorHandleReadPlanCacheFromFile = __library
-                .get(b"cutensorHandleReadPlanCacheFromFile\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorHandleResizePlanCache = __library
-                .get(b"cutensorHandleResizePlanCache\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorHandleWritePlanCacheToFile = __library
-                .get(b"cutensorHandleWritePlanCacheToFile\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorLoggerForceDisable = __library
-                .get(b"cutensorLoggerForceDisable\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorLoggerOpenFile = __library
-                .get(b"cutensorLoggerOpenFile\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorLoggerSetCallback = __library
-                .get(b"cutensorLoggerSetCallback\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorLoggerSetFile = __library
-                .get(b"cutensorLoggerSetFile\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorLoggerSetLevel = __library
-                .get(b"cutensorLoggerSetLevel\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorLoggerSetMask = __library
-                .get(b"cutensorLoggerSetMask\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorOperationDescriptorGetAttribute = __library
-                .get(b"cutensorOperationDescriptorGetAttribute\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorOperationDescriptorSetAttribute = __library
-                .get(b"cutensorOperationDescriptorSetAttribute\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorPermute = __library
-                .get(b"cutensorPermute\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorPlanGetAttribute = __library
-                .get(b"cutensorPlanGetAttribute\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            #[cfg(any(
-                feature = "cutensor-02004",
-                feature = "cutensor-02005",
-                feature = "cutensor-02006"
-            ))]
-            let cutensorPlanPreferenceGetAttribute = __library
-                .get(b"cutensorPlanPreferenceGetAttribute\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorPlanPreferenceSetAttribute = __library
-                .get(b"cutensorPlanPreferenceSetAttribute\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorReadKernelCacheFromFile = __library
-                .get(b"cutensorReadKernelCacheFromFile\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorReduce = __library
-                .get(b"cutensorReduce\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            let cutensorWriteKernelCacheToFile = __library
-                .get(b"cutensorWriteKernelCacheToFile\0")
-                .map(|sym| *sym)
-                .expect("Expected symbol in library");
-            Ok(Self {
-                __library,
-                cutensorBlockSparseContract,
-                cutensorContract,
-                cutensorContractTrinary,
-                cutensorCreate,
-                cutensorCreateBlockSparseContraction,
-                cutensorCreateBlockSparseTensorDescriptor,
-                cutensorCreateContraction,
-                cutensorCreateContractionTrinary,
-                cutensorCreateElementwiseBinary,
-                cutensorCreateElementwiseTrinary,
-                cutensorCreatePermutation,
-                cutensorCreatePlan,
-                cutensorCreatePlanPreference,
-                cutensorCreateReduction,
-                cutensorCreateTensorDescriptor,
-                cutensorDestroy,
-                cutensorDestroyBlockSparseTensorDescriptor,
-                cutensorDestroyOperationDescriptor,
-                cutensorDestroyPlan,
-                cutensorDestroyPlanPreference,
-                cutensorDestroyTensorDescriptor,
-                cutensorElementwiseBinaryExecute,
-                cutensorElementwiseTrinaryExecute,
-                cutensorEstimateWorkspaceSize,
-                cutensorGetCudartVersion,
-                cutensorGetErrorString,
-                cutensorGetVersion,
-                cutensorHandleReadPlanCacheFromFile,
-                cutensorHandleResizePlanCache,
-                cutensorHandleWritePlanCacheToFile,
-                cutensorLoggerForceDisable,
-                cutensorLoggerOpenFile,
-                cutensorLoggerSetCallback,
-                cutensorLoggerSetFile,
-                cutensorLoggerSetLevel,
-                cutensorLoggerSetMask,
-                cutensorOperationDescriptorGetAttribute,
-                cutensorOperationDescriptorSetAttribute,
-                cutensorPermute,
-                cutensorPlanGetAttribute,
-                #[cfg(any(
-                    feature = "cutensor-02004",
-                    feature = "cutensor-02005",
-                    feature = "cutensor-02006"
-                ))]
-                cutensorPlanPreferenceGetAttribute,
-                cutensorPlanPreferenceSetAttribute,
-                cutensorReadKernelCacheFromFile,
-                cutensorReduce,
-                cutensorWriteKernelCacheToFile,
-            })
-        }
+}
+pub unsafe fn cutensorGetCudartVersion() -> usize {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn() -> usize;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorGetCudartVersion") });
+        _f()
     }
-    pub unsafe fn is_culib_present() -> bool {
-        let lib_names = ["cutensor"];
-        let choices = lib_names
-            .iter()
-            .map(|l| crate::get_lib_name_candidates(l))
-            .flatten();
-        for choice in choices {
-            if Lib::new(choice).is_ok() {
-                return true;
-            }
-        }
-        false
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorGetCudartVersion() -> usize;
+        cutensorGetCudartVersion()
     }
-    pub unsafe fn culib() -> &'static Lib {
-        static LIB: std::sync::OnceLock<Lib> = std::sync::OnceLock::new();
-        LIB.get_or_init(|| {
-            let lib_names = std::vec!["cutensor"];
-            let choices: std::vec::Vec<_> = lib_names
-                .iter()
-                .map(|l| crate::get_lib_name_candidates(l))
-                .flatten()
-                .collect();
-            for choice in choices.iter() {
-                if let Ok(lib) = Lib::new(choice) {
-                    return lib;
-                }
-            }
-            crate::panic_no_lib_found(lib_names[0], &choices);
-        })
+}
+pub unsafe fn cutensorGetErrorString(error: cutensorStatus_t) -> *const ::core::ffi::c_char {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorStatus_t) -> *const ::core::ffi::c_char;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorGetErrorString") });
+        _f(error)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorGetErrorString(error: cutensorStatus_t) -> *const ::core::ffi::c_char;
+        cutensorGetErrorString(error)
+    }
+}
+pub unsafe fn cutensorGetVersion() -> usize {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn() -> usize;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorGetVersion") });
+        _f()
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorGetVersion() -> usize;
+        cutensorGetVersion()
+    }
+}
+pub unsafe fn cutensorHandleReadPlanCacheFromFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char, numCachelinesRead: *mut u32) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, *const ::core::ffi::c_char, *mut u32) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorHandleReadPlanCacheFromFile") });
+        _f(handle, filename, numCachelinesRead)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorHandleReadPlanCacheFromFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char, numCachelinesRead: *mut u32) -> cutensorStatus_t;
+        cutensorHandleReadPlanCacheFromFile(handle, filename, numCachelinesRead)
+    }
+}
+pub unsafe fn cutensorHandleResizePlanCache(handle: cutensorHandle_t, numEntries: u32) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, u32) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorHandleResizePlanCache") });
+        _f(handle, numEntries)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorHandleResizePlanCache(handle: cutensorHandle_t, numEntries: u32) -> cutensorStatus_t;
+        cutensorHandleResizePlanCache(handle, numEntries)
+    }
+}
+pub unsafe fn cutensorHandleWritePlanCacheToFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, *const ::core::ffi::c_char) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorHandleWritePlanCacheToFile") });
+        _f(handle, filename)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorHandleWritePlanCacheToFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char) -> cutensorStatus_t;
+        cutensorHandleWritePlanCacheToFile(handle, filename)
+    }
+}
+pub unsafe fn cutensorLoggerForceDisable() -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn() -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorLoggerForceDisable") });
+        _f()
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorLoggerForceDisable() -> cutensorStatus_t;
+        cutensorLoggerForceDisable()
+    }
+}
+pub unsafe fn cutensorLoggerOpenFile(logFile: *const ::core::ffi::c_char) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*const ::core::ffi::c_char) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorLoggerOpenFile") });
+        _f(logFile)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorLoggerOpenFile(logFile: *const ::core::ffi::c_char) -> cutensorStatus_t;
+        cutensorLoggerOpenFile(logFile)
+    }
+}
+pub unsafe fn cutensorLoggerSetCallback(callback: cutensorLoggerCallback_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorLoggerCallback_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorLoggerSetCallback") });
+        _f(callback)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorLoggerSetCallback(callback: cutensorLoggerCallback_t) -> cutensorStatus_t;
+        cutensorLoggerSetCallback(callback)
+    }
+}
+pub unsafe fn cutensorLoggerSetFile(file: *mut FILE) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*mut FILE) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorLoggerSetFile") });
+        _f(file)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorLoggerSetFile(file: *mut FILE) -> cutensorStatus_t;
+        cutensorLoggerSetFile(file)
+    }
+}
+pub unsafe fn cutensorLoggerSetLevel(level: i32) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(i32) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorLoggerSetLevel") });
+        _f(level)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorLoggerSetLevel(level: i32) -> cutensorStatus_t;
+        cutensorLoggerSetLevel(level)
+    }
+}
+pub unsafe fn cutensorLoggerSetMask(mask: i32) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(i32) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorLoggerSetMask") });
+        _f(mask)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorLoggerSetMask(mask: i32) -> cutensorStatus_t;
+        cutensorLoggerSetMask(mask)
+    }
+}
+pub unsafe fn cutensorOperationDescriptorGetAttribute(handle: cutensorHandle_t, desc: cutensorOperationDescriptor_t, attr: cutensorOperationDescriptorAttribute_t, buf: *mut ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, cutensorOperationDescriptor_t, cutensorOperationDescriptorAttribute_t, *mut ::core::ffi::c_void, usize) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorOperationDescriptorGetAttribute") });
+        _f(handle, desc, attr, buf, sizeInBytes)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorOperationDescriptorGetAttribute(handle: cutensorHandle_t, desc: cutensorOperationDescriptor_t, attr: cutensorOperationDescriptorAttribute_t, buf: *mut ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t;
+        cutensorOperationDescriptorGetAttribute(handle, desc, attr, buf, sizeInBytes)
+    }
+}
+pub unsafe fn cutensorOperationDescriptorSetAttribute(handle: cutensorHandle_t, desc: cutensorOperationDescriptor_t, attr: cutensorOperationDescriptorAttribute_t, buf: *const ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, cutensorOperationDescriptor_t, cutensorOperationDescriptorAttribute_t, *const ::core::ffi::c_void, usize) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorOperationDescriptorSetAttribute") });
+        _f(handle, desc, attr, buf, sizeInBytes)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorOperationDescriptorSetAttribute(handle: cutensorHandle_t, desc: cutensorOperationDescriptor_t, attr: cutensorOperationDescriptorAttribute_t, buf: *const ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t;
+        cutensorOperationDescriptorSetAttribute(handle, desc, attr, buf, sizeInBytes)
+    }
+}
+pub unsafe fn cutensorPermute(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, B: *mut ::core::ffi::c_void, stream: cudaStream_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, cutensorPlan_t, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *mut ::core::ffi::c_void, cudaStream_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorPermute") });
+        _f(handle, plan, alpha, A, B, stream)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorPermute(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, B: *mut ::core::ffi::c_void, stream: cudaStream_t) -> cutensorStatus_t;
+        cutensorPermute(handle, plan, alpha, A, B, stream)
+    }
+}
+pub unsafe fn cutensorPlanGetAttribute(handle: cutensorHandle_t, plan: cutensorPlan_t, attr: cutensorPlanAttribute_t, buf: *mut ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, cutensorPlan_t, cutensorPlanAttribute_t, *mut ::core::ffi::c_void, usize) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorPlanGetAttribute") });
+        _f(handle, plan, attr, buf, sizeInBytes)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorPlanGetAttribute(handle: cutensorHandle_t, plan: cutensorPlan_t, attr: cutensorPlanAttribute_t, buf: *mut ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t;
+        cutensorPlanGetAttribute(handle, plan, attr, buf, sizeInBytes)
+    }
+}
+#[cfg(any(feature = "cutensor-02004", feature = "cutensor-02005", feature = "cutensor-02006"))]
+pub unsafe fn cutensorPlanPreferenceGetAttribute(handle: cutensorHandle_t, pref: cutensorPlanPreference_t, attr: cutensorPlanPreferenceAttribute_t, buf: *mut ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, cutensorPlanPreference_t, cutensorPlanPreferenceAttribute_t, *mut ::core::ffi::c_void, usize) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorPlanPreferenceGetAttribute") });
+        _f(handle, pref, attr, buf, sizeInBytes)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorPlanPreferenceGetAttribute(handle: cutensorHandle_t, pref: cutensorPlanPreference_t, attr: cutensorPlanPreferenceAttribute_t, buf: *mut ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t;
+        cutensorPlanPreferenceGetAttribute(handle, pref, attr, buf, sizeInBytes)
+    }
+}
+pub unsafe fn cutensorPlanPreferenceSetAttribute(handle: cutensorHandle_t, pref: cutensorPlanPreference_t, attr: cutensorPlanPreferenceAttribute_t, buf: *const ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, cutensorPlanPreference_t, cutensorPlanPreferenceAttribute_t, *const ::core::ffi::c_void, usize) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorPlanPreferenceSetAttribute") });
+        _f(handle, pref, attr, buf, sizeInBytes)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorPlanPreferenceSetAttribute(handle: cutensorHandle_t, pref: cutensorPlanPreference_t, attr: cutensorPlanPreferenceAttribute_t, buf: *const ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t;
+        cutensorPlanPreferenceSetAttribute(handle, pref, attr, buf, sizeInBytes)
+    }
+}
+pub unsafe fn cutensorReadKernelCacheFromFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, *const ::core::ffi::c_char) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorReadKernelCacheFromFile") });
+        _f(handle, filename)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorReadKernelCacheFromFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char) -> cutensorStatus_t;
+        cutensorReadKernelCacheFromFile(handle, filename)
+    }
+}
+pub unsafe fn cutensorReduce(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, cutensorPlan_t, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *const ::core::ffi::c_void, *mut ::core::ffi::c_void, *mut ::core::ffi::c_void, u64, cudaStream_t) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorReduce") });
+        _f(handle, plan, alpha, A, beta, C, D, workspace, workspaceSize, stream)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorReduce(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t;
+        cutensorReduce(handle, plan, alpha, A, beta, C, D, workspace, workspaceSize, stream)
+    }
+}
+pub unsafe fn cutensorWriteKernelCacheToFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char) -> cutensorStatus_t {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(cutensorHandle_t, *const ::core::ffi::c_char) -> cutensorStatus_t;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cutensorWriteKernelCacheToFile") });
+        _f(handle, filename)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" fn cutensorWriteKernelCacheToFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char) -> cutensorStatus_t;
+        cutensorWriteKernelCacheToFile(handle, filename)
     }
 }
 #[cfg(feature = "dynamic-loading")]
-pub use loaded::*;
+pub unsafe fn is_culib_present() -> bool {
+    let lib_names = ["cutensor"];
+    let choices = lib_names.iter().map(|l| crate::get_lib_name_candidates(l)).flatten();
+    for choice in choices {
+        if ::libloading::Library::new(choice).is_ok() {
+            return true;
+        }
+    }
+    false
+}
+#[cfg(feature = "dynamic-loading")]
+pub unsafe fn culib() -> &'static ::libloading::Library {
+    static LIB: OnceLock<::libloading::Library> = OnceLock::new();
+    LIB.get_or_init(|| {
+        let lib_names = std::vec!["cutensor"];
+        let choices: std::vec::Vec<_> = lib_names.iter().map(|l| crate::get_lib_name_candidates(l)).flatten().collect();
+        for choice in choices.iter() {
+            if let Ok(lib) = ::libloading::Library::new(choice) {
+                return lib;
+            }
+        }
+        crate::panic_no_lib_found(lib_names[0], &choices);
+    })
+}

@@ -9,7 +9,7 @@ use std::{
 use anyhow::{Context, Result};
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 use lazy_static::lazy_static;
-use reqwest::blocking::{Response, get};
+use reqwest::blocking::get;
 use serde_json::Value;
 use sha2::{Digest, Sha256};
 
@@ -18,10 +18,6 @@ use crate::version::Version;
 lazy_static! {
     static ref DOWNLOAD_CACHE: Mutex<HashMap<String, PathBuf>> = Mutex::new(HashMap::new());
     static ref REVISION: Mutex<HashMap<(Version, String), PathBuf>> = Mutex::new(HashMap::new());
-}
-
-fn download_response(url: &str) -> Result<Response> {
-    Ok(get(url).unwrap())
 }
 
 pub fn to_file(url: &str, dest: &Path, multi_progress: &MultiProgress) -> Result<()> {
@@ -36,16 +32,7 @@ pub fn to_file(url: &str, dest: &Path, multi_progress: &MultiProgress) -> Result
     }
 
     log::debug!("Downloading url {url}");
-    let mut response = download_response(url).expect("Downloading error");
-    log::debug!("Got response");
-    let status = response.status();
-    if !status.is_success() {
-        return Err(anyhow::anyhow!(
-            "Failed to download {}: HTTP {}",
-            url,
-            status
-        ));
-    }
+    let mut response = get(url).expect("Downloading error").error_for_status()?;
 
     // Create parent directories if needed
     log::debug!("Checking parent directories {}", dest.display());

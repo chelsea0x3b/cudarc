@@ -1,0 +1,7 @@
+edition = "2021"
+fn_params_layout = "Compressed"
+max_width = 1000
+fn_call_width = 1000
+attr_fn_like_width = 1000
+array_width = 1000
+chain_width = 1000

@@ -542,10 +542,8 @@ fn create_bindings(modules: &[ModuleConfig], cuda_versions: &[Version]) -> Resul
 
     // Phase A: download primary archives for all versions in parallel.
     // These are done upfront so module tasks don't race on the shared primary archive paths.
-    let primary_pb = multi_progress.add(ProgressBar::new(cuda_versions.len() as u64));
-    primary_pb.set_style(
-        ProgressStyle::default_bar().template("primary archives {wide_bar} {pos}/{len}")?,
-    );
+    let pb = multi_progress.add(ProgressBar::new(cuda_versions.len() as u64));
+    pb.set_style(ProgressStyle::default_bar().template("primary archives {bar} {pos}/{len}")?);
     let primary_archives = cuda_versions
         .par_iter()
         .map(|cuda_version| {
@@ -567,22 +565,22 @@ fn create_bindings(modules: &[ModuleConfig], cuda_versions: &[Version]) -> Resul
                     &multi_progress,
                 )?);
             }
-            primary_pb.inc(1);
+            pb.inc(1);
             Ok((*cuda_version, archives))
         })
         .collect::<Result<HashMap<_, _>>>()?;
-    primary_pb.finish_with_message("primary archives done");
+    pb.finish();
+    drop(pb);
 
     // Phase B: CUDA-versioned modules, processed in dependency order.
-    let tasks: Vec<(Version, &ModuleConfig)> = cuda_versions
+    let cuda_tasks: Vec<(Version, &ModuleConfig)> = cuda_versions
         .iter()
         .flat_map(|&v| modules.iter().map(move |m| (v, m)))
         .filter(|(v, m)| m.lib_versions.is_empty() && m.supports_cuda_version(*v))
         .collect();
 
     let mut archive_dir_map: HashMap<(Version, &str), PathBuf> = HashMap::new();
-    let mut remaining: Vec<(Version, &ModuleConfig)> = tasks;
-    let mut wave = 0usize;
+    let mut remaining: Vec<(Version, &ModuleConfig)> = cuda_tasks;
 
     while !remaining.is_empty() {
         let (ready, not_ready): (Vec<_>, Vec<_>) = remaining.into_iter().partition(|(v, m)| {
@@ -590,19 +588,10 @@ fn create_bindings(modules: &[ModuleConfig], cuda_versions: &[Version]) -> Resul
                 .iter()
                 .all(|dep| archive_dir_map.contains_key(&(*v, *dep)))
         });
-        anyhow::ensure!(
-            !ready.is_empty(),
-            "dependency cycle detected: modules {:?} cannot be resolved",
-            not_ready
-                .iter()
-                .map(|(_, m)| m.cudarc_name)
-                .collect::<Vec<_>>()
-        );
+        assert!(!ready.is_empty(), "dependency cycle detected");
 
         let pb = multi_progress.add(ProgressBar::new(ready.len() as u64));
-        pb.set_style(
-            ProgressStyle::default_bar().template("{msg} {wide_bar} {pos}/{len} ({eta})")?,
-        );
+        pb.set_style(ProgressStyle::default_bar().template("cuda {bar} {pos}/{len} ({eta})")?);
         let results = ready
             .par_iter()
             .map(|(cuda_version, module)| {
@@ -625,10 +614,10 @@ fn create_bindings(modules: &[ModuleConfig], cuda_versions: &[Version]) -> Resul
                 Ok(((*cuda_version, module.cudarc_name), archive_dir))
             })
             .collect::<Result<Vec<_>>>()?;
-        pb.finish_with_message(format!("wave {wave} done - {ready:?}"));
+        pb.finish();
+        drop(pb);
         archive_dir_map.extend(results);
         remaining = not_ready;
-        wave += 1;
     }
 
     // Phase C: library-versioned modules (NCCL, cuDNN, cuTENSOR).
@@ -639,8 +628,7 @@ fn create_bindings(modules: &[ModuleConfig], cuda_versions: &[Version]) -> Resul
         .collect();
 
     let pb = multi_progress.add(ProgressBar::new(lib_tasks.len() as u64));
-    pb.set_style(ProgressStyle::default_bar().template("{msg} {wide_bar} {pos}/{len} ({eta})")?);
-
+    pb.set_style(ProgressStyle::default_bar().template("downstream {bar} {pos}/{len} ({eta})")?);
     lib_tasks
         .into_par_iter()
         .map(|(module, lib_version)| {
@@ -655,7 +643,8 @@ fn create_bindings(modules: &[ModuleConfig], cuda_versions: &[Version]) -> Resul
         })
         .collect::<Result<Vec<_>>>()?;
 
-    pb.finish_with_message("lib-versioned modules done");
+    pb.finish();
+    drop(pb);
 
     Ok(())
 }
@@ -838,10 +827,5 @@ fn main() -> Result<()> {
         create_bindings(&modules, &cuda_versions)?;
     }
     merge::merge_bindings(&modules)?;
-
-    std::process::Command::new("cargo")
-        .arg("fmt")
-        .current_dir(std::fs::canonicalize("../")?)
-        .status()?;
     Ok(())
 }
