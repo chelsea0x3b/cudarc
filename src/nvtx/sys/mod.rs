@@ -249,7 +249,9 @@ pub unsafe fn nvtxDomainCreateA(name: *const ::core::ffi::c_char) -> nvtxDomainH
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxDomainCreateA(name: *const ::core::ffi::c_char) -> nvtxDomainHandle_t;
+        extern "C" {
+            fn nvtxDomainCreateA(name: *const ::core::ffi::c_char) -> nvtxDomainHandle_t;
+        }
         nvtxDomainCreateA(name)
     }
 }
@@ -263,7 +265,9 @@ pub unsafe fn nvtxDomainCreateW(name: *const wchar_t) -> nvtxDomainHandle_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxDomainCreateW(name: *const wchar_t) -> nvtxDomainHandle_t;
+        extern "C" {
+            fn nvtxDomainCreateW(name: *const wchar_t) -> nvtxDomainHandle_t;
+        }
         nvtxDomainCreateW(name)
     }
 }
@@ -277,7 +281,9 @@ pub unsafe fn nvtxDomainDestroy(domain: nvtxDomainHandle_t) {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxDomainDestroy(domain: nvtxDomainHandle_t);
+        extern "C" {
+            fn nvtxDomainDestroy(domain: nvtxDomainHandle_t);
+        }
         nvtxDomainDestroy(domain)
     }
 }
@@ -291,7 +297,9 @@ pub unsafe fn nvtxDomainMarkEx(domain: nvtxDomainHandle_t, eventAttrib: *const n
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxDomainMarkEx(domain: nvtxDomainHandle_t, eventAttrib: *const nvtxEventAttributes_t);
+        extern "C" {
+            fn nvtxDomainMarkEx(domain: nvtxDomainHandle_t, eventAttrib: *const nvtxEventAttributes_t);
+        }
         nvtxDomainMarkEx(domain, eventAttrib)
     }
 }
@@ -305,7 +313,9 @@ pub unsafe fn nvtxDomainNameCategoryA(domain: nvtxDomainHandle_t, category: u32,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxDomainNameCategoryA(domain: nvtxDomainHandle_t, category: u32, name: *const ::core::ffi::c_char);
+        extern "C" {
+            fn nvtxDomainNameCategoryA(domain: nvtxDomainHandle_t, category: u32, name: *const ::core::ffi::c_char);
+        }
         nvtxDomainNameCategoryA(domain, category, name)
     }
 }
@@ -319,7 +329,9 @@ pub unsafe fn nvtxDomainNameCategoryW(domain: nvtxDomainHandle_t, category: u32,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxDomainNameCategoryW(domain: nvtxDomainHandle_t, category: u32, name: *const wchar_t);
+        extern "C" {
+            fn nvtxDomainNameCategoryW(domain: nvtxDomainHandle_t, category: u32, name: *const wchar_t);
+        }
         nvtxDomainNameCategoryW(domain, category, name)
     }
 }
@@ -333,7 +345,9 @@ pub unsafe fn nvtxDomainRangeEnd(domain: nvtxDomainHandle_t, id: nvtxRangeId_t) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxDomainRangeEnd(domain: nvtxDomainHandle_t, id: nvtxRangeId_t);
+        extern "C" {
+            fn nvtxDomainRangeEnd(domain: nvtxDomainHandle_t, id: nvtxRangeId_t);
+        }
         nvtxDomainRangeEnd(domain, id)
     }
 }
@@ -347,7 +361,9 @@ pub unsafe fn nvtxDomainRangePop(domain: nvtxDomainHandle_t) -> ::core::ffi::c_i
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxDomainRangePop(domain: nvtxDomainHandle_t) -> ::core::ffi::c_int;
+        extern "C" {
+            fn nvtxDomainRangePop(domain: nvtxDomainHandle_t) -> ::core::ffi::c_int;
+        }
         nvtxDomainRangePop(domain)
     }
 }
@@ -361,7 +377,9 @@ pub unsafe fn nvtxDomainRangePushEx(domain: nvtxDomainHandle_t, eventAttrib: *co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxDomainRangePushEx(domain: nvtxDomainHandle_t, eventAttrib: *const nvtxEventAttributes_t) -> ::core::ffi::c_int;
+        extern "C" {
+            fn nvtxDomainRangePushEx(domain: nvtxDomainHandle_t, eventAttrib: *const nvtxEventAttributes_t) -> ::core::ffi::c_int;
+        }
         nvtxDomainRangePushEx(domain, eventAttrib)
     }
 }
@@ -375,7 +393,9 @@ pub unsafe fn nvtxDomainRangeStartEx(domain: nvtxDomainHandle_t, eventAttrib: *c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxDomainRangeStartEx(domain: nvtxDomainHandle_t, eventAttrib: *const nvtxEventAttributes_t) -> nvtxRangeId_t;
+        extern "C" {
+            fn nvtxDomainRangeStartEx(domain: nvtxDomainHandle_t, eventAttrib: *const nvtxEventAttributes_t) -> nvtxRangeId_t;
+        }
         nvtxDomainRangeStartEx(domain, eventAttrib)
     }
 }
@@ -389,7 +409,9 @@ pub unsafe fn nvtxDomainRegisterStringA(domain: nvtxDomainHandle_t, string: *con
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxDomainRegisterStringA(domain: nvtxDomainHandle_t, string: *const ::core::ffi::c_char) -> nvtxStringHandle_t;
+        extern "C" {
+            fn nvtxDomainRegisterStringA(domain: nvtxDomainHandle_t, string: *const ::core::ffi::c_char) -> nvtxStringHandle_t;
+        }
         nvtxDomainRegisterStringA(domain, string)
     }
 }
@@ -403,7 +425,9 @@ pub unsafe fn nvtxDomainRegisterStringW(domain: nvtxDomainHandle_t, string: *con
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxDomainRegisterStringW(domain: nvtxDomainHandle_t, string: *const wchar_t) -> nvtxStringHandle_t;
+        extern "C" {
+            fn nvtxDomainRegisterStringW(domain: nvtxDomainHandle_t, string: *const wchar_t) -> nvtxStringHandle_t;
+        }
         nvtxDomainRegisterStringW(domain, string)
     }
 }
@@ -417,7 +441,9 @@ pub unsafe fn nvtxDomainResourceCreate(domain: nvtxDomainHandle_t, attribs: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxDomainResourceCreate(domain: nvtxDomainHandle_t, attribs: *mut nvtxResourceAttributes_t) -> nvtxResourceHandle_t;
+        extern "C" {
+            fn nvtxDomainResourceCreate(domain: nvtxDomainHandle_t, attribs: *mut nvtxResourceAttributes_t) -> nvtxResourceHandle_t;
+        }
         nvtxDomainResourceCreate(domain, attribs)
     }
 }
@@ -431,7 +457,9 @@ pub unsafe fn nvtxDomainResourceDestroy(resource: nvtxResourceHandle_t) {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxDomainResourceDestroy(resource: nvtxResourceHandle_t);
+        extern "C" {
+            fn nvtxDomainResourceDestroy(resource: nvtxResourceHandle_t);
+        }
         nvtxDomainResourceDestroy(resource)
     }
 }
@@ -445,7 +473,9 @@ pub unsafe fn nvtxMarkA(message: *const ::core::ffi::c_char) {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxMarkA(message: *const ::core::ffi::c_char);
+        extern "C" {
+            fn nvtxMarkA(message: *const ::core::ffi::c_char);
+        }
         nvtxMarkA(message)
     }
 }
@@ -459,7 +489,9 @@ pub unsafe fn nvtxMarkEx(eventAttrib: *const nvtxEventAttributes_t) {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxMarkEx(eventAttrib: *const nvtxEventAttributes_t);
+        extern "C" {
+            fn nvtxMarkEx(eventAttrib: *const nvtxEventAttributes_t);
+        }
         nvtxMarkEx(eventAttrib)
     }
 }
@@ -473,7 +505,9 @@ pub unsafe fn nvtxMarkW(message: *const wchar_t) {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxMarkW(message: *const wchar_t);
+        extern "C" {
+            fn nvtxMarkW(message: *const wchar_t);
+        }
         nvtxMarkW(message)
     }
 }
@@ -487,7 +521,9 @@ pub unsafe fn nvtxNameCategoryA(category: u32, name: *const ::core::ffi::c_char)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxNameCategoryA(category: u32, name: *const ::core::ffi::c_char);
+        extern "C" {
+            fn nvtxNameCategoryA(category: u32, name: *const ::core::ffi::c_char);
+        }
         nvtxNameCategoryA(category, name)
     }
 }
@@ -501,7 +537,9 @@ pub unsafe fn nvtxNameCategoryW(category: u32, name: *const wchar_t) {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxNameCategoryW(category: u32, name: *const wchar_t);
+        extern "C" {
+            fn nvtxNameCategoryW(category: u32, name: *const wchar_t);
+        }
         nvtxNameCategoryW(category, name)
     }
 }
@@ -515,7 +553,9 @@ pub unsafe fn nvtxNameOsThreadA(threadId: u32, name: *const ::core::ffi::c_char)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxNameOsThreadA(threadId: u32, name: *const ::core::ffi::c_char);
+        extern "C" {
+            fn nvtxNameOsThreadA(threadId: u32, name: *const ::core::ffi::c_char);
+        }
         nvtxNameOsThreadA(threadId, name)
     }
 }
@@ -529,7 +569,9 @@ pub unsafe fn nvtxNameOsThreadW(threadId: u32, name: *const wchar_t) {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxNameOsThreadW(threadId: u32, name: *const wchar_t);
+        extern "C" {
+            fn nvtxNameOsThreadW(threadId: u32, name: *const wchar_t);
+        }
         nvtxNameOsThreadW(threadId, name)
     }
 }
@@ -543,7 +585,9 @@ pub unsafe fn nvtxRangeEnd(id: nvtxRangeId_t) {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxRangeEnd(id: nvtxRangeId_t);
+        extern "C" {
+            fn nvtxRangeEnd(id: nvtxRangeId_t);
+        }
         nvtxRangeEnd(id)
     }
 }
@@ -557,7 +601,9 @@ pub unsafe fn nvtxRangePop() -> ::core::ffi::c_int {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxRangePop() -> ::core::ffi::c_int;
+        extern "C" {
+            fn nvtxRangePop() -> ::core::ffi::c_int;
+        }
         nvtxRangePop()
     }
 }
@@ -571,7 +617,9 @@ pub unsafe fn nvtxRangePushA(message: *const ::core::ffi::c_char) -> ::core::ffi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxRangePushA(message: *const ::core::ffi::c_char) -> ::core::ffi::c_int;
+        extern "C" {
+            fn nvtxRangePushA(message: *const ::core::ffi::c_char) -> ::core::ffi::c_int;
+        }
         nvtxRangePushA(message)
     }
 }
@@ -585,7 +633,9 @@ pub unsafe fn nvtxRangePushEx(eventAttrib: *const nvtxEventAttributes_t) -> ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxRangePushEx(eventAttrib: *const nvtxEventAttributes_t) -> ::core::ffi::c_int;
+        extern "C" {
+            fn nvtxRangePushEx(eventAttrib: *const nvtxEventAttributes_t) -> ::core::ffi::c_int;
+        }
         nvtxRangePushEx(eventAttrib)
     }
 }
@@ -599,7 +649,9 @@ pub unsafe fn nvtxRangePushW(message: *const wchar_t) -> ::core::ffi::c_int {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxRangePushW(message: *const wchar_t) -> ::core::ffi::c_int;
+        extern "C" {
+            fn nvtxRangePushW(message: *const wchar_t) -> ::core::ffi::c_int;
+        }
         nvtxRangePushW(message)
     }
 }
@@ -613,7 +665,9 @@ pub unsafe fn nvtxRangeStartA(message: *const ::core::ffi::c_char) -> nvtxRangeI
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxRangeStartA(message: *const ::core::ffi::c_char) -> nvtxRangeId_t;
+        extern "C" {
+            fn nvtxRangeStartA(message: *const ::core::ffi::c_char) -> nvtxRangeId_t;
+        }
         nvtxRangeStartA(message)
     }
 }
@@ -627,7 +681,9 @@ pub unsafe fn nvtxRangeStartEx(eventAttrib: *const nvtxEventAttributes_t) -> nvt
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxRangeStartEx(eventAttrib: *const nvtxEventAttributes_t) -> nvtxRangeId_t;
+        extern "C" {
+            fn nvtxRangeStartEx(eventAttrib: *const nvtxEventAttributes_t) -> nvtxRangeId_t;
+        }
         nvtxRangeStartEx(eventAttrib)
     }
 }
@@ -641,7 +697,9 @@ pub unsafe fn nvtxRangeStartW(message: *const wchar_t) -> nvtxRangeId_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvtxRangeStartW(message: *const wchar_t) -> nvtxRangeId_t;
+        extern "C" {
+            fn nvtxRangeStartW(message: *const wchar_t) -> nvtxRangeId_t;
+        }
         nvtxRangeStartW(message)
     }
 }

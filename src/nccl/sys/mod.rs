@@ -314,7 +314,9 @@ pub unsafe fn ncclAllGather(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclAllGather(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, sendcount: usize, datatype: ncclDataType_t, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclAllGather(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, sendcount: usize, datatype: ncclDataType_t, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        }
         ncclAllGather(sendbuff, recvbuff, sendcount, datatype, comm, stream)
     }
 }
@@ -328,7 +330,9 @@ pub unsafe fn ncclAllReduce(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclAllReduce(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, op: ncclRedOp_t, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclAllReduce(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, op: ncclRedOp_t, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        }
         ncclAllReduce(sendbuff, recvbuff, count, datatype, op, comm, stream)
     }
 }
@@ -343,7 +347,9 @@ pub unsafe fn ncclAlltoAll(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclAlltoAll(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclAlltoAll(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        }
         ncclAlltoAll(sendbuff, recvbuff, count, datatype, comm, stream)
     }
 }
@@ -357,7 +363,9 @@ pub unsafe fn ncclBcast(buff: *mut ::core::ffi::c_void, count: usize, datatype: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclBcast(buff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, root: ::core::ffi::c_int, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclBcast(buff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, root: ::core::ffi::c_int, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        }
         ncclBcast(buff, count, datatype, root, comm, stream)
     }
 }
@@ -371,7 +379,9 @@ pub unsafe fn ncclBroadcast(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclBroadcast(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, root: ::core::ffi::c_int, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclBroadcast(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, root: ::core::ffi::c_int, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        }
         ncclBroadcast(sendbuff, recvbuff, count, datatype, root, comm, stream)
     }
 }
@@ -385,7 +395,9 @@ pub unsafe fn ncclCommAbort(comm: ncclComm_t) -> ncclResult_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommAbort(comm: ncclComm_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommAbort(comm: ncclComm_t) -> ncclResult_t;
+        }
         ncclCommAbort(comm)
     }
 }
@@ -399,7 +411,9 @@ pub unsafe fn ncclCommCount(comm: ncclComm_t, count: *mut ::core::ffi::c_int) ->
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommCount(comm: ncclComm_t, count: *mut ::core::ffi::c_int) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommCount(comm: ncclComm_t, count: *mut ::core::ffi::c_int) -> ncclResult_t;
+        }
         ncclCommCount(comm, count)
     }
 }
@@ -413,7 +427,9 @@ pub unsafe fn ncclCommCuDevice(comm: ncclComm_t, device: *mut ::core::ffi::c_int
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommCuDevice(comm: ncclComm_t, device: *mut ::core::ffi::c_int) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommCuDevice(comm: ncclComm_t, device: *mut ::core::ffi::c_int) -> ncclResult_t;
+        }
         ncclCommCuDevice(comm, device)
     }
 }
@@ -427,7 +443,9 @@ pub unsafe fn ncclCommDeregister(comm: ncclComm_t, handle: *mut ::core::ffi::c_v
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommDeregister(comm: ncclComm_t, handle: *mut ::core::ffi::c_void) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommDeregister(comm: ncclComm_t, handle: *mut ::core::ffi::c_void) -> ncclResult_t;
+        }
         ncclCommDeregister(comm, handle)
     }
 }
@@ -441,7 +459,9 @@ pub unsafe fn ncclCommDestroy(comm: ncclComm_t) -> ncclResult_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommDestroy(comm: ncclComm_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommDestroy(comm: ncclComm_t) -> ncclResult_t;
+        }
         ncclCommDestroy(comm)
     }
 }
@@ -455,7 +475,9 @@ pub unsafe fn ncclCommFinalize(comm: ncclComm_t) -> ncclResult_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommFinalize(comm: ncclComm_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommFinalize(comm: ncclComm_t) -> ncclResult_t;
+        }
         ncclCommFinalize(comm)
     }
 }
@@ -469,7 +491,9 @@ pub unsafe fn ncclCommGetAsyncError(comm: ncclComm_t, asyncError: *mut ncclResul
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommGetAsyncError(comm: ncclComm_t, asyncError: *mut ncclResult_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommGetAsyncError(comm: ncclComm_t, asyncError: *mut ncclResult_t) -> ncclResult_t;
+        }
         ncclCommGetAsyncError(comm, asyncError)
     }
 }
@@ -484,7 +508,9 @@ pub unsafe fn ncclCommGetUniqueId(comm: ncclComm_t, uniqueId: *mut ncclUniqueId)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommGetUniqueId(comm: ncclComm_t, uniqueId: *mut ncclUniqueId) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommGetUniqueId(comm: ncclComm_t, uniqueId: *mut ncclUniqueId) -> ncclResult_t;
+        }
         ncclCommGetUniqueId(comm, uniqueId)
     }
 }
@@ -499,7 +525,9 @@ pub unsafe fn ncclCommGrow(comm: ncclComm_t, nRanks: ::core::ffi::c_int, uniqueI
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommGrow(comm: ncclComm_t, nRanks: ::core::ffi::c_int, uniqueId: *const ncclUniqueId, rank: ::core::ffi::c_int, newcomm: *mut ncclComm_t, config: *mut ncclConfig_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommGrow(comm: ncclComm_t, nRanks: ::core::ffi::c_int, uniqueId: *const ncclUniqueId, rank: ::core::ffi::c_int, newcomm: *mut ncclComm_t, config: *mut ncclConfig_t) -> ncclResult_t;
+        }
         ncclCommGrow(comm, nRanks, uniqueId, rank, newcomm, config)
     }
 }
@@ -513,7 +541,9 @@ pub unsafe fn ncclCommInitAll(comm: *mut ncclComm_t, ndev: ::core::ffi::c_int, d
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommInitAll(comm: *mut ncclComm_t, ndev: ::core::ffi::c_int, devlist: *const ::core::ffi::c_int) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommInitAll(comm: *mut ncclComm_t, ndev: ::core::ffi::c_int, devlist: *const ::core::ffi::c_int) -> ncclResult_t;
+        }
         ncclCommInitAll(comm, ndev, devlist)
     }
 }
@@ -527,7 +557,9 @@ pub unsafe fn ncclCommInitRank(comm: *mut ncclComm_t, nranks: ::core::ffi::c_int
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommInitRank(comm: *mut ncclComm_t, nranks: ::core::ffi::c_int, commId: ncclUniqueId, rank: ::core::ffi::c_int) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommInitRank(comm: *mut ncclComm_t, nranks: ::core::ffi::c_int, commId: ncclUniqueId, rank: ::core::ffi::c_int) -> ncclResult_t;
+        }
         ncclCommInitRank(comm, nranks, commId, rank)
     }
 }
@@ -541,7 +573,9 @@ pub unsafe fn ncclCommInitRankConfig(comm: *mut ncclComm_t, nranks: ::core::ffi:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommInitRankConfig(comm: *mut ncclComm_t, nranks: ::core::ffi::c_int, commId: ncclUniqueId, rank: ::core::ffi::c_int, config: *mut ncclConfig_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommInitRankConfig(comm: *mut ncclComm_t, nranks: ::core::ffi::c_int, commId: ncclUniqueId, rank: ::core::ffi::c_int, config: *mut ncclConfig_t) -> ncclResult_t;
+        }
         ncclCommInitRankConfig(comm, nranks, commId, rank, config)
     }
 }
@@ -556,7 +590,9 @@ pub unsafe fn ncclCommInitRankScalable(newcomm: *mut ncclComm_t, nranks: ::core:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommInitRankScalable(newcomm: *mut ncclComm_t, nranks: ::core::ffi::c_int, myrank: ::core::ffi::c_int, nId: ::core::ffi::c_int, commIds: *mut ncclUniqueId, config: *mut ncclConfig_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommInitRankScalable(newcomm: *mut ncclComm_t, nranks: ::core::ffi::c_int, myrank: ::core::ffi::c_int, nId: ::core::ffi::c_int, commIds: *mut ncclUniqueId, config: *mut ncclConfig_t) -> ncclResult_t;
+        }
         ncclCommInitRankScalable(newcomm, nranks, myrank, nId, commIds, config)
     }
 }
@@ -571,7 +607,9 @@ pub unsafe fn ncclCommMemStats(comm: ncclComm_t, stat: ncclCommMemStat_t, value:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommMemStats(comm: ncclComm_t, stat: ncclCommMemStat_t, value: *mut u64) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommMemStats(comm: ncclComm_t, stat: ncclCommMemStat_t, value: *mut u64) -> ncclResult_t;
+        }
         ncclCommMemStats(comm, stat, value)
     }
 }
@@ -585,7 +623,9 @@ pub unsafe fn ncclCommRegister(comm: ncclComm_t, buff: *mut ::core::ffi::c_void,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommRegister(comm: ncclComm_t, buff: *mut ::core::ffi::c_void, size: usize, handle: *mut *mut ::core::ffi::c_void) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommRegister(comm: ncclComm_t, buff: *mut ::core::ffi::c_void, size: usize, handle: *mut *mut ::core::ffi::c_void) -> ncclResult_t;
+        }
         ncclCommRegister(comm, buff, size, handle)
     }
 }
@@ -600,7 +640,9 @@ pub unsafe fn ncclCommResume(comm: ncclComm_t) -> ncclResult_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommResume(comm: ncclComm_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommResume(comm: ncclComm_t) -> ncclResult_t;
+        }
         ncclCommResume(comm)
     }
 }
@@ -615,7 +657,9 @@ pub unsafe fn ncclCommRevoke(comm: ncclComm_t, revokeFlags: ::core::ffi::c_int) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommRevoke(comm: ncclComm_t, revokeFlags: ::core::ffi::c_int) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommRevoke(comm: ncclComm_t, revokeFlags: ::core::ffi::c_int) -> ncclResult_t;
+        }
         ncclCommRevoke(comm, revokeFlags)
     }
 }
@@ -630,7 +674,9 @@ pub unsafe fn ncclCommShrink(comm: ncclComm_t, excludeRanksList: *mut ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommShrink(comm: ncclComm_t, excludeRanksList: *mut ::core::ffi::c_int, excludeRanksCount: ::core::ffi::c_int, newcomm: *mut ncclComm_t, config: *mut ncclConfig_t, shrinkFlags: ::core::ffi::c_int) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommShrink(comm: ncclComm_t, excludeRanksList: *mut ::core::ffi::c_int, excludeRanksCount: ::core::ffi::c_int, newcomm: *mut ncclComm_t, config: *mut ncclConfig_t, shrinkFlags: ::core::ffi::c_int) -> ncclResult_t;
+        }
         ncclCommShrink(comm, excludeRanksList, excludeRanksCount, newcomm, config, shrinkFlags)
     }
 }
@@ -644,7 +690,9 @@ pub unsafe fn ncclCommSplit(comm: ncclComm_t, color: ::core::ffi::c_int, key: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommSplit(comm: ncclComm_t, color: ::core::ffi::c_int, key: ::core::ffi::c_int, newcomm: *mut ncclComm_t, config: *mut ncclConfig_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommSplit(comm: ncclComm_t, color: ::core::ffi::c_int, key: ::core::ffi::c_int, newcomm: *mut ncclComm_t, config: *mut ncclConfig_t) -> ncclResult_t;
+        }
         ncclCommSplit(comm, color, key, newcomm, config)
     }
 }
@@ -659,7 +707,9 @@ pub unsafe fn ncclCommSuspend(comm: ncclComm_t, flags: ::core::ffi::c_int) -> nc
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommSuspend(comm: ncclComm_t, flags: ::core::ffi::c_int) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommSuspend(comm: ncclComm_t, flags: ::core::ffi::c_int) -> ncclResult_t;
+        }
         ncclCommSuspend(comm, flags)
     }
 }
@@ -673,7 +723,9 @@ pub unsafe fn ncclCommUserRank(comm: ncclComm_t, rank: *mut ::core::ffi::c_int) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommUserRank(comm: ncclComm_t, rank: *mut ::core::ffi::c_int) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommUserRank(comm: ncclComm_t, rank: *mut ::core::ffi::c_int) -> ncclResult_t;
+        }
         ncclCommUserRank(comm, rank)
     }
 }
@@ -688,7 +740,9 @@ pub unsafe fn ncclCommWindowDeregister(comm: ncclComm_t, win: ncclWindow_t) -> n
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommWindowDeregister(comm: ncclComm_t, win: ncclWindow_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommWindowDeregister(comm: ncclComm_t, win: ncclWindow_t) -> ncclResult_t;
+        }
         ncclCommWindowDeregister(comm, win)
     }
 }
@@ -703,7 +757,9 @@ pub unsafe fn ncclCommWindowRegister(comm: ncclComm_t, buff: *mut ::core::ffi::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclCommWindowRegister(comm: ncclComm_t, buff: *mut ::core::ffi::c_void, size: usize, win: *mut ncclWindow_t, winFlags: ::core::ffi::c_int) -> ncclResult_t;
+        extern "C" {
+            fn ncclCommWindowRegister(comm: ncclComm_t, buff: *mut ::core::ffi::c_void, size: usize, win: *mut ncclWindow_t, winFlags: ::core::ffi::c_int) -> ncclResult_t;
+        }
         ncclCommWindowRegister(comm, buff, size, win, winFlags)
     }
 }
@@ -718,7 +774,9 @@ pub unsafe fn ncclGather(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclGather(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, root: ::core::ffi::c_int, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclGather(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, root: ::core::ffi::c_int, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        }
         ncclGather(sendbuff, recvbuff, count, datatype, root, comm, stream)
     }
 }
@@ -732,7 +790,9 @@ pub unsafe fn ncclGetErrorString(result: ncclResult_t) -> *const ::core::ffi::c_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclGetErrorString(result: ncclResult_t) -> *const ::core::ffi::c_char;
+        extern "C" {
+            fn ncclGetErrorString(result: ncclResult_t) -> *const ::core::ffi::c_char;
+        }
         ncclGetErrorString(result)
     }
 }
@@ -746,7 +806,9 @@ pub unsafe fn ncclGetLastError(comm: ncclComm_t) -> *const ::core::ffi::c_char {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclGetLastError(comm: ncclComm_t) -> *const ::core::ffi::c_char;
+        extern "C" {
+            fn ncclGetLastError(comm: ncclComm_t) -> *const ::core::ffi::c_char;
+        }
         ncclGetLastError(comm)
     }
 }
@@ -760,7 +822,9 @@ pub unsafe fn ncclGetUniqueId(uniqueId: *mut ncclUniqueId) -> ncclResult_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclGetUniqueId(uniqueId: *mut ncclUniqueId) -> ncclResult_t;
+        extern "C" {
+            fn ncclGetUniqueId(uniqueId: *mut ncclUniqueId) -> ncclResult_t;
+        }
         ncclGetUniqueId(uniqueId)
     }
 }
@@ -774,7 +838,9 @@ pub unsafe fn ncclGetVersion(version: *mut ::core::ffi::c_int) -> ncclResult_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclGetVersion(version: *mut ::core::ffi::c_int) -> ncclResult_t;
+        extern "C" {
+            fn ncclGetVersion(version: *mut ::core::ffi::c_int) -> ncclResult_t;
+        }
         ncclGetVersion(version)
     }
 }
@@ -788,7 +854,9 @@ pub unsafe fn ncclGroupEnd() -> ncclResult_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclGroupEnd() -> ncclResult_t;
+        extern "C" {
+            fn ncclGroupEnd() -> ncclResult_t;
+        }
         ncclGroupEnd()
     }
 }
@@ -802,7 +870,9 @@ pub unsafe fn ncclGroupSimulateEnd(simInfo: *mut ncclSimInfo_t) -> ncclResult_t 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclGroupSimulateEnd(simInfo: *mut ncclSimInfo_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclGroupSimulateEnd(simInfo: *mut ncclSimInfo_t) -> ncclResult_t;
+        }
         ncclGroupSimulateEnd(simInfo)
     }
 }
@@ -816,7 +886,9 @@ pub unsafe fn ncclGroupStart() -> ncclResult_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclGroupStart() -> ncclResult_t;
+        extern "C" {
+            fn ncclGroupStart() -> ncclResult_t;
+        }
         ncclGroupStart()
     }
 }
@@ -830,7 +902,9 @@ pub unsafe fn ncclMemAlloc(ptr: *mut *mut ::core::ffi::c_void, size: usize) -> n
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclMemAlloc(ptr: *mut *mut ::core::ffi::c_void, size: usize) -> ncclResult_t;
+        extern "C" {
+            fn ncclMemAlloc(ptr: *mut *mut ::core::ffi::c_void, size: usize) -> ncclResult_t;
+        }
         ncclMemAlloc(ptr, size)
     }
 }
@@ -844,7 +918,9 @@ pub unsafe fn ncclMemFree(ptr: *mut ::core::ffi::c_void) -> ncclResult_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclMemFree(ptr: *mut ::core::ffi::c_void) -> ncclResult_t;
+        extern "C" {
+            fn ncclMemFree(ptr: *mut ::core::ffi::c_void) -> ncclResult_t;
+        }
         ncclMemFree(ptr)
     }
 }
@@ -859,7 +935,9 @@ pub unsafe fn ncclParamBind(out: *mut *mut ncclParamHandle_t, key: *const ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclParamBind(out: *mut *mut ncclParamHandle_t, key: *const ::core::ffi::c_char) -> ncclResult_t;
+        extern "C" {
+            fn ncclParamBind(out: *mut *mut ncclParamHandle_t, key: *const ::core::ffi::c_char) -> ncclResult_t;
+        }
         ncclParamBind(out, key)
     }
 }
@@ -874,7 +952,9 @@ pub unsafe fn ncclParamDumpAll() {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclParamDumpAll();
+        extern "C" {
+            fn ncclParamDumpAll();
+        }
         ncclParamDumpAll()
     }
 }
@@ -889,7 +969,9 @@ pub unsafe fn ncclParamGet(h: *mut ncclParamHandle_t, out: *mut ::core::ffi::c_v
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclParamGet(h: *mut ncclParamHandle_t, out: *mut ::core::ffi::c_void, maxLen: ::core::ffi::c_int, len: *mut ::core::ffi::c_int) -> ncclResult_t;
+        extern "C" {
+            fn ncclParamGet(h: *mut ncclParamHandle_t, out: *mut ::core::ffi::c_void, maxLen: ::core::ffi::c_int, len: *mut ::core::ffi::c_int) -> ncclResult_t;
+        }
         ncclParamGet(h, out, maxLen, len)
     }
 }
@@ -904,7 +986,9 @@ pub unsafe fn ncclParamGetAllParameterKeys(table: *mut *mut *const ::core::ffi::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclParamGetAllParameterKeys(table: *mut *mut *const ::core::ffi::c_char, tableLen: *mut ::core::ffi::c_int) -> ncclResult_t;
+        extern "C" {
+            fn ncclParamGetAllParameterKeys(table: *mut *mut *const ::core::ffi::c_char, tableLen: *mut ::core::ffi::c_int) -> ncclResult_t;
+        }
         ncclParamGetAllParameterKeys(table, tableLen)
     }
 }
@@ -919,7 +1003,9 @@ pub unsafe fn ncclParamGetI16(h: *mut ncclParamHandle_t, out: *mut i16) -> ncclR
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclParamGetI16(h: *mut ncclParamHandle_t, out: *mut i16) -> ncclResult_t;
+        extern "C" {
+            fn ncclParamGetI16(h: *mut ncclParamHandle_t, out: *mut i16) -> ncclResult_t;
+        }
         ncclParamGetI16(h, out)
     }
 }
@@ -934,7 +1020,9 @@ pub unsafe fn ncclParamGetI32(h: *mut ncclParamHandle_t, out: *mut i32) -> ncclR
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclParamGetI32(h: *mut ncclParamHandle_t, out: *mut i32) -> ncclResult_t;
+        extern "C" {
+            fn ncclParamGetI32(h: *mut ncclParamHandle_t, out: *mut i32) -> ncclResult_t;
+        }
         ncclParamGetI32(h, out)
     }
 }
@@ -949,7 +1037,9 @@ pub unsafe fn ncclParamGetI64(h: *mut ncclParamHandle_t, out: *mut i64) -> ncclR
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclParamGetI64(h: *mut ncclParamHandle_t, out: *mut i64) -> ncclResult_t;
+        extern "C" {
+            fn ncclParamGetI64(h: *mut ncclParamHandle_t, out: *mut i64) -> ncclResult_t;
+        }
         ncclParamGetI64(h, out)
     }
 }
@@ -964,7 +1054,9 @@ pub unsafe fn ncclParamGetI8(h: *mut ncclParamHandle_t, out: *mut i8) -> ncclRes
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclParamGetI8(h: *mut ncclParamHandle_t, out: *mut i8) -> ncclResult_t;
+        extern "C" {
+            fn ncclParamGetI8(h: *mut ncclParamHandle_t, out: *mut i8) -> ncclResult_t;
+        }
         ncclParamGetI8(h, out)
     }
 }
@@ -979,7 +1071,9 @@ pub unsafe fn ncclParamGetParameter(key: *const ::core::ffi::c_char, value: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclParamGetParameter(key: *const ::core::ffi::c_char, value: *mut *const ::core::ffi::c_char, valueLen: *mut ::core::ffi::c_int) -> ncclResult_t;
+        extern "C" {
+            fn ncclParamGetParameter(key: *const ::core::ffi::c_char, value: *mut *const ::core::ffi::c_char, valueLen: *mut ::core::ffi::c_int) -> ncclResult_t;
+        }
         ncclParamGetParameter(key, value, valueLen)
     }
 }
@@ -994,7 +1088,9 @@ pub unsafe fn ncclParamGetStr(h: *mut ncclParamHandle_t, out: *mut *const ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclParamGetStr(h: *mut ncclParamHandle_t, out: *mut *const ::core::ffi::c_char) -> ncclResult_t;
+        extern "C" {
+            fn ncclParamGetStr(h: *mut ncclParamHandle_t, out: *mut *const ::core::ffi::c_char) -> ncclResult_t;
+        }
         ncclParamGetStr(h, out)
     }
 }
@@ -1009,7 +1105,9 @@ pub unsafe fn ncclParamGetU16(h: *mut ncclParamHandle_t, out: *mut u16) -> ncclR
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclParamGetU16(h: *mut ncclParamHandle_t, out: *mut u16) -> ncclResult_t;
+        extern "C" {
+            fn ncclParamGetU16(h: *mut ncclParamHandle_t, out: *mut u16) -> ncclResult_t;
+        }
         ncclParamGetU16(h, out)
     }
 }
@@ -1024,7 +1122,9 @@ pub unsafe fn ncclParamGetU32(h: *mut ncclParamHandle_t, out: *mut u32) -> ncclR
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclParamGetU32(h: *mut ncclParamHandle_t, out: *mut u32) -> ncclResult_t;
+        extern "C" {
+            fn ncclParamGetU32(h: *mut ncclParamHandle_t, out: *mut u32) -> ncclResult_t;
+        }
         ncclParamGetU32(h, out)
     }
 }
@@ -1039,7 +1139,9 @@ pub unsafe fn ncclParamGetU64(h: *mut ncclParamHandle_t, out: *mut u64) -> ncclR
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclParamGetU64(h: *mut ncclParamHandle_t, out: *mut u64) -> ncclResult_t;
+        extern "C" {
+            fn ncclParamGetU64(h: *mut ncclParamHandle_t, out: *mut u64) -> ncclResult_t;
+        }
         ncclParamGetU64(h, out)
     }
 }
@@ -1054,7 +1156,9 @@ pub unsafe fn ncclParamGetU8(h: *mut ncclParamHandle_t, out: *mut u8) -> ncclRes
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclParamGetU8(h: *mut ncclParamHandle_t, out: *mut u8) -> ncclResult_t;
+        extern "C" {
+            fn ncclParamGetU8(h: *mut ncclParamHandle_t, out: *mut u8) -> ncclResult_t;
+        }
         ncclParamGetU8(h, out)
     }
 }
@@ -1069,7 +1173,9 @@ pub unsafe fn ncclPutSignal(localbuff: *const ::core::ffi::c_void, count: usize,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclPutSignal(localbuff: *const ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, peer: ::core::ffi::c_int, peerWin: ncclWindow_t, peerWinOffset: usize, sigIdx: ::core::ffi::c_int, ctx: ::core::ffi::c_int, flags: ::core::ffi::c_uint, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclPutSignal(localbuff: *const ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, peer: ::core::ffi::c_int, peerWin: ncclWindow_t, peerWinOffset: usize, sigIdx: ::core::ffi::c_int, ctx: ::core::ffi::c_int, flags: ::core::ffi::c_uint, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        }
         ncclPutSignal(localbuff, count, datatype, peer, peerWin, peerWinOffset, sigIdx, ctx, flags, comm, stream)
     }
 }
@@ -1083,7 +1189,9 @@ pub unsafe fn ncclRecv(recvbuff: *mut ::core::ffi::c_void, count: usize, datatyp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclRecv(recvbuff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, peer: ::core::ffi::c_int, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclRecv(recvbuff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, peer: ::core::ffi::c_int, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        }
         ncclRecv(recvbuff, count, datatype, peer, comm, stream)
     }
 }
@@ -1097,7 +1205,9 @@ pub unsafe fn ncclRedOpCreatePreMulSum(op: *mut ncclRedOp_t, scalar: *mut ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclRedOpCreatePreMulSum(op: *mut ncclRedOp_t, scalar: *mut ::core::ffi::c_void, datatype: ncclDataType_t, residence: ncclScalarResidence_t, comm: ncclComm_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclRedOpCreatePreMulSum(op: *mut ncclRedOp_t, scalar: *mut ::core::ffi::c_void, datatype: ncclDataType_t, residence: ncclScalarResidence_t, comm: ncclComm_t) -> ncclResult_t;
+        }
         ncclRedOpCreatePreMulSum(op, scalar, datatype, residence, comm)
     }
 }
@@ -1111,7 +1221,9 @@ pub unsafe fn ncclRedOpDestroy(op: ncclRedOp_t, comm: ncclComm_t) -> ncclResult_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclRedOpDestroy(op: ncclRedOp_t, comm: ncclComm_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclRedOpDestroy(op: ncclRedOp_t, comm: ncclComm_t) -> ncclResult_t;
+        }
         ncclRedOpDestroy(op, comm)
     }
 }
@@ -1125,7 +1237,9 @@ pub unsafe fn ncclReduce(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclReduce(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, op: ncclRedOp_t, root: ::core::ffi::c_int, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclReduce(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, op: ncclRedOp_t, root: ::core::ffi::c_int, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        }
         ncclReduce(sendbuff, recvbuff, count, datatype, op, root, comm, stream)
     }
 }
@@ -1139,7 +1253,9 @@ pub unsafe fn ncclReduceScatter(sendbuff: *const ::core::ffi::c_void, recvbuff: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclReduceScatter(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, recvcount: usize, datatype: ncclDataType_t, op: ncclRedOp_t, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclReduceScatter(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, recvcount: usize, datatype: ncclDataType_t, op: ncclRedOp_t, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        }
         ncclReduceScatter(sendbuff, recvbuff, recvcount, datatype, op, comm, stream)
     }
 }
@@ -1154,7 +1270,9 @@ pub unsafe fn ncclResetDebugInit() {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclResetDebugInit();
+        extern "C" {
+            fn ncclResetDebugInit();
+        }
         ncclResetDebugInit()
     }
 }
@@ -1169,7 +1287,9 @@ pub unsafe fn ncclScatter(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclScatter(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, root: ::core::ffi::c_int, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclScatter(sendbuff: *const ::core::ffi::c_void, recvbuff: *mut ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, root: ::core::ffi::c_int, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        }
         ncclScatter(sendbuff, recvbuff, count, datatype, root, comm, stream)
     }
 }
@@ -1183,7 +1303,9 @@ pub unsafe fn ncclSend(sendbuff: *const ::core::ffi::c_void, count: usize, datat
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclSend(sendbuff: *const ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, peer: ::core::ffi::c_int, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclSend(sendbuff: *const ::core::ffi::c_void, count: usize, datatype: ncclDataType_t, peer: ::core::ffi::c_int, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        }
         ncclSend(sendbuff, count, datatype, peer, comm, stream)
     }
 }
@@ -1198,7 +1320,9 @@ pub unsafe fn ncclSignal(peer: ::core::ffi::c_int, sigIdx: ::core::ffi::c_int, c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclSignal(peer: ::core::ffi::c_int, sigIdx: ::core::ffi::c_int, ctx: ::core::ffi::c_int, flags: ::core::ffi::c_uint, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclSignal(peer: ::core::ffi::c_int, sigIdx: ::core::ffi::c_int, ctx: ::core::ffi::c_int, flags: ::core::ffi::c_uint, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        }
         ncclSignal(peer, sigIdx, ctx, flags, comm, stream)
     }
 }
@@ -1213,7 +1337,9 @@ pub unsafe fn ncclWaitSignal(nDesc: ::core::ffi::c_int, signalDescs: *mut ncclWa
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclWaitSignal(nDesc: ::core::ffi::c_int, signalDescs: *mut ncclWaitSignalDesc_t, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        extern "C" {
+            fn ncclWaitSignal(nDesc: ::core::ffi::c_int, signalDescs: *mut ncclWaitSignalDesc_t, comm: ncclComm_t, stream: cudaStream_t) -> ncclResult_t;
+        }
         ncclWaitSignal(nDesc, signalDescs, comm, stream)
     }
 }
@@ -1228,7 +1354,9 @@ pub unsafe fn ncclWinGetUserPtr(comm: ncclComm_t, win: ncclWindow_t, outUserPtr:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn ncclWinGetUserPtr(comm: ncclComm_t, win: ncclWindow_t, outUserPtr: *mut *mut ::core::ffi::c_void) -> ncclResult_t;
+        extern "C" {
+            fn ncclWinGetUserPtr(comm: ncclComm_t, win: ncclWindow_t, outUserPtr: *mut *mut ::core::ffi::c_void) -> ncclResult_t;
+        }
         ncclWinGetUserPtr(comm, win, outUserPtr)
     }
 }

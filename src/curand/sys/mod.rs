@@ -158,7 +158,9 @@ pub unsafe fn curandCreateGenerator(generator: *mut curandGenerator_t, rng_type:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandCreateGenerator(generator: *mut curandGenerator_t, rng_type: curandRngType_t) -> curandStatus_t;
+        extern "C" {
+            fn curandCreateGenerator(generator: *mut curandGenerator_t, rng_type: curandRngType_t) -> curandStatus_t;
+        }
         curandCreateGenerator(generator, rng_type)
     }
 }
@@ -172,7 +174,9 @@ pub unsafe fn curandCreateGeneratorHost(generator: *mut curandGenerator_t, rng_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandCreateGeneratorHost(generator: *mut curandGenerator_t, rng_type: curandRngType_t) -> curandStatus_t;
+        extern "C" {
+            fn curandCreateGeneratorHost(generator: *mut curandGenerator_t, rng_type: curandRngType_t) -> curandStatus_t;
+        }
         curandCreateGeneratorHost(generator, rng_type)
     }
 }
@@ -186,7 +190,9 @@ pub unsafe fn curandCreatePoissonDistribution(lambda: f64, discrete_distribution
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandCreatePoissonDistribution(lambda: f64, discrete_distribution: *mut curandDiscreteDistribution_t) -> curandStatus_t;
+        extern "C" {
+            fn curandCreatePoissonDistribution(lambda: f64, discrete_distribution: *mut curandDiscreteDistribution_t) -> curandStatus_t;
+        }
         curandCreatePoissonDistribution(lambda, discrete_distribution)
     }
 }
@@ -200,7 +206,9 @@ pub unsafe fn curandDestroyDistribution(discrete_distribution: curandDiscreteDis
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandDestroyDistribution(discrete_distribution: curandDiscreteDistribution_t) -> curandStatus_t;
+        extern "C" {
+            fn curandDestroyDistribution(discrete_distribution: curandDiscreteDistribution_t) -> curandStatus_t;
+        }
         curandDestroyDistribution(discrete_distribution)
     }
 }
@@ -214,7 +222,9 @@ pub unsafe fn curandDestroyGenerator(generator: curandGenerator_t) -> curandStat
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandDestroyGenerator(generator: curandGenerator_t) -> curandStatus_t;
+        extern "C" {
+            fn curandDestroyGenerator(generator: curandGenerator_t) -> curandStatus_t;
+        }
         curandDestroyGenerator(generator)
     }
 }
@@ -228,7 +238,9 @@ pub unsafe fn curandGenerate(generator: curandGenerator_t, outputPtr: *mut ::cor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGenerate(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_uint, num: usize) -> curandStatus_t;
+        extern "C" {
+            fn curandGenerate(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_uint, num: usize) -> curandStatus_t;
+        }
         curandGenerate(generator, outputPtr, num)
     }
 }
@@ -242,7 +254,9 @@ pub unsafe fn curandGenerateLogNormal(generator: curandGenerator_t, outputPtr: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGenerateLogNormal(generator: curandGenerator_t, outputPtr: *mut f32, n: usize, mean: f32, stddev: f32) -> curandStatus_t;
+        extern "C" {
+            fn curandGenerateLogNormal(generator: curandGenerator_t, outputPtr: *mut f32, n: usize, mean: f32, stddev: f32) -> curandStatus_t;
+        }
         curandGenerateLogNormal(generator, outputPtr, n, mean, stddev)
     }
 }
@@ -256,7 +270,9 @@ pub unsafe fn curandGenerateLogNormalDouble(generator: curandGenerator_t, output
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGenerateLogNormalDouble(generator: curandGenerator_t, outputPtr: *mut f64, n: usize, mean: f64, stddev: f64) -> curandStatus_t;
+        extern "C" {
+            fn curandGenerateLogNormalDouble(generator: curandGenerator_t, outputPtr: *mut f64, n: usize, mean: f64, stddev: f64) -> curandStatus_t;
+        }
         curandGenerateLogNormalDouble(generator, outputPtr, n, mean, stddev)
     }
 }
@@ -270,7 +286,9 @@ pub unsafe fn curandGenerateLongLong(generator: curandGenerator_t, outputPtr: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGenerateLongLong(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_ulonglong, num: usize) -> curandStatus_t;
+        extern "C" {
+            fn curandGenerateLongLong(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_ulonglong, num: usize) -> curandStatus_t;
+        }
         curandGenerateLongLong(generator, outputPtr, num)
     }
 }
@@ -284,7 +302,9 @@ pub unsafe fn curandGenerateNormal(generator: curandGenerator_t, outputPtr: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGenerateNormal(generator: curandGenerator_t, outputPtr: *mut f32, n: usize, mean: f32, stddev: f32) -> curandStatus_t;
+        extern "C" {
+            fn curandGenerateNormal(generator: curandGenerator_t, outputPtr: *mut f32, n: usize, mean: f32, stddev: f32) -> curandStatus_t;
+        }
         curandGenerateNormal(generator, outputPtr, n, mean, stddev)
     }
 }
@@ -298,7 +318,9 @@ pub unsafe fn curandGenerateNormalDouble(generator: curandGenerator_t, outputPtr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGenerateNormalDouble(generator: curandGenerator_t, outputPtr: *mut f64, n: usize, mean: f64, stddev: f64) -> curandStatus_t;
+        extern "C" {
+            fn curandGenerateNormalDouble(generator: curandGenerator_t, outputPtr: *mut f64, n: usize, mean: f64, stddev: f64) -> curandStatus_t;
+        }
         curandGenerateNormalDouble(generator, outputPtr, n, mean, stddev)
     }
 }
@@ -312,7 +334,9 @@ pub unsafe fn curandGeneratePoisson(generator: curandGenerator_t, outputPtr: *mu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGeneratePoisson(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_uint, n: usize, lambda: f64) -> curandStatus_t;
+        extern "C" {
+            fn curandGeneratePoisson(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_uint, n: usize, lambda: f64) -> curandStatus_t;
+        }
         curandGeneratePoisson(generator, outputPtr, n, lambda)
     }
 }
@@ -326,7 +350,9 @@ pub unsafe fn curandGeneratePoissonMethod(generator: curandGenerator_t, outputPt
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGeneratePoissonMethod(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_uint, n: usize, lambda: f64, method: curandMethod_t) -> curandStatus_t;
+        extern "C" {
+            fn curandGeneratePoissonMethod(generator: curandGenerator_t, outputPtr: *mut ::core::ffi::c_uint, n: usize, lambda: f64, method: curandMethod_t) -> curandStatus_t;
+        }
         curandGeneratePoissonMethod(generator, outputPtr, n, lambda, method)
     }
 }
@@ -340,7 +366,9 @@ pub unsafe fn curandGenerateSeeds(generator: curandGenerator_t) -> curandStatus_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGenerateSeeds(generator: curandGenerator_t) -> curandStatus_t;
+        extern "C" {
+            fn curandGenerateSeeds(generator: curandGenerator_t) -> curandStatus_t;
+        }
         curandGenerateSeeds(generator)
     }
 }
@@ -354,7 +382,9 @@ pub unsafe fn curandGenerateUniform(generator: curandGenerator_t, outputPtr: *mu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGenerateUniform(generator: curandGenerator_t, outputPtr: *mut f32, num: usize) -> curandStatus_t;
+        extern "C" {
+            fn curandGenerateUniform(generator: curandGenerator_t, outputPtr: *mut f32, num: usize) -> curandStatus_t;
+        }
         curandGenerateUniform(generator, outputPtr, num)
     }
 }
@@ -368,7 +398,9 @@ pub unsafe fn curandGenerateUniformDouble(generator: curandGenerator_t, outputPt
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGenerateUniformDouble(generator: curandGenerator_t, outputPtr: *mut f64, num: usize) -> curandStatus_t;
+        extern "C" {
+            fn curandGenerateUniformDouble(generator: curandGenerator_t, outputPtr: *mut f64, num: usize) -> curandStatus_t;
+        }
         curandGenerateUniformDouble(generator, outputPtr, num)
     }
 }
@@ -382,7 +414,9 @@ pub unsafe fn curandGetDirectionVectors32(vectors: *mut *mut curandDirectionVect
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGetDirectionVectors32(vectors: *mut *mut curandDirectionVectors32_t, set: curandDirectionVectorSet_t) -> curandStatus_t;
+        extern "C" {
+            fn curandGetDirectionVectors32(vectors: *mut *mut curandDirectionVectors32_t, set: curandDirectionVectorSet_t) -> curandStatus_t;
+        }
         curandGetDirectionVectors32(vectors, set)
     }
 }
@@ -396,7 +430,9 @@ pub unsafe fn curandGetDirectionVectors64(vectors: *mut *mut curandDirectionVect
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGetDirectionVectors64(vectors: *mut *mut curandDirectionVectors64_t, set: curandDirectionVectorSet_t) -> curandStatus_t;
+        extern "C" {
+            fn curandGetDirectionVectors64(vectors: *mut *mut curandDirectionVectors64_t, set: curandDirectionVectorSet_t) -> curandStatus_t;
+        }
         curandGetDirectionVectors64(vectors, set)
     }
 }
@@ -410,7 +446,9 @@ pub unsafe fn curandGetProperty(type_: libraryPropertyType, value: *mut ::core::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGetProperty(type_: libraryPropertyType, value: *mut ::core::ffi::c_int) -> curandStatus_t;
+        extern "C" {
+            fn curandGetProperty(type_: libraryPropertyType, value: *mut ::core::ffi::c_int) -> curandStatus_t;
+        }
         curandGetProperty(type_, value)
     }
 }
@@ -424,7 +462,9 @@ pub unsafe fn curandGetScrambleConstants32(constants: *mut *mut ::core::ffi::c_u
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGetScrambleConstants32(constants: *mut *mut ::core::ffi::c_uint) -> curandStatus_t;
+        extern "C" {
+            fn curandGetScrambleConstants32(constants: *mut *mut ::core::ffi::c_uint) -> curandStatus_t;
+        }
         curandGetScrambleConstants32(constants)
     }
 }
@@ -438,7 +478,9 @@ pub unsafe fn curandGetScrambleConstants64(constants: *mut *mut ::core::ffi::c_u
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGetScrambleConstants64(constants: *mut *mut ::core::ffi::c_ulonglong) -> curandStatus_t;
+        extern "C" {
+            fn curandGetScrambleConstants64(constants: *mut *mut ::core::ffi::c_ulonglong) -> curandStatus_t;
+        }
         curandGetScrambleConstants64(constants)
     }
 }
@@ -452,7 +494,9 @@ pub unsafe fn curandGetVersion(version: *mut ::core::ffi::c_int) -> curandStatus
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandGetVersion(version: *mut ::core::ffi::c_int) -> curandStatus_t;
+        extern "C" {
+            fn curandGetVersion(version: *mut ::core::ffi::c_int) -> curandStatus_t;
+        }
         curandGetVersion(version)
     }
 }
@@ -466,7 +510,9 @@ pub unsafe fn curandSetGeneratorOffset(generator: curandGenerator_t, offset: ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandSetGeneratorOffset(generator: curandGenerator_t, offset: ::core::ffi::c_ulonglong) -> curandStatus_t;
+        extern "C" {
+            fn curandSetGeneratorOffset(generator: curandGenerator_t, offset: ::core::ffi::c_ulonglong) -> curandStatus_t;
+        }
         curandSetGeneratorOffset(generator, offset)
     }
 }
@@ -480,7 +526,9 @@ pub unsafe fn curandSetGeneratorOrdering(generator: curandGenerator_t, order: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandSetGeneratorOrdering(generator: curandGenerator_t, order: curandOrdering_t) -> curandStatus_t;
+        extern "C" {
+            fn curandSetGeneratorOrdering(generator: curandGenerator_t, order: curandOrdering_t) -> curandStatus_t;
+        }
         curandSetGeneratorOrdering(generator, order)
     }
 }
@@ -494,7 +542,9 @@ pub unsafe fn curandSetPseudoRandomGeneratorSeed(generator: curandGenerator_t, s
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandSetPseudoRandomGeneratorSeed(generator: curandGenerator_t, seed: ::core::ffi::c_ulonglong) -> curandStatus_t;
+        extern "C" {
+            fn curandSetPseudoRandomGeneratorSeed(generator: curandGenerator_t, seed: ::core::ffi::c_ulonglong) -> curandStatus_t;
+        }
         curandSetPseudoRandomGeneratorSeed(generator, seed)
     }
 }
@@ -508,7 +558,9 @@ pub unsafe fn curandSetQuasiRandomGeneratorDimensions(generator: curandGenerator
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandSetQuasiRandomGeneratorDimensions(generator: curandGenerator_t, num_dimensions: ::core::ffi::c_uint) -> curandStatus_t;
+        extern "C" {
+            fn curandSetQuasiRandomGeneratorDimensions(generator: curandGenerator_t, num_dimensions: ::core::ffi::c_uint) -> curandStatus_t;
+        }
         curandSetQuasiRandomGeneratorDimensions(generator, num_dimensions)
     }
 }
@@ -522,7 +574,9 @@ pub unsafe fn curandSetStream(generator: curandGenerator_t, stream: cudaStream_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn curandSetStream(generator: curandGenerator_t, stream: cudaStream_t) -> curandStatus_t;
+        extern "C" {
+            fn curandSetStream(generator: curandGenerator_t, stream: cudaStream_t) -> curandStatus_t;
+        }
         curandSetStream(generator, stream)
     }
 }

@@ -1780,7 +1780,9 @@ pub unsafe fn cuFileBatchIOCancel(batch_idp: CUfileBatchHandle_t) -> CUfileError
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileBatchIOCancel(batch_idp: CUfileBatchHandle_t) -> CUfileError_t;
+        extern "C" {
+            fn cuFileBatchIOCancel(batch_idp: CUfileBatchHandle_t) -> CUfileError_t;
+        }
         cuFileBatchIOCancel(batch_idp)
     }
 }
@@ -1795,7 +1797,9 @@ pub unsafe fn cuFileBatchIODestroy(batch_idp: CUfileBatchHandle_t) {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileBatchIODestroy(batch_idp: CUfileBatchHandle_t);
+        extern "C" {
+            fn cuFileBatchIODestroy(batch_idp: CUfileBatchHandle_t);
+        }
         cuFileBatchIODestroy(batch_idp)
     }
 }
@@ -1810,7 +1814,9 @@ pub unsafe fn cuFileBatchIOGetStatus(batch_idp: CUfileBatchHandle_t, min_nr: ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileBatchIOGetStatus(batch_idp: CUfileBatchHandle_t, min_nr: ::core::ffi::c_uint, nr: *mut ::core::ffi::c_uint, iocbp: *mut CUfileIOEvents_t, timeout: *mut timespec) -> CUfileError_t;
+        extern "C" {
+            fn cuFileBatchIOGetStatus(batch_idp: CUfileBatchHandle_t, min_nr: ::core::ffi::c_uint, nr: *mut ::core::ffi::c_uint, iocbp: *mut CUfileIOEvents_t, timeout: *mut timespec) -> CUfileError_t;
+        }
         cuFileBatchIOGetStatus(batch_idp, min_nr, nr, iocbp, timeout)
     }
 }
@@ -1825,7 +1831,9 @@ pub unsafe fn cuFileBatchIOSetUp(batch_idp: *mut CUfileBatchHandle_t, nr: ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileBatchIOSetUp(batch_idp: *mut CUfileBatchHandle_t, nr: ::core::ffi::c_uint) -> CUfileError_t;
+        extern "C" {
+            fn cuFileBatchIOSetUp(batch_idp: *mut CUfileBatchHandle_t, nr: ::core::ffi::c_uint) -> CUfileError_t;
+        }
         cuFileBatchIOSetUp(batch_idp, nr)
     }
 }
@@ -1840,7 +1848,9 @@ pub unsafe fn cuFileBatchIOSubmit(batch_idp: CUfileBatchHandle_t, nr: ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileBatchIOSubmit(batch_idp: CUfileBatchHandle_t, nr: ::core::ffi::c_uint, iocbp: *mut CUfileIOParams_t, flags: ::core::ffi::c_uint) -> CUfileError_t;
+        extern "C" {
+            fn cuFileBatchIOSubmit(batch_idp: CUfileBatchHandle_t, nr: ::core::ffi::c_uint, iocbp: *mut CUfileIOParams_t, flags: ::core::ffi::c_uint) -> CUfileError_t;
+        }
         cuFileBatchIOSubmit(batch_idp, nr, iocbp, flags)
     }
 }
@@ -1855,7 +1865,9 @@ pub unsafe fn cuFileBufDeregister(devPtr_base: *const ::core::ffi::c_void) -> CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileBufDeregister(devPtr_base: *const ::core::ffi::c_void) -> CUfileError_t;
+        extern "C" {
+            fn cuFileBufDeregister(devPtr_base: *const ::core::ffi::c_void) -> CUfileError_t;
+        }
         cuFileBufDeregister(devPtr_base)
     }
 }
@@ -1870,7 +1882,9 @@ pub unsafe fn cuFileBufDeregister(bufPtr_base: *const ::core::ffi::c_void) -> CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileBufDeregister(bufPtr_base: *const ::core::ffi::c_void) -> CUfileError_t;
+        extern "C" {
+            fn cuFileBufDeregister(bufPtr_base: *const ::core::ffi::c_void) -> CUfileError_t;
+        }
         cuFileBufDeregister(bufPtr_base)
     }
 }
@@ -1885,7 +1899,9 @@ pub unsafe fn cuFileBufRegister(devPtr_base: *const ::core::ffi::c_void, length:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileBufRegister(devPtr_base: *const ::core::ffi::c_void, length: usize, flags: ::core::ffi::c_int) -> CUfileError_t;
+        extern "C" {
+            fn cuFileBufRegister(devPtr_base: *const ::core::ffi::c_void, length: usize, flags: ::core::ffi::c_int) -> CUfileError_t;
+        }
         cuFileBufRegister(devPtr_base, length, flags)
     }
 }
@@ -1900,7 +1916,9 @@ pub unsafe fn cuFileBufRegister(bufPtr_base: *const ::core::ffi::c_void, length:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileBufRegister(bufPtr_base: *const ::core::ffi::c_void, length: usize, flags: ::core::ffi::c_int) -> CUfileError_t;
+        extern "C" {
+            fn cuFileBufRegister(bufPtr_base: *const ::core::ffi::c_void, length: usize, flags: ::core::ffi::c_int) -> CUfileError_t;
+        }
         cuFileBufRegister(bufPtr_base, length, flags)
     }
 }
@@ -1914,7 +1932,9 @@ pub unsafe fn cuFileDriverClose() -> CUfileError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileDriverClose() -> CUfileError_t;
+        extern "C" {
+            fn cuFileDriverClose() -> CUfileError_t;
+        }
         cuFileDriverClose()
     }
 }
@@ -1929,7 +1949,9 @@ pub unsafe fn cuFileDriverClose_v2() -> CUfileError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileDriverClose_v2() -> CUfileError_t;
+        extern "C" {
+            fn cuFileDriverClose_v2() -> CUfileError_t;
+        }
         cuFileDriverClose_v2()
     }
 }
@@ -1944,7 +1966,9 @@ pub unsafe fn cuFileDriverGetP2PFlags(status_flag: CUfileDriverStatusFlags_t, p2
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileDriverGetP2PFlags(status_flag: CUfileDriverStatusFlags_t, p2p_flags: *mut CUfileP2PFlags_t) -> CUfileError_t;
+        extern "C" {
+            fn cuFileDriverGetP2PFlags(status_flag: CUfileDriverStatusFlags_t, p2p_flags: *mut CUfileP2PFlags_t) -> CUfileError_t;
+        }
         cuFileDriverGetP2PFlags(status_flag, p2p_flags)
     }
 }
@@ -1958,7 +1982,9 @@ pub unsafe fn cuFileDriverGetProperties(props: *mut CUfileDrvProps_t) -> CUfileE
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileDriverGetProperties(props: *mut CUfileDrvProps_t) -> CUfileError_t;
+        extern "C" {
+            fn cuFileDriverGetProperties(props: *mut CUfileDrvProps_t) -> CUfileError_t;
+        }
         cuFileDriverGetProperties(props)
     }
 }
@@ -1972,7 +1998,9 @@ pub unsafe fn cuFileDriverOpen() -> CUfileError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileDriverOpen() -> CUfileError_t;
+        extern "C" {
+            fn cuFileDriverOpen() -> CUfileError_t;
+        }
         cuFileDriverOpen()
     }
 }
@@ -1986,7 +2014,9 @@ pub unsafe fn cuFileDriverSetMaxCacheSize(max_cache_size: usize) -> CUfileError_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileDriverSetMaxCacheSize(max_cache_size: usize) -> CUfileError_t;
+        extern "C" {
+            fn cuFileDriverSetMaxCacheSize(max_cache_size: usize) -> CUfileError_t;
+        }
         cuFileDriverSetMaxCacheSize(max_cache_size)
     }
 }
@@ -2000,7 +2030,9 @@ pub unsafe fn cuFileDriverSetMaxDirectIOSize(max_direct_io_size: usize) -> CUfil
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileDriverSetMaxDirectIOSize(max_direct_io_size: usize) -> CUfileError_t;
+        extern "C" {
+            fn cuFileDriverSetMaxDirectIOSize(max_direct_io_size: usize) -> CUfileError_t;
+        }
         cuFileDriverSetMaxDirectIOSize(max_direct_io_size)
     }
 }
@@ -2014,7 +2046,9 @@ pub unsafe fn cuFileDriverSetMaxPinnedMemSize(max_pinned_size: usize) -> CUfileE
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileDriverSetMaxPinnedMemSize(max_pinned_size: usize) -> CUfileError_t;
+        extern "C" {
+            fn cuFileDriverSetMaxPinnedMemSize(max_pinned_size: usize) -> CUfileError_t;
+        }
         cuFileDriverSetMaxPinnedMemSize(max_pinned_size)
     }
 }
@@ -2029,7 +2063,9 @@ pub unsafe fn cuFileDriverSetP2PFlags(status_flag: CUfileDriverStatusFlags_t, p2
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileDriverSetP2PFlags(status_flag: CUfileDriverStatusFlags_t, p2p_flags: CUfileP2PFlags_t) -> CUfileError_t;
+        extern "C" {
+            fn cuFileDriverSetP2PFlags(status_flag: CUfileDriverStatusFlags_t, p2p_flags: CUfileP2PFlags_t) -> CUfileError_t;
+        }
         cuFileDriverSetP2PFlags(status_flag, p2p_flags)
     }
 }
@@ -2043,7 +2079,9 @@ pub unsafe fn cuFileDriverSetPollMode(poll: bool, poll_threshold_size: usize) ->
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileDriverSetPollMode(poll: bool, poll_threshold_size: usize) -> CUfileError_t;
+        extern "C" {
+            fn cuFileDriverSetPollMode(poll: bool, poll_threshold_size: usize) -> CUfileError_t;
+        }
         cuFileDriverSetPollMode(poll, poll_threshold_size)
     }
 }
@@ -2058,7 +2096,9 @@ pub unsafe fn cuFileExportPCIeTopology(filename: *const ::core::ffi::c_char) -> 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileExportPCIeTopology(filename: *const ::core::ffi::c_char) -> CUfileError_t;
+        extern "C" {
+            fn cuFileExportPCIeTopology(filename: *const ::core::ffi::c_char) -> CUfileError_t;
+        }
         cuFileExportPCIeTopology(filename)
     }
 }
@@ -2073,7 +2113,9 @@ pub unsafe fn cuFileGetBARSizeInKB(gpuIndex: ::core::ffi::c_int, barSize: *mut u
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileGetBARSizeInKB(gpuIndex: ::core::ffi::c_int, barSize: *mut usize) -> CUfileError_t;
+        extern "C" {
+            fn cuFileGetBARSizeInKB(gpuIndex: ::core::ffi::c_int, barSize: *mut usize) -> CUfileError_t;
+        }
         cuFileGetBARSizeInKB(gpuIndex, barSize)
     }
 }
@@ -2088,7 +2130,9 @@ pub unsafe fn cuFileGetParameterBool(param: CUFileBoolConfigParameter_t, value: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileGetParameterBool(param: CUFileBoolConfigParameter_t, value: *mut bool) -> CUfileError_t;
+        extern "C" {
+            fn cuFileGetParameterBool(param: CUFileBoolConfigParameter_t, value: *mut bool) -> CUfileError_t;
+        }
         cuFileGetParameterBool(param, value)
     }
 }
@@ -2103,7 +2147,9 @@ pub unsafe fn cuFileGetParameterGpuBounceBufferSlabArray(size_values: *mut usize
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileGetParameterGpuBounceBufferSlabArray(size_values: *mut usize, count_values: *mut usize, len: ::core::ffi::c_int) -> CUfileError_t;
+        extern "C" {
+            fn cuFileGetParameterGpuBounceBufferSlabArray(size_values: *mut usize, count_values: *mut usize, len: ::core::ffi::c_int) -> CUfileError_t;
+        }
         cuFileGetParameterGpuBounceBufferSlabArray(size_values, count_values, len)
     }
 }
@@ -2118,7 +2164,9 @@ pub unsafe fn cuFileGetParameterMinMaxValue(param: CUFileSizeTConfigParameter_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileGetParameterMinMaxValue(param: CUFileSizeTConfigParameter_t, min_value: *mut usize, max_value: *mut usize) -> CUfileError_t;
+        extern "C" {
+            fn cuFileGetParameterMinMaxValue(param: CUFileSizeTConfigParameter_t, min_value: *mut usize, max_value: *mut usize) -> CUfileError_t;
+        }
         cuFileGetParameterMinMaxValue(param, min_value, max_value)
     }
 }
@@ -2133,7 +2181,9 @@ pub unsafe fn cuFileGetParameterPosixPoolSlabArray(size_values: *mut usize, coun
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileGetParameterPosixPoolSlabArray(size_values: *mut usize, count_values: *mut usize, len: ::core::ffi::c_int) -> CUfileError_t;
+        extern "C" {
+            fn cuFileGetParameterPosixPoolSlabArray(size_values: *mut usize, count_values: *mut usize, len: ::core::ffi::c_int) -> CUfileError_t;
+        }
         cuFileGetParameterPosixPoolSlabArray(size_values, count_values, len)
     }
 }
@@ -2148,7 +2198,9 @@ pub unsafe fn cuFileGetParameterSizeT(param: CUFileSizeTConfigParameter_t, value
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileGetParameterSizeT(param: CUFileSizeTConfigParameter_t, value: *mut usize) -> CUfileError_t;
+        extern "C" {
+            fn cuFileGetParameterSizeT(param: CUFileSizeTConfigParameter_t, value: *mut usize) -> CUfileError_t;
+        }
         cuFileGetParameterSizeT(param, value)
     }
 }
@@ -2163,7 +2215,9 @@ pub unsafe fn cuFileGetParameterString(param: CUFileStringConfigParameter_t, des
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileGetParameterString(param: CUFileStringConfigParameter_t, desc_str: *mut ::core::ffi::c_char, len: ::core::ffi::c_int) -> CUfileError_t;
+        extern "C" {
+            fn cuFileGetParameterString(param: CUFileStringConfigParameter_t, desc_str: *mut ::core::ffi::c_char, len: ::core::ffi::c_int) -> CUfileError_t;
+        }
         cuFileGetParameterString(param, desc_str, len)
     }
 }
@@ -2178,7 +2232,9 @@ pub unsafe fn cuFileGetStatsL1(stats: *mut CUfileStatsLevel1_t) -> CUfileError_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileGetStatsL1(stats: *mut CUfileStatsLevel1_t) -> CUfileError_t;
+        extern "C" {
+            fn cuFileGetStatsL1(stats: *mut CUfileStatsLevel1_t) -> CUfileError_t;
+        }
         cuFileGetStatsL1(stats)
     }
 }
@@ -2193,7 +2249,9 @@ pub unsafe fn cuFileGetStatsL2(stats: *mut CUfileStatsLevel2_t) -> CUfileError_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileGetStatsL2(stats: *mut CUfileStatsLevel2_t) -> CUfileError_t;
+        extern "C" {
+            fn cuFileGetStatsL2(stats: *mut CUfileStatsLevel2_t) -> CUfileError_t;
+        }
         cuFileGetStatsL2(stats)
     }
 }
@@ -2208,7 +2266,9 @@ pub unsafe fn cuFileGetStatsL3(stats: *mut CUfileStatsLevel3_t) -> CUfileError_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileGetStatsL3(stats: *mut CUfileStatsLevel3_t) -> CUfileError_t;
+        extern "C" {
+            fn cuFileGetStatsL3(stats: *mut CUfileStatsLevel3_t) -> CUfileError_t;
+        }
         cuFileGetStatsL3(stats)
     }
 }
@@ -2223,7 +2283,9 @@ pub unsafe fn cuFileGetStatsLevel(level: *mut ::core::ffi::c_int) -> CUfileError
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileGetStatsLevel(level: *mut ::core::ffi::c_int) -> CUfileError_t;
+        extern "C" {
+            fn cuFileGetStatsLevel(level: *mut ::core::ffi::c_int) -> CUfileError_t;
+        }
         cuFileGetStatsLevel(level)
     }
 }
@@ -2238,7 +2300,9 @@ pub unsafe fn cuFileGetVersion(version: *mut ::core::ffi::c_int) -> CUfileError_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileGetVersion(version: *mut ::core::ffi::c_int) -> CUfileError_t;
+        extern "C" {
+            fn cuFileGetVersion(version: *mut ::core::ffi::c_int) -> CUfileError_t;
+        }
         cuFileGetVersion(version)
     }
 }
@@ -2252,7 +2316,9 @@ pub unsafe fn cuFileHandleDeregister(fh: CUfileHandle_t) {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileHandleDeregister(fh: CUfileHandle_t);
+        extern "C" {
+            fn cuFileHandleDeregister(fh: CUfileHandle_t);
+        }
         cuFileHandleDeregister(fh)
     }
 }
@@ -2266,7 +2332,9 @@ pub unsafe fn cuFileHandleRegister(fh: *mut CUfileHandle_t, descr: *mut CUfileDe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileHandleRegister(fh: *mut CUfileHandle_t, descr: *mut CUfileDescr_t) -> CUfileError_t;
+        extern "C" {
+            fn cuFileHandleRegister(fh: *mut CUfileHandle_t, descr: *mut CUfileDescr_t) -> CUfileError_t;
+        }
         cuFileHandleRegister(fh, descr)
     }
 }
@@ -2281,7 +2349,9 @@ pub unsafe fn cuFileRead(fh: CUfileHandle_t, devPtr_base: *mut ::core::ffi::c_vo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileRead(fh: CUfileHandle_t, devPtr_base: *mut ::core::ffi::c_void, size: usize, file_offset: off_t, devPtr_offset: off_t) -> isize;
+        extern "C" {
+            fn cuFileRead(fh: CUfileHandle_t, devPtr_base: *mut ::core::ffi::c_void, size: usize, file_offset: off_t, devPtr_offset: off_t) -> isize;
+        }
         cuFileRead(fh, devPtr_base, size, file_offset, devPtr_offset)
     }
 }
@@ -2296,7 +2366,9 @@ pub unsafe fn cuFileRead(fh: CUfileHandle_t, bufPtr_base: *mut ::core::ffi::c_vo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileRead(fh: CUfileHandle_t, bufPtr_base: *mut ::core::ffi::c_void, size: usize, file_offset: off_t, bufPtr_offset: off_t) -> isize;
+        extern "C" {
+            fn cuFileRead(fh: CUfileHandle_t, bufPtr_base: *mut ::core::ffi::c_void, size: usize, file_offset: off_t, bufPtr_offset: off_t) -> isize;
+        }
         cuFileRead(fh, bufPtr_base, size, file_offset, bufPtr_offset)
     }
 }
@@ -2311,7 +2383,9 @@ pub unsafe fn cuFileReadAsync(fh: CUfileHandle_t, bufPtr_base: *mut ::core::ffi:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileReadAsync(fh: CUfileHandle_t, bufPtr_base: *mut ::core::ffi::c_void, size_p: *mut usize, file_offset_p: *mut off_t, bufPtr_offset_p: *mut off_t, bytes_read_p: *mut isize, stream: CUstream) -> CUfileError_t;
+        extern "C" {
+            fn cuFileReadAsync(fh: CUfileHandle_t, bufPtr_base: *mut ::core::ffi::c_void, size_p: *mut usize, file_offset_p: *mut off_t, bufPtr_offset_p: *mut off_t, bytes_read_p: *mut isize, stream: CUstream) -> CUfileError_t;
+        }
         cuFileReadAsync(fh, bufPtr_base, size_p, file_offset_p, bufPtr_offset_p, bytes_read_p, stream)
     }
 }
@@ -2326,7 +2400,9 @@ pub unsafe fn cuFileSetParameterBool(param: CUFileBoolConfigParameter_t, value: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileSetParameterBool(param: CUFileBoolConfigParameter_t, value: bool) -> CUfileError_t;
+        extern "C" {
+            fn cuFileSetParameterBool(param: CUFileBoolConfigParameter_t, value: bool) -> CUfileError_t;
+        }
         cuFileSetParameterBool(param, value)
     }
 }
@@ -2341,7 +2417,9 @@ pub unsafe fn cuFileSetParameterGpuBounceBufferSlabArray(size_values: *const usi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileSetParameterGpuBounceBufferSlabArray(size_values: *const usize, count_values: *const usize, len: ::core::ffi::c_int) -> CUfileError_t;
+        extern "C" {
+            fn cuFileSetParameterGpuBounceBufferSlabArray(size_values: *const usize, count_values: *const usize, len: ::core::ffi::c_int) -> CUfileError_t;
+        }
         cuFileSetParameterGpuBounceBufferSlabArray(size_values, count_values, len)
     }
 }
@@ -2356,7 +2434,9 @@ pub unsafe fn cuFileSetParameterPosixPoolSlabArray(size_values: *const usize, co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileSetParameterPosixPoolSlabArray(size_values: *const usize, count_values: *const usize, len: ::core::ffi::c_int) -> CUfileError_t;
+        extern "C" {
+            fn cuFileSetParameterPosixPoolSlabArray(size_values: *const usize, count_values: *const usize, len: ::core::ffi::c_int) -> CUfileError_t;
+        }
         cuFileSetParameterPosixPoolSlabArray(size_values, count_values, len)
     }
 }
@@ -2371,7 +2451,9 @@ pub unsafe fn cuFileSetParameterSizeT(param: CUFileSizeTConfigParameter_t, value
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileSetParameterSizeT(param: CUFileSizeTConfigParameter_t, value: usize) -> CUfileError_t;
+        extern "C" {
+            fn cuFileSetParameterSizeT(param: CUFileSizeTConfigParameter_t, value: usize) -> CUfileError_t;
+        }
         cuFileSetParameterSizeT(param, value)
     }
 }
@@ -2386,7 +2468,9 @@ pub unsafe fn cuFileSetParameterString(param: CUFileStringConfigParameter_t, des
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileSetParameterString(param: CUFileStringConfigParameter_t, desc_str: *const ::core::ffi::c_char) -> CUfileError_t;
+        extern "C" {
+            fn cuFileSetParameterString(param: CUFileStringConfigParameter_t, desc_str: *const ::core::ffi::c_char) -> CUfileError_t;
+        }
         cuFileSetParameterString(param, desc_str)
     }
 }
@@ -2401,7 +2485,9 @@ pub unsafe fn cuFileSetStatsLevel(level: ::core::ffi::c_int) -> CUfileError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileSetStatsLevel(level: ::core::ffi::c_int) -> CUfileError_t;
+        extern "C" {
+            fn cuFileSetStatsLevel(level: ::core::ffi::c_int) -> CUfileError_t;
+        }
         cuFileSetStatsLevel(level)
     }
 }
@@ -2416,7 +2502,9 @@ pub unsafe fn cuFileStatsReset() -> CUfileError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileStatsReset() -> CUfileError_t;
+        extern "C" {
+            fn cuFileStatsReset() -> CUfileError_t;
+        }
         cuFileStatsReset()
     }
 }
@@ -2431,7 +2519,9 @@ pub unsafe fn cuFileStatsStart() -> CUfileError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileStatsStart() -> CUfileError_t;
+        extern "C" {
+            fn cuFileStatsStart() -> CUfileError_t;
+        }
         cuFileStatsStart()
     }
 }
@@ -2446,7 +2536,9 @@ pub unsafe fn cuFileStatsStop() -> CUfileError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileStatsStop() -> CUfileError_t;
+        extern "C" {
+            fn cuFileStatsStop() -> CUfileError_t;
+        }
         cuFileStatsStop()
     }
 }
@@ -2461,7 +2553,9 @@ pub unsafe fn cuFileStreamDeregister(stream: CUstream) -> CUfileError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileStreamDeregister(stream: CUstream) -> CUfileError_t;
+        extern "C" {
+            fn cuFileStreamDeregister(stream: CUstream) -> CUfileError_t;
+        }
         cuFileStreamDeregister(stream)
     }
 }
@@ -2476,7 +2570,9 @@ pub unsafe fn cuFileStreamRegister(stream: CUstream, flags: ::core::ffi::c_uint)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileStreamRegister(stream: CUstream, flags: ::core::ffi::c_uint) -> CUfileError_t;
+        extern "C" {
+            fn cuFileStreamRegister(stream: CUstream, flags: ::core::ffi::c_uint) -> CUfileError_t;
+        }
         cuFileStreamRegister(stream, flags)
     }
 }
@@ -2491,7 +2587,9 @@ pub unsafe fn cuFileUseCount() -> ::core::ffi::c_long {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileUseCount() -> ::core::ffi::c_long;
+        extern "C" {
+            fn cuFileUseCount() -> ::core::ffi::c_long;
+        }
         cuFileUseCount()
     }
 }
@@ -2506,7 +2604,9 @@ pub unsafe fn cuFileWrite(fh: CUfileHandle_t, devPtr_base: *const ::core::ffi::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileWrite(fh: CUfileHandle_t, devPtr_base: *const ::core::ffi::c_void, size: usize, file_offset: off_t, devPtr_offset: off_t) -> isize;
+        extern "C" {
+            fn cuFileWrite(fh: CUfileHandle_t, devPtr_base: *const ::core::ffi::c_void, size: usize, file_offset: off_t, devPtr_offset: off_t) -> isize;
+        }
         cuFileWrite(fh, devPtr_base, size, file_offset, devPtr_offset)
     }
 }
@@ -2521,7 +2621,9 @@ pub unsafe fn cuFileWrite(fh: CUfileHandle_t, bufPtr_base: *const ::core::ffi::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileWrite(fh: CUfileHandle_t, bufPtr_base: *const ::core::ffi::c_void, size: usize, file_offset: off_t, bufPtr_offset: off_t) -> isize;
+        extern "C" {
+            fn cuFileWrite(fh: CUfileHandle_t, bufPtr_base: *const ::core::ffi::c_void, size: usize, file_offset: off_t, bufPtr_offset: off_t) -> isize;
+        }
         cuFileWrite(fh, bufPtr_base, size, file_offset, bufPtr_offset)
     }
 }
@@ -2536,7 +2638,9 @@ pub unsafe fn cuFileWriteAsync(fh: CUfileHandle_t, bufPtr_base: *mut ::core::ffi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFileWriteAsync(fh: CUfileHandle_t, bufPtr_base: *mut ::core::ffi::c_void, size_p: *mut usize, file_offset_p: *mut off_t, bufPtr_offset_p: *mut off_t, bytes_written_p: *mut isize, stream: CUstream) -> CUfileError_t;
+        extern "C" {
+            fn cuFileWriteAsync(fh: CUfileHandle_t, bufPtr_base: *mut ::core::ffi::c_void, size_p: *mut usize, file_offset_p: *mut off_t, bufPtr_offset_p: *mut off_t, bytes_written_p: *mut isize, stream: CUstream) -> CUfileError_t;
+        }
         cuFileWriteAsync(fh, bufPtr_base, size_p, file_offset_p, bufPtr_offset_p, bytes_written_p, stream)
     }
 }

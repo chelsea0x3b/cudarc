@@ -33001,7 +33001,9 @@ pub unsafe fn cuptiActivityConfigurePCSampling(ctx: CUcontext, config: *mut CUpt
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityConfigurePCSampling(ctx: CUcontext, config: *mut CUpti_ActivityPCSamplingConfig) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityConfigurePCSampling(ctx: CUcontext, config: *mut CUpti_ActivityPCSamplingConfig) -> CUptiResult;
+        }
         cuptiActivityConfigurePCSampling(ctx, config)
     }
 }
@@ -33015,7 +33017,9 @@ pub unsafe fn cuptiActivityConfigureUnifiedMemoryCounter(config: *mut CUpti_Acti
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityConfigureUnifiedMemoryCounter(config: *mut CUpti_ActivityUnifiedMemoryCounterConfig, count: u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityConfigureUnifiedMemoryCounter(config: *mut CUpti_ActivityUnifiedMemoryCounterConfig, count: u32) -> CUptiResult;
+        }
         cuptiActivityConfigureUnifiedMemoryCounter(config, count)
     }
 }
@@ -33029,7 +33033,9 @@ pub unsafe fn cuptiActivityDisable(kind: CUpti_ActivityKind) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityDisable(kind: CUpti_ActivityKind) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityDisable(kind: CUpti_ActivityKind) -> CUptiResult;
+        }
         cuptiActivityDisable(kind)
     }
 }
@@ -33043,7 +33049,9 @@ pub unsafe fn cuptiActivityDisableContext(context: CUcontext, kind: CUpti_Activi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityDisableContext(context: CUcontext, kind: CUpti_ActivityKind) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityDisableContext(context: CUcontext, kind: CUpti_ActivityKind) -> CUptiResult;
+        }
         cuptiActivityDisableContext(context, kind)
     }
 }
@@ -33058,7 +33066,9 @@ pub unsafe fn cuptiActivityDisable_v2(subscriber: CUpti_SubscriberHandle, kind: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityDisable_v2(subscriber: CUpti_SubscriberHandle, kind: CUpti_ActivityKind, pActivityConfig: *mut CUpti_ActivityConfig) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityDisable_v2(subscriber: CUpti_SubscriberHandle, kind: CUpti_ActivityKind, pActivityConfig: *mut CUpti_ActivityConfig) -> CUptiResult;
+        }
         cuptiActivityDisable_v2(subscriber, kind, pActivityConfig)
     }
 }
@@ -33072,7 +33082,9 @@ pub unsafe fn cuptiActivityEnable(kind: CUpti_ActivityKind) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityEnable(kind: CUpti_ActivityKind) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityEnable(kind: CUpti_ActivityKind) -> CUptiResult;
+        }
         cuptiActivityEnable(kind)
     }
 }
@@ -33087,7 +33099,9 @@ pub unsafe fn cuptiActivityEnableAllSyncRecords(enable: u8) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityEnableAllSyncRecords(enable: u8) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityEnableAllSyncRecords(enable: u8) -> CUptiResult;
+        }
         cuptiActivityEnableAllSyncRecords(enable)
     }
 }
@@ -33102,7 +33116,9 @@ pub unsafe fn cuptiActivityEnableAllocationSource(enable: u8) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityEnableAllocationSource(enable: u8) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityEnableAllocationSource(enable: u8) -> CUptiResult;
+        }
         cuptiActivityEnableAllocationSource(enable)
     }
 }
@@ -33117,7 +33133,9 @@ pub unsafe fn cuptiActivityEnableAndDump(kind: CUpti_ActivityKind) -> CUptiResul
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityEnableAndDump(kind: CUpti_ActivityKind) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityEnableAndDump(kind: CUpti_ActivityKind) -> CUptiResult;
+        }
         cuptiActivityEnableAndDump(kind)
     }
 }
@@ -33132,7 +33150,9 @@ pub unsafe fn cuptiActivityEnableAndDump_v2(subscriber: CUpti_SubscriberHandle, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityEnableAndDump_v2(subscriber: CUpti_SubscriberHandle, kind: CUpti_ActivityKind, activityConfig: *mut CUpti_ActivityConfig) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityEnableAndDump_v2(subscriber: CUpti_SubscriberHandle, kind: CUpti_ActivityKind, activityConfig: *mut CUpti_ActivityConfig) -> CUptiResult;
+        }
         cuptiActivityEnableAndDump_v2(subscriber, kind, activityConfig)
     }
 }
@@ -33146,7 +33166,9 @@ pub unsafe fn cuptiActivityEnableContext(context: CUcontext, kind: CUpti_Activit
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityEnableContext(context: CUcontext, kind: CUpti_ActivityKind) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityEnableContext(context: CUcontext, kind: CUpti_ActivityKind) -> CUptiResult;
+        }
         cuptiActivityEnableContext(context, kind)
     }
 }
@@ -33161,7 +33183,9 @@ pub unsafe fn cuptiActivityEnableCudaEventDeviceTimestamps(enable: u8) -> CUptiR
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityEnableCudaEventDeviceTimestamps(enable: u8) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityEnableCudaEventDeviceTimestamps(enable: u8) -> CUptiResult;
+        }
         cuptiActivityEnableCudaEventDeviceTimestamps(enable)
     }
 }
@@ -33176,7 +33200,9 @@ pub unsafe fn cuptiActivityEnableDeviceGraph(enable: u8) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityEnableDeviceGraph(enable: u8) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityEnableDeviceGraph(enable: u8) -> CUptiResult;
+        }
         cuptiActivityEnableDeviceGraph(enable)
     }
 }
@@ -33191,7 +33217,9 @@ pub unsafe fn cuptiActivityEnableDriverApi(cbid: CUpti_CallbackId, enable: u8) -
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityEnableDriverApi(cbid: CUpti_CallbackId, enable: u8) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityEnableDriverApi(cbid: CUpti_CallbackId, enable: u8) -> CUptiResult;
+        }
         cuptiActivityEnableDriverApi(cbid, enable)
     }
 }
@@ -33206,7 +33234,9 @@ pub unsafe fn cuptiActivityEnableHWTrace(enable: u8) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityEnableHWTrace(enable: u8) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityEnableHWTrace(enable: u8) -> CUptiResult;
+        }
         cuptiActivityEnableHWTrace(enable)
     }
 }
@@ -33220,7 +33250,9 @@ pub unsafe fn cuptiActivityEnableLatencyTimestamps(enable: u8) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityEnableLatencyTimestamps(enable: u8) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityEnableLatencyTimestamps(enable: u8) -> CUptiResult;
+        }
         cuptiActivityEnableLatencyTimestamps(enable)
     }
 }
@@ -33234,7 +33266,9 @@ pub unsafe fn cuptiActivityEnableLaunchAttributes(enable: u8) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityEnableLaunchAttributes(enable: u8) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityEnableLaunchAttributes(enable: u8) -> CUptiResult;
+        }
         cuptiActivityEnableLaunchAttributes(enable)
     }
 }
@@ -33249,7 +33283,9 @@ pub unsafe fn cuptiActivityEnableRuntimeApi(cbid: CUpti_CallbackId, enable: u8) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityEnableRuntimeApi(cbid: CUpti_CallbackId, enable: u8) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityEnableRuntimeApi(cbid: CUpti_CallbackId, enable: u8) -> CUptiResult;
+        }
         cuptiActivityEnableRuntimeApi(cbid, enable)
     }
 }
@@ -33264,7 +33300,9 @@ pub unsafe fn cuptiActivityEnable_v2(subscriber: CUpti_SubscriberHandle, kind: C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityEnable_v2(subscriber: CUpti_SubscriberHandle, kind: CUpti_ActivityKind, pActivityConfig: *mut CUpti_ActivityConfig) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityEnable_v2(subscriber: CUpti_SubscriberHandle, kind: CUpti_ActivityKind, pActivityConfig: *mut CUpti_ActivityConfig) -> CUptiResult;
+        }
         cuptiActivityEnable_v2(subscriber, kind, pActivityConfig)
     }
 }
@@ -33278,7 +33316,9 @@ pub unsafe fn cuptiActivityFlush(context: CUcontext, streamId: u32, flag: u32) -
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityFlush(context: CUcontext, streamId: u32, flag: u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityFlush(context: CUcontext, streamId: u32, flag: u32) -> CUptiResult;
+        }
         cuptiActivityFlush(context, streamId, flag)
     }
 }
@@ -33292,7 +33332,9 @@ pub unsafe fn cuptiActivityFlushAll(flag: u32) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityFlushAll(flag: u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityFlushAll(flag: u32) -> CUptiResult;
+        }
         cuptiActivityFlushAll(flag)
     }
 }
@@ -33306,7 +33348,9 @@ pub unsafe fn cuptiActivityFlushPeriod(time: u32) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityFlushPeriod(time: u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityFlushPeriod(time: u32) -> CUptiResult;
+        }
         cuptiActivityFlushPeriod(time)
     }
 }
@@ -33320,7 +33364,9 @@ pub unsafe fn cuptiActivityGetAttribute(attr: CUpti_ActivityAttribute, valueSize
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityGetAttribute(attr: CUpti_ActivityAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityGetAttribute(attr: CUpti_ActivityAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        }
         cuptiActivityGetAttribute(attr, valueSize, value)
     }
 }
@@ -33335,7 +33381,9 @@ pub unsafe fn cuptiActivityGetAttribute_v2(subscriber: CUpti_SubscriberHandle, a
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityGetAttribute_v2(subscriber: CUpti_SubscriberHandle, attr: CUpti_ActivityAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityGetAttribute_v2(subscriber: CUpti_SubscriberHandle, attr: CUpti_ActivityAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        }
         cuptiActivityGetAttribute_v2(subscriber, attr, valueSize, value)
     }
 }
@@ -33350,7 +33398,9 @@ pub unsafe fn cuptiActivityGetEnabledKinds(subscriber: CUpti_SubscriberHandle, b
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityGetEnabledKinds(subscriber: CUpti_SubscriberHandle, buffer: *mut CUpti_ActivityKind, bufferSize: *mut u32, enabledKindsCount: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityGetEnabledKinds(subscriber: CUpti_SubscriberHandle, buffer: *mut CUpti_ActivityKind, bufferSize: *mut u32, enabledKindsCount: *mut u32) -> CUptiResult;
+        }
         cuptiActivityGetEnabledKinds(subscriber, buffer, bufferSize, enabledKindsCount)
     }
 }
@@ -33364,7 +33414,9 @@ pub unsafe fn cuptiActivityGetNextRecord(buffer: *mut u8, validBufferSizeBytes: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityGetNextRecord(buffer: *mut u8, validBufferSizeBytes: usize, record: *mut *mut CUpti_Activity) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityGetNextRecord(buffer: *mut u8, validBufferSizeBytes: usize, record: *mut *mut CUpti_Activity) -> CUptiResult;
+        }
         cuptiActivityGetNextRecord(buffer, validBufferSizeBytes, record)
     }
 }
@@ -33378,7 +33430,9 @@ pub unsafe fn cuptiActivityGetNumDroppedRecords(context: CUcontext, streamId: u3
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityGetNumDroppedRecords(context: CUcontext, streamId: u32, dropped: *mut usize) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityGetNumDroppedRecords(context: CUcontext, streamId: u32, dropped: *mut usize) -> CUptiResult;
+        }
         cuptiActivityGetNumDroppedRecords(context, streamId, dropped)
     }
 }
@@ -33393,7 +33447,9 @@ pub unsafe fn cuptiActivityGetStructSize(activityKind: CUpti_ActivityKind, versi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityGetStructSize(activityKind: CUpti_ActivityKind, version: u32, activityStructSize: *mut usize) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityGetStructSize(activityKind: CUpti_ActivityKind, version: u32, activityStructSize: *mut usize) -> CUptiResult;
+        }
         cuptiActivityGetStructSize(activityKind, version, activityStructSize)
     }
 }
@@ -33407,7 +33463,9 @@ pub unsafe fn cuptiActivityPopExternalCorrelationId(kind: CUpti_ExternalCorrelat
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityPopExternalCorrelationId(kind: CUpti_ExternalCorrelationKind, lastId: *mut u64) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityPopExternalCorrelationId(kind: CUpti_ExternalCorrelationKind, lastId: *mut u64) -> CUptiResult;
+        }
         cuptiActivityPopExternalCorrelationId(kind, lastId)
     }
 }
@@ -33421,7 +33479,9 @@ pub unsafe fn cuptiActivityPushExternalCorrelationId(kind: CUpti_ExternalCorrela
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityPushExternalCorrelationId(kind: CUpti_ExternalCorrelationKind, id: u64) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityPushExternalCorrelationId(kind: CUpti_ExternalCorrelationKind, id: u64) -> CUptiResult;
+        }
         cuptiActivityPushExternalCorrelationId(kind, id)
     }
 }
@@ -33435,7 +33495,9 @@ pub unsafe fn cuptiActivityRegisterCallbacks(funcBufferRequested: CUpti_BuffersC
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityRegisterCallbacks(funcBufferRequested: CUpti_BuffersCallbackRequestFunc, funcBufferCompleted: CUpti_BuffersCallbackCompleteFunc) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityRegisterCallbacks(funcBufferRequested: CUpti_BuffersCallbackRequestFunc, funcBufferCompleted: CUpti_BuffersCallbackCompleteFunc) -> CUptiResult;
+        }
         cuptiActivityRegisterCallbacks(funcBufferRequested, funcBufferCompleted)
     }
 }
@@ -33450,7 +33512,9 @@ pub unsafe fn cuptiActivityRegisterCallbacks_v2(subscriber: CUpti_SubscriberHand
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityRegisterCallbacks_v2(subscriber: CUpti_SubscriberHandle, funcBufferRequested: CUpti_BuffersCallbackRequestFunc_v2, funcBufferCompleted: CUpti_BuffersCallbackCompleteFunc_v2) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityRegisterCallbacks_v2(subscriber: CUpti_SubscriberHandle, funcBufferRequested: CUpti_BuffersCallbackRequestFunc_v2, funcBufferCompleted: CUpti_BuffersCallbackCompleteFunc_v2) -> CUptiResult;
+        }
         cuptiActivityRegisterCallbacks_v2(subscriber, funcBufferRequested, funcBufferCompleted)
     }
 }
@@ -33465,7 +33529,9 @@ pub unsafe fn cuptiActivityRegisterTimestampCallback(funcTimestamp: CUpti_Timest
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivityRegisterTimestampCallback(funcTimestamp: CUpti_TimestampCallbackFunc) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivityRegisterTimestampCallback(funcTimestamp: CUpti_TimestampCallbackFunc) -> CUptiResult;
+        }
         cuptiActivityRegisterTimestampCallback(funcTimestamp)
     }
 }
@@ -33479,7 +33545,9 @@ pub unsafe fn cuptiActivitySetAttribute(attr: CUpti_ActivityAttribute, valueSize
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivitySetAttribute(attr: CUpti_ActivityAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivitySetAttribute(attr: CUpti_ActivityAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        }
         cuptiActivitySetAttribute(attr, valueSize, value)
     }
 }
@@ -33494,7 +33562,9 @@ pub unsafe fn cuptiActivitySetAttribute_v2(subscriber: CUpti_SubscriberHandle, a
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiActivitySetAttribute_v2(subscriber: CUpti_SubscriberHandle, attr: CUpti_ActivityAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        extern "C" {
+            fn cuptiActivitySetAttribute_v2(subscriber: CUpti_SubscriberHandle, attr: CUpti_ActivityAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        }
         cuptiActivitySetAttribute_v2(subscriber, attr, valueSize, value)
     }
 }
@@ -33508,7 +33578,9 @@ pub unsafe fn cuptiComputeCapabilitySupported(major: ::core::ffi::c_int, minor: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiComputeCapabilitySupported(major: ::core::ffi::c_int, minor: ::core::ffi::c_int, support: *mut ::core::ffi::c_int) -> CUptiResult;
+        extern "C" {
+            fn cuptiComputeCapabilitySupported(major: ::core::ffi::c_int, minor: ::core::ffi::c_int, support: *mut ::core::ffi::c_int) -> CUptiResult;
+        }
         cuptiComputeCapabilitySupported(major, minor, support)
     }
 }
@@ -33522,7 +33594,9 @@ pub unsafe fn cuptiDeviceEnumEventDomains(device: CUdevice, arraySizeBytes: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiDeviceEnumEventDomains(device: CUdevice, arraySizeBytes: *mut usize, domainArray: *mut CUpti_EventDomainID) -> CUptiResult;
+        extern "C" {
+            fn cuptiDeviceEnumEventDomains(device: CUdevice, arraySizeBytes: *mut usize, domainArray: *mut CUpti_EventDomainID) -> CUptiResult;
+        }
         cuptiDeviceEnumEventDomains(device, arraySizeBytes, domainArray)
     }
 }
@@ -33536,7 +33610,9 @@ pub unsafe fn cuptiDeviceEnumMetrics(device: CUdevice, arraySizeBytes: *mut usiz
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiDeviceEnumMetrics(device: CUdevice, arraySizeBytes: *mut usize, metricArray: *mut CUpti_MetricID) -> CUptiResult;
+        extern "C" {
+            fn cuptiDeviceEnumMetrics(device: CUdevice, arraySizeBytes: *mut usize, metricArray: *mut CUpti_MetricID) -> CUptiResult;
+        }
         cuptiDeviceEnumMetrics(device, arraySizeBytes, metricArray)
     }
 }
@@ -33550,7 +33626,9 @@ pub unsafe fn cuptiDeviceGetAttribute(device: CUdevice, attrib: CUpti_DeviceAttr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiDeviceGetAttribute(device: CUdevice, attrib: CUpti_DeviceAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        extern "C" {
+            fn cuptiDeviceGetAttribute(device: CUdevice, attrib: CUpti_DeviceAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        }
         cuptiDeviceGetAttribute(device, attrib, valueSize, value)
     }
 }
@@ -33564,7 +33642,9 @@ pub unsafe fn cuptiDeviceGetEventDomainAttribute(device: CUdevice, eventDomain: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiDeviceGetEventDomainAttribute(device: CUdevice, eventDomain: CUpti_EventDomainID, attrib: CUpti_EventDomainAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        extern "C" {
+            fn cuptiDeviceGetEventDomainAttribute(device: CUdevice, eventDomain: CUpti_EventDomainID, attrib: CUpti_EventDomainAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        }
         cuptiDeviceGetEventDomainAttribute(device, eventDomain, attrib, valueSize, value)
     }
 }
@@ -33578,7 +33658,9 @@ pub unsafe fn cuptiDeviceGetNumEventDomains(device: CUdevice, numDomains: *mut u
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiDeviceGetNumEventDomains(device: CUdevice, numDomains: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiDeviceGetNumEventDomains(device: CUdevice, numDomains: *mut u32) -> CUptiResult;
+        }
         cuptiDeviceGetNumEventDomains(device, numDomains)
     }
 }
@@ -33592,7 +33674,9 @@ pub unsafe fn cuptiDeviceGetNumMetrics(device: CUdevice, numMetrics: *mut u32) -
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiDeviceGetNumMetrics(device: CUdevice, numMetrics: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiDeviceGetNumMetrics(device: CUdevice, numMetrics: *mut u32) -> CUptiResult;
+        }
         cuptiDeviceGetNumMetrics(device, numMetrics)
     }
 }
@@ -33607,7 +33691,9 @@ pub unsafe fn cuptiDeviceGetTimestamp(context: CUcontext, timestamp: *mut u64) -
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiDeviceGetTimestamp(context: CUcontext, timestamp: *mut u64) -> CUptiResult;
+        extern "C" {
+            fn cuptiDeviceGetTimestamp(context: CUcontext, timestamp: *mut u64) -> CUptiResult;
+        }
         cuptiDeviceGetTimestamp(context, timestamp)
     }
 }
@@ -33621,7 +33707,9 @@ pub unsafe fn cuptiDeviceSupported(dev: CUdevice, support: *mut ::core::ffi::c_i
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiDeviceSupported(dev: CUdevice, support: *mut ::core::ffi::c_int) -> CUptiResult;
+        extern "C" {
+            fn cuptiDeviceSupported(dev: CUdevice, support: *mut ::core::ffi::c_int) -> CUptiResult;
+        }
         cuptiDeviceSupported(dev, support)
     }
 }
@@ -33635,7 +33723,9 @@ pub unsafe fn cuptiDeviceVirtualizationMode(dev: CUdevice, mode: *mut CUpti_Devi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiDeviceVirtualizationMode(dev: CUdevice, mode: *mut CUpti_DeviceVirtualizationMode) -> CUptiResult;
+        extern "C" {
+            fn cuptiDeviceVirtualizationMode(dev: CUdevice, mode: *mut CUpti_DeviceVirtualizationMode) -> CUptiResult;
+        }
         cuptiDeviceVirtualizationMode(dev, mode)
     }
 }
@@ -33649,7 +33739,9 @@ pub unsafe fn cuptiDisableKernelReplayMode(context: CUcontext) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiDisableKernelReplayMode(context: CUcontext) -> CUptiResult;
+        extern "C" {
+            fn cuptiDisableKernelReplayMode(context: CUcontext) -> CUptiResult;
+        }
         cuptiDisableKernelReplayMode(context)
     }
 }
@@ -33663,7 +33755,9 @@ pub unsafe fn cuptiEnableAllDomains(enable: u32, subscriber: CUpti_SubscriberHan
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEnableAllDomains(enable: u32, subscriber: CUpti_SubscriberHandle) -> CUptiResult;
+        extern "C" {
+            fn cuptiEnableAllDomains(enable: u32, subscriber: CUpti_SubscriberHandle) -> CUptiResult;
+        }
         cuptiEnableAllDomains(enable, subscriber)
     }
 }
@@ -33677,7 +33771,9 @@ pub unsafe fn cuptiEnableCallback(enable: u32, subscriber: CUpti_SubscriberHandl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEnableCallback(enable: u32, subscriber: CUpti_SubscriberHandle, domain: CUpti_CallbackDomain, cbid: CUpti_CallbackId) -> CUptiResult;
+        extern "C" {
+            fn cuptiEnableCallback(enable: u32, subscriber: CUpti_SubscriberHandle, domain: CUpti_CallbackDomain, cbid: CUpti_CallbackId) -> CUptiResult;
+        }
         cuptiEnableCallback(enable, subscriber, domain, cbid)
     }
 }
@@ -33691,7 +33787,9 @@ pub unsafe fn cuptiEnableDomain(enable: u32, subscriber: CUpti_SubscriberHandle,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEnableDomain(enable: u32, subscriber: CUpti_SubscriberHandle, domain: CUpti_CallbackDomain) -> CUptiResult;
+        extern "C" {
+            fn cuptiEnableDomain(enable: u32, subscriber: CUpti_SubscriberHandle, domain: CUpti_CallbackDomain) -> CUptiResult;
+        }
         cuptiEnableDomain(enable, subscriber, domain)
     }
 }
@@ -33705,7 +33803,9 @@ pub unsafe fn cuptiEnableKernelReplayMode(context: CUcontext) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEnableKernelReplayMode(context: CUcontext) -> CUptiResult;
+        extern "C" {
+            fn cuptiEnableKernelReplayMode(context: CUcontext) -> CUptiResult;
+        }
         cuptiEnableKernelReplayMode(context)
     }
 }
@@ -33719,7 +33819,9 @@ pub unsafe fn cuptiEnumEventDomains(arraySizeBytes: *mut usize, domainArray: *mu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEnumEventDomains(arraySizeBytes: *mut usize, domainArray: *mut CUpti_EventDomainID) -> CUptiResult;
+        extern "C" {
+            fn cuptiEnumEventDomains(arraySizeBytes: *mut usize, domainArray: *mut CUpti_EventDomainID) -> CUptiResult;
+        }
         cuptiEnumEventDomains(arraySizeBytes, domainArray)
     }
 }
@@ -33733,7 +33835,9 @@ pub unsafe fn cuptiEnumMetrics(arraySizeBytes: *mut usize, metricArray: *mut CUp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEnumMetrics(arraySizeBytes: *mut usize, metricArray: *mut CUpti_MetricID) -> CUptiResult;
+        extern "C" {
+            fn cuptiEnumMetrics(arraySizeBytes: *mut usize, metricArray: *mut CUpti_MetricID) -> CUptiResult;
+        }
         cuptiEnumMetrics(arraySizeBytes, metricArray)
     }
 }
@@ -33747,7 +33851,9 @@ pub unsafe fn cuptiEventDomainEnumEvents(eventDomain: CUpti_EventDomainID, array
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventDomainEnumEvents(eventDomain: CUpti_EventDomainID, arraySizeBytes: *mut usize, eventArray: *mut CUpti_EventID) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventDomainEnumEvents(eventDomain: CUpti_EventDomainID, arraySizeBytes: *mut usize, eventArray: *mut CUpti_EventID) -> CUptiResult;
+        }
         cuptiEventDomainEnumEvents(eventDomain, arraySizeBytes, eventArray)
     }
 }
@@ -33761,7 +33867,9 @@ pub unsafe fn cuptiEventDomainGetAttribute(eventDomain: CUpti_EventDomainID, att
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventDomainGetAttribute(eventDomain: CUpti_EventDomainID, attrib: CUpti_EventDomainAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventDomainGetAttribute(eventDomain: CUpti_EventDomainID, attrib: CUpti_EventDomainAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        }
         cuptiEventDomainGetAttribute(eventDomain, attrib, valueSize, value)
     }
 }
@@ -33775,7 +33883,9 @@ pub unsafe fn cuptiEventDomainGetNumEvents(eventDomain: CUpti_EventDomainID, num
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventDomainGetNumEvents(eventDomain: CUpti_EventDomainID, numEvents: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventDomainGetNumEvents(eventDomain: CUpti_EventDomainID, numEvents: *mut u32) -> CUptiResult;
+        }
         cuptiEventDomainGetNumEvents(eventDomain, numEvents)
     }
 }
@@ -33789,7 +33899,9 @@ pub unsafe fn cuptiEventGetAttribute(event: CUpti_EventID, attrib: CUpti_EventAt
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGetAttribute(event: CUpti_EventID, attrib: CUpti_EventAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGetAttribute(event: CUpti_EventID, attrib: CUpti_EventAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        }
         cuptiEventGetAttribute(event, attrib, valueSize, value)
     }
 }
@@ -33803,7 +33915,9 @@ pub unsafe fn cuptiEventGetIdFromName(device: CUdevice, eventName: *const ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGetIdFromName(device: CUdevice, eventName: *const ::core::ffi::c_char, event: *mut CUpti_EventID) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGetIdFromName(device: CUdevice, eventName: *const ::core::ffi::c_char, event: *mut CUpti_EventID) -> CUptiResult;
+        }
         cuptiEventGetIdFromName(device, eventName, event)
     }
 }
@@ -33817,7 +33931,9 @@ pub unsafe fn cuptiEventGroupAddEvent(eventGroup: CUpti_EventGroup, event: CUpti
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupAddEvent(eventGroup: CUpti_EventGroup, event: CUpti_EventID) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupAddEvent(eventGroup: CUpti_EventGroup, event: CUpti_EventID) -> CUptiResult;
+        }
         cuptiEventGroupAddEvent(eventGroup, event)
     }
 }
@@ -33831,7 +33947,9 @@ pub unsafe fn cuptiEventGroupCreate(context: CUcontext, eventGroup: *mut CUpti_E
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupCreate(context: CUcontext, eventGroup: *mut CUpti_EventGroup, flags: u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupCreate(context: CUcontext, eventGroup: *mut CUpti_EventGroup, flags: u32) -> CUptiResult;
+        }
         cuptiEventGroupCreate(context, eventGroup, flags)
     }
 }
@@ -33845,7 +33963,9 @@ pub unsafe fn cuptiEventGroupDestroy(eventGroup: CUpti_EventGroup) -> CUptiResul
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupDestroy(eventGroup: CUpti_EventGroup) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupDestroy(eventGroup: CUpti_EventGroup) -> CUptiResult;
+        }
         cuptiEventGroupDestroy(eventGroup)
     }
 }
@@ -33859,7 +33979,9 @@ pub unsafe fn cuptiEventGroupDisable(eventGroup: CUpti_EventGroup) -> CUptiResul
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupDisable(eventGroup: CUpti_EventGroup) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupDisable(eventGroup: CUpti_EventGroup) -> CUptiResult;
+        }
         cuptiEventGroupDisable(eventGroup)
     }
 }
@@ -33873,7 +33995,9 @@ pub unsafe fn cuptiEventGroupEnable(eventGroup: CUpti_EventGroup) -> CUptiResult
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupEnable(eventGroup: CUpti_EventGroup) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupEnable(eventGroup: CUpti_EventGroup) -> CUptiResult;
+        }
         cuptiEventGroupEnable(eventGroup)
     }
 }
@@ -33887,7 +34011,9 @@ pub unsafe fn cuptiEventGroupGetAttribute(eventGroup: CUpti_EventGroup, attrib: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupGetAttribute(eventGroup: CUpti_EventGroup, attrib: CUpti_EventGroupAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupGetAttribute(eventGroup: CUpti_EventGroup, attrib: CUpti_EventGroupAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        }
         cuptiEventGroupGetAttribute(eventGroup, attrib, valueSize, value)
     }
 }
@@ -33901,7 +34027,9 @@ pub unsafe fn cuptiEventGroupReadAllEvents(eventGroup: CUpti_EventGroup, flags: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupReadAllEvents(eventGroup: CUpti_EventGroup, flags: CUpti_ReadEventFlags, eventValueBufferSizeBytes: *mut usize, eventValueBuffer: *mut u64, eventIdArraySizeBytes: *mut usize, eventIdArray: *mut CUpti_EventID, numEventIdsRead: *mut usize) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupReadAllEvents(eventGroup: CUpti_EventGroup, flags: CUpti_ReadEventFlags, eventValueBufferSizeBytes: *mut usize, eventValueBuffer: *mut u64, eventIdArraySizeBytes: *mut usize, eventIdArray: *mut CUpti_EventID, numEventIdsRead: *mut usize) -> CUptiResult;
+        }
         cuptiEventGroupReadAllEvents(eventGroup, flags, eventValueBufferSizeBytes, eventValueBuffer, eventIdArraySizeBytes, eventIdArray, numEventIdsRead)
     }
 }
@@ -33915,7 +34043,9 @@ pub unsafe fn cuptiEventGroupReadEvent(eventGroup: CUpti_EventGroup, flags: CUpt
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupReadEvent(eventGroup: CUpti_EventGroup, flags: CUpti_ReadEventFlags, event: CUpti_EventID, eventValueBufferSizeBytes: *mut usize, eventValueBuffer: *mut u64) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupReadEvent(eventGroup: CUpti_EventGroup, flags: CUpti_ReadEventFlags, event: CUpti_EventID, eventValueBufferSizeBytes: *mut usize, eventValueBuffer: *mut u64) -> CUptiResult;
+        }
         cuptiEventGroupReadEvent(eventGroup, flags, event, eventValueBufferSizeBytes, eventValueBuffer)
     }
 }
@@ -33929,7 +34059,9 @@ pub unsafe fn cuptiEventGroupRemoveAllEvents(eventGroup: CUpti_EventGroup) -> CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupRemoveAllEvents(eventGroup: CUpti_EventGroup) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupRemoveAllEvents(eventGroup: CUpti_EventGroup) -> CUptiResult;
+        }
         cuptiEventGroupRemoveAllEvents(eventGroup)
     }
 }
@@ -33943,7 +34075,9 @@ pub unsafe fn cuptiEventGroupRemoveEvent(eventGroup: CUpti_EventGroup, event: CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupRemoveEvent(eventGroup: CUpti_EventGroup, event: CUpti_EventID) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupRemoveEvent(eventGroup: CUpti_EventGroup, event: CUpti_EventID) -> CUptiResult;
+        }
         cuptiEventGroupRemoveEvent(eventGroup, event)
     }
 }
@@ -33957,7 +34091,9 @@ pub unsafe fn cuptiEventGroupResetAllEvents(eventGroup: CUpti_EventGroup) -> CUp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupResetAllEvents(eventGroup: CUpti_EventGroup) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupResetAllEvents(eventGroup: CUpti_EventGroup) -> CUptiResult;
+        }
         cuptiEventGroupResetAllEvents(eventGroup)
     }
 }
@@ -33971,7 +34107,9 @@ pub unsafe fn cuptiEventGroupSetAttribute(eventGroup: CUpti_EventGroup, attrib: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupSetAttribute(eventGroup: CUpti_EventGroup, attrib: CUpti_EventGroupAttribute, valueSize: usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupSetAttribute(eventGroup: CUpti_EventGroup, attrib: CUpti_EventGroupAttribute, valueSize: usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        }
         cuptiEventGroupSetAttribute(eventGroup, attrib, valueSize, value)
     }
 }
@@ -33985,7 +34123,9 @@ pub unsafe fn cuptiEventGroupSetDisable(eventGroupSet: *mut CUpti_EventGroupSet)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupSetDisable(eventGroupSet: *mut CUpti_EventGroupSet) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupSetDisable(eventGroupSet: *mut CUpti_EventGroupSet) -> CUptiResult;
+        }
         cuptiEventGroupSetDisable(eventGroupSet)
     }
 }
@@ -33999,7 +34139,9 @@ pub unsafe fn cuptiEventGroupSetEnable(eventGroupSet: *mut CUpti_EventGroupSet) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupSetEnable(eventGroupSet: *mut CUpti_EventGroupSet) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupSetEnable(eventGroupSet: *mut CUpti_EventGroupSet) -> CUptiResult;
+        }
         cuptiEventGroupSetEnable(eventGroupSet)
     }
 }
@@ -34013,7 +34155,9 @@ pub unsafe fn cuptiEventGroupSetsCreate(context: CUcontext, eventIdArraySizeByte
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupSetsCreate(context: CUcontext, eventIdArraySizeBytes: usize, eventIdArray: *mut CUpti_EventID, eventGroupPasses: *mut *mut CUpti_EventGroupSets) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupSetsCreate(context: CUcontext, eventIdArraySizeBytes: usize, eventIdArray: *mut CUpti_EventID, eventGroupPasses: *mut *mut CUpti_EventGroupSets) -> CUptiResult;
+        }
         cuptiEventGroupSetsCreate(context, eventIdArraySizeBytes, eventIdArray, eventGroupPasses)
     }
 }
@@ -34027,7 +34171,9 @@ pub unsafe fn cuptiEventGroupSetsDestroy(eventGroupSets: *mut CUpti_EventGroupSe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiEventGroupSetsDestroy(eventGroupSets: *mut CUpti_EventGroupSets) -> CUptiResult;
+        extern "C" {
+            fn cuptiEventGroupSetsDestroy(eventGroupSets: *mut CUpti_EventGroupSets) -> CUptiResult;
+        }
         cuptiEventGroupSetsDestroy(eventGroupSets)
     }
 }
@@ -34041,7 +34187,9 @@ pub unsafe fn cuptiFinalize() -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiFinalize() -> CUptiResult;
+        extern "C" {
+            fn cuptiFinalize() -> CUptiResult;
+        }
         cuptiFinalize()
     }
 }
@@ -34055,7 +34203,9 @@ pub unsafe fn cuptiGetAutoBoostState(context: CUcontext, state: *mut CUpti_Activ
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetAutoBoostState(context: CUcontext, state: *mut CUpti_ActivityAutoBoostState) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetAutoBoostState(context: CUcontext, state: *mut CUpti_ActivityAutoBoostState) -> CUptiResult;
+        }
         cuptiGetAutoBoostState(context, state)
     }
 }
@@ -34069,7 +34219,9 @@ pub unsafe fn cuptiGetCallbackName(domain: CUpti_CallbackDomain, cbid: u32, name
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetCallbackName(domain: CUpti_CallbackDomain, cbid: u32, name: *mut *const ::core::ffi::c_char) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetCallbackName(domain: CUpti_CallbackDomain, cbid: u32, name: *mut *const ::core::ffi::c_char) -> CUptiResult;
+        }
         cuptiGetCallbackName(domain, cbid, name)
     }
 }
@@ -34083,7 +34235,9 @@ pub unsafe fn cuptiGetCallbackState(enable: *mut u32, subscriber: CUpti_Subscrib
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetCallbackState(enable: *mut u32, subscriber: CUpti_SubscriberHandle, domain: CUpti_CallbackDomain, cbid: CUpti_CallbackId) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetCallbackState(enable: *mut u32, subscriber: CUpti_SubscriberHandle, domain: CUpti_CallbackDomain, cbid: CUpti_CallbackId) -> CUptiResult;
+        }
         cuptiGetCallbackState(enable, subscriber, domain, cbid)
     }
 }
@@ -34097,7 +34251,9 @@ pub unsafe fn cuptiGetContextId(context: CUcontext, contextId: *mut u32) -> CUpt
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetContextId(context: CUcontext, contextId: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetContextId(context: CUcontext, contextId: *mut u32) -> CUptiResult;
+        }
         cuptiGetContextId(context, contextId)
     }
 }
@@ -34111,7 +34267,9 @@ pub unsafe fn cuptiGetDeviceId(context: CUcontext, deviceId: *mut u32) -> CUptiR
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetDeviceId(context: CUcontext, deviceId: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetDeviceId(context: CUcontext, deviceId: *mut u32) -> CUptiResult;
+        }
         cuptiGetDeviceId(context, deviceId)
     }
 }
@@ -34126,7 +34284,9 @@ pub unsafe fn cuptiGetEnabledCallbacks(subscriber: CUpti_SubscriberHandle, domai
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetEnabledCallbacks(subscriber: CUpti_SubscriberHandle, domain: CUpti_CallbackDomain, buffer: *mut CUpti_CallbackId, bufferSize: *mut u32, enabledCallbacksCount: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetEnabledCallbacks(subscriber: CUpti_SubscriberHandle, domain: CUpti_CallbackDomain, buffer: *mut CUpti_CallbackId, bufferSize: *mut u32, enabledCallbacksCount: *mut u32) -> CUptiResult;
+        }
         cuptiGetEnabledCallbacks(subscriber, domain, buffer, bufferSize, enabledCallbacksCount)
     }
 }
@@ -34141,7 +34301,9 @@ pub unsafe fn cuptiGetErrorMessage(result: CUptiResult, str_: *mut *const ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetErrorMessage(result: CUptiResult, str_: *mut *const ::core::ffi::c_char) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetErrorMessage(result: CUptiResult, str_: *mut *const ::core::ffi::c_char) -> CUptiResult;
+        }
         cuptiGetErrorMessage(result, str_)
     }
 }
@@ -34156,7 +34318,9 @@ pub unsafe fn cuptiGetGraphExecId(graphExec: CUgraphExec, pId: *mut u32) -> CUpt
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetGraphExecId(graphExec: CUgraphExec, pId: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetGraphExecId(graphExec: CUgraphExec, pId: *mut u32) -> CUptiResult;
+        }
         cuptiGetGraphExecId(graphExec, pId)
     }
 }
@@ -34170,7 +34334,9 @@ pub unsafe fn cuptiGetGraphId(graph: CUgraph, pId: *mut u32) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetGraphId(graph: CUgraph, pId: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetGraphId(graph: CUgraph, pId: *mut u32) -> CUptiResult;
+        }
         cuptiGetGraphId(graph, pId)
     }
 }
@@ -34184,7 +34350,9 @@ pub unsafe fn cuptiGetGraphNodeId(node: CUgraphNode, nodeId: *mut u64) -> CUptiR
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetGraphNodeId(node: CUgraphNode, nodeId: *mut u64) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetGraphNodeId(node: CUgraphNode, nodeId: *mut u64) -> CUptiResult;
+        }
         cuptiGetGraphNodeId(node, nodeId)
     }
 }
@@ -34198,7 +34366,9 @@ pub unsafe fn cuptiGetLastError() -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetLastError() -> CUptiResult;
+        extern "C" {
+            fn cuptiGetLastError() -> CUptiResult;
+        }
         cuptiGetLastError()
     }
 }
@@ -34212,7 +34382,9 @@ pub unsafe fn cuptiGetNumEventDomains(numDomains: *mut u32) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetNumEventDomains(numDomains: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetNumEventDomains(numDomains: *mut u32) -> CUptiResult;
+        }
         cuptiGetNumEventDomains(numDomains)
     }
 }
@@ -34226,7 +34398,9 @@ pub unsafe fn cuptiGetNumMetrics(numMetrics: *mut u32) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetNumMetrics(numMetrics: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetNumMetrics(numMetrics: *mut u32) -> CUptiResult;
+        }
         cuptiGetNumMetrics(numMetrics)
     }
 }
@@ -34240,7 +34414,9 @@ pub unsafe fn cuptiGetResultString(result: CUptiResult, str_: *mut *const ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetResultString(result: CUptiResult, str_: *mut *const ::core::ffi::c_char) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetResultString(result: CUptiResult, str_: *mut *const ::core::ffi::c_char) -> CUptiResult;
+        }
         cuptiGetResultString(result, str_)
     }
 }
@@ -34254,7 +34430,9 @@ pub unsafe fn cuptiGetStreamId(context: CUcontext, stream: CUstream, streamId: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetStreamId(context: CUcontext, stream: CUstream, streamId: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetStreamId(context: CUcontext, stream: CUstream, streamId: *mut u32) -> CUptiResult;
+        }
         cuptiGetStreamId(context, stream, streamId)
     }
 }
@@ -34268,7 +34446,9 @@ pub unsafe fn cuptiGetStreamIdEx(context: CUcontext, stream: CUstream, perThread
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetStreamIdEx(context: CUcontext, stream: CUstream, perThreadStream: u8, streamId: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetStreamIdEx(context: CUcontext, stream: CUstream, perThreadStream: u8, streamId: *mut u32) -> CUptiResult;
+        }
         cuptiGetStreamIdEx(context, stream, perThreadStream, streamId)
     }
 }
@@ -34282,7 +34462,9 @@ pub unsafe fn cuptiGetThreadIdType(type_: *mut CUpti_ActivityThreadIdType) -> CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetThreadIdType(type_: *mut CUpti_ActivityThreadIdType) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetThreadIdType(type_: *mut CUpti_ActivityThreadIdType) -> CUptiResult;
+        }
         cuptiGetThreadIdType(type_)
     }
 }
@@ -34296,7 +34478,9 @@ pub unsafe fn cuptiGetTimestamp(timestamp: *mut u64) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetTimestamp(timestamp: *mut u64) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetTimestamp(timestamp: *mut u64) -> CUptiResult;
+        }
         cuptiGetTimestamp(timestamp)
     }
 }
@@ -34310,7 +34494,9 @@ pub unsafe fn cuptiGetVersion(version: *mut u32) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiGetVersion(version: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiGetVersion(version: *mut u32) -> CUptiResult;
+        }
         cuptiGetVersion(version)
     }
 }
@@ -34325,7 +34511,9 @@ pub unsafe fn cuptiIsTracingSessionRunning(isRunning: *mut u8) -> CUptiResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiIsTracingSessionRunning(isRunning: *mut u8) -> CUptiResult;
+        extern "C" {
+            fn cuptiIsTracingSessionRunning(isRunning: *mut u8) -> CUptiResult;
+        }
         cuptiIsTracingSessionRunning(isRunning)
     }
 }
@@ -34339,7 +34527,9 @@ pub unsafe fn cuptiKernelReplaySubscribeUpdate(updateFunc: CUpti_KernelReplayUpd
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiKernelReplaySubscribeUpdate(updateFunc: CUpti_KernelReplayUpdateFunc, customData: *mut ::core::ffi::c_void) -> CUptiResult;
+        extern "C" {
+            fn cuptiKernelReplaySubscribeUpdate(updateFunc: CUpti_KernelReplayUpdateFunc, customData: *mut ::core::ffi::c_void) -> CUptiResult;
+        }
         cuptiKernelReplaySubscribeUpdate(updateFunc, customData)
     }
 }
@@ -34353,7 +34543,9 @@ pub unsafe fn cuptiMetricCreateEventGroupSets(context: CUcontext, metricIdArrayS
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiMetricCreateEventGroupSets(context: CUcontext, metricIdArraySizeBytes: usize, metricIdArray: *mut CUpti_MetricID, eventGroupPasses: *mut *mut CUpti_EventGroupSets) -> CUptiResult;
+        extern "C" {
+            fn cuptiMetricCreateEventGroupSets(context: CUcontext, metricIdArraySizeBytes: usize, metricIdArray: *mut CUpti_MetricID, eventGroupPasses: *mut *mut CUpti_EventGroupSets) -> CUptiResult;
+        }
         cuptiMetricCreateEventGroupSets(context, metricIdArraySizeBytes, metricIdArray, eventGroupPasses)
     }
 }
@@ -34367,7 +34559,9 @@ pub unsafe fn cuptiMetricEnumEvents(metric: CUpti_MetricID, eventIdArraySizeByte
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiMetricEnumEvents(metric: CUpti_MetricID, eventIdArraySizeBytes: *mut usize, eventIdArray: *mut CUpti_EventID) -> CUptiResult;
+        extern "C" {
+            fn cuptiMetricEnumEvents(metric: CUpti_MetricID, eventIdArraySizeBytes: *mut usize, eventIdArray: *mut CUpti_EventID) -> CUptiResult;
+        }
         cuptiMetricEnumEvents(metric, eventIdArraySizeBytes, eventIdArray)
     }
 }
@@ -34381,7 +34575,9 @@ pub unsafe fn cuptiMetricEnumProperties(metric: CUpti_MetricID, propIdArraySizeB
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiMetricEnumProperties(metric: CUpti_MetricID, propIdArraySizeBytes: *mut usize, propIdArray: *mut CUpti_MetricPropertyID) -> CUptiResult;
+        extern "C" {
+            fn cuptiMetricEnumProperties(metric: CUpti_MetricID, propIdArraySizeBytes: *mut usize, propIdArray: *mut CUpti_MetricPropertyID) -> CUptiResult;
+        }
         cuptiMetricEnumProperties(metric, propIdArraySizeBytes, propIdArray)
     }
 }
@@ -34395,7 +34591,9 @@ pub unsafe fn cuptiMetricGetAttribute(metric: CUpti_MetricID, attrib: CUpti_Metr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiMetricGetAttribute(metric: CUpti_MetricID, attrib: CUpti_MetricAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        extern "C" {
+            fn cuptiMetricGetAttribute(metric: CUpti_MetricID, attrib: CUpti_MetricAttribute, valueSize: *mut usize, value: *mut ::core::ffi::c_void) -> CUptiResult;
+        }
         cuptiMetricGetAttribute(metric, attrib, valueSize, value)
     }
 }
@@ -34409,7 +34607,9 @@ pub unsafe fn cuptiMetricGetIdFromName(device: CUdevice, metricName: *const ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiMetricGetIdFromName(device: CUdevice, metricName: *const ::core::ffi::c_char, metric: *mut CUpti_MetricID) -> CUptiResult;
+        extern "C" {
+            fn cuptiMetricGetIdFromName(device: CUdevice, metricName: *const ::core::ffi::c_char, metric: *mut CUpti_MetricID) -> CUptiResult;
+        }
         cuptiMetricGetIdFromName(device, metricName, metric)
     }
 }
@@ -34423,7 +34623,9 @@ pub unsafe fn cuptiMetricGetNumEvents(metric: CUpti_MetricID, numEvents: *mut u3
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiMetricGetNumEvents(metric: CUpti_MetricID, numEvents: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiMetricGetNumEvents(metric: CUpti_MetricID, numEvents: *mut u32) -> CUptiResult;
+        }
         cuptiMetricGetNumEvents(metric, numEvents)
     }
 }
@@ -34437,7 +34639,9 @@ pub unsafe fn cuptiMetricGetNumProperties(metric: CUpti_MetricID, numProp: *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiMetricGetNumProperties(metric: CUpti_MetricID, numProp: *mut u32) -> CUptiResult;
+        extern "C" {
+            fn cuptiMetricGetNumProperties(metric: CUpti_MetricID, numProp: *mut u32) -> CUptiResult;
+        }
         cuptiMetricGetNumProperties(metric, numProp)
     }
 }
@@ -34451,7 +34655,9 @@ pub unsafe fn cuptiMetricGetRequiredEventGroupSets(context: CUcontext, metric: C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiMetricGetRequiredEventGroupSets(context: CUcontext, metric: CUpti_MetricID, eventGroupSets: *mut *mut CUpti_EventGroupSets) -> CUptiResult;
+        extern "C" {
+            fn cuptiMetricGetRequiredEventGroupSets(context: CUcontext, metric: CUpti_MetricID, eventGroupSets: *mut *mut CUpti_EventGroupSets) -> CUptiResult;
+        }
         cuptiMetricGetRequiredEventGroupSets(context, metric, eventGroupSets)
     }
 }
@@ -34465,7 +34671,9 @@ pub unsafe fn cuptiMetricGetValue(device: CUdevice, metric: CUpti_MetricID, even
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiMetricGetValue(device: CUdevice, metric: CUpti_MetricID, eventIdArraySizeBytes: usize, eventIdArray: *mut CUpti_EventID, eventValueArraySizeBytes: usize, eventValueArray: *mut u64, timeDuration: u64, metricValue: *mut CUpti_MetricValue) -> CUptiResult;
+        extern "C" {
+            fn cuptiMetricGetValue(device: CUdevice, metric: CUpti_MetricID, eventIdArraySizeBytes: usize, eventIdArray: *mut CUpti_EventID, eventValueArraySizeBytes: usize, eventValueArray: *mut u64, timeDuration: u64, metricValue: *mut CUpti_MetricValue) -> CUptiResult;
+        }
         cuptiMetricGetValue(device, metric, eventIdArraySizeBytes, eventIdArray, eventValueArraySizeBytes, eventValueArray, timeDuration, metricValue)
     }
 }
@@ -34479,7 +34687,9 @@ pub unsafe fn cuptiMetricGetValue2(metric: CUpti_MetricID, eventIdArraySizeBytes
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiMetricGetValue2(metric: CUpti_MetricID, eventIdArraySizeBytes: usize, eventIdArray: *mut CUpti_EventID, eventValueArraySizeBytes: usize, eventValueArray: *mut u64, propIdArraySizeBytes: usize, propIdArray: *mut CUpti_MetricPropertyID, propValueArraySizeBytes: usize, propValueArray: *mut u64, metricValue: *mut CUpti_MetricValue) -> CUptiResult;
+        extern "C" {
+            fn cuptiMetricGetValue2(metric: CUpti_MetricID, eventIdArraySizeBytes: usize, eventIdArray: *mut CUpti_EventID, eventValueArraySizeBytes: usize, eventValueArray: *mut u64, propIdArraySizeBytes: usize, propIdArray: *mut CUpti_MetricPropertyID, propValueArraySizeBytes: usize, propValueArray: *mut u64, metricValue: *mut CUpti_MetricValue) -> CUptiResult;
+        }
         cuptiMetricGetValue2(metric, eventIdArraySizeBytes, eventIdArray, eventValueArraySizeBytes, eventValueArray, propIdArraySizeBytes, propIdArray, propValueArraySizeBytes, propValueArray, metricValue)
     }
 }
@@ -34493,7 +34703,9 @@ pub unsafe fn cuptiSetEventCollectionMode(context: CUcontext, mode: CUpti_EventC
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiSetEventCollectionMode(context: CUcontext, mode: CUpti_EventCollectionMode) -> CUptiResult;
+        extern "C" {
+            fn cuptiSetEventCollectionMode(context: CUcontext, mode: CUpti_EventCollectionMode) -> CUptiResult;
+        }
         cuptiSetEventCollectionMode(context, mode)
     }
 }
@@ -34507,7 +34719,9 @@ pub unsafe fn cuptiSetThreadIdType(type_: CUpti_ActivityThreadIdType) -> CUptiRe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiSetThreadIdType(type_: CUpti_ActivityThreadIdType) -> CUptiResult;
+        extern "C" {
+            fn cuptiSetThreadIdType(type_: CUpti_ActivityThreadIdType) -> CUptiResult;
+        }
         cuptiSetThreadIdType(type_)
     }
 }
@@ -34521,7 +34735,9 @@ pub unsafe fn cuptiSubscribe(subscriber: *mut CUpti_SubscriberHandle, callback: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiSubscribe(subscriber: *mut CUpti_SubscriberHandle, callback: CUpti_CallbackFunc, userdata: *mut ::core::ffi::c_void) -> CUptiResult;
+        extern "C" {
+            fn cuptiSubscribe(subscriber: *mut CUpti_SubscriberHandle, callback: CUpti_CallbackFunc, userdata: *mut ::core::ffi::c_void) -> CUptiResult;
+        }
         cuptiSubscribe(subscriber, callback, userdata)
     }
 }
@@ -34536,7 +34752,9 @@ pub unsafe fn cuptiSubscribe_v2(subscriber: *mut CUpti_SubscriberHandle, callbac
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiSubscribe_v2(subscriber: *mut CUpti_SubscriberHandle, callback: CUpti_CallbackFunc, userdata: *mut ::core::ffi::c_void, pParams: *mut CUpti_SubscriberParams) -> CUptiResult;
+        extern "C" {
+            fn cuptiSubscribe_v2(subscriber: *mut CUpti_SubscriberHandle, callback: CUpti_CallbackFunc, userdata: *mut ::core::ffi::c_void, pParams: *mut CUpti_SubscriberParams) -> CUptiResult;
+        }
         cuptiSubscribe_v2(subscriber, callback, userdata, pParams)
     }
 }
@@ -34550,7 +34768,9 @@ pub unsafe fn cuptiSupportedDomains(domainCount: *mut usize, domainTable: *mut C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiSupportedDomains(domainCount: *mut usize, domainTable: *mut CUpti_DomainTable) -> CUptiResult;
+        extern "C" {
+            fn cuptiSupportedDomains(domainCount: *mut usize, domainTable: *mut CUpti_DomainTable) -> CUptiResult;
+        }
         cuptiSupportedDomains(domainCount, domainTable)
     }
 }
@@ -34564,7 +34784,9 @@ pub unsafe fn cuptiUnsubscribe(subscriber: CUpti_SubscriberHandle) -> CUptiResul
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuptiUnsubscribe(subscriber: CUpti_SubscriberHandle) -> CUptiResult;
+        extern "C" {
+            fn cuptiUnsubscribe(subscriber: CUpti_SubscriberHandle) -> CUptiResult;
+        }
         cuptiUnsubscribe(subscriber)
     }
 }

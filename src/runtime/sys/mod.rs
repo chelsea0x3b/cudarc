@@ -6346,7 +6346,9 @@ pub unsafe fn cudaArrayGetInfo(desc: *mut cudaChannelFormatDesc, extent: *mut cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaArrayGetInfo(desc: *mut cudaChannelFormatDesc, extent: *mut cudaExtent, flags: *mut ::core::ffi::c_uint, array: cudaArray_t) -> cudaError_t;
+        extern "C" {
+            fn cudaArrayGetInfo(desc: *mut cudaChannelFormatDesc, extent: *mut cudaExtent, flags: *mut ::core::ffi::c_uint, array: cudaArray_t) -> cudaError_t;
+        }
         cudaArrayGetInfo(desc, extent, flags, array)
     }
 }
@@ -6361,7 +6363,9 @@ pub unsafe fn cudaArrayGetMemoryRequirements(memoryRequirements: *mut cudaArrayM
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaArrayGetMemoryRequirements(memoryRequirements: *mut cudaArrayMemoryRequirements, array: cudaArray_t, device: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaArrayGetMemoryRequirements(memoryRequirements: *mut cudaArrayMemoryRequirements, array: cudaArray_t, device: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaArrayGetMemoryRequirements(memoryRequirements, array, device)
     }
 }
@@ -6375,7 +6379,9 @@ pub unsafe fn cudaArrayGetPlane(pPlaneArray: *mut cudaArray_t, hArray: cudaArray
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaArrayGetPlane(pPlaneArray: *mut cudaArray_t, hArray: cudaArray_t, planeIdx: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaArrayGetPlane(pPlaneArray: *mut cudaArray_t, hArray: cudaArray_t, planeIdx: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaArrayGetPlane(pPlaneArray, hArray, planeIdx)
     }
 }
@@ -6389,7 +6395,9 @@ pub unsafe fn cudaArrayGetSparseProperties(sparseProperties: *mut cudaArraySpars
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaArrayGetSparseProperties(sparseProperties: *mut cudaArraySparseProperties, array: cudaArray_t) -> cudaError_t;
+        extern "C" {
+            fn cudaArrayGetSparseProperties(sparseProperties: *mut cudaArraySparseProperties, array: cudaArray_t) -> cudaError_t;
+        }
         cudaArrayGetSparseProperties(sparseProperties, array)
     }
 }
@@ -6404,7 +6412,9 @@ pub unsafe fn cudaBindSurfaceToArray(surfref: *const surfaceReference, array: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaBindSurfaceToArray(surfref: *const surfaceReference, array: cudaArray_const_t, desc: *const cudaChannelFormatDesc) -> cudaError_t;
+        extern "C" {
+            fn cudaBindSurfaceToArray(surfref: *const surfaceReference, array: cudaArray_const_t, desc: *const cudaChannelFormatDesc) -> cudaError_t;
+        }
         cudaBindSurfaceToArray(surfref, array, desc)
     }
 }
@@ -6419,7 +6429,9 @@ pub unsafe fn cudaBindTexture(offset: *mut usize, texref: *const textureReferenc
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaBindTexture(offset: *mut usize, texref: *const textureReference, devPtr: *const ::core::ffi::c_void, desc: *const cudaChannelFormatDesc, size: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaBindTexture(offset: *mut usize, texref: *const textureReference, devPtr: *const ::core::ffi::c_void, desc: *const cudaChannelFormatDesc, size: usize) -> cudaError_t;
+        }
         cudaBindTexture(offset, texref, devPtr, desc, size)
     }
 }
@@ -6434,7 +6446,9 @@ pub unsafe fn cudaBindTexture2D(offset: *mut usize, texref: *const textureRefere
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaBindTexture2D(offset: *mut usize, texref: *const textureReference, devPtr: *const ::core::ffi::c_void, desc: *const cudaChannelFormatDesc, width: usize, height: usize, pitch: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaBindTexture2D(offset: *mut usize, texref: *const textureReference, devPtr: *const ::core::ffi::c_void, desc: *const cudaChannelFormatDesc, width: usize, height: usize, pitch: usize) -> cudaError_t;
+        }
         cudaBindTexture2D(offset, texref, devPtr, desc, width, height, pitch)
     }
 }
@@ -6449,7 +6463,9 @@ pub unsafe fn cudaBindTextureToArray(texref: *const textureReference, array: cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaBindTextureToArray(texref: *const textureReference, array: cudaArray_const_t, desc: *const cudaChannelFormatDesc) -> cudaError_t;
+        extern "C" {
+            fn cudaBindTextureToArray(texref: *const textureReference, array: cudaArray_const_t, desc: *const cudaChannelFormatDesc) -> cudaError_t;
+        }
         cudaBindTextureToArray(texref, array, desc)
     }
 }
@@ -6464,7 +6480,9 @@ pub unsafe fn cudaBindTextureToMipmappedArray(texref: *const textureReference, m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaBindTextureToMipmappedArray(texref: *const textureReference, mipmappedArray: cudaMipmappedArray_const_t, desc: *const cudaChannelFormatDesc) -> cudaError_t;
+        extern "C" {
+            fn cudaBindTextureToMipmappedArray(texref: *const textureReference, mipmappedArray: cudaMipmappedArray_const_t, desc: *const cudaChannelFormatDesc) -> cudaError_t;
+        }
         cudaBindTextureToMipmappedArray(texref, mipmappedArray, desc)
     }
 }
@@ -6478,7 +6496,9 @@ pub unsafe fn cudaChooseDevice(device: *mut ::core::ffi::c_int, prop: *const cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaChooseDevice(device: *mut ::core::ffi::c_int, prop: *const cudaDeviceProp) -> cudaError_t;
+        extern "C" {
+            fn cudaChooseDevice(device: *mut ::core::ffi::c_int, prop: *const cudaDeviceProp) -> cudaError_t;
+        }
         cudaChooseDevice(device, prop)
     }
 }
@@ -6492,7 +6512,9 @@ pub unsafe fn cudaCreateChannelDesc(x: ::core::ffi::c_int, y: ::core::ffi::c_int
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaCreateChannelDesc(x: ::core::ffi::c_int, y: ::core::ffi::c_int, z: ::core::ffi::c_int, w: ::core::ffi::c_int, f: cudaChannelFormatKind) -> cudaChannelFormatDesc;
+        extern "C" {
+            fn cudaCreateChannelDesc(x: ::core::ffi::c_int, y: ::core::ffi::c_int, z: ::core::ffi::c_int, w: ::core::ffi::c_int, f: cudaChannelFormatKind) -> cudaChannelFormatDesc;
+        }
         cudaCreateChannelDesc(x, y, z, w, f)
     }
 }
@@ -6506,7 +6528,9 @@ pub unsafe fn cudaCreateSurfaceObject(pSurfObject: *mut cudaSurfaceObject_t, pRe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaCreateSurfaceObject(pSurfObject: *mut cudaSurfaceObject_t, pResDesc: *const cudaResourceDesc) -> cudaError_t;
+        extern "C" {
+            fn cudaCreateSurfaceObject(pSurfObject: *mut cudaSurfaceObject_t, pResDesc: *const cudaResourceDesc) -> cudaError_t;
+        }
         cudaCreateSurfaceObject(pSurfObject, pResDesc)
     }
 }
@@ -6520,7 +6544,9 @@ pub unsafe fn cudaCreateTextureObject(pTexObject: *mut cudaTextureObject_t, pRes
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaCreateTextureObject(pTexObject: *mut cudaTextureObject_t, pResDesc: *const cudaResourceDesc, pTexDesc: *const cudaTextureDesc, pResViewDesc: *const cudaResourceViewDesc) -> cudaError_t;
+        extern "C" {
+            fn cudaCreateTextureObject(pTexObject: *mut cudaTextureObject_t, pResDesc: *const cudaResourceDesc, pTexDesc: *const cudaTextureDesc, pResViewDesc: *const cudaResourceViewDesc) -> cudaError_t;
+        }
         cudaCreateTextureObject(pTexObject, pResDesc, pTexDesc, pResViewDesc)
     }
 }
@@ -6535,7 +6561,9 @@ pub unsafe fn cudaCreateTextureObject_v2(pTexObject: *mut cudaTextureObject_t, p
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaCreateTextureObject_v2(pTexObject: *mut cudaTextureObject_t, pResDesc: *const cudaResourceDesc, pTexDesc: *const cudaTextureDesc_v2, pResViewDesc: *const cudaResourceViewDesc) -> cudaError_t;
+        extern "C" {
+            fn cudaCreateTextureObject_v2(pTexObject: *mut cudaTextureObject_t, pResDesc: *const cudaResourceDesc, pTexDesc: *const cudaTextureDesc_v2, pResViewDesc: *const cudaResourceViewDesc) -> cudaError_t;
+        }
         cudaCreateTextureObject_v2(pTexObject, pResDesc, pTexDesc, pResViewDesc)
     }
 }
@@ -6549,7 +6577,9 @@ pub unsafe fn cudaCtxResetPersistingL2Cache() -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaCtxResetPersistingL2Cache() -> cudaError_t;
+        extern "C" {
+            fn cudaCtxResetPersistingL2Cache() -> cudaError_t;
+        }
         cudaCtxResetPersistingL2Cache()
     }
 }
@@ -6563,7 +6593,9 @@ pub unsafe fn cudaDestroyExternalMemory(extMem: cudaExternalMemory_t) -> cudaErr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDestroyExternalMemory(extMem: cudaExternalMemory_t) -> cudaError_t;
+        extern "C" {
+            fn cudaDestroyExternalMemory(extMem: cudaExternalMemory_t) -> cudaError_t;
+        }
         cudaDestroyExternalMemory(extMem)
     }
 }
@@ -6577,7 +6609,9 @@ pub unsafe fn cudaDestroyExternalSemaphore(extSem: cudaExternalSemaphore_t) -> c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDestroyExternalSemaphore(extSem: cudaExternalSemaphore_t) -> cudaError_t;
+        extern "C" {
+            fn cudaDestroyExternalSemaphore(extSem: cudaExternalSemaphore_t) -> cudaError_t;
+        }
         cudaDestroyExternalSemaphore(extSem)
     }
 }
@@ -6591,7 +6625,9 @@ pub unsafe fn cudaDestroySurfaceObject(surfObject: cudaSurfaceObject_t) -> cudaE
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDestroySurfaceObject(surfObject: cudaSurfaceObject_t) -> cudaError_t;
+        extern "C" {
+            fn cudaDestroySurfaceObject(surfObject: cudaSurfaceObject_t) -> cudaError_t;
+        }
         cudaDestroySurfaceObject(surfObject)
     }
 }
@@ -6605,7 +6641,9 @@ pub unsafe fn cudaDestroyTextureObject(texObject: cudaTextureObject_t) -> cudaEr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDestroyTextureObject(texObject: cudaTextureObject_t) -> cudaError_t;
+        extern "C" {
+            fn cudaDestroyTextureObject(texObject: cudaTextureObject_t) -> cudaError_t;
+        }
         cudaDestroyTextureObject(texObject)
     }
 }
@@ -6620,7 +6658,9 @@ pub unsafe fn cudaDevResourceGenerateDesc(phDesc: *mut cudaDevResourceDesc_t, re
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDevResourceGenerateDesc(phDesc: *mut cudaDevResourceDesc_t, resources: *mut cudaDevResource, nbResources: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaDevResourceGenerateDesc(phDesc: *mut cudaDevResourceDesc_t, resources: *mut cudaDevResource, nbResources: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaDevResourceGenerateDesc(phDesc, resources, nbResources)
     }
 }
@@ -6635,7 +6675,9 @@ pub unsafe fn cudaDevSmResourceSplit(result: *mut cudaDevResource, nbGroups: ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDevSmResourceSplit(result: *mut cudaDevResource, nbGroups: ::core::ffi::c_uint, input: *const cudaDevResource, remainder: *mut cudaDevResource, flags: ::core::ffi::c_uint, groupParams: *mut cudaDevSmResourceGroupParams) -> cudaError_t;
+        extern "C" {
+            fn cudaDevSmResourceSplit(result: *mut cudaDevResource, nbGroups: ::core::ffi::c_uint, input: *const cudaDevResource, remainder: *mut cudaDevResource, flags: ::core::ffi::c_uint, groupParams: *mut cudaDevSmResourceGroupParams) -> cudaError_t;
+        }
         cudaDevSmResourceSplit(result, nbGroups, input, remainder, flags, groupParams)
     }
 }
@@ -6650,7 +6692,9 @@ pub unsafe fn cudaDevSmResourceSplitByCount(result: *mut cudaDevResource, nbGrou
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDevSmResourceSplitByCount(result: *mut cudaDevResource, nbGroups: *mut ::core::ffi::c_uint, input: *const cudaDevResource, remaining: *mut cudaDevResource, flags: ::core::ffi::c_uint, minCount: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaDevSmResourceSplitByCount(result: *mut cudaDevResource, nbGroups: *mut ::core::ffi::c_uint, input: *const cudaDevResource, remaining: *mut cudaDevResource, flags: ::core::ffi::c_uint, minCount: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaDevSmResourceSplitByCount(result, nbGroups, input, remaining, flags, minCount)
     }
 }
@@ -6664,7 +6708,9 @@ pub unsafe fn cudaDeviceCanAccessPeer(canAccessPeer: *mut ::core::ffi::c_int, de
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceCanAccessPeer(canAccessPeer: *mut ::core::ffi::c_int, device: ::core::ffi::c_int, peerDevice: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceCanAccessPeer(canAccessPeer: *mut ::core::ffi::c_int, device: ::core::ffi::c_int, peerDevice: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaDeviceCanAccessPeer(canAccessPeer, device, peerDevice)
     }
 }
@@ -6678,7 +6724,9 @@ pub unsafe fn cudaDeviceDisablePeerAccess(peerDevice: ::core::ffi::c_int) -> cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceDisablePeerAccess(peerDevice: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceDisablePeerAccess(peerDevice: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaDeviceDisablePeerAccess(peerDevice)
     }
 }
@@ -6692,7 +6740,9 @@ pub unsafe fn cudaDeviceEnablePeerAccess(peerDevice: ::core::ffi::c_int, flags: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceEnablePeerAccess(peerDevice: ::core::ffi::c_int, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceEnablePeerAccess(peerDevice: ::core::ffi::c_int, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaDeviceEnablePeerAccess(peerDevice, flags)
     }
 }
@@ -6706,7 +6756,9 @@ pub unsafe fn cudaDeviceFlushGPUDirectRDMAWrites(target: cudaFlushGPUDirectRDMAW
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceFlushGPUDirectRDMAWrites(target: cudaFlushGPUDirectRDMAWritesTarget, scope: cudaFlushGPUDirectRDMAWritesScope) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceFlushGPUDirectRDMAWrites(target: cudaFlushGPUDirectRDMAWritesTarget, scope: cudaFlushGPUDirectRDMAWritesScope) -> cudaError_t;
+        }
         cudaDeviceFlushGPUDirectRDMAWrites(target, scope)
     }
 }
@@ -6720,7 +6772,9 @@ pub unsafe fn cudaDeviceGetAttribute(value: *mut ::core::ffi::c_int, attr: cudaD
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetAttribute(value: *mut ::core::ffi::c_int, attr: cudaDeviceAttr, device: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetAttribute(value: *mut ::core::ffi::c_int, attr: cudaDeviceAttr, device: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaDeviceGetAttribute(value, attr, device)
     }
 }
@@ -6734,7 +6788,9 @@ pub unsafe fn cudaDeviceGetByPCIBusId(device: *mut ::core::ffi::c_int, pciBusId:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetByPCIBusId(device: *mut ::core::ffi::c_int, pciBusId: *const ::core::ffi::c_char) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetByPCIBusId(device: *mut ::core::ffi::c_int, pciBusId: *const ::core::ffi::c_char) -> cudaError_t;
+        }
         cudaDeviceGetByPCIBusId(device, pciBusId)
     }
 }
@@ -6748,7 +6804,9 @@ pub unsafe fn cudaDeviceGetCacheConfig(pCacheConfig: *mut cudaFuncCache) -> cuda
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetCacheConfig(pCacheConfig: *mut cudaFuncCache) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetCacheConfig(pCacheConfig: *mut cudaFuncCache) -> cudaError_t;
+        }
         cudaDeviceGetCacheConfig(pCacheConfig)
     }
 }
@@ -6762,7 +6820,9 @@ pub unsafe fn cudaDeviceGetDefaultMemPool(memPool: *mut cudaMemPool_t, device: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetDefaultMemPool(memPool: *mut cudaMemPool_t, device: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetDefaultMemPool(memPool: *mut cudaMemPool_t, device: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaDeviceGetDefaultMemPool(memPool, device)
     }
 }
@@ -6777,7 +6837,9 @@ pub unsafe fn cudaDeviceGetDevResource(device: ::core::ffi::c_int, resource: *mu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetDevResource(device: ::core::ffi::c_int, resource: *mut cudaDevResource, type_: cudaDevResourceType) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetDevResource(device: ::core::ffi::c_int, resource: *mut cudaDevResource, type_: cudaDevResourceType) -> cudaError_t;
+        }
         cudaDeviceGetDevResource(device, resource, type_)
     }
 }
@@ -6792,7 +6854,9 @@ pub unsafe fn cudaDeviceGetExecutionCtx(ctx: *mut cudaExecutionContext_t, device
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetExecutionCtx(ctx: *mut cudaExecutionContext_t, device: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetExecutionCtx(ctx: *mut cudaExecutionContext_t, device: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaDeviceGetExecutionCtx(ctx, device)
     }
 }
@@ -6806,7 +6870,9 @@ pub unsafe fn cudaDeviceGetGraphMemAttribute(device: ::core::ffi::c_int, attr: c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetGraphMemAttribute(device: ::core::ffi::c_int, attr: cudaGraphMemAttributeType, value: *mut ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetGraphMemAttribute(device: ::core::ffi::c_int, attr: cudaGraphMemAttributeType, value: *mut ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaDeviceGetGraphMemAttribute(device, attr, value)
     }
 }
@@ -6821,7 +6887,9 @@ pub unsafe fn cudaDeviceGetHostAtomicCapabilities(capabilities: *mut ::core::ffi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetHostAtomicCapabilities(capabilities: *mut ::core::ffi::c_uint, operations: *const cudaAtomicOperation, count: ::core::ffi::c_uint, device: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetHostAtomicCapabilities(capabilities: *mut ::core::ffi::c_uint, operations: *const cudaAtomicOperation, count: ::core::ffi::c_uint, device: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaDeviceGetHostAtomicCapabilities(capabilities, operations, count, device)
     }
 }
@@ -6835,7 +6903,9 @@ pub unsafe fn cudaDeviceGetLimit(pValue: *mut usize, limit: cudaLimit) -> cudaEr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetLimit(pValue: *mut usize, limit: cudaLimit) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetLimit(pValue: *mut usize, limit: cudaLimit) -> cudaError_t;
+        }
         cudaDeviceGetLimit(pValue, limit)
     }
 }
@@ -6849,7 +6919,9 @@ pub unsafe fn cudaDeviceGetMemPool(memPool: *mut cudaMemPool_t, device: ::core::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetMemPool(memPool: *mut cudaMemPool_t, device: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetMemPool(memPool: *mut cudaMemPool_t, device: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaDeviceGetMemPool(memPool, device)
     }
 }
@@ -6864,7 +6936,9 @@ pub unsafe fn cudaDeviceGetP2PAtomicCapabilities(capabilities: *mut ::core::ffi:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetP2PAtomicCapabilities(capabilities: *mut ::core::ffi::c_uint, operations: *const cudaAtomicOperation, count: ::core::ffi::c_uint, srcDevice: ::core::ffi::c_int, dstDevice: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetP2PAtomicCapabilities(capabilities: *mut ::core::ffi::c_uint, operations: *const cudaAtomicOperation, count: ::core::ffi::c_uint, srcDevice: ::core::ffi::c_int, dstDevice: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaDeviceGetP2PAtomicCapabilities(capabilities, operations, count, srcDevice, dstDevice)
     }
 }
@@ -6878,7 +6952,9 @@ pub unsafe fn cudaDeviceGetP2PAttribute(value: *mut ::core::ffi::c_int, attr: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetP2PAttribute(value: *mut ::core::ffi::c_int, attr: cudaDeviceP2PAttr, srcDevice: ::core::ffi::c_int, dstDevice: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetP2PAttribute(value: *mut ::core::ffi::c_int, attr: cudaDeviceP2PAttr, srcDevice: ::core::ffi::c_int, dstDevice: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaDeviceGetP2PAttribute(value, attr, srcDevice, dstDevice)
     }
 }
@@ -6892,7 +6968,9 @@ pub unsafe fn cudaDeviceGetPCIBusId(pciBusId: *mut ::core::ffi::c_char, len: ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetPCIBusId(pciBusId: *mut ::core::ffi::c_char, len: ::core::ffi::c_int, device: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetPCIBusId(pciBusId: *mut ::core::ffi::c_char, len: ::core::ffi::c_int, device: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaDeviceGetPCIBusId(pciBusId, len, device)
     }
 }
@@ -6906,7 +6984,9 @@ pub unsafe fn cudaDeviceGetSharedMemConfig(pConfig: *mut cudaSharedMemConfig) ->
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetSharedMemConfig(pConfig: *mut cudaSharedMemConfig) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetSharedMemConfig(pConfig: *mut cudaSharedMemConfig) -> cudaError_t;
+        }
         cudaDeviceGetSharedMemConfig(pConfig)
     }
 }
@@ -6920,7 +7000,9 @@ pub unsafe fn cudaDeviceGetStreamPriorityRange(leastPriority: *mut ::core::ffi::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetStreamPriorityRange(leastPriority: *mut ::core::ffi::c_int, greatestPriority: *mut ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetStreamPriorityRange(leastPriority: *mut ::core::ffi::c_int, greatestPriority: *mut ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaDeviceGetStreamPriorityRange(leastPriority, greatestPriority)
     }
 }
@@ -6934,7 +7016,9 @@ pub unsafe fn cudaDeviceGetTexture1DLinearMaxWidth(maxWidthInElements: *mut usiz
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGetTexture1DLinearMaxWidth(maxWidthInElements: *mut usize, fmtDesc: *const cudaChannelFormatDesc, device: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGetTexture1DLinearMaxWidth(maxWidthInElements: *mut usize, fmtDesc: *const cudaChannelFormatDesc, device: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaDeviceGetTexture1DLinearMaxWidth(maxWidthInElements, fmtDesc, device)
     }
 }
@@ -6948,7 +7032,9 @@ pub unsafe fn cudaDeviceGraphMemTrim(device: ::core::ffi::c_int) -> cudaError_t 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceGraphMemTrim(device: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceGraphMemTrim(device: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaDeviceGraphMemTrim(device)
     }
 }
@@ -6963,7 +7049,9 @@ pub unsafe fn cudaDeviceRegisterAsyncNotification(device: ::core::ffi::c_int, ca
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceRegisterAsyncNotification(device: ::core::ffi::c_int, callbackFunc: cudaAsyncCallback, userData: *mut ::core::ffi::c_void, callback: *mut cudaAsyncCallbackHandle_t) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceRegisterAsyncNotification(device: ::core::ffi::c_int, callbackFunc: cudaAsyncCallback, userData: *mut ::core::ffi::c_void, callback: *mut cudaAsyncCallbackHandle_t) -> cudaError_t;
+        }
         cudaDeviceRegisterAsyncNotification(device, callbackFunc, userData, callback)
     }
 }
@@ -6977,7 +7065,9 @@ pub unsafe fn cudaDeviceReset() -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceReset() -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceReset() -> cudaError_t;
+        }
         cudaDeviceReset()
     }
 }
@@ -6991,7 +7081,9 @@ pub unsafe fn cudaDeviceSetCacheConfig(cacheConfig: cudaFuncCache) -> cudaError_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceSetCacheConfig(cacheConfig: cudaFuncCache) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceSetCacheConfig(cacheConfig: cudaFuncCache) -> cudaError_t;
+        }
         cudaDeviceSetCacheConfig(cacheConfig)
     }
 }
@@ -7005,7 +7097,9 @@ pub unsafe fn cudaDeviceSetGraphMemAttribute(device: ::core::ffi::c_int, attr: c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceSetGraphMemAttribute(device: ::core::ffi::c_int, attr: cudaGraphMemAttributeType, value: *mut ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceSetGraphMemAttribute(device: ::core::ffi::c_int, attr: cudaGraphMemAttributeType, value: *mut ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaDeviceSetGraphMemAttribute(device, attr, value)
     }
 }
@@ -7019,7 +7113,9 @@ pub unsafe fn cudaDeviceSetLimit(limit: cudaLimit, value: usize) -> cudaError_t 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceSetLimit(limit: cudaLimit, value: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceSetLimit(limit: cudaLimit, value: usize) -> cudaError_t;
+        }
         cudaDeviceSetLimit(limit, value)
     }
 }
@@ -7033,7 +7129,9 @@ pub unsafe fn cudaDeviceSetMemPool(device: ::core::ffi::c_int, memPool: cudaMemP
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceSetMemPool(device: ::core::ffi::c_int, memPool: cudaMemPool_t) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceSetMemPool(device: ::core::ffi::c_int, memPool: cudaMemPool_t) -> cudaError_t;
+        }
         cudaDeviceSetMemPool(device, memPool)
     }
 }
@@ -7047,7 +7145,9 @@ pub unsafe fn cudaDeviceSetSharedMemConfig(config: cudaSharedMemConfig) -> cudaE
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceSetSharedMemConfig(config: cudaSharedMemConfig) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceSetSharedMemConfig(config: cudaSharedMemConfig) -> cudaError_t;
+        }
         cudaDeviceSetSharedMemConfig(config)
     }
 }
@@ -7061,7 +7161,9 @@ pub unsafe fn cudaDeviceSynchronize() -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceSynchronize() -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceSynchronize() -> cudaError_t;
+        }
         cudaDeviceSynchronize()
     }
 }
@@ -7076,7 +7178,9 @@ pub unsafe fn cudaDeviceUnregisterAsyncNotification(device: ::core::ffi::c_int, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDeviceUnregisterAsyncNotification(device: ::core::ffi::c_int, callback: cudaAsyncCallbackHandle_t) -> cudaError_t;
+        extern "C" {
+            fn cudaDeviceUnregisterAsyncNotification(device: ::core::ffi::c_int, callback: cudaAsyncCallbackHandle_t) -> cudaError_t;
+        }
         cudaDeviceUnregisterAsyncNotification(device, callback)
     }
 }
@@ -7090,7 +7194,9 @@ pub unsafe fn cudaDriverGetVersion(driverVersion: *mut ::core::ffi::c_int) -> cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaDriverGetVersion(driverVersion: *mut ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaDriverGetVersion(driverVersion: *mut ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaDriverGetVersion(driverVersion)
     }
 }
@@ -7104,7 +7210,9 @@ pub unsafe fn cudaEventCreate(event: *mut cudaEvent_t) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaEventCreate(event: *mut cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaEventCreate(event: *mut cudaEvent_t) -> cudaError_t;
+        }
         cudaEventCreate(event)
     }
 }
@@ -7118,7 +7226,9 @@ pub unsafe fn cudaEventCreateWithFlags(event: *mut cudaEvent_t, flags: ::core::f
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaEventCreateWithFlags(event: *mut cudaEvent_t, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaEventCreateWithFlags(event: *mut cudaEvent_t, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaEventCreateWithFlags(event, flags)
     }
 }
@@ -7132,7 +7242,9 @@ pub unsafe fn cudaEventDestroy(event: cudaEvent_t) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaEventDestroy(event: cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaEventDestroy(event: cudaEvent_t) -> cudaError_t;
+        }
         cudaEventDestroy(event)
     }
 }
@@ -7146,7 +7258,9 @@ pub unsafe fn cudaEventElapsedTime(ms: *mut f32, start: cudaEvent_t, end: cudaEv
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaEventElapsedTime(ms: *mut f32, start: cudaEvent_t, end: cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaEventElapsedTime(ms: *mut f32, start: cudaEvent_t, end: cudaEvent_t) -> cudaError_t;
+        }
         cudaEventElapsedTime(ms, start, end)
     }
 }
@@ -7161,7 +7275,9 @@ pub unsafe fn cudaEventElapsedTime_v2(ms: *mut f32, start: cudaEvent_t, end: cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaEventElapsedTime_v2(ms: *mut f32, start: cudaEvent_t, end: cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaEventElapsedTime_v2(ms: *mut f32, start: cudaEvent_t, end: cudaEvent_t) -> cudaError_t;
+        }
         cudaEventElapsedTime_v2(ms, start, end)
     }
 }
@@ -7175,7 +7291,9 @@ pub unsafe fn cudaEventQuery(event: cudaEvent_t) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaEventQuery(event: cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaEventQuery(event: cudaEvent_t) -> cudaError_t;
+        }
         cudaEventQuery(event)
     }
 }
@@ -7189,7 +7307,9 @@ pub unsafe fn cudaEventRecord(event: cudaEvent_t, stream: cudaStream_t) -> cudaE
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaEventRecord(event: cudaEvent_t, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaEventRecord(event: cudaEvent_t, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaEventRecord(event, stream)
     }
 }
@@ -7203,7 +7323,9 @@ pub unsafe fn cudaEventRecordWithFlags(event: cudaEvent_t, stream: cudaStream_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaEventRecordWithFlags(event: cudaEvent_t, stream: cudaStream_t, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaEventRecordWithFlags(event: cudaEvent_t, stream: cudaStream_t, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaEventRecordWithFlags(event, stream, flags)
     }
 }
@@ -7217,7 +7339,9 @@ pub unsafe fn cudaEventSynchronize(event: cudaEvent_t) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaEventSynchronize(event: cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaEventSynchronize(event: cudaEvent_t) -> cudaError_t;
+        }
         cudaEventSynchronize(event)
     }
 }
@@ -7232,7 +7356,9 @@ pub unsafe fn cudaExecutionCtxDestroy(ctx: cudaExecutionContext_t) -> cudaError_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaExecutionCtxDestroy(ctx: cudaExecutionContext_t) -> cudaError_t;
+        extern "C" {
+            fn cudaExecutionCtxDestroy(ctx: cudaExecutionContext_t) -> cudaError_t;
+        }
         cudaExecutionCtxDestroy(ctx)
     }
 }
@@ -7247,7 +7373,9 @@ pub unsafe fn cudaExecutionCtxGetDevResource(ctx: cudaExecutionContext_t, resour
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaExecutionCtxGetDevResource(ctx: cudaExecutionContext_t, resource: *mut cudaDevResource, type_: cudaDevResourceType) -> cudaError_t;
+        extern "C" {
+            fn cudaExecutionCtxGetDevResource(ctx: cudaExecutionContext_t, resource: *mut cudaDevResource, type_: cudaDevResourceType) -> cudaError_t;
+        }
         cudaExecutionCtxGetDevResource(ctx, resource, type_)
     }
 }
@@ -7262,7 +7390,9 @@ pub unsafe fn cudaExecutionCtxGetDevice(device: *mut ::core::ffi::c_int, ctx: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaExecutionCtxGetDevice(device: *mut ::core::ffi::c_int, ctx: cudaExecutionContext_t) -> cudaError_t;
+        extern "C" {
+            fn cudaExecutionCtxGetDevice(device: *mut ::core::ffi::c_int, ctx: cudaExecutionContext_t) -> cudaError_t;
+        }
         cudaExecutionCtxGetDevice(device, ctx)
     }
 }
@@ -7277,7 +7407,9 @@ pub unsafe fn cudaExecutionCtxGetId(ctx: cudaExecutionContext_t, ctxId: *mut ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaExecutionCtxGetId(ctx: cudaExecutionContext_t, ctxId: *mut ::core::ffi::c_ulonglong) -> cudaError_t;
+        extern "C" {
+            fn cudaExecutionCtxGetId(ctx: cudaExecutionContext_t, ctxId: *mut ::core::ffi::c_ulonglong) -> cudaError_t;
+        }
         cudaExecutionCtxGetId(ctx, ctxId)
     }
 }
@@ -7292,7 +7424,9 @@ pub unsafe fn cudaExecutionCtxRecordEvent(ctx: cudaExecutionContext_t, event: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaExecutionCtxRecordEvent(ctx: cudaExecutionContext_t, event: cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaExecutionCtxRecordEvent(ctx: cudaExecutionContext_t, event: cudaEvent_t) -> cudaError_t;
+        }
         cudaExecutionCtxRecordEvent(ctx, event)
     }
 }
@@ -7307,7 +7441,9 @@ pub unsafe fn cudaExecutionCtxStreamCreate(phStream: *mut cudaStream_t, ctx: cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaExecutionCtxStreamCreate(phStream: *mut cudaStream_t, ctx: cudaExecutionContext_t, flags: ::core::ffi::c_uint, priority: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaExecutionCtxStreamCreate(phStream: *mut cudaStream_t, ctx: cudaExecutionContext_t, flags: ::core::ffi::c_uint, priority: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaExecutionCtxStreamCreate(phStream, ctx, flags, priority)
     }
 }
@@ -7322,7 +7458,9 @@ pub unsafe fn cudaExecutionCtxSynchronize(ctx: cudaExecutionContext_t) -> cudaEr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaExecutionCtxSynchronize(ctx: cudaExecutionContext_t) -> cudaError_t;
+        extern "C" {
+            fn cudaExecutionCtxSynchronize(ctx: cudaExecutionContext_t) -> cudaError_t;
+        }
         cudaExecutionCtxSynchronize(ctx)
     }
 }
@@ -7337,7 +7475,9 @@ pub unsafe fn cudaExecutionCtxWaitEvent(ctx: cudaExecutionContext_t, event: cuda
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaExecutionCtxWaitEvent(ctx: cudaExecutionContext_t, event: cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaExecutionCtxWaitEvent(ctx: cudaExecutionContext_t, event: cudaEvent_t) -> cudaError_t;
+        }
         cudaExecutionCtxWaitEvent(ctx, event)
     }
 }
@@ -7351,7 +7491,9 @@ pub unsafe fn cudaExternalMemoryGetMappedBuffer(devPtr: *mut *mut ::core::ffi::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaExternalMemoryGetMappedBuffer(devPtr: *mut *mut ::core::ffi::c_void, extMem: cudaExternalMemory_t, bufferDesc: *const cudaExternalMemoryBufferDesc) -> cudaError_t;
+        extern "C" {
+            fn cudaExternalMemoryGetMappedBuffer(devPtr: *mut *mut ::core::ffi::c_void, extMem: cudaExternalMemory_t, bufferDesc: *const cudaExternalMemoryBufferDesc) -> cudaError_t;
+        }
         cudaExternalMemoryGetMappedBuffer(devPtr, extMem, bufferDesc)
     }
 }
@@ -7365,7 +7507,9 @@ pub unsafe fn cudaExternalMemoryGetMappedMipmappedArray(mipmap: *mut cudaMipmapp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaExternalMemoryGetMappedMipmappedArray(mipmap: *mut cudaMipmappedArray_t, extMem: cudaExternalMemory_t, mipmapDesc: *const cudaExternalMemoryMipmappedArrayDesc) -> cudaError_t;
+        extern "C" {
+            fn cudaExternalMemoryGetMappedMipmappedArray(mipmap: *mut cudaMipmappedArray_t, extMem: cudaExternalMemory_t, mipmapDesc: *const cudaExternalMemoryMipmappedArrayDesc) -> cudaError_t;
+        }
         cudaExternalMemoryGetMappedMipmappedArray(mipmap, extMem, mipmapDesc)
     }
 }
@@ -7379,7 +7523,9 @@ pub unsafe fn cudaFree(devPtr: *mut ::core::ffi::c_void) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaFree(devPtr: *mut ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaFree(devPtr: *mut ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaFree(devPtr)
     }
 }
@@ -7393,7 +7539,9 @@ pub unsafe fn cudaFreeArray(array: cudaArray_t) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaFreeArray(array: cudaArray_t) -> cudaError_t;
+        extern "C" {
+            fn cudaFreeArray(array: cudaArray_t) -> cudaError_t;
+        }
         cudaFreeArray(array)
     }
 }
@@ -7407,7 +7555,9 @@ pub unsafe fn cudaFreeAsync(devPtr: *mut ::core::ffi::c_void, hStream: cudaStrea
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaFreeAsync(devPtr: *mut ::core::ffi::c_void, hStream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaFreeAsync(devPtr: *mut ::core::ffi::c_void, hStream: cudaStream_t) -> cudaError_t;
+        }
         cudaFreeAsync(devPtr, hStream)
     }
 }
@@ -7421,7 +7571,9 @@ pub unsafe fn cudaFreeHost(ptr: *mut ::core::ffi::c_void) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaFreeHost(ptr: *mut ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaFreeHost(ptr: *mut ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaFreeHost(ptr)
     }
 }
@@ -7435,7 +7587,9 @@ pub unsafe fn cudaFreeMipmappedArray(mipmappedArray: cudaMipmappedArray_t) -> cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaFreeMipmappedArray(mipmappedArray: cudaMipmappedArray_t) -> cudaError_t;
+        extern "C" {
+            fn cudaFreeMipmappedArray(mipmappedArray: cudaMipmappedArray_t) -> cudaError_t;
+        }
         cudaFreeMipmappedArray(mipmappedArray)
     }
 }
@@ -7449,7 +7603,9 @@ pub unsafe fn cudaFuncGetAttributes(attr: *mut cudaFuncAttributes, func: *const 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaFuncGetAttributes(attr: *mut cudaFuncAttributes, func: *const ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaFuncGetAttributes(attr: *mut cudaFuncAttributes, func: *const ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaFuncGetAttributes(attr, func)
     }
 }
@@ -7464,7 +7620,9 @@ pub unsafe fn cudaFuncGetName(name: *mut *const ::core::ffi::c_char, func: *cons
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaFuncGetName(name: *mut *const ::core::ffi::c_char, func: *const ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaFuncGetName(name: *mut *const ::core::ffi::c_char, func: *const ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaFuncGetName(name, func)
     }
 }
@@ -7479,7 +7637,9 @@ pub unsafe fn cudaFuncGetParamCount(func: *const ::core::ffi::c_void, paramCount
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaFuncGetParamCount(func: *const ::core::ffi::c_void, paramCount: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaFuncGetParamCount(func: *const ::core::ffi::c_void, paramCount: *mut usize) -> cudaError_t;
+        }
         cudaFuncGetParamCount(func, paramCount)
     }
 }
@@ -7494,7 +7654,9 @@ pub unsafe fn cudaFuncGetParamInfo(func: *const ::core::ffi::c_void, paramIndex:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaFuncGetParamInfo(func: *const ::core::ffi::c_void, paramIndex: usize, paramOffset: *mut usize, paramSize: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaFuncGetParamInfo(func: *const ::core::ffi::c_void, paramIndex: usize, paramOffset: *mut usize, paramSize: *mut usize) -> cudaError_t;
+        }
         cudaFuncGetParamInfo(func, paramIndex, paramOffset, paramSize)
     }
 }
@@ -7508,7 +7670,9 @@ pub unsafe fn cudaFuncSetAttribute(func: *const ::core::ffi::c_void, attr: cudaF
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaFuncSetAttribute(func: *const ::core::ffi::c_void, attr: cudaFuncAttribute, value: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaFuncSetAttribute(func: *const ::core::ffi::c_void, attr: cudaFuncAttribute, value: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaFuncSetAttribute(func, attr, value)
     }
 }
@@ -7522,7 +7686,9 @@ pub unsafe fn cudaFuncSetCacheConfig(func: *const ::core::ffi::c_void, cacheConf
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaFuncSetCacheConfig(func: *const ::core::ffi::c_void, cacheConfig: cudaFuncCache) -> cudaError_t;
+        extern "C" {
+            fn cudaFuncSetCacheConfig(func: *const ::core::ffi::c_void, cacheConfig: cudaFuncCache) -> cudaError_t;
+        }
         cudaFuncSetCacheConfig(func, cacheConfig)
     }
 }
@@ -7536,7 +7702,9 @@ pub unsafe fn cudaFuncSetSharedMemConfig(func: *const ::core::ffi::c_void, confi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaFuncSetSharedMemConfig(func: *const ::core::ffi::c_void, config: cudaSharedMemConfig) -> cudaError_t;
+        extern "C" {
+            fn cudaFuncSetSharedMemConfig(func: *const ::core::ffi::c_void, config: cudaSharedMemConfig) -> cudaError_t;
+        }
         cudaFuncSetSharedMemConfig(func, config)
     }
 }
@@ -7550,7 +7718,9 @@ pub unsafe fn cudaGetChannelDesc(desc: *mut cudaChannelFormatDesc, array: cudaAr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetChannelDesc(desc: *mut cudaChannelFormatDesc, array: cudaArray_const_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGetChannelDesc(desc: *mut cudaChannelFormatDesc, array: cudaArray_const_t) -> cudaError_t;
+        }
         cudaGetChannelDesc(desc, array)
     }
 }
@@ -7564,7 +7734,9 @@ pub unsafe fn cudaGetDevice(device: *mut ::core::ffi::c_int) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetDevice(device: *mut ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaGetDevice(device: *mut ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaGetDevice(device)
     }
 }
@@ -7578,7 +7750,9 @@ pub unsafe fn cudaGetDeviceCount(count: *mut ::core::ffi::c_int) -> cudaError_t 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetDeviceCount(count: *mut ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaGetDeviceCount(count: *mut ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaGetDeviceCount(count)
     }
 }
@@ -7592,7 +7766,9 @@ pub unsafe fn cudaGetDeviceFlags(flags: *mut ::core::ffi::c_uint) -> cudaError_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetDeviceFlags(flags: *mut ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGetDeviceFlags(flags: *mut ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGetDeviceFlags(flags)
     }
 }
@@ -7607,7 +7783,9 @@ pub unsafe fn cudaGetDeviceProperties(prop: *mut cudaDeviceProp, device: ::core:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetDeviceProperties(prop: *mut cudaDeviceProp, device: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaGetDeviceProperties(prop: *mut cudaDeviceProp, device: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaGetDeviceProperties(prop, device)
     }
 }
@@ -7622,7 +7800,9 @@ pub unsafe fn cudaGetDeviceProperties_v2(prop: *mut cudaDeviceProp, device: ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetDeviceProperties_v2(prop: *mut cudaDeviceProp, device: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaGetDeviceProperties_v2(prop: *mut cudaDeviceProp, device: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaGetDeviceProperties_v2(prop, device)
     }
 }
@@ -7637,7 +7817,9 @@ pub unsafe fn cudaGetDriverEntryPoint(symbol: *const ::core::ffi::c_char, funcPt
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetDriverEntryPoint(symbol: *const ::core::ffi::c_char, funcPtr: *mut *mut ::core::ffi::c_void, flags: ::core::ffi::c_ulonglong) -> cudaError_t;
+        extern "C" {
+            fn cudaGetDriverEntryPoint(symbol: *const ::core::ffi::c_char, funcPtr: *mut *mut ::core::ffi::c_void, flags: ::core::ffi::c_ulonglong) -> cudaError_t;
+        }
         cudaGetDriverEntryPoint(symbol, funcPtr, flags)
     }
 }
@@ -7652,7 +7834,9 @@ pub unsafe fn cudaGetDriverEntryPoint(symbol: *const ::core::ffi::c_char, funcPt
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetDriverEntryPoint(symbol: *const ::core::ffi::c_char, funcPtr: *mut *mut ::core::ffi::c_void, flags: ::core::ffi::c_ulonglong, driverStatus: *mut cudaDriverEntryPointQueryResult) -> cudaError_t;
+        extern "C" {
+            fn cudaGetDriverEntryPoint(symbol: *const ::core::ffi::c_char, funcPtr: *mut *mut ::core::ffi::c_void, flags: ::core::ffi::c_ulonglong, driverStatus: *mut cudaDriverEntryPointQueryResult) -> cudaError_t;
+        }
         cudaGetDriverEntryPoint(symbol, funcPtr, flags, driverStatus)
     }
 }
@@ -7667,7 +7851,9 @@ pub unsafe fn cudaGetDriverEntryPointByVersion(symbol: *const ::core::ffi::c_cha
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetDriverEntryPointByVersion(symbol: *const ::core::ffi::c_char, funcPtr: *mut *mut ::core::ffi::c_void, cudaVersion: ::core::ffi::c_uint, flags: ::core::ffi::c_ulonglong, driverStatus: *mut cudaDriverEntryPointQueryResult) -> cudaError_t;
+        extern "C" {
+            fn cudaGetDriverEntryPointByVersion(symbol: *const ::core::ffi::c_char, funcPtr: *mut *mut ::core::ffi::c_void, cudaVersion: ::core::ffi::c_uint, flags: ::core::ffi::c_ulonglong, driverStatus: *mut cudaDriverEntryPointQueryResult) -> cudaError_t;
+        }
         cudaGetDriverEntryPointByVersion(symbol, funcPtr, cudaVersion, flags, driverStatus)
     }
 }
@@ -7681,7 +7867,9 @@ pub unsafe fn cudaGetErrorName(error: cudaError_t) -> *const ::core::ffi::c_char
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetErrorName(error: cudaError_t) -> *const ::core::ffi::c_char;
+        extern "C" {
+            fn cudaGetErrorName(error: cudaError_t) -> *const ::core::ffi::c_char;
+        }
         cudaGetErrorName(error)
     }
 }
@@ -7695,7 +7883,9 @@ pub unsafe fn cudaGetErrorString(error: cudaError_t) -> *const ::core::ffi::c_ch
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetErrorString(error: cudaError_t) -> *const ::core::ffi::c_char;
+        extern "C" {
+            fn cudaGetErrorString(error: cudaError_t) -> *const ::core::ffi::c_char;
+        }
         cudaGetErrorString(error)
     }
 }
@@ -7709,7 +7899,9 @@ pub unsafe fn cudaGetExportTable(ppExportTable: *mut *const ::core::ffi::c_void,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetExportTable(ppExportTable: *mut *const ::core::ffi::c_void, pExportTableId: *const cudaUUID_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGetExportTable(ppExportTable: *mut *const ::core::ffi::c_void, pExportTableId: *const cudaUUID_t) -> cudaError_t;
+        }
         cudaGetExportTable(ppExportTable, pExportTableId)
     }
 }
@@ -7723,7 +7915,9 @@ pub unsafe fn cudaGetFuncBySymbol(functionPtr: *mut cudaFunction_t, symbolPtr: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetFuncBySymbol(functionPtr: *mut cudaFunction_t, symbolPtr: *const ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaGetFuncBySymbol(functionPtr: *mut cudaFunction_t, symbolPtr: *const ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaGetFuncBySymbol(functionPtr, symbolPtr)
     }
 }
@@ -7738,7 +7932,9 @@ pub unsafe fn cudaGetKernel(kernelPtr: *mut cudaKernel_t, entryFuncAddr: *const 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetKernel(kernelPtr: *mut cudaKernel_t, entryFuncAddr: *const ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaGetKernel(kernelPtr: *mut cudaKernel_t, entryFuncAddr: *const ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaGetKernel(kernelPtr, entryFuncAddr)
     }
 }
@@ -7752,7 +7948,9 @@ pub unsafe fn cudaGetLastError() -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetLastError() -> cudaError_t;
+        extern "C" {
+            fn cudaGetLastError() -> cudaError_t;
+        }
         cudaGetLastError()
     }
 }
@@ -7766,7 +7964,9 @@ pub unsafe fn cudaGetMipmappedArrayLevel(levelArray: *mut cudaArray_t, mipmapped
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetMipmappedArrayLevel(levelArray: *mut cudaArray_t, mipmappedArray: cudaMipmappedArray_const_t, level: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGetMipmappedArrayLevel(levelArray: *mut cudaArray_t, mipmappedArray: cudaMipmappedArray_const_t, level: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGetMipmappedArrayLevel(levelArray, mipmappedArray, level)
     }
 }
@@ -7780,7 +7980,9 @@ pub unsafe fn cudaGetSurfaceObjectResourceDesc(pResDesc: *mut cudaResourceDesc, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetSurfaceObjectResourceDesc(pResDesc: *mut cudaResourceDesc, surfObject: cudaSurfaceObject_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGetSurfaceObjectResourceDesc(pResDesc: *mut cudaResourceDesc, surfObject: cudaSurfaceObject_t) -> cudaError_t;
+        }
         cudaGetSurfaceObjectResourceDesc(pResDesc, surfObject)
     }
 }
@@ -7795,7 +7997,9 @@ pub unsafe fn cudaGetSurfaceReference(surfref: *mut *const surfaceReference, sym
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetSurfaceReference(surfref: *mut *const surfaceReference, symbol: *const ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaGetSurfaceReference(surfref: *mut *const surfaceReference, symbol: *const ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaGetSurfaceReference(surfref, symbol)
     }
 }
@@ -7809,7 +8013,9 @@ pub unsafe fn cudaGetSymbolAddress(devPtr: *mut *mut ::core::ffi::c_void, symbol
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetSymbolAddress(devPtr: *mut *mut ::core::ffi::c_void, symbol: *const ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaGetSymbolAddress(devPtr: *mut *mut ::core::ffi::c_void, symbol: *const ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaGetSymbolAddress(devPtr, symbol)
     }
 }
@@ -7823,7 +8029,9 @@ pub unsafe fn cudaGetSymbolSize(size: *mut usize, symbol: *const ::core::ffi::c_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetSymbolSize(size: *mut usize, symbol: *const ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaGetSymbolSize(size: *mut usize, symbol: *const ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaGetSymbolSize(size, symbol)
     }
 }
@@ -7838,7 +8046,9 @@ pub unsafe fn cudaGetTextureAlignmentOffset(offset: *mut usize, texref: *const t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetTextureAlignmentOffset(offset: *mut usize, texref: *const textureReference) -> cudaError_t;
+        extern "C" {
+            fn cudaGetTextureAlignmentOffset(offset: *mut usize, texref: *const textureReference) -> cudaError_t;
+        }
         cudaGetTextureAlignmentOffset(offset, texref)
     }
 }
@@ -7852,7 +8062,9 @@ pub unsafe fn cudaGetTextureObjectResourceDesc(pResDesc: *mut cudaResourceDesc, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetTextureObjectResourceDesc(pResDesc: *mut cudaResourceDesc, texObject: cudaTextureObject_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGetTextureObjectResourceDesc(pResDesc: *mut cudaResourceDesc, texObject: cudaTextureObject_t) -> cudaError_t;
+        }
         cudaGetTextureObjectResourceDesc(pResDesc, texObject)
     }
 }
@@ -7866,7 +8078,9 @@ pub unsafe fn cudaGetTextureObjectResourceViewDesc(pResViewDesc: *mut cudaResour
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetTextureObjectResourceViewDesc(pResViewDesc: *mut cudaResourceViewDesc, texObject: cudaTextureObject_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGetTextureObjectResourceViewDesc(pResViewDesc: *mut cudaResourceViewDesc, texObject: cudaTextureObject_t) -> cudaError_t;
+        }
         cudaGetTextureObjectResourceViewDesc(pResViewDesc, texObject)
     }
 }
@@ -7880,7 +8094,9 @@ pub unsafe fn cudaGetTextureObjectTextureDesc(pTexDesc: *mut cudaTextureDesc, te
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetTextureObjectTextureDesc(pTexDesc: *mut cudaTextureDesc, texObject: cudaTextureObject_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGetTextureObjectTextureDesc(pTexDesc: *mut cudaTextureDesc, texObject: cudaTextureObject_t) -> cudaError_t;
+        }
         cudaGetTextureObjectTextureDesc(pTexDesc, texObject)
     }
 }
@@ -7895,7 +8111,9 @@ pub unsafe fn cudaGetTextureObjectTextureDesc_v2(pTexDesc: *mut cudaTextureDesc_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetTextureObjectTextureDesc_v2(pTexDesc: *mut cudaTextureDesc_v2, texObject: cudaTextureObject_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGetTextureObjectTextureDesc_v2(pTexDesc: *mut cudaTextureDesc_v2, texObject: cudaTextureObject_t) -> cudaError_t;
+        }
         cudaGetTextureObjectTextureDesc_v2(pTexDesc, texObject)
     }
 }
@@ -7910,7 +8128,9 @@ pub unsafe fn cudaGetTextureReference(texref: *mut *const textureReference, symb
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGetTextureReference(texref: *mut *const textureReference, symbol: *const ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaGetTextureReference(texref: *mut *const textureReference, symbol: *const ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaGetTextureReference(texref, symbol)
     }
 }
@@ -7924,7 +8144,9 @@ pub unsafe fn cudaGraphAddChildGraphNode(pGraphNode: *mut cudaGraphNode_t, graph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddChildGraphNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, childGraph: cudaGraph_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddChildGraphNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, childGraph: cudaGraph_t) -> cudaError_t;
+        }
         cudaGraphAddChildGraphNode(pGraphNode, graph, pDependencies, numDependencies, childGraph)
     }
 }
@@ -7939,7 +8161,9 @@ pub unsafe fn cudaGraphAddDependencies(graph: cudaGraph_t, from: *const cudaGrap
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddDependencies(graph: cudaGraph_t, from: *const cudaGraphNode_t, to: *const cudaGraphNode_t, numDependencies: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddDependencies(graph: cudaGraph_t, from: *const cudaGraphNode_t, to: *const cudaGraphNode_t, numDependencies: usize) -> cudaError_t;
+        }
         cudaGraphAddDependencies(graph, from, to, numDependencies)
     }
 }
@@ -7954,7 +8178,9 @@ pub unsafe fn cudaGraphAddDependencies(graph: cudaGraph_t, from: *const cudaGrap
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddDependencies(graph: cudaGraph_t, from: *const cudaGraphNode_t, to: *const cudaGraphNode_t, edgeData: *const cudaGraphEdgeData, numDependencies: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddDependencies(graph: cudaGraph_t, from: *const cudaGraphNode_t, to: *const cudaGraphNode_t, edgeData: *const cudaGraphEdgeData, numDependencies: usize) -> cudaError_t;
+        }
         cudaGraphAddDependencies(graph, from, to, edgeData, numDependencies)
     }
 }
@@ -7969,7 +8195,9 @@ pub unsafe fn cudaGraphAddDependencies_v2(graph: cudaGraph_t, from: *const cudaG
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddDependencies_v2(graph: cudaGraph_t, from: *const cudaGraphNode_t, to: *const cudaGraphNode_t, edgeData: *const cudaGraphEdgeData, numDependencies: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddDependencies_v2(graph: cudaGraph_t, from: *const cudaGraphNode_t, to: *const cudaGraphNode_t, edgeData: *const cudaGraphEdgeData, numDependencies: usize) -> cudaError_t;
+        }
         cudaGraphAddDependencies_v2(graph, from, to, edgeData, numDependencies)
     }
 }
@@ -7983,7 +8211,9 @@ pub unsafe fn cudaGraphAddEmptyNode(pGraphNode: *mut cudaGraphNode_t, graph: cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddEmptyNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddEmptyNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize) -> cudaError_t;
+        }
         cudaGraphAddEmptyNode(pGraphNode, graph, pDependencies, numDependencies)
     }
 }
@@ -7997,7 +8227,9 @@ pub unsafe fn cudaGraphAddEventRecordNode(pGraphNode: *mut cudaGraphNode_t, grap
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddEventRecordNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, event: cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddEventRecordNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, event: cudaEvent_t) -> cudaError_t;
+        }
         cudaGraphAddEventRecordNode(pGraphNode, graph, pDependencies, numDependencies, event)
     }
 }
@@ -8011,7 +8243,9 @@ pub unsafe fn cudaGraphAddEventWaitNode(pGraphNode: *mut cudaGraphNode_t, graph:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddEventWaitNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, event: cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddEventWaitNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, event: cudaEvent_t) -> cudaError_t;
+        }
         cudaGraphAddEventWaitNode(pGraphNode, graph, pDependencies, numDependencies, event)
     }
 }
@@ -8025,7 +8259,9 @@ pub unsafe fn cudaGraphAddExternalSemaphoresSignalNode(pGraphNode: *mut cudaGrap
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddExternalSemaphoresSignalNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, nodeParams: *const cudaExternalSemaphoreSignalNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddExternalSemaphoresSignalNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, nodeParams: *const cudaExternalSemaphoreSignalNodeParams) -> cudaError_t;
+        }
         cudaGraphAddExternalSemaphoresSignalNode(pGraphNode, graph, pDependencies, numDependencies, nodeParams)
     }
 }
@@ -8039,7 +8275,9 @@ pub unsafe fn cudaGraphAddExternalSemaphoresWaitNode(pGraphNode: *mut cudaGraphN
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddExternalSemaphoresWaitNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, nodeParams: *const cudaExternalSemaphoreWaitNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddExternalSemaphoresWaitNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, nodeParams: *const cudaExternalSemaphoreWaitNodeParams) -> cudaError_t;
+        }
         cudaGraphAddExternalSemaphoresWaitNode(pGraphNode, graph, pDependencies, numDependencies, nodeParams)
     }
 }
@@ -8053,7 +8291,9 @@ pub unsafe fn cudaGraphAddHostNode(pGraphNode: *mut cudaGraphNode_t, graph: cuda
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddHostNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, pNodeParams: *const cudaHostNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddHostNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, pNodeParams: *const cudaHostNodeParams) -> cudaError_t;
+        }
         cudaGraphAddHostNode(pGraphNode, graph, pDependencies, numDependencies, pNodeParams)
     }
 }
@@ -8067,7 +8307,9 @@ pub unsafe fn cudaGraphAddKernelNode(pGraphNode: *mut cudaGraphNode_t, graph: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddKernelNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, pNodeParams: *const cudaKernelNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddKernelNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, pNodeParams: *const cudaKernelNodeParams) -> cudaError_t;
+        }
         cudaGraphAddKernelNode(pGraphNode, graph, pDependencies, numDependencies, pNodeParams)
     }
 }
@@ -8081,7 +8323,9 @@ pub unsafe fn cudaGraphAddMemAllocNode(pGraphNode: *mut cudaGraphNode_t, graph: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddMemAllocNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, nodeParams: *mut cudaMemAllocNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddMemAllocNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, nodeParams: *mut cudaMemAllocNodeParams) -> cudaError_t;
+        }
         cudaGraphAddMemAllocNode(pGraphNode, graph, pDependencies, numDependencies, nodeParams)
     }
 }
@@ -8095,7 +8339,9 @@ pub unsafe fn cudaGraphAddMemFreeNode(pGraphNode: *mut cudaGraphNode_t, graph: c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddMemFreeNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, dptr: *mut ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddMemFreeNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, dptr: *mut ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaGraphAddMemFreeNode(pGraphNode, graph, pDependencies, numDependencies, dptr)
     }
 }
@@ -8109,7 +8355,9 @@ pub unsafe fn cudaGraphAddMemcpyNode(pGraphNode: *mut cudaGraphNode_t, graph: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddMemcpyNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, pCopyParams: *const cudaMemcpy3DParms) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddMemcpyNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, pCopyParams: *const cudaMemcpy3DParms) -> cudaError_t;
+        }
         cudaGraphAddMemcpyNode(pGraphNode, graph, pDependencies, numDependencies, pCopyParams)
     }
 }
@@ -8123,7 +8371,9 @@ pub unsafe fn cudaGraphAddMemcpyNode1D(pGraphNode: *mut cudaGraphNode_t, graph: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddMemcpyNode1D(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, dst: *mut ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddMemcpyNode1D(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, dst: *mut ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaGraphAddMemcpyNode1D(pGraphNode, graph, pDependencies, numDependencies, dst, src, count, kind)
     }
 }
@@ -8137,7 +8387,9 @@ pub unsafe fn cudaGraphAddMemcpyNodeFromSymbol(pGraphNode: *mut cudaGraphNode_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddMemcpyNodeFromSymbol(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, dst: *mut ::core::ffi::c_void, symbol: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddMemcpyNodeFromSymbol(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, dst: *mut ::core::ffi::c_void, symbol: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaGraphAddMemcpyNodeFromSymbol(pGraphNode, graph, pDependencies, numDependencies, dst, symbol, count, offset, kind)
     }
 }
@@ -8151,7 +8403,9 @@ pub unsafe fn cudaGraphAddMemcpyNodeToSymbol(pGraphNode: *mut cudaGraphNode_t, g
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddMemcpyNodeToSymbol(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, symbol: *const ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddMemcpyNodeToSymbol(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, symbol: *const ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaGraphAddMemcpyNodeToSymbol(pGraphNode, graph, pDependencies, numDependencies, symbol, src, count, offset, kind)
     }
 }
@@ -8165,7 +8419,9 @@ pub unsafe fn cudaGraphAddMemsetNode(pGraphNode: *mut cudaGraphNode_t, graph: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddMemsetNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, pMemsetParams: *const cudaMemsetParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddMemsetNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, pMemsetParams: *const cudaMemsetParams) -> cudaError_t;
+        }
         cudaGraphAddMemsetNode(pGraphNode, graph, pDependencies, numDependencies, pMemsetParams)
     }
 }
@@ -8180,7 +8436,9 @@ pub unsafe fn cudaGraphAddNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGrap
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, nodeParams: *mut cudaGraphNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, numDependencies: usize, nodeParams: *mut cudaGraphNodeParams) -> cudaError_t;
+        }
         cudaGraphAddNode(pGraphNode, graph, pDependencies, numDependencies, nodeParams)
     }
 }
@@ -8195,7 +8453,9 @@ pub unsafe fn cudaGraphAddNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGrap
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, dependencyData: *const cudaGraphEdgeData, numDependencies: usize, nodeParams: *mut cudaGraphNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddNode(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, dependencyData: *const cudaGraphEdgeData, numDependencies: usize, nodeParams: *mut cudaGraphNodeParams) -> cudaError_t;
+        }
         cudaGraphAddNode(pGraphNode, graph, pDependencies, dependencyData, numDependencies, nodeParams)
     }
 }
@@ -8210,7 +8470,9 @@ pub unsafe fn cudaGraphAddNode_v2(pGraphNode: *mut cudaGraphNode_t, graph: cudaG
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphAddNode_v2(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, dependencyData: *const cudaGraphEdgeData, numDependencies: usize, nodeParams: *mut cudaGraphNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphAddNode_v2(pGraphNode: *mut cudaGraphNode_t, graph: cudaGraph_t, pDependencies: *const cudaGraphNode_t, dependencyData: *const cudaGraphEdgeData, numDependencies: usize, nodeParams: *mut cudaGraphNodeParams) -> cudaError_t;
+        }
         cudaGraphAddNode_v2(pGraphNode, graph, pDependencies, dependencyData, numDependencies, nodeParams)
     }
 }
@@ -8224,7 +8486,9 @@ pub unsafe fn cudaGraphChildGraphNodeGetGraph(node: cudaGraphNode_t, pGraph: *mu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphChildGraphNodeGetGraph(node: cudaGraphNode_t, pGraph: *mut cudaGraph_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphChildGraphNodeGetGraph(node: cudaGraphNode_t, pGraph: *mut cudaGraph_t) -> cudaError_t;
+        }
         cudaGraphChildGraphNodeGetGraph(node, pGraph)
     }
 }
@@ -8238,7 +8502,9 @@ pub unsafe fn cudaGraphClone(pGraphClone: *mut cudaGraph_t, originalGraph: cudaG
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphClone(pGraphClone: *mut cudaGraph_t, originalGraph: cudaGraph_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphClone(pGraphClone: *mut cudaGraph_t, originalGraph: cudaGraph_t) -> cudaError_t;
+        }
         cudaGraphClone(pGraphClone, originalGraph)
     }
 }
@@ -8253,7 +8519,9 @@ pub unsafe fn cudaGraphConditionalHandleCreate(pHandle_out: *mut cudaGraphCondit
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphConditionalHandleCreate(pHandle_out: *mut cudaGraphConditionalHandle, graph: cudaGraph_t, defaultLaunchValue: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphConditionalHandleCreate(pHandle_out: *mut cudaGraphConditionalHandle, graph: cudaGraph_t, defaultLaunchValue: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGraphConditionalHandleCreate(pHandle_out, graph, defaultLaunchValue, flags)
     }
 }
@@ -8268,7 +8536,9 @@ pub unsafe fn cudaGraphConditionalHandleCreate_v2(pHandle_out: *mut cudaGraphCon
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphConditionalHandleCreate_v2(pHandle_out: *mut cudaGraphConditionalHandle, graph: cudaGraph_t, ctx: cudaExecutionContext_t, defaultLaunchValue: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphConditionalHandleCreate_v2(pHandle_out: *mut cudaGraphConditionalHandle, graph: cudaGraph_t, ctx: cudaExecutionContext_t, defaultLaunchValue: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGraphConditionalHandleCreate_v2(pHandle_out, graph, ctx, defaultLaunchValue, flags)
     }
 }
@@ -8282,7 +8552,9 @@ pub unsafe fn cudaGraphCreate(pGraph: *mut cudaGraph_t, flags: ::core::ffi::c_ui
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphCreate(pGraph: *mut cudaGraph_t, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphCreate(pGraph: *mut cudaGraph_t, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGraphCreate(pGraph, flags)
     }
 }
@@ -8296,7 +8568,9 @@ pub unsafe fn cudaGraphDebugDotPrint(graph: cudaGraph_t, path: *const ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphDebugDotPrint(graph: cudaGraph_t, path: *const ::core::ffi::c_char, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphDebugDotPrint(graph: cudaGraph_t, path: *const ::core::ffi::c_char, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGraphDebugDotPrint(graph, path, flags)
     }
 }
@@ -8310,7 +8584,9 @@ pub unsafe fn cudaGraphDestroy(graph: cudaGraph_t) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphDestroy(graph: cudaGraph_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphDestroy(graph: cudaGraph_t) -> cudaError_t;
+        }
         cudaGraphDestroy(graph)
     }
 }
@@ -8324,7 +8600,9 @@ pub unsafe fn cudaGraphDestroyNode(node: cudaGraphNode_t) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphDestroyNode(node: cudaGraphNode_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphDestroyNode(node: cudaGraphNode_t) -> cudaError_t;
+        }
         cudaGraphDestroyNode(node)
     }
 }
@@ -8338,7 +8616,9 @@ pub unsafe fn cudaGraphEventRecordNodeGetEvent(node: cudaGraphNode_t, event_out:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphEventRecordNodeGetEvent(node: cudaGraphNode_t, event_out: *mut cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphEventRecordNodeGetEvent(node: cudaGraphNode_t, event_out: *mut cudaEvent_t) -> cudaError_t;
+        }
         cudaGraphEventRecordNodeGetEvent(node, event_out)
     }
 }
@@ -8352,7 +8632,9 @@ pub unsafe fn cudaGraphEventRecordNodeSetEvent(node: cudaGraphNode_t, event: cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphEventRecordNodeSetEvent(node: cudaGraphNode_t, event: cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphEventRecordNodeSetEvent(node: cudaGraphNode_t, event: cudaEvent_t) -> cudaError_t;
+        }
         cudaGraphEventRecordNodeSetEvent(node, event)
     }
 }
@@ -8366,7 +8648,9 @@ pub unsafe fn cudaGraphEventWaitNodeGetEvent(node: cudaGraphNode_t, event_out: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphEventWaitNodeGetEvent(node: cudaGraphNode_t, event_out: *mut cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphEventWaitNodeGetEvent(node: cudaGraphNode_t, event_out: *mut cudaEvent_t) -> cudaError_t;
+        }
         cudaGraphEventWaitNodeGetEvent(node, event_out)
     }
 }
@@ -8380,7 +8664,9 @@ pub unsafe fn cudaGraphEventWaitNodeSetEvent(node: cudaGraphNode_t, event: cudaE
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphEventWaitNodeSetEvent(node: cudaGraphNode_t, event: cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphEventWaitNodeSetEvent(node: cudaGraphNode_t, event: cudaEvent_t) -> cudaError_t;
+        }
         cudaGraphEventWaitNodeSetEvent(node, event)
     }
 }
@@ -8394,7 +8680,9 @@ pub unsafe fn cudaGraphExecChildGraphNodeSetParams(hGraphExec: cudaGraphExec_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecChildGraphNodeSetParams(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, childGraph: cudaGraph_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecChildGraphNodeSetParams(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, childGraph: cudaGraph_t) -> cudaError_t;
+        }
         cudaGraphExecChildGraphNodeSetParams(hGraphExec, node, childGraph)
     }
 }
@@ -8408,7 +8696,9 @@ pub unsafe fn cudaGraphExecDestroy(graphExec: cudaGraphExec_t) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecDestroy(graphExec: cudaGraphExec_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecDestroy(graphExec: cudaGraphExec_t) -> cudaError_t;
+        }
         cudaGraphExecDestroy(graphExec)
     }
 }
@@ -8422,7 +8712,9 @@ pub unsafe fn cudaGraphExecEventRecordNodeSetEvent(hGraphExec: cudaGraphExec_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecEventRecordNodeSetEvent(hGraphExec: cudaGraphExec_t, hNode: cudaGraphNode_t, event: cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecEventRecordNodeSetEvent(hGraphExec: cudaGraphExec_t, hNode: cudaGraphNode_t, event: cudaEvent_t) -> cudaError_t;
+        }
         cudaGraphExecEventRecordNodeSetEvent(hGraphExec, hNode, event)
     }
 }
@@ -8436,7 +8728,9 @@ pub unsafe fn cudaGraphExecEventWaitNodeSetEvent(hGraphExec: cudaGraphExec_t, hN
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecEventWaitNodeSetEvent(hGraphExec: cudaGraphExec_t, hNode: cudaGraphNode_t, event: cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecEventWaitNodeSetEvent(hGraphExec: cudaGraphExec_t, hNode: cudaGraphNode_t, event: cudaEvent_t) -> cudaError_t;
+        }
         cudaGraphExecEventWaitNodeSetEvent(hGraphExec, hNode, event)
     }
 }
@@ -8450,7 +8744,9 @@ pub unsafe fn cudaGraphExecExternalSemaphoresSignalNodeSetParams(hGraphExec: cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecExternalSemaphoresSignalNodeSetParams(hGraphExec: cudaGraphExec_t, hNode: cudaGraphNode_t, nodeParams: *const cudaExternalSemaphoreSignalNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecExternalSemaphoresSignalNodeSetParams(hGraphExec: cudaGraphExec_t, hNode: cudaGraphNode_t, nodeParams: *const cudaExternalSemaphoreSignalNodeParams) -> cudaError_t;
+        }
         cudaGraphExecExternalSemaphoresSignalNodeSetParams(hGraphExec, hNode, nodeParams)
     }
 }
@@ -8464,7 +8760,9 @@ pub unsafe fn cudaGraphExecExternalSemaphoresWaitNodeSetParams(hGraphExec: cudaG
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecExternalSemaphoresWaitNodeSetParams(hGraphExec: cudaGraphExec_t, hNode: cudaGraphNode_t, nodeParams: *const cudaExternalSemaphoreWaitNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecExternalSemaphoresWaitNodeSetParams(hGraphExec: cudaGraphExec_t, hNode: cudaGraphNode_t, nodeParams: *const cudaExternalSemaphoreWaitNodeParams) -> cudaError_t;
+        }
         cudaGraphExecExternalSemaphoresWaitNodeSetParams(hGraphExec, hNode, nodeParams)
     }
 }
@@ -8479,7 +8777,9 @@ pub unsafe fn cudaGraphExecGetFlags(graphExec: cudaGraphExec_t, flags: *mut ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecGetFlags(graphExec: cudaGraphExec_t, flags: *mut ::core::ffi::c_ulonglong) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecGetFlags(graphExec: cudaGraphExec_t, flags: *mut ::core::ffi::c_ulonglong) -> cudaError_t;
+        }
         cudaGraphExecGetFlags(graphExec, flags)
     }
 }
@@ -8494,7 +8794,9 @@ pub unsafe fn cudaGraphExecGetId(hGraphExec: cudaGraphExec_t, graphID: *mut ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecGetId(hGraphExec: cudaGraphExec_t, graphID: *mut ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecGetId(hGraphExec: cudaGraphExec_t, graphID: *mut ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGraphExecGetId(hGraphExec, graphID)
     }
 }
@@ -8508,7 +8810,9 @@ pub unsafe fn cudaGraphExecHostNodeSetParams(hGraphExec: cudaGraphExec_t, node: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecHostNodeSetParams(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, pNodeParams: *const cudaHostNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecHostNodeSetParams(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, pNodeParams: *const cudaHostNodeParams) -> cudaError_t;
+        }
         cudaGraphExecHostNodeSetParams(hGraphExec, node, pNodeParams)
     }
 }
@@ -8522,7 +8826,9 @@ pub unsafe fn cudaGraphExecKernelNodeSetParams(hGraphExec: cudaGraphExec_t, node
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecKernelNodeSetParams(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, pNodeParams: *const cudaKernelNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecKernelNodeSetParams(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, pNodeParams: *const cudaKernelNodeParams) -> cudaError_t;
+        }
         cudaGraphExecKernelNodeSetParams(hGraphExec, node, pNodeParams)
     }
 }
@@ -8536,7 +8842,9 @@ pub unsafe fn cudaGraphExecMemcpyNodeSetParams(hGraphExec: cudaGraphExec_t, node
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecMemcpyNodeSetParams(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, pNodeParams: *const cudaMemcpy3DParms) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecMemcpyNodeSetParams(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, pNodeParams: *const cudaMemcpy3DParms) -> cudaError_t;
+        }
         cudaGraphExecMemcpyNodeSetParams(hGraphExec, node, pNodeParams)
     }
 }
@@ -8550,7 +8858,9 @@ pub unsafe fn cudaGraphExecMemcpyNodeSetParams1D(hGraphExec: cudaGraphExec_t, no
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecMemcpyNodeSetParams1D(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, dst: *mut ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecMemcpyNodeSetParams1D(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, dst: *mut ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaGraphExecMemcpyNodeSetParams1D(hGraphExec, node, dst, src, count, kind)
     }
 }
@@ -8564,7 +8874,9 @@ pub unsafe fn cudaGraphExecMemcpyNodeSetParamsFromSymbol(hGraphExec: cudaGraphEx
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecMemcpyNodeSetParamsFromSymbol(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, dst: *mut ::core::ffi::c_void, symbol: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecMemcpyNodeSetParamsFromSymbol(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, dst: *mut ::core::ffi::c_void, symbol: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaGraphExecMemcpyNodeSetParamsFromSymbol(hGraphExec, node, dst, symbol, count, offset, kind)
     }
 }
@@ -8578,7 +8890,9 @@ pub unsafe fn cudaGraphExecMemcpyNodeSetParamsToSymbol(hGraphExec: cudaGraphExec
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecMemcpyNodeSetParamsToSymbol(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, symbol: *const ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecMemcpyNodeSetParamsToSymbol(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, symbol: *const ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaGraphExecMemcpyNodeSetParamsToSymbol(hGraphExec, node, symbol, src, count, offset, kind)
     }
 }
@@ -8592,7 +8906,9 @@ pub unsafe fn cudaGraphExecMemsetNodeSetParams(hGraphExec: cudaGraphExec_t, node
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecMemsetNodeSetParams(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, pNodeParams: *const cudaMemsetParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecMemsetNodeSetParams(hGraphExec: cudaGraphExec_t, node: cudaGraphNode_t, pNodeParams: *const cudaMemsetParams) -> cudaError_t;
+        }
         cudaGraphExecMemsetNodeSetParams(hGraphExec, node, pNodeParams)
     }
 }
@@ -8607,7 +8923,9 @@ pub unsafe fn cudaGraphExecNodeSetParams(graphExec: cudaGraphExec_t, node: cudaG
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecNodeSetParams(graphExec: cudaGraphExec_t, node: cudaGraphNode_t, nodeParams: *mut cudaGraphNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecNodeSetParams(graphExec: cudaGraphExec_t, node: cudaGraphNode_t, nodeParams: *mut cudaGraphNodeParams) -> cudaError_t;
+        }
         cudaGraphExecNodeSetParams(graphExec, node, nodeParams)
     }
 }
@@ -8622,7 +8940,9 @@ pub unsafe fn cudaGraphExecUpdate(hGraphExec: cudaGraphExec_t, hGraph: cudaGraph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecUpdate(hGraphExec: cudaGraphExec_t, hGraph: cudaGraph_t, hErrorNode_out: *mut cudaGraphNode_t, updateResult_out: *mut cudaGraphExecUpdateResult) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecUpdate(hGraphExec: cudaGraphExec_t, hGraph: cudaGraph_t, hErrorNode_out: *mut cudaGraphNode_t, updateResult_out: *mut cudaGraphExecUpdateResult) -> cudaError_t;
+        }
         cudaGraphExecUpdate(hGraphExec, hGraph, hErrorNode_out, updateResult_out)
     }
 }
@@ -8637,7 +8957,9 @@ pub unsafe fn cudaGraphExecUpdate(hGraphExec: cudaGraphExec_t, hGraph: cudaGraph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExecUpdate(hGraphExec: cudaGraphExec_t, hGraph: cudaGraph_t, resultInfo: *mut cudaGraphExecUpdateResultInfo) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExecUpdate(hGraphExec: cudaGraphExec_t, hGraph: cudaGraph_t, resultInfo: *mut cudaGraphExecUpdateResultInfo) -> cudaError_t;
+        }
         cudaGraphExecUpdate(hGraphExec, hGraph, resultInfo)
     }
 }
@@ -8651,7 +8973,9 @@ pub unsafe fn cudaGraphExternalSemaphoresSignalNodeGetParams(hNode: cudaGraphNod
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExternalSemaphoresSignalNodeGetParams(hNode: cudaGraphNode_t, params_out: *mut cudaExternalSemaphoreSignalNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExternalSemaphoresSignalNodeGetParams(hNode: cudaGraphNode_t, params_out: *mut cudaExternalSemaphoreSignalNodeParams) -> cudaError_t;
+        }
         cudaGraphExternalSemaphoresSignalNodeGetParams(hNode, params_out)
     }
 }
@@ -8665,7 +8989,9 @@ pub unsafe fn cudaGraphExternalSemaphoresSignalNodeSetParams(hNode: cudaGraphNod
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExternalSemaphoresSignalNodeSetParams(hNode: cudaGraphNode_t, nodeParams: *const cudaExternalSemaphoreSignalNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExternalSemaphoresSignalNodeSetParams(hNode: cudaGraphNode_t, nodeParams: *const cudaExternalSemaphoreSignalNodeParams) -> cudaError_t;
+        }
         cudaGraphExternalSemaphoresSignalNodeSetParams(hNode, nodeParams)
     }
 }
@@ -8679,7 +9005,9 @@ pub unsafe fn cudaGraphExternalSemaphoresWaitNodeGetParams(hNode: cudaGraphNode_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExternalSemaphoresWaitNodeGetParams(hNode: cudaGraphNode_t, params_out: *mut cudaExternalSemaphoreWaitNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExternalSemaphoresWaitNodeGetParams(hNode: cudaGraphNode_t, params_out: *mut cudaExternalSemaphoreWaitNodeParams) -> cudaError_t;
+        }
         cudaGraphExternalSemaphoresWaitNodeGetParams(hNode, params_out)
     }
 }
@@ -8693,7 +9021,9 @@ pub unsafe fn cudaGraphExternalSemaphoresWaitNodeSetParams(hNode: cudaGraphNode_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphExternalSemaphoresWaitNodeSetParams(hNode: cudaGraphNode_t, nodeParams: *const cudaExternalSemaphoreWaitNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphExternalSemaphoresWaitNodeSetParams(hNode: cudaGraphNode_t, nodeParams: *const cudaExternalSemaphoreWaitNodeParams) -> cudaError_t;
+        }
         cudaGraphExternalSemaphoresWaitNodeSetParams(hNode, nodeParams)
     }
 }
@@ -8708,7 +9038,9 @@ pub unsafe fn cudaGraphGetEdges(graph: cudaGraph_t, from: *mut cudaGraphNode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphGetEdges(graph: cudaGraph_t, from: *mut cudaGraphNode_t, to: *mut cudaGraphNode_t, numEdges: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphGetEdges(graph: cudaGraph_t, from: *mut cudaGraphNode_t, to: *mut cudaGraphNode_t, numEdges: *mut usize) -> cudaError_t;
+        }
         cudaGraphGetEdges(graph, from, to, numEdges)
     }
 }
@@ -8723,7 +9055,9 @@ pub unsafe fn cudaGraphGetEdges(graph: cudaGraph_t, from: *mut cudaGraphNode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphGetEdges(graph: cudaGraph_t, from: *mut cudaGraphNode_t, to: *mut cudaGraphNode_t, edgeData: *mut cudaGraphEdgeData, numEdges: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphGetEdges(graph: cudaGraph_t, from: *mut cudaGraphNode_t, to: *mut cudaGraphNode_t, edgeData: *mut cudaGraphEdgeData, numEdges: *mut usize) -> cudaError_t;
+        }
         cudaGraphGetEdges(graph, from, to, edgeData, numEdges)
     }
 }
@@ -8738,7 +9072,9 @@ pub unsafe fn cudaGraphGetEdges_v2(graph: cudaGraph_t, from: *mut cudaGraphNode_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphGetEdges_v2(graph: cudaGraph_t, from: *mut cudaGraphNode_t, to: *mut cudaGraphNode_t, edgeData: *mut cudaGraphEdgeData, numEdges: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphGetEdges_v2(graph: cudaGraph_t, from: *mut cudaGraphNode_t, to: *mut cudaGraphNode_t, edgeData: *mut cudaGraphEdgeData, numEdges: *mut usize) -> cudaError_t;
+        }
         cudaGraphGetEdges_v2(graph, from, to, edgeData, numEdges)
     }
 }
@@ -8753,7 +9089,9 @@ pub unsafe fn cudaGraphGetId(hGraph: cudaGraph_t, graphID: *mut ::core::ffi::c_u
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphGetId(hGraph: cudaGraph_t, graphID: *mut ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphGetId(hGraph: cudaGraph_t, graphID: *mut ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGraphGetId(hGraph, graphID)
     }
 }
@@ -8767,7 +9105,9 @@ pub unsafe fn cudaGraphGetNodes(graph: cudaGraph_t, nodes: *mut cudaGraphNode_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphGetNodes(graph: cudaGraph_t, nodes: *mut cudaGraphNode_t, numNodes: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphGetNodes(graph: cudaGraph_t, nodes: *mut cudaGraphNode_t, numNodes: *mut usize) -> cudaError_t;
+        }
         cudaGraphGetNodes(graph, nodes, numNodes)
     }
 }
@@ -8781,7 +9121,9 @@ pub unsafe fn cudaGraphGetRootNodes(graph: cudaGraph_t, pRootNodes: *mut cudaGra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphGetRootNodes(graph: cudaGraph_t, pRootNodes: *mut cudaGraphNode_t, pNumRootNodes: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphGetRootNodes(graph: cudaGraph_t, pRootNodes: *mut cudaGraphNode_t, pNumRootNodes: *mut usize) -> cudaError_t;
+        }
         cudaGraphGetRootNodes(graph, pRootNodes, pNumRootNodes)
     }
 }
@@ -8795,7 +9137,9 @@ pub unsafe fn cudaGraphHostNodeGetParams(node: cudaGraphNode_t, pNodeParams: *mu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphHostNodeGetParams(node: cudaGraphNode_t, pNodeParams: *mut cudaHostNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphHostNodeGetParams(node: cudaGraphNode_t, pNodeParams: *mut cudaHostNodeParams) -> cudaError_t;
+        }
         cudaGraphHostNodeGetParams(node, pNodeParams)
     }
 }
@@ -8809,7 +9153,9 @@ pub unsafe fn cudaGraphHostNodeSetParams(node: cudaGraphNode_t, pNodeParams: *co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphHostNodeSetParams(node: cudaGraphNode_t, pNodeParams: *const cudaHostNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphHostNodeSetParams(node: cudaGraphNode_t, pNodeParams: *const cudaHostNodeParams) -> cudaError_t;
+        }
         cudaGraphHostNodeSetParams(node, pNodeParams)
     }
 }
@@ -8824,7 +9170,9 @@ pub unsafe fn cudaGraphInstantiate(pGraphExec: *mut cudaGraphExec_t, graph: cuda
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphInstantiate(pGraphExec: *mut cudaGraphExec_t, graph: cudaGraph_t, pErrorNode: *mut cudaGraphNode_t, pLogBuffer: *mut ::core::ffi::c_char, bufferSize: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphInstantiate(pGraphExec: *mut cudaGraphExec_t, graph: cudaGraph_t, pErrorNode: *mut cudaGraphNode_t, pLogBuffer: *mut ::core::ffi::c_char, bufferSize: usize) -> cudaError_t;
+        }
         cudaGraphInstantiate(pGraphExec, graph, pErrorNode, pLogBuffer, bufferSize)
     }
 }
@@ -8839,7 +9187,9 @@ pub unsafe fn cudaGraphInstantiate(pGraphExec: *mut cudaGraphExec_t, graph: cuda
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphInstantiate(pGraphExec: *mut cudaGraphExec_t, graph: cudaGraph_t, flags: ::core::ffi::c_ulonglong) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphInstantiate(pGraphExec: *mut cudaGraphExec_t, graph: cudaGraph_t, flags: ::core::ffi::c_ulonglong) -> cudaError_t;
+        }
         cudaGraphInstantiate(pGraphExec, graph, flags)
     }
 }
@@ -8853,7 +9203,9 @@ pub unsafe fn cudaGraphInstantiateWithFlags(pGraphExec: *mut cudaGraphExec_t, gr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphInstantiateWithFlags(pGraphExec: *mut cudaGraphExec_t, graph: cudaGraph_t, flags: ::core::ffi::c_ulonglong) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphInstantiateWithFlags(pGraphExec: *mut cudaGraphExec_t, graph: cudaGraph_t, flags: ::core::ffi::c_ulonglong) -> cudaError_t;
+        }
         cudaGraphInstantiateWithFlags(pGraphExec, graph, flags)
     }
 }
@@ -8868,7 +9220,9 @@ pub unsafe fn cudaGraphInstantiateWithParams(pGraphExec: *mut cudaGraphExec_t, g
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphInstantiateWithParams(pGraphExec: *mut cudaGraphExec_t, graph: cudaGraph_t, instantiateParams: *mut cudaGraphInstantiateParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphInstantiateWithParams(pGraphExec: *mut cudaGraphExec_t, graph: cudaGraph_t, instantiateParams: *mut cudaGraphInstantiateParams) -> cudaError_t;
+        }
         cudaGraphInstantiateWithParams(pGraphExec, graph, instantiateParams)
     }
 }
@@ -8883,7 +9237,9 @@ pub unsafe fn cudaGraphKernelNodeCopyAttributes(hSrc: cudaGraphNode_t, hDst: cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphKernelNodeCopyAttributes(hSrc: cudaGraphNode_t, hDst: cudaGraphNode_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphKernelNodeCopyAttributes(hSrc: cudaGraphNode_t, hDst: cudaGraphNode_t) -> cudaError_t;
+        }
         cudaGraphKernelNodeCopyAttributes(hSrc, hDst)
     }
 }
@@ -8898,7 +9254,9 @@ pub unsafe fn cudaGraphKernelNodeCopyAttributes(hDst: cudaGraphNode_t, hSrc: cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphKernelNodeCopyAttributes(hDst: cudaGraphNode_t, hSrc: cudaGraphNode_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphKernelNodeCopyAttributes(hDst: cudaGraphNode_t, hSrc: cudaGraphNode_t) -> cudaError_t;
+        }
         cudaGraphKernelNodeCopyAttributes(hDst, hSrc)
     }
 }
@@ -8913,7 +9271,9 @@ pub unsafe fn cudaGraphKernelNodeGetAttribute(hNode: cudaGraphNode_t, attr: cuda
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphKernelNodeGetAttribute(hNode: cudaGraphNode_t, attr: cudaKernelNodeAttrID, value_out: *mut cudaKernelNodeAttrValue) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphKernelNodeGetAttribute(hNode: cudaGraphNode_t, attr: cudaKernelNodeAttrID, value_out: *mut cudaKernelNodeAttrValue) -> cudaError_t;
+        }
         cudaGraphKernelNodeGetAttribute(hNode, attr, value_out)
     }
 }
@@ -8928,7 +9288,9 @@ pub unsafe fn cudaGraphKernelNodeGetAttribute(hNode: cudaGraphNode_t, attr: cuda
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphKernelNodeGetAttribute(hNode: cudaGraphNode_t, attr: cudaLaunchAttributeID, value_out: *mut cudaLaunchAttributeValue) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphKernelNodeGetAttribute(hNode: cudaGraphNode_t, attr: cudaLaunchAttributeID, value_out: *mut cudaLaunchAttributeValue) -> cudaError_t;
+        }
         cudaGraphKernelNodeGetAttribute(hNode, attr, value_out)
     }
 }
@@ -8942,7 +9304,9 @@ pub unsafe fn cudaGraphKernelNodeGetParams(node: cudaGraphNode_t, pNodeParams: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphKernelNodeGetParams(node: cudaGraphNode_t, pNodeParams: *mut cudaKernelNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphKernelNodeGetParams(node: cudaGraphNode_t, pNodeParams: *mut cudaKernelNodeParams) -> cudaError_t;
+        }
         cudaGraphKernelNodeGetParams(node, pNodeParams)
     }
 }
@@ -8957,7 +9321,9 @@ pub unsafe fn cudaGraphKernelNodeSetAttribute(hNode: cudaGraphNode_t, attr: cuda
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphKernelNodeSetAttribute(hNode: cudaGraphNode_t, attr: cudaKernelNodeAttrID, value: *const cudaKernelNodeAttrValue) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphKernelNodeSetAttribute(hNode: cudaGraphNode_t, attr: cudaKernelNodeAttrID, value: *const cudaKernelNodeAttrValue) -> cudaError_t;
+        }
         cudaGraphKernelNodeSetAttribute(hNode, attr, value)
     }
 }
@@ -8972,7 +9338,9 @@ pub unsafe fn cudaGraphKernelNodeSetAttribute(hNode: cudaGraphNode_t, attr: cuda
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphKernelNodeSetAttribute(hNode: cudaGraphNode_t, attr: cudaLaunchAttributeID, value: *const cudaLaunchAttributeValue) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphKernelNodeSetAttribute(hNode: cudaGraphNode_t, attr: cudaLaunchAttributeID, value: *const cudaLaunchAttributeValue) -> cudaError_t;
+        }
         cudaGraphKernelNodeSetAttribute(hNode, attr, value)
     }
 }
@@ -8986,7 +9354,9 @@ pub unsafe fn cudaGraphKernelNodeSetParams(node: cudaGraphNode_t, pNodeParams: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphKernelNodeSetParams(node: cudaGraphNode_t, pNodeParams: *const cudaKernelNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphKernelNodeSetParams(node: cudaGraphNode_t, pNodeParams: *const cudaKernelNodeParams) -> cudaError_t;
+        }
         cudaGraphKernelNodeSetParams(node, pNodeParams)
     }
 }
@@ -9000,7 +9370,9 @@ pub unsafe fn cudaGraphLaunch(graphExec: cudaGraphExec_t, stream: cudaStream_t) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphLaunch(graphExec: cudaGraphExec_t, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphLaunch(graphExec: cudaGraphExec_t, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaGraphLaunch(graphExec, stream)
     }
 }
@@ -9014,7 +9386,9 @@ pub unsafe fn cudaGraphMemAllocNodeGetParams(node: cudaGraphNode_t, params_out: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphMemAllocNodeGetParams(node: cudaGraphNode_t, params_out: *mut cudaMemAllocNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphMemAllocNodeGetParams(node: cudaGraphNode_t, params_out: *mut cudaMemAllocNodeParams) -> cudaError_t;
+        }
         cudaGraphMemAllocNodeGetParams(node, params_out)
     }
 }
@@ -9028,7 +9402,9 @@ pub unsafe fn cudaGraphMemFreeNodeGetParams(node: cudaGraphNode_t, dptr_out: *mu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphMemFreeNodeGetParams(node: cudaGraphNode_t, dptr_out: *mut ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphMemFreeNodeGetParams(node: cudaGraphNode_t, dptr_out: *mut ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaGraphMemFreeNodeGetParams(node, dptr_out)
     }
 }
@@ -9042,7 +9418,9 @@ pub unsafe fn cudaGraphMemcpyNodeGetParams(node: cudaGraphNode_t, pNodeParams: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphMemcpyNodeGetParams(node: cudaGraphNode_t, pNodeParams: *mut cudaMemcpy3DParms) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphMemcpyNodeGetParams(node: cudaGraphNode_t, pNodeParams: *mut cudaMemcpy3DParms) -> cudaError_t;
+        }
         cudaGraphMemcpyNodeGetParams(node, pNodeParams)
     }
 }
@@ -9056,7 +9434,9 @@ pub unsafe fn cudaGraphMemcpyNodeSetParams(node: cudaGraphNode_t, pNodeParams: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphMemcpyNodeSetParams(node: cudaGraphNode_t, pNodeParams: *const cudaMemcpy3DParms) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphMemcpyNodeSetParams(node: cudaGraphNode_t, pNodeParams: *const cudaMemcpy3DParms) -> cudaError_t;
+        }
         cudaGraphMemcpyNodeSetParams(node, pNodeParams)
     }
 }
@@ -9070,7 +9450,9 @@ pub unsafe fn cudaGraphMemcpyNodeSetParams1D(node: cudaGraphNode_t, dst: *mut ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphMemcpyNodeSetParams1D(node: cudaGraphNode_t, dst: *mut ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphMemcpyNodeSetParams1D(node: cudaGraphNode_t, dst: *mut ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaGraphMemcpyNodeSetParams1D(node, dst, src, count, kind)
     }
 }
@@ -9084,7 +9466,9 @@ pub unsafe fn cudaGraphMemcpyNodeSetParamsFromSymbol(node: cudaGraphNode_t, dst:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphMemcpyNodeSetParamsFromSymbol(node: cudaGraphNode_t, dst: *mut ::core::ffi::c_void, symbol: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphMemcpyNodeSetParamsFromSymbol(node: cudaGraphNode_t, dst: *mut ::core::ffi::c_void, symbol: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaGraphMemcpyNodeSetParamsFromSymbol(node, dst, symbol, count, offset, kind)
     }
 }
@@ -9098,7 +9482,9 @@ pub unsafe fn cudaGraphMemcpyNodeSetParamsToSymbol(node: cudaGraphNode_t, symbol
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphMemcpyNodeSetParamsToSymbol(node: cudaGraphNode_t, symbol: *const ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphMemcpyNodeSetParamsToSymbol(node: cudaGraphNode_t, symbol: *const ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaGraphMemcpyNodeSetParamsToSymbol(node, symbol, src, count, offset, kind)
     }
 }
@@ -9112,7 +9498,9 @@ pub unsafe fn cudaGraphMemsetNodeGetParams(node: cudaGraphNode_t, pNodeParams: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphMemsetNodeGetParams(node: cudaGraphNode_t, pNodeParams: *mut cudaMemsetParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphMemsetNodeGetParams(node: cudaGraphNode_t, pNodeParams: *mut cudaMemsetParams) -> cudaError_t;
+        }
         cudaGraphMemsetNodeGetParams(node, pNodeParams)
     }
 }
@@ -9126,7 +9514,9 @@ pub unsafe fn cudaGraphMemsetNodeSetParams(node: cudaGraphNode_t, pNodeParams: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphMemsetNodeSetParams(node: cudaGraphNode_t, pNodeParams: *const cudaMemsetParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphMemsetNodeSetParams(node: cudaGraphNode_t, pNodeParams: *const cudaMemsetParams) -> cudaError_t;
+        }
         cudaGraphMemsetNodeSetParams(node, pNodeParams)
     }
 }
@@ -9140,7 +9530,9 @@ pub unsafe fn cudaGraphNodeFindInClone(pNode: *mut cudaGraphNode_t, originalNode
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphNodeFindInClone(pNode: *mut cudaGraphNode_t, originalNode: cudaGraphNode_t, clonedGraph: cudaGraph_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphNodeFindInClone(pNode: *mut cudaGraphNode_t, originalNode: cudaGraphNode_t, clonedGraph: cudaGraph_t) -> cudaError_t;
+        }
         cudaGraphNodeFindInClone(pNode, originalNode, clonedGraph)
     }
 }
@@ -9155,7 +9547,9 @@ pub unsafe fn cudaGraphNodeGetContainingGraph(hNode: cudaGraphNode_t, phGraph: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphNodeGetContainingGraph(hNode: cudaGraphNode_t, phGraph: *mut cudaGraph_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphNodeGetContainingGraph(hNode: cudaGraphNode_t, phGraph: *mut cudaGraph_t) -> cudaError_t;
+        }
         cudaGraphNodeGetContainingGraph(hNode, phGraph)
     }
 }
@@ -9170,7 +9564,9 @@ pub unsafe fn cudaGraphNodeGetDependencies(node: cudaGraphNode_t, pDependencies:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphNodeGetDependencies(node: cudaGraphNode_t, pDependencies: *mut cudaGraphNode_t, pNumDependencies: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphNodeGetDependencies(node: cudaGraphNode_t, pDependencies: *mut cudaGraphNode_t, pNumDependencies: *mut usize) -> cudaError_t;
+        }
         cudaGraphNodeGetDependencies(node, pDependencies, pNumDependencies)
     }
 }
@@ -9185,7 +9581,9 @@ pub unsafe fn cudaGraphNodeGetDependencies(node: cudaGraphNode_t, pDependencies:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphNodeGetDependencies(node: cudaGraphNode_t, pDependencies: *mut cudaGraphNode_t, edgeData: *mut cudaGraphEdgeData, pNumDependencies: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphNodeGetDependencies(node: cudaGraphNode_t, pDependencies: *mut cudaGraphNode_t, edgeData: *mut cudaGraphEdgeData, pNumDependencies: *mut usize) -> cudaError_t;
+        }
         cudaGraphNodeGetDependencies(node, pDependencies, edgeData, pNumDependencies)
     }
 }
@@ -9200,7 +9598,9 @@ pub unsafe fn cudaGraphNodeGetDependencies_v2(node: cudaGraphNode_t, pDependenci
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphNodeGetDependencies_v2(node: cudaGraphNode_t, pDependencies: *mut cudaGraphNode_t, edgeData: *mut cudaGraphEdgeData, pNumDependencies: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphNodeGetDependencies_v2(node: cudaGraphNode_t, pDependencies: *mut cudaGraphNode_t, edgeData: *mut cudaGraphEdgeData, pNumDependencies: *mut usize) -> cudaError_t;
+        }
         cudaGraphNodeGetDependencies_v2(node, pDependencies, edgeData, pNumDependencies)
     }
 }
@@ -9215,7 +9615,9 @@ pub unsafe fn cudaGraphNodeGetDependentNodes(node: cudaGraphNode_t, pDependentNo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphNodeGetDependentNodes(node: cudaGraphNode_t, pDependentNodes: *mut cudaGraphNode_t, pNumDependentNodes: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphNodeGetDependentNodes(node: cudaGraphNode_t, pDependentNodes: *mut cudaGraphNode_t, pNumDependentNodes: *mut usize) -> cudaError_t;
+        }
         cudaGraphNodeGetDependentNodes(node, pDependentNodes, pNumDependentNodes)
     }
 }
@@ -9230,7 +9632,9 @@ pub unsafe fn cudaGraphNodeGetDependentNodes(node: cudaGraphNode_t, pDependentNo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphNodeGetDependentNodes(node: cudaGraphNode_t, pDependentNodes: *mut cudaGraphNode_t, edgeData: *mut cudaGraphEdgeData, pNumDependentNodes: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphNodeGetDependentNodes(node: cudaGraphNode_t, pDependentNodes: *mut cudaGraphNode_t, edgeData: *mut cudaGraphEdgeData, pNumDependentNodes: *mut usize) -> cudaError_t;
+        }
         cudaGraphNodeGetDependentNodes(node, pDependentNodes, edgeData, pNumDependentNodes)
     }
 }
@@ -9245,7 +9649,9 @@ pub unsafe fn cudaGraphNodeGetDependentNodes_v2(node: cudaGraphNode_t, pDependen
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphNodeGetDependentNodes_v2(node: cudaGraphNode_t, pDependentNodes: *mut cudaGraphNode_t, edgeData: *mut cudaGraphEdgeData, pNumDependentNodes: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphNodeGetDependentNodes_v2(node: cudaGraphNode_t, pDependentNodes: *mut cudaGraphNode_t, edgeData: *mut cudaGraphEdgeData, pNumDependentNodes: *mut usize) -> cudaError_t;
+        }
         cudaGraphNodeGetDependentNodes_v2(node, pDependentNodes, edgeData, pNumDependentNodes)
     }
 }
@@ -9260,7 +9666,9 @@ pub unsafe fn cudaGraphNodeGetEnabled(hGraphExec: cudaGraphExec_t, hNode: cudaGr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphNodeGetEnabled(hGraphExec: cudaGraphExec_t, hNode: cudaGraphNode_t, isEnabled: *mut ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphNodeGetEnabled(hGraphExec: cudaGraphExec_t, hNode: cudaGraphNode_t, isEnabled: *mut ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGraphNodeGetEnabled(hGraphExec, hNode, isEnabled)
     }
 }
@@ -9275,7 +9683,9 @@ pub unsafe fn cudaGraphNodeGetLocalId(hNode: cudaGraphNode_t, nodeId: *mut ::cor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphNodeGetLocalId(hNode: cudaGraphNode_t, nodeId: *mut ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphNodeGetLocalId(hNode: cudaGraphNode_t, nodeId: *mut ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGraphNodeGetLocalId(hNode, nodeId)
     }
 }
@@ -9290,7 +9700,9 @@ pub unsafe fn cudaGraphNodeGetParams(node: cudaGraphNode_t, nodeParams: *mut cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphNodeGetParams(node: cudaGraphNode_t, nodeParams: *mut cudaGraphNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphNodeGetParams(node: cudaGraphNode_t, nodeParams: *mut cudaGraphNodeParams) -> cudaError_t;
+        }
         cudaGraphNodeGetParams(node, nodeParams)
     }
 }
@@ -9305,7 +9717,9 @@ pub unsafe fn cudaGraphNodeGetToolsId(hNode: cudaGraphNode_t, toolsNodeId: *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphNodeGetToolsId(hNode: cudaGraphNode_t, toolsNodeId: *mut ::core::ffi::c_ulonglong) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphNodeGetToolsId(hNode: cudaGraphNode_t, toolsNodeId: *mut ::core::ffi::c_ulonglong) -> cudaError_t;
+        }
         cudaGraphNodeGetToolsId(hNode, toolsNodeId)
     }
 }
@@ -9319,7 +9733,9 @@ pub unsafe fn cudaGraphNodeGetType(node: cudaGraphNode_t, pType: *mut cudaGraphN
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphNodeGetType(node: cudaGraphNode_t, pType: *mut cudaGraphNodeType) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphNodeGetType(node: cudaGraphNode_t, pType: *mut cudaGraphNodeType) -> cudaError_t;
+        }
         cudaGraphNodeGetType(node, pType)
     }
 }
@@ -9334,7 +9750,9 @@ pub unsafe fn cudaGraphNodeSetEnabled(hGraphExec: cudaGraphExec_t, hNode: cudaGr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphNodeSetEnabled(hGraphExec: cudaGraphExec_t, hNode: cudaGraphNode_t, isEnabled: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphNodeSetEnabled(hGraphExec: cudaGraphExec_t, hNode: cudaGraphNode_t, isEnabled: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGraphNodeSetEnabled(hGraphExec, hNode, isEnabled)
     }
 }
@@ -9349,7 +9767,9 @@ pub unsafe fn cudaGraphNodeSetParams(node: cudaGraphNode_t, nodeParams: *mut cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphNodeSetParams(node: cudaGraphNode_t, nodeParams: *mut cudaGraphNodeParams) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphNodeSetParams(node: cudaGraphNode_t, nodeParams: *mut cudaGraphNodeParams) -> cudaError_t;
+        }
         cudaGraphNodeSetParams(node, nodeParams)
     }
 }
@@ -9363,7 +9783,9 @@ pub unsafe fn cudaGraphReleaseUserObject(graph: cudaGraph_t, object: cudaUserObj
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphReleaseUserObject(graph: cudaGraph_t, object: cudaUserObject_t, count: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphReleaseUserObject(graph: cudaGraph_t, object: cudaUserObject_t, count: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGraphReleaseUserObject(graph, object, count)
     }
 }
@@ -9378,7 +9800,9 @@ pub unsafe fn cudaGraphRemoveDependencies(graph: cudaGraph_t, from: *const cudaG
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphRemoveDependencies(graph: cudaGraph_t, from: *const cudaGraphNode_t, to: *const cudaGraphNode_t, numDependencies: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphRemoveDependencies(graph: cudaGraph_t, from: *const cudaGraphNode_t, to: *const cudaGraphNode_t, numDependencies: usize) -> cudaError_t;
+        }
         cudaGraphRemoveDependencies(graph, from, to, numDependencies)
     }
 }
@@ -9393,7 +9817,9 @@ pub unsafe fn cudaGraphRemoveDependencies(graph: cudaGraph_t, from: *const cudaG
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphRemoveDependencies(graph: cudaGraph_t, from: *const cudaGraphNode_t, to: *const cudaGraphNode_t, edgeData: *const cudaGraphEdgeData, numDependencies: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphRemoveDependencies(graph: cudaGraph_t, from: *const cudaGraphNode_t, to: *const cudaGraphNode_t, edgeData: *const cudaGraphEdgeData, numDependencies: usize) -> cudaError_t;
+        }
         cudaGraphRemoveDependencies(graph, from, to, edgeData, numDependencies)
     }
 }
@@ -9408,7 +9834,9 @@ pub unsafe fn cudaGraphRemoveDependencies_v2(graph: cudaGraph_t, from: *const cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphRemoveDependencies_v2(graph: cudaGraph_t, from: *const cudaGraphNode_t, to: *const cudaGraphNode_t, edgeData: *const cudaGraphEdgeData, numDependencies: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphRemoveDependencies_v2(graph: cudaGraph_t, from: *const cudaGraphNode_t, to: *const cudaGraphNode_t, edgeData: *const cudaGraphEdgeData, numDependencies: usize) -> cudaError_t;
+        }
         cudaGraphRemoveDependencies_v2(graph, from, to, edgeData, numDependencies)
     }
 }
@@ -9422,7 +9850,9 @@ pub unsafe fn cudaGraphRetainUserObject(graph: cudaGraph_t, object: cudaUserObje
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphRetainUserObject(graph: cudaGraph_t, object: cudaUserObject_t, count: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphRetainUserObject(graph: cudaGraph_t, object: cudaUserObject_t, count: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGraphRetainUserObject(graph, object, count, flags)
     }
 }
@@ -9436,7 +9866,9 @@ pub unsafe fn cudaGraphUpload(graphExec: cudaGraphExec_t, stream: cudaStream_t) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphUpload(graphExec: cudaGraphExec_t, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphUpload(graphExec: cudaGraphExec_t, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaGraphUpload(graphExec, stream)
     }
 }
@@ -9450,7 +9882,9 @@ pub unsafe fn cudaGraphicsMapResources(count: ::core::ffi::c_int, resources: *mu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphicsMapResources(count: ::core::ffi::c_int, resources: *mut cudaGraphicsResource_t, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphicsMapResources(count: ::core::ffi::c_int, resources: *mut cudaGraphicsResource_t, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaGraphicsMapResources(count, resources, stream)
     }
 }
@@ -9464,7 +9898,9 @@ pub unsafe fn cudaGraphicsResourceGetMappedMipmappedArray(mipmappedArray: *mut c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphicsResourceGetMappedMipmappedArray(mipmappedArray: *mut cudaMipmappedArray_t, resource: cudaGraphicsResource_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphicsResourceGetMappedMipmappedArray(mipmappedArray: *mut cudaMipmappedArray_t, resource: cudaGraphicsResource_t) -> cudaError_t;
+        }
         cudaGraphicsResourceGetMappedMipmappedArray(mipmappedArray, resource)
     }
 }
@@ -9478,7 +9914,9 @@ pub unsafe fn cudaGraphicsResourceGetMappedPointer(devPtr: *mut *mut ::core::ffi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphicsResourceGetMappedPointer(devPtr: *mut *mut ::core::ffi::c_void, size: *mut usize, resource: cudaGraphicsResource_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphicsResourceGetMappedPointer(devPtr: *mut *mut ::core::ffi::c_void, size: *mut usize, resource: cudaGraphicsResource_t) -> cudaError_t;
+        }
         cudaGraphicsResourceGetMappedPointer(devPtr, size, resource)
     }
 }
@@ -9492,7 +9930,9 @@ pub unsafe fn cudaGraphicsResourceSetMapFlags(resource: cudaGraphicsResource_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphicsResourceSetMapFlags(resource: cudaGraphicsResource_t, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphicsResourceSetMapFlags(resource: cudaGraphicsResource_t, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGraphicsResourceSetMapFlags(resource, flags)
     }
 }
@@ -9506,7 +9946,9 @@ pub unsafe fn cudaGraphicsSubResourceGetMappedArray(array: *mut cudaArray_t, res
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphicsSubResourceGetMappedArray(array: *mut cudaArray_t, resource: cudaGraphicsResource_t, arrayIndex: ::core::ffi::c_uint, mipLevel: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphicsSubResourceGetMappedArray(array: *mut cudaArray_t, resource: cudaGraphicsResource_t, arrayIndex: ::core::ffi::c_uint, mipLevel: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGraphicsSubResourceGetMappedArray(array, resource, arrayIndex, mipLevel)
     }
 }
@@ -9520,7 +9962,9 @@ pub unsafe fn cudaGraphicsUnmapResources(count: ::core::ffi::c_int, resources: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphicsUnmapResources(count: ::core::ffi::c_int, resources: *mut cudaGraphicsResource_t, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphicsUnmapResources(count: ::core::ffi::c_int, resources: *mut cudaGraphicsResource_t, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaGraphicsUnmapResources(count, resources, stream)
     }
 }
@@ -9534,7 +9978,9 @@ pub unsafe fn cudaGraphicsUnregisterResource(resource: cudaGraphicsResource_t) -
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGraphicsUnregisterResource(resource: cudaGraphicsResource_t) -> cudaError_t;
+        extern "C" {
+            fn cudaGraphicsUnregisterResource(resource: cudaGraphicsResource_t) -> cudaError_t;
+        }
         cudaGraphicsUnregisterResource(resource)
     }
 }
@@ -9549,7 +9995,9 @@ pub unsafe fn cudaGreenCtxCreate(phCtx: *mut cudaExecutionContext_t, desc: cudaD
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaGreenCtxCreate(phCtx: *mut cudaExecutionContext_t, desc: cudaDevResourceDesc_t, device: ::core::ffi::c_int, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaGreenCtxCreate(phCtx: *mut cudaExecutionContext_t, desc: cudaDevResourceDesc_t, device: ::core::ffi::c_int, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaGreenCtxCreate(phCtx, desc, device, flags)
     }
 }
@@ -9563,7 +10011,9 @@ pub unsafe fn cudaHostAlloc(pHost: *mut *mut ::core::ffi::c_void, size: usize, f
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaHostAlloc(pHost: *mut *mut ::core::ffi::c_void, size: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaHostAlloc(pHost: *mut *mut ::core::ffi::c_void, size: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaHostAlloc(pHost, size, flags)
     }
 }
@@ -9577,7 +10027,9 @@ pub unsafe fn cudaHostGetDevicePointer(pDevice: *mut *mut ::core::ffi::c_void, p
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaHostGetDevicePointer(pDevice: *mut *mut ::core::ffi::c_void, pHost: *mut ::core::ffi::c_void, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaHostGetDevicePointer(pDevice: *mut *mut ::core::ffi::c_void, pHost: *mut ::core::ffi::c_void, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaHostGetDevicePointer(pDevice, pHost, flags)
     }
 }
@@ -9591,7 +10043,9 @@ pub unsafe fn cudaHostGetFlags(pFlags: *mut ::core::ffi::c_uint, pHost: *mut ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaHostGetFlags(pFlags: *mut ::core::ffi::c_uint, pHost: *mut ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaHostGetFlags(pFlags: *mut ::core::ffi::c_uint, pHost: *mut ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaHostGetFlags(pFlags, pHost)
     }
 }
@@ -9605,7 +10059,9 @@ pub unsafe fn cudaHostRegister(ptr: *mut ::core::ffi::c_void, size: usize, flags
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaHostRegister(ptr: *mut ::core::ffi::c_void, size: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaHostRegister(ptr: *mut ::core::ffi::c_void, size: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaHostRegister(ptr, size, flags)
     }
 }
@@ -9619,7 +10075,9 @@ pub unsafe fn cudaHostUnregister(ptr: *mut ::core::ffi::c_void) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaHostUnregister(ptr: *mut ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaHostUnregister(ptr: *mut ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaHostUnregister(ptr)
     }
 }
@@ -9633,7 +10091,9 @@ pub unsafe fn cudaImportExternalMemory(extMem_out: *mut cudaExternalMemory_t, me
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaImportExternalMemory(extMem_out: *mut cudaExternalMemory_t, memHandleDesc: *const cudaExternalMemoryHandleDesc) -> cudaError_t;
+        extern "C" {
+            fn cudaImportExternalMemory(extMem_out: *mut cudaExternalMemory_t, memHandleDesc: *const cudaExternalMemoryHandleDesc) -> cudaError_t;
+        }
         cudaImportExternalMemory(extMem_out, memHandleDesc)
     }
 }
@@ -9647,7 +10107,9 @@ pub unsafe fn cudaImportExternalSemaphore(extSem_out: *mut cudaExternalSemaphore
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaImportExternalSemaphore(extSem_out: *mut cudaExternalSemaphore_t, semHandleDesc: *const cudaExternalSemaphoreHandleDesc) -> cudaError_t;
+        extern "C" {
+            fn cudaImportExternalSemaphore(extSem_out: *mut cudaExternalSemaphore_t, semHandleDesc: *const cudaExternalSemaphoreHandleDesc) -> cudaError_t;
+        }
         cudaImportExternalSemaphore(extSem_out, semHandleDesc)
     }
 }
@@ -9662,7 +10124,9 @@ pub unsafe fn cudaInitDevice(device: ::core::ffi::c_int, deviceFlags: ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaInitDevice(device: ::core::ffi::c_int, deviceFlags: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaInitDevice(device: ::core::ffi::c_int, deviceFlags: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaInitDevice(device, deviceFlags, flags)
     }
 }
@@ -9676,7 +10140,9 @@ pub unsafe fn cudaIpcCloseMemHandle(devPtr: *mut ::core::ffi::c_void) -> cudaErr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaIpcCloseMemHandle(devPtr: *mut ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaIpcCloseMemHandle(devPtr: *mut ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaIpcCloseMemHandle(devPtr)
     }
 }
@@ -9690,7 +10156,9 @@ pub unsafe fn cudaIpcGetEventHandle(handle: *mut cudaIpcEventHandle_t, event: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaIpcGetEventHandle(handle: *mut cudaIpcEventHandle_t, event: cudaEvent_t) -> cudaError_t;
+        extern "C" {
+            fn cudaIpcGetEventHandle(handle: *mut cudaIpcEventHandle_t, event: cudaEvent_t) -> cudaError_t;
+        }
         cudaIpcGetEventHandle(handle, event)
     }
 }
@@ -9704,7 +10172,9 @@ pub unsafe fn cudaIpcGetMemHandle(handle: *mut cudaIpcMemHandle_t, devPtr: *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaIpcGetMemHandle(handle: *mut cudaIpcMemHandle_t, devPtr: *mut ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaIpcGetMemHandle(handle: *mut cudaIpcMemHandle_t, devPtr: *mut ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaIpcGetMemHandle(handle, devPtr)
     }
 }
@@ -9718,7 +10188,9 @@ pub unsafe fn cudaIpcOpenEventHandle(event: *mut cudaEvent_t, handle: cudaIpcEve
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaIpcOpenEventHandle(event: *mut cudaEvent_t, handle: cudaIpcEventHandle_t) -> cudaError_t;
+        extern "C" {
+            fn cudaIpcOpenEventHandle(event: *mut cudaEvent_t, handle: cudaIpcEventHandle_t) -> cudaError_t;
+        }
         cudaIpcOpenEventHandle(event, handle)
     }
 }
@@ -9732,7 +10204,9 @@ pub unsafe fn cudaIpcOpenMemHandle(devPtr: *mut *mut ::core::ffi::c_void, handle
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaIpcOpenMemHandle(devPtr: *mut *mut ::core::ffi::c_void, handle: cudaIpcMemHandle_t, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaIpcOpenMemHandle(devPtr: *mut *mut ::core::ffi::c_void, handle: cudaIpcMemHandle_t, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaIpcOpenMemHandle(devPtr, handle, flags)
     }
 }
@@ -9747,7 +10221,9 @@ pub unsafe fn cudaKernelSetAttributeForDevice(kernel: cudaKernel_t, attr: cudaFu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaKernelSetAttributeForDevice(kernel: cudaKernel_t, attr: cudaFuncAttribute, value: ::core::ffi::c_int, device: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaKernelSetAttributeForDevice(kernel: cudaKernel_t, attr: cudaFuncAttribute, value: ::core::ffi::c_int, device: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaKernelSetAttributeForDevice(kernel, attr, value, device)
     }
 }
@@ -9761,7 +10237,9 @@ pub unsafe fn cudaLaunchCooperativeKernel(func: *const ::core::ffi::c_void, grid
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLaunchCooperativeKernel(func: *const ::core::ffi::c_void, gridDim: dim3, blockDim: dim3, args: *mut *mut ::core::ffi::c_void, sharedMem: usize, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaLaunchCooperativeKernel(func: *const ::core::ffi::c_void, gridDim: dim3, blockDim: dim3, args: *mut *mut ::core::ffi::c_void, sharedMem: usize, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaLaunchCooperativeKernel(func, gridDim, blockDim, args, sharedMem, stream)
     }
 }
@@ -9776,7 +10254,9 @@ pub unsafe fn cudaLaunchCooperativeKernelMultiDevice(launchParamsList: *mut cuda
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLaunchCooperativeKernelMultiDevice(launchParamsList: *mut cudaLaunchParams, numDevices: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaLaunchCooperativeKernelMultiDevice(launchParamsList: *mut cudaLaunchParams, numDevices: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaLaunchCooperativeKernelMultiDevice(launchParamsList, numDevices, flags)
     }
 }
@@ -9790,7 +10270,9 @@ pub unsafe fn cudaLaunchHostFunc(stream: cudaStream_t, fn_: cudaHostFn_t, userDa
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLaunchHostFunc(stream: cudaStream_t, fn_: cudaHostFn_t, userData: *mut ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaLaunchHostFunc(stream: cudaStream_t, fn_: cudaHostFn_t, userData: *mut ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaLaunchHostFunc(stream, fn_, userData)
     }
 }
@@ -9805,7 +10287,9 @@ pub unsafe fn cudaLaunchHostFunc_v2(stream: cudaStream_t, fn_: cudaHostFn_t, use
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLaunchHostFunc_v2(stream: cudaStream_t, fn_: cudaHostFn_t, userData: *mut ::core::ffi::c_void, syncMode: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaLaunchHostFunc_v2(stream: cudaStream_t, fn_: cudaHostFn_t, userData: *mut ::core::ffi::c_void, syncMode: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaLaunchHostFunc_v2(stream, fn_, userData, syncMode)
     }
 }
@@ -9819,7 +10303,9 @@ pub unsafe fn cudaLaunchKernel(func: *const ::core::ffi::c_void, gridDim: dim3, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLaunchKernel(func: *const ::core::ffi::c_void, gridDim: dim3, blockDim: dim3, args: *mut *mut ::core::ffi::c_void, sharedMem: usize, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaLaunchKernel(func: *const ::core::ffi::c_void, gridDim: dim3, blockDim: dim3, args: *mut *mut ::core::ffi::c_void, sharedMem: usize, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaLaunchKernel(func, gridDim, blockDim, args, sharedMem, stream)
     }
 }
@@ -9834,7 +10320,9 @@ pub unsafe fn cudaLaunchKernelExC(config: *const cudaLaunchConfig_t, func: *cons
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLaunchKernelExC(config: *const cudaLaunchConfig_t, func: *const ::core::ffi::c_void, args: *mut *mut ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaLaunchKernelExC(config: *const cudaLaunchConfig_t, func: *const ::core::ffi::c_void, args: *mut *mut ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaLaunchKernelExC(config, func, args)
     }
 }
@@ -9849,7 +10337,9 @@ pub unsafe fn cudaLibraryEnumerateKernels(kernels: *mut cudaKernel_t, numKernels
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLibraryEnumerateKernels(kernels: *mut cudaKernel_t, numKernels: ::core::ffi::c_uint, lib: cudaLibrary_t) -> cudaError_t;
+        extern "C" {
+            fn cudaLibraryEnumerateKernels(kernels: *mut cudaKernel_t, numKernels: ::core::ffi::c_uint, lib: cudaLibrary_t) -> cudaError_t;
+        }
         cudaLibraryEnumerateKernels(kernels, numKernels, lib)
     }
 }
@@ -9864,7 +10354,9 @@ pub unsafe fn cudaLibraryGetGlobal(dptr: *mut *mut ::core::ffi::c_void, bytes: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLibraryGetGlobal(dptr: *mut *mut ::core::ffi::c_void, bytes: *mut usize, library: cudaLibrary_t, name: *const ::core::ffi::c_char) -> cudaError_t;
+        extern "C" {
+            fn cudaLibraryGetGlobal(dptr: *mut *mut ::core::ffi::c_void, bytes: *mut usize, library: cudaLibrary_t, name: *const ::core::ffi::c_char) -> cudaError_t;
+        }
         cudaLibraryGetGlobal(dptr, bytes, library, name)
     }
 }
@@ -9879,7 +10371,9 @@ pub unsafe fn cudaLibraryGetKernel(pKernel: *mut cudaKernel_t, library: cudaLibr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLibraryGetKernel(pKernel: *mut cudaKernel_t, library: cudaLibrary_t, name: *const ::core::ffi::c_char) -> cudaError_t;
+        extern "C" {
+            fn cudaLibraryGetKernel(pKernel: *mut cudaKernel_t, library: cudaLibrary_t, name: *const ::core::ffi::c_char) -> cudaError_t;
+        }
         cudaLibraryGetKernel(pKernel, library, name)
     }
 }
@@ -9894,7 +10388,9 @@ pub unsafe fn cudaLibraryGetKernelCount(count: *mut ::core::ffi::c_uint, lib: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLibraryGetKernelCount(count: *mut ::core::ffi::c_uint, lib: cudaLibrary_t) -> cudaError_t;
+        extern "C" {
+            fn cudaLibraryGetKernelCount(count: *mut ::core::ffi::c_uint, lib: cudaLibrary_t) -> cudaError_t;
+        }
         cudaLibraryGetKernelCount(count, lib)
     }
 }
@@ -9909,7 +10405,9 @@ pub unsafe fn cudaLibraryGetManaged(dptr: *mut *mut ::core::ffi::c_void, bytes: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLibraryGetManaged(dptr: *mut *mut ::core::ffi::c_void, bytes: *mut usize, library: cudaLibrary_t, name: *const ::core::ffi::c_char) -> cudaError_t;
+        extern "C" {
+            fn cudaLibraryGetManaged(dptr: *mut *mut ::core::ffi::c_void, bytes: *mut usize, library: cudaLibrary_t, name: *const ::core::ffi::c_char) -> cudaError_t;
+        }
         cudaLibraryGetManaged(dptr, bytes, library, name)
     }
 }
@@ -9924,7 +10422,9 @@ pub unsafe fn cudaLibraryGetUnifiedFunction(fptr: *mut *mut ::core::ffi::c_void,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLibraryGetUnifiedFunction(fptr: *mut *mut ::core::ffi::c_void, library: cudaLibrary_t, symbol: *const ::core::ffi::c_char) -> cudaError_t;
+        extern "C" {
+            fn cudaLibraryGetUnifiedFunction(fptr: *mut *mut ::core::ffi::c_void, library: cudaLibrary_t, symbol: *const ::core::ffi::c_char) -> cudaError_t;
+        }
         cudaLibraryGetUnifiedFunction(fptr, library, symbol)
     }
 }
@@ -9939,7 +10439,9 @@ pub unsafe fn cudaLibraryLoadData(library: *mut cudaLibrary_t, code: *const ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLibraryLoadData(library: *mut cudaLibrary_t, code: *const ::core::ffi::c_void, jitOptions: *mut cudaJitOption, jitOptionsValues: *mut *mut ::core::ffi::c_void, numJitOptions: ::core::ffi::c_uint, libraryOptions: *mut cudaLibraryOption, libraryOptionValues: *mut *mut ::core::ffi::c_void, numLibraryOptions: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaLibraryLoadData(library: *mut cudaLibrary_t, code: *const ::core::ffi::c_void, jitOptions: *mut cudaJitOption, jitOptionsValues: *mut *mut ::core::ffi::c_void, numJitOptions: ::core::ffi::c_uint, libraryOptions: *mut cudaLibraryOption, libraryOptionValues: *mut *mut ::core::ffi::c_void, numLibraryOptions: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaLibraryLoadData(library, code, jitOptions, jitOptionsValues, numJitOptions, libraryOptions, libraryOptionValues, numLibraryOptions)
     }
 }
@@ -9954,7 +10456,9 @@ pub unsafe fn cudaLibraryLoadFromFile(library: *mut cudaLibrary_t, fileName: *co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLibraryLoadFromFile(library: *mut cudaLibrary_t, fileName: *const ::core::ffi::c_char, jitOptions: *mut cudaJitOption, jitOptionsValues: *mut *mut ::core::ffi::c_void, numJitOptions: ::core::ffi::c_uint, libraryOptions: *mut cudaLibraryOption, libraryOptionValues: *mut *mut ::core::ffi::c_void, numLibraryOptions: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaLibraryLoadFromFile(library: *mut cudaLibrary_t, fileName: *const ::core::ffi::c_char, jitOptions: *mut cudaJitOption, jitOptionsValues: *mut *mut ::core::ffi::c_void, numJitOptions: ::core::ffi::c_uint, libraryOptions: *mut cudaLibraryOption, libraryOptionValues: *mut *mut ::core::ffi::c_void, numLibraryOptions: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaLibraryLoadFromFile(library, fileName, jitOptions, jitOptionsValues, numJitOptions, libraryOptions, libraryOptionValues, numLibraryOptions)
     }
 }
@@ -9969,7 +10473,9 @@ pub unsafe fn cudaLibraryUnload(library: cudaLibrary_t) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLibraryUnload(library: cudaLibrary_t) -> cudaError_t;
+        extern "C" {
+            fn cudaLibraryUnload(library: cudaLibrary_t) -> cudaError_t;
+        }
         cudaLibraryUnload(library)
     }
 }
@@ -9984,7 +10490,9 @@ pub unsafe fn cudaLogsCurrent(iterator_out: *mut cudaLogIterator, flags: ::core:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLogsCurrent(iterator_out: *mut cudaLogIterator, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaLogsCurrent(iterator_out: *mut cudaLogIterator, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaLogsCurrent(iterator_out, flags)
     }
 }
@@ -9999,7 +10507,9 @@ pub unsafe fn cudaLogsDumpToFile(iterator: *mut cudaLogIterator, pathToFile: *co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLogsDumpToFile(iterator: *mut cudaLogIterator, pathToFile: *const ::core::ffi::c_char, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaLogsDumpToFile(iterator: *mut cudaLogIterator, pathToFile: *const ::core::ffi::c_char, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaLogsDumpToFile(iterator, pathToFile, flags)
     }
 }
@@ -10014,7 +10524,9 @@ pub unsafe fn cudaLogsDumpToMemory(iterator: *mut cudaLogIterator, buffer: *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLogsDumpToMemory(iterator: *mut cudaLogIterator, buffer: *mut ::core::ffi::c_char, size: *mut usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaLogsDumpToMemory(iterator: *mut cudaLogIterator, buffer: *mut ::core::ffi::c_char, size: *mut usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaLogsDumpToMemory(iterator, buffer, size, flags)
     }
 }
@@ -10029,7 +10541,9 @@ pub unsafe fn cudaLogsRegisterCallback(callbackFunc: cudaLogsCallback_t, userDat
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLogsRegisterCallback(callbackFunc: cudaLogsCallback_t, userData: *mut ::core::ffi::c_void, callback_out: *mut cudaLogsCallbackHandle) -> cudaError_t;
+        extern "C" {
+            fn cudaLogsRegisterCallback(callbackFunc: cudaLogsCallback_t, userData: *mut ::core::ffi::c_void, callback_out: *mut cudaLogsCallbackHandle) -> cudaError_t;
+        }
         cudaLogsRegisterCallback(callbackFunc, userData, callback_out)
     }
 }
@@ -10044,7 +10558,9 @@ pub unsafe fn cudaLogsUnregisterCallback(callback: cudaLogsCallbackHandle) -> cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaLogsUnregisterCallback(callback: cudaLogsCallbackHandle) -> cudaError_t;
+        extern "C" {
+            fn cudaLogsUnregisterCallback(callback: cudaLogsCallbackHandle) -> cudaError_t;
+        }
         cudaLogsUnregisterCallback(callback)
     }
 }
@@ -10058,7 +10574,9 @@ pub unsafe fn cudaMalloc(devPtr: *mut *mut ::core::ffi::c_void, size: usize) -> 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMalloc(devPtr: *mut *mut ::core::ffi::c_void, size: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaMalloc(devPtr: *mut *mut ::core::ffi::c_void, size: usize) -> cudaError_t;
+        }
         cudaMalloc(devPtr, size)
     }
 }
@@ -10072,7 +10590,9 @@ pub unsafe fn cudaMalloc3D(pitchedDevPtr: *mut cudaPitchedPtr, extent: cudaExten
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMalloc3D(pitchedDevPtr: *mut cudaPitchedPtr, extent: cudaExtent) -> cudaError_t;
+        extern "C" {
+            fn cudaMalloc3D(pitchedDevPtr: *mut cudaPitchedPtr, extent: cudaExtent) -> cudaError_t;
+        }
         cudaMalloc3D(pitchedDevPtr, extent)
     }
 }
@@ -10086,7 +10606,9 @@ pub unsafe fn cudaMalloc3DArray(array: *mut cudaArray_t, desc: *const cudaChanne
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMalloc3DArray(array: *mut cudaArray_t, desc: *const cudaChannelFormatDesc, extent: cudaExtent, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaMalloc3DArray(array: *mut cudaArray_t, desc: *const cudaChannelFormatDesc, extent: cudaExtent, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaMalloc3DArray(array, desc, extent, flags)
     }
 }
@@ -10100,7 +10622,9 @@ pub unsafe fn cudaMallocArray(array: *mut cudaArray_t, desc: *const cudaChannelF
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMallocArray(array: *mut cudaArray_t, desc: *const cudaChannelFormatDesc, width: usize, height: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaMallocArray(array: *mut cudaArray_t, desc: *const cudaChannelFormatDesc, width: usize, height: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaMallocArray(array, desc, width, height, flags)
     }
 }
@@ -10114,7 +10638,9 @@ pub unsafe fn cudaMallocAsync(devPtr: *mut *mut ::core::ffi::c_void, size: usize
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMallocAsync(devPtr: *mut *mut ::core::ffi::c_void, size: usize, hStream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMallocAsync(devPtr: *mut *mut ::core::ffi::c_void, size: usize, hStream: cudaStream_t) -> cudaError_t;
+        }
         cudaMallocAsync(devPtr, size, hStream)
     }
 }
@@ -10128,7 +10654,9 @@ pub unsafe fn cudaMallocFromPoolAsync(ptr: *mut *mut ::core::ffi::c_void, size: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMallocFromPoolAsync(ptr: *mut *mut ::core::ffi::c_void, size: usize, memPool: cudaMemPool_t, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMallocFromPoolAsync(ptr: *mut *mut ::core::ffi::c_void, size: usize, memPool: cudaMemPool_t, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMallocFromPoolAsync(ptr, size, memPool, stream)
     }
 }
@@ -10142,7 +10670,9 @@ pub unsafe fn cudaMallocHost(ptr: *mut *mut ::core::ffi::c_void, size: usize) ->
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMallocHost(ptr: *mut *mut ::core::ffi::c_void, size: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaMallocHost(ptr: *mut *mut ::core::ffi::c_void, size: usize) -> cudaError_t;
+        }
         cudaMallocHost(ptr, size)
     }
 }
@@ -10156,7 +10686,9 @@ pub unsafe fn cudaMallocManaged(devPtr: *mut *mut ::core::ffi::c_void, size: usi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMallocManaged(devPtr: *mut *mut ::core::ffi::c_void, size: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaMallocManaged(devPtr: *mut *mut ::core::ffi::c_void, size: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaMallocManaged(devPtr, size, flags)
     }
 }
@@ -10170,7 +10702,9 @@ pub unsafe fn cudaMallocMipmappedArray(mipmappedArray: *mut cudaMipmappedArray_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMallocMipmappedArray(mipmappedArray: *mut cudaMipmappedArray_t, desc: *const cudaChannelFormatDesc, extent: cudaExtent, numLevels: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaMallocMipmappedArray(mipmappedArray: *mut cudaMipmappedArray_t, desc: *const cudaChannelFormatDesc, extent: cudaExtent, numLevels: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaMallocMipmappedArray(mipmappedArray, desc, extent, numLevels, flags)
     }
 }
@@ -10184,7 +10718,9 @@ pub unsafe fn cudaMallocPitch(devPtr: *mut *mut ::core::ffi::c_void, pitch: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMallocPitch(devPtr: *mut *mut ::core::ffi::c_void, pitch: *mut usize, width: usize, height: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaMallocPitch(devPtr: *mut *mut ::core::ffi::c_void, pitch: *mut usize, width: usize, height: usize) -> cudaError_t;
+        }
         cudaMallocPitch(devPtr, pitch, width, height)
     }
 }
@@ -10199,7 +10735,9 @@ pub unsafe fn cudaMemAdvise(devPtr: *const ::core::ffi::c_void, count: usize, ad
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemAdvise(devPtr: *const ::core::ffi::c_void, count: usize, advice: cudaMemoryAdvise, device: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaMemAdvise(devPtr: *const ::core::ffi::c_void, count: usize, advice: cudaMemoryAdvise, device: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaMemAdvise(devPtr, count, advice, device)
     }
 }
@@ -10214,7 +10752,9 @@ pub unsafe fn cudaMemAdvise(devPtr: *const ::core::ffi::c_void, count: usize, ad
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemAdvise(devPtr: *const ::core::ffi::c_void, count: usize, advice: cudaMemoryAdvise, location: cudaMemLocation) -> cudaError_t;
+        extern "C" {
+            fn cudaMemAdvise(devPtr: *const ::core::ffi::c_void, count: usize, advice: cudaMemoryAdvise, location: cudaMemLocation) -> cudaError_t;
+        }
         cudaMemAdvise(devPtr, count, advice, location)
     }
 }
@@ -10229,7 +10769,9 @@ pub unsafe fn cudaMemAdvise_v2(devPtr: *const ::core::ffi::c_void, count: usize,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemAdvise_v2(devPtr: *const ::core::ffi::c_void, count: usize, advice: cudaMemoryAdvise, location: cudaMemLocation) -> cudaError_t;
+        extern "C" {
+            fn cudaMemAdvise_v2(devPtr: *const ::core::ffi::c_void, count: usize, advice: cudaMemoryAdvise, location: cudaMemLocation) -> cudaError_t;
+        }
         cudaMemAdvise_v2(devPtr, count, advice, location)
     }
 }
@@ -10244,7 +10786,9 @@ pub unsafe fn cudaMemDiscardAndPrefetchBatchAsync(dptrs: *mut *mut ::core::ffi::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemDiscardAndPrefetchBatchAsync(dptrs: *mut *mut ::core::ffi::c_void, sizes: *mut usize, count: usize, prefetchLocs: *mut cudaMemLocation, prefetchLocIdxs: *mut usize, numPrefetchLocs: usize, flags: ::core::ffi::c_ulonglong, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemDiscardAndPrefetchBatchAsync(dptrs: *mut *mut ::core::ffi::c_void, sizes: *mut usize, count: usize, prefetchLocs: *mut cudaMemLocation, prefetchLocIdxs: *mut usize, numPrefetchLocs: usize, flags: ::core::ffi::c_ulonglong, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemDiscardAndPrefetchBatchAsync(dptrs, sizes, count, prefetchLocs, prefetchLocIdxs, numPrefetchLocs, flags, stream)
     }
 }
@@ -10259,7 +10803,9 @@ pub unsafe fn cudaMemDiscardBatchAsync(dptrs: *mut *mut ::core::ffi::c_void, siz
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemDiscardBatchAsync(dptrs: *mut *mut ::core::ffi::c_void, sizes: *mut usize, count: usize, flags: ::core::ffi::c_ulonglong, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemDiscardBatchAsync(dptrs: *mut *mut ::core::ffi::c_void, sizes: *mut usize, count: usize, flags: ::core::ffi::c_ulonglong, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemDiscardBatchAsync(dptrs, sizes, count, flags, stream)
     }
 }
@@ -10274,7 +10820,9 @@ pub unsafe fn cudaMemGetDefaultMemPool(memPool: *mut cudaMemPool_t, location: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemGetDefaultMemPool(memPool: *mut cudaMemPool_t, location: *mut cudaMemLocation, type_: cudaMemAllocationType) -> cudaError_t;
+        extern "C" {
+            fn cudaMemGetDefaultMemPool(memPool: *mut cudaMemPool_t, location: *mut cudaMemLocation, type_: cudaMemAllocationType) -> cudaError_t;
+        }
         cudaMemGetDefaultMemPool(memPool, location, type_)
     }
 }
@@ -10288,7 +10836,9 @@ pub unsafe fn cudaMemGetInfo(free: *mut usize, total: *mut usize) -> cudaError_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemGetInfo(free: *mut usize, total: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaMemGetInfo(free: *mut usize, total: *mut usize) -> cudaError_t;
+        }
         cudaMemGetInfo(free, total)
     }
 }
@@ -10303,7 +10853,9 @@ pub unsafe fn cudaMemGetMemPool(memPool: *mut cudaMemPool_t, location: *mut cuda
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemGetMemPool(memPool: *mut cudaMemPool_t, location: *mut cudaMemLocation, type_: cudaMemAllocationType) -> cudaError_t;
+        extern "C" {
+            fn cudaMemGetMemPool(memPool: *mut cudaMemPool_t, location: *mut cudaMemLocation, type_: cudaMemAllocationType) -> cudaError_t;
+        }
         cudaMemGetMemPool(memPool, location, type_)
     }
 }
@@ -10317,7 +10869,9 @@ pub unsafe fn cudaMemPoolCreate(memPool: *mut cudaMemPool_t, poolProps: *const c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemPoolCreate(memPool: *mut cudaMemPool_t, poolProps: *const cudaMemPoolProps) -> cudaError_t;
+        extern "C" {
+            fn cudaMemPoolCreate(memPool: *mut cudaMemPool_t, poolProps: *const cudaMemPoolProps) -> cudaError_t;
+        }
         cudaMemPoolCreate(memPool, poolProps)
     }
 }
@@ -10331,7 +10885,9 @@ pub unsafe fn cudaMemPoolDestroy(memPool: cudaMemPool_t) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemPoolDestroy(memPool: cudaMemPool_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemPoolDestroy(memPool: cudaMemPool_t) -> cudaError_t;
+        }
         cudaMemPoolDestroy(memPool)
     }
 }
@@ -10345,7 +10901,9 @@ pub unsafe fn cudaMemPoolExportPointer(exportData: *mut cudaMemPoolPtrExportData
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemPoolExportPointer(exportData: *mut cudaMemPoolPtrExportData, ptr: *mut ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaMemPoolExportPointer(exportData: *mut cudaMemPoolPtrExportData, ptr: *mut ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaMemPoolExportPointer(exportData, ptr)
     }
 }
@@ -10359,7 +10917,9 @@ pub unsafe fn cudaMemPoolExportToShareableHandle(shareableHandle: *mut ::core::f
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemPoolExportToShareableHandle(shareableHandle: *mut ::core::ffi::c_void, memPool: cudaMemPool_t, handleType: cudaMemAllocationHandleType, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaMemPoolExportToShareableHandle(shareableHandle: *mut ::core::ffi::c_void, memPool: cudaMemPool_t, handleType: cudaMemAllocationHandleType, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaMemPoolExportToShareableHandle(shareableHandle, memPool, handleType, flags)
     }
 }
@@ -10373,7 +10933,9 @@ pub unsafe fn cudaMemPoolGetAccess(flags: *mut cudaMemAccessFlags, memPool: cuda
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemPoolGetAccess(flags: *mut cudaMemAccessFlags, memPool: cudaMemPool_t, location: *mut cudaMemLocation) -> cudaError_t;
+        extern "C" {
+            fn cudaMemPoolGetAccess(flags: *mut cudaMemAccessFlags, memPool: cudaMemPool_t, location: *mut cudaMemLocation) -> cudaError_t;
+        }
         cudaMemPoolGetAccess(flags, memPool, location)
     }
 }
@@ -10387,7 +10949,9 @@ pub unsafe fn cudaMemPoolGetAttribute(memPool: cudaMemPool_t, attr: cudaMemPoolA
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemPoolGetAttribute(memPool: cudaMemPool_t, attr: cudaMemPoolAttr, value: *mut ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaMemPoolGetAttribute(memPool: cudaMemPool_t, attr: cudaMemPoolAttr, value: *mut ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaMemPoolGetAttribute(memPool, attr, value)
     }
 }
@@ -10401,7 +10965,9 @@ pub unsafe fn cudaMemPoolImportFromShareableHandle(memPool: *mut cudaMemPool_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemPoolImportFromShareableHandle(memPool: *mut cudaMemPool_t, shareableHandle: *mut ::core::ffi::c_void, handleType: cudaMemAllocationHandleType, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaMemPoolImportFromShareableHandle(memPool: *mut cudaMemPool_t, shareableHandle: *mut ::core::ffi::c_void, handleType: cudaMemAllocationHandleType, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaMemPoolImportFromShareableHandle(memPool, shareableHandle, handleType, flags)
     }
 }
@@ -10415,7 +10981,9 @@ pub unsafe fn cudaMemPoolImportPointer(ptr: *mut *mut ::core::ffi::c_void, memPo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemPoolImportPointer(ptr: *mut *mut ::core::ffi::c_void, memPool: cudaMemPool_t, exportData: *mut cudaMemPoolPtrExportData) -> cudaError_t;
+        extern "C" {
+            fn cudaMemPoolImportPointer(ptr: *mut *mut ::core::ffi::c_void, memPool: cudaMemPool_t, exportData: *mut cudaMemPoolPtrExportData) -> cudaError_t;
+        }
         cudaMemPoolImportPointer(ptr, memPool, exportData)
     }
 }
@@ -10429,7 +10997,9 @@ pub unsafe fn cudaMemPoolSetAccess(memPool: cudaMemPool_t, descList: *const cuda
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemPoolSetAccess(memPool: cudaMemPool_t, descList: *const cudaMemAccessDesc, count: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaMemPoolSetAccess(memPool: cudaMemPool_t, descList: *const cudaMemAccessDesc, count: usize) -> cudaError_t;
+        }
         cudaMemPoolSetAccess(memPool, descList, count)
     }
 }
@@ -10443,7 +11013,9 @@ pub unsafe fn cudaMemPoolSetAttribute(memPool: cudaMemPool_t, attr: cudaMemPoolA
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemPoolSetAttribute(memPool: cudaMemPool_t, attr: cudaMemPoolAttr, value: *mut ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaMemPoolSetAttribute(memPool: cudaMemPool_t, attr: cudaMemPoolAttr, value: *mut ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaMemPoolSetAttribute(memPool, attr, value)
     }
 }
@@ -10457,7 +11029,9 @@ pub unsafe fn cudaMemPoolTrimTo(memPool: cudaMemPool_t, minBytesToKeep: usize) -
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemPoolTrimTo(memPool: cudaMemPool_t, minBytesToKeep: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaMemPoolTrimTo(memPool: cudaMemPool_t, minBytesToKeep: usize) -> cudaError_t;
+        }
         cudaMemPoolTrimTo(memPool, minBytesToKeep)
     }
 }
@@ -10472,7 +11046,9 @@ pub unsafe fn cudaMemPrefetchAsync(devPtr: *const ::core::ffi::c_void, count: us
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemPrefetchAsync(devPtr: *const ::core::ffi::c_void, count: usize, dstDevice: ::core::ffi::c_int, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemPrefetchAsync(devPtr: *const ::core::ffi::c_void, count: usize, dstDevice: ::core::ffi::c_int, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemPrefetchAsync(devPtr, count, dstDevice, stream)
     }
 }
@@ -10487,7 +11063,9 @@ pub unsafe fn cudaMemPrefetchAsync(devPtr: *const ::core::ffi::c_void, count: us
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemPrefetchAsync(devPtr: *const ::core::ffi::c_void, count: usize, location: cudaMemLocation, flags: ::core::ffi::c_uint, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemPrefetchAsync(devPtr: *const ::core::ffi::c_void, count: usize, location: cudaMemLocation, flags: ::core::ffi::c_uint, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemPrefetchAsync(devPtr, count, location, flags, stream)
     }
 }
@@ -10502,7 +11080,9 @@ pub unsafe fn cudaMemPrefetchAsync_v2(devPtr: *const ::core::ffi::c_void, count:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemPrefetchAsync_v2(devPtr: *const ::core::ffi::c_void, count: usize, location: cudaMemLocation, flags: ::core::ffi::c_uint, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemPrefetchAsync_v2(devPtr: *const ::core::ffi::c_void, count: usize, location: cudaMemLocation, flags: ::core::ffi::c_uint, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemPrefetchAsync_v2(devPtr, count, location, flags, stream)
     }
 }
@@ -10517,7 +11097,9 @@ pub unsafe fn cudaMemPrefetchBatchAsync(dptrs: *mut *mut ::core::ffi::c_void, si
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemPrefetchBatchAsync(dptrs: *mut *mut ::core::ffi::c_void, sizes: *mut usize, count: usize, prefetchLocs: *mut cudaMemLocation, prefetchLocIdxs: *mut usize, numPrefetchLocs: usize, flags: ::core::ffi::c_ulonglong, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemPrefetchBatchAsync(dptrs: *mut *mut ::core::ffi::c_void, sizes: *mut usize, count: usize, prefetchLocs: *mut cudaMemLocation, prefetchLocIdxs: *mut usize, numPrefetchLocs: usize, flags: ::core::ffi::c_ulonglong, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemPrefetchBatchAsync(dptrs, sizes, count, prefetchLocs, prefetchLocIdxs, numPrefetchLocs, flags, stream)
     }
 }
@@ -10531,7 +11113,9 @@ pub unsafe fn cudaMemRangeGetAttribute(data: *mut ::core::ffi::c_void, dataSize:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemRangeGetAttribute(data: *mut ::core::ffi::c_void, dataSize: usize, attribute: cudaMemRangeAttribute, devPtr: *const ::core::ffi::c_void, count: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaMemRangeGetAttribute(data: *mut ::core::ffi::c_void, dataSize: usize, attribute: cudaMemRangeAttribute, devPtr: *const ::core::ffi::c_void, count: usize) -> cudaError_t;
+        }
         cudaMemRangeGetAttribute(data, dataSize, attribute, devPtr, count)
     }
 }
@@ -10545,7 +11129,9 @@ pub unsafe fn cudaMemRangeGetAttributes(data: *mut *mut ::core::ffi::c_void, dat
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemRangeGetAttributes(data: *mut *mut ::core::ffi::c_void, dataSizes: *mut usize, attributes: *mut cudaMemRangeAttribute, numAttributes: usize, devPtr: *const ::core::ffi::c_void, count: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaMemRangeGetAttributes(data: *mut *mut ::core::ffi::c_void, dataSizes: *mut usize, attributes: *mut cudaMemRangeAttribute, numAttributes: usize, devPtr: *const ::core::ffi::c_void, count: usize) -> cudaError_t;
+        }
         cudaMemRangeGetAttributes(data, dataSizes, attributes, numAttributes, devPtr, count)
     }
 }
@@ -10560,7 +11146,9 @@ pub unsafe fn cudaMemSetMemPool(location: *mut cudaMemLocation, type_: cudaMemAl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemSetMemPool(location: *mut cudaMemLocation, type_: cudaMemAllocationType, memPool: cudaMemPool_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemSetMemPool(location: *mut cudaMemLocation, type_: cudaMemAllocationType, memPool: cudaMemPool_t) -> cudaError_t;
+        }
         cudaMemSetMemPool(location, type_, memPool)
     }
 }
@@ -10574,7 +11162,9 @@ pub unsafe fn cudaMemcpy(dst: *mut ::core::ffi::c_void, src: *const ::core::ffi:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpy(dst: *mut ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpy(dst: *mut ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaMemcpy(dst, src, count, kind)
     }
 }
@@ -10588,7 +11178,9 @@ pub unsafe fn cudaMemcpy2D(dst: *mut ::core::ffi::c_void, dpitch: usize, src: *c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpy2D(dst: *mut ::core::ffi::c_void, dpitch: usize, src: *const ::core::ffi::c_void, spitch: usize, width: usize, height: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpy2D(dst: *mut ::core::ffi::c_void, dpitch: usize, src: *const ::core::ffi::c_void, spitch: usize, width: usize, height: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaMemcpy2D(dst, dpitch, src, spitch, width, height, kind)
     }
 }
@@ -10602,7 +11194,9 @@ pub unsafe fn cudaMemcpy2DArrayToArray(dst: cudaArray_t, wOffsetDst: usize, hOff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpy2DArrayToArray(dst: cudaArray_t, wOffsetDst: usize, hOffsetDst: usize, src: cudaArray_const_t, wOffsetSrc: usize, hOffsetSrc: usize, width: usize, height: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpy2DArrayToArray(dst: cudaArray_t, wOffsetDst: usize, hOffsetDst: usize, src: cudaArray_const_t, wOffsetSrc: usize, hOffsetSrc: usize, width: usize, height: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaMemcpy2DArrayToArray(dst, wOffsetDst, hOffsetDst, src, wOffsetSrc, hOffsetSrc, width, height, kind)
     }
 }
@@ -10616,7 +11210,9 @@ pub unsafe fn cudaMemcpy2DAsync(dst: *mut ::core::ffi::c_void, dpitch: usize, sr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpy2DAsync(dst: *mut ::core::ffi::c_void, dpitch: usize, src: *const ::core::ffi::c_void, spitch: usize, width: usize, height: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpy2DAsync(dst: *mut ::core::ffi::c_void, dpitch: usize, src: *const ::core::ffi::c_void, spitch: usize, width: usize, height: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpy2DAsync(dst, dpitch, src, spitch, width, height, kind, stream)
     }
 }
@@ -10630,7 +11226,9 @@ pub unsafe fn cudaMemcpy2DFromArray(dst: *mut ::core::ffi::c_void, dpitch: usize
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpy2DFromArray(dst: *mut ::core::ffi::c_void, dpitch: usize, src: cudaArray_const_t, wOffset: usize, hOffset: usize, width: usize, height: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpy2DFromArray(dst: *mut ::core::ffi::c_void, dpitch: usize, src: cudaArray_const_t, wOffset: usize, hOffset: usize, width: usize, height: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaMemcpy2DFromArray(dst, dpitch, src, wOffset, hOffset, width, height, kind)
     }
 }
@@ -10644,7 +11242,9 @@ pub unsafe fn cudaMemcpy2DFromArrayAsync(dst: *mut ::core::ffi::c_void, dpitch: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpy2DFromArrayAsync(dst: *mut ::core::ffi::c_void, dpitch: usize, src: cudaArray_const_t, wOffset: usize, hOffset: usize, width: usize, height: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpy2DFromArrayAsync(dst: *mut ::core::ffi::c_void, dpitch: usize, src: cudaArray_const_t, wOffset: usize, hOffset: usize, width: usize, height: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpy2DFromArrayAsync(dst, dpitch, src, wOffset, hOffset, width, height, kind, stream)
     }
 }
@@ -10658,7 +11258,9 @@ pub unsafe fn cudaMemcpy2DToArray(dst: cudaArray_t, wOffset: usize, hOffset: usi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpy2DToArray(dst: cudaArray_t, wOffset: usize, hOffset: usize, src: *const ::core::ffi::c_void, spitch: usize, width: usize, height: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpy2DToArray(dst: cudaArray_t, wOffset: usize, hOffset: usize, src: *const ::core::ffi::c_void, spitch: usize, width: usize, height: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaMemcpy2DToArray(dst, wOffset, hOffset, src, spitch, width, height, kind)
     }
 }
@@ -10672,7 +11274,9 @@ pub unsafe fn cudaMemcpy2DToArrayAsync(dst: cudaArray_t, wOffset: usize, hOffset
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpy2DToArrayAsync(dst: cudaArray_t, wOffset: usize, hOffset: usize, src: *const ::core::ffi::c_void, spitch: usize, width: usize, height: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpy2DToArrayAsync(dst: cudaArray_t, wOffset: usize, hOffset: usize, src: *const ::core::ffi::c_void, spitch: usize, width: usize, height: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpy2DToArrayAsync(dst, wOffset, hOffset, src, spitch, width, height, kind, stream)
     }
 }
@@ -10686,7 +11290,9 @@ pub unsafe fn cudaMemcpy3D(p: *const cudaMemcpy3DParms) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpy3D(p: *const cudaMemcpy3DParms) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpy3D(p: *const cudaMemcpy3DParms) -> cudaError_t;
+        }
         cudaMemcpy3D(p)
     }
 }
@@ -10700,7 +11306,9 @@ pub unsafe fn cudaMemcpy3DAsync(p: *const cudaMemcpy3DParms, stream: cudaStream_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpy3DAsync(p: *const cudaMemcpy3DParms, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpy3DAsync(p: *const cudaMemcpy3DParms, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpy3DAsync(p, stream)
     }
 }
@@ -10715,7 +11323,9 @@ pub unsafe fn cudaMemcpy3DBatchAsync(numOps: usize, opList: *mut cudaMemcpy3DBat
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpy3DBatchAsync(numOps: usize, opList: *mut cudaMemcpy3DBatchOp, failIdx: *mut usize, flags: ::core::ffi::c_ulonglong, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpy3DBatchAsync(numOps: usize, opList: *mut cudaMemcpy3DBatchOp, failIdx: *mut usize, flags: ::core::ffi::c_ulonglong, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpy3DBatchAsync(numOps, opList, failIdx, flags, stream)
     }
 }
@@ -10730,7 +11340,9 @@ pub unsafe fn cudaMemcpy3DBatchAsync(numOps: usize, opList: *mut cudaMemcpy3DBat
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpy3DBatchAsync(numOps: usize, opList: *mut cudaMemcpy3DBatchOp, flags: ::core::ffi::c_ulonglong, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpy3DBatchAsync(numOps: usize, opList: *mut cudaMemcpy3DBatchOp, flags: ::core::ffi::c_ulonglong, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpy3DBatchAsync(numOps, opList, flags, stream)
     }
 }
@@ -10744,7 +11356,9 @@ pub unsafe fn cudaMemcpy3DPeer(p: *const cudaMemcpy3DPeerParms) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpy3DPeer(p: *const cudaMemcpy3DPeerParms) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpy3DPeer(p: *const cudaMemcpy3DPeerParms) -> cudaError_t;
+        }
         cudaMemcpy3DPeer(p)
     }
 }
@@ -10758,7 +11372,9 @@ pub unsafe fn cudaMemcpy3DPeerAsync(p: *const cudaMemcpy3DPeerParms, stream: cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpy3DPeerAsync(p: *const cudaMemcpy3DPeerParms, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpy3DPeerAsync(p: *const cudaMemcpy3DPeerParms, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpy3DPeerAsync(p, stream)
     }
 }
@@ -10773,7 +11389,9 @@ pub unsafe fn cudaMemcpy3DWithAttributesAsync(op: *mut cudaMemcpy3DBatchOp, flag
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpy3DWithAttributesAsync(op: *mut cudaMemcpy3DBatchOp, flags: ::core::ffi::c_ulonglong, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpy3DWithAttributesAsync(op: *mut cudaMemcpy3DBatchOp, flags: ::core::ffi::c_ulonglong, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpy3DWithAttributesAsync(op, flags, stream)
     }
 }
@@ -10787,7 +11405,9 @@ pub unsafe fn cudaMemcpyArrayToArray(dst: cudaArray_t, wOffsetDst: usize, hOffse
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpyArrayToArray(dst: cudaArray_t, wOffsetDst: usize, hOffsetDst: usize, src: cudaArray_const_t, wOffsetSrc: usize, hOffsetSrc: usize, count: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpyArrayToArray(dst: cudaArray_t, wOffsetDst: usize, hOffsetDst: usize, src: cudaArray_const_t, wOffsetSrc: usize, hOffsetSrc: usize, count: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaMemcpyArrayToArray(dst, wOffsetDst, hOffsetDst, src, wOffsetSrc, hOffsetSrc, count, kind)
     }
 }
@@ -10801,7 +11421,9 @@ pub unsafe fn cudaMemcpyAsync(dst: *mut ::core::ffi::c_void, src: *const ::core:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpyAsync(dst: *mut ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpyAsync(dst: *mut ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpyAsync(dst, src, count, kind, stream)
     }
 }
@@ -10816,7 +11438,9 @@ pub unsafe fn cudaMemcpyBatchAsync(dsts: *mut *mut ::core::ffi::c_void, srcs: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpyBatchAsync(dsts: *mut *mut ::core::ffi::c_void, srcs: *mut *mut ::core::ffi::c_void, sizes: *mut usize, count: usize, attrs: *mut cudaMemcpyAttributes, attrsIdxs: *mut usize, numAttrs: usize, failIdx: *mut usize, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpyBatchAsync(dsts: *mut *mut ::core::ffi::c_void, srcs: *mut *mut ::core::ffi::c_void, sizes: *mut usize, count: usize, attrs: *mut cudaMemcpyAttributes, attrsIdxs: *mut usize, numAttrs: usize, failIdx: *mut usize, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpyBatchAsync(dsts, srcs, sizes, count, attrs, attrsIdxs, numAttrs, failIdx, stream)
     }
 }
@@ -10831,7 +11455,9 @@ pub unsafe fn cudaMemcpyBatchAsync(dsts: *const *mut ::core::ffi::c_void, srcs: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpyBatchAsync(dsts: *const *mut ::core::ffi::c_void, srcs: *const *const ::core::ffi::c_void, sizes: *const usize, count: usize, attrs: *mut cudaMemcpyAttributes, attrsIdxs: *mut usize, numAttrs: usize, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpyBatchAsync(dsts: *const *mut ::core::ffi::c_void, srcs: *const *const ::core::ffi::c_void, sizes: *const usize, count: usize, attrs: *mut cudaMemcpyAttributes, attrsIdxs: *mut usize, numAttrs: usize, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpyBatchAsync(dsts, srcs, sizes, count, attrs, attrsIdxs, numAttrs, stream)
     }
 }
@@ -10845,7 +11471,9 @@ pub unsafe fn cudaMemcpyFromArray(dst: *mut ::core::ffi::c_void, src: cudaArray_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpyFromArray(dst: *mut ::core::ffi::c_void, src: cudaArray_const_t, wOffset: usize, hOffset: usize, count: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpyFromArray(dst: *mut ::core::ffi::c_void, src: cudaArray_const_t, wOffset: usize, hOffset: usize, count: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaMemcpyFromArray(dst, src, wOffset, hOffset, count, kind)
     }
 }
@@ -10859,7 +11487,9 @@ pub unsafe fn cudaMemcpyFromArrayAsync(dst: *mut ::core::ffi::c_void, src: cudaA
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpyFromArrayAsync(dst: *mut ::core::ffi::c_void, src: cudaArray_const_t, wOffset: usize, hOffset: usize, count: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpyFromArrayAsync(dst: *mut ::core::ffi::c_void, src: cudaArray_const_t, wOffset: usize, hOffset: usize, count: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpyFromArrayAsync(dst, src, wOffset, hOffset, count, kind, stream)
     }
 }
@@ -10873,7 +11503,9 @@ pub unsafe fn cudaMemcpyFromSymbol(dst: *mut ::core::ffi::c_void, symbol: *const
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpyFromSymbol(dst: *mut ::core::ffi::c_void, symbol: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpyFromSymbol(dst: *mut ::core::ffi::c_void, symbol: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaMemcpyFromSymbol(dst, symbol, count, offset, kind)
     }
 }
@@ -10887,7 +11519,9 @@ pub unsafe fn cudaMemcpyFromSymbolAsync(dst: *mut ::core::ffi::c_void, symbol: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpyFromSymbolAsync(dst: *mut ::core::ffi::c_void, symbol: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpyFromSymbolAsync(dst: *mut ::core::ffi::c_void, symbol: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpyFromSymbolAsync(dst, symbol, count, offset, kind, stream)
     }
 }
@@ -10901,7 +11535,9 @@ pub unsafe fn cudaMemcpyPeer(dst: *mut ::core::ffi::c_void, dstDevice: ::core::f
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpyPeer(dst: *mut ::core::ffi::c_void, dstDevice: ::core::ffi::c_int, src: *const ::core::ffi::c_void, srcDevice: ::core::ffi::c_int, count: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpyPeer(dst: *mut ::core::ffi::c_void, dstDevice: ::core::ffi::c_int, src: *const ::core::ffi::c_void, srcDevice: ::core::ffi::c_int, count: usize) -> cudaError_t;
+        }
         cudaMemcpyPeer(dst, dstDevice, src, srcDevice, count)
     }
 }
@@ -10915,7 +11551,9 @@ pub unsafe fn cudaMemcpyPeerAsync(dst: *mut ::core::ffi::c_void, dstDevice: ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpyPeerAsync(dst: *mut ::core::ffi::c_void, dstDevice: ::core::ffi::c_int, src: *const ::core::ffi::c_void, srcDevice: ::core::ffi::c_int, count: usize, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpyPeerAsync(dst: *mut ::core::ffi::c_void, dstDevice: ::core::ffi::c_int, src: *const ::core::ffi::c_void, srcDevice: ::core::ffi::c_int, count: usize, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpyPeerAsync(dst, dstDevice, src, srcDevice, count, stream)
     }
 }
@@ -10929,7 +11567,9 @@ pub unsafe fn cudaMemcpyToArray(dst: cudaArray_t, wOffset: usize, hOffset: usize
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpyToArray(dst: cudaArray_t, wOffset: usize, hOffset: usize, src: *const ::core::ffi::c_void, count: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpyToArray(dst: cudaArray_t, wOffset: usize, hOffset: usize, src: *const ::core::ffi::c_void, count: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaMemcpyToArray(dst, wOffset, hOffset, src, count, kind)
     }
 }
@@ -10943,7 +11583,9 @@ pub unsafe fn cudaMemcpyToArrayAsync(dst: cudaArray_t, wOffset: usize, hOffset: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpyToArrayAsync(dst: cudaArray_t, wOffset: usize, hOffset: usize, src: *const ::core::ffi::c_void, count: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpyToArrayAsync(dst: cudaArray_t, wOffset: usize, hOffset: usize, src: *const ::core::ffi::c_void, count: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpyToArrayAsync(dst, wOffset, hOffset, src, count, kind, stream)
     }
 }
@@ -10957,7 +11599,9 @@ pub unsafe fn cudaMemcpyToSymbol(symbol: *const ::core::ffi::c_void, src: *const
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpyToSymbol(symbol: *const ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpyToSymbol(symbol: *const ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind) -> cudaError_t;
+        }
         cudaMemcpyToSymbol(symbol, src, count, offset, kind)
     }
 }
@@ -10971,7 +11615,9 @@ pub unsafe fn cudaMemcpyToSymbolAsync(symbol: *const ::core::ffi::c_void, src: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpyToSymbolAsync(symbol: *const ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpyToSymbolAsync(symbol: *const ::core::ffi::c_void, src: *const ::core::ffi::c_void, count: usize, offset: usize, kind: cudaMemcpyKind, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpyToSymbolAsync(symbol, src, count, offset, kind, stream)
     }
 }
@@ -10986,7 +11632,9 @@ pub unsafe fn cudaMemcpyWithAttributesAsync(dst: *mut ::core::ffi::c_void, src: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemcpyWithAttributesAsync(dst: *mut ::core::ffi::c_void, src: *const ::core::ffi::c_void, size: usize, attr: *mut cudaMemcpyAttributes, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemcpyWithAttributesAsync(dst: *mut ::core::ffi::c_void, src: *const ::core::ffi::c_void, size: usize, attr: *mut cudaMemcpyAttributes, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemcpyWithAttributesAsync(dst, src, size, attr, stream)
     }
 }
@@ -11000,7 +11648,9 @@ pub unsafe fn cudaMemset(devPtr: *mut ::core::ffi::c_void, value: ::core::ffi::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemset(devPtr: *mut ::core::ffi::c_void, value: ::core::ffi::c_int, count: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaMemset(devPtr: *mut ::core::ffi::c_void, value: ::core::ffi::c_int, count: usize) -> cudaError_t;
+        }
         cudaMemset(devPtr, value, count)
     }
 }
@@ -11014,7 +11664,9 @@ pub unsafe fn cudaMemset2D(devPtr: *mut ::core::ffi::c_void, pitch: usize, value
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemset2D(devPtr: *mut ::core::ffi::c_void, pitch: usize, value: ::core::ffi::c_int, width: usize, height: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaMemset2D(devPtr: *mut ::core::ffi::c_void, pitch: usize, value: ::core::ffi::c_int, width: usize, height: usize) -> cudaError_t;
+        }
         cudaMemset2D(devPtr, pitch, value, width, height)
     }
 }
@@ -11028,7 +11680,9 @@ pub unsafe fn cudaMemset2DAsync(devPtr: *mut ::core::ffi::c_void, pitch: usize, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemset2DAsync(devPtr: *mut ::core::ffi::c_void, pitch: usize, value: ::core::ffi::c_int, width: usize, height: usize, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemset2DAsync(devPtr: *mut ::core::ffi::c_void, pitch: usize, value: ::core::ffi::c_int, width: usize, height: usize, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemset2DAsync(devPtr, pitch, value, width, height, stream)
     }
 }
@@ -11042,7 +11696,9 @@ pub unsafe fn cudaMemset3D(pitchedDevPtr: cudaPitchedPtr, value: ::core::ffi::c_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemset3D(pitchedDevPtr: cudaPitchedPtr, value: ::core::ffi::c_int, extent: cudaExtent) -> cudaError_t;
+        extern "C" {
+            fn cudaMemset3D(pitchedDevPtr: cudaPitchedPtr, value: ::core::ffi::c_int, extent: cudaExtent) -> cudaError_t;
+        }
         cudaMemset3D(pitchedDevPtr, value, extent)
     }
 }
@@ -11056,7 +11712,9 @@ pub unsafe fn cudaMemset3DAsync(pitchedDevPtr: cudaPitchedPtr, value: ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemset3DAsync(pitchedDevPtr: cudaPitchedPtr, value: ::core::ffi::c_int, extent: cudaExtent, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemset3DAsync(pitchedDevPtr: cudaPitchedPtr, value: ::core::ffi::c_int, extent: cudaExtent, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemset3DAsync(pitchedDevPtr, value, extent, stream)
     }
 }
@@ -11070,7 +11728,9 @@ pub unsafe fn cudaMemsetAsync(devPtr: *mut ::core::ffi::c_void, value: ::core::f
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMemsetAsync(devPtr: *mut ::core::ffi::c_void, value: ::core::ffi::c_int, count: usize, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMemsetAsync(devPtr: *mut ::core::ffi::c_void, value: ::core::ffi::c_int, count: usize, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaMemsetAsync(devPtr, value, count, stream)
     }
 }
@@ -11085,7 +11745,9 @@ pub unsafe fn cudaMipmappedArrayGetMemoryRequirements(memoryRequirements: *mut c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMipmappedArrayGetMemoryRequirements(memoryRequirements: *mut cudaArrayMemoryRequirements, mipmap: cudaMipmappedArray_t, device: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaMipmappedArrayGetMemoryRequirements(memoryRequirements: *mut cudaArrayMemoryRequirements, mipmap: cudaMipmappedArray_t, device: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaMipmappedArrayGetMemoryRequirements(memoryRequirements, mipmap, device)
     }
 }
@@ -11099,7 +11761,9 @@ pub unsafe fn cudaMipmappedArrayGetSparseProperties(sparseProperties: *mut cudaA
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaMipmappedArrayGetSparseProperties(sparseProperties: *mut cudaArraySparseProperties, mipmap: cudaMipmappedArray_t) -> cudaError_t;
+        extern "C" {
+            fn cudaMipmappedArrayGetSparseProperties(sparseProperties: *mut cudaArraySparseProperties, mipmap: cudaMipmappedArray_t) -> cudaError_t;
+        }
         cudaMipmappedArrayGetSparseProperties(sparseProperties, mipmap)
     }
 }
@@ -11113,7 +11777,9 @@ pub unsafe fn cudaOccupancyAvailableDynamicSMemPerBlock(dynamicSmemSize: *mut us
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaOccupancyAvailableDynamicSMemPerBlock(dynamicSmemSize: *mut usize, func: *const ::core::ffi::c_void, numBlocks: ::core::ffi::c_int, blockSize: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaOccupancyAvailableDynamicSMemPerBlock(dynamicSmemSize: *mut usize, func: *const ::core::ffi::c_void, numBlocks: ::core::ffi::c_int, blockSize: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaOccupancyAvailableDynamicSMemPerBlock(dynamicSmemSize, func, numBlocks, blockSize)
     }
 }
@@ -11127,7 +11793,9 @@ pub unsafe fn cudaOccupancyMaxActiveBlocksPerMultiprocessor(numBlocks: *mut ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaOccupancyMaxActiveBlocksPerMultiprocessor(numBlocks: *mut ::core::ffi::c_int, func: *const ::core::ffi::c_void, blockSize: ::core::ffi::c_int, dynamicSMemSize: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaOccupancyMaxActiveBlocksPerMultiprocessor(numBlocks: *mut ::core::ffi::c_int, func: *const ::core::ffi::c_void, blockSize: ::core::ffi::c_int, dynamicSMemSize: usize) -> cudaError_t;
+        }
         cudaOccupancyMaxActiveBlocksPerMultiprocessor(numBlocks, func, blockSize, dynamicSMemSize)
     }
 }
@@ -11141,7 +11809,9 @@ pub unsafe fn cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(numBlocks: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(numBlocks: *mut ::core::ffi::c_int, func: *const ::core::ffi::c_void, blockSize: ::core::ffi::c_int, dynamicSMemSize: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(numBlocks: *mut ::core::ffi::c_int, func: *const ::core::ffi::c_void, blockSize: ::core::ffi::c_int, dynamicSMemSize: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(numBlocks, func, blockSize, dynamicSMemSize, flags)
     }
 }
@@ -11156,7 +11826,9 @@ pub unsafe fn cudaOccupancyMaxActiveClusters(numClusters: *mut ::core::ffi::c_in
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaOccupancyMaxActiveClusters(numClusters: *mut ::core::ffi::c_int, func: *const ::core::ffi::c_void, launchConfig: *const cudaLaunchConfig_t) -> cudaError_t;
+        extern "C" {
+            fn cudaOccupancyMaxActiveClusters(numClusters: *mut ::core::ffi::c_int, func: *const ::core::ffi::c_void, launchConfig: *const cudaLaunchConfig_t) -> cudaError_t;
+        }
         cudaOccupancyMaxActiveClusters(numClusters, func, launchConfig)
     }
 }
@@ -11171,7 +11843,9 @@ pub unsafe fn cudaOccupancyMaxPotentialClusterSize(clusterSize: *mut ::core::ffi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaOccupancyMaxPotentialClusterSize(clusterSize: *mut ::core::ffi::c_int, func: *const ::core::ffi::c_void, launchConfig: *const cudaLaunchConfig_t) -> cudaError_t;
+        extern "C" {
+            fn cudaOccupancyMaxPotentialClusterSize(clusterSize: *mut ::core::ffi::c_int, func: *const ::core::ffi::c_void, launchConfig: *const cudaLaunchConfig_t) -> cudaError_t;
+        }
         cudaOccupancyMaxPotentialClusterSize(clusterSize, func, launchConfig)
     }
 }
@@ -11185,7 +11859,9 @@ pub unsafe fn cudaPeekAtLastError() -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaPeekAtLastError() -> cudaError_t;
+        extern "C" {
+            fn cudaPeekAtLastError() -> cudaError_t;
+        }
         cudaPeekAtLastError()
     }
 }
@@ -11199,7 +11875,9 @@ pub unsafe fn cudaPointerGetAttributes(attributes: *mut cudaPointerAttributes, p
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaPointerGetAttributes(attributes: *mut cudaPointerAttributes, ptr: *const ::core::ffi::c_void) -> cudaError_t;
+        extern "C" {
+            fn cudaPointerGetAttributes(attributes: *mut cudaPointerAttributes, ptr: *const ::core::ffi::c_void) -> cudaError_t;
+        }
         cudaPointerGetAttributes(attributes, ptr)
     }
 }
@@ -11213,7 +11891,9 @@ pub unsafe fn cudaProfilerStop() -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaProfilerStop() -> cudaError_t;
+        extern "C" {
+            fn cudaProfilerStop() -> cudaError_t;
+        }
         cudaProfilerStop()
     }
 }
@@ -11227,7 +11907,9 @@ pub unsafe fn cudaRuntimeGetVersion(runtimeVersion: *mut ::core::ffi::c_int) -> 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaRuntimeGetVersion(runtimeVersion: *mut ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaRuntimeGetVersion(runtimeVersion: *mut ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaRuntimeGetVersion(runtimeVersion)
     }
 }
@@ -11241,7 +11923,9 @@ pub unsafe fn cudaSetDevice(device: ::core::ffi::c_int) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaSetDevice(device: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaSetDevice(device: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaSetDevice(device)
     }
 }
@@ -11255,7 +11939,9 @@ pub unsafe fn cudaSetDeviceFlags(flags: ::core::ffi::c_uint) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaSetDeviceFlags(flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaSetDeviceFlags(flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaSetDeviceFlags(flags)
     }
 }
@@ -11270,7 +11956,9 @@ pub unsafe fn cudaSetDoubleForDevice(d: *mut f64) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaSetDoubleForDevice(d: *mut f64) -> cudaError_t;
+        extern "C" {
+            fn cudaSetDoubleForDevice(d: *mut f64) -> cudaError_t;
+        }
         cudaSetDoubleForDevice(d)
     }
 }
@@ -11285,7 +11973,9 @@ pub unsafe fn cudaSetDoubleForHost(d: *mut f64) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaSetDoubleForHost(d: *mut f64) -> cudaError_t;
+        extern "C" {
+            fn cudaSetDoubleForHost(d: *mut f64) -> cudaError_t;
+        }
         cudaSetDoubleForHost(d)
     }
 }
@@ -11299,7 +11989,9 @@ pub unsafe fn cudaSetValidDevices(device_arr: *mut ::core::ffi::c_int, len: ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaSetValidDevices(device_arr: *mut ::core::ffi::c_int, len: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaSetValidDevices(device_arr: *mut ::core::ffi::c_int, len: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaSetValidDevices(device_arr, len)
     }
 }
@@ -11314,7 +12006,9 @@ pub unsafe fn cudaSignalExternalSemaphoresAsync(extSemArray: *const cudaExternal
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaSignalExternalSemaphoresAsync(extSemArray: *const cudaExternalSemaphore_t, paramsArray: *const cudaExternalSemaphoreSignalParams, numExtSems: ::core::ffi::c_uint, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaSignalExternalSemaphoresAsync(extSemArray: *const cudaExternalSemaphore_t, paramsArray: *const cudaExternalSemaphoreSignalParams, numExtSems: ::core::ffi::c_uint, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaSignalExternalSemaphoresAsync(extSemArray, paramsArray, numExtSems, stream)
     }
 }
@@ -11329,7 +12023,9 @@ pub unsafe fn cudaSignalExternalSemaphoresAsync_v2(extSemArray: *const cudaExter
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaSignalExternalSemaphoresAsync_v2(extSemArray: *const cudaExternalSemaphore_t, paramsArray: *const cudaExternalSemaphoreSignalParams, numExtSems: ::core::ffi::c_uint, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaSignalExternalSemaphoresAsync_v2(extSemArray: *const cudaExternalSemaphore_t, paramsArray: *const cudaExternalSemaphoreSignalParams, numExtSems: ::core::ffi::c_uint, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaSignalExternalSemaphoresAsync_v2(extSemArray, paramsArray, numExtSems, stream)
     }
 }
@@ -11343,7 +12039,9 @@ pub unsafe fn cudaStreamAddCallback(stream: cudaStream_t, callback: cudaStreamCa
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamAddCallback(stream: cudaStream_t, callback: cudaStreamCallback_t, userData: *mut ::core::ffi::c_void, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamAddCallback(stream: cudaStream_t, callback: cudaStreamCallback_t, userData: *mut ::core::ffi::c_void, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaStreamAddCallback(stream, callback, userData, flags)
     }
 }
@@ -11357,7 +12055,9 @@ pub unsafe fn cudaStreamAttachMemAsync(stream: cudaStream_t, devPtr: *mut ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamAttachMemAsync(stream: cudaStream_t, devPtr: *mut ::core::ffi::c_void, length: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamAttachMemAsync(stream: cudaStream_t, devPtr: *mut ::core::ffi::c_void, length: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaStreamAttachMemAsync(stream, devPtr, length, flags)
     }
 }
@@ -11371,7 +12071,9 @@ pub unsafe fn cudaStreamBeginCapture(stream: cudaStream_t, mode: cudaStreamCaptu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamBeginCapture(stream: cudaStream_t, mode: cudaStreamCaptureMode) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamBeginCapture(stream: cudaStream_t, mode: cudaStreamCaptureMode) -> cudaError_t;
+        }
         cudaStreamBeginCapture(stream, mode)
     }
 }
@@ -11386,7 +12088,9 @@ pub unsafe fn cudaStreamBeginCaptureToGraph(stream: cudaStream_t, graph: cudaGra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamBeginCaptureToGraph(stream: cudaStream_t, graph: cudaGraph_t, dependencies: *const cudaGraphNode_t, dependencyData: *const cudaGraphEdgeData, numDependencies: usize, mode: cudaStreamCaptureMode) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamBeginCaptureToGraph(stream: cudaStream_t, graph: cudaGraph_t, dependencies: *const cudaGraphNode_t, dependencyData: *const cudaGraphEdgeData, numDependencies: usize, mode: cudaStreamCaptureMode) -> cudaError_t;
+        }
         cudaStreamBeginCaptureToGraph(stream, graph, dependencies, dependencyData, numDependencies, mode)
     }
 }
@@ -11400,7 +12104,9 @@ pub unsafe fn cudaStreamCopyAttributes(dst: cudaStream_t, src: cudaStream_t) -> 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamCopyAttributes(dst: cudaStream_t, src: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamCopyAttributes(dst: cudaStream_t, src: cudaStream_t) -> cudaError_t;
+        }
         cudaStreamCopyAttributes(dst, src)
     }
 }
@@ -11414,7 +12120,9 @@ pub unsafe fn cudaStreamCreate(pStream: *mut cudaStream_t) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamCreate(pStream: *mut cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamCreate(pStream: *mut cudaStream_t) -> cudaError_t;
+        }
         cudaStreamCreate(pStream)
     }
 }
@@ -11428,7 +12136,9 @@ pub unsafe fn cudaStreamCreateWithFlags(pStream: *mut cudaStream_t, flags: ::cor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamCreateWithFlags(pStream: *mut cudaStream_t, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamCreateWithFlags(pStream: *mut cudaStream_t, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaStreamCreateWithFlags(pStream, flags)
     }
 }
@@ -11442,7 +12152,9 @@ pub unsafe fn cudaStreamCreateWithPriority(pStream: *mut cudaStream_t, flags: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamCreateWithPriority(pStream: *mut cudaStream_t, flags: ::core::ffi::c_uint, priority: ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamCreateWithPriority(pStream: *mut cudaStream_t, flags: ::core::ffi::c_uint, priority: ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaStreamCreateWithPriority(pStream, flags, priority)
     }
 }
@@ -11456,7 +12168,9 @@ pub unsafe fn cudaStreamDestroy(stream: cudaStream_t) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamDestroy(stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamDestroy(stream: cudaStream_t) -> cudaError_t;
+        }
         cudaStreamDestroy(stream)
     }
 }
@@ -11470,7 +12184,9 @@ pub unsafe fn cudaStreamEndCapture(stream: cudaStream_t, pGraph: *mut cudaGraph_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamEndCapture(stream: cudaStream_t, pGraph: *mut cudaGraph_t) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamEndCapture(stream: cudaStream_t, pGraph: *mut cudaGraph_t) -> cudaError_t;
+        }
         cudaStreamEndCapture(stream, pGraph)
     }
 }
@@ -11485,7 +12201,9 @@ pub unsafe fn cudaStreamGetAttribute(hStream: cudaStream_t, attr: cudaStreamAttr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamGetAttribute(hStream: cudaStream_t, attr: cudaStreamAttrID, value_out: *mut cudaStreamAttrValue) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamGetAttribute(hStream: cudaStream_t, attr: cudaStreamAttrID, value_out: *mut cudaStreamAttrValue) -> cudaError_t;
+        }
         cudaStreamGetAttribute(hStream, attr, value_out)
     }
 }
@@ -11500,7 +12218,9 @@ pub unsafe fn cudaStreamGetAttribute(hStream: cudaStream_t, attr: cudaLaunchAttr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamGetAttribute(hStream: cudaStream_t, attr: cudaLaunchAttributeID, value_out: *mut cudaLaunchAttributeValue) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamGetAttribute(hStream: cudaStream_t, attr: cudaLaunchAttributeID, value_out: *mut cudaLaunchAttributeValue) -> cudaError_t;
+        }
         cudaStreamGetAttribute(hStream, attr, value_out)
     }
 }
@@ -11515,7 +12235,9 @@ pub unsafe fn cudaStreamGetCaptureInfo(stream: cudaStream_t, pCaptureStatus: *mu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamGetCaptureInfo(stream: cudaStream_t, pCaptureStatus: *mut cudaStreamCaptureStatus, pId: *mut ::core::ffi::c_ulonglong) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamGetCaptureInfo(stream: cudaStream_t, pCaptureStatus: *mut cudaStreamCaptureStatus, pId: *mut ::core::ffi::c_ulonglong) -> cudaError_t;
+        }
         cudaStreamGetCaptureInfo(stream, pCaptureStatus, pId)
     }
 }
@@ -11530,7 +12252,9 @@ pub unsafe fn cudaStreamGetCaptureInfo(stream: cudaStream_t, captureStatus_out: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamGetCaptureInfo(stream: cudaStream_t, captureStatus_out: *mut cudaStreamCaptureStatus, id_out: *mut ::core::ffi::c_ulonglong, graph_out: *mut cudaGraph_t, dependencies_out: *mut *const cudaGraphNode_t, edgeData_out: *mut *const cudaGraphEdgeData, numDependencies_out: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamGetCaptureInfo(stream: cudaStream_t, captureStatus_out: *mut cudaStreamCaptureStatus, id_out: *mut ::core::ffi::c_ulonglong, graph_out: *mut cudaGraph_t, dependencies_out: *mut *const cudaGraphNode_t, edgeData_out: *mut *const cudaGraphEdgeData, numDependencies_out: *mut usize) -> cudaError_t;
+        }
         cudaStreamGetCaptureInfo(stream, captureStatus_out, id_out, graph_out, dependencies_out, edgeData_out, numDependencies_out)
     }
 }
@@ -11545,7 +12269,9 @@ pub unsafe fn cudaStreamGetCaptureInfo_v2(stream: cudaStream_t, captureStatus_ou
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamGetCaptureInfo_v2(stream: cudaStream_t, captureStatus_out: *mut cudaStreamCaptureStatus, id_out: *mut ::core::ffi::c_ulonglong, graph_out: *mut cudaGraph_t, dependencies_out: *mut *const cudaGraphNode_t, numDependencies_out: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamGetCaptureInfo_v2(stream: cudaStream_t, captureStatus_out: *mut cudaStreamCaptureStatus, id_out: *mut ::core::ffi::c_ulonglong, graph_out: *mut cudaGraph_t, dependencies_out: *mut *const cudaGraphNode_t, numDependencies_out: *mut usize) -> cudaError_t;
+        }
         cudaStreamGetCaptureInfo_v2(stream, captureStatus_out, id_out, graph_out, dependencies_out, numDependencies_out)
     }
 }
@@ -11560,7 +12286,9 @@ pub unsafe fn cudaStreamGetCaptureInfo_v3(stream: cudaStream_t, captureStatus_ou
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamGetCaptureInfo_v3(stream: cudaStream_t, captureStatus_out: *mut cudaStreamCaptureStatus, id_out: *mut ::core::ffi::c_ulonglong, graph_out: *mut cudaGraph_t, dependencies_out: *mut *const cudaGraphNode_t, edgeData_out: *mut *const cudaGraphEdgeData, numDependencies_out: *mut usize) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamGetCaptureInfo_v3(stream: cudaStream_t, captureStatus_out: *mut cudaStreamCaptureStatus, id_out: *mut ::core::ffi::c_ulonglong, graph_out: *mut cudaGraph_t, dependencies_out: *mut *const cudaGraphNode_t, edgeData_out: *mut *const cudaGraphEdgeData, numDependencies_out: *mut usize) -> cudaError_t;
+        }
         cudaStreamGetCaptureInfo_v3(stream, captureStatus_out, id_out, graph_out, dependencies_out, edgeData_out, numDependencies_out)
     }
 }
@@ -11575,7 +12303,9 @@ pub unsafe fn cudaStreamGetDevResource(hStream: cudaStream_t, resource: *mut cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamGetDevResource(hStream: cudaStream_t, resource: *mut cudaDevResource, type_: cudaDevResourceType) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamGetDevResource(hStream: cudaStream_t, resource: *mut cudaDevResource, type_: cudaDevResourceType) -> cudaError_t;
+        }
         cudaStreamGetDevResource(hStream, resource, type_)
     }
 }
@@ -11590,7 +12320,9 @@ pub unsafe fn cudaStreamGetDevice(hStream: cudaStream_t, device: *mut ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamGetDevice(hStream: cudaStream_t, device: *mut ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamGetDevice(hStream: cudaStream_t, device: *mut ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaStreamGetDevice(hStream, device)
     }
 }
@@ -11604,7 +12336,9 @@ pub unsafe fn cudaStreamGetFlags(hStream: cudaStream_t, flags: *mut ::core::ffi:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamGetFlags(hStream: cudaStream_t, flags: *mut ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamGetFlags(hStream: cudaStream_t, flags: *mut ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaStreamGetFlags(hStream, flags)
     }
 }
@@ -11619,7 +12353,9 @@ pub unsafe fn cudaStreamGetId(hStream: cudaStream_t, streamId: *mut ::core::ffi:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamGetId(hStream: cudaStream_t, streamId: *mut ::core::ffi::c_ulonglong) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamGetId(hStream: cudaStream_t, streamId: *mut ::core::ffi::c_ulonglong) -> cudaError_t;
+        }
         cudaStreamGetId(hStream, streamId)
     }
 }
@@ -11633,7 +12369,9 @@ pub unsafe fn cudaStreamGetPriority(hStream: cudaStream_t, priority: *mut ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamGetPriority(hStream: cudaStream_t, priority: *mut ::core::ffi::c_int) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamGetPriority(hStream: cudaStream_t, priority: *mut ::core::ffi::c_int) -> cudaError_t;
+        }
         cudaStreamGetPriority(hStream, priority)
     }
 }
@@ -11647,7 +12385,9 @@ pub unsafe fn cudaStreamIsCapturing(stream: cudaStream_t, pCaptureStatus: *mut c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamIsCapturing(stream: cudaStream_t, pCaptureStatus: *mut cudaStreamCaptureStatus) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamIsCapturing(stream: cudaStream_t, pCaptureStatus: *mut cudaStreamCaptureStatus) -> cudaError_t;
+        }
         cudaStreamIsCapturing(stream, pCaptureStatus)
     }
 }
@@ -11661,7 +12401,9 @@ pub unsafe fn cudaStreamQuery(stream: cudaStream_t) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamQuery(stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamQuery(stream: cudaStream_t) -> cudaError_t;
+        }
         cudaStreamQuery(stream)
     }
 }
@@ -11676,7 +12418,9 @@ pub unsafe fn cudaStreamSetAttribute(hStream: cudaStream_t, attr: cudaStreamAttr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamSetAttribute(hStream: cudaStream_t, attr: cudaStreamAttrID, value: *const cudaStreamAttrValue) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamSetAttribute(hStream: cudaStream_t, attr: cudaStreamAttrID, value: *const cudaStreamAttrValue) -> cudaError_t;
+        }
         cudaStreamSetAttribute(hStream, attr, value)
     }
 }
@@ -11691,7 +12435,9 @@ pub unsafe fn cudaStreamSetAttribute(hStream: cudaStream_t, attr: cudaLaunchAttr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamSetAttribute(hStream: cudaStream_t, attr: cudaLaunchAttributeID, value: *const cudaLaunchAttributeValue) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamSetAttribute(hStream: cudaStream_t, attr: cudaLaunchAttributeID, value: *const cudaLaunchAttributeValue) -> cudaError_t;
+        }
         cudaStreamSetAttribute(hStream, attr, value)
     }
 }
@@ -11705,7 +12451,9 @@ pub unsafe fn cudaStreamSynchronize(stream: cudaStream_t) -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamSynchronize(stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamSynchronize(stream: cudaStream_t) -> cudaError_t;
+        }
         cudaStreamSynchronize(stream)
     }
 }
@@ -11720,7 +12468,9 @@ pub unsafe fn cudaStreamUpdateCaptureDependencies(stream: cudaStream_t, dependen
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamUpdateCaptureDependencies(stream: cudaStream_t, dependencies: *mut cudaGraphNode_t, numDependencies: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamUpdateCaptureDependencies(stream: cudaStream_t, dependencies: *mut cudaGraphNode_t, numDependencies: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaStreamUpdateCaptureDependencies(stream, dependencies, numDependencies, flags)
     }
 }
@@ -11735,7 +12485,9 @@ pub unsafe fn cudaStreamUpdateCaptureDependencies(stream: cudaStream_t, dependen
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamUpdateCaptureDependencies(stream: cudaStream_t, dependencies: *mut cudaGraphNode_t, dependencyData: *const cudaGraphEdgeData, numDependencies: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamUpdateCaptureDependencies(stream: cudaStream_t, dependencies: *mut cudaGraphNode_t, dependencyData: *const cudaGraphEdgeData, numDependencies: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaStreamUpdateCaptureDependencies(stream, dependencies, dependencyData, numDependencies, flags)
     }
 }
@@ -11750,7 +12502,9 @@ pub unsafe fn cudaStreamUpdateCaptureDependencies_v2(stream: cudaStream_t, depen
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamUpdateCaptureDependencies_v2(stream: cudaStream_t, dependencies: *mut cudaGraphNode_t, dependencyData: *const cudaGraphEdgeData, numDependencies: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamUpdateCaptureDependencies_v2(stream: cudaStream_t, dependencies: *mut cudaGraphNode_t, dependencyData: *const cudaGraphEdgeData, numDependencies: usize, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaStreamUpdateCaptureDependencies_v2(stream, dependencies, dependencyData, numDependencies, flags)
     }
 }
@@ -11764,7 +12518,9 @@ pub unsafe fn cudaStreamWaitEvent(stream: cudaStream_t, event: cudaEvent_t, flag
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaStreamWaitEvent(stream: cudaStream_t, event: cudaEvent_t, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaStreamWaitEvent(stream: cudaStream_t, event: cudaEvent_t, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaStreamWaitEvent(stream, event, flags)
     }
 }
@@ -11778,7 +12534,9 @@ pub unsafe fn cudaThreadExchangeStreamCaptureMode(mode: *mut cudaStreamCaptureMo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaThreadExchangeStreamCaptureMode(mode: *mut cudaStreamCaptureMode) -> cudaError_t;
+        extern "C" {
+            fn cudaThreadExchangeStreamCaptureMode(mode: *mut cudaStreamCaptureMode) -> cudaError_t;
+        }
         cudaThreadExchangeStreamCaptureMode(mode)
     }
 }
@@ -11793,7 +12551,9 @@ pub unsafe fn cudaThreadExit() -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaThreadExit() -> cudaError_t;
+        extern "C" {
+            fn cudaThreadExit() -> cudaError_t;
+        }
         cudaThreadExit()
     }
 }
@@ -11808,7 +12568,9 @@ pub unsafe fn cudaThreadGetCacheConfig(pCacheConfig: *mut cudaFuncCache) -> cuda
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaThreadGetCacheConfig(pCacheConfig: *mut cudaFuncCache) -> cudaError_t;
+        extern "C" {
+            fn cudaThreadGetCacheConfig(pCacheConfig: *mut cudaFuncCache) -> cudaError_t;
+        }
         cudaThreadGetCacheConfig(pCacheConfig)
     }
 }
@@ -11823,7 +12585,9 @@ pub unsafe fn cudaThreadGetLimit(pValue: *mut usize, limit: cudaLimit) -> cudaEr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaThreadGetLimit(pValue: *mut usize, limit: cudaLimit) -> cudaError_t;
+        extern "C" {
+            fn cudaThreadGetLimit(pValue: *mut usize, limit: cudaLimit) -> cudaError_t;
+        }
         cudaThreadGetLimit(pValue, limit)
     }
 }
@@ -11838,7 +12602,9 @@ pub unsafe fn cudaThreadSetCacheConfig(cacheConfig: cudaFuncCache) -> cudaError_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaThreadSetCacheConfig(cacheConfig: cudaFuncCache) -> cudaError_t;
+        extern "C" {
+            fn cudaThreadSetCacheConfig(cacheConfig: cudaFuncCache) -> cudaError_t;
+        }
         cudaThreadSetCacheConfig(cacheConfig)
     }
 }
@@ -11853,7 +12619,9 @@ pub unsafe fn cudaThreadSetLimit(limit: cudaLimit, value: usize) -> cudaError_t 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaThreadSetLimit(limit: cudaLimit, value: usize) -> cudaError_t;
+        extern "C" {
+            fn cudaThreadSetLimit(limit: cudaLimit, value: usize) -> cudaError_t;
+        }
         cudaThreadSetLimit(limit, value)
     }
 }
@@ -11868,7 +12636,9 @@ pub unsafe fn cudaThreadSynchronize() -> cudaError_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaThreadSynchronize() -> cudaError_t;
+        extern "C" {
+            fn cudaThreadSynchronize() -> cudaError_t;
+        }
         cudaThreadSynchronize()
     }
 }
@@ -11883,7 +12653,9 @@ pub unsafe fn cudaUnbindTexture(texref: *const textureReference) -> cudaError_t 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaUnbindTexture(texref: *const textureReference) -> cudaError_t;
+        extern "C" {
+            fn cudaUnbindTexture(texref: *const textureReference) -> cudaError_t;
+        }
         cudaUnbindTexture(texref)
     }
 }
@@ -11897,7 +12669,9 @@ pub unsafe fn cudaUserObjectCreate(object_out: *mut cudaUserObject_t, ptr: *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaUserObjectCreate(object_out: *mut cudaUserObject_t, ptr: *mut ::core::ffi::c_void, destroy: cudaHostFn_t, initialRefcount: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaUserObjectCreate(object_out: *mut cudaUserObject_t, ptr: *mut ::core::ffi::c_void, destroy: cudaHostFn_t, initialRefcount: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaUserObjectCreate(object_out, ptr, destroy, initialRefcount, flags)
     }
 }
@@ -11911,7 +12685,9 @@ pub unsafe fn cudaUserObjectRelease(object: cudaUserObject_t, count: ::core::ffi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaUserObjectRelease(object: cudaUserObject_t, count: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaUserObjectRelease(object: cudaUserObject_t, count: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaUserObjectRelease(object, count)
     }
 }
@@ -11925,7 +12701,9 @@ pub unsafe fn cudaUserObjectRetain(object: cudaUserObject_t, count: ::core::ffi:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaUserObjectRetain(object: cudaUserObject_t, count: ::core::ffi::c_uint) -> cudaError_t;
+        extern "C" {
+            fn cudaUserObjectRetain(object: cudaUserObject_t, count: ::core::ffi::c_uint) -> cudaError_t;
+        }
         cudaUserObjectRetain(object, count)
     }
 }
@@ -11940,7 +12718,9 @@ pub unsafe fn cudaWaitExternalSemaphoresAsync(extSemArray: *const cudaExternalSe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaWaitExternalSemaphoresAsync(extSemArray: *const cudaExternalSemaphore_t, paramsArray: *const cudaExternalSemaphoreWaitParams, numExtSems: ::core::ffi::c_uint, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaWaitExternalSemaphoresAsync(extSemArray: *const cudaExternalSemaphore_t, paramsArray: *const cudaExternalSemaphoreWaitParams, numExtSems: ::core::ffi::c_uint, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaWaitExternalSemaphoresAsync(extSemArray, paramsArray, numExtSems, stream)
     }
 }
@@ -11955,7 +12735,9 @@ pub unsafe fn cudaWaitExternalSemaphoresAsync_v2(extSemArray: *const cudaExterna
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudaWaitExternalSemaphoresAsync_v2(extSemArray: *const cudaExternalSemaphore_t, paramsArray: *const cudaExternalSemaphoreWaitParams, numExtSems: ::core::ffi::c_uint, stream: cudaStream_t) -> cudaError_t;
+        extern "C" {
+            fn cudaWaitExternalSemaphoresAsync_v2(extSemArray: *const cudaExternalSemaphore_t, paramsArray: *const cudaExternalSemaphoreWaitParams, numExtSems: ::core::ffi::c_uint, stream: cudaStream_t) -> cudaError_t;
+        }
         cudaWaitExternalSemaphoresAsync_v2(extSemArray, paramsArray, numExtSems, stream)
     }
 }

@@ -135,7 +135,9 @@ pub unsafe fn cufftCreate(handle: *mut cufftHandle) -> cufftResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftCreate(handle: *mut cufftHandle) -> cufftResult;
+        extern "C" {
+            fn cufftCreate(handle: *mut cufftHandle) -> cufftResult;
+        }
         cufftCreate(handle)
     }
 }
@@ -149,7 +151,9 @@ pub unsafe fn cufftDestroy(plan: cufftHandle) -> cufftResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftDestroy(plan: cufftHandle) -> cufftResult;
+        extern "C" {
+            fn cufftDestroy(plan: cufftHandle) -> cufftResult;
+        }
         cufftDestroy(plan)
     }
 }
@@ -163,7 +167,9 @@ pub unsafe fn cufftEstimate1d(nx: ::core::ffi::c_int, type_: cufftType, batch: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftEstimate1d(nx: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int, workSize: *mut usize) -> cufftResult;
+        extern "C" {
+            fn cufftEstimate1d(nx: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int, workSize: *mut usize) -> cufftResult;
+        }
         cufftEstimate1d(nx, type_, batch, workSize)
     }
 }
@@ -177,7 +183,9 @@ pub unsafe fn cufftEstimate2d(nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, ty
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftEstimate2d(nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, type_: cufftType, workSize: *mut usize) -> cufftResult;
+        extern "C" {
+            fn cufftEstimate2d(nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, type_: cufftType, workSize: *mut usize) -> cufftResult;
+        }
         cufftEstimate2d(nx, ny, type_, workSize)
     }
 }
@@ -191,7 +199,9 @@ pub unsafe fn cufftEstimate3d(nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, nz
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftEstimate3d(nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, nz: ::core::ffi::c_int, type_: cufftType, workSize: *mut usize) -> cufftResult;
+        extern "C" {
+            fn cufftEstimate3d(nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, nz: ::core::ffi::c_int, type_: cufftType, workSize: *mut usize) -> cufftResult;
+        }
         cufftEstimate3d(nx, ny, nz, type_, workSize)
     }
 }
@@ -205,7 +215,9 @@ pub unsafe fn cufftEstimateMany(rank: ::core::ffi::c_int, n: *mut ::core::ffi::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftEstimateMany(rank: ::core::ffi::c_int, n: *mut ::core::ffi::c_int, inembed: *mut ::core::ffi::c_int, istride: ::core::ffi::c_int, idist: ::core::ffi::c_int, onembed: *mut ::core::ffi::c_int, ostride: ::core::ffi::c_int, odist: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int, workSize: *mut usize) -> cufftResult;
+        extern "C" {
+            fn cufftEstimateMany(rank: ::core::ffi::c_int, n: *mut ::core::ffi::c_int, inembed: *mut ::core::ffi::c_int, istride: ::core::ffi::c_int, idist: ::core::ffi::c_int, onembed: *mut ::core::ffi::c_int, ostride: ::core::ffi::c_int, odist: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int, workSize: *mut usize) -> cufftResult;
+        }
         cufftEstimateMany(rank, n, inembed, istride, idist, onembed, ostride, odist, type_, batch, workSize)
     }
 }
@@ -219,7 +231,9 @@ pub unsafe fn cufftExecC2C(plan: cufftHandle, idata: *mut cufftComplex, odata: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftExecC2C(plan: cufftHandle, idata: *mut cufftComplex, odata: *mut cufftComplex, direction: ::core::ffi::c_int) -> cufftResult;
+        extern "C" {
+            fn cufftExecC2C(plan: cufftHandle, idata: *mut cufftComplex, odata: *mut cufftComplex, direction: ::core::ffi::c_int) -> cufftResult;
+        }
         cufftExecC2C(plan, idata, odata, direction)
     }
 }
@@ -233,7 +247,9 @@ pub unsafe fn cufftExecC2R(plan: cufftHandle, idata: *mut cufftComplex, odata: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftExecC2R(plan: cufftHandle, idata: *mut cufftComplex, odata: *mut cufftReal) -> cufftResult;
+        extern "C" {
+            fn cufftExecC2R(plan: cufftHandle, idata: *mut cufftComplex, odata: *mut cufftReal) -> cufftResult;
+        }
         cufftExecC2R(plan, idata, odata)
     }
 }
@@ -247,7 +263,9 @@ pub unsafe fn cufftExecD2Z(plan: cufftHandle, idata: *mut cufftDoubleReal, odata
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftExecD2Z(plan: cufftHandle, idata: *mut cufftDoubleReal, odata: *mut cufftDoubleComplex) -> cufftResult;
+        extern "C" {
+            fn cufftExecD2Z(plan: cufftHandle, idata: *mut cufftDoubleReal, odata: *mut cufftDoubleComplex) -> cufftResult;
+        }
         cufftExecD2Z(plan, idata, odata)
     }
 }
@@ -261,7 +279,9 @@ pub unsafe fn cufftExecR2C(plan: cufftHandle, idata: *mut cufftReal, odata: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftExecR2C(plan: cufftHandle, idata: *mut cufftReal, odata: *mut cufftComplex) -> cufftResult;
+        extern "C" {
+            fn cufftExecR2C(plan: cufftHandle, idata: *mut cufftReal, odata: *mut cufftComplex) -> cufftResult;
+        }
         cufftExecR2C(plan, idata, odata)
     }
 }
@@ -275,7 +295,9 @@ pub unsafe fn cufftExecZ2D(plan: cufftHandle, idata: *mut cufftDoubleComplex, od
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftExecZ2D(plan: cufftHandle, idata: *mut cufftDoubleComplex, odata: *mut cufftDoubleReal) -> cufftResult;
+        extern "C" {
+            fn cufftExecZ2D(plan: cufftHandle, idata: *mut cufftDoubleComplex, odata: *mut cufftDoubleReal) -> cufftResult;
+        }
         cufftExecZ2D(plan, idata, odata)
     }
 }
@@ -289,7 +311,9 @@ pub unsafe fn cufftExecZ2Z(plan: cufftHandle, idata: *mut cufftDoubleComplex, od
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftExecZ2Z(plan: cufftHandle, idata: *mut cufftDoubleComplex, odata: *mut cufftDoubleComplex, direction: ::core::ffi::c_int) -> cufftResult;
+        extern "C" {
+            fn cufftExecZ2Z(plan: cufftHandle, idata: *mut cufftDoubleComplex, odata: *mut cufftDoubleComplex, direction: ::core::ffi::c_int) -> cufftResult;
+        }
         cufftExecZ2Z(plan, idata, odata, direction)
     }
 }
@@ -304,7 +328,9 @@ pub unsafe fn cufftGetPlanPropertyInt64(plan: cufftHandle, property: cufftProper
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftGetPlanPropertyInt64(plan: cufftHandle, property: cufftProperty, returnPtrValue: *mut ::core::ffi::c_longlong) -> cufftResult;
+        extern "C" {
+            fn cufftGetPlanPropertyInt64(plan: cufftHandle, property: cufftProperty, returnPtrValue: *mut ::core::ffi::c_longlong) -> cufftResult;
+        }
         cufftGetPlanPropertyInt64(plan, property, returnPtrValue)
     }
 }
@@ -318,7 +344,9 @@ pub unsafe fn cufftGetProperty(type_: libraryPropertyType, value: *mut ::core::f
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftGetProperty(type_: libraryPropertyType, value: *mut ::core::ffi::c_int) -> cufftResult;
+        extern "C" {
+            fn cufftGetProperty(type_: libraryPropertyType, value: *mut ::core::ffi::c_int) -> cufftResult;
+        }
         cufftGetProperty(type_, value)
     }
 }
@@ -332,7 +360,9 @@ pub unsafe fn cufftGetSize(handle: cufftHandle, workSize: *mut usize) -> cufftRe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftGetSize(handle: cufftHandle, workSize: *mut usize) -> cufftResult;
+        extern "C" {
+            fn cufftGetSize(handle: cufftHandle, workSize: *mut usize) -> cufftResult;
+        }
         cufftGetSize(handle, workSize)
     }
 }
@@ -346,7 +376,9 @@ pub unsafe fn cufftGetSize1d(handle: cufftHandle, nx: ::core::ffi::c_int, type_:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftGetSize1d(handle: cufftHandle, nx: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int, workSize: *mut usize) -> cufftResult;
+        extern "C" {
+            fn cufftGetSize1d(handle: cufftHandle, nx: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int, workSize: *mut usize) -> cufftResult;
+        }
         cufftGetSize1d(handle, nx, type_, batch, workSize)
     }
 }
@@ -360,7 +392,9 @@ pub unsafe fn cufftGetSize2d(handle: cufftHandle, nx: ::core::ffi::c_int, ny: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftGetSize2d(handle: cufftHandle, nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, type_: cufftType, workSize: *mut usize) -> cufftResult;
+        extern "C" {
+            fn cufftGetSize2d(handle: cufftHandle, nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, type_: cufftType, workSize: *mut usize) -> cufftResult;
+        }
         cufftGetSize2d(handle, nx, ny, type_, workSize)
     }
 }
@@ -374,7 +408,9 @@ pub unsafe fn cufftGetSize3d(handle: cufftHandle, nx: ::core::ffi::c_int, ny: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftGetSize3d(handle: cufftHandle, nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, nz: ::core::ffi::c_int, type_: cufftType, workSize: *mut usize) -> cufftResult;
+        extern "C" {
+            fn cufftGetSize3d(handle: cufftHandle, nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, nz: ::core::ffi::c_int, type_: cufftType, workSize: *mut usize) -> cufftResult;
+        }
         cufftGetSize3d(handle, nx, ny, nz, type_, workSize)
     }
 }
@@ -388,7 +424,9 @@ pub unsafe fn cufftGetSizeMany(handle: cufftHandle, rank: ::core::ffi::c_int, n:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftGetSizeMany(handle: cufftHandle, rank: ::core::ffi::c_int, n: *mut ::core::ffi::c_int, inembed: *mut ::core::ffi::c_int, istride: ::core::ffi::c_int, idist: ::core::ffi::c_int, onembed: *mut ::core::ffi::c_int, ostride: ::core::ffi::c_int, odist: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int, workArea: *mut usize) -> cufftResult;
+        extern "C" {
+            fn cufftGetSizeMany(handle: cufftHandle, rank: ::core::ffi::c_int, n: *mut ::core::ffi::c_int, inembed: *mut ::core::ffi::c_int, istride: ::core::ffi::c_int, idist: ::core::ffi::c_int, onembed: *mut ::core::ffi::c_int, ostride: ::core::ffi::c_int, odist: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int, workArea: *mut usize) -> cufftResult;
+        }
         cufftGetSizeMany(handle, rank, n, inembed, istride, idist, onembed, ostride, odist, type_, batch, workArea)
     }
 }
@@ -402,7 +440,9 @@ pub unsafe fn cufftGetSizeMany64(plan: cufftHandle, rank: ::core::ffi::c_int, n:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftGetSizeMany64(plan: cufftHandle, rank: ::core::ffi::c_int, n: *mut ::core::ffi::c_longlong, inembed: *mut ::core::ffi::c_longlong, istride: ::core::ffi::c_longlong, idist: ::core::ffi::c_longlong, onembed: *mut ::core::ffi::c_longlong, ostride: ::core::ffi::c_longlong, odist: ::core::ffi::c_longlong, type_: cufftType, batch: ::core::ffi::c_longlong, workSize: *mut usize) -> cufftResult;
+        extern "C" {
+            fn cufftGetSizeMany64(plan: cufftHandle, rank: ::core::ffi::c_int, n: *mut ::core::ffi::c_longlong, inembed: *mut ::core::ffi::c_longlong, istride: ::core::ffi::c_longlong, idist: ::core::ffi::c_longlong, onembed: *mut ::core::ffi::c_longlong, ostride: ::core::ffi::c_longlong, odist: ::core::ffi::c_longlong, type_: cufftType, batch: ::core::ffi::c_longlong, workSize: *mut usize) -> cufftResult;
+        }
         cufftGetSizeMany64(plan, rank, n, inembed, istride, idist, onembed, ostride, odist, type_, batch, workSize)
     }
 }
@@ -416,7 +456,9 @@ pub unsafe fn cufftGetVersion(version: *mut ::core::ffi::c_int) -> cufftResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftGetVersion(version: *mut ::core::ffi::c_int) -> cufftResult;
+        extern "C" {
+            fn cufftGetVersion(version: *mut ::core::ffi::c_int) -> cufftResult;
+        }
         cufftGetVersion(version)
     }
 }
@@ -430,7 +472,9 @@ pub unsafe fn cufftMakePlan1d(plan: cufftHandle, nx: ::core::ffi::c_int, type_: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftMakePlan1d(plan: cufftHandle, nx: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int, workSize: *mut usize) -> cufftResult;
+        extern "C" {
+            fn cufftMakePlan1d(plan: cufftHandle, nx: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int, workSize: *mut usize) -> cufftResult;
+        }
         cufftMakePlan1d(plan, nx, type_, batch, workSize)
     }
 }
@@ -444,7 +488,9 @@ pub unsafe fn cufftMakePlan2d(plan: cufftHandle, nx: ::core::ffi::c_int, ny: ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftMakePlan2d(plan: cufftHandle, nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, type_: cufftType, workSize: *mut usize) -> cufftResult;
+        extern "C" {
+            fn cufftMakePlan2d(plan: cufftHandle, nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, type_: cufftType, workSize: *mut usize) -> cufftResult;
+        }
         cufftMakePlan2d(plan, nx, ny, type_, workSize)
     }
 }
@@ -458,7 +504,9 @@ pub unsafe fn cufftMakePlan3d(plan: cufftHandle, nx: ::core::ffi::c_int, ny: ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftMakePlan3d(plan: cufftHandle, nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, nz: ::core::ffi::c_int, type_: cufftType, workSize: *mut usize) -> cufftResult;
+        extern "C" {
+            fn cufftMakePlan3d(plan: cufftHandle, nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, nz: ::core::ffi::c_int, type_: cufftType, workSize: *mut usize) -> cufftResult;
+        }
         cufftMakePlan3d(plan, nx, ny, nz, type_, workSize)
     }
 }
@@ -472,7 +520,9 @@ pub unsafe fn cufftMakePlanMany(plan: cufftHandle, rank: ::core::ffi::c_int, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftMakePlanMany(plan: cufftHandle, rank: ::core::ffi::c_int, n: *mut ::core::ffi::c_int, inembed: *mut ::core::ffi::c_int, istride: ::core::ffi::c_int, idist: ::core::ffi::c_int, onembed: *mut ::core::ffi::c_int, ostride: ::core::ffi::c_int, odist: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int, workSize: *mut usize) -> cufftResult;
+        extern "C" {
+            fn cufftMakePlanMany(plan: cufftHandle, rank: ::core::ffi::c_int, n: *mut ::core::ffi::c_int, inembed: *mut ::core::ffi::c_int, istride: ::core::ffi::c_int, idist: ::core::ffi::c_int, onembed: *mut ::core::ffi::c_int, ostride: ::core::ffi::c_int, odist: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int, workSize: *mut usize) -> cufftResult;
+        }
         cufftMakePlanMany(plan, rank, n, inembed, istride, idist, onembed, ostride, odist, type_, batch, workSize)
     }
 }
@@ -486,7 +536,9 @@ pub unsafe fn cufftMakePlanMany64(plan: cufftHandle, rank: ::core::ffi::c_int, n
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftMakePlanMany64(plan: cufftHandle, rank: ::core::ffi::c_int, n: *mut ::core::ffi::c_longlong, inembed: *mut ::core::ffi::c_longlong, istride: ::core::ffi::c_longlong, idist: ::core::ffi::c_longlong, onembed: *mut ::core::ffi::c_longlong, ostride: ::core::ffi::c_longlong, odist: ::core::ffi::c_longlong, type_: cufftType, batch: ::core::ffi::c_longlong, workSize: *mut usize) -> cufftResult;
+        extern "C" {
+            fn cufftMakePlanMany64(plan: cufftHandle, rank: ::core::ffi::c_int, n: *mut ::core::ffi::c_longlong, inembed: *mut ::core::ffi::c_longlong, istride: ::core::ffi::c_longlong, idist: ::core::ffi::c_longlong, onembed: *mut ::core::ffi::c_longlong, ostride: ::core::ffi::c_longlong, odist: ::core::ffi::c_longlong, type_: cufftType, batch: ::core::ffi::c_longlong, workSize: *mut usize) -> cufftResult;
+        }
         cufftMakePlanMany64(plan, rank, n, inembed, istride, idist, onembed, ostride, odist, type_, batch, workSize)
     }
 }
@@ -500,7 +552,9 @@ pub unsafe fn cufftPlan1d(plan: *mut cufftHandle, nx: ::core::ffi::c_int, type_:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftPlan1d(plan: *mut cufftHandle, nx: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int) -> cufftResult;
+        extern "C" {
+            fn cufftPlan1d(plan: *mut cufftHandle, nx: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int) -> cufftResult;
+        }
         cufftPlan1d(plan, nx, type_, batch)
     }
 }
@@ -514,7 +568,9 @@ pub unsafe fn cufftPlan2d(plan: *mut cufftHandle, nx: ::core::ffi::c_int, ny: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftPlan2d(plan: *mut cufftHandle, nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, type_: cufftType) -> cufftResult;
+        extern "C" {
+            fn cufftPlan2d(plan: *mut cufftHandle, nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, type_: cufftType) -> cufftResult;
+        }
         cufftPlan2d(plan, nx, ny, type_)
     }
 }
@@ -528,7 +584,9 @@ pub unsafe fn cufftPlan3d(plan: *mut cufftHandle, nx: ::core::ffi::c_int, ny: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftPlan3d(plan: *mut cufftHandle, nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, nz: ::core::ffi::c_int, type_: cufftType) -> cufftResult;
+        extern "C" {
+            fn cufftPlan3d(plan: *mut cufftHandle, nx: ::core::ffi::c_int, ny: ::core::ffi::c_int, nz: ::core::ffi::c_int, type_: cufftType) -> cufftResult;
+        }
         cufftPlan3d(plan, nx, ny, nz, type_)
     }
 }
@@ -542,7 +600,9 @@ pub unsafe fn cufftPlanMany(plan: *mut cufftHandle, rank: ::core::ffi::c_int, n:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftPlanMany(plan: *mut cufftHandle, rank: ::core::ffi::c_int, n: *mut ::core::ffi::c_int, inembed: *mut ::core::ffi::c_int, istride: ::core::ffi::c_int, idist: ::core::ffi::c_int, onembed: *mut ::core::ffi::c_int, ostride: ::core::ffi::c_int, odist: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int) -> cufftResult;
+        extern "C" {
+            fn cufftPlanMany(plan: *mut cufftHandle, rank: ::core::ffi::c_int, n: *mut ::core::ffi::c_int, inembed: *mut ::core::ffi::c_int, istride: ::core::ffi::c_int, idist: ::core::ffi::c_int, onembed: *mut ::core::ffi::c_int, ostride: ::core::ffi::c_int, odist: ::core::ffi::c_int, type_: cufftType, batch: ::core::ffi::c_int) -> cufftResult;
+        }
         cufftPlanMany(plan, rank, n, inembed, istride, idist, onembed, ostride, odist, type_, batch)
     }
 }
@@ -557,7 +617,9 @@ pub unsafe fn cufftResetPlanProperty(plan: cufftHandle, property: cufftProperty)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftResetPlanProperty(plan: cufftHandle, property: cufftProperty) -> cufftResult;
+        extern "C" {
+            fn cufftResetPlanProperty(plan: cufftHandle, property: cufftProperty) -> cufftResult;
+        }
         cufftResetPlanProperty(plan, property)
     }
 }
@@ -571,7 +633,9 @@ pub unsafe fn cufftSetAutoAllocation(plan: cufftHandle, autoAllocate: ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftSetAutoAllocation(plan: cufftHandle, autoAllocate: ::core::ffi::c_int) -> cufftResult;
+        extern "C" {
+            fn cufftSetAutoAllocation(plan: cufftHandle, autoAllocate: ::core::ffi::c_int) -> cufftResult;
+        }
         cufftSetAutoAllocation(plan, autoAllocate)
     }
 }
@@ -586,7 +650,9 @@ pub unsafe fn cufftSetPlanPropertyInt64(plan: cufftHandle, property: cufftProper
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftSetPlanPropertyInt64(plan: cufftHandle, property: cufftProperty, inputValueInt: ::core::ffi::c_longlong) -> cufftResult;
+        extern "C" {
+            fn cufftSetPlanPropertyInt64(plan: cufftHandle, property: cufftProperty, inputValueInt: ::core::ffi::c_longlong) -> cufftResult;
+        }
         cufftSetPlanPropertyInt64(plan, property, inputValueInt)
     }
 }
@@ -600,7 +666,9 @@ pub unsafe fn cufftSetStream(plan: cufftHandle, stream: cudaStream_t) -> cufftRe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftSetStream(plan: cufftHandle, stream: cudaStream_t) -> cufftResult;
+        extern "C" {
+            fn cufftSetStream(plan: cufftHandle, stream: cudaStream_t) -> cufftResult;
+        }
         cufftSetStream(plan, stream)
     }
 }
@@ -614,7 +682,9 @@ pub unsafe fn cufftSetWorkArea(plan: cufftHandle, workArea: *mut ::core::ffi::c_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cufftSetWorkArea(plan: cufftHandle, workArea: *mut ::core::ffi::c_void) -> cufftResult;
+        extern "C" {
+            fn cufftSetWorkArea(plan: cufftHandle, workArea: *mut ::core::ffi::c_void) -> cufftResult;
+        }
         cufftSetWorkArea(plan, workArea)
     }
 }

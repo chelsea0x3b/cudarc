@@ -69,7 +69,7 @@ fn build_adapter(
             }
             #[cfg(not(feature = "dynamic-loading"))]
             {
-                extern "C" fn #fn_name(#inputs) #output;
+                extern "C" { fn #fn_name(#inputs) #output; }
                 #fn_name(#(#arg_names),*)
             }
         }

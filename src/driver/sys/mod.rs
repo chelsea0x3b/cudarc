@@ -7341,7 +7341,9 @@ pub unsafe fn cuArray3DCreate_v2(pHandle: *mut CUarray, pAllocateArray: *const C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuArray3DCreate_v2(pHandle: *mut CUarray, pAllocateArray: *const CUDA_ARRAY3D_DESCRIPTOR) -> CUresult;
+        extern "C" {
+            fn cuArray3DCreate_v2(pHandle: *mut CUarray, pAllocateArray: *const CUDA_ARRAY3D_DESCRIPTOR) -> CUresult;
+        }
         cuArray3DCreate_v2(pHandle, pAllocateArray)
     }
 }
@@ -7355,7 +7357,9 @@ pub unsafe fn cuArray3DGetDescriptor_v2(pArrayDescriptor: *mut CUDA_ARRAY3D_DESC
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuArray3DGetDescriptor_v2(pArrayDescriptor: *mut CUDA_ARRAY3D_DESCRIPTOR, hArray: CUarray) -> CUresult;
+        extern "C" {
+            fn cuArray3DGetDescriptor_v2(pArrayDescriptor: *mut CUDA_ARRAY3D_DESCRIPTOR, hArray: CUarray) -> CUresult;
+        }
         cuArray3DGetDescriptor_v2(pArrayDescriptor, hArray)
     }
 }
@@ -7369,7 +7373,9 @@ pub unsafe fn cuArrayCreate_v2(pHandle: *mut CUarray, pAllocateArray: *const CUD
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuArrayCreate_v2(pHandle: *mut CUarray, pAllocateArray: *const CUDA_ARRAY_DESCRIPTOR) -> CUresult;
+        extern "C" {
+            fn cuArrayCreate_v2(pHandle: *mut CUarray, pAllocateArray: *const CUDA_ARRAY_DESCRIPTOR) -> CUresult;
+        }
         cuArrayCreate_v2(pHandle, pAllocateArray)
     }
 }
@@ -7383,7 +7389,9 @@ pub unsafe fn cuArrayDestroy(hArray: CUarray) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuArrayDestroy(hArray: CUarray) -> CUresult;
+        extern "C" {
+            fn cuArrayDestroy(hArray: CUarray) -> CUresult;
+        }
         cuArrayDestroy(hArray)
     }
 }
@@ -7397,7 +7405,9 @@ pub unsafe fn cuArrayGetDescriptor_v2(pArrayDescriptor: *mut CUDA_ARRAY_DESCRIPT
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuArrayGetDescriptor_v2(pArrayDescriptor: *mut CUDA_ARRAY_DESCRIPTOR, hArray: CUarray) -> CUresult;
+        extern "C" {
+            fn cuArrayGetDescriptor_v2(pArrayDescriptor: *mut CUDA_ARRAY_DESCRIPTOR, hArray: CUarray) -> CUresult;
+        }
         cuArrayGetDescriptor_v2(pArrayDescriptor, hArray)
     }
 }
@@ -7412,7 +7422,9 @@ pub unsafe fn cuArrayGetMemoryRequirements(memoryRequirements: *mut CUDA_ARRAY_M
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuArrayGetMemoryRequirements(memoryRequirements: *mut CUDA_ARRAY_MEMORY_REQUIREMENTS, array: CUarray, device: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuArrayGetMemoryRequirements(memoryRequirements: *mut CUDA_ARRAY_MEMORY_REQUIREMENTS, array: CUarray, device: CUdevice) -> CUresult;
+        }
         cuArrayGetMemoryRequirements(memoryRequirements, array, device)
     }
 }
@@ -7426,7 +7438,9 @@ pub unsafe fn cuArrayGetPlane(pPlaneArray: *mut CUarray, hArray: CUarray, planeI
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuArrayGetPlane(pPlaneArray: *mut CUarray, hArray: CUarray, planeIdx: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuArrayGetPlane(pPlaneArray: *mut CUarray, hArray: CUarray, planeIdx: ::core::ffi::c_uint) -> CUresult;
+        }
         cuArrayGetPlane(pPlaneArray, hArray, planeIdx)
     }
 }
@@ -7440,7 +7454,9 @@ pub unsafe fn cuArrayGetSparseProperties(sparseProperties: *mut CUDA_ARRAY_SPARS
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuArrayGetSparseProperties(sparseProperties: *mut CUDA_ARRAY_SPARSE_PROPERTIES, array: CUarray) -> CUresult;
+        extern "C" {
+            fn cuArrayGetSparseProperties(sparseProperties: *mut CUDA_ARRAY_SPARSE_PROPERTIES, array: CUarray) -> CUresult;
+        }
         cuArrayGetSparseProperties(sparseProperties, array)
     }
 }
@@ -7455,7 +7471,9 @@ pub unsafe fn cuCoredumpDeregisterCompleteCallback(callback: CUcoredumpCallbackH
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCoredumpDeregisterCompleteCallback(callback: CUcoredumpCallbackHandle) -> CUresult;
+        extern "C" {
+            fn cuCoredumpDeregisterCompleteCallback(callback: CUcoredumpCallbackHandle) -> CUresult;
+        }
         cuCoredumpDeregisterCompleteCallback(callback)
     }
 }
@@ -7470,7 +7488,9 @@ pub unsafe fn cuCoredumpDeregisterStartCallback(callback: CUcoredumpCallbackHand
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCoredumpDeregisterStartCallback(callback: CUcoredumpCallbackHandle) -> CUresult;
+        extern "C" {
+            fn cuCoredumpDeregisterStartCallback(callback: CUcoredumpCallbackHandle) -> CUresult;
+        }
         cuCoredumpDeregisterStartCallback(callback)
     }
 }
@@ -7485,7 +7505,9 @@ pub unsafe fn cuCoredumpGetAttribute(attrib: CUcoredumpSettings, value: *mut ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCoredumpGetAttribute(attrib: CUcoredumpSettings, value: *mut ::core::ffi::c_void, size: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuCoredumpGetAttribute(attrib: CUcoredumpSettings, value: *mut ::core::ffi::c_void, size: *mut usize) -> CUresult;
+        }
         cuCoredumpGetAttribute(attrib, value, size)
     }
 }
@@ -7500,7 +7522,9 @@ pub unsafe fn cuCoredumpGetAttributeGlobal(attrib: CUcoredumpSettings, value: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCoredumpGetAttributeGlobal(attrib: CUcoredumpSettings, value: *mut ::core::ffi::c_void, size: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuCoredumpGetAttributeGlobal(attrib: CUcoredumpSettings, value: *mut ::core::ffi::c_void, size: *mut usize) -> CUresult;
+        }
         cuCoredumpGetAttributeGlobal(attrib, value, size)
     }
 }
@@ -7515,7 +7539,9 @@ pub unsafe fn cuCoredumpRegisterCompleteCallback(callback: CUcoredumpStatusCallb
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCoredumpRegisterCompleteCallback(callback: CUcoredumpStatusCallback, userData: *mut ::core::ffi::c_void, callbackOut: *mut CUcoredumpCallbackHandle) -> CUresult;
+        extern "C" {
+            fn cuCoredumpRegisterCompleteCallback(callback: CUcoredumpStatusCallback, userData: *mut ::core::ffi::c_void, callbackOut: *mut CUcoredumpCallbackHandle) -> CUresult;
+        }
         cuCoredumpRegisterCompleteCallback(callback, userData, callbackOut)
     }
 }
@@ -7530,7 +7556,9 @@ pub unsafe fn cuCoredumpRegisterStartCallback(callback: CUcoredumpStatusCallback
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCoredumpRegisterStartCallback(callback: CUcoredumpStatusCallback, userData: *mut ::core::ffi::c_void, callbackOut: *mut CUcoredumpCallbackHandle) -> CUresult;
+        extern "C" {
+            fn cuCoredumpRegisterStartCallback(callback: CUcoredumpStatusCallback, userData: *mut ::core::ffi::c_void, callbackOut: *mut CUcoredumpCallbackHandle) -> CUresult;
+        }
         cuCoredumpRegisterStartCallback(callback, userData, callbackOut)
     }
 }
@@ -7545,7 +7573,9 @@ pub unsafe fn cuCoredumpSetAttribute(attrib: CUcoredumpSettings, value: *mut ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCoredumpSetAttribute(attrib: CUcoredumpSettings, value: *mut ::core::ffi::c_void, size: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuCoredumpSetAttribute(attrib: CUcoredumpSettings, value: *mut ::core::ffi::c_void, size: *mut usize) -> CUresult;
+        }
         cuCoredumpSetAttribute(attrib, value, size)
     }
 }
@@ -7560,7 +7590,9 @@ pub unsafe fn cuCoredumpSetAttributeGlobal(attrib: CUcoredumpSettings, value: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCoredumpSetAttributeGlobal(attrib: CUcoredumpSettings, value: *mut ::core::ffi::c_void, size: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuCoredumpSetAttributeGlobal(attrib: CUcoredumpSettings, value: *mut ::core::ffi::c_void, size: *mut usize) -> CUresult;
+        }
         cuCoredumpSetAttributeGlobal(attrib, value, size)
     }
 }
@@ -7574,7 +7606,9 @@ pub unsafe fn cuCtxAttach(pctx: *mut CUcontext, flags: ::core::ffi::c_uint) -> C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxAttach(pctx: *mut CUcontext, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuCtxAttach(pctx: *mut CUcontext, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuCtxAttach(pctx, flags)
     }
 }
@@ -7589,7 +7623,9 @@ pub unsafe fn cuCtxCreate_v2(pctx: *mut CUcontext, flags: ::core::ffi::c_uint, d
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxCreate_v2(pctx: *mut CUcontext, flags: ::core::ffi::c_uint, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuCtxCreate_v2(pctx: *mut CUcontext, flags: ::core::ffi::c_uint, dev: CUdevice) -> CUresult;
+        }
         cuCtxCreate_v2(pctx, flags, dev)
     }
 }
@@ -7604,7 +7640,9 @@ pub unsafe fn cuCtxCreate_v3(pctx: *mut CUcontext, paramsArray: *mut CUexecAffin
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxCreate_v3(pctx: *mut CUcontext, paramsArray: *mut CUexecAffinityParam, numParams: ::core::ffi::c_int, flags: ::core::ffi::c_uint, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuCtxCreate_v3(pctx: *mut CUcontext, paramsArray: *mut CUexecAffinityParam, numParams: ::core::ffi::c_int, flags: ::core::ffi::c_uint, dev: CUdevice) -> CUresult;
+        }
         cuCtxCreate_v3(pctx, paramsArray, numParams, flags, dev)
     }
 }
@@ -7619,7 +7657,9 @@ pub unsafe fn cuCtxCreate_v4(pctx: *mut CUcontext, ctxCreateParams: *mut CUctxCr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxCreate_v4(pctx: *mut CUcontext, ctxCreateParams: *mut CUctxCreateParams, flags: ::core::ffi::c_uint, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuCtxCreate_v4(pctx: *mut CUcontext, ctxCreateParams: *mut CUctxCreateParams, flags: ::core::ffi::c_uint, dev: CUdevice) -> CUresult;
+        }
         cuCtxCreate_v4(pctx, ctxCreateParams, flags, dev)
     }
 }
@@ -7633,7 +7673,9 @@ pub unsafe fn cuCtxDestroy_v2(ctx: CUcontext) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxDestroy_v2(ctx: CUcontext) -> CUresult;
+        extern "C" {
+            fn cuCtxDestroy_v2(ctx: CUcontext) -> CUresult;
+        }
         cuCtxDestroy_v2(ctx)
     }
 }
@@ -7647,7 +7689,9 @@ pub unsafe fn cuCtxDetach(ctx: CUcontext) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxDetach(ctx: CUcontext) -> CUresult;
+        extern "C" {
+            fn cuCtxDetach(ctx: CUcontext) -> CUresult;
+        }
         cuCtxDetach(ctx)
     }
 }
@@ -7661,7 +7705,9 @@ pub unsafe fn cuCtxDisablePeerAccess(peerContext: CUcontext) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxDisablePeerAccess(peerContext: CUcontext) -> CUresult;
+        extern "C" {
+            fn cuCtxDisablePeerAccess(peerContext: CUcontext) -> CUresult;
+        }
         cuCtxDisablePeerAccess(peerContext)
     }
 }
@@ -7675,7 +7721,9 @@ pub unsafe fn cuCtxEnablePeerAccess(peerContext: CUcontext, Flags: ::core::ffi::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxEnablePeerAccess(peerContext: CUcontext, Flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuCtxEnablePeerAccess(peerContext: CUcontext, Flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuCtxEnablePeerAccess(peerContext, Flags)
     }
 }
@@ -7690,7 +7738,9 @@ pub unsafe fn cuCtxFromGreenCtx(pContext: *mut CUcontext, hCtx: CUgreenCtx) -> C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxFromGreenCtx(pContext: *mut CUcontext, hCtx: CUgreenCtx) -> CUresult;
+        extern "C" {
+            fn cuCtxFromGreenCtx(pContext: *mut CUcontext, hCtx: CUgreenCtx) -> CUresult;
+        }
         cuCtxFromGreenCtx(pContext, hCtx)
     }
 }
@@ -7704,7 +7754,9 @@ pub unsafe fn cuCtxGetApiVersion(ctx: CUcontext, version: *mut ::core::ffi::c_ui
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxGetApiVersion(ctx: CUcontext, version: *mut ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuCtxGetApiVersion(ctx: CUcontext, version: *mut ::core::ffi::c_uint) -> CUresult;
+        }
         cuCtxGetApiVersion(ctx, version)
     }
 }
@@ -7718,7 +7770,9 @@ pub unsafe fn cuCtxGetCacheConfig(pconfig: *mut CUfunc_cache) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxGetCacheConfig(pconfig: *mut CUfunc_cache) -> CUresult;
+        extern "C" {
+            fn cuCtxGetCacheConfig(pconfig: *mut CUfunc_cache) -> CUresult;
+        }
         cuCtxGetCacheConfig(pconfig)
     }
 }
@@ -7732,7 +7786,9 @@ pub unsafe fn cuCtxGetCurrent(pctx: *mut CUcontext) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxGetCurrent(pctx: *mut CUcontext) -> CUresult;
+        extern "C" {
+            fn cuCtxGetCurrent(pctx: *mut CUcontext) -> CUresult;
+        }
         cuCtxGetCurrent(pctx)
     }
 }
@@ -7747,7 +7803,9 @@ pub unsafe fn cuCtxGetDevResource(hCtx: CUcontext, resource: *mut CUdevResource,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxGetDevResource(hCtx: CUcontext, resource: *mut CUdevResource, type_: CUdevResourceType) -> CUresult;
+        extern "C" {
+            fn cuCtxGetDevResource(hCtx: CUcontext, resource: *mut CUdevResource, type_: CUdevResourceType) -> CUresult;
+        }
         cuCtxGetDevResource(hCtx, resource, type_)
     }
 }
@@ -7761,7 +7819,9 @@ pub unsafe fn cuCtxGetDevice(device: *mut CUdevice) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxGetDevice(device: *mut CUdevice) -> CUresult;
+        extern "C" {
+            fn cuCtxGetDevice(device: *mut CUdevice) -> CUresult;
+        }
         cuCtxGetDevice(device)
     }
 }
@@ -7776,7 +7836,9 @@ pub unsafe fn cuCtxGetDevice_v2(device: *mut CUdevice, ctx: CUcontext) -> CUresu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxGetDevice_v2(device: *mut CUdevice, ctx: CUcontext) -> CUresult;
+        extern "C" {
+            fn cuCtxGetDevice_v2(device: *mut CUdevice, ctx: CUcontext) -> CUresult;
+        }
         cuCtxGetDevice_v2(device, ctx)
     }
 }
@@ -7790,7 +7852,9 @@ pub unsafe fn cuCtxGetExecAffinity(pExecAffinity: *mut CUexecAffinityParam, type
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxGetExecAffinity(pExecAffinity: *mut CUexecAffinityParam, type_: CUexecAffinityType) -> CUresult;
+        extern "C" {
+            fn cuCtxGetExecAffinity(pExecAffinity: *mut CUexecAffinityParam, type_: CUexecAffinityType) -> CUresult;
+        }
         cuCtxGetExecAffinity(pExecAffinity, type_)
     }
 }
@@ -7804,7 +7868,9 @@ pub unsafe fn cuCtxGetFlags(flags: *mut ::core::ffi::c_uint) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxGetFlags(flags: *mut ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuCtxGetFlags(flags: *mut ::core::ffi::c_uint) -> CUresult;
+        }
         cuCtxGetFlags(flags)
     }
 }
@@ -7819,7 +7885,9 @@ pub unsafe fn cuCtxGetId(ctx: CUcontext, ctxId: *mut ::core::ffi::c_ulonglong) -
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxGetId(ctx: CUcontext, ctxId: *mut ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuCtxGetId(ctx: CUcontext, ctxId: *mut ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuCtxGetId(ctx, ctxId)
     }
 }
@@ -7833,7 +7901,9 @@ pub unsafe fn cuCtxGetLimit(pvalue: *mut usize, limit: CUlimit) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxGetLimit(pvalue: *mut usize, limit: CUlimit) -> CUresult;
+        extern "C" {
+            fn cuCtxGetLimit(pvalue: *mut usize, limit: CUlimit) -> CUresult;
+        }
         cuCtxGetLimit(pvalue, limit)
     }
 }
@@ -7847,7 +7917,9 @@ pub unsafe fn cuCtxGetSharedMemConfig(pConfig: *mut CUsharedconfig) -> CUresult 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxGetSharedMemConfig(pConfig: *mut CUsharedconfig) -> CUresult;
+        extern "C" {
+            fn cuCtxGetSharedMemConfig(pConfig: *mut CUsharedconfig) -> CUresult;
+        }
         cuCtxGetSharedMemConfig(pConfig)
     }
 }
@@ -7861,7 +7933,9 @@ pub unsafe fn cuCtxGetStreamPriorityRange(leastPriority: *mut ::core::ffi::c_int
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxGetStreamPriorityRange(leastPriority: *mut ::core::ffi::c_int, greatestPriority: *mut ::core::ffi::c_int) -> CUresult;
+        extern "C" {
+            fn cuCtxGetStreamPriorityRange(leastPriority: *mut ::core::ffi::c_int, greatestPriority: *mut ::core::ffi::c_int) -> CUresult;
+        }
         cuCtxGetStreamPriorityRange(leastPriority, greatestPriority)
     }
 }
@@ -7875,7 +7949,9 @@ pub unsafe fn cuCtxPopCurrent_v2(pctx: *mut CUcontext) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxPopCurrent_v2(pctx: *mut CUcontext) -> CUresult;
+        extern "C" {
+            fn cuCtxPopCurrent_v2(pctx: *mut CUcontext) -> CUresult;
+        }
         cuCtxPopCurrent_v2(pctx)
     }
 }
@@ -7889,7 +7965,9 @@ pub unsafe fn cuCtxPushCurrent_v2(ctx: CUcontext) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxPushCurrent_v2(ctx: CUcontext) -> CUresult;
+        extern "C" {
+            fn cuCtxPushCurrent_v2(ctx: CUcontext) -> CUresult;
+        }
         cuCtxPushCurrent_v2(ctx)
     }
 }
@@ -7904,7 +7982,9 @@ pub unsafe fn cuCtxRecordEvent(hCtx: CUcontext, hEvent: CUevent) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxRecordEvent(hCtx: CUcontext, hEvent: CUevent) -> CUresult;
+        extern "C" {
+            fn cuCtxRecordEvent(hCtx: CUcontext, hEvent: CUevent) -> CUresult;
+        }
         cuCtxRecordEvent(hCtx, hEvent)
     }
 }
@@ -7918,7 +7998,9 @@ pub unsafe fn cuCtxResetPersistingL2Cache() -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxResetPersistingL2Cache() -> CUresult;
+        extern "C" {
+            fn cuCtxResetPersistingL2Cache() -> CUresult;
+        }
         cuCtxResetPersistingL2Cache()
     }
 }
@@ -7932,7 +8014,9 @@ pub unsafe fn cuCtxSetCacheConfig(config: CUfunc_cache) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxSetCacheConfig(config: CUfunc_cache) -> CUresult;
+        extern "C" {
+            fn cuCtxSetCacheConfig(config: CUfunc_cache) -> CUresult;
+        }
         cuCtxSetCacheConfig(config)
     }
 }
@@ -7946,7 +8030,9 @@ pub unsafe fn cuCtxSetCurrent(ctx: CUcontext) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxSetCurrent(ctx: CUcontext) -> CUresult;
+        extern "C" {
+            fn cuCtxSetCurrent(ctx: CUcontext) -> CUresult;
+        }
         cuCtxSetCurrent(ctx)
     }
 }
@@ -7961,7 +8047,9 @@ pub unsafe fn cuCtxSetFlags(flags: ::core::ffi::c_uint) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxSetFlags(flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuCtxSetFlags(flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuCtxSetFlags(flags)
     }
 }
@@ -7975,7 +8063,9 @@ pub unsafe fn cuCtxSetLimit(limit: CUlimit, value: usize) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxSetLimit(limit: CUlimit, value: usize) -> CUresult;
+        extern "C" {
+            fn cuCtxSetLimit(limit: CUlimit, value: usize) -> CUresult;
+        }
         cuCtxSetLimit(limit, value)
     }
 }
@@ -7989,7 +8079,9 @@ pub unsafe fn cuCtxSetSharedMemConfig(config: CUsharedconfig) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxSetSharedMemConfig(config: CUsharedconfig) -> CUresult;
+        extern "C" {
+            fn cuCtxSetSharedMemConfig(config: CUsharedconfig) -> CUresult;
+        }
         cuCtxSetSharedMemConfig(config)
     }
 }
@@ -8003,7 +8095,9 @@ pub unsafe fn cuCtxSynchronize() -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxSynchronize() -> CUresult;
+        extern "C" {
+            fn cuCtxSynchronize() -> CUresult;
+        }
         cuCtxSynchronize()
     }
 }
@@ -8018,7 +8112,9 @@ pub unsafe fn cuCtxSynchronize_v2(ctx: CUcontext) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxSynchronize_v2(ctx: CUcontext) -> CUresult;
+        extern "C" {
+            fn cuCtxSynchronize_v2(ctx: CUcontext) -> CUresult;
+        }
         cuCtxSynchronize_v2(ctx)
     }
 }
@@ -8033,7 +8129,9 @@ pub unsafe fn cuCtxWaitEvent(hCtx: CUcontext, hEvent: CUevent) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuCtxWaitEvent(hCtx: CUcontext, hEvent: CUevent) -> CUresult;
+        extern "C" {
+            fn cuCtxWaitEvent(hCtx: CUcontext, hEvent: CUevent) -> CUresult;
+        }
         cuCtxWaitEvent(hCtx, hEvent)
     }
 }
@@ -8047,7 +8145,9 @@ pub unsafe fn cuDestroyExternalMemory(extMem: CUexternalMemory) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDestroyExternalMemory(extMem: CUexternalMemory) -> CUresult;
+        extern "C" {
+            fn cuDestroyExternalMemory(extMem: CUexternalMemory) -> CUresult;
+        }
         cuDestroyExternalMemory(extMem)
     }
 }
@@ -8061,7 +8161,9 @@ pub unsafe fn cuDestroyExternalSemaphore(extSem: CUexternalSemaphore) -> CUresul
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDestroyExternalSemaphore(extSem: CUexternalSemaphore) -> CUresult;
+        extern "C" {
+            fn cuDestroyExternalSemaphore(extSem: CUexternalSemaphore) -> CUresult;
+        }
         cuDestroyExternalSemaphore(extSem)
     }
 }
@@ -8076,7 +8178,9 @@ pub unsafe fn cuDevResourceGenerateDesc(phDesc: *mut CUdevResourceDesc, resource
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDevResourceGenerateDesc(phDesc: *mut CUdevResourceDesc, resources: *mut CUdevResource, nbResources: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuDevResourceGenerateDesc(phDesc: *mut CUdevResourceDesc, resources: *mut CUdevResource, nbResources: ::core::ffi::c_uint) -> CUresult;
+        }
         cuDevResourceGenerateDesc(phDesc, resources, nbResources)
     }
 }
@@ -8091,7 +8195,9 @@ pub unsafe fn cuDevSmResourceSplit(result: *mut CUdevResource, nbGroups: ::core:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDevSmResourceSplit(result: *mut CUdevResource, nbGroups: ::core::ffi::c_uint, input: *const CUdevResource, remainder: *mut CUdevResource, flags: ::core::ffi::c_uint, groupParams: *mut CU_DEV_SM_RESOURCE_GROUP_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuDevSmResourceSplit(result: *mut CUdevResource, nbGroups: ::core::ffi::c_uint, input: *const CUdevResource, remainder: *mut CUdevResource, flags: ::core::ffi::c_uint, groupParams: *mut CU_DEV_SM_RESOURCE_GROUP_PARAMS) -> CUresult;
+        }
         cuDevSmResourceSplit(result, nbGroups, input, remainder, flags, groupParams)
     }
 }
@@ -8106,7 +8212,9 @@ pub unsafe fn cuDevSmResourceSplitByCount(result: *mut CUdevResource, nbGroups: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDevSmResourceSplitByCount(result: *mut CUdevResource, nbGroups: *mut ::core::ffi::c_uint, input: *const CUdevResource, remaining: *mut CUdevResource, useFlags: ::core::ffi::c_uint, minCount: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuDevSmResourceSplitByCount(result: *mut CUdevResource, nbGroups: *mut ::core::ffi::c_uint, input: *const CUdevResource, remaining: *mut CUdevResource, useFlags: ::core::ffi::c_uint, minCount: ::core::ffi::c_uint) -> CUresult;
+        }
         cuDevSmResourceSplitByCount(result, nbGroups, input, remaining, useFlags, minCount)
     }
 }
@@ -8121,7 +8229,9 @@ pub unsafe fn cuDevSmResourceSplitByCount(result: *mut CUdevResource, nbGroups: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDevSmResourceSplitByCount(result: *mut CUdevResource, nbGroups: *mut ::core::ffi::c_uint, input: *const CUdevResource, remainder: *mut CUdevResource, flags: ::core::ffi::c_uint, minCount: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuDevSmResourceSplitByCount(result: *mut CUdevResource, nbGroups: *mut ::core::ffi::c_uint, input: *const CUdevResource, remainder: *mut CUdevResource, flags: ::core::ffi::c_uint, minCount: ::core::ffi::c_uint) -> CUresult;
+        }
         cuDevSmResourceSplitByCount(result, nbGroups, input, remainder, flags, minCount)
     }
 }
@@ -8135,7 +8245,9 @@ pub unsafe fn cuDeviceCanAccessPeer(canAccessPeer: *mut ::core::ffi::c_int, dev:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceCanAccessPeer(canAccessPeer: *mut ::core::ffi::c_int, dev: CUdevice, peerDev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceCanAccessPeer(canAccessPeer: *mut ::core::ffi::c_int, dev: CUdevice, peerDev: CUdevice) -> CUresult;
+        }
         cuDeviceCanAccessPeer(canAccessPeer, dev, peerDev)
     }
 }
@@ -8149,7 +8261,9 @@ pub unsafe fn cuDeviceComputeCapability(major: *mut ::core::ffi::c_int, minor: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceComputeCapability(major: *mut ::core::ffi::c_int, minor: *mut ::core::ffi::c_int, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceComputeCapability(major: *mut ::core::ffi::c_int, minor: *mut ::core::ffi::c_int, dev: CUdevice) -> CUresult;
+        }
         cuDeviceComputeCapability(major, minor, dev)
     }
 }
@@ -8163,7 +8277,9 @@ pub unsafe fn cuDeviceGet(device: *mut CUdevice, ordinal: ::core::ffi::c_int) ->
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGet(device: *mut CUdevice, ordinal: ::core::ffi::c_int) -> CUresult;
+        extern "C" {
+            fn cuDeviceGet(device: *mut CUdevice, ordinal: ::core::ffi::c_int) -> CUresult;
+        }
         cuDeviceGet(device, ordinal)
     }
 }
@@ -8177,7 +8293,9 @@ pub unsafe fn cuDeviceGetAttribute(pi: *mut ::core::ffi::c_int, attrib: CUdevice
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetAttribute(pi: *mut ::core::ffi::c_int, attrib: CUdevice_attribute, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetAttribute(pi: *mut ::core::ffi::c_int, attrib: CUdevice_attribute, dev: CUdevice) -> CUresult;
+        }
         cuDeviceGetAttribute(pi, attrib, dev)
     }
 }
@@ -8191,7 +8309,9 @@ pub unsafe fn cuDeviceGetByPCIBusId(dev: *mut CUdevice, pciBusId: *const ::core:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetByPCIBusId(dev: *mut CUdevice, pciBusId: *const ::core::ffi::c_char) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetByPCIBusId(dev: *mut CUdevice, pciBusId: *const ::core::ffi::c_char) -> CUresult;
+        }
         cuDeviceGetByPCIBusId(dev, pciBusId)
     }
 }
@@ -8205,7 +8325,9 @@ pub unsafe fn cuDeviceGetCount(count: *mut ::core::ffi::c_int) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetCount(count: *mut ::core::ffi::c_int) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetCount(count: *mut ::core::ffi::c_int) -> CUresult;
+        }
         cuDeviceGetCount(count)
     }
 }
@@ -8219,7 +8341,9 @@ pub unsafe fn cuDeviceGetDefaultMemPool(pool_out: *mut CUmemoryPool, dev: CUdevi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetDefaultMemPool(pool_out: *mut CUmemoryPool, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetDefaultMemPool(pool_out: *mut CUmemoryPool, dev: CUdevice) -> CUresult;
+        }
         cuDeviceGetDefaultMemPool(pool_out, dev)
     }
 }
@@ -8234,7 +8358,9 @@ pub unsafe fn cuDeviceGetDevResource(device: CUdevice, resource: *mut CUdevResou
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetDevResource(device: CUdevice, resource: *mut CUdevResource, type_: CUdevResourceType) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetDevResource(device: CUdevice, resource: *mut CUdevResource, type_: CUdevResourceType) -> CUresult;
+        }
         cuDeviceGetDevResource(device, resource, type_)
     }
 }
@@ -8248,7 +8374,9 @@ pub unsafe fn cuDeviceGetExecAffinitySupport(pi: *mut ::core::ffi::c_int, type_:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetExecAffinitySupport(pi: *mut ::core::ffi::c_int, type_: CUexecAffinityType, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetExecAffinitySupport(pi: *mut ::core::ffi::c_int, type_: CUexecAffinityType, dev: CUdevice) -> CUresult;
+        }
         cuDeviceGetExecAffinitySupport(pi, type_, dev)
     }
 }
@@ -8262,7 +8390,9 @@ pub unsafe fn cuDeviceGetGraphMemAttribute(device: CUdevice, attr: CUgraphMem_at
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetGraphMemAttribute(device: CUdevice, attr: CUgraphMem_attribute, value: *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetGraphMemAttribute(device: CUdevice, attr: CUgraphMem_attribute, value: *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuDeviceGetGraphMemAttribute(device, attr, value)
     }
 }
@@ -8277,7 +8407,9 @@ pub unsafe fn cuDeviceGetHostAtomicCapabilities(capabilities: *mut ::core::ffi::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetHostAtomicCapabilities(capabilities: *mut ::core::ffi::c_uint, operations: *const CUatomicOperation, count: ::core::ffi::c_uint, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetHostAtomicCapabilities(capabilities: *mut ::core::ffi::c_uint, operations: *const CUatomicOperation, count: ::core::ffi::c_uint, dev: CUdevice) -> CUresult;
+        }
         cuDeviceGetHostAtomicCapabilities(capabilities, operations, count, dev)
     }
 }
@@ -8291,7 +8423,9 @@ pub unsafe fn cuDeviceGetLuid(luid: *mut ::core::ffi::c_char, deviceNodeMask: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetLuid(luid: *mut ::core::ffi::c_char, deviceNodeMask: *mut ::core::ffi::c_uint, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetLuid(luid: *mut ::core::ffi::c_char, deviceNodeMask: *mut ::core::ffi::c_uint, dev: CUdevice) -> CUresult;
+        }
         cuDeviceGetLuid(luid, deviceNodeMask, dev)
     }
 }
@@ -8305,7 +8439,9 @@ pub unsafe fn cuDeviceGetMemPool(pool: *mut CUmemoryPool, dev: CUdevice) -> CUre
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetMemPool(pool: *mut CUmemoryPool, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetMemPool(pool: *mut CUmemoryPool, dev: CUdevice) -> CUresult;
+        }
         cuDeviceGetMemPool(pool, dev)
     }
 }
@@ -8319,7 +8455,9 @@ pub unsafe fn cuDeviceGetName(name: *mut ::core::ffi::c_char, len: ::core::ffi::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetName(name: *mut ::core::ffi::c_char, len: ::core::ffi::c_int, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetName(name: *mut ::core::ffi::c_char, len: ::core::ffi::c_int, dev: CUdevice) -> CUresult;
+        }
         cuDeviceGetName(name, len, dev)
     }
 }
@@ -8334,7 +8472,9 @@ pub unsafe fn cuDeviceGetP2PAtomicCapabilities(capabilities: *mut ::core::ffi::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetP2PAtomicCapabilities(capabilities: *mut ::core::ffi::c_uint, operations: *const CUatomicOperation, count: ::core::ffi::c_uint, srcDevice: CUdevice, dstDevice: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetP2PAtomicCapabilities(capabilities: *mut ::core::ffi::c_uint, operations: *const CUatomicOperation, count: ::core::ffi::c_uint, srcDevice: CUdevice, dstDevice: CUdevice) -> CUresult;
+        }
         cuDeviceGetP2PAtomicCapabilities(capabilities, operations, count, srcDevice, dstDevice)
     }
 }
@@ -8348,7 +8488,9 @@ pub unsafe fn cuDeviceGetP2PAttribute(value: *mut ::core::ffi::c_int, attrib: CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetP2PAttribute(value: *mut ::core::ffi::c_int, attrib: CUdevice_P2PAttribute, srcDevice: CUdevice, dstDevice: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetP2PAttribute(value: *mut ::core::ffi::c_int, attrib: CUdevice_P2PAttribute, srcDevice: CUdevice, dstDevice: CUdevice) -> CUresult;
+        }
         cuDeviceGetP2PAttribute(value, attrib, srcDevice, dstDevice)
     }
 }
@@ -8362,7 +8504,9 @@ pub unsafe fn cuDeviceGetPCIBusId(pciBusId: *mut ::core::ffi::c_char, len: ::cor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetPCIBusId(pciBusId: *mut ::core::ffi::c_char, len: ::core::ffi::c_int, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetPCIBusId(pciBusId: *mut ::core::ffi::c_char, len: ::core::ffi::c_int, dev: CUdevice) -> CUresult;
+        }
         cuDeviceGetPCIBusId(pciBusId, len, dev)
     }
 }
@@ -8376,7 +8520,9 @@ pub unsafe fn cuDeviceGetProperties(prop: *mut CUdevprop, dev: CUdevice) -> CUre
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetProperties(prop: *mut CUdevprop, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetProperties(prop: *mut CUdevprop, dev: CUdevice) -> CUresult;
+        }
         cuDeviceGetProperties(prop, dev)
     }
 }
@@ -8390,7 +8536,9 @@ pub unsafe fn cuDeviceGetTexture1DLinearMaxWidth(maxWidthInElements: *mut usize,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetTexture1DLinearMaxWidth(maxWidthInElements: *mut usize, format: CUarray_format, numChannels: ::core::ffi::c_uint, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetTexture1DLinearMaxWidth(maxWidthInElements: *mut usize, format: CUarray_format, numChannels: ::core::ffi::c_uint, dev: CUdevice) -> CUresult;
+        }
         cuDeviceGetTexture1DLinearMaxWidth(maxWidthInElements, format, numChannels, dev)
     }
 }
@@ -8405,7 +8553,9 @@ pub unsafe fn cuDeviceGetUuid(uuid: *mut CUuuid, dev: CUdevice) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetUuid(uuid: *mut CUuuid, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetUuid(uuid: *mut CUuuid, dev: CUdevice) -> CUresult;
+        }
         cuDeviceGetUuid(uuid, dev)
     }
 }
@@ -8419,7 +8569,9 @@ pub unsafe fn cuDeviceGetUuid_v2(uuid: *mut CUuuid, dev: CUdevice) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGetUuid_v2(uuid: *mut CUuuid, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceGetUuid_v2(uuid: *mut CUuuid, dev: CUdevice) -> CUresult;
+        }
         cuDeviceGetUuid_v2(uuid, dev)
     }
 }
@@ -8433,7 +8585,9 @@ pub unsafe fn cuDeviceGraphMemTrim(device: CUdevice) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceGraphMemTrim(device: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceGraphMemTrim(device: CUdevice) -> CUresult;
+        }
         cuDeviceGraphMemTrim(device)
     }
 }
@@ -8447,7 +8601,9 @@ pub unsafe fn cuDevicePrimaryCtxGetState(dev: CUdevice, flags: *mut ::core::ffi:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDevicePrimaryCtxGetState(dev: CUdevice, flags: *mut ::core::ffi::c_uint, active: *mut ::core::ffi::c_int) -> CUresult;
+        extern "C" {
+            fn cuDevicePrimaryCtxGetState(dev: CUdevice, flags: *mut ::core::ffi::c_uint, active: *mut ::core::ffi::c_int) -> CUresult;
+        }
         cuDevicePrimaryCtxGetState(dev, flags, active)
     }
 }
@@ -8461,7 +8617,9 @@ pub unsafe fn cuDevicePrimaryCtxRelease_v2(dev: CUdevice) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDevicePrimaryCtxRelease_v2(dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDevicePrimaryCtxRelease_v2(dev: CUdevice) -> CUresult;
+        }
         cuDevicePrimaryCtxRelease_v2(dev)
     }
 }
@@ -8475,7 +8633,9 @@ pub unsafe fn cuDevicePrimaryCtxReset_v2(dev: CUdevice) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDevicePrimaryCtxReset_v2(dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDevicePrimaryCtxReset_v2(dev: CUdevice) -> CUresult;
+        }
         cuDevicePrimaryCtxReset_v2(dev)
     }
 }
@@ -8489,7 +8649,9 @@ pub unsafe fn cuDevicePrimaryCtxRetain(pctx: *mut CUcontext, dev: CUdevice) -> C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDevicePrimaryCtxRetain(pctx: *mut CUcontext, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDevicePrimaryCtxRetain(pctx: *mut CUcontext, dev: CUdevice) -> CUresult;
+        }
         cuDevicePrimaryCtxRetain(pctx, dev)
     }
 }
@@ -8503,7 +8665,9 @@ pub unsafe fn cuDevicePrimaryCtxSetFlags_v2(dev: CUdevice, flags: ::core::ffi::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDevicePrimaryCtxSetFlags_v2(dev: CUdevice, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuDevicePrimaryCtxSetFlags_v2(dev: CUdevice, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuDevicePrimaryCtxSetFlags_v2(dev, flags)
     }
 }
@@ -8518,7 +8682,9 @@ pub unsafe fn cuDeviceRegisterAsyncNotification(device: CUdevice, callbackFunc: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceRegisterAsyncNotification(device: CUdevice, callbackFunc: CUasyncCallback, userData: *mut ::core::ffi::c_void, callback: *mut CUasyncCallbackHandle) -> CUresult;
+        extern "C" {
+            fn cuDeviceRegisterAsyncNotification(device: CUdevice, callbackFunc: CUasyncCallback, userData: *mut ::core::ffi::c_void, callback: *mut CUasyncCallbackHandle) -> CUresult;
+        }
         cuDeviceRegisterAsyncNotification(device, callbackFunc, userData, callback)
     }
 }
@@ -8532,7 +8698,9 @@ pub unsafe fn cuDeviceSetGraphMemAttribute(device: CUdevice, attr: CUgraphMem_at
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceSetGraphMemAttribute(device: CUdevice, attr: CUgraphMem_attribute, value: *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuDeviceSetGraphMemAttribute(device: CUdevice, attr: CUgraphMem_attribute, value: *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuDeviceSetGraphMemAttribute(device, attr, value)
     }
 }
@@ -8546,7 +8714,9 @@ pub unsafe fn cuDeviceSetMemPool(dev: CUdevice, pool: CUmemoryPool) -> CUresult 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceSetMemPool(dev: CUdevice, pool: CUmemoryPool) -> CUresult;
+        extern "C" {
+            fn cuDeviceSetMemPool(dev: CUdevice, pool: CUmemoryPool) -> CUresult;
+        }
         cuDeviceSetMemPool(dev, pool)
     }
 }
@@ -8560,7 +8730,9 @@ pub unsafe fn cuDeviceTotalMem_v2(bytes: *mut usize, dev: CUdevice) -> CUresult 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceTotalMem_v2(bytes: *mut usize, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuDeviceTotalMem_v2(bytes: *mut usize, dev: CUdevice) -> CUresult;
+        }
         cuDeviceTotalMem_v2(bytes, dev)
     }
 }
@@ -8575,7 +8747,9 @@ pub unsafe fn cuDeviceUnregisterAsyncNotification(device: CUdevice, callback: CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDeviceUnregisterAsyncNotification(device: CUdevice, callback: CUasyncCallbackHandle) -> CUresult;
+        extern "C" {
+            fn cuDeviceUnregisterAsyncNotification(device: CUdevice, callback: CUasyncCallbackHandle) -> CUresult;
+        }
         cuDeviceUnregisterAsyncNotification(device, callback)
     }
 }
@@ -8589,7 +8763,9 @@ pub unsafe fn cuDriverGetVersion(driverVersion: *mut ::core::ffi::c_int) -> CUre
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuDriverGetVersion(driverVersion: *mut ::core::ffi::c_int) -> CUresult;
+        extern "C" {
+            fn cuDriverGetVersion(driverVersion: *mut ::core::ffi::c_int) -> CUresult;
+        }
         cuDriverGetVersion(driverVersion)
     }
 }
@@ -8603,7 +8779,9 @@ pub unsafe fn cuEventCreate(phEvent: *mut CUevent, Flags: ::core::ffi::c_uint) -
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuEventCreate(phEvent: *mut CUevent, Flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuEventCreate(phEvent: *mut CUevent, Flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuEventCreate(phEvent, Flags)
     }
 }
@@ -8617,7 +8795,9 @@ pub unsafe fn cuEventDestroy_v2(hEvent: CUevent) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuEventDestroy_v2(hEvent: CUevent) -> CUresult;
+        extern "C" {
+            fn cuEventDestroy_v2(hEvent: CUevent) -> CUresult;
+        }
         cuEventDestroy_v2(hEvent)
     }
 }
@@ -8632,7 +8812,9 @@ pub unsafe fn cuEventElapsedTime(pMilliseconds: *mut f32, hStart: CUevent, hEnd:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuEventElapsedTime(pMilliseconds: *mut f32, hStart: CUevent, hEnd: CUevent) -> CUresult;
+        extern "C" {
+            fn cuEventElapsedTime(pMilliseconds: *mut f32, hStart: CUevent, hEnd: CUevent) -> CUresult;
+        }
         cuEventElapsedTime(pMilliseconds, hStart, hEnd)
     }
 }
@@ -8647,7 +8829,9 @@ pub unsafe fn cuEventElapsedTime_v2(pMilliseconds: *mut f32, hStart: CUevent, hE
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuEventElapsedTime_v2(pMilliseconds: *mut f32, hStart: CUevent, hEnd: CUevent) -> CUresult;
+        extern "C" {
+            fn cuEventElapsedTime_v2(pMilliseconds: *mut f32, hStart: CUevent, hEnd: CUevent) -> CUresult;
+        }
         cuEventElapsedTime_v2(pMilliseconds, hStart, hEnd)
     }
 }
@@ -8661,7 +8845,9 @@ pub unsafe fn cuEventQuery(hEvent: CUevent) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuEventQuery(hEvent: CUevent) -> CUresult;
+        extern "C" {
+            fn cuEventQuery(hEvent: CUevent) -> CUresult;
+        }
         cuEventQuery(hEvent)
     }
 }
@@ -8675,7 +8861,9 @@ pub unsafe fn cuEventRecord(hEvent: CUevent, hStream: CUstream) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuEventRecord(hEvent: CUevent, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuEventRecord(hEvent: CUevent, hStream: CUstream) -> CUresult;
+        }
         cuEventRecord(hEvent, hStream)
     }
 }
@@ -8689,7 +8877,9 @@ pub unsafe fn cuEventRecordWithFlags(hEvent: CUevent, hStream: CUstream, flags: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuEventRecordWithFlags(hEvent: CUevent, hStream: CUstream, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuEventRecordWithFlags(hEvent: CUevent, hStream: CUstream, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuEventRecordWithFlags(hEvent, hStream, flags)
     }
 }
@@ -8703,7 +8893,9 @@ pub unsafe fn cuEventSynchronize(hEvent: CUevent) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuEventSynchronize(hEvent: CUevent) -> CUresult;
+        extern "C" {
+            fn cuEventSynchronize(hEvent: CUevent) -> CUresult;
+        }
         cuEventSynchronize(hEvent)
     }
 }
@@ -8717,7 +8909,9 @@ pub unsafe fn cuExternalMemoryGetMappedBuffer(devPtr: *mut CUdeviceptr, extMem: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuExternalMemoryGetMappedBuffer(devPtr: *mut CUdeviceptr, extMem: CUexternalMemory, bufferDesc: *const CUDA_EXTERNAL_MEMORY_BUFFER_DESC) -> CUresult;
+        extern "C" {
+            fn cuExternalMemoryGetMappedBuffer(devPtr: *mut CUdeviceptr, extMem: CUexternalMemory, bufferDesc: *const CUDA_EXTERNAL_MEMORY_BUFFER_DESC) -> CUresult;
+        }
         cuExternalMemoryGetMappedBuffer(devPtr, extMem, bufferDesc)
     }
 }
@@ -8731,7 +8925,9 @@ pub unsafe fn cuExternalMemoryGetMappedMipmappedArray(mipmap: *mut CUmipmappedAr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuExternalMemoryGetMappedMipmappedArray(mipmap: *mut CUmipmappedArray, extMem: CUexternalMemory, mipmapDesc: *const CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC) -> CUresult;
+        extern "C" {
+            fn cuExternalMemoryGetMappedMipmappedArray(mipmap: *mut CUmipmappedArray, extMem: CUexternalMemory, mipmapDesc: *const CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC) -> CUresult;
+        }
         cuExternalMemoryGetMappedMipmappedArray(mipmap, extMem, mipmapDesc)
     }
 }
@@ -8745,7 +8941,9 @@ pub unsafe fn cuFlushGPUDirectRDMAWrites(target: CUflushGPUDirectRDMAWritesTarge
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFlushGPUDirectRDMAWrites(target: CUflushGPUDirectRDMAWritesTarget, scope: CUflushGPUDirectRDMAWritesScope) -> CUresult;
+        extern "C" {
+            fn cuFlushGPUDirectRDMAWrites(target: CUflushGPUDirectRDMAWritesTarget, scope: CUflushGPUDirectRDMAWritesScope) -> CUresult;
+        }
         cuFlushGPUDirectRDMAWrites(target, scope)
     }
 }
@@ -8759,7 +8957,9 @@ pub unsafe fn cuFuncGetAttribute(pi: *mut ::core::ffi::c_int, attrib: CUfunction
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFuncGetAttribute(pi: *mut ::core::ffi::c_int, attrib: CUfunction_attribute, hfunc: CUfunction) -> CUresult;
+        extern "C" {
+            fn cuFuncGetAttribute(pi: *mut ::core::ffi::c_int, attrib: CUfunction_attribute, hfunc: CUfunction) -> CUresult;
+        }
         cuFuncGetAttribute(pi, attrib, hfunc)
     }
 }
@@ -8773,7 +8973,9 @@ pub unsafe fn cuFuncGetModule(hmod: *mut CUmodule, hfunc: CUfunction) -> CUresul
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFuncGetModule(hmod: *mut CUmodule, hfunc: CUfunction) -> CUresult;
+        extern "C" {
+            fn cuFuncGetModule(hmod: *mut CUmodule, hfunc: CUfunction) -> CUresult;
+        }
         cuFuncGetModule(hmod, hfunc)
     }
 }
@@ -8788,7 +8990,9 @@ pub unsafe fn cuFuncGetName(name: *mut *const ::core::ffi::c_char, hfunc: CUfunc
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFuncGetName(name: *mut *const ::core::ffi::c_char, hfunc: CUfunction) -> CUresult;
+        extern "C" {
+            fn cuFuncGetName(name: *mut *const ::core::ffi::c_char, hfunc: CUfunction) -> CUresult;
+        }
         cuFuncGetName(name, hfunc)
     }
 }
@@ -8803,7 +9007,9 @@ pub unsafe fn cuFuncGetParamCount(func: CUfunction, paramCount: *mut usize) -> C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFuncGetParamCount(func: CUfunction, paramCount: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuFuncGetParamCount(func: CUfunction, paramCount: *mut usize) -> CUresult;
+        }
         cuFuncGetParamCount(func, paramCount)
     }
 }
@@ -8818,7 +9024,9 @@ pub unsafe fn cuFuncGetParamInfo(func: CUfunction, paramIndex: usize, paramOffse
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFuncGetParamInfo(func: CUfunction, paramIndex: usize, paramOffset: *mut usize, paramSize: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuFuncGetParamInfo(func: CUfunction, paramIndex: usize, paramOffset: *mut usize, paramSize: *mut usize) -> CUresult;
+        }
         cuFuncGetParamInfo(func, paramIndex, paramOffset, paramSize)
     }
 }
@@ -8833,7 +9041,9 @@ pub unsafe fn cuFuncIsLoaded(state: *mut CUfunctionLoadingState, function: CUfun
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFuncIsLoaded(state: *mut CUfunctionLoadingState, function: CUfunction) -> CUresult;
+        extern "C" {
+            fn cuFuncIsLoaded(state: *mut CUfunctionLoadingState, function: CUfunction) -> CUresult;
+        }
         cuFuncIsLoaded(state, function)
     }
 }
@@ -8848,7 +9058,9 @@ pub unsafe fn cuFuncLoad(function: CUfunction) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFuncLoad(function: CUfunction) -> CUresult;
+        extern "C" {
+            fn cuFuncLoad(function: CUfunction) -> CUresult;
+        }
         cuFuncLoad(function)
     }
 }
@@ -8862,7 +9074,9 @@ pub unsafe fn cuFuncSetAttribute(hfunc: CUfunction, attrib: CUfunction_attribute
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFuncSetAttribute(hfunc: CUfunction, attrib: CUfunction_attribute, value: ::core::ffi::c_int) -> CUresult;
+        extern "C" {
+            fn cuFuncSetAttribute(hfunc: CUfunction, attrib: CUfunction_attribute, value: ::core::ffi::c_int) -> CUresult;
+        }
         cuFuncSetAttribute(hfunc, attrib, value)
     }
 }
@@ -8876,7 +9090,9 @@ pub unsafe fn cuFuncSetBlockShape(hfunc: CUfunction, x: ::core::ffi::c_int, y: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFuncSetBlockShape(hfunc: CUfunction, x: ::core::ffi::c_int, y: ::core::ffi::c_int, z: ::core::ffi::c_int) -> CUresult;
+        extern "C" {
+            fn cuFuncSetBlockShape(hfunc: CUfunction, x: ::core::ffi::c_int, y: ::core::ffi::c_int, z: ::core::ffi::c_int) -> CUresult;
+        }
         cuFuncSetBlockShape(hfunc, x, y, z)
     }
 }
@@ -8890,7 +9106,9 @@ pub unsafe fn cuFuncSetCacheConfig(hfunc: CUfunction, config: CUfunc_cache) -> C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFuncSetCacheConfig(hfunc: CUfunction, config: CUfunc_cache) -> CUresult;
+        extern "C" {
+            fn cuFuncSetCacheConfig(hfunc: CUfunction, config: CUfunc_cache) -> CUresult;
+        }
         cuFuncSetCacheConfig(hfunc, config)
     }
 }
@@ -8904,7 +9122,9 @@ pub unsafe fn cuFuncSetSharedMemConfig(hfunc: CUfunction, config: CUsharedconfig
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFuncSetSharedMemConfig(hfunc: CUfunction, config: CUsharedconfig) -> CUresult;
+        extern "C" {
+            fn cuFuncSetSharedMemConfig(hfunc: CUfunction, config: CUsharedconfig) -> CUresult;
+        }
         cuFuncSetSharedMemConfig(hfunc, config)
     }
 }
@@ -8918,7 +9138,9 @@ pub unsafe fn cuFuncSetSharedSize(hfunc: CUfunction, bytes: ::core::ffi::c_uint)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuFuncSetSharedSize(hfunc: CUfunction, bytes: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuFuncSetSharedSize(hfunc: CUfunction, bytes: ::core::ffi::c_uint) -> CUresult;
+        }
         cuFuncSetSharedSize(hfunc, bytes)
     }
 }
@@ -8932,7 +9154,9 @@ pub unsafe fn cuGetErrorName(error: CUresult, pStr: *mut *const ::core::ffi::c_c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGetErrorName(error: CUresult, pStr: *mut *const ::core::ffi::c_char) -> CUresult;
+        extern "C" {
+            fn cuGetErrorName(error: CUresult, pStr: *mut *const ::core::ffi::c_char) -> CUresult;
+        }
         cuGetErrorName(error, pStr)
     }
 }
@@ -8946,7 +9170,9 @@ pub unsafe fn cuGetErrorString(error: CUresult, pStr: *mut *const ::core::ffi::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGetErrorString(error: CUresult, pStr: *mut *const ::core::ffi::c_char) -> CUresult;
+        extern "C" {
+            fn cuGetErrorString(error: CUresult, pStr: *mut *const ::core::ffi::c_char) -> CUresult;
+        }
         cuGetErrorString(error, pStr)
     }
 }
@@ -8960,7 +9186,9 @@ pub unsafe fn cuGetExportTable(ppExportTable: *mut *const ::core::ffi::c_void, p
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGetExportTable(ppExportTable: *mut *const ::core::ffi::c_void, pExportTableId: *const CUuuid) -> CUresult;
+        extern "C" {
+            fn cuGetExportTable(ppExportTable: *mut *const ::core::ffi::c_void, pExportTableId: *const CUuuid) -> CUresult;
+        }
         cuGetExportTable(ppExportTable, pExportTableId)
     }
 }
@@ -8975,7 +9203,9 @@ pub unsafe fn cuGetProcAddress(symbol: *const ::core::ffi::c_char, pfn: *mut *mu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGetProcAddress(symbol: *const ::core::ffi::c_char, pfn: *mut *mut ::core::ffi::c_void, cudaVersion: ::core::ffi::c_int, flags: cuuint64_t) -> CUresult;
+        extern "C" {
+            fn cuGetProcAddress(symbol: *const ::core::ffi::c_char, pfn: *mut *mut ::core::ffi::c_void, cudaVersion: ::core::ffi::c_int, flags: cuuint64_t) -> CUresult;
+        }
         cuGetProcAddress(symbol, pfn, cudaVersion, flags)
     }
 }
@@ -8990,7 +9220,9 @@ pub unsafe fn cuGetProcAddress_v2(symbol: *const ::core::ffi::c_char, pfn: *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGetProcAddress_v2(symbol: *const ::core::ffi::c_char, pfn: *mut *mut ::core::ffi::c_void, cudaVersion: ::core::ffi::c_int, flags: cuuint64_t, symbolStatus: *mut CUdriverProcAddressQueryResult) -> CUresult;
+        extern "C" {
+            fn cuGetProcAddress_v2(symbol: *const ::core::ffi::c_char, pfn: *mut *mut ::core::ffi::c_void, cudaVersion: ::core::ffi::c_int, flags: cuuint64_t, symbolStatus: *mut CUdriverProcAddressQueryResult) -> CUresult;
+        }
         cuGetProcAddress_v2(symbol, pfn, cudaVersion, flags, symbolStatus)
     }
 }
@@ -9005,7 +9237,9 @@ pub unsafe fn cuGraphAddBatchMemOpNode(phGraphNode: *mut CUgraphNode, hGraph: CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddBatchMemOpNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *const CUDA_BATCH_MEM_OP_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphAddBatchMemOpNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *const CUDA_BATCH_MEM_OP_NODE_PARAMS) -> CUresult;
+        }
         cuGraphAddBatchMemOpNode(phGraphNode, hGraph, dependencies, numDependencies, nodeParams)
     }
 }
@@ -9019,7 +9253,9 @@ pub unsafe fn cuGraphAddChildGraphNode(phGraphNode: *mut CUgraphNode, hGraph: CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddChildGraphNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, childGraph: CUgraph) -> CUresult;
+        extern "C" {
+            fn cuGraphAddChildGraphNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, childGraph: CUgraph) -> CUresult;
+        }
         cuGraphAddChildGraphNode(phGraphNode, hGraph, dependencies, numDependencies, childGraph)
     }
 }
@@ -9034,7 +9270,9 @@ pub unsafe fn cuGraphAddDependencies(hGraph: CUgraph, from: *const CUgraphNode, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddDependencies(hGraph: CUgraph, from: *const CUgraphNode, to: *const CUgraphNode, numDependencies: usize) -> CUresult;
+        extern "C" {
+            fn cuGraphAddDependencies(hGraph: CUgraph, from: *const CUgraphNode, to: *const CUgraphNode, numDependencies: usize) -> CUresult;
+        }
         cuGraphAddDependencies(hGraph, from, to, numDependencies)
     }
 }
@@ -9049,7 +9287,9 @@ pub unsafe fn cuGraphAddDependencies_v2(hGraph: CUgraph, from: *const CUgraphNod
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddDependencies_v2(hGraph: CUgraph, from: *const CUgraphNode, to: *const CUgraphNode, edgeData: *const CUgraphEdgeData, numDependencies: usize) -> CUresult;
+        extern "C" {
+            fn cuGraphAddDependencies_v2(hGraph: CUgraph, from: *const CUgraphNode, to: *const CUgraphNode, edgeData: *const CUgraphEdgeData, numDependencies: usize) -> CUresult;
+        }
         cuGraphAddDependencies_v2(hGraph, from, to, edgeData, numDependencies)
     }
 }
@@ -9063,7 +9303,9 @@ pub unsafe fn cuGraphAddEmptyNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddEmptyNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize) -> CUresult;
+        extern "C" {
+            fn cuGraphAddEmptyNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize) -> CUresult;
+        }
         cuGraphAddEmptyNode(phGraphNode, hGraph, dependencies, numDependencies)
     }
 }
@@ -9077,7 +9319,9 @@ pub unsafe fn cuGraphAddEventRecordNode(phGraphNode: *mut CUgraphNode, hGraph: C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddEventRecordNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, event: CUevent) -> CUresult;
+        extern "C" {
+            fn cuGraphAddEventRecordNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, event: CUevent) -> CUresult;
+        }
         cuGraphAddEventRecordNode(phGraphNode, hGraph, dependencies, numDependencies, event)
     }
 }
@@ -9091,7 +9335,9 @@ pub unsafe fn cuGraphAddEventWaitNode(phGraphNode: *mut CUgraphNode, hGraph: CUg
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddEventWaitNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, event: CUevent) -> CUresult;
+        extern "C" {
+            fn cuGraphAddEventWaitNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, event: CUevent) -> CUresult;
+        }
         cuGraphAddEventWaitNode(phGraphNode, hGraph, dependencies, numDependencies, event)
     }
 }
@@ -9105,7 +9351,9 @@ pub unsafe fn cuGraphAddExternalSemaphoresSignalNode(phGraphNode: *mut CUgraphNo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddExternalSemaphoresSignalNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *const CUDA_EXT_SEM_SIGNAL_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphAddExternalSemaphoresSignalNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *const CUDA_EXT_SEM_SIGNAL_NODE_PARAMS) -> CUresult;
+        }
         cuGraphAddExternalSemaphoresSignalNode(phGraphNode, hGraph, dependencies, numDependencies, nodeParams)
     }
 }
@@ -9119,7 +9367,9 @@ pub unsafe fn cuGraphAddExternalSemaphoresWaitNode(phGraphNode: *mut CUgraphNode
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddExternalSemaphoresWaitNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *const CUDA_EXT_SEM_WAIT_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphAddExternalSemaphoresWaitNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *const CUDA_EXT_SEM_WAIT_NODE_PARAMS) -> CUresult;
+        }
         cuGraphAddExternalSemaphoresWaitNode(phGraphNode, hGraph, dependencies, numDependencies, nodeParams)
     }
 }
@@ -9133,7 +9383,9 @@ pub unsafe fn cuGraphAddHostNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddHostNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *const CUDA_HOST_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphAddHostNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *const CUDA_HOST_NODE_PARAMS) -> CUresult;
+        }
         cuGraphAddHostNode(phGraphNode, hGraph, dependencies, numDependencies, nodeParams)
     }
 }
@@ -9148,7 +9400,9 @@ pub unsafe fn cuGraphAddKernelNode(phGraphNode: *mut CUgraphNode, hGraph: CUgrap
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddKernelNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *const CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphAddKernelNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *const CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        }
         cuGraphAddKernelNode(phGraphNode, hGraph, dependencies, numDependencies, nodeParams)
     }
 }
@@ -9163,7 +9417,9 @@ pub unsafe fn cuGraphAddKernelNode_v2(phGraphNode: *mut CUgraphNode, hGraph: CUg
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddKernelNode_v2(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *const CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphAddKernelNode_v2(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *const CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        }
         cuGraphAddKernelNode_v2(phGraphNode, hGraph, dependencies, numDependencies, nodeParams)
     }
 }
@@ -9177,7 +9433,9 @@ pub unsafe fn cuGraphAddMemAllocNode(phGraphNode: *mut CUgraphNode, hGraph: CUgr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddMemAllocNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *mut CUDA_MEM_ALLOC_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphAddMemAllocNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *mut CUDA_MEM_ALLOC_NODE_PARAMS) -> CUresult;
+        }
         cuGraphAddMemAllocNode(phGraphNode, hGraph, dependencies, numDependencies, nodeParams)
     }
 }
@@ -9191,7 +9449,9 @@ pub unsafe fn cuGraphAddMemFreeNode(phGraphNode: *mut CUgraphNode, hGraph: CUgra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddMemFreeNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, dptr: CUdeviceptr) -> CUresult;
+        extern "C" {
+            fn cuGraphAddMemFreeNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, dptr: CUdeviceptr) -> CUresult;
+        }
         cuGraphAddMemFreeNode(phGraphNode, hGraph, dependencies, numDependencies, dptr)
     }
 }
@@ -9205,7 +9465,9 @@ pub unsafe fn cuGraphAddMemcpyNode(phGraphNode: *mut CUgraphNode, hGraph: CUgrap
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddMemcpyNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, copyParams: *const CUDA_MEMCPY3D, ctx: CUcontext) -> CUresult;
+        extern "C" {
+            fn cuGraphAddMemcpyNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, copyParams: *const CUDA_MEMCPY3D, ctx: CUcontext) -> CUresult;
+        }
         cuGraphAddMemcpyNode(phGraphNode, hGraph, dependencies, numDependencies, copyParams, ctx)
     }
 }
@@ -9219,7 +9481,9 @@ pub unsafe fn cuGraphAddMemsetNode(phGraphNode: *mut CUgraphNode, hGraph: CUgrap
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddMemsetNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, memsetParams: *const CUDA_MEMSET_NODE_PARAMS, ctx: CUcontext) -> CUresult;
+        extern "C" {
+            fn cuGraphAddMemsetNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, memsetParams: *const CUDA_MEMSET_NODE_PARAMS, ctx: CUcontext) -> CUresult;
+        }
         cuGraphAddMemsetNode(phGraphNode, hGraph, dependencies, numDependencies, memsetParams, ctx)
     }
 }
@@ -9234,7 +9498,9 @@ pub unsafe fn cuGraphAddNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dep
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *mut CUgraphNodeParams) -> CUresult;
+        extern "C" {
+            fn cuGraphAddNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *mut CUgraphNodeParams) -> CUresult;
+        }
         cuGraphAddNode(phGraphNode, hGraph, dependencies, numDependencies, nodeParams)
     }
 }
@@ -9249,7 +9515,9 @@ pub unsafe fn cuGraphAddNode_v2(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphAddNode_v2(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, dependencyData: *const CUgraphEdgeData, numDependencies: usize, nodeParams: *mut CUgraphNodeParams) -> CUresult;
+        extern "C" {
+            fn cuGraphAddNode_v2(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, dependencyData: *const CUgraphEdgeData, numDependencies: usize, nodeParams: *mut CUgraphNodeParams) -> CUresult;
+        }
         cuGraphAddNode_v2(phGraphNode, hGraph, dependencies, dependencyData, numDependencies, nodeParams)
     }
 }
@@ -9264,7 +9532,9 @@ pub unsafe fn cuGraphBatchMemOpNodeGetParams(hNode: CUgraphNode, nodeParams_out:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphBatchMemOpNodeGetParams(hNode: CUgraphNode, nodeParams_out: *mut CUDA_BATCH_MEM_OP_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphBatchMemOpNodeGetParams(hNode: CUgraphNode, nodeParams_out: *mut CUDA_BATCH_MEM_OP_NODE_PARAMS) -> CUresult;
+        }
         cuGraphBatchMemOpNodeGetParams(hNode, nodeParams_out)
     }
 }
@@ -9279,7 +9549,9 @@ pub unsafe fn cuGraphBatchMemOpNodeSetParams(hNode: CUgraphNode, nodeParams: *co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphBatchMemOpNodeSetParams(hNode: CUgraphNode, nodeParams: *const CUDA_BATCH_MEM_OP_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphBatchMemOpNodeSetParams(hNode: CUgraphNode, nodeParams: *const CUDA_BATCH_MEM_OP_NODE_PARAMS) -> CUresult;
+        }
         cuGraphBatchMemOpNodeSetParams(hNode, nodeParams)
     }
 }
@@ -9293,7 +9565,9 @@ pub unsafe fn cuGraphChildGraphNodeGetGraph(hNode: CUgraphNode, phGraph: *mut CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphChildGraphNodeGetGraph(hNode: CUgraphNode, phGraph: *mut CUgraph) -> CUresult;
+        extern "C" {
+            fn cuGraphChildGraphNodeGetGraph(hNode: CUgraphNode, phGraph: *mut CUgraph) -> CUresult;
+        }
         cuGraphChildGraphNodeGetGraph(hNode, phGraph)
     }
 }
@@ -9307,7 +9581,9 @@ pub unsafe fn cuGraphClone(phGraphClone: *mut CUgraph, originalGraph: CUgraph) -
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphClone(phGraphClone: *mut CUgraph, originalGraph: CUgraph) -> CUresult;
+        extern "C" {
+            fn cuGraphClone(phGraphClone: *mut CUgraph, originalGraph: CUgraph) -> CUresult;
+        }
         cuGraphClone(phGraphClone, originalGraph)
     }
 }
@@ -9322,7 +9598,9 @@ pub unsafe fn cuGraphConditionalHandleCreate(pHandle_out: *mut CUgraphConditiona
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphConditionalHandleCreate(pHandle_out: *mut CUgraphConditionalHandle, hGraph: CUgraph, ctx: CUcontext, defaultLaunchValue: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuGraphConditionalHandleCreate(pHandle_out: *mut CUgraphConditionalHandle, hGraph: CUgraph, ctx: CUcontext, defaultLaunchValue: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuGraphConditionalHandleCreate(pHandle_out, hGraph, ctx, defaultLaunchValue, flags)
     }
 }
@@ -9336,7 +9614,9 @@ pub unsafe fn cuGraphCreate(phGraph: *mut CUgraph, flags: ::core::ffi::c_uint) -
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphCreate(phGraph: *mut CUgraph, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuGraphCreate(phGraph: *mut CUgraph, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuGraphCreate(phGraph, flags)
     }
 }
@@ -9350,7 +9630,9 @@ pub unsafe fn cuGraphDebugDotPrint(hGraph: CUgraph, path: *const ::core::ffi::c_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphDebugDotPrint(hGraph: CUgraph, path: *const ::core::ffi::c_char, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuGraphDebugDotPrint(hGraph: CUgraph, path: *const ::core::ffi::c_char, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuGraphDebugDotPrint(hGraph, path, flags)
     }
 }
@@ -9364,7 +9646,9 @@ pub unsafe fn cuGraphDestroy(hGraph: CUgraph) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphDestroy(hGraph: CUgraph) -> CUresult;
+        extern "C" {
+            fn cuGraphDestroy(hGraph: CUgraph) -> CUresult;
+        }
         cuGraphDestroy(hGraph)
     }
 }
@@ -9378,7 +9662,9 @@ pub unsafe fn cuGraphDestroyNode(hNode: CUgraphNode) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphDestroyNode(hNode: CUgraphNode) -> CUresult;
+        extern "C" {
+            fn cuGraphDestroyNode(hNode: CUgraphNode) -> CUresult;
+        }
         cuGraphDestroyNode(hNode)
     }
 }
@@ -9392,7 +9678,9 @@ pub unsafe fn cuGraphEventRecordNodeGetEvent(hNode: CUgraphNode, event_out: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphEventRecordNodeGetEvent(hNode: CUgraphNode, event_out: *mut CUevent) -> CUresult;
+        extern "C" {
+            fn cuGraphEventRecordNodeGetEvent(hNode: CUgraphNode, event_out: *mut CUevent) -> CUresult;
+        }
         cuGraphEventRecordNodeGetEvent(hNode, event_out)
     }
 }
@@ -9406,7 +9694,9 @@ pub unsafe fn cuGraphEventRecordNodeSetEvent(hNode: CUgraphNode, event: CUevent)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphEventRecordNodeSetEvent(hNode: CUgraphNode, event: CUevent) -> CUresult;
+        extern "C" {
+            fn cuGraphEventRecordNodeSetEvent(hNode: CUgraphNode, event: CUevent) -> CUresult;
+        }
         cuGraphEventRecordNodeSetEvent(hNode, event)
     }
 }
@@ -9420,7 +9710,9 @@ pub unsafe fn cuGraphEventWaitNodeGetEvent(hNode: CUgraphNode, event_out: *mut C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphEventWaitNodeGetEvent(hNode: CUgraphNode, event_out: *mut CUevent) -> CUresult;
+        extern "C" {
+            fn cuGraphEventWaitNodeGetEvent(hNode: CUgraphNode, event_out: *mut CUevent) -> CUresult;
+        }
         cuGraphEventWaitNodeGetEvent(hNode, event_out)
     }
 }
@@ -9434,7 +9726,9 @@ pub unsafe fn cuGraphEventWaitNodeSetEvent(hNode: CUgraphNode, event: CUevent) -
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphEventWaitNodeSetEvent(hNode: CUgraphNode, event: CUevent) -> CUresult;
+        extern "C" {
+            fn cuGraphEventWaitNodeSetEvent(hNode: CUgraphNode, event: CUevent) -> CUresult;
+        }
         cuGraphEventWaitNodeSetEvent(hNode, event)
     }
 }
@@ -9449,7 +9743,9 @@ pub unsafe fn cuGraphExecBatchMemOpNodeSetParams(hGraphExec: CUgraphExec, hNode:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecBatchMemOpNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *const CUDA_BATCH_MEM_OP_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphExecBatchMemOpNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *const CUDA_BATCH_MEM_OP_NODE_PARAMS) -> CUresult;
+        }
         cuGraphExecBatchMemOpNodeSetParams(hGraphExec, hNode, nodeParams)
     }
 }
@@ -9463,7 +9759,9 @@ pub unsafe fn cuGraphExecChildGraphNodeSetParams(hGraphExec: CUgraphExec, hNode:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecChildGraphNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, childGraph: CUgraph) -> CUresult;
+        extern "C" {
+            fn cuGraphExecChildGraphNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, childGraph: CUgraph) -> CUresult;
+        }
         cuGraphExecChildGraphNodeSetParams(hGraphExec, hNode, childGraph)
     }
 }
@@ -9477,7 +9775,9 @@ pub unsafe fn cuGraphExecDestroy(hGraphExec: CUgraphExec) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecDestroy(hGraphExec: CUgraphExec) -> CUresult;
+        extern "C" {
+            fn cuGraphExecDestroy(hGraphExec: CUgraphExec) -> CUresult;
+        }
         cuGraphExecDestroy(hGraphExec)
     }
 }
@@ -9491,7 +9791,9 @@ pub unsafe fn cuGraphExecEventRecordNodeSetEvent(hGraphExec: CUgraphExec, hNode:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecEventRecordNodeSetEvent(hGraphExec: CUgraphExec, hNode: CUgraphNode, event: CUevent) -> CUresult;
+        extern "C" {
+            fn cuGraphExecEventRecordNodeSetEvent(hGraphExec: CUgraphExec, hNode: CUgraphNode, event: CUevent) -> CUresult;
+        }
         cuGraphExecEventRecordNodeSetEvent(hGraphExec, hNode, event)
     }
 }
@@ -9505,7 +9807,9 @@ pub unsafe fn cuGraphExecEventWaitNodeSetEvent(hGraphExec: CUgraphExec, hNode: C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecEventWaitNodeSetEvent(hGraphExec: CUgraphExec, hNode: CUgraphNode, event: CUevent) -> CUresult;
+        extern "C" {
+            fn cuGraphExecEventWaitNodeSetEvent(hGraphExec: CUgraphExec, hNode: CUgraphNode, event: CUevent) -> CUresult;
+        }
         cuGraphExecEventWaitNodeSetEvent(hGraphExec, hNode, event)
     }
 }
@@ -9519,7 +9823,9 @@ pub unsafe fn cuGraphExecExternalSemaphoresSignalNodeSetParams(hGraphExec: CUgra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecExternalSemaphoresSignalNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *const CUDA_EXT_SEM_SIGNAL_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphExecExternalSemaphoresSignalNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *const CUDA_EXT_SEM_SIGNAL_NODE_PARAMS) -> CUresult;
+        }
         cuGraphExecExternalSemaphoresSignalNodeSetParams(hGraphExec, hNode, nodeParams)
     }
 }
@@ -9533,7 +9839,9 @@ pub unsafe fn cuGraphExecExternalSemaphoresWaitNodeSetParams(hGraphExec: CUgraph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecExternalSemaphoresWaitNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *const CUDA_EXT_SEM_WAIT_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphExecExternalSemaphoresWaitNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *const CUDA_EXT_SEM_WAIT_NODE_PARAMS) -> CUresult;
+        }
         cuGraphExecExternalSemaphoresWaitNodeSetParams(hGraphExec, hNode, nodeParams)
     }
 }
@@ -9548,7 +9856,9 @@ pub unsafe fn cuGraphExecGetFlags(hGraphExec: CUgraphExec, flags: *mut cuuint64_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecGetFlags(hGraphExec: CUgraphExec, flags: *mut cuuint64_t) -> CUresult;
+        extern "C" {
+            fn cuGraphExecGetFlags(hGraphExec: CUgraphExec, flags: *mut cuuint64_t) -> CUresult;
+        }
         cuGraphExecGetFlags(hGraphExec, flags)
     }
 }
@@ -9563,7 +9873,9 @@ pub unsafe fn cuGraphExecGetId(hGraphExec: CUgraphExec, graphId: *mut ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecGetId(hGraphExec: CUgraphExec, graphId: *mut ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuGraphExecGetId(hGraphExec: CUgraphExec, graphId: *mut ::core::ffi::c_uint) -> CUresult;
+        }
         cuGraphExecGetId(hGraphExec, graphId)
     }
 }
@@ -9577,7 +9889,9 @@ pub unsafe fn cuGraphExecHostNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecHostNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *const CUDA_HOST_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphExecHostNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *const CUDA_HOST_NODE_PARAMS) -> CUresult;
+        }
         cuGraphExecHostNodeSetParams(hGraphExec, hNode, nodeParams)
     }
 }
@@ -9592,7 +9906,9 @@ pub unsafe fn cuGraphExecKernelNodeSetParams(hGraphExec: CUgraphExec, hNode: CUg
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecKernelNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *const CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphExecKernelNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *const CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        }
         cuGraphExecKernelNodeSetParams(hGraphExec, hNode, nodeParams)
     }
 }
@@ -9607,7 +9923,9 @@ pub unsafe fn cuGraphExecKernelNodeSetParams_v2(hGraphExec: CUgraphExec, hNode: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecKernelNodeSetParams_v2(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *const CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphExecKernelNodeSetParams_v2(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *const CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        }
         cuGraphExecKernelNodeSetParams_v2(hGraphExec, hNode, nodeParams)
     }
 }
@@ -9621,7 +9939,9 @@ pub unsafe fn cuGraphExecMemcpyNodeSetParams(hGraphExec: CUgraphExec, hNode: CUg
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecMemcpyNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, copyParams: *const CUDA_MEMCPY3D, ctx: CUcontext) -> CUresult;
+        extern "C" {
+            fn cuGraphExecMemcpyNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, copyParams: *const CUDA_MEMCPY3D, ctx: CUcontext) -> CUresult;
+        }
         cuGraphExecMemcpyNodeSetParams(hGraphExec, hNode, copyParams, ctx)
     }
 }
@@ -9635,7 +9955,9 @@ pub unsafe fn cuGraphExecMemsetNodeSetParams(hGraphExec: CUgraphExec, hNode: CUg
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecMemsetNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, memsetParams: *const CUDA_MEMSET_NODE_PARAMS, ctx: CUcontext) -> CUresult;
+        extern "C" {
+            fn cuGraphExecMemsetNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, memsetParams: *const CUDA_MEMSET_NODE_PARAMS, ctx: CUcontext) -> CUresult;
+        }
         cuGraphExecMemsetNodeSetParams(hGraphExec, hNode, memsetParams, ctx)
     }
 }
@@ -9650,7 +9972,9 @@ pub unsafe fn cuGraphExecNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *mut CUgraphNodeParams) -> CUresult;
+        extern "C" {
+            fn cuGraphExecNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *mut CUgraphNodeParams) -> CUresult;
+        }
         cuGraphExecNodeSetParams(hGraphExec, hNode, nodeParams)
     }
 }
@@ -9665,7 +9989,9 @@ pub unsafe fn cuGraphExecUpdate(hGraphExec: CUgraphExec, hGraph: CUgraph, hError
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecUpdate(hGraphExec: CUgraphExec, hGraph: CUgraph, hErrorNode_out: *mut CUgraphNode, updateResult_out: *mut CUgraphExecUpdateResult) -> CUresult;
+        extern "C" {
+            fn cuGraphExecUpdate(hGraphExec: CUgraphExec, hGraph: CUgraph, hErrorNode_out: *mut CUgraphNode, updateResult_out: *mut CUgraphExecUpdateResult) -> CUresult;
+        }
         cuGraphExecUpdate(hGraphExec, hGraph, hErrorNode_out, updateResult_out)
     }
 }
@@ -9680,7 +10006,9 @@ pub unsafe fn cuGraphExecUpdate_v2(hGraphExec: CUgraphExec, hGraph: CUgraph, res
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExecUpdate_v2(hGraphExec: CUgraphExec, hGraph: CUgraph, resultInfo: *mut CUgraphExecUpdateResultInfo) -> CUresult;
+        extern "C" {
+            fn cuGraphExecUpdate_v2(hGraphExec: CUgraphExec, hGraph: CUgraph, resultInfo: *mut CUgraphExecUpdateResultInfo) -> CUresult;
+        }
         cuGraphExecUpdate_v2(hGraphExec, hGraph, resultInfo)
     }
 }
@@ -9694,7 +10022,9 @@ pub unsafe fn cuGraphExternalSemaphoresSignalNodeGetParams(hNode: CUgraphNode, p
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExternalSemaphoresSignalNodeGetParams(hNode: CUgraphNode, params_out: *mut CUDA_EXT_SEM_SIGNAL_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphExternalSemaphoresSignalNodeGetParams(hNode: CUgraphNode, params_out: *mut CUDA_EXT_SEM_SIGNAL_NODE_PARAMS) -> CUresult;
+        }
         cuGraphExternalSemaphoresSignalNodeGetParams(hNode, params_out)
     }
 }
@@ -9708,7 +10038,9 @@ pub unsafe fn cuGraphExternalSemaphoresSignalNodeSetParams(hNode: CUgraphNode, n
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExternalSemaphoresSignalNodeSetParams(hNode: CUgraphNode, nodeParams: *const CUDA_EXT_SEM_SIGNAL_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphExternalSemaphoresSignalNodeSetParams(hNode: CUgraphNode, nodeParams: *const CUDA_EXT_SEM_SIGNAL_NODE_PARAMS) -> CUresult;
+        }
         cuGraphExternalSemaphoresSignalNodeSetParams(hNode, nodeParams)
     }
 }
@@ -9722,7 +10054,9 @@ pub unsafe fn cuGraphExternalSemaphoresWaitNodeGetParams(hNode: CUgraphNode, par
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExternalSemaphoresWaitNodeGetParams(hNode: CUgraphNode, params_out: *mut CUDA_EXT_SEM_WAIT_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphExternalSemaphoresWaitNodeGetParams(hNode: CUgraphNode, params_out: *mut CUDA_EXT_SEM_WAIT_NODE_PARAMS) -> CUresult;
+        }
         cuGraphExternalSemaphoresWaitNodeGetParams(hNode, params_out)
     }
 }
@@ -9736,7 +10070,9 @@ pub unsafe fn cuGraphExternalSemaphoresWaitNodeSetParams(hNode: CUgraphNode, nod
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphExternalSemaphoresWaitNodeSetParams(hNode: CUgraphNode, nodeParams: *const CUDA_EXT_SEM_WAIT_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphExternalSemaphoresWaitNodeSetParams(hNode: CUgraphNode, nodeParams: *const CUDA_EXT_SEM_WAIT_NODE_PARAMS) -> CUresult;
+        }
         cuGraphExternalSemaphoresWaitNodeSetParams(hNode, nodeParams)
     }
 }
@@ -9751,7 +10087,9 @@ pub unsafe fn cuGraphGetEdges(hGraph: CUgraph, from: *mut CUgraphNode, to: *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphGetEdges(hGraph: CUgraph, from: *mut CUgraphNode, to: *mut CUgraphNode, numEdges: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuGraphGetEdges(hGraph: CUgraph, from: *mut CUgraphNode, to: *mut CUgraphNode, numEdges: *mut usize) -> CUresult;
+        }
         cuGraphGetEdges(hGraph, from, to, numEdges)
     }
 }
@@ -9766,7 +10104,9 @@ pub unsafe fn cuGraphGetEdges_v2(hGraph: CUgraph, from: *mut CUgraphNode, to: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphGetEdges_v2(hGraph: CUgraph, from: *mut CUgraphNode, to: *mut CUgraphNode, edgeData: *mut CUgraphEdgeData, numEdges: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuGraphGetEdges_v2(hGraph: CUgraph, from: *mut CUgraphNode, to: *mut CUgraphNode, edgeData: *mut CUgraphEdgeData, numEdges: *mut usize) -> CUresult;
+        }
         cuGraphGetEdges_v2(hGraph, from, to, edgeData, numEdges)
     }
 }
@@ -9781,7 +10121,9 @@ pub unsafe fn cuGraphGetId(hGraph: CUgraph, graphId: *mut ::core::ffi::c_uint) -
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphGetId(hGraph: CUgraph, graphId: *mut ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuGraphGetId(hGraph: CUgraph, graphId: *mut ::core::ffi::c_uint) -> CUresult;
+        }
         cuGraphGetId(hGraph, graphId)
     }
 }
@@ -9795,7 +10137,9 @@ pub unsafe fn cuGraphGetNodes(hGraph: CUgraph, nodes: *mut CUgraphNode, numNodes
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphGetNodes(hGraph: CUgraph, nodes: *mut CUgraphNode, numNodes: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuGraphGetNodes(hGraph: CUgraph, nodes: *mut CUgraphNode, numNodes: *mut usize) -> CUresult;
+        }
         cuGraphGetNodes(hGraph, nodes, numNodes)
     }
 }
@@ -9809,7 +10153,9 @@ pub unsafe fn cuGraphGetRootNodes(hGraph: CUgraph, rootNodes: *mut CUgraphNode, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphGetRootNodes(hGraph: CUgraph, rootNodes: *mut CUgraphNode, numRootNodes: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuGraphGetRootNodes(hGraph: CUgraph, rootNodes: *mut CUgraphNode, numRootNodes: *mut usize) -> CUresult;
+        }
         cuGraphGetRootNodes(hGraph, rootNodes, numRootNodes)
     }
 }
@@ -9823,7 +10169,9 @@ pub unsafe fn cuGraphHostNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CUDA
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphHostNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CUDA_HOST_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphHostNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CUDA_HOST_NODE_PARAMS) -> CUresult;
+        }
         cuGraphHostNodeGetParams(hNode, nodeParams)
     }
 }
@@ -9837,7 +10185,9 @@ pub unsafe fn cuGraphHostNodeSetParams(hNode: CUgraphNode, nodeParams: *const CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphHostNodeSetParams(hNode: CUgraphNode, nodeParams: *const CUDA_HOST_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphHostNodeSetParams(hNode: CUgraphNode, nodeParams: *const CUDA_HOST_NODE_PARAMS) -> CUresult;
+        }
         cuGraphHostNodeSetParams(hNode, nodeParams)
     }
 }
@@ -9851,7 +10201,9 @@ pub unsafe fn cuGraphInstantiateWithFlags(phGraphExec: *mut CUgraphExec, hGraph:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphInstantiateWithFlags(phGraphExec: *mut CUgraphExec, hGraph: CUgraph, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuGraphInstantiateWithFlags(phGraphExec: *mut CUgraphExec, hGraph: CUgraph, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuGraphInstantiateWithFlags(phGraphExec, hGraph, flags)
     }
 }
@@ -9866,7 +10218,9 @@ pub unsafe fn cuGraphInstantiateWithParams(phGraphExec: *mut CUgraphExec, hGraph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphInstantiateWithParams(phGraphExec: *mut CUgraphExec, hGraph: CUgraph, instantiateParams: *mut CUDA_GRAPH_INSTANTIATE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphInstantiateWithParams(phGraphExec: *mut CUgraphExec, hGraph: CUgraph, instantiateParams: *mut CUDA_GRAPH_INSTANTIATE_PARAMS) -> CUresult;
+        }
         cuGraphInstantiateWithParams(phGraphExec, hGraph, instantiateParams)
     }
 }
@@ -9881,7 +10235,9 @@ pub unsafe fn cuGraphInstantiate_v2(phGraphExec: *mut CUgraphExec, hGraph: CUgra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphInstantiate_v2(phGraphExec: *mut CUgraphExec, hGraph: CUgraph, phErrorNode: *mut CUgraphNode, logBuffer: *mut ::core::ffi::c_char, bufferSize: usize) -> CUresult;
+        extern "C" {
+            fn cuGraphInstantiate_v2(phGraphExec: *mut CUgraphExec, hGraph: CUgraph, phErrorNode: *mut CUgraphNode, logBuffer: *mut ::core::ffi::c_char, bufferSize: usize) -> CUresult;
+        }
         cuGraphInstantiate_v2(phGraphExec, hGraph, phErrorNode, logBuffer, bufferSize)
     }
 }
@@ -9895,7 +10251,9 @@ pub unsafe fn cuGraphKernelNodeCopyAttributes(dst: CUgraphNode, src: CUgraphNode
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphKernelNodeCopyAttributes(dst: CUgraphNode, src: CUgraphNode) -> CUresult;
+        extern "C" {
+            fn cuGraphKernelNodeCopyAttributes(dst: CUgraphNode, src: CUgraphNode) -> CUresult;
+        }
         cuGraphKernelNodeCopyAttributes(dst, src)
     }
 }
@@ -9909,7 +10267,9 @@ pub unsafe fn cuGraphKernelNodeGetAttribute(hNode: CUgraphNode, attr: CUkernelNo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphKernelNodeGetAttribute(hNode: CUgraphNode, attr: CUkernelNodeAttrID, value_out: *mut CUkernelNodeAttrValue) -> CUresult;
+        extern "C" {
+            fn cuGraphKernelNodeGetAttribute(hNode: CUgraphNode, attr: CUkernelNodeAttrID, value_out: *mut CUkernelNodeAttrValue) -> CUresult;
+        }
         cuGraphKernelNodeGetAttribute(hNode, attr, value_out)
     }
 }
@@ -9924,7 +10284,9 @@ pub unsafe fn cuGraphKernelNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphKernelNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphKernelNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        }
         cuGraphKernelNodeGetParams(hNode, nodeParams)
     }
 }
@@ -9939,7 +10301,9 @@ pub unsafe fn cuGraphKernelNodeGetParams_v2(hNode: CUgraphNode, nodeParams: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphKernelNodeGetParams_v2(hNode: CUgraphNode, nodeParams: *mut CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphKernelNodeGetParams_v2(hNode: CUgraphNode, nodeParams: *mut CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        }
         cuGraphKernelNodeGetParams_v2(hNode, nodeParams)
     }
 }
@@ -9953,7 +10317,9 @@ pub unsafe fn cuGraphKernelNodeSetAttribute(hNode: CUgraphNode, attr: CUkernelNo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphKernelNodeSetAttribute(hNode: CUgraphNode, attr: CUkernelNodeAttrID, value: *const CUkernelNodeAttrValue) -> CUresult;
+        extern "C" {
+            fn cuGraphKernelNodeSetAttribute(hNode: CUgraphNode, attr: CUkernelNodeAttrID, value: *const CUkernelNodeAttrValue) -> CUresult;
+        }
         cuGraphKernelNodeSetAttribute(hNode, attr, value)
     }
 }
@@ -9968,7 +10334,9 @@ pub unsafe fn cuGraphKernelNodeSetParams(hNode: CUgraphNode, nodeParams: *const 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphKernelNodeSetParams(hNode: CUgraphNode, nodeParams: *const CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphKernelNodeSetParams(hNode: CUgraphNode, nodeParams: *const CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        }
         cuGraphKernelNodeSetParams(hNode, nodeParams)
     }
 }
@@ -9983,7 +10351,9 @@ pub unsafe fn cuGraphKernelNodeSetParams_v2(hNode: CUgraphNode, nodeParams: *con
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphKernelNodeSetParams_v2(hNode: CUgraphNode, nodeParams: *const CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphKernelNodeSetParams_v2(hNode: CUgraphNode, nodeParams: *const CUDA_KERNEL_NODE_PARAMS) -> CUresult;
+        }
         cuGraphKernelNodeSetParams_v2(hNode, nodeParams)
     }
 }
@@ -9997,7 +10367,9 @@ pub unsafe fn cuGraphLaunch(hGraphExec: CUgraphExec, hStream: CUstream) -> CUres
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphLaunch(hGraphExec: CUgraphExec, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuGraphLaunch(hGraphExec: CUgraphExec, hStream: CUstream) -> CUresult;
+        }
         cuGraphLaunch(hGraphExec, hStream)
     }
 }
@@ -10011,7 +10383,9 @@ pub unsafe fn cuGraphMemAllocNodeGetParams(hNode: CUgraphNode, params_out: *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphMemAllocNodeGetParams(hNode: CUgraphNode, params_out: *mut CUDA_MEM_ALLOC_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphMemAllocNodeGetParams(hNode: CUgraphNode, params_out: *mut CUDA_MEM_ALLOC_NODE_PARAMS) -> CUresult;
+        }
         cuGraphMemAllocNodeGetParams(hNode, params_out)
     }
 }
@@ -10025,7 +10399,9 @@ pub unsafe fn cuGraphMemFreeNodeGetParams(hNode: CUgraphNode, dptr_out: *mut CUd
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphMemFreeNodeGetParams(hNode: CUgraphNode, dptr_out: *mut CUdeviceptr) -> CUresult;
+        extern "C" {
+            fn cuGraphMemFreeNodeGetParams(hNode: CUgraphNode, dptr_out: *mut CUdeviceptr) -> CUresult;
+        }
         cuGraphMemFreeNodeGetParams(hNode, dptr_out)
     }
 }
@@ -10039,7 +10415,9 @@ pub unsafe fn cuGraphMemcpyNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphMemcpyNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CUDA_MEMCPY3D) -> CUresult;
+        extern "C" {
+            fn cuGraphMemcpyNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CUDA_MEMCPY3D) -> CUresult;
+        }
         cuGraphMemcpyNodeGetParams(hNode, nodeParams)
     }
 }
@@ -10053,7 +10431,9 @@ pub unsafe fn cuGraphMemcpyNodeSetParams(hNode: CUgraphNode, nodeParams: *const 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphMemcpyNodeSetParams(hNode: CUgraphNode, nodeParams: *const CUDA_MEMCPY3D) -> CUresult;
+        extern "C" {
+            fn cuGraphMemcpyNodeSetParams(hNode: CUgraphNode, nodeParams: *const CUDA_MEMCPY3D) -> CUresult;
+        }
         cuGraphMemcpyNodeSetParams(hNode, nodeParams)
     }
 }
@@ -10067,7 +10447,9 @@ pub unsafe fn cuGraphMemsetNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphMemsetNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CUDA_MEMSET_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphMemsetNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CUDA_MEMSET_NODE_PARAMS) -> CUresult;
+        }
         cuGraphMemsetNodeGetParams(hNode, nodeParams)
     }
 }
@@ -10081,7 +10463,9 @@ pub unsafe fn cuGraphMemsetNodeSetParams(hNode: CUgraphNode, nodeParams: *const 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphMemsetNodeSetParams(hNode: CUgraphNode, nodeParams: *const CUDA_MEMSET_NODE_PARAMS) -> CUresult;
+        extern "C" {
+            fn cuGraphMemsetNodeSetParams(hNode: CUgraphNode, nodeParams: *const CUDA_MEMSET_NODE_PARAMS) -> CUresult;
+        }
         cuGraphMemsetNodeSetParams(hNode, nodeParams)
     }
 }
@@ -10095,7 +10479,9 @@ pub unsafe fn cuGraphNodeFindInClone(phNode: *mut CUgraphNode, hOriginalNode: CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphNodeFindInClone(phNode: *mut CUgraphNode, hOriginalNode: CUgraphNode, hClonedGraph: CUgraph) -> CUresult;
+        extern "C" {
+            fn cuGraphNodeFindInClone(phNode: *mut CUgraphNode, hOriginalNode: CUgraphNode, hClonedGraph: CUgraph) -> CUresult;
+        }
         cuGraphNodeFindInClone(phNode, hOriginalNode, hClonedGraph)
     }
 }
@@ -10110,7 +10496,9 @@ pub unsafe fn cuGraphNodeGetContainingGraph(hNode: CUgraphNode, phGraph: *mut CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphNodeGetContainingGraph(hNode: CUgraphNode, phGraph: *mut CUgraph) -> CUresult;
+        extern "C" {
+            fn cuGraphNodeGetContainingGraph(hNode: CUgraphNode, phGraph: *mut CUgraph) -> CUresult;
+        }
         cuGraphNodeGetContainingGraph(hNode, phGraph)
     }
 }
@@ -10125,7 +10513,9 @@ pub unsafe fn cuGraphNodeGetDependencies(hNode: CUgraphNode, dependencies: *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphNodeGetDependencies(hNode: CUgraphNode, dependencies: *mut CUgraphNode, numDependencies: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuGraphNodeGetDependencies(hNode: CUgraphNode, dependencies: *mut CUgraphNode, numDependencies: *mut usize) -> CUresult;
+        }
         cuGraphNodeGetDependencies(hNode, dependencies, numDependencies)
     }
 }
@@ -10140,7 +10530,9 @@ pub unsafe fn cuGraphNodeGetDependencies_v2(hNode: CUgraphNode, dependencies: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphNodeGetDependencies_v2(hNode: CUgraphNode, dependencies: *mut CUgraphNode, edgeData: *mut CUgraphEdgeData, numDependencies: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuGraphNodeGetDependencies_v2(hNode: CUgraphNode, dependencies: *mut CUgraphNode, edgeData: *mut CUgraphEdgeData, numDependencies: *mut usize) -> CUresult;
+        }
         cuGraphNodeGetDependencies_v2(hNode, dependencies, edgeData, numDependencies)
     }
 }
@@ -10155,7 +10547,9 @@ pub unsafe fn cuGraphNodeGetDependentNodes(hNode: CUgraphNode, dependentNodes: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphNodeGetDependentNodes(hNode: CUgraphNode, dependentNodes: *mut CUgraphNode, numDependentNodes: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuGraphNodeGetDependentNodes(hNode: CUgraphNode, dependentNodes: *mut CUgraphNode, numDependentNodes: *mut usize) -> CUresult;
+        }
         cuGraphNodeGetDependentNodes(hNode, dependentNodes, numDependentNodes)
     }
 }
@@ -10170,7 +10564,9 @@ pub unsafe fn cuGraphNodeGetDependentNodes_v2(hNode: CUgraphNode, dependentNodes
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphNodeGetDependentNodes_v2(hNode: CUgraphNode, dependentNodes: *mut CUgraphNode, edgeData: *mut CUgraphEdgeData, numDependentNodes: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuGraphNodeGetDependentNodes_v2(hNode: CUgraphNode, dependentNodes: *mut CUgraphNode, edgeData: *mut CUgraphEdgeData, numDependentNodes: *mut usize) -> CUresult;
+        }
         cuGraphNodeGetDependentNodes_v2(hNode, dependentNodes, edgeData, numDependentNodes)
     }
 }
@@ -10185,7 +10581,9 @@ pub unsafe fn cuGraphNodeGetEnabled(hGraphExec: CUgraphExec, hNode: CUgraphNode,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphNodeGetEnabled(hGraphExec: CUgraphExec, hNode: CUgraphNode, isEnabled: *mut ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuGraphNodeGetEnabled(hGraphExec: CUgraphExec, hNode: CUgraphNode, isEnabled: *mut ::core::ffi::c_uint) -> CUresult;
+        }
         cuGraphNodeGetEnabled(hGraphExec, hNode, isEnabled)
     }
 }
@@ -10200,7 +10598,9 @@ pub unsafe fn cuGraphNodeGetLocalId(hNode: CUgraphNode, nodeId: *mut ::core::ffi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphNodeGetLocalId(hNode: CUgraphNode, nodeId: *mut ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuGraphNodeGetLocalId(hNode: CUgraphNode, nodeId: *mut ::core::ffi::c_uint) -> CUresult;
+        }
         cuGraphNodeGetLocalId(hNode, nodeId)
     }
 }
@@ -10215,7 +10615,9 @@ pub unsafe fn cuGraphNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CUgraphN
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CUgraphNodeParams) -> CUresult;
+        extern "C" {
+            fn cuGraphNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CUgraphNodeParams) -> CUresult;
+        }
         cuGraphNodeGetParams(hNode, nodeParams)
     }
 }
@@ -10230,7 +10632,9 @@ pub unsafe fn cuGraphNodeGetToolsId(hNode: CUgraphNode, toolsNodeId: *mut ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphNodeGetToolsId(hNode: CUgraphNode, toolsNodeId: *mut ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuGraphNodeGetToolsId(hNode: CUgraphNode, toolsNodeId: *mut ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuGraphNodeGetToolsId(hNode, toolsNodeId)
     }
 }
@@ -10244,7 +10648,9 @@ pub unsafe fn cuGraphNodeGetType(hNode: CUgraphNode, type_: *mut CUgraphNodeType
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphNodeGetType(hNode: CUgraphNode, type_: *mut CUgraphNodeType) -> CUresult;
+        extern "C" {
+            fn cuGraphNodeGetType(hNode: CUgraphNode, type_: *mut CUgraphNodeType) -> CUresult;
+        }
         cuGraphNodeGetType(hNode, type_)
     }
 }
@@ -10259,7 +10665,9 @@ pub unsafe fn cuGraphNodeSetEnabled(hGraphExec: CUgraphExec, hNode: CUgraphNode,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphNodeSetEnabled(hGraphExec: CUgraphExec, hNode: CUgraphNode, isEnabled: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuGraphNodeSetEnabled(hGraphExec: CUgraphExec, hNode: CUgraphNode, isEnabled: ::core::ffi::c_uint) -> CUresult;
+        }
         cuGraphNodeSetEnabled(hGraphExec, hNode, isEnabled)
     }
 }
@@ -10274,7 +10682,9 @@ pub unsafe fn cuGraphNodeSetParams(hNode: CUgraphNode, nodeParams: *mut CUgraphN
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphNodeSetParams(hNode: CUgraphNode, nodeParams: *mut CUgraphNodeParams) -> CUresult;
+        extern "C" {
+            fn cuGraphNodeSetParams(hNode: CUgraphNode, nodeParams: *mut CUgraphNodeParams) -> CUresult;
+        }
         cuGraphNodeSetParams(hNode, nodeParams)
     }
 }
@@ -10288,7 +10698,9 @@ pub unsafe fn cuGraphReleaseUserObject(graph: CUgraph, object: CUuserObject, cou
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphReleaseUserObject(graph: CUgraph, object: CUuserObject, count: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuGraphReleaseUserObject(graph: CUgraph, object: CUuserObject, count: ::core::ffi::c_uint) -> CUresult;
+        }
         cuGraphReleaseUserObject(graph, object, count)
     }
 }
@@ -10303,7 +10715,9 @@ pub unsafe fn cuGraphRemoveDependencies(hGraph: CUgraph, from: *const CUgraphNod
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphRemoveDependencies(hGraph: CUgraph, from: *const CUgraphNode, to: *const CUgraphNode, numDependencies: usize) -> CUresult;
+        extern "C" {
+            fn cuGraphRemoveDependencies(hGraph: CUgraph, from: *const CUgraphNode, to: *const CUgraphNode, numDependencies: usize) -> CUresult;
+        }
         cuGraphRemoveDependencies(hGraph, from, to, numDependencies)
     }
 }
@@ -10318,7 +10732,9 @@ pub unsafe fn cuGraphRemoveDependencies_v2(hGraph: CUgraph, from: *const CUgraph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphRemoveDependencies_v2(hGraph: CUgraph, from: *const CUgraphNode, to: *const CUgraphNode, edgeData: *const CUgraphEdgeData, numDependencies: usize) -> CUresult;
+        extern "C" {
+            fn cuGraphRemoveDependencies_v2(hGraph: CUgraph, from: *const CUgraphNode, to: *const CUgraphNode, edgeData: *const CUgraphEdgeData, numDependencies: usize) -> CUresult;
+        }
         cuGraphRemoveDependencies_v2(hGraph, from, to, edgeData, numDependencies)
     }
 }
@@ -10332,7 +10748,9 @@ pub unsafe fn cuGraphRetainUserObject(graph: CUgraph, object: CUuserObject, coun
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphRetainUserObject(graph: CUgraph, object: CUuserObject, count: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuGraphRetainUserObject(graph: CUgraph, object: CUuserObject, count: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuGraphRetainUserObject(graph, object, count, flags)
     }
 }
@@ -10346,7 +10764,9 @@ pub unsafe fn cuGraphUpload(hGraphExec: CUgraphExec, hStream: CUstream) -> CUres
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphUpload(hGraphExec: CUgraphExec, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuGraphUpload(hGraphExec: CUgraphExec, hStream: CUstream) -> CUresult;
+        }
         cuGraphUpload(hGraphExec, hStream)
     }
 }
@@ -10360,7 +10780,9 @@ pub unsafe fn cuGraphicsMapResources(count: ::core::ffi::c_uint, resources: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphicsMapResources(count: ::core::ffi::c_uint, resources: *mut CUgraphicsResource, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuGraphicsMapResources(count: ::core::ffi::c_uint, resources: *mut CUgraphicsResource, hStream: CUstream) -> CUresult;
+        }
         cuGraphicsMapResources(count, resources, hStream)
     }
 }
@@ -10374,7 +10796,9 @@ pub unsafe fn cuGraphicsResourceGetMappedMipmappedArray(pMipmappedArray: *mut CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphicsResourceGetMappedMipmappedArray(pMipmappedArray: *mut CUmipmappedArray, resource: CUgraphicsResource) -> CUresult;
+        extern "C" {
+            fn cuGraphicsResourceGetMappedMipmappedArray(pMipmappedArray: *mut CUmipmappedArray, resource: CUgraphicsResource) -> CUresult;
+        }
         cuGraphicsResourceGetMappedMipmappedArray(pMipmappedArray, resource)
     }
 }
@@ -10388,7 +10812,9 @@ pub unsafe fn cuGraphicsResourceGetMappedPointer_v2(pDevPtr: *mut CUdeviceptr, p
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphicsResourceGetMappedPointer_v2(pDevPtr: *mut CUdeviceptr, pSize: *mut usize, resource: CUgraphicsResource) -> CUresult;
+        extern "C" {
+            fn cuGraphicsResourceGetMappedPointer_v2(pDevPtr: *mut CUdeviceptr, pSize: *mut usize, resource: CUgraphicsResource) -> CUresult;
+        }
         cuGraphicsResourceGetMappedPointer_v2(pDevPtr, pSize, resource)
     }
 }
@@ -10402,7 +10828,9 @@ pub unsafe fn cuGraphicsResourceSetMapFlags_v2(resource: CUgraphicsResource, fla
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphicsResourceSetMapFlags_v2(resource: CUgraphicsResource, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuGraphicsResourceSetMapFlags_v2(resource: CUgraphicsResource, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuGraphicsResourceSetMapFlags_v2(resource, flags)
     }
 }
@@ -10416,7 +10844,9 @@ pub unsafe fn cuGraphicsSubResourceGetMappedArray(pArray: *mut CUarray, resource
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphicsSubResourceGetMappedArray(pArray: *mut CUarray, resource: CUgraphicsResource, arrayIndex: ::core::ffi::c_uint, mipLevel: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuGraphicsSubResourceGetMappedArray(pArray: *mut CUarray, resource: CUgraphicsResource, arrayIndex: ::core::ffi::c_uint, mipLevel: ::core::ffi::c_uint) -> CUresult;
+        }
         cuGraphicsSubResourceGetMappedArray(pArray, resource, arrayIndex, mipLevel)
     }
 }
@@ -10430,7 +10860,9 @@ pub unsafe fn cuGraphicsUnmapResources(count: ::core::ffi::c_uint, resources: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphicsUnmapResources(count: ::core::ffi::c_uint, resources: *mut CUgraphicsResource, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuGraphicsUnmapResources(count: ::core::ffi::c_uint, resources: *mut CUgraphicsResource, hStream: CUstream) -> CUresult;
+        }
         cuGraphicsUnmapResources(count, resources, hStream)
     }
 }
@@ -10444,7 +10876,9 @@ pub unsafe fn cuGraphicsUnregisterResource(resource: CUgraphicsResource) -> CUre
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGraphicsUnregisterResource(resource: CUgraphicsResource) -> CUresult;
+        extern "C" {
+            fn cuGraphicsUnregisterResource(resource: CUgraphicsResource) -> CUresult;
+        }
         cuGraphicsUnregisterResource(resource)
     }
 }
@@ -10459,7 +10893,9 @@ pub unsafe fn cuGreenCtxCreate(phCtx: *mut CUgreenCtx, desc: CUdevResourceDesc, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGreenCtxCreate(phCtx: *mut CUgreenCtx, desc: CUdevResourceDesc, dev: CUdevice, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuGreenCtxCreate(phCtx: *mut CUgreenCtx, desc: CUdevResourceDesc, dev: CUdevice, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuGreenCtxCreate(phCtx, desc, dev, flags)
     }
 }
@@ -10474,7 +10910,9 @@ pub unsafe fn cuGreenCtxDestroy(hCtx: CUgreenCtx) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGreenCtxDestroy(hCtx: CUgreenCtx) -> CUresult;
+        extern "C" {
+            fn cuGreenCtxDestroy(hCtx: CUgreenCtx) -> CUresult;
+        }
         cuGreenCtxDestroy(hCtx)
     }
 }
@@ -10489,7 +10927,9 @@ pub unsafe fn cuGreenCtxGetDevResource(hCtx: CUgreenCtx, resource: *mut CUdevRes
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGreenCtxGetDevResource(hCtx: CUgreenCtx, resource: *mut CUdevResource, type_: CUdevResourceType) -> CUresult;
+        extern "C" {
+            fn cuGreenCtxGetDevResource(hCtx: CUgreenCtx, resource: *mut CUdevResource, type_: CUdevResourceType) -> CUresult;
+        }
         cuGreenCtxGetDevResource(hCtx, resource, type_)
     }
 }
@@ -10504,7 +10944,9 @@ pub unsafe fn cuGreenCtxGetId(greenCtx: CUgreenCtx, greenCtxId: *mut ::core::ffi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGreenCtxGetId(greenCtx: CUgreenCtx, greenCtxId: *mut ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuGreenCtxGetId(greenCtx: CUgreenCtx, greenCtxId: *mut ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuGreenCtxGetId(greenCtx, greenCtxId)
     }
 }
@@ -10519,7 +10961,9 @@ pub unsafe fn cuGreenCtxRecordEvent(hCtx: CUgreenCtx, hEvent: CUevent) -> CUresu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGreenCtxRecordEvent(hCtx: CUgreenCtx, hEvent: CUevent) -> CUresult;
+        extern "C" {
+            fn cuGreenCtxRecordEvent(hCtx: CUgreenCtx, hEvent: CUevent) -> CUresult;
+        }
         cuGreenCtxRecordEvent(hCtx, hEvent)
     }
 }
@@ -10534,7 +10978,9 @@ pub unsafe fn cuGreenCtxStreamCreate(phStream: *mut CUstream, greenCtx: CUgreenC
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGreenCtxStreamCreate(phStream: *mut CUstream, greenCtx: CUgreenCtx, flags: ::core::ffi::c_uint, priority: ::core::ffi::c_int) -> CUresult;
+        extern "C" {
+            fn cuGreenCtxStreamCreate(phStream: *mut CUstream, greenCtx: CUgreenCtx, flags: ::core::ffi::c_uint, priority: ::core::ffi::c_int) -> CUresult;
+        }
         cuGreenCtxStreamCreate(phStream, greenCtx, flags, priority)
     }
 }
@@ -10549,7 +10995,9 @@ pub unsafe fn cuGreenCtxWaitEvent(hCtx: CUgreenCtx, hEvent: CUevent) -> CUresult
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuGreenCtxWaitEvent(hCtx: CUgreenCtx, hEvent: CUevent) -> CUresult;
+        extern "C" {
+            fn cuGreenCtxWaitEvent(hCtx: CUgreenCtx, hEvent: CUevent) -> CUresult;
+        }
         cuGreenCtxWaitEvent(hCtx, hEvent)
     }
 }
@@ -10563,7 +11011,9 @@ pub unsafe fn cuImportExternalMemory(extMem_out: *mut CUexternalMemory, memHandl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuImportExternalMemory(extMem_out: *mut CUexternalMemory, memHandleDesc: *const CUDA_EXTERNAL_MEMORY_HANDLE_DESC) -> CUresult;
+        extern "C" {
+            fn cuImportExternalMemory(extMem_out: *mut CUexternalMemory, memHandleDesc: *const CUDA_EXTERNAL_MEMORY_HANDLE_DESC) -> CUresult;
+        }
         cuImportExternalMemory(extMem_out, memHandleDesc)
     }
 }
@@ -10577,7 +11027,9 @@ pub unsafe fn cuImportExternalSemaphore(extSem_out: *mut CUexternalSemaphore, se
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuImportExternalSemaphore(extSem_out: *mut CUexternalSemaphore, semHandleDesc: *const CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC) -> CUresult;
+        extern "C" {
+            fn cuImportExternalSemaphore(extSem_out: *mut CUexternalSemaphore, semHandleDesc: *const CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC) -> CUresult;
+        }
         cuImportExternalSemaphore(extSem_out, semHandleDesc)
     }
 }
@@ -10591,7 +11043,9 @@ pub unsafe fn cuInit(Flags: ::core::ffi::c_uint) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuInit(Flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuInit(Flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuInit(Flags)
     }
 }
@@ -10605,7 +11059,9 @@ pub unsafe fn cuIpcCloseMemHandle(dptr: CUdeviceptr) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuIpcCloseMemHandle(dptr: CUdeviceptr) -> CUresult;
+        extern "C" {
+            fn cuIpcCloseMemHandle(dptr: CUdeviceptr) -> CUresult;
+        }
         cuIpcCloseMemHandle(dptr)
     }
 }
@@ -10619,7 +11075,9 @@ pub unsafe fn cuIpcGetEventHandle(pHandle: *mut CUipcEventHandle, event: CUevent
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuIpcGetEventHandle(pHandle: *mut CUipcEventHandle, event: CUevent) -> CUresult;
+        extern "C" {
+            fn cuIpcGetEventHandle(pHandle: *mut CUipcEventHandle, event: CUevent) -> CUresult;
+        }
         cuIpcGetEventHandle(pHandle, event)
     }
 }
@@ -10633,7 +11091,9 @@ pub unsafe fn cuIpcGetMemHandle(pHandle: *mut CUipcMemHandle, dptr: CUdeviceptr)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuIpcGetMemHandle(pHandle: *mut CUipcMemHandle, dptr: CUdeviceptr) -> CUresult;
+        extern "C" {
+            fn cuIpcGetMemHandle(pHandle: *mut CUipcMemHandle, dptr: CUdeviceptr) -> CUresult;
+        }
         cuIpcGetMemHandle(pHandle, dptr)
     }
 }
@@ -10647,7 +11107,9 @@ pub unsafe fn cuIpcOpenEventHandle(phEvent: *mut CUevent, handle: CUipcEventHand
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuIpcOpenEventHandle(phEvent: *mut CUevent, handle: CUipcEventHandle) -> CUresult;
+        extern "C" {
+            fn cuIpcOpenEventHandle(phEvent: *mut CUevent, handle: CUipcEventHandle) -> CUresult;
+        }
         cuIpcOpenEventHandle(phEvent, handle)
     }
 }
@@ -10661,7 +11123,9 @@ pub unsafe fn cuIpcOpenMemHandle_v2(pdptr: *mut CUdeviceptr, handle: CUipcMemHan
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuIpcOpenMemHandle_v2(pdptr: *mut CUdeviceptr, handle: CUipcMemHandle, Flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuIpcOpenMemHandle_v2(pdptr: *mut CUdeviceptr, handle: CUipcMemHandle, Flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuIpcOpenMemHandle_v2(pdptr, handle, Flags)
     }
 }
@@ -10676,7 +11140,9 @@ pub unsafe fn cuKernelGetAttribute(pi: *mut ::core::ffi::c_int, attrib: CUfuncti
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuKernelGetAttribute(pi: *mut ::core::ffi::c_int, attrib: CUfunction_attribute, kernel: CUkernel, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuKernelGetAttribute(pi: *mut ::core::ffi::c_int, attrib: CUfunction_attribute, kernel: CUkernel, dev: CUdevice) -> CUresult;
+        }
         cuKernelGetAttribute(pi, attrib, kernel, dev)
     }
 }
@@ -10691,7 +11157,9 @@ pub unsafe fn cuKernelGetFunction(pFunc: *mut CUfunction, kernel: CUkernel) -> C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuKernelGetFunction(pFunc: *mut CUfunction, kernel: CUkernel) -> CUresult;
+        extern "C" {
+            fn cuKernelGetFunction(pFunc: *mut CUfunction, kernel: CUkernel) -> CUresult;
+        }
         cuKernelGetFunction(pFunc, kernel)
     }
 }
@@ -10706,7 +11174,9 @@ pub unsafe fn cuKernelGetLibrary(pLib: *mut CUlibrary, kernel: CUkernel) -> CUre
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuKernelGetLibrary(pLib: *mut CUlibrary, kernel: CUkernel) -> CUresult;
+        extern "C" {
+            fn cuKernelGetLibrary(pLib: *mut CUlibrary, kernel: CUkernel) -> CUresult;
+        }
         cuKernelGetLibrary(pLib, kernel)
     }
 }
@@ -10721,7 +11191,9 @@ pub unsafe fn cuKernelGetName(name: *mut *const ::core::ffi::c_char, hfunc: CUke
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuKernelGetName(name: *mut *const ::core::ffi::c_char, hfunc: CUkernel) -> CUresult;
+        extern "C" {
+            fn cuKernelGetName(name: *mut *const ::core::ffi::c_char, hfunc: CUkernel) -> CUresult;
+        }
         cuKernelGetName(name, hfunc)
     }
 }
@@ -10736,7 +11208,9 @@ pub unsafe fn cuKernelGetParamCount(kernel: CUkernel, paramCount: *mut usize) ->
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuKernelGetParamCount(kernel: CUkernel, paramCount: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuKernelGetParamCount(kernel: CUkernel, paramCount: *mut usize) -> CUresult;
+        }
         cuKernelGetParamCount(kernel, paramCount)
     }
 }
@@ -10751,7 +11225,9 @@ pub unsafe fn cuKernelGetParamInfo(kernel: CUkernel, paramIndex: usize, paramOff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuKernelGetParamInfo(kernel: CUkernel, paramIndex: usize, paramOffset: *mut usize, paramSize: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuKernelGetParamInfo(kernel: CUkernel, paramIndex: usize, paramOffset: *mut usize, paramSize: *mut usize) -> CUresult;
+        }
         cuKernelGetParamInfo(kernel, paramIndex, paramOffset, paramSize)
     }
 }
@@ -10766,7 +11242,9 @@ pub unsafe fn cuKernelSetAttribute(attrib: CUfunction_attribute, val: ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuKernelSetAttribute(attrib: CUfunction_attribute, val: ::core::ffi::c_int, kernel: CUkernel, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuKernelSetAttribute(attrib: CUfunction_attribute, val: ::core::ffi::c_int, kernel: CUkernel, dev: CUdevice) -> CUresult;
+        }
         cuKernelSetAttribute(attrib, val, kernel, dev)
     }
 }
@@ -10781,7 +11259,9 @@ pub unsafe fn cuKernelSetCacheConfig(kernel: CUkernel, config: CUfunc_cache, dev
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuKernelSetCacheConfig(kernel: CUkernel, config: CUfunc_cache, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuKernelSetCacheConfig(kernel: CUkernel, config: CUfunc_cache, dev: CUdevice) -> CUresult;
+        }
         cuKernelSetCacheConfig(kernel, config, dev)
     }
 }
@@ -10795,7 +11275,9 @@ pub unsafe fn cuLaunch(f: CUfunction) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLaunch(f: CUfunction) -> CUresult;
+        extern "C" {
+            fn cuLaunch(f: CUfunction) -> CUresult;
+        }
         cuLaunch(f)
     }
 }
@@ -10809,7 +11291,9 @@ pub unsafe fn cuLaunchCooperativeKernel(f: CUfunction, gridDimX: ::core::ffi::c_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLaunchCooperativeKernel(f: CUfunction, gridDimX: ::core::ffi::c_uint, gridDimY: ::core::ffi::c_uint, gridDimZ: ::core::ffi::c_uint, blockDimX: ::core::ffi::c_uint, blockDimY: ::core::ffi::c_uint, blockDimZ: ::core::ffi::c_uint, sharedMemBytes: ::core::ffi::c_uint, hStream: CUstream, kernelParams: *mut *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuLaunchCooperativeKernel(f: CUfunction, gridDimX: ::core::ffi::c_uint, gridDimY: ::core::ffi::c_uint, gridDimZ: ::core::ffi::c_uint, blockDimX: ::core::ffi::c_uint, blockDimY: ::core::ffi::c_uint, blockDimZ: ::core::ffi::c_uint, sharedMemBytes: ::core::ffi::c_uint, hStream: CUstream, kernelParams: *mut *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuLaunchCooperativeKernel(f, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, hStream, kernelParams)
     }
 }
@@ -10823,7 +11307,9 @@ pub unsafe fn cuLaunchCooperativeKernelMultiDevice(launchParamsList: *mut CUDA_L
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLaunchCooperativeKernelMultiDevice(launchParamsList: *mut CUDA_LAUNCH_PARAMS, numDevices: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuLaunchCooperativeKernelMultiDevice(launchParamsList: *mut CUDA_LAUNCH_PARAMS, numDevices: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuLaunchCooperativeKernelMultiDevice(launchParamsList, numDevices, flags)
     }
 }
@@ -10837,7 +11323,9 @@ pub unsafe fn cuLaunchGrid(f: CUfunction, grid_width: ::core::ffi::c_int, grid_h
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLaunchGrid(f: CUfunction, grid_width: ::core::ffi::c_int, grid_height: ::core::ffi::c_int) -> CUresult;
+        extern "C" {
+            fn cuLaunchGrid(f: CUfunction, grid_width: ::core::ffi::c_int, grid_height: ::core::ffi::c_int) -> CUresult;
+        }
         cuLaunchGrid(f, grid_width, grid_height)
     }
 }
@@ -10851,7 +11339,9 @@ pub unsafe fn cuLaunchGridAsync(f: CUfunction, grid_width: ::core::ffi::c_int, g
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLaunchGridAsync(f: CUfunction, grid_width: ::core::ffi::c_int, grid_height: ::core::ffi::c_int, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuLaunchGridAsync(f: CUfunction, grid_width: ::core::ffi::c_int, grid_height: ::core::ffi::c_int, hStream: CUstream) -> CUresult;
+        }
         cuLaunchGridAsync(f, grid_width, grid_height, hStream)
     }
 }
@@ -10865,7 +11355,9 @@ pub unsafe fn cuLaunchHostFunc(hStream: CUstream, fn_: CUhostFn, userData: *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLaunchHostFunc(hStream: CUstream, fn_: CUhostFn, userData: *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuLaunchHostFunc(hStream: CUstream, fn_: CUhostFn, userData: *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuLaunchHostFunc(hStream, fn_, userData)
     }
 }
@@ -10880,7 +11372,9 @@ pub unsafe fn cuLaunchHostFunc_v2(hStream: CUstream, fn_: CUhostFn, userData: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLaunchHostFunc_v2(hStream: CUstream, fn_: CUhostFn, userData: *mut ::core::ffi::c_void, syncMode: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuLaunchHostFunc_v2(hStream: CUstream, fn_: CUhostFn, userData: *mut ::core::ffi::c_void, syncMode: ::core::ffi::c_uint) -> CUresult;
+        }
         cuLaunchHostFunc_v2(hStream, fn_, userData, syncMode)
     }
 }
@@ -10894,7 +11388,9 @@ pub unsafe fn cuLaunchKernel(f: CUfunction, gridDimX: ::core::ffi::c_uint, gridD
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLaunchKernel(f: CUfunction, gridDimX: ::core::ffi::c_uint, gridDimY: ::core::ffi::c_uint, gridDimZ: ::core::ffi::c_uint, blockDimX: ::core::ffi::c_uint, blockDimY: ::core::ffi::c_uint, blockDimZ: ::core::ffi::c_uint, sharedMemBytes: ::core::ffi::c_uint, hStream: CUstream, kernelParams: *mut *mut ::core::ffi::c_void, extra: *mut *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuLaunchKernel(f: CUfunction, gridDimX: ::core::ffi::c_uint, gridDimY: ::core::ffi::c_uint, gridDimZ: ::core::ffi::c_uint, blockDimX: ::core::ffi::c_uint, blockDimY: ::core::ffi::c_uint, blockDimZ: ::core::ffi::c_uint, sharedMemBytes: ::core::ffi::c_uint, hStream: CUstream, kernelParams: *mut *mut ::core::ffi::c_void, extra: *mut *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuLaunchKernel(f, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, hStream, kernelParams, extra)
     }
 }
@@ -10909,7 +11405,9 @@ pub unsafe fn cuLaunchKernelEx(config: *const CUlaunchConfig, f: CUfunction, ker
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLaunchKernelEx(config: *const CUlaunchConfig, f: CUfunction, kernelParams: *mut *mut ::core::ffi::c_void, extra: *mut *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuLaunchKernelEx(config: *const CUlaunchConfig, f: CUfunction, kernelParams: *mut *mut ::core::ffi::c_void, extra: *mut *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuLaunchKernelEx(config, f, kernelParams, extra)
     }
 }
@@ -10924,7 +11422,9 @@ pub unsafe fn cuLibraryEnumerateKernels(kernels: *mut CUkernel, numKernels: ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLibraryEnumerateKernels(kernels: *mut CUkernel, numKernels: ::core::ffi::c_uint, lib: CUlibrary) -> CUresult;
+        extern "C" {
+            fn cuLibraryEnumerateKernels(kernels: *mut CUkernel, numKernels: ::core::ffi::c_uint, lib: CUlibrary) -> CUresult;
+        }
         cuLibraryEnumerateKernels(kernels, numKernels, lib)
     }
 }
@@ -10939,7 +11439,9 @@ pub unsafe fn cuLibraryGetGlobal(dptr: *mut CUdeviceptr, bytes: *mut usize, libr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLibraryGetGlobal(dptr: *mut CUdeviceptr, bytes: *mut usize, library: CUlibrary, name: *const ::core::ffi::c_char) -> CUresult;
+        extern "C" {
+            fn cuLibraryGetGlobal(dptr: *mut CUdeviceptr, bytes: *mut usize, library: CUlibrary, name: *const ::core::ffi::c_char) -> CUresult;
+        }
         cuLibraryGetGlobal(dptr, bytes, library, name)
     }
 }
@@ -10954,7 +11456,9 @@ pub unsafe fn cuLibraryGetKernel(pKernel: *mut CUkernel, library: CUlibrary, nam
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLibraryGetKernel(pKernel: *mut CUkernel, library: CUlibrary, name: *const ::core::ffi::c_char) -> CUresult;
+        extern "C" {
+            fn cuLibraryGetKernel(pKernel: *mut CUkernel, library: CUlibrary, name: *const ::core::ffi::c_char) -> CUresult;
+        }
         cuLibraryGetKernel(pKernel, library, name)
     }
 }
@@ -10969,7 +11473,9 @@ pub unsafe fn cuLibraryGetKernelCount(count: *mut ::core::ffi::c_uint, lib: CUli
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLibraryGetKernelCount(count: *mut ::core::ffi::c_uint, lib: CUlibrary) -> CUresult;
+        extern "C" {
+            fn cuLibraryGetKernelCount(count: *mut ::core::ffi::c_uint, lib: CUlibrary) -> CUresult;
+        }
         cuLibraryGetKernelCount(count, lib)
     }
 }
@@ -10984,7 +11490,9 @@ pub unsafe fn cuLibraryGetManaged(dptr: *mut CUdeviceptr, bytes: *mut usize, lib
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLibraryGetManaged(dptr: *mut CUdeviceptr, bytes: *mut usize, library: CUlibrary, name: *const ::core::ffi::c_char) -> CUresult;
+        extern "C" {
+            fn cuLibraryGetManaged(dptr: *mut CUdeviceptr, bytes: *mut usize, library: CUlibrary, name: *const ::core::ffi::c_char) -> CUresult;
+        }
         cuLibraryGetManaged(dptr, bytes, library, name)
     }
 }
@@ -10999,7 +11507,9 @@ pub unsafe fn cuLibraryGetModule(pMod: *mut CUmodule, library: CUlibrary) -> CUr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLibraryGetModule(pMod: *mut CUmodule, library: CUlibrary) -> CUresult;
+        extern "C" {
+            fn cuLibraryGetModule(pMod: *mut CUmodule, library: CUlibrary) -> CUresult;
+        }
         cuLibraryGetModule(pMod, library)
     }
 }
@@ -11014,7 +11524,9 @@ pub unsafe fn cuLibraryGetUnifiedFunction(fptr: *mut *mut ::core::ffi::c_void, l
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLibraryGetUnifiedFunction(fptr: *mut *mut ::core::ffi::c_void, library: CUlibrary, symbol: *const ::core::ffi::c_char) -> CUresult;
+        extern "C" {
+            fn cuLibraryGetUnifiedFunction(fptr: *mut *mut ::core::ffi::c_void, library: CUlibrary, symbol: *const ::core::ffi::c_char) -> CUresult;
+        }
         cuLibraryGetUnifiedFunction(fptr, library, symbol)
     }
 }
@@ -11029,7 +11541,9 @@ pub unsafe fn cuLibraryLoadData(library: *mut CUlibrary, code: *const ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLibraryLoadData(library: *mut CUlibrary, code: *const ::core::ffi::c_void, jitOptions: *mut CUjit_option, jitOptionsValues: *mut *mut ::core::ffi::c_void, numJitOptions: ::core::ffi::c_uint, libraryOptions: *mut CUlibraryOption, libraryOptionValues: *mut *mut ::core::ffi::c_void, numLibraryOptions: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuLibraryLoadData(library: *mut CUlibrary, code: *const ::core::ffi::c_void, jitOptions: *mut CUjit_option, jitOptionsValues: *mut *mut ::core::ffi::c_void, numJitOptions: ::core::ffi::c_uint, libraryOptions: *mut CUlibraryOption, libraryOptionValues: *mut *mut ::core::ffi::c_void, numLibraryOptions: ::core::ffi::c_uint) -> CUresult;
+        }
         cuLibraryLoadData(library, code, jitOptions, jitOptionsValues, numJitOptions, libraryOptions, libraryOptionValues, numLibraryOptions)
     }
 }
@@ -11044,7 +11558,9 @@ pub unsafe fn cuLibraryLoadFromFile(library: *mut CUlibrary, fileName: *const ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLibraryLoadFromFile(library: *mut CUlibrary, fileName: *const ::core::ffi::c_char, jitOptions: *mut CUjit_option, jitOptionsValues: *mut *mut ::core::ffi::c_void, numJitOptions: ::core::ffi::c_uint, libraryOptions: *mut CUlibraryOption, libraryOptionValues: *mut *mut ::core::ffi::c_void, numLibraryOptions: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuLibraryLoadFromFile(library: *mut CUlibrary, fileName: *const ::core::ffi::c_char, jitOptions: *mut CUjit_option, jitOptionsValues: *mut *mut ::core::ffi::c_void, numJitOptions: ::core::ffi::c_uint, libraryOptions: *mut CUlibraryOption, libraryOptionValues: *mut *mut ::core::ffi::c_void, numLibraryOptions: ::core::ffi::c_uint) -> CUresult;
+        }
         cuLibraryLoadFromFile(library, fileName, jitOptions, jitOptionsValues, numJitOptions, libraryOptions, libraryOptionValues, numLibraryOptions)
     }
 }
@@ -11059,7 +11575,9 @@ pub unsafe fn cuLibraryUnload(library: CUlibrary) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLibraryUnload(library: CUlibrary) -> CUresult;
+        extern "C" {
+            fn cuLibraryUnload(library: CUlibrary) -> CUresult;
+        }
         cuLibraryUnload(library)
     }
 }
@@ -11073,7 +11591,9 @@ pub unsafe fn cuLinkAddData_v2(state: CUlinkState, type_: CUjitInputType, data: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLinkAddData_v2(state: CUlinkState, type_: CUjitInputType, data: *mut ::core::ffi::c_void, size: usize, name: *const ::core::ffi::c_char, numOptions: ::core::ffi::c_uint, options: *mut CUjit_option, optionValues: *mut *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuLinkAddData_v2(state: CUlinkState, type_: CUjitInputType, data: *mut ::core::ffi::c_void, size: usize, name: *const ::core::ffi::c_char, numOptions: ::core::ffi::c_uint, options: *mut CUjit_option, optionValues: *mut *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuLinkAddData_v2(state, type_, data, size, name, numOptions, options, optionValues)
     }
 }
@@ -11087,7 +11607,9 @@ pub unsafe fn cuLinkAddFile_v2(state: CUlinkState, type_: CUjitInputType, path: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLinkAddFile_v2(state: CUlinkState, type_: CUjitInputType, path: *const ::core::ffi::c_char, numOptions: ::core::ffi::c_uint, options: *mut CUjit_option, optionValues: *mut *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuLinkAddFile_v2(state: CUlinkState, type_: CUjitInputType, path: *const ::core::ffi::c_char, numOptions: ::core::ffi::c_uint, options: *mut CUjit_option, optionValues: *mut *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuLinkAddFile_v2(state, type_, path, numOptions, options, optionValues)
     }
 }
@@ -11101,7 +11623,9 @@ pub unsafe fn cuLinkComplete(state: CUlinkState, cubinOut: *mut *mut ::core::ffi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLinkComplete(state: CUlinkState, cubinOut: *mut *mut ::core::ffi::c_void, sizeOut: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuLinkComplete(state: CUlinkState, cubinOut: *mut *mut ::core::ffi::c_void, sizeOut: *mut usize) -> CUresult;
+        }
         cuLinkComplete(state, cubinOut, sizeOut)
     }
 }
@@ -11115,7 +11639,9 @@ pub unsafe fn cuLinkCreate_v2(numOptions: ::core::ffi::c_uint, options: *mut CUj
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLinkCreate_v2(numOptions: ::core::ffi::c_uint, options: *mut CUjit_option, optionValues: *mut *mut ::core::ffi::c_void, stateOut: *mut CUlinkState) -> CUresult;
+        extern "C" {
+            fn cuLinkCreate_v2(numOptions: ::core::ffi::c_uint, options: *mut CUjit_option, optionValues: *mut *mut ::core::ffi::c_void, stateOut: *mut CUlinkState) -> CUresult;
+        }
         cuLinkCreate_v2(numOptions, options, optionValues, stateOut)
     }
 }
@@ -11129,7 +11655,9 @@ pub unsafe fn cuLinkDestroy(state: CUlinkState) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLinkDestroy(state: CUlinkState) -> CUresult;
+        extern "C" {
+            fn cuLinkDestroy(state: CUlinkState) -> CUresult;
+        }
         cuLinkDestroy(state)
     }
 }
@@ -11144,7 +11672,9 @@ pub unsafe fn cuLogsCurrent(iterator_out: *mut CUlogIterator, flags: ::core::ffi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLogsCurrent(iterator_out: *mut CUlogIterator, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuLogsCurrent(iterator_out: *mut CUlogIterator, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuLogsCurrent(iterator_out, flags)
     }
 }
@@ -11159,7 +11689,9 @@ pub unsafe fn cuLogsDumpToFile(iterator: *mut CUlogIterator, pathToFile: *const 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLogsDumpToFile(iterator: *mut CUlogIterator, pathToFile: *const ::core::ffi::c_char, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuLogsDumpToFile(iterator: *mut CUlogIterator, pathToFile: *const ::core::ffi::c_char, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuLogsDumpToFile(iterator, pathToFile, flags)
     }
 }
@@ -11174,7 +11706,9 @@ pub unsafe fn cuLogsDumpToMemory(iterator: *mut CUlogIterator, buffer: *mut ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLogsDumpToMemory(iterator: *mut CUlogIterator, buffer: *mut ::core::ffi::c_char, size: *mut usize, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuLogsDumpToMemory(iterator: *mut CUlogIterator, buffer: *mut ::core::ffi::c_char, size: *mut usize, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuLogsDumpToMemory(iterator, buffer, size, flags)
     }
 }
@@ -11189,7 +11723,9 @@ pub unsafe fn cuLogsRegisterCallback(callbackFunc: CUlogsCallback, userData: *mu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLogsRegisterCallback(callbackFunc: CUlogsCallback, userData: *mut ::core::ffi::c_void, callback_out: *mut CUlogsCallbackHandle) -> CUresult;
+        extern "C" {
+            fn cuLogsRegisterCallback(callbackFunc: CUlogsCallback, userData: *mut ::core::ffi::c_void, callback_out: *mut CUlogsCallbackHandle) -> CUresult;
+        }
         cuLogsRegisterCallback(callbackFunc, userData, callback_out)
     }
 }
@@ -11204,7 +11740,9 @@ pub unsafe fn cuLogsUnregisterCallback(callback: CUlogsCallbackHandle) -> CUresu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuLogsUnregisterCallback(callback: CUlogsCallbackHandle) -> CUresult;
+        extern "C" {
+            fn cuLogsUnregisterCallback(callback: CUlogsCallbackHandle) -> CUresult;
+        }
         cuLogsUnregisterCallback(callback)
     }
 }
@@ -11218,7 +11756,9 @@ pub unsafe fn cuMemAddressFree(ptr: CUdeviceptr, size: usize) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemAddressFree(ptr: CUdeviceptr, size: usize) -> CUresult;
+        extern "C" {
+            fn cuMemAddressFree(ptr: CUdeviceptr, size: usize) -> CUresult;
+        }
         cuMemAddressFree(ptr, size)
     }
 }
@@ -11232,7 +11772,9 @@ pub unsafe fn cuMemAddressReserve(ptr: *mut CUdeviceptr, size: usize, alignment:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemAddressReserve(ptr: *mut CUdeviceptr, size: usize, alignment: usize, addr: CUdeviceptr, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuMemAddressReserve(ptr: *mut CUdeviceptr, size: usize, alignment: usize, addr: CUdeviceptr, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuMemAddressReserve(ptr, size, alignment, addr, flags)
     }
 }
@@ -11247,7 +11789,9 @@ pub unsafe fn cuMemAdvise(devPtr: CUdeviceptr, count: usize, advice: CUmem_advis
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemAdvise(devPtr: CUdeviceptr, count: usize, advice: CUmem_advise, device: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuMemAdvise(devPtr: CUdeviceptr, count: usize, advice: CUmem_advise, device: CUdevice) -> CUresult;
+        }
         cuMemAdvise(devPtr, count, advice, device)
     }
 }
@@ -11262,7 +11806,9 @@ pub unsafe fn cuMemAdvise_v2(devPtr: CUdeviceptr, count: usize, advice: CUmem_ad
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemAdvise_v2(devPtr: CUdeviceptr, count: usize, advice: CUmem_advise, location: CUmemLocation) -> CUresult;
+        extern "C" {
+            fn cuMemAdvise_v2(devPtr: CUdeviceptr, count: usize, advice: CUmem_advise, location: CUmemLocation) -> CUresult;
+        }
         cuMemAdvise_v2(devPtr, count, advice, location)
     }
 }
@@ -11276,7 +11822,9 @@ pub unsafe fn cuMemAllocAsync(dptr: *mut CUdeviceptr, bytesize: usize, hStream: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemAllocAsync(dptr: *mut CUdeviceptr, bytesize: usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemAllocAsync(dptr: *mut CUdeviceptr, bytesize: usize, hStream: CUstream) -> CUresult;
+        }
         cuMemAllocAsync(dptr, bytesize, hStream)
     }
 }
@@ -11290,7 +11838,9 @@ pub unsafe fn cuMemAllocFromPoolAsync(dptr: *mut CUdeviceptr, bytesize: usize, p
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemAllocFromPoolAsync(dptr: *mut CUdeviceptr, bytesize: usize, pool: CUmemoryPool, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemAllocFromPoolAsync(dptr: *mut CUdeviceptr, bytesize: usize, pool: CUmemoryPool, hStream: CUstream) -> CUresult;
+        }
         cuMemAllocFromPoolAsync(dptr, bytesize, pool, hStream)
     }
 }
@@ -11304,7 +11854,9 @@ pub unsafe fn cuMemAllocHost_v2(pp: *mut *mut ::core::ffi::c_void, bytesize: usi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemAllocHost_v2(pp: *mut *mut ::core::ffi::c_void, bytesize: usize) -> CUresult;
+        extern "C" {
+            fn cuMemAllocHost_v2(pp: *mut *mut ::core::ffi::c_void, bytesize: usize) -> CUresult;
+        }
         cuMemAllocHost_v2(pp, bytesize)
     }
 }
@@ -11318,7 +11870,9 @@ pub unsafe fn cuMemAllocManaged(dptr: *mut CUdeviceptr, bytesize: usize, flags: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemAllocManaged(dptr: *mut CUdeviceptr, bytesize: usize, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuMemAllocManaged(dptr: *mut CUdeviceptr, bytesize: usize, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuMemAllocManaged(dptr, bytesize, flags)
     }
 }
@@ -11332,7 +11886,9 @@ pub unsafe fn cuMemAllocPitch_v2(dptr: *mut CUdeviceptr, pPitch: *mut usize, Wid
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemAllocPitch_v2(dptr: *mut CUdeviceptr, pPitch: *mut usize, WidthInBytes: usize, Height: usize, ElementSizeBytes: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuMemAllocPitch_v2(dptr: *mut CUdeviceptr, pPitch: *mut usize, WidthInBytes: usize, Height: usize, ElementSizeBytes: ::core::ffi::c_uint) -> CUresult;
+        }
         cuMemAllocPitch_v2(dptr, pPitch, WidthInBytes, Height, ElementSizeBytes)
     }
 }
@@ -11346,7 +11902,9 @@ pub unsafe fn cuMemAlloc_v2(dptr: *mut CUdeviceptr, bytesize: usize) -> CUresult
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemAlloc_v2(dptr: *mut CUdeviceptr, bytesize: usize) -> CUresult;
+        extern "C" {
+            fn cuMemAlloc_v2(dptr: *mut CUdeviceptr, bytesize: usize) -> CUresult;
+        }
         cuMemAlloc_v2(dptr, bytesize)
     }
 }
@@ -11361,7 +11919,9 @@ pub unsafe fn cuMemBatchDecompressAsync(paramsArray: *mut CUmemDecompressParams,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemBatchDecompressAsync(paramsArray: *mut CUmemDecompressParams, count: usize, flags: ::core::ffi::c_uint, errorIndex: *mut usize, stream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemBatchDecompressAsync(paramsArray: *mut CUmemDecompressParams, count: usize, flags: ::core::ffi::c_uint, errorIndex: *mut usize, stream: CUstream) -> CUresult;
+        }
         cuMemBatchDecompressAsync(paramsArray, count, flags, errorIndex, stream)
     }
 }
@@ -11375,7 +11935,9 @@ pub unsafe fn cuMemCreate(handle: *mut CUmemGenericAllocationHandle, size: usize
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemCreate(handle: *mut CUmemGenericAllocationHandle, size: usize, prop: *const CUmemAllocationProp, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuMemCreate(handle: *mut CUmemGenericAllocationHandle, size: usize, prop: *const CUmemAllocationProp, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuMemCreate(handle, size, prop, flags)
     }
 }
@@ -11390,7 +11952,9 @@ pub unsafe fn cuMemDiscardAndPrefetchBatchAsync(dptrs: *mut CUdeviceptr, sizes: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemDiscardAndPrefetchBatchAsync(dptrs: *mut CUdeviceptr, sizes: *mut usize, count: usize, prefetchLocs: *mut CUmemLocation, prefetchLocIdxs: *mut usize, numPrefetchLocs: usize, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemDiscardAndPrefetchBatchAsync(dptrs: *mut CUdeviceptr, sizes: *mut usize, count: usize, prefetchLocs: *mut CUmemLocation, prefetchLocIdxs: *mut usize, numPrefetchLocs: usize, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult;
+        }
         cuMemDiscardAndPrefetchBatchAsync(dptrs, sizes, count, prefetchLocs, prefetchLocIdxs, numPrefetchLocs, flags, hStream)
     }
 }
@@ -11405,7 +11969,9 @@ pub unsafe fn cuMemDiscardBatchAsync(dptrs: *mut CUdeviceptr, sizes: *mut usize,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemDiscardBatchAsync(dptrs: *mut CUdeviceptr, sizes: *mut usize, count: usize, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemDiscardBatchAsync(dptrs: *mut CUdeviceptr, sizes: *mut usize, count: usize, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult;
+        }
         cuMemDiscardBatchAsync(dptrs, sizes, count, flags, hStream)
     }
 }
@@ -11419,7 +11985,9 @@ pub unsafe fn cuMemExportToShareableHandle(shareableHandle: *mut ::core::ffi::c_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemExportToShareableHandle(shareableHandle: *mut ::core::ffi::c_void, handle: CUmemGenericAllocationHandle, handleType: CUmemAllocationHandleType, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuMemExportToShareableHandle(shareableHandle: *mut ::core::ffi::c_void, handle: CUmemGenericAllocationHandle, handleType: CUmemAllocationHandleType, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuMemExportToShareableHandle(shareableHandle, handle, handleType, flags)
     }
 }
@@ -11433,7 +12001,9 @@ pub unsafe fn cuMemFreeAsync(dptr: CUdeviceptr, hStream: CUstream) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemFreeAsync(dptr: CUdeviceptr, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemFreeAsync(dptr: CUdeviceptr, hStream: CUstream) -> CUresult;
+        }
         cuMemFreeAsync(dptr, hStream)
     }
 }
@@ -11447,7 +12017,9 @@ pub unsafe fn cuMemFreeHost(p: *mut ::core::ffi::c_void) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemFreeHost(p: *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuMemFreeHost(p: *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuMemFreeHost(p)
     }
 }
@@ -11461,7 +12033,9 @@ pub unsafe fn cuMemFree_v2(dptr: CUdeviceptr) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemFree_v2(dptr: CUdeviceptr) -> CUresult;
+        extern "C" {
+            fn cuMemFree_v2(dptr: CUdeviceptr) -> CUresult;
+        }
         cuMemFree_v2(dptr)
     }
 }
@@ -11475,7 +12049,9 @@ pub unsafe fn cuMemGetAccess(flags: *mut ::core::ffi::c_ulonglong, location: *co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemGetAccess(flags: *mut ::core::ffi::c_ulonglong, location: *const CUmemLocation, ptr: CUdeviceptr) -> CUresult;
+        extern "C" {
+            fn cuMemGetAccess(flags: *mut ::core::ffi::c_ulonglong, location: *const CUmemLocation, ptr: CUdeviceptr) -> CUresult;
+        }
         cuMemGetAccess(flags, location, ptr)
     }
 }
@@ -11489,7 +12065,9 @@ pub unsafe fn cuMemGetAddressRange_v2(pbase: *mut CUdeviceptr, psize: *mut usize
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemGetAddressRange_v2(pbase: *mut CUdeviceptr, psize: *mut usize, dptr: CUdeviceptr) -> CUresult;
+        extern "C" {
+            fn cuMemGetAddressRange_v2(pbase: *mut CUdeviceptr, psize: *mut usize, dptr: CUdeviceptr) -> CUresult;
+        }
         cuMemGetAddressRange_v2(pbase, psize, dptr)
     }
 }
@@ -11503,7 +12081,9 @@ pub unsafe fn cuMemGetAllocationGranularity(granularity: *mut usize, prop: *cons
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemGetAllocationGranularity(granularity: *mut usize, prop: *const CUmemAllocationProp, option: CUmemAllocationGranularity_flags) -> CUresult;
+        extern "C" {
+            fn cuMemGetAllocationGranularity(granularity: *mut usize, prop: *const CUmemAllocationProp, option: CUmemAllocationGranularity_flags) -> CUresult;
+        }
         cuMemGetAllocationGranularity(granularity, prop, option)
     }
 }
@@ -11517,7 +12097,9 @@ pub unsafe fn cuMemGetAllocationPropertiesFromHandle(prop: *mut CUmemAllocationP
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemGetAllocationPropertiesFromHandle(prop: *mut CUmemAllocationProp, handle: CUmemGenericAllocationHandle) -> CUresult;
+        extern "C" {
+            fn cuMemGetAllocationPropertiesFromHandle(prop: *mut CUmemAllocationProp, handle: CUmemGenericAllocationHandle) -> CUresult;
+        }
         cuMemGetAllocationPropertiesFromHandle(prop, handle)
     }
 }
@@ -11532,7 +12114,9 @@ pub unsafe fn cuMemGetDefaultMemPool(pool_out: *mut CUmemoryPool, location: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemGetDefaultMemPool(pool_out: *mut CUmemoryPool, location: *mut CUmemLocation, type_: CUmemAllocationType) -> CUresult;
+        extern "C" {
+            fn cuMemGetDefaultMemPool(pool_out: *mut CUmemoryPool, location: *mut CUmemLocation, type_: CUmemAllocationType) -> CUresult;
+        }
         cuMemGetDefaultMemPool(pool_out, location, type_)
     }
 }
@@ -11547,7 +12131,9 @@ pub unsafe fn cuMemGetHandleForAddressRange(handle: *mut ::core::ffi::c_void, dp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemGetHandleForAddressRange(handle: *mut ::core::ffi::c_void, dptr: CUdeviceptr, size: usize, handleType: CUmemRangeHandleType, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuMemGetHandleForAddressRange(handle: *mut ::core::ffi::c_void, dptr: CUdeviceptr, size: usize, handleType: CUmemRangeHandleType, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuMemGetHandleForAddressRange(handle, dptr, size, handleType, flags)
     }
 }
@@ -11561,7 +12147,9 @@ pub unsafe fn cuMemGetInfo_v2(free: *mut usize, total: *mut usize) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemGetInfo_v2(free: *mut usize, total: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuMemGetInfo_v2(free: *mut usize, total: *mut usize) -> CUresult;
+        }
         cuMemGetInfo_v2(free, total)
     }
 }
@@ -11576,7 +12164,9 @@ pub unsafe fn cuMemGetMemPool(pool: *mut CUmemoryPool, location: *mut CUmemLocat
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemGetMemPool(pool: *mut CUmemoryPool, location: *mut CUmemLocation, type_: CUmemAllocationType) -> CUresult;
+        extern "C" {
+            fn cuMemGetMemPool(pool: *mut CUmemoryPool, location: *mut CUmemLocation, type_: CUmemAllocationType) -> CUresult;
+        }
         cuMemGetMemPool(pool, location, type_)
     }
 }
@@ -11590,7 +12180,9 @@ pub unsafe fn cuMemHostAlloc(pp: *mut *mut ::core::ffi::c_void, bytesize: usize,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemHostAlloc(pp: *mut *mut ::core::ffi::c_void, bytesize: usize, Flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuMemHostAlloc(pp: *mut *mut ::core::ffi::c_void, bytesize: usize, Flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuMemHostAlloc(pp, bytesize, Flags)
     }
 }
@@ -11604,7 +12196,9 @@ pub unsafe fn cuMemHostGetDevicePointer_v2(pdptr: *mut CUdeviceptr, p: *mut ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemHostGetDevicePointer_v2(pdptr: *mut CUdeviceptr, p: *mut ::core::ffi::c_void, Flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuMemHostGetDevicePointer_v2(pdptr: *mut CUdeviceptr, p: *mut ::core::ffi::c_void, Flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuMemHostGetDevicePointer_v2(pdptr, p, Flags)
     }
 }
@@ -11618,7 +12212,9 @@ pub unsafe fn cuMemHostGetFlags(pFlags: *mut ::core::ffi::c_uint, p: *mut ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemHostGetFlags(pFlags: *mut ::core::ffi::c_uint, p: *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuMemHostGetFlags(pFlags: *mut ::core::ffi::c_uint, p: *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuMemHostGetFlags(pFlags, p)
     }
 }
@@ -11632,7 +12228,9 @@ pub unsafe fn cuMemHostRegister_v2(p: *mut ::core::ffi::c_void, bytesize: usize,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemHostRegister_v2(p: *mut ::core::ffi::c_void, bytesize: usize, Flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuMemHostRegister_v2(p: *mut ::core::ffi::c_void, bytesize: usize, Flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuMemHostRegister_v2(p, bytesize, Flags)
     }
 }
@@ -11646,7 +12244,9 @@ pub unsafe fn cuMemHostUnregister(p: *mut ::core::ffi::c_void) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemHostUnregister(p: *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuMemHostUnregister(p: *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuMemHostUnregister(p)
     }
 }
@@ -11660,7 +12260,9 @@ pub unsafe fn cuMemImportFromShareableHandle(handle: *mut CUmemGenericAllocation
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemImportFromShareableHandle(handle: *mut CUmemGenericAllocationHandle, osHandle: *mut ::core::ffi::c_void, shHandleType: CUmemAllocationHandleType) -> CUresult;
+        extern "C" {
+            fn cuMemImportFromShareableHandle(handle: *mut CUmemGenericAllocationHandle, osHandle: *mut ::core::ffi::c_void, shHandleType: CUmemAllocationHandleType) -> CUresult;
+        }
         cuMemImportFromShareableHandle(handle, osHandle, shHandleType)
     }
 }
@@ -11674,7 +12276,9 @@ pub unsafe fn cuMemMap(ptr: CUdeviceptr, size: usize, offset: usize, handle: CUm
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemMap(ptr: CUdeviceptr, size: usize, offset: usize, handle: CUmemGenericAllocationHandle, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuMemMap(ptr: CUdeviceptr, size: usize, offset: usize, handle: CUmemGenericAllocationHandle, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuMemMap(ptr, size, offset, handle, flags)
     }
 }
@@ -11688,7 +12292,9 @@ pub unsafe fn cuMemMapArrayAsync(mapInfoList: *mut CUarrayMapInfo, count: ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemMapArrayAsync(mapInfoList: *mut CUarrayMapInfo, count: ::core::ffi::c_uint, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemMapArrayAsync(mapInfoList: *mut CUarrayMapInfo, count: ::core::ffi::c_uint, hStream: CUstream) -> CUresult;
+        }
         cuMemMapArrayAsync(mapInfoList, count, hStream)
     }
 }
@@ -11702,7 +12308,9 @@ pub unsafe fn cuMemPoolCreate(pool: *mut CUmemoryPool, poolProps: *const CUmemPo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemPoolCreate(pool: *mut CUmemoryPool, poolProps: *const CUmemPoolProps) -> CUresult;
+        extern "C" {
+            fn cuMemPoolCreate(pool: *mut CUmemoryPool, poolProps: *const CUmemPoolProps) -> CUresult;
+        }
         cuMemPoolCreate(pool, poolProps)
     }
 }
@@ -11716,7 +12324,9 @@ pub unsafe fn cuMemPoolDestroy(pool: CUmemoryPool) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemPoolDestroy(pool: CUmemoryPool) -> CUresult;
+        extern "C" {
+            fn cuMemPoolDestroy(pool: CUmemoryPool) -> CUresult;
+        }
         cuMemPoolDestroy(pool)
     }
 }
@@ -11730,7 +12340,9 @@ pub unsafe fn cuMemPoolExportPointer(shareData_out: *mut CUmemPoolPtrExportData,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemPoolExportPointer(shareData_out: *mut CUmemPoolPtrExportData, ptr: CUdeviceptr) -> CUresult;
+        extern "C" {
+            fn cuMemPoolExportPointer(shareData_out: *mut CUmemPoolPtrExportData, ptr: CUdeviceptr) -> CUresult;
+        }
         cuMemPoolExportPointer(shareData_out, ptr)
     }
 }
@@ -11744,7 +12356,9 @@ pub unsafe fn cuMemPoolExportToShareableHandle(handle_out: *mut ::core::ffi::c_v
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemPoolExportToShareableHandle(handle_out: *mut ::core::ffi::c_void, pool: CUmemoryPool, handleType: CUmemAllocationHandleType, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuMemPoolExportToShareableHandle(handle_out: *mut ::core::ffi::c_void, pool: CUmemoryPool, handleType: CUmemAllocationHandleType, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuMemPoolExportToShareableHandle(handle_out, pool, handleType, flags)
     }
 }
@@ -11758,7 +12372,9 @@ pub unsafe fn cuMemPoolGetAccess(flags: *mut CUmemAccess_flags, memPool: CUmemor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemPoolGetAccess(flags: *mut CUmemAccess_flags, memPool: CUmemoryPool, location: *mut CUmemLocation) -> CUresult;
+        extern "C" {
+            fn cuMemPoolGetAccess(flags: *mut CUmemAccess_flags, memPool: CUmemoryPool, location: *mut CUmemLocation) -> CUresult;
+        }
         cuMemPoolGetAccess(flags, memPool, location)
     }
 }
@@ -11772,7 +12388,9 @@ pub unsafe fn cuMemPoolGetAttribute(pool: CUmemoryPool, attr: CUmemPool_attribut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemPoolGetAttribute(pool: CUmemoryPool, attr: CUmemPool_attribute, value: *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuMemPoolGetAttribute(pool: CUmemoryPool, attr: CUmemPool_attribute, value: *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuMemPoolGetAttribute(pool, attr, value)
     }
 }
@@ -11786,7 +12404,9 @@ pub unsafe fn cuMemPoolImportFromShareableHandle(pool_out: *mut CUmemoryPool, ha
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemPoolImportFromShareableHandle(pool_out: *mut CUmemoryPool, handle: *mut ::core::ffi::c_void, handleType: CUmemAllocationHandleType, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuMemPoolImportFromShareableHandle(pool_out: *mut CUmemoryPool, handle: *mut ::core::ffi::c_void, handleType: CUmemAllocationHandleType, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuMemPoolImportFromShareableHandle(pool_out, handle, handleType, flags)
     }
 }
@@ -11800,7 +12420,9 @@ pub unsafe fn cuMemPoolImportPointer(ptr_out: *mut CUdeviceptr, pool: CUmemoryPo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemPoolImportPointer(ptr_out: *mut CUdeviceptr, pool: CUmemoryPool, shareData: *mut CUmemPoolPtrExportData) -> CUresult;
+        extern "C" {
+            fn cuMemPoolImportPointer(ptr_out: *mut CUdeviceptr, pool: CUmemoryPool, shareData: *mut CUmemPoolPtrExportData) -> CUresult;
+        }
         cuMemPoolImportPointer(ptr_out, pool, shareData)
     }
 }
@@ -11814,7 +12436,9 @@ pub unsafe fn cuMemPoolSetAccess(pool: CUmemoryPool, map: *const CUmemAccessDesc
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemPoolSetAccess(pool: CUmemoryPool, map: *const CUmemAccessDesc, count: usize) -> CUresult;
+        extern "C" {
+            fn cuMemPoolSetAccess(pool: CUmemoryPool, map: *const CUmemAccessDesc, count: usize) -> CUresult;
+        }
         cuMemPoolSetAccess(pool, map, count)
     }
 }
@@ -11828,7 +12452,9 @@ pub unsafe fn cuMemPoolSetAttribute(pool: CUmemoryPool, attr: CUmemPool_attribut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemPoolSetAttribute(pool: CUmemoryPool, attr: CUmemPool_attribute, value: *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuMemPoolSetAttribute(pool: CUmemoryPool, attr: CUmemPool_attribute, value: *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuMemPoolSetAttribute(pool, attr, value)
     }
 }
@@ -11842,7 +12468,9 @@ pub unsafe fn cuMemPoolTrimTo(pool: CUmemoryPool, minBytesToKeep: usize) -> CUre
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemPoolTrimTo(pool: CUmemoryPool, minBytesToKeep: usize) -> CUresult;
+        extern "C" {
+            fn cuMemPoolTrimTo(pool: CUmemoryPool, minBytesToKeep: usize) -> CUresult;
+        }
         cuMemPoolTrimTo(pool, minBytesToKeep)
     }
 }
@@ -11857,7 +12485,9 @@ pub unsafe fn cuMemPrefetchAsync(devPtr: CUdeviceptr, count: usize, dstDevice: C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemPrefetchAsync(devPtr: CUdeviceptr, count: usize, dstDevice: CUdevice, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemPrefetchAsync(devPtr: CUdeviceptr, count: usize, dstDevice: CUdevice, hStream: CUstream) -> CUresult;
+        }
         cuMemPrefetchAsync(devPtr, count, dstDevice, hStream)
     }
 }
@@ -11872,7 +12502,9 @@ pub unsafe fn cuMemPrefetchAsync_v2(devPtr: CUdeviceptr, count: usize, location:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemPrefetchAsync_v2(devPtr: CUdeviceptr, count: usize, location: CUmemLocation, flags: ::core::ffi::c_uint, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemPrefetchAsync_v2(devPtr: CUdeviceptr, count: usize, location: CUmemLocation, flags: ::core::ffi::c_uint, hStream: CUstream) -> CUresult;
+        }
         cuMemPrefetchAsync_v2(devPtr, count, location, flags, hStream)
     }
 }
@@ -11887,7 +12519,9 @@ pub unsafe fn cuMemPrefetchBatchAsync(dptrs: *mut CUdeviceptr, sizes: *mut usize
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemPrefetchBatchAsync(dptrs: *mut CUdeviceptr, sizes: *mut usize, count: usize, prefetchLocs: *mut CUmemLocation, prefetchLocIdxs: *mut usize, numPrefetchLocs: usize, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemPrefetchBatchAsync(dptrs: *mut CUdeviceptr, sizes: *mut usize, count: usize, prefetchLocs: *mut CUmemLocation, prefetchLocIdxs: *mut usize, numPrefetchLocs: usize, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult;
+        }
         cuMemPrefetchBatchAsync(dptrs, sizes, count, prefetchLocs, prefetchLocIdxs, numPrefetchLocs, flags, hStream)
     }
 }
@@ -11901,7 +12535,9 @@ pub unsafe fn cuMemRangeGetAttribute(data: *mut ::core::ffi::c_void, dataSize: u
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemRangeGetAttribute(data: *mut ::core::ffi::c_void, dataSize: usize, attribute: CUmem_range_attribute, devPtr: CUdeviceptr, count: usize) -> CUresult;
+        extern "C" {
+            fn cuMemRangeGetAttribute(data: *mut ::core::ffi::c_void, dataSize: usize, attribute: CUmem_range_attribute, devPtr: CUdeviceptr, count: usize) -> CUresult;
+        }
         cuMemRangeGetAttribute(data, dataSize, attribute, devPtr, count)
     }
 }
@@ -11915,7 +12551,9 @@ pub unsafe fn cuMemRangeGetAttributes(data: *mut *mut ::core::ffi::c_void, dataS
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemRangeGetAttributes(data: *mut *mut ::core::ffi::c_void, dataSizes: *mut usize, attributes: *mut CUmem_range_attribute, numAttributes: usize, devPtr: CUdeviceptr, count: usize) -> CUresult;
+        extern "C" {
+            fn cuMemRangeGetAttributes(data: *mut *mut ::core::ffi::c_void, dataSizes: *mut usize, attributes: *mut CUmem_range_attribute, numAttributes: usize, devPtr: CUdeviceptr, count: usize) -> CUresult;
+        }
         cuMemRangeGetAttributes(data, dataSizes, attributes, numAttributes, devPtr, count)
     }
 }
@@ -11929,7 +12567,9 @@ pub unsafe fn cuMemRelease(handle: CUmemGenericAllocationHandle) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemRelease(handle: CUmemGenericAllocationHandle) -> CUresult;
+        extern "C" {
+            fn cuMemRelease(handle: CUmemGenericAllocationHandle) -> CUresult;
+        }
         cuMemRelease(handle)
     }
 }
@@ -11943,7 +12583,9 @@ pub unsafe fn cuMemRetainAllocationHandle(handle: *mut CUmemGenericAllocationHan
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemRetainAllocationHandle(handle: *mut CUmemGenericAllocationHandle, addr: *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuMemRetainAllocationHandle(handle: *mut CUmemGenericAllocationHandle, addr: *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuMemRetainAllocationHandle(handle, addr)
     }
 }
@@ -11957,7 +12599,9 @@ pub unsafe fn cuMemSetAccess(ptr: CUdeviceptr, size: usize, desc: *const CUmemAc
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemSetAccess(ptr: CUdeviceptr, size: usize, desc: *const CUmemAccessDesc, count: usize) -> CUresult;
+        extern "C" {
+            fn cuMemSetAccess(ptr: CUdeviceptr, size: usize, desc: *const CUmemAccessDesc, count: usize) -> CUresult;
+        }
         cuMemSetAccess(ptr, size, desc, count)
     }
 }
@@ -11972,7 +12616,9 @@ pub unsafe fn cuMemSetMemPool(location: *mut CUmemLocation, type_: CUmemAllocati
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemSetMemPool(location: *mut CUmemLocation, type_: CUmemAllocationType, pool: CUmemoryPool) -> CUresult;
+        extern "C" {
+            fn cuMemSetMemPool(location: *mut CUmemLocation, type_: CUmemAllocationType, pool: CUmemoryPool) -> CUresult;
+        }
         cuMemSetMemPool(location, type_, pool)
     }
 }
@@ -11986,7 +12632,9 @@ pub unsafe fn cuMemUnmap(ptr: CUdeviceptr, size: usize) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemUnmap(ptr: CUdeviceptr, size: usize) -> CUresult;
+        extern "C" {
+            fn cuMemUnmap(ptr: CUdeviceptr, size: usize) -> CUresult;
+        }
         cuMemUnmap(ptr, size)
     }
 }
@@ -12000,7 +12648,9 @@ pub unsafe fn cuMemcpy(dst: CUdeviceptr, src: CUdeviceptr, ByteCount: usize) -> 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpy(dst: CUdeviceptr, src: CUdeviceptr, ByteCount: usize) -> CUresult;
+        extern "C" {
+            fn cuMemcpy(dst: CUdeviceptr, src: CUdeviceptr, ByteCount: usize) -> CUresult;
+        }
         cuMemcpy(dst, src, ByteCount)
     }
 }
@@ -12014,7 +12664,9 @@ pub unsafe fn cuMemcpy2DAsync_v2(pCopy: *const CUDA_MEMCPY2D, hStream: CUstream)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpy2DAsync_v2(pCopy: *const CUDA_MEMCPY2D, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpy2DAsync_v2(pCopy: *const CUDA_MEMCPY2D, hStream: CUstream) -> CUresult;
+        }
         cuMemcpy2DAsync_v2(pCopy, hStream)
     }
 }
@@ -12028,7 +12680,9 @@ pub unsafe fn cuMemcpy2DUnaligned_v2(pCopy: *const CUDA_MEMCPY2D) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpy2DUnaligned_v2(pCopy: *const CUDA_MEMCPY2D) -> CUresult;
+        extern "C" {
+            fn cuMemcpy2DUnaligned_v2(pCopy: *const CUDA_MEMCPY2D) -> CUresult;
+        }
         cuMemcpy2DUnaligned_v2(pCopy)
     }
 }
@@ -12042,7 +12696,9 @@ pub unsafe fn cuMemcpy2D_v2(pCopy: *const CUDA_MEMCPY2D) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpy2D_v2(pCopy: *const CUDA_MEMCPY2D) -> CUresult;
+        extern "C" {
+            fn cuMemcpy2D_v2(pCopy: *const CUDA_MEMCPY2D) -> CUresult;
+        }
         cuMemcpy2D_v2(pCopy)
     }
 }
@@ -12056,7 +12712,9 @@ pub unsafe fn cuMemcpy3DAsync_v2(pCopy: *const CUDA_MEMCPY3D, hStream: CUstream)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpy3DAsync_v2(pCopy: *const CUDA_MEMCPY3D, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpy3DAsync_v2(pCopy: *const CUDA_MEMCPY3D, hStream: CUstream) -> CUresult;
+        }
         cuMemcpy3DAsync_v2(pCopy, hStream)
     }
 }
@@ -12071,7 +12729,9 @@ pub unsafe fn cuMemcpy3DBatchAsync(numOps: usize, opList: *mut CUDA_MEMCPY3D_BAT
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpy3DBatchAsync(numOps: usize, opList: *mut CUDA_MEMCPY3D_BATCH_OP, failIdx: *mut usize, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpy3DBatchAsync(numOps: usize, opList: *mut CUDA_MEMCPY3D_BATCH_OP, failIdx: *mut usize, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult;
+        }
         cuMemcpy3DBatchAsync(numOps, opList, failIdx, flags, hStream)
     }
 }
@@ -12086,7 +12746,9 @@ pub unsafe fn cuMemcpy3DBatchAsync_v2(numOps: usize, opList: *mut CUDA_MEMCPY3D_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpy3DBatchAsync_v2(numOps: usize, opList: *mut CUDA_MEMCPY3D_BATCH_OP, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpy3DBatchAsync_v2(numOps: usize, opList: *mut CUDA_MEMCPY3D_BATCH_OP, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult;
+        }
         cuMemcpy3DBatchAsync_v2(numOps, opList, flags, hStream)
     }
 }
@@ -12100,7 +12762,9 @@ pub unsafe fn cuMemcpy3DPeer(pCopy: *const CUDA_MEMCPY3D_PEER) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpy3DPeer(pCopy: *const CUDA_MEMCPY3D_PEER) -> CUresult;
+        extern "C" {
+            fn cuMemcpy3DPeer(pCopy: *const CUDA_MEMCPY3D_PEER) -> CUresult;
+        }
         cuMemcpy3DPeer(pCopy)
     }
 }
@@ -12114,7 +12778,9 @@ pub unsafe fn cuMemcpy3DPeerAsync(pCopy: *const CUDA_MEMCPY3D_PEER, hStream: CUs
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpy3DPeerAsync(pCopy: *const CUDA_MEMCPY3D_PEER, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpy3DPeerAsync(pCopy: *const CUDA_MEMCPY3D_PEER, hStream: CUstream) -> CUresult;
+        }
         cuMemcpy3DPeerAsync(pCopy, hStream)
     }
 }
@@ -12129,7 +12795,9 @@ pub unsafe fn cuMemcpy3DWithAttributesAsync(op: *mut CUDA_MEMCPY3D_BATCH_OP, fla
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpy3DWithAttributesAsync(op: *mut CUDA_MEMCPY3D_BATCH_OP, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpy3DWithAttributesAsync(op: *mut CUDA_MEMCPY3D_BATCH_OP, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult;
+        }
         cuMemcpy3DWithAttributesAsync(op, flags, hStream)
     }
 }
@@ -12143,7 +12811,9 @@ pub unsafe fn cuMemcpy3D_v2(pCopy: *const CUDA_MEMCPY3D) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpy3D_v2(pCopy: *const CUDA_MEMCPY3D) -> CUresult;
+        extern "C" {
+            fn cuMemcpy3D_v2(pCopy: *const CUDA_MEMCPY3D) -> CUresult;
+        }
         cuMemcpy3D_v2(pCopy)
     }
 }
@@ -12157,7 +12827,9 @@ pub unsafe fn cuMemcpyAsync(dst: CUdeviceptr, src: CUdeviceptr, ByteCount: usize
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyAsync(dst: CUdeviceptr, src: CUdeviceptr, ByteCount: usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpyAsync(dst: CUdeviceptr, src: CUdeviceptr, ByteCount: usize, hStream: CUstream) -> CUresult;
+        }
         cuMemcpyAsync(dst, src, ByteCount, hStream)
     }
 }
@@ -12171,7 +12843,9 @@ pub unsafe fn cuMemcpyAtoA_v2(dstArray: CUarray, dstOffset: usize, srcArray: CUa
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyAtoA_v2(dstArray: CUarray, dstOffset: usize, srcArray: CUarray, srcOffset: usize, ByteCount: usize) -> CUresult;
+        extern "C" {
+            fn cuMemcpyAtoA_v2(dstArray: CUarray, dstOffset: usize, srcArray: CUarray, srcOffset: usize, ByteCount: usize) -> CUresult;
+        }
         cuMemcpyAtoA_v2(dstArray, dstOffset, srcArray, srcOffset, ByteCount)
     }
 }
@@ -12185,7 +12859,9 @@ pub unsafe fn cuMemcpyAtoD_v2(dstDevice: CUdeviceptr, srcArray: CUarray, srcOffs
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyAtoD_v2(dstDevice: CUdeviceptr, srcArray: CUarray, srcOffset: usize, ByteCount: usize) -> CUresult;
+        extern "C" {
+            fn cuMemcpyAtoD_v2(dstDevice: CUdeviceptr, srcArray: CUarray, srcOffset: usize, ByteCount: usize) -> CUresult;
+        }
         cuMemcpyAtoD_v2(dstDevice, srcArray, srcOffset, ByteCount)
     }
 }
@@ -12199,7 +12875,9 @@ pub unsafe fn cuMemcpyAtoHAsync_v2(dstHost: *mut ::core::ffi::c_void, srcArray: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyAtoHAsync_v2(dstHost: *mut ::core::ffi::c_void, srcArray: CUarray, srcOffset: usize, ByteCount: usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpyAtoHAsync_v2(dstHost: *mut ::core::ffi::c_void, srcArray: CUarray, srcOffset: usize, ByteCount: usize, hStream: CUstream) -> CUresult;
+        }
         cuMemcpyAtoHAsync_v2(dstHost, srcArray, srcOffset, ByteCount, hStream)
     }
 }
@@ -12213,7 +12891,9 @@ pub unsafe fn cuMemcpyAtoH_v2(dstHost: *mut ::core::ffi::c_void, srcArray: CUarr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyAtoH_v2(dstHost: *mut ::core::ffi::c_void, srcArray: CUarray, srcOffset: usize, ByteCount: usize) -> CUresult;
+        extern "C" {
+            fn cuMemcpyAtoH_v2(dstHost: *mut ::core::ffi::c_void, srcArray: CUarray, srcOffset: usize, ByteCount: usize) -> CUresult;
+        }
         cuMemcpyAtoH_v2(dstHost, srcArray, srcOffset, ByteCount)
     }
 }
@@ -12228,7 +12908,9 @@ pub unsafe fn cuMemcpyBatchAsync(dsts: *mut CUdeviceptr, srcs: *mut CUdeviceptr,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyBatchAsync(dsts: *mut CUdeviceptr, srcs: *mut CUdeviceptr, sizes: *mut usize, count: usize, attrs: *mut CUmemcpyAttributes, attrsIdxs: *mut usize, numAttrs: usize, failIdx: *mut usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpyBatchAsync(dsts: *mut CUdeviceptr, srcs: *mut CUdeviceptr, sizes: *mut usize, count: usize, attrs: *mut CUmemcpyAttributes, attrsIdxs: *mut usize, numAttrs: usize, failIdx: *mut usize, hStream: CUstream) -> CUresult;
+        }
         cuMemcpyBatchAsync(dsts, srcs, sizes, count, attrs, attrsIdxs, numAttrs, failIdx, hStream)
     }
 }
@@ -12243,7 +12925,9 @@ pub unsafe fn cuMemcpyBatchAsync_v2(dsts: *mut CUdeviceptr, srcs: *mut CUdevicep
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyBatchAsync_v2(dsts: *mut CUdeviceptr, srcs: *mut CUdeviceptr, sizes: *mut usize, count: usize, attrs: *mut CUmemcpyAttributes, attrsIdxs: *mut usize, numAttrs: usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpyBatchAsync_v2(dsts: *mut CUdeviceptr, srcs: *mut CUdeviceptr, sizes: *mut usize, count: usize, attrs: *mut CUmemcpyAttributes, attrsIdxs: *mut usize, numAttrs: usize, hStream: CUstream) -> CUresult;
+        }
         cuMemcpyBatchAsync_v2(dsts, srcs, sizes, count, attrs, attrsIdxs, numAttrs, hStream)
     }
 }
@@ -12257,7 +12941,9 @@ pub unsafe fn cuMemcpyDtoA_v2(dstArray: CUarray, dstOffset: usize, srcDevice: CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyDtoA_v2(dstArray: CUarray, dstOffset: usize, srcDevice: CUdeviceptr, ByteCount: usize) -> CUresult;
+        extern "C" {
+            fn cuMemcpyDtoA_v2(dstArray: CUarray, dstOffset: usize, srcDevice: CUdeviceptr, ByteCount: usize) -> CUresult;
+        }
         cuMemcpyDtoA_v2(dstArray, dstOffset, srcDevice, ByteCount)
     }
 }
@@ -12271,7 +12957,9 @@ pub unsafe fn cuMemcpyDtoDAsync_v2(dstDevice: CUdeviceptr, srcDevice: CUdevicept
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyDtoDAsync_v2(dstDevice: CUdeviceptr, srcDevice: CUdeviceptr, ByteCount: usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpyDtoDAsync_v2(dstDevice: CUdeviceptr, srcDevice: CUdeviceptr, ByteCount: usize, hStream: CUstream) -> CUresult;
+        }
         cuMemcpyDtoDAsync_v2(dstDevice, srcDevice, ByteCount, hStream)
     }
 }
@@ -12285,7 +12973,9 @@ pub unsafe fn cuMemcpyDtoD_v2(dstDevice: CUdeviceptr, srcDevice: CUdeviceptr, By
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyDtoD_v2(dstDevice: CUdeviceptr, srcDevice: CUdeviceptr, ByteCount: usize) -> CUresult;
+        extern "C" {
+            fn cuMemcpyDtoD_v2(dstDevice: CUdeviceptr, srcDevice: CUdeviceptr, ByteCount: usize) -> CUresult;
+        }
         cuMemcpyDtoD_v2(dstDevice, srcDevice, ByteCount)
     }
 }
@@ -12299,7 +12989,9 @@ pub unsafe fn cuMemcpyDtoHAsync_v2(dstHost: *mut ::core::ffi::c_void, srcDevice:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyDtoHAsync_v2(dstHost: *mut ::core::ffi::c_void, srcDevice: CUdeviceptr, ByteCount: usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpyDtoHAsync_v2(dstHost: *mut ::core::ffi::c_void, srcDevice: CUdeviceptr, ByteCount: usize, hStream: CUstream) -> CUresult;
+        }
         cuMemcpyDtoHAsync_v2(dstHost, srcDevice, ByteCount, hStream)
     }
 }
@@ -12313,7 +13005,9 @@ pub unsafe fn cuMemcpyDtoH_v2(dstHost: *mut ::core::ffi::c_void, srcDevice: CUde
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyDtoH_v2(dstHost: *mut ::core::ffi::c_void, srcDevice: CUdeviceptr, ByteCount: usize) -> CUresult;
+        extern "C" {
+            fn cuMemcpyDtoH_v2(dstHost: *mut ::core::ffi::c_void, srcDevice: CUdeviceptr, ByteCount: usize) -> CUresult;
+        }
         cuMemcpyDtoH_v2(dstHost, srcDevice, ByteCount)
     }
 }
@@ -12327,7 +13021,9 @@ pub unsafe fn cuMemcpyHtoAAsync_v2(dstArray: CUarray, dstOffset: usize, srcHost:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyHtoAAsync_v2(dstArray: CUarray, dstOffset: usize, srcHost: *const ::core::ffi::c_void, ByteCount: usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpyHtoAAsync_v2(dstArray: CUarray, dstOffset: usize, srcHost: *const ::core::ffi::c_void, ByteCount: usize, hStream: CUstream) -> CUresult;
+        }
         cuMemcpyHtoAAsync_v2(dstArray, dstOffset, srcHost, ByteCount, hStream)
     }
 }
@@ -12341,7 +13037,9 @@ pub unsafe fn cuMemcpyHtoA_v2(dstArray: CUarray, dstOffset: usize, srcHost: *con
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyHtoA_v2(dstArray: CUarray, dstOffset: usize, srcHost: *const ::core::ffi::c_void, ByteCount: usize) -> CUresult;
+        extern "C" {
+            fn cuMemcpyHtoA_v2(dstArray: CUarray, dstOffset: usize, srcHost: *const ::core::ffi::c_void, ByteCount: usize) -> CUresult;
+        }
         cuMemcpyHtoA_v2(dstArray, dstOffset, srcHost, ByteCount)
     }
 }
@@ -12355,7 +13053,9 @@ pub unsafe fn cuMemcpyHtoDAsync_v2(dstDevice: CUdeviceptr, srcHost: *const ::cor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyHtoDAsync_v2(dstDevice: CUdeviceptr, srcHost: *const ::core::ffi::c_void, ByteCount: usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpyHtoDAsync_v2(dstDevice: CUdeviceptr, srcHost: *const ::core::ffi::c_void, ByteCount: usize, hStream: CUstream) -> CUresult;
+        }
         cuMemcpyHtoDAsync_v2(dstDevice, srcHost, ByteCount, hStream)
     }
 }
@@ -12369,7 +13069,9 @@ pub unsafe fn cuMemcpyHtoD_v2(dstDevice: CUdeviceptr, srcHost: *const ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyHtoD_v2(dstDevice: CUdeviceptr, srcHost: *const ::core::ffi::c_void, ByteCount: usize) -> CUresult;
+        extern "C" {
+            fn cuMemcpyHtoD_v2(dstDevice: CUdeviceptr, srcHost: *const ::core::ffi::c_void, ByteCount: usize) -> CUresult;
+        }
         cuMemcpyHtoD_v2(dstDevice, srcHost, ByteCount)
     }
 }
@@ -12383,7 +13085,9 @@ pub unsafe fn cuMemcpyPeer(dstDevice: CUdeviceptr, dstContext: CUcontext, srcDev
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyPeer(dstDevice: CUdeviceptr, dstContext: CUcontext, srcDevice: CUdeviceptr, srcContext: CUcontext, ByteCount: usize) -> CUresult;
+        extern "C" {
+            fn cuMemcpyPeer(dstDevice: CUdeviceptr, dstContext: CUcontext, srcDevice: CUdeviceptr, srcContext: CUcontext, ByteCount: usize) -> CUresult;
+        }
         cuMemcpyPeer(dstDevice, dstContext, srcDevice, srcContext, ByteCount)
     }
 }
@@ -12397,7 +13101,9 @@ pub unsafe fn cuMemcpyPeerAsync(dstDevice: CUdeviceptr, dstContext: CUcontext, s
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyPeerAsync(dstDevice: CUdeviceptr, dstContext: CUcontext, srcDevice: CUdeviceptr, srcContext: CUcontext, ByteCount: usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpyPeerAsync(dstDevice: CUdeviceptr, dstContext: CUcontext, srcDevice: CUdeviceptr, srcContext: CUcontext, ByteCount: usize, hStream: CUstream) -> CUresult;
+        }
         cuMemcpyPeerAsync(dstDevice, dstContext, srcDevice, srcContext, ByteCount, hStream)
     }
 }
@@ -12412,7 +13118,9 @@ pub unsafe fn cuMemcpyWithAttributesAsync(dst: CUdeviceptr, src: CUdeviceptr, si
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemcpyWithAttributesAsync(dst: CUdeviceptr, src: CUdeviceptr, size: usize, attr: *mut CUmemcpyAttributes, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemcpyWithAttributesAsync(dst: CUdeviceptr, src: CUdeviceptr, size: usize, attr: *mut CUmemcpyAttributes, hStream: CUstream) -> CUresult;
+        }
         cuMemcpyWithAttributesAsync(dst, src, size, attr, hStream)
     }
 }
@@ -12426,7 +13134,9 @@ pub unsafe fn cuMemsetD16Async(dstDevice: CUdeviceptr, us: ::core::ffi::c_ushort
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemsetD16Async(dstDevice: CUdeviceptr, us: ::core::ffi::c_ushort, N: usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemsetD16Async(dstDevice: CUdeviceptr, us: ::core::ffi::c_ushort, N: usize, hStream: CUstream) -> CUresult;
+        }
         cuMemsetD16Async(dstDevice, us, N, hStream)
     }
 }
@@ -12440,7 +13150,9 @@ pub unsafe fn cuMemsetD16_v2(dstDevice: CUdeviceptr, us: ::core::ffi::c_ushort, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemsetD16_v2(dstDevice: CUdeviceptr, us: ::core::ffi::c_ushort, N: usize) -> CUresult;
+        extern "C" {
+            fn cuMemsetD16_v2(dstDevice: CUdeviceptr, us: ::core::ffi::c_ushort, N: usize) -> CUresult;
+        }
         cuMemsetD16_v2(dstDevice, us, N)
     }
 }
@@ -12454,7 +13166,9 @@ pub unsafe fn cuMemsetD2D16Async(dstDevice: CUdeviceptr, dstPitch: usize, us: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemsetD2D16Async(dstDevice: CUdeviceptr, dstPitch: usize, us: ::core::ffi::c_ushort, Width: usize, Height: usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemsetD2D16Async(dstDevice: CUdeviceptr, dstPitch: usize, us: ::core::ffi::c_ushort, Width: usize, Height: usize, hStream: CUstream) -> CUresult;
+        }
         cuMemsetD2D16Async(dstDevice, dstPitch, us, Width, Height, hStream)
     }
 }
@@ -12468,7 +13182,9 @@ pub unsafe fn cuMemsetD2D16_v2(dstDevice: CUdeviceptr, dstPitch: usize, us: ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemsetD2D16_v2(dstDevice: CUdeviceptr, dstPitch: usize, us: ::core::ffi::c_ushort, Width: usize, Height: usize) -> CUresult;
+        extern "C" {
+            fn cuMemsetD2D16_v2(dstDevice: CUdeviceptr, dstPitch: usize, us: ::core::ffi::c_ushort, Width: usize, Height: usize) -> CUresult;
+        }
         cuMemsetD2D16_v2(dstDevice, dstPitch, us, Width, Height)
     }
 }
@@ -12482,7 +13198,9 @@ pub unsafe fn cuMemsetD2D32Async(dstDevice: CUdeviceptr, dstPitch: usize, ui: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemsetD2D32Async(dstDevice: CUdeviceptr, dstPitch: usize, ui: ::core::ffi::c_uint, Width: usize, Height: usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemsetD2D32Async(dstDevice: CUdeviceptr, dstPitch: usize, ui: ::core::ffi::c_uint, Width: usize, Height: usize, hStream: CUstream) -> CUresult;
+        }
         cuMemsetD2D32Async(dstDevice, dstPitch, ui, Width, Height, hStream)
     }
 }
@@ -12496,7 +13214,9 @@ pub unsafe fn cuMemsetD2D32_v2(dstDevice: CUdeviceptr, dstPitch: usize, ui: ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemsetD2D32_v2(dstDevice: CUdeviceptr, dstPitch: usize, ui: ::core::ffi::c_uint, Width: usize, Height: usize) -> CUresult;
+        extern "C" {
+            fn cuMemsetD2D32_v2(dstDevice: CUdeviceptr, dstPitch: usize, ui: ::core::ffi::c_uint, Width: usize, Height: usize) -> CUresult;
+        }
         cuMemsetD2D32_v2(dstDevice, dstPitch, ui, Width, Height)
     }
 }
@@ -12510,7 +13230,9 @@ pub unsafe fn cuMemsetD2D8Async(dstDevice: CUdeviceptr, dstPitch: usize, uc: ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemsetD2D8Async(dstDevice: CUdeviceptr, dstPitch: usize, uc: ::core::ffi::c_uchar, Width: usize, Height: usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemsetD2D8Async(dstDevice: CUdeviceptr, dstPitch: usize, uc: ::core::ffi::c_uchar, Width: usize, Height: usize, hStream: CUstream) -> CUresult;
+        }
         cuMemsetD2D8Async(dstDevice, dstPitch, uc, Width, Height, hStream)
     }
 }
@@ -12524,7 +13246,9 @@ pub unsafe fn cuMemsetD2D8_v2(dstDevice: CUdeviceptr, dstPitch: usize, uc: ::cor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemsetD2D8_v2(dstDevice: CUdeviceptr, dstPitch: usize, uc: ::core::ffi::c_uchar, Width: usize, Height: usize) -> CUresult;
+        extern "C" {
+            fn cuMemsetD2D8_v2(dstDevice: CUdeviceptr, dstPitch: usize, uc: ::core::ffi::c_uchar, Width: usize, Height: usize) -> CUresult;
+        }
         cuMemsetD2D8_v2(dstDevice, dstPitch, uc, Width, Height)
     }
 }
@@ -12538,7 +13262,9 @@ pub unsafe fn cuMemsetD32Async(dstDevice: CUdeviceptr, ui: ::core::ffi::c_uint, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemsetD32Async(dstDevice: CUdeviceptr, ui: ::core::ffi::c_uint, N: usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemsetD32Async(dstDevice: CUdeviceptr, ui: ::core::ffi::c_uint, N: usize, hStream: CUstream) -> CUresult;
+        }
         cuMemsetD32Async(dstDevice, ui, N, hStream)
     }
 }
@@ -12552,7 +13278,9 @@ pub unsafe fn cuMemsetD32_v2(dstDevice: CUdeviceptr, ui: ::core::ffi::c_uint, N:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemsetD32_v2(dstDevice: CUdeviceptr, ui: ::core::ffi::c_uint, N: usize) -> CUresult;
+        extern "C" {
+            fn cuMemsetD32_v2(dstDevice: CUdeviceptr, ui: ::core::ffi::c_uint, N: usize) -> CUresult;
+        }
         cuMemsetD32_v2(dstDevice, ui, N)
     }
 }
@@ -12566,7 +13294,9 @@ pub unsafe fn cuMemsetD8Async(dstDevice: CUdeviceptr, uc: ::core::ffi::c_uchar, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemsetD8Async(dstDevice: CUdeviceptr, uc: ::core::ffi::c_uchar, N: usize, hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuMemsetD8Async(dstDevice: CUdeviceptr, uc: ::core::ffi::c_uchar, N: usize, hStream: CUstream) -> CUresult;
+        }
         cuMemsetD8Async(dstDevice, uc, N, hStream)
     }
 }
@@ -12580,7 +13310,9 @@ pub unsafe fn cuMemsetD8_v2(dstDevice: CUdeviceptr, uc: ::core::ffi::c_uchar, N:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMemsetD8_v2(dstDevice: CUdeviceptr, uc: ::core::ffi::c_uchar, N: usize) -> CUresult;
+        extern "C" {
+            fn cuMemsetD8_v2(dstDevice: CUdeviceptr, uc: ::core::ffi::c_uchar, N: usize) -> CUresult;
+        }
         cuMemsetD8_v2(dstDevice, uc, N)
     }
 }
@@ -12594,7 +13326,9 @@ pub unsafe fn cuMipmappedArrayCreate(pHandle: *mut CUmipmappedArray, pMipmappedA
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMipmappedArrayCreate(pHandle: *mut CUmipmappedArray, pMipmappedArrayDesc: *const CUDA_ARRAY3D_DESCRIPTOR, numMipmapLevels: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuMipmappedArrayCreate(pHandle: *mut CUmipmappedArray, pMipmappedArrayDesc: *const CUDA_ARRAY3D_DESCRIPTOR, numMipmapLevels: ::core::ffi::c_uint) -> CUresult;
+        }
         cuMipmappedArrayCreate(pHandle, pMipmappedArrayDesc, numMipmapLevels)
     }
 }
@@ -12608,7 +13342,9 @@ pub unsafe fn cuMipmappedArrayDestroy(hMipmappedArray: CUmipmappedArray) -> CUre
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMipmappedArrayDestroy(hMipmappedArray: CUmipmappedArray) -> CUresult;
+        extern "C" {
+            fn cuMipmappedArrayDestroy(hMipmappedArray: CUmipmappedArray) -> CUresult;
+        }
         cuMipmappedArrayDestroy(hMipmappedArray)
     }
 }
@@ -12622,7 +13358,9 @@ pub unsafe fn cuMipmappedArrayGetLevel(pLevelArray: *mut CUarray, hMipmappedArra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMipmappedArrayGetLevel(pLevelArray: *mut CUarray, hMipmappedArray: CUmipmappedArray, level: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuMipmappedArrayGetLevel(pLevelArray: *mut CUarray, hMipmappedArray: CUmipmappedArray, level: ::core::ffi::c_uint) -> CUresult;
+        }
         cuMipmappedArrayGetLevel(pLevelArray, hMipmappedArray, level)
     }
 }
@@ -12637,7 +13375,9 @@ pub unsafe fn cuMipmappedArrayGetMemoryRequirements(memoryRequirements: *mut CUD
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMipmappedArrayGetMemoryRequirements(memoryRequirements: *mut CUDA_ARRAY_MEMORY_REQUIREMENTS, mipmap: CUmipmappedArray, device: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuMipmappedArrayGetMemoryRequirements(memoryRequirements: *mut CUDA_ARRAY_MEMORY_REQUIREMENTS, mipmap: CUmipmappedArray, device: CUdevice) -> CUresult;
+        }
         cuMipmappedArrayGetMemoryRequirements(memoryRequirements, mipmap, device)
     }
 }
@@ -12651,7 +13391,9 @@ pub unsafe fn cuMipmappedArrayGetSparseProperties(sparseProperties: *mut CUDA_AR
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMipmappedArrayGetSparseProperties(sparseProperties: *mut CUDA_ARRAY_SPARSE_PROPERTIES, mipmap: CUmipmappedArray) -> CUresult;
+        extern "C" {
+            fn cuMipmappedArrayGetSparseProperties(sparseProperties: *mut CUDA_ARRAY_SPARSE_PROPERTIES, mipmap: CUmipmappedArray) -> CUresult;
+        }
         cuMipmappedArrayGetSparseProperties(sparseProperties, mipmap)
     }
 }
@@ -12666,7 +13408,9 @@ pub unsafe fn cuModuleEnumerateFunctions(functions: *mut CUfunction, numFunction
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuModuleEnumerateFunctions(functions: *mut CUfunction, numFunctions: ::core::ffi::c_uint, mod_: CUmodule) -> CUresult;
+        extern "C" {
+            fn cuModuleEnumerateFunctions(functions: *mut CUfunction, numFunctions: ::core::ffi::c_uint, mod_: CUmodule) -> CUresult;
+        }
         cuModuleEnumerateFunctions(functions, numFunctions, mod_)
     }
 }
@@ -12680,7 +13424,9 @@ pub unsafe fn cuModuleGetFunction(hfunc: *mut CUfunction, hmod: CUmodule, name: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuModuleGetFunction(hfunc: *mut CUfunction, hmod: CUmodule, name: *const ::core::ffi::c_char) -> CUresult;
+        extern "C" {
+            fn cuModuleGetFunction(hfunc: *mut CUfunction, hmod: CUmodule, name: *const ::core::ffi::c_char) -> CUresult;
+        }
         cuModuleGetFunction(hfunc, hmod, name)
     }
 }
@@ -12695,7 +13441,9 @@ pub unsafe fn cuModuleGetFunctionCount(count: *mut ::core::ffi::c_uint, mod_: CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuModuleGetFunctionCount(count: *mut ::core::ffi::c_uint, mod_: CUmodule) -> CUresult;
+        extern "C" {
+            fn cuModuleGetFunctionCount(count: *mut ::core::ffi::c_uint, mod_: CUmodule) -> CUresult;
+        }
         cuModuleGetFunctionCount(count, mod_)
     }
 }
@@ -12709,7 +13457,9 @@ pub unsafe fn cuModuleGetGlobal_v2(dptr: *mut CUdeviceptr, bytes: *mut usize, hm
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuModuleGetGlobal_v2(dptr: *mut CUdeviceptr, bytes: *mut usize, hmod: CUmodule, name: *const ::core::ffi::c_char) -> CUresult;
+        extern "C" {
+            fn cuModuleGetGlobal_v2(dptr: *mut CUdeviceptr, bytes: *mut usize, hmod: CUmodule, name: *const ::core::ffi::c_char) -> CUresult;
+        }
         cuModuleGetGlobal_v2(dptr, bytes, hmod, name)
     }
 }
@@ -12724,7 +13474,9 @@ pub unsafe fn cuModuleGetLoadingMode(mode: *mut CUmoduleLoadingMode) -> CUresult
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuModuleGetLoadingMode(mode: *mut CUmoduleLoadingMode) -> CUresult;
+        extern "C" {
+            fn cuModuleGetLoadingMode(mode: *mut CUmoduleLoadingMode) -> CUresult;
+        }
         cuModuleGetLoadingMode(mode)
     }
 }
@@ -12738,7 +13490,9 @@ pub unsafe fn cuModuleGetSurfRef(pSurfRef: *mut CUsurfref, hmod: CUmodule, name:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuModuleGetSurfRef(pSurfRef: *mut CUsurfref, hmod: CUmodule, name: *const ::core::ffi::c_char) -> CUresult;
+        extern "C" {
+            fn cuModuleGetSurfRef(pSurfRef: *mut CUsurfref, hmod: CUmodule, name: *const ::core::ffi::c_char) -> CUresult;
+        }
         cuModuleGetSurfRef(pSurfRef, hmod, name)
     }
 }
@@ -12752,7 +13506,9 @@ pub unsafe fn cuModuleGetTexRef(pTexRef: *mut CUtexref, hmod: CUmodule, name: *c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuModuleGetTexRef(pTexRef: *mut CUtexref, hmod: CUmodule, name: *const ::core::ffi::c_char) -> CUresult;
+        extern "C" {
+            fn cuModuleGetTexRef(pTexRef: *mut CUtexref, hmod: CUmodule, name: *const ::core::ffi::c_char) -> CUresult;
+        }
         cuModuleGetTexRef(pTexRef, hmod, name)
     }
 }
@@ -12766,7 +13522,9 @@ pub unsafe fn cuModuleLoad(module: *mut CUmodule, fname: *const ::core::ffi::c_c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuModuleLoad(module: *mut CUmodule, fname: *const ::core::ffi::c_char) -> CUresult;
+        extern "C" {
+            fn cuModuleLoad(module: *mut CUmodule, fname: *const ::core::ffi::c_char) -> CUresult;
+        }
         cuModuleLoad(module, fname)
     }
 }
@@ -12780,7 +13538,9 @@ pub unsafe fn cuModuleLoadData(module: *mut CUmodule, image: *const ::core::ffi:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuModuleLoadData(module: *mut CUmodule, image: *const ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuModuleLoadData(module: *mut CUmodule, image: *const ::core::ffi::c_void) -> CUresult;
+        }
         cuModuleLoadData(module, image)
     }
 }
@@ -12794,7 +13554,9 @@ pub unsafe fn cuModuleLoadDataEx(module: *mut CUmodule, image: *const ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuModuleLoadDataEx(module: *mut CUmodule, image: *const ::core::ffi::c_void, numOptions: ::core::ffi::c_uint, options: *mut CUjit_option, optionValues: *mut *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuModuleLoadDataEx(module: *mut CUmodule, image: *const ::core::ffi::c_void, numOptions: ::core::ffi::c_uint, options: *mut CUjit_option, optionValues: *mut *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuModuleLoadDataEx(module, image, numOptions, options, optionValues)
     }
 }
@@ -12808,7 +13570,9 @@ pub unsafe fn cuModuleLoadFatBinary(module: *mut CUmodule, fatCubin: *const ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuModuleLoadFatBinary(module: *mut CUmodule, fatCubin: *const ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuModuleLoadFatBinary(module: *mut CUmodule, fatCubin: *const ::core::ffi::c_void) -> CUresult;
+        }
         cuModuleLoadFatBinary(module, fatCubin)
     }
 }
@@ -12822,7 +13586,9 @@ pub unsafe fn cuModuleUnload(hmod: CUmodule) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuModuleUnload(hmod: CUmodule) -> CUresult;
+        extern "C" {
+            fn cuModuleUnload(hmod: CUmodule) -> CUresult;
+        }
         cuModuleUnload(hmod)
     }
 }
@@ -12837,7 +13603,9 @@ pub unsafe fn cuMulticastAddDevice(mcHandle: CUmemGenericAllocationHandle, dev: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMulticastAddDevice(mcHandle: CUmemGenericAllocationHandle, dev: CUdevice) -> CUresult;
+        extern "C" {
+            fn cuMulticastAddDevice(mcHandle: CUmemGenericAllocationHandle, dev: CUdevice) -> CUresult;
+        }
         cuMulticastAddDevice(mcHandle, dev)
     }
 }
@@ -12852,7 +13620,9 @@ pub unsafe fn cuMulticastBindAddr(mcHandle: CUmemGenericAllocationHandle, mcOffs
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMulticastBindAddr(mcHandle: CUmemGenericAllocationHandle, mcOffset: usize, memptr: CUdeviceptr, size: usize, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuMulticastBindAddr(mcHandle: CUmemGenericAllocationHandle, mcOffset: usize, memptr: CUdeviceptr, size: usize, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuMulticastBindAddr(mcHandle, mcOffset, memptr, size, flags)
     }
 }
@@ -12867,7 +13637,9 @@ pub unsafe fn cuMulticastBindAddr_v2(mcHandle: CUmemGenericAllocationHandle, dev
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMulticastBindAddr_v2(mcHandle: CUmemGenericAllocationHandle, dev: CUdevice, mcOffset: usize, memptr: CUdeviceptr, size: usize, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuMulticastBindAddr_v2(mcHandle: CUmemGenericAllocationHandle, dev: CUdevice, mcOffset: usize, memptr: CUdeviceptr, size: usize, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuMulticastBindAddr_v2(mcHandle, dev, mcOffset, memptr, size, flags)
     }
 }
@@ -12882,7 +13654,9 @@ pub unsafe fn cuMulticastBindMem(mcHandle: CUmemGenericAllocationHandle, mcOffse
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMulticastBindMem(mcHandle: CUmemGenericAllocationHandle, mcOffset: usize, memHandle: CUmemGenericAllocationHandle, memOffset: usize, size: usize, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuMulticastBindMem(mcHandle: CUmemGenericAllocationHandle, mcOffset: usize, memHandle: CUmemGenericAllocationHandle, memOffset: usize, size: usize, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuMulticastBindMem(mcHandle, mcOffset, memHandle, memOffset, size, flags)
     }
 }
@@ -12897,7 +13671,9 @@ pub unsafe fn cuMulticastBindMem_v2(mcHandle: CUmemGenericAllocationHandle, dev:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMulticastBindMem_v2(mcHandle: CUmemGenericAllocationHandle, dev: CUdevice, mcOffset: usize, memHandle: CUmemGenericAllocationHandle, memOffset: usize, size: usize, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuMulticastBindMem_v2(mcHandle: CUmemGenericAllocationHandle, dev: CUdevice, mcOffset: usize, memHandle: CUmemGenericAllocationHandle, memOffset: usize, size: usize, flags: ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuMulticastBindMem_v2(mcHandle, dev, mcOffset, memHandle, memOffset, size, flags)
     }
 }
@@ -12912,7 +13688,9 @@ pub unsafe fn cuMulticastCreate(mcHandle: *mut CUmemGenericAllocationHandle, pro
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMulticastCreate(mcHandle: *mut CUmemGenericAllocationHandle, prop: *const CUmulticastObjectProp) -> CUresult;
+        extern "C" {
+            fn cuMulticastCreate(mcHandle: *mut CUmemGenericAllocationHandle, prop: *const CUmulticastObjectProp) -> CUresult;
+        }
         cuMulticastCreate(mcHandle, prop)
     }
 }
@@ -12927,7 +13705,9 @@ pub unsafe fn cuMulticastGetGranularity(granularity: *mut usize, prop: *const CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMulticastGetGranularity(granularity: *mut usize, prop: *const CUmulticastObjectProp, option: CUmulticastGranularity_flags) -> CUresult;
+        extern "C" {
+            fn cuMulticastGetGranularity(granularity: *mut usize, prop: *const CUmulticastObjectProp, option: CUmulticastGranularity_flags) -> CUresult;
+        }
         cuMulticastGetGranularity(granularity, prop, option)
     }
 }
@@ -12942,7 +13722,9 @@ pub unsafe fn cuMulticastUnbind(mcHandle: CUmemGenericAllocationHandle, dev: CUd
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuMulticastUnbind(mcHandle: CUmemGenericAllocationHandle, dev: CUdevice, mcOffset: usize, size: usize) -> CUresult;
+        extern "C" {
+            fn cuMulticastUnbind(mcHandle: CUmemGenericAllocationHandle, dev: CUdevice, mcOffset: usize, size: usize) -> CUresult;
+        }
         cuMulticastUnbind(mcHandle, dev, mcOffset, size)
     }
 }
@@ -12956,7 +13738,9 @@ pub unsafe fn cuOccupancyAvailableDynamicSMemPerBlock(dynamicSmemSize: *mut usiz
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuOccupancyAvailableDynamicSMemPerBlock(dynamicSmemSize: *mut usize, func: CUfunction, numBlocks: ::core::ffi::c_int, blockSize: ::core::ffi::c_int) -> CUresult;
+        extern "C" {
+            fn cuOccupancyAvailableDynamicSMemPerBlock(dynamicSmemSize: *mut usize, func: CUfunction, numBlocks: ::core::ffi::c_int, blockSize: ::core::ffi::c_int) -> CUresult;
+        }
         cuOccupancyAvailableDynamicSMemPerBlock(dynamicSmemSize, func, numBlocks, blockSize)
     }
 }
@@ -12970,7 +13754,9 @@ pub unsafe fn cuOccupancyMaxActiveBlocksPerMultiprocessor(numBlocks: *mut ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuOccupancyMaxActiveBlocksPerMultiprocessor(numBlocks: *mut ::core::ffi::c_int, func: CUfunction, blockSize: ::core::ffi::c_int, dynamicSMemSize: usize) -> CUresult;
+        extern "C" {
+            fn cuOccupancyMaxActiveBlocksPerMultiprocessor(numBlocks: *mut ::core::ffi::c_int, func: CUfunction, blockSize: ::core::ffi::c_int, dynamicSMemSize: usize) -> CUresult;
+        }
         cuOccupancyMaxActiveBlocksPerMultiprocessor(numBlocks, func, blockSize, dynamicSMemSize)
     }
 }
@@ -12984,7 +13770,9 @@ pub unsafe fn cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(numBlocks: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(numBlocks: *mut ::core::ffi::c_int, func: CUfunction, blockSize: ::core::ffi::c_int, dynamicSMemSize: usize, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(numBlocks: *mut ::core::ffi::c_int, func: CUfunction, blockSize: ::core::ffi::c_int, dynamicSMemSize: usize, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(numBlocks, func, blockSize, dynamicSMemSize, flags)
     }
 }
@@ -12999,7 +13787,9 @@ pub unsafe fn cuOccupancyMaxActiveClusters(numClusters: *mut ::core::ffi::c_int,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuOccupancyMaxActiveClusters(numClusters: *mut ::core::ffi::c_int, func: CUfunction, config: *const CUlaunchConfig) -> CUresult;
+        extern "C" {
+            fn cuOccupancyMaxActiveClusters(numClusters: *mut ::core::ffi::c_int, func: CUfunction, config: *const CUlaunchConfig) -> CUresult;
+        }
         cuOccupancyMaxActiveClusters(numClusters, func, config)
     }
 }
@@ -13013,7 +13803,9 @@ pub unsafe fn cuOccupancyMaxPotentialBlockSize(minGridSize: *mut ::core::ffi::c_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuOccupancyMaxPotentialBlockSize(minGridSize: *mut ::core::ffi::c_int, blockSize: *mut ::core::ffi::c_int, func: CUfunction, blockSizeToDynamicSMemSize: CUoccupancyB2DSize, dynamicSMemSize: usize, blockSizeLimit: ::core::ffi::c_int) -> CUresult;
+        extern "C" {
+            fn cuOccupancyMaxPotentialBlockSize(minGridSize: *mut ::core::ffi::c_int, blockSize: *mut ::core::ffi::c_int, func: CUfunction, blockSizeToDynamicSMemSize: CUoccupancyB2DSize, dynamicSMemSize: usize, blockSizeLimit: ::core::ffi::c_int) -> CUresult;
+        }
         cuOccupancyMaxPotentialBlockSize(minGridSize, blockSize, func, blockSizeToDynamicSMemSize, dynamicSMemSize, blockSizeLimit)
     }
 }
@@ -13027,7 +13819,9 @@ pub unsafe fn cuOccupancyMaxPotentialBlockSizeWithFlags(minGridSize: *mut ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuOccupancyMaxPotentialBlockSizeWithFlags(minGridSize: *mut ::core::ffi::c_int, blockSize: *mut ::core::ffi::c_int, func: CUfunction, blockSizeToDynamicSMemSize: CUoccupancyB2DSize, dynamicSMemSize: usize, blockSizeLimit: ::core::ffi::c_int, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuOccupancyMaxPotentialBlockSizeWithFlags(minGridSize: *mut ::core::ffi::c_int, blockSize: *mut ::core::ffi::c_int, func: CUfunction, blockSizeToDynamicSMemSize: CUoccupancyB2DSize, dynamicSMemSize: usize, blockSizeLimit: ::core::ffi::c_int, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuOccupancyMaxPotentialBlockSizeWithFlags(minGridSize, blockSize, func, blockSizeToDynamicSMemSize, dynamicSMemSize, blockSizeLimit, flags)
     }
 }
@@ -13042,7 +13836,9 @@ pub unsafe fn cuOccupancyMaxPotentialClusterSize(clusterSize: *mut ::core::ffi::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuOccupancyMaxPotentialClusterSize(clusterSize: *mut ::core::ffi::c_int, func: CUfunction, config: *const CUlaunchConfig) -> CUresult;
+        extern "C" {
+            fn cuOccupancyMaxPotentialClusterSize(clusterSize: *mut ::core::ffi::c_int, func: CUfunction, config: *const CUlaunchConfig) -> CUresult;
+        }
         cuOccupancyMaxPotentialClusterSize(clusterSize, func, config)
     }
 }
@@ -13056,7 +13852,9 @@ pub unsafe fn cuParamSetSize(hfunc: CUfunction, numbytes: ::core::ffi::c_uint) -
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuParamSetSize(hfunc: CUfunction, numbytes: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuParamSetSize(hfunc: CUfunction, numbytes: ::core::ffi::c_uint) -> CUresult;
+        }
         cuParamSetSize(hfunc, numbytes)
     }
 }
@@ -13070,7 +13868,9 @@ pub unsafe fn cuParamSetTexRef(hfunc: CUfunction, texunit: ::core::ffi::c_int, h
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuParamSetTexRef(hfunc: CUfunction, texunit: ::core::ffi::c_int, hTexRef: CUtexref) -> CUresult;
+        extern "C" {
+            fn cuParamSetTexRef(hfunc: CUfunction, texunit: ::core::ffi::c_int, hTexRef: CUtexref) -> CUresult;
+        }
         cuParamSetTexRef(hfunc, texunit, hTexRef)
     }
 }
@@ -13084,7 +13884,9 @@ pub unsafe fn cuParamSetf(hfunc: CUfunction, offset: ::core::ffi::c_int, value: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuParamSetf(hfunc: CUfunction, offset: ::core::ffi::c_int, value: f32) -> CUresult;
+        extern "C" {
+            fn cuParamSetf(hfunc: CUfunction, offset: ::core::ffi::c_int, value: f32) -> CUresult;
+        }
         cuParamSetf(hfunc, offset, value)
     }
 }
@@ -13098,7 +13900,9 @@ pub unsafe fn cuParamSeti(hfunc: CUfunction, offset: ::core::ffi::c_int, value: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuParamSeti(hfunc: CUfunction, offset: ::core::ffi::c_int, value: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuParamSeti(hfunc: CUfunction, offset: ::core::ffi::c_int, value: ::core::ffi::c_uint) -> CUresult;
+        }
         cuParamSeti(hfunc, offset, value)
     }
 }
@@ -13112,7 +13916,9 @@ pub unsafe fn cuParamSetv(hfunc: CUfunction, offset: ::core::ffi::c_int, ptr: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuParamSetv(hfunc: CUfunction, offset: ::core::ffi::c_int, ptr: *mut ::core::ffi::c_void, numbytes: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuParamSetv(hfunc: CUfunction, offset: ::core::ffi::c_int, ptr: *mut ::core::ffi::c_void, numbytes: ::core::ffi::c_uint) -> CUresult;
+        }
         cuParamSetv(hfunc, offset, ptr, numbytes)
     }
 }
@@ -13126,7 +13932,9 @@ pub unsafe fn cuPointerGetAttribute(data: *mut ::core::ffi::c_void, attribute: C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuPointerGetAttribute(data: *mut ::core::ffi::c_void, attribute: CUpointer_attribute, ptr: CUdeviceptr) -> CUresult;
+        extern "C" {
+            fn cuPointerGetAttribute(data: *mut ::core::ffi::c_void, attribute: CUpointer_attribute, ptr: CUdeviceptr) -> CUresult;
+        }
         cuPointerGetAttribute(data, attribute, ptr)
     }
 }
@@ -13140,7 +13948,9 @@ pub unsafe fn cuPointerGetAttributes(numAttributes: ::core::ffi::c_uint, attribu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuPointerGetAttributes(numAttributes: ::core::ffi::c_uint, attributes: *mut CUpointer_attribute, data: *mut *mut ::core::ffi::c_void, ptr: CUdeviceptr) -> CUresult;
+        extern "C" {
+            fn cuPointerGetAttributes(numAttributes: ::core::ffi::c_uint, attributes: *mut CUpointer_attribute, data: *mut *mut ::core::ffi::c_void, ptr: CUdeviceptr) -> CUresult;
+        }
         cuPointerGetAttributes(numAttributes, attributes, data, ptr)
     }
 }
@@ -13154,7 +13964,9 @@ pub unsafe fn cuPointerSetAttribute(value: *const ::core::ffi::c_void, attribute
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuPointerSetAttribute(value: *const ::core::ffi::c_void, attribute: CUpointer_attribute, ptr: CUdeviceptr) -> CUresult;
+        extern "C" {
+            fn cuPointerSetAttribute(value: *const ::core::ffi::c_void, attribute: CUpointer_attribute, ptr: CUdeviceptr) -> CUresult;
+        }
         cuPointerSetAttribute(value, attribute, ptr)
     }
 }
@@ -13168,7 +13980,9 @@ pub unsafe fn cuProfilerInitialize(configFile: *const ::core::ffi::c_char, outpu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuProfilerInitialize(configFile: *const ::core::ffi::c_char, outputFile: *const ::core::ffi::c_char, outputMode: CUoutput_mode) -> CUresult;
+        extern "C" {
+            fn cuProfilerInitialize(configFile: *const ::core::ffi::c_char, outputFile: *const ::core::ffi::c_char, outputMode: CUoutput_mode) -> CUresult;
+        }
         cuProfilerInitialize(configFile, outputFile, outputMode)
     }
 }
@@ -13182,7 +13996,9 @@ pub unsafe fn cuProfilerStart() -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuProfilerStart() -> CUresult;
+        extern "C" {
+            fn cuProfilerStart() -> CUresult;
+        }
         cuProfilerStart()
     }
 }
@@ -13196,7 +14012,9 @@ pub unsafe fn cuProfilerStop() -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuProfilerStop() -> CUresult;
+        extern "C" {
+            fn cuProfilerStop() -> CUresult;
+        }
         cuProfilerStop()
     }
 }
@@ -13210,7 +14028,9 @@ pub unsafe fn cuSignalExternalSemaphoresAsync(extSemArray: *const CUexternalSema
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuSignalExternalSemaphoresAsync(extSemArray: *const CUexternalSemaphore, paramsArray: *const CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS, numExtSems: ::core::ffi::c_uint, stream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuSignalExternalSemaphoresAsync(extSemArray: *const CUexternalSemaphore, paramsArray: *const CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS, numExtSems: ::core::ffi::c_uint, stream: CUstream) -> CUresult;
+        }
         cuSignalExternalSemaphoresAsync(extSemArray, paramsArray, numExtSems, stream)
     }
 }
@@ -13224,7 +14044,9 @@ pub unsafe fn cuStreamAddCallback(hStream: CUstream, callback: CUstreamCallback,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamAddCallback(hStream: CUstream, callback: CUstreamCallback, userData: *mut ::core::ffi::c_void, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamAddCallback(hStream: CUstream, callback: CUstreamCallback, userData: *mut ::core::ffi::c_void, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamAddCallback(hStream, callback, userData, flags)
     }
 }
@@ -13238,7 +14060,9 @@ pub unsafe fn cuStreamAttachMemAsync(hStream: CUstream, dptr: CUdeviceptr, lengt
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamAttachMemAsync(hStream: CUstream, dptr: CUdeviceptr, length: usize, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamAttachMemAsync(hStream: CUstream, dptr: CUdeviceptr, length: usize, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamAttachMemAsync(hStream, dptr, length, flags)
     }
 }
@@ -13253,7 +14077,9 @@ pub unsafe fn cuStreamBatchMemOp(stream: CUstream, count: ::core::ffi::c_uint, p
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamBatchMemOp(stream: CUstream, count: ::core::ffi::c_uint, paramArray: *mut CUstreamBatchMemOpParams, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamBatchMemOp(stream: CUstream, count: ::core::ffi::c_uint, paramArray: *mut CUstreamBatchMemOpParams, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamBatchMemOp(stream, count, paramArray, flags)
     }
 }
@@ -13268,7 +14094,9 @@ pub unsafe fn cuStreamBatchMemOp_v2(stream: CUstream, count: ::core::ffi::c_uint
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamBatchMemOp_v2(stream: CUstream, count: ::core::ffi::c_uint, paramArray: *mut CUstreamBatchMemOpParams, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamBatchMemOp_v2(stream: CUstream, count: ::core::ffi::c_uint, paramArray: *mut CUstreamBatchMemOpParams, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamBatchMemOp_v2(stream, count, paramArray, flags)
     }
 }
@@ -13283,7 +14111,9 @@ pub unsafe fn cuStreamBeginCaptureToCig(hStream: CUstream, streamCigCaptureParam
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamBeginCaptureToCig(hStream: CUstream, streamCigCaptureParams: *mut CUstreamCigCaptureParams) -> CUresult;
+        extern "C" {
+            fn cuStreamBeginCaptureToCig(hStream: CUstream, streamCigCaptureParams: *mut CUstreamCigCaptureParams) -> CUresult;
+        }
         cuStreamBeginCaptureToCig(hStream, streamCigCaptureParams)
     }
 }
@@ -13298,7 +14128,9 @@ pub unsafe fn cuStreamBeginCaptureToGraph(hStream: CUstream, hGraph: CUgraph, de
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamBeginCaptureToGraph(hStream: CUstream, hGraph: CUgraph, dependencies: *const CUgraphNode, dependencyData: *const CUgraphEdgeData, numDependencies: usize, mode: CUstreamCaptureMode) -> CUresult;
+        extern "C" {
+            fn cuStreamBeginCaptureToGraph(hStream: CUstream, hGraph: CUgraph, dependencies: *const CUgraphNode, dependencyData: *const CUgraphEdgeData, numDependencies: usize, mode: CUstreamCaptureMode) -> CUresult;
+        }
         cuStreamBeginCaptureToGraph(hStream, hGraph, dependencies, dependencyData, numDependencies, mode)
     }
 }
@@ -13312,7 +14144,9 @@ pub unsafe fn cuStreamBeginCapture_v2(hStream: CUstream, mode: CUstreamCaptureMo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamBeginCapture_v2(hStream: CUstream, mode: CUstreamCaptureMode) -> CUresult;
+        extern "C" {
+            fn cuStreamBeginCapture_v2(hStream: CUstream, mode: CUstreamCaptureMode) -> CUresult;
+        }
         cuStreamBeginCapture_v2(hStream, mode)
     }
 }
@@ -13326,7 +14160,9 @@ pub unsafe fn cuStreamCopyAttributes(dst: CUstream, src: CUstream) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamCopyAttributes(dst: CUstream, src: CUstream) -> CUresult;
+        extern "C" {
+            fn cuStreamCopyAttributes(dst: CUstream, src: CUstream) -> CUresult;
+        }
         cuStreamCopyAttributes(dst, src)
     }
 }
@@ -13340,7 +14176,9 @@ pub unsafe fn cuStreamCreate(phStream: *mut CUstream, Flags: ::core::ffi::c_uint
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamCreate(phStream: *mut CUstream, Flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamCreate(phStream: *mut CUstream, Flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamCreate(phStream, Flags)
     }
 }
@@ -13354,7 +14192,9 @@ pub unsafe fn cuStreamCreateWithPriority(phStream: *mut CUstream, flags: ::core:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamCreateWithPriority(phStream: *mut CUstream, flags: ::core::ffi::c_uint, priority: ::core::ffi::c_int) -> CUresult;
+        extern "C" {
+            fn cuStreamCreateWithPriority(phStream: *mut CUstream, flags: ::core::ffi::c_uint, priority: ::core::ffi::c_int) -> CUresult;
+        }
         cuStreamCreateWithPriority(phStream, flags, priority)
     }
 }
@@ -13368,7 +14208,9 @@ pub unsafe fn cuStreamDestroy_v2(hStream: CUstream) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamDestroy_v2(hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuStreamDestroy_v2(hStream: CUstream) -> CUresult;
+        }
         cuStreamDestroy_v2(hStream)
     }
 }
@@ -13382,7 +14224,9 @@ pub unsafe fn cuStreamEndCapture(hStream: CUstream, phGraph: *mut CUgraph) -> CU
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamEndCapture(hStream: CUstream, phGraph: *mut CUgraph) -> CUresult;
+        extern "C" {
+            fn cuStreamEndCapture(hStream: CUstream, phGraph: *mut CUgraph) -> CUresult;
+        }
         cuStreamEndCapture(hStream, phGraph)
     }
 }
@@ -13397,7 +14241,9 @@ pub unsafe fn cuStreamEndCaptureToCig(hStream: CUstream) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamEndCaptureToCig(hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuStreamEndCaptureToCig(hStream: CUstream) -> CUresult;
+        }
         cuStreamEndCaptureToCig(hStream)
     }
 }
@@ -13411,7 +14257,9 @@ pub unsafe fn cuStreamGetAttribute(hStream: CUstream, attr: CUstreamAttrID, valu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamGetAttribute(hStream: CUstream, attr: CUstreamAttrID, value_out: *mut CUstreamAttrValue) -> CUresult;
+        extern "C" {
+            fn cuStreamGetAttribute(hStream: CUstream, attr: CUstreamAttrID, value_out: *mut CUstreamAttrValue) -> CUresult;
+        }
         cuStreamGetAttribute(hStream, attr, value_out)
     }
 }
@@ -13426,7 +14274,9 @@ pub unsafe fn cuStreamGetCaptureInfo(hStream: CUstream, captureStatus_out: *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamGetCaptureInfo(hStream: CUstream, captureStatus_out: *mut CUstreamCaptureStatus, id_out: *mut cuuint64_t) -> CUresult;
+        extern "C" {
+            fn cuStreamGetCaptureInfo(hStream: CUstream, captureStatus_out: *mut CUstreamCaptureStatus, id_out: *mut cuuint64_t) -> CUresult;
+        }
         cuStreamGetCaptureInfo(hStream, captureStatus_out, id_out)
     }
 }
@@ -13441,7 +14291,9 @@ pub unsafe fn cuStreamGetCaptureInfo_v2(hStream: CUstream, captureStatus_out: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamGetCaptureInfo_v2(hStream: CUstream, captureStatus_out: *mut CUstreamCaptureStatus, id_out: *mut cuuint64_t, graph_out: *mut CUgraph, dependencies_out: *mut *const CUgraphNode, numDependencies_out: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuStreamGetCaptureInfo_v2(hStream: CUstream, captureStatus_out: *mut CUstreamCaptureStatus, id_out: *mut cuuint64_t, graph_out: *mut CUgraph, dependencies_out: *mut *const CUgraphNode, numDependencies_out: *mut usize) -> CUresult;
+        }
         cuStreamGetCaptureInfo_v2(hStream, captureStatus_out, id_out, graph_out, dependencies_out, numDependencies_out)
     }
 }
@@ -13456,7 +14308,9 @@ pub unsafe fn cuStreamGetCaptureInfo_v3(hStream: CUstream, captureStatus_out: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamGetCaptureInfo_v3(hStream: CUstream, captureStatus_out: *mut CUstreamCaptureStatus, id_out: *mut cuuint64_t, graph_out: *mut CUgraph, dependencies_out: *mut *const CUgraphNode, edgeData_out: *mut *const CUgraphEdgeData, numDependencies_out: *mut usize) -> CUresult;
+        extern "C" {
+            fn cuStreamGetCaptureInfo_v3(hStream: CUstream, captureStatus_out: *mut CUstreamCaptureStatus, id_out: *mut cuuint64_t, graph_out: *mut CUgraph, dependencies_out: *mut *const CUgraphNode, edgeData_out: *mut *const CUgraphEdgeData, numDependencies_out: *mut usize) -> CUresult;
+        }
         cuStreamGetCaptureInfo_v3(hStream, captureStatus_out, id_out, graph_out, dependencies_out, edgeData_out, numDependencies_out)
     }
 }
@@ -13470,7 +14324,9 @@ pub unsafe fn cuStreamGetCtx(hStream: CUstream, pctx: *mut CUcontext) -> CUresul
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamGetCtx(hStream: CUstream, pctx: *mut CUcontext) -> CUresult;
+        extern "C" {
+            fn cuStreamGetCtx(hStream: CUstream, pctx: *mut CUcontext) -> CUresult;
+        }
         cuStreamGetCtx(hStream, pctx)
     }
 }
@@ -13485,7 +14341,9 @@ pub unsafe fn cuStreamGetCtx_v2(hStream: CUstream, pCtx: *mut CUcontext, pGreenC
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamGetCtx_v2(hStream: CUstream, pCtx: *mut CUcontext, pGreenCtx: *mut CUgreenCtx) -> CUresult;
+        extern "C" {
+            fn cuStreamGetCtx_v2(hStream: CUstream, pCtx: *mut CUcontext, pGreenCtx: *mut CUgreenCtx) -> CUresult;
+        }
         cuStreamGetCtx_v2(hStream, pCtx, pGreenCtx)
     }
 }
@@ -13500,7 +14358,9 @@ pub unsafe fn cuStreamGetDevResource(hStream: CUstream, resource: *mut CUdevReso
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamGetDevResource(hStream: CUstream, resource: *mut CUdevResource, type_: CUdevResourceType) -> CUresult;
+        extern "C" {
+            fn cuStreamGetDevResource(hStream: CUstream, resource: *mut CUdevResource, type_: CUdevResourceType) -> CUresult;
+        }
         cuStreamGetDevResource(hStream, resource, type_)
     }
 }
@@ -13515,7 +14375,9 @@ pub unsafe fn cuStreamGetDevice(hStream: CUstream, device: *mut CUdevice) -> CUr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamGetDevice(hStream: CUstream, device: *mut CUdevice) -> CUresult;
+        extern "C" {
+            fn cuStreamGetDevice(hStream: CUstream, device: *mut CUdevice) -> CUresult;
+        }
         cuStreamGetDevice(hStream, device)
     }
 }
@@ -13529,7 +14391,9 @@ pub unsafe fn cuStreamGetFlags(hStream: CUstream, flags: *mut ::core::ffi::c_uin
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamGetFlags(hStream: CUstream, flags: *mut ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamGetFlags(hStream: CUstream, flags: *mut ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamGetFlags(hStream, flags)
     }
 }
@@ -13544,7 +14408,9 @@ pub unsafe fn cuStreamGetGreenCtx(hStream: CUstream, phCtx: *mut CUgreenCtx) -> 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamGetGreenCtx(hStream: CUstream, phCtx: *mut CUgreenCtx) -> CUresult;
+        extern "C" {
+            fn cuStreamGetGreenCtx(hStream: CUstream, phCtx: *mut CUgreenCtx) -> CUresult;
+        }
         cuStreamGetGreenCtx(hStream, phCtx)
     }
 }
@@ -13559,7 +14425,9 @@ pub unsafe fn cuStreamGetId(hStream: CUstream, streamId: *mut ::core::ffi::c_ulo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamGetId(hStream: CUstream, streamId: *mut ::core::ffi::c_ulonglong) -> CUresult;
+        extern "C" {
+            fn cuStreamGetId(hStream: CUstream, streamId: *mut ::core::ffi::c_ulonglong) -> CUresult;
+        }
         cuStreamGetId(hStream, streamId)
     }
 }
@@ -13573,7 +14441,9 @@ pub unsafe fn cuStreamGetPriority(hStream: CUstream, priority: *mut ::core::ffi:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamGetPriority(hStream: CUstream, priority: *mut ::core::ffi::c_int) -> CUresult;
+        extern "C" {
+            fn cuStreamGetPriority(hStream: CUstream, priority: *mut ::core::ffi::c_int) -> CUresult;
+        }
         cuStreamGetPriority(hStream, priority)
     }
 }
@@ -13587,7 +14457,9 @@ pub unsafe fn cuStreamIsCapturing(hStream: CUstream, captureStatus: *mut CUstrea
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamIsCapturing(hStream: CUstream, captureStatus: *mut CUstreamCaptureStatus) -> CUresult;
+        extern "C" {
+            fn cuStreamIsCapturing(hStream: CUstream, captureStatus: *mut CUstreamCaptureStatus) -> CUresult;
+        }
         cuStreamIsCapturing(hStream, captureStatus)
     }
 }
@@ -13601,7 +14473,9 @@ pub unsafe fn cuStreamQuery(hStream: CUstream) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamQuery(hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuStreamQuery(hStream: CUstream) -> CUresult;
+        }
         cuStreamQuery(hStream)
     }
 }
@@ -13615,7 +14489,9 @@ pub unsafe fn cuStreamSetAttribute(hStream: CUstream, attr: CUstreamAttrID, valu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamSetAttribute(hStream: CUstream, attr: CUstreamAttrID, value: *const CUstreamAttrValue) -> CUresult;
+        extern "C" {
+            fn cuStreamSetAttribute(hStream: CUstream, attr: CUstreamAttrID, value: *const CUstreamAttrValue) -> CUresult;
+        }
         cuStreamSetAttribute(hStream, attr, value)
     }
 }
@@ -13629,7 +14505,9 @@ pub unsafe fn cuStreamSynchronize(hStream: CUstream) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamSynchronize(hStream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuStreamSynchronize(hStream: CUstream) -> CUresult;
+        }
         cuStreamSynchronize(hStream)
     }
 }
@@ -13644,7 +14522,9 @@ pub unsafe fn cuStreamUpdateCaptureDependencies(hStream: CUstream, dependencies:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamUpdateCaptureDependencies(hStream: CUstream, dependencies: *mut CUgraphNode, numDependencies: usize, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamUpdateCaptureDependencies(hStream: CUstream, dependencies: *mut CUgraphNode, numDependencies: usize, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamUpdateCaptureDependencies(hStream, dependencies, numDependencies, flags)
     }
 }
@@ -13659,7 +14539,9 @@ pub unsafe fn cuStreamUpdateCaptureDependencies_v2(hStream: CUstream, dependenci
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamUpdateCaptureDependencies_v2(hStream: CUstream, dependencies: *mut CUgraphNode, dependencyData: *const CUgraphEdgeData, numDependencies: usize, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamUpdateCaptureDependencies_v2(hStream: CUstream, dependencies: *mut CUgraphNode, dependencyData: *const CUgraphEdgeData, numDependencies: usize, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamUpdateCaptureDependencies_v2(hStream, dependencies, dependencyData, numDependencies, flags)
     }
 }
@@ -13673,7 +14555,9 @@ pub unsafe fn cuStreamWaitEvent(hStream: CUstream, hEvent: CUevent, Flags: ::cor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamWaitEvent(hStream: CUstream, hEvent: CUevent, Flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamWaitEvent(hStream: CUstream, hEvent: CUevent, Flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamWaitEvent(hStream, hEvent, Flags)
     }
 }
@@ -13688,7 +14572,9 @@ pub unsafe fn cuStreamWaitValue32(stream: CUstream, addr: CUdeviceptr, value: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamWaitValue32(stream: CUstream, addr: CUdeviceptr, value: cuuint32_t, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamWaitValue32(stream: CUstream, addr: CUdeviceptr, value: cuuint32_t, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamWaitValue32(stream, addr, value, flags)
     }
 }
@@ -13703,7 +14589,9 @@ pub unsafe fn cuStreamWaitValue32_v2(stream: CUstream, addr: CUdeviceptr, value:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamWaitValue32_v2(stream: CUstream, addr: CUdeviceptr, value: cuuint32_t, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamWaitValue32_v2(stream: CUstream, addr: CUdeviceptr, value: cuuint32_t, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamWaitValue32_v2(stream, addr, value, flags)
     }
 }
@@ -13718,7 +14606,9 @@ pub unsafe fn cuStreamWaitValue64(stream: CUstream, addr: CUdeviceptr, value: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamWaitValue64(stream: CUstream, addr: CUdeviceptr, value: cuuint64_t, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamWaitValue64(stream: CUstream, addr: CUdeviceptr, value: cuuint64_t, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamWaitValue64(stream, addr, value, flags)
     }
 }
@@ -13733,7 +14623,9 @@ pub unsafe fn cuStreamWaitValue64_v2(stream: CUstream, addr: CUdeviceptr, value:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamWaitValue64_v2(stream: CUstream, addr: CUdeviceptr, value: cuuint64_t, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamWaitValue64_v2(stream: CUstream, addr: CUdeviceptr, value: cuuint64_t, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamWaitValue64_v2(stream, addr, value, flags)
     }
 }
@@ -13748,7 +14640,9 @@ pub unsafe fn cuStreamWriteValue32(stream: CUstream, addr: CUdeviceptr, value: c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamWriteValue32(stream: CUstream, addr: CUdeviceptr, value: cuuint32_t, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamWriteValue32(stream: CUstream, addr: CUdeviceptr, value: cuuint32_t, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamWriteValue32(stream, addr, value, flags)
     }
 }
@@ -13763,7 +14657,9 @@ pub unsafe fn cuStreamWriteValue32_v2(stream: CUstream, addr: CUdeviceptr, value
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamWriteValue32_v2(stream: CUstream, addr: CUdeviceptr, value: cuuint32_t, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamWriteValue32_v2(stream: CUstream, addr: CUdeviceptr, value: cuuint32_t, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamWriteValue32_v2(stream, addr, value, flags)
     }
 }
@@ -13778,7 +14674,9 @@ pub unsafe fn cuStreamWriteValue64(stream: CUstream, addr: CUdeviceptr, value: c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamWriteValue64(stream: CUstream, addr: CUdeviceptr, value: cuuint64_t, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamWriteValue64(stream: CUstream, addr: CUdeviceptr, value: cuuint64_t, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamWriteValue64(stream, addr, value, flags)
     }
 }
@@ -13793,7 +14691,9 @@ pub unsafe fn cuStreamWriteValue64_v2(stream: CUstream, addr: CUdeviceptr, value
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuStreamWriteValue64_v2(stream: CUstream, addr: CUdeviceptr, value: cuuint64_t, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuStreamWriteValue64_v2(stream: CUstream, addr: CUdeviceptr, value: cuuint64_t, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuStreamWriteValue64_v2(stream, addr, value, flags)
     }
 }
@@ -13807,7 +14707,9 @@ pub unsafe fn cuSurfObjectCreate(pSurfObject: *mut CUsurfObject, pResDesc: *cons
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuSurfObjectCreate(pSurfObject: *mut CUsurfObject, pResDesc: *const CUDA_RESOURCE_DESC) -> CUresult;
+        extern "C" {
+            fn cuSurfObjectCreate(pSurfObject: *mut CUsurfObject, pResDesc: *const CUDA_RESOURCE_DESC) -> CUresult;
+        }
         cuSurfObjectCreate(pSurfObject, pResDesc)
     }
 }
@@ -13821,7 +14723,9 @@ pub unsafe fn cuSurfObjectDestroy(surfObject: CUsurfObject) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuSurfObjectDestroy(surfObject: CUsurfObject) -> CUresult;
+        extern "C" {
+            fn cuSurfObjectDestroy(surfObject: CUsurfObject) -> CUresult;
+        }
         cuSurfObjectDestroy(surfObject)
     }
 }
@@ -13835,7 +14739,9 @@ pub unsafe fn cuSurfObjectGetResourceDesc(pResDesc: *mut CUDA_RESOURCE_DESC, sur
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuSurfObjectGetResourceDesc(pResDesc: *mut CUDA_RESOURCE_DESC, surfObject: CUsurfObject) -> CUresult;
+        extern "C" {
+            fn cuSurfObjectGetResourceDesc(pResDesc: *mut CUDA_RESOURCE_DESC, surfObject: CUsurfObject) -> CUresult;
+        }
         cuSurfObjectGetResourceDesc(pResDesc, surfObject)
     }
 }
@@ -13849,7 +14755,9 @@ pub unsafe fn cuSurfRefGetArray(phArray: *mut CUarray, hSurfRef: CUsurfref) -> C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuSurfRefGetArray(phArray: *mut CUarray, hSurfRef: CUsurfref) -> CUresult;
+        extern "C" {
+            fn cuSurfRefGetArray(phArray: *mut CUarray, hSurfRef: CUsurfref) -> CUresult;
+        }
         cuSurfRefGetArray(phArray, hSurfRef)
     }
 }
@@ -13863,7 +14771,9 @@ pub unsafe fn cuSurfRefSetArray(hSurfRef: CUsurfref, hArray: CUarray, Flags: ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuSurfRefSetArray(hSurfRef: CUsurfref, hArray: CUarray, Flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuSurfRefSetArray(hSurfRef: CUsurfref, hArray: CUarray, Flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuSurfRefSetArray(hSurfRef, hArray, Flags)
     }
 }
@@ -13878,7 +14788,9 @@ pub unsafe fn cuTensorMapEncodeIm2col(tensorMap: *mut CUtensorMap, tensorDataTyp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTensorMapEncodeIm2col(tensorMap: *mut CUtensorMap, tensorDataType: CUtensorMapDataType, tensorRank: cuuint32_t, globalAddress: *mut ::core::ffi::c_void, globalDim: *const cuuint64_t, globalStrides: *const cuuint64_t, pixelBoxLowerCorner: *const ::core::ffi::c_int, pixelBoxUpperCorner: *const ::core::ffi::c_int, channelsPerPixel: cuuint32_t, pixelsPerColumn: cuuint32_t, elementStrides: *const cuuint32_t, interleave: CUtensorMapInterleave, swizzle: CUtensorMapSwizzle, l2Promotion: CUtensorMapL2promotion, oobFill: CUtensorMapFloatOOBfill) -> CUresult;
+        extern "C" {
+            fn cuTensorMapEncodeIm2col(tensorMap: *mut CUtensorMap, tensorDataType: CUtensorMapDataType, tensorRank: cuuint32_t, globalAddress: *mut ::core::ffi::c_void, globalDim: *const cuuint64_t, globalStrides: *const cuuint64_t, pixelBoxLowerCorner: *const ::core::ffi::c_int, pixelBoxUpperCorner: *const ::core::ffi::c_int, channelsPerPixel: cuuint32_t, pixelsPerColumn: cuuint32_t, elementStrides: *const cuuint32_t, interleave: CUtensorMapInterleave, swizzle: CUtensorMapSwizzle, l2Promotion: CUtensorMapL2promotion, oobFill: CUtensorMapFloatOOBfill) -> CUresult;
+        }
         cuTensorMapEncodeIm2col(tensorMap, tensorDataType, tensorRank, globalAddress, globalDim, globalStrides, pixelBoxLowerCorner, pixelBoxUpperCorner, channelsPerPixel, pixelsPerColumn, elementStrides, interleave, swizzle, l2Promotion, oobFill)
     }
 }
@@ -13893,7 +14805,9 @@ pub unsafe fn cuTensorMapEncodeIm2colWide(tensorMap: *mut CUtensorMap, tensorDat
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTensorMapEncodeIm2colWide(tensorMap: *mut CUtensorMap, tensorDataType: CUtensorMapDataType, tensorRank: cuuint32_t, globalAddress: *mut ::core::ffi::c_void, globalDim: *const cuuint64_t, globalStrides: *const cuuint64_t, pixelBoxLowerCornerWidth: ::core::ffi::c_int, pixelBoxUpperCornerWidth: ::core::ffi::c_int, channelsPerPixel: cuuint32_t, pixelsPerColumn: cuuint32_t, elementStrides: *const cuuint32_t, interleave: CUtensorMapInterleave, mode: CUtensorMapIm2ColWideMode, swizzle: CUtensorMapSwizzle, l2Promotion: CUtensorMapL2promotion, oobFill: CUtensorMapFloatOOBfill) -> CUresult;
+        extern "C" {
+            fn cuTensorMapEncodeIm2colWide(tensorMap: *mut CUtensorMap, tensorDataType: CUtensorMapDataType, tensorRank: cuuint32_t, globalAddress: *mut ::core::ffi::c_void, globalDim: *const cuuint64_t, globalStrides: *const cuuint64_t, pixelBoxLowerCornerWidth: ::core::ffi::c_int, pixelBoxUpperCornerWidth: ::core::ffi::c_int, channelsPerPixel: cuuint32_t, pixelsPerColumn: cuuint32_t, elementStrides: *const cuuint32_t, interleave: CUtensorMapInterleave, mode: CUtensorMapIm2ColWideMode, swizzle: CUtensorMapSwizzle, l2Promotion: CUtensorMapL2promotion, oobFill: CUtensorMapFloatOOBfill) -> CUresult;
+        }
         cuTensorMapEncodeIm2colWide(tensorMap, tensorDataType, tensorRank, globalAddress, globalDim, globalStrides, pixelBoxLowerCornerWidth, pixelBoxUpperCornerWidth, channelsPerPixel, pixelsPerColumn, elementStrides, interleave, mode, swizzle, l2Promotion, oobFill)
     }
 }
@@ -13908,7 +14822,9 @@ pub unsafe fn cuTensorMapEncodeTiled(tensorMap: *mut CUtensorMap, tensorDataType
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTensorMapEncodeTiled(tensorMap: *mut CUtensorMap, tensorDataType: CUtensorMapDataType, tensorRank: cuuint32_t, globalAddress: *mut ::core::ffi::c_void, globalDim: *const cuuint64_t, globalStrides: *const cuuint64_t, boxDim: *const cuuint32_t, elementStrides: *const cuuint32_t, interleave: CUtensorMapInterleave, swizzle: CUtensorMapSwizzle, l2Promotion: CUtensorMapL2promotion, oobFill: CUtensorMapFloatOOBfill) -> CUresult;
+        extern "C" {
+            fn cuTensorMapEncodeTiled(tensorMap: *mut CUtensorMap, tensorDataType: CUtensorMapDataType, tensorRank: cuuint32_t, globalAddress: *mut ::core::ffi::c_void, globalDim: *const cuuint64_t, globalStrides: *const cuuint64_t, boxDim: *const cuuint32_t, elementStrides: *const cuuint32_t, interleave: CUtensorMapInterleave, swizzle: CUtensorMapSwizzle, l2Promotion: CUtensorMapL2promotion, oobFill: CUtensorMapFloatOOBfill) -> CUresult;
+        }
         cuTensorMapEncodeTiled(tensorMap, tensorDataType, tensorRank, globalAddress, globalDim, globalStrides, boxDim, elementStrides, interleave, swizzle, l2Promotion, oobFill)
     }
 }
@@ -13923,7 +14839,9 @@ pub unsafe fn cuTensorMapReplaceAddress(tensorMap: *mut CUtensorMap, globalAddre
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTensorMapReplaceAddress(tensorMap: *mut CUtensorMap, globalAddress: *mut ::core::ffi::c_void) -> CUresult;
+        extern "C" {
+            fn cuTensorMapReplaceAddress(tensorMap: *mut CUtensorMap, globalAddress: *mut ::core::ffi::c_void) -> CUresult;
+        }
         cuTensorMapReplaceAddress(tensorMap, globalAddress)
     }
 }
@@ -13937,7 +14855,9 @@ pub unsafe fn cuTexObjectCreate(pTexObject: *mut CUtexObject, pResDesc: *const C
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexObjectCreate(pTexObject: *mut CUtexObject, pResDesc: *const CUDA_RESOURCE_DESC, pTexDesc: *const CUDA_TEXTURE_DESC, pResViewDesc: *const CUDA_RESOURCE_VIEW_DESC) -> CUresult;
+        extern "C" {
+            fn cuTexObjectCreate(pTexObject: *mut CUtexObject, pResDesc: *const CUDA_RESOURCE_DESC, pTexDesc: *const CUDA_TEXTURE_DESC, pResViewDesc: *const CUDA_RESOURCE_VIEW_DESC) -> CUresult;
+        }
         cuTexObjectCreate(pTexObject, pResDesc, pTexDesc, pResViewDesc)
     }
 }
@@ -13951,7 +14871,9 @@ pub unsafe fn cuTexObjectDestroy(texObject: CUtexObject) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexObjectDestroy(texObject: CUtexObject) -> CUresult;
+        extern "C" {
+            fn cuTexObjectDestroy(texObject: CUtexObject) -> CUresult;
+        }
         cuTexObjectDestroy(texObject)
     }
 }
@@ -13965,7 +14887,9 @@ pub unsafe fn cuTexObjectGetResourceDesc(pResDesc: *mut CUDA_RESOURCE_DESC, texO
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexObjectGetResourceDesc(pResDesc: *mut CUDA_RESOURCE_DESC, texObject: CUtexObject) -> CUresult;
+        extern "C" {
+            fn cuTexObjectGetResourceDesc(pResDesc: *mut CUDA_RESOURCE_DESC, texObject: CUtexObject) -> CUresult;
+        }
         cuTexObjectGetResourceDesc(pResDesc, texObject)
     }
 }
@@ -13979,7 +14903,9 @@ pub unsafe fn cuTexObjectGetResourceViewDesc(pResViewDesc: *mut CUDA_RESOURCE_VI
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexObjectGetResourceViewDesc(pResViewDesc: *mut CUDA_RESOURCE_VIEW_DESC, texObject: CUtexObject) -> CUresult;
+        extern "C" {
+            fn cuTexObjectGetResourceViewDesc(pResViewDesc: *mut CUDA_RESOURCE_VIEW_DESC, texObject: CUtexObject) -> CUresult;
+        }
         cuTexObjectGetResourceViewDesc(pResViewDesc, texObject)
     }
 }
@@ -13993,7 +14919,9 @@ pub unsafe fn cuTexObjectGetTextureDesc(pTexDesc: *mut CUDA_TEXTURE_DESC, texObj
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexObjectGetTextureDesc(pTexDesc: *mut CUDA_TEXTURE_DESC, texObject: CUtexObject) -> CUresult;
+        extern "C" {
+            fn cuTexObjectGetTextureDesc(pTexDesc: *mut CUDA_TEXTURE_DESC, texObject: CUtexObject) -> CUresult;
+        }
         cuTexObjectGetTextureDesc(pTexDesc, texObject)
     }
 }
@@ -14007,7 +14935,9 @@ pub unsafe fn cuTexRefCreate(pTexRef: *mut CUtexref) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefCreate(pTexRef: *mut CUtexref) -> CUresult;
+        extern "C" {
+            fn cuTexRefCreate(pTexRef: *mut CUtexref) -> CUresult;
+        }
         cuTexRefCreate(pTexRef)
     }
 }
@@ -14021,7 +14951,9 @@ pub unsafe fn cuTexRefDestroy(hTexRef: CUtexref) -> CUresult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefDestroy(hTexRef: CUtexref) -> CUresult;
+        extern "C" {
+            fn cuTexRefDestroy(hTexRef: CUtexref) -> CUresult;
+        }
         cuTexRefDestroy(hTexRef)
     }
 }
@@ -14035,7 +14967,9 @@ pub unsafe fn cuTexRefGetAddressMode(pam: *mut CUaddress_mode, hTexRef: CUtexref
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefGetAddressMode(pam: *mut CUaddress_mode, hTexRef: CUtexref, dim: ::core::ffi::c_int) -> CUresult;
+        extern "C" {
+            fn cuTexRefGetAddressMode(pam: *mut CUaddress_mode, hTexRef: CUtexref, dim: ::core::ffi::c_int) -> CUresult;
+        }
         cuTexRefGetAddressMode(pam, hTexRef, dim)
     }
 }
@@ -14049,7 +14983,9 @@ pub unsafe fn cuTexRefGetAddress_v2(pdptr: *mut CUdeviceptr, hTexRef: CUtexref) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefGetAddress_v2(pdptr: *mut CUdeviceptr, hTexRef: CUtexref) -> CUresult;
+        extern "C" {
+            fn cuTexRefGetAddress_v2(pdptr: *mut CUdeviceptr, hTexRef: CUtexref) -> CUresult;
+        }
         cuTexRefGetAddress_v2(pdptr, hTexRef)
     }
 }
@@ -14063,7 +14999,9 @@ pub unsafe fn cuTexRefGetArray(phArray: *mut CUarray, hTexRef: CUtexref) -> CUre
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefGetArray(phArray: *mut CUarray, hTexRef: CUtexref) -> CUresult;
+        extern "C" {
+            fn cuTexRefGetArray(phArray: *mut CUarray, hTexRef: CUtexref) -> CUresult;
+        }
         cuTexRefGetArray(phArray, hTexRef)
     }
 }
@@ -14077,7 +15015,9 @@ pub unsafe fn cuTexRefGetBorderColor(pBorderColor: *mut f32, hTexRef: CUtexref) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefGetBorderColor(pBorderColor: *mut f32, hTexRef: CUtexref) -> CUresult;
+        extern "C" {
+            fn cuTexRefGetBorderColor(pBorderColor: *mut f32, hTexRef: CUtexref) -> CUresult;
+        }
         cuTexRefGetBorderColor(pBorderColor, hTexRef)
     }
 }
@@ -14091,7 +15031,9 @@ pub unsafe fn cuTexRefGetFilterMode(pfm: *mut CUfilter_mode, hTexRef: CUtexref) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefGetFilterMode(pfm: *mut CUfilter_mode, hTexRef: CUtexref) -> CUresult;
+        extern "C" {
+            fn cuTexRefGetFilterMode(pfm: *mut CUfilter_mode, hTexRef: CUtexref) -> CUresult;
+        }
         cuTexRefGetFilterMode(pfm, hTexRef)
     }
 }
@@ -14105,7 +15047,9 @@ pub unsafe fn cuTexRefGetFlags(pFlags: *mut ::core::ffi::c_uint, hTexRef: CUtexr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefGetFlags(pFlags: *mut ::core::ffi::c_uint, hTexRef: CUtexref) -> CUresult;
+        extern "C" {
+            fn cuTexRefGetFlags(pFlags: *mut ::core::ffi::c_uint, hTexRef: CUtexref) -> CUresult;
+        }
         cuTexRefGetFlags(pFlags, hTexRef)
     }
 }
@@ -14119,7 +15063,9 @@ pub unsafe fn cuTexRefGetFormat(pFormat: *mut CUarray_format, pNumChannels: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefGetFormat(pFormat: *mut CUarray_format, pNumChannels: *mut ::core::ffi::c_int, hTexRef: CUtexref) -> CUresult;
+        extern "C" {
+            fn cuTexRefGetFormat(pFormat: *mut CUarray_format, pNumChannels: *mut ::core::ffi::c_int, hTexRef: CUtexref) -> CUresult;
+        }
         cuTexRefGetFormat(pFormat, pNumChannels, hTexRef)
     }
 }
@@ -14133,7 +15079,9 @@ pub unsafe fn cuTexRefGetMaxAnisotropy(pmaxAniso: *mut ::core::ffi::c_int, hTexR
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefGetMaxAnisotropy(pmaxAniso: *mut ::core::ffi::c_int, hTexRef: CUtexref) -> CUresult;
+        extern "C" {
+            fn cuTexRefGetMaxAnisotropy(pmaxAniso: *mut ::core::ffi::c_int, hTexRef: CUtexref) -> CUresult;
+        }
         cuTexRefGetMaxAnisotropy(pmaxAniso, hTexRef)
     }
 }
@@ -14147,7 +15095,9 @@ pub unsafe fn cuTexRefGetMipmapFilterMode(pfm: *mut CUfilter_mode, hTexRef: CUte
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefGetMipmapFilterMode(pfm: *mut CUfilter_mode, hTexRef: CUtexref) -> CUresult;
+        extern "C" {
+            fn cuTexRefGetMipmapFilterMode(pfm: *mut CUfilter_mode, hTexRef: CUtexref) -> CUresult;
+        }
         cuTexRefGetMipmapFilterMode(pfm, hTexRef)
     }
 }
@@ -14161,7 +15111,9 @@ pub unsafe fn cuTexRefGetMipmapLevelBias(pbias: *mut f32, hTexRef: CUtexref) -> 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefGetMipmapLevelBias(pbias: *mut f32, hTexRef: CUtexref) -> CUresult;
+        extern "C" {
+            fn cuTexRefGetMipmapLevelBias(pbias: *mut f32, hTexRef: CUtexref) -> CUresult;
+        }
         cuTexRefGetMipmapLevelBias(pbias, hTexRef)
     }
 }
@@ -14175,7 +15127,9 @@ pub unsafe fn cuTexRefGetMipmapLevelClamp(pminMipmapLevelClamp: *mut f32, pmaxMi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefGetMipmapLevelClamp(pminMipmapLevelClamp: *mut f32, pmaxMipmapLevelClamp: *mut f32, hTexRef: CUtexref) -> CUresult;
+        extern "C" {
+            fn cuTexRefGetMipmapLevelClamp(pminMipmapLevelClamp: *mut f32, pmaxMipmapLevelClamp: *mut f32, hTexRef: CUtexref) -> CUresult;
+        }
         cuTexRefGetMipmapLevelClamp(pminMipmapLevelClamp, pmaxMipmapLevelClamp, hTexRef)
     }
 }
@@ -14189,7 +15143,9 @@ pub unsafe fn cuTexRefGetMipmappedArray(phMipmappedArray: *mut CUmipmappedArray,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefGetMipmappedArray(phMipmappedArray: *mut CUmipmappedArray, hTexRef: CUtexref) -> CUresult;
+        extern "C" {
+            fn cuTexRefGetMipmappedArray(phMipmappedArray: *mut CUmipmappedArray, hTexRef: CUtexref) -> CUresult;
+        }
         cuTexRefGetMipmappedArray(phMipmappedArray, hTexRef)
     }
 }
@@ -14203,7 +15159,9 @@ pub unsafe fn cuTexRefSetAddress2D_v3(hTexRef: CUtexref, desc: *const CUDA_ARRAY
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefSetAddress2D_v3(hTexRef: CUtexref, desc: *const CUDA_ARRAY_DESCRIPTOR, dptr: CUdeviceptr, Pitch: usize) -> CUresult;
+        extern "C" {
+            fn cuTexRefSetAddress2D_v3(hTexRef: CUtexref, desc: *const CUDA_ARRAY_DESCRIPTOR, dptr: CUdeviceptr, Pitch: usize) -> CUresult;
+        }
         cuTexRefSetAddress2D_v3(hTexRef, desc, dptr, Pitch)
     }
 }
@@ -14217,7 +15175,9 @@ pub unsafe fn cuTexRefSetAddressMode(hTexRef: CUtexref, dim: ::core::ffi::c_int,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefSetAddressMode(hTexRef: CUtexref, dim: ::core::ffi::c_int, am: CUaddress_mode) -> CUresult;
+        extern "C" {
+            fn cuTexRefSetAddressMode(hTexRef: CUtexref, dim: ::core::ffi::c_int, am: CUaddress_mode) -> CUresult;
+        }
         cuTexRefSetAddressMode(hTexRef, dim, am)
     }
 }
@@ -14231,7 +15191,9 @@ pub unsafe fn cuTexRefSetAddress_v2(ByteOffset: *mut usize, hTexRef: CUtexref, d
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefSetAddress_v2(ByteOffset: *mut usize, hTexRef: CUtexref, dptr: CUdeviceptr, bytes: usize) -> CUresult;
+        extern "C" {
+            fn cuTexRefSetAddress_v2(ByteOffset: *mut usize, hTexRef: CUtexref, dptr: CUdeviceptr, bytes: usize) -> CUresult;
+        }
         cuTexRefSetAddress_v2(ByteOffset, hTexRef, dptr, bytes)
     }
 }
@@ -14245,7 +15207,9 @@ pub unsafe fn cuTexRefSetArray(hTexRef: CUtexref, hArray: CUarray, Flags: ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefSetArray(hTexRef: CUtexref, hArray: CUarray, Flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuTexRefSetArray(hTexRef: CUtexref, hArray: CUarray, Flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuTexRefSetArray(hTexRef, hArray, Flags)
     }
 }
@@ -14259,7 +15223,9 @@ pub unsafe fn cuTexRefSetBorderColor(hTexRef: CUtexref, pBorderColor: *mut f32) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefSetBorderColor(hTexRef: CUtexref, pBorderColor: *mut f32) -> CUresult;
+        extern "C" {
+            fn cuTexRefSetBorderColor(hTexRef: CUtexref, pBorderColor: *mut f32) -> CUresult;
+        }
         cuTexRefSetBorderColor(hTexRef, pBorderColor)
     }
 }
@@ -14273,7 +15239,9 @@ pub unsafe fn cuTexRefSetFilterMode(hTexRef: CUtexref, fm: CUfilter_mode) -> CUr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefSetFilterMode(hTexRef: CUtexref, fm: CUfilter_mode) -> CUresult;
+        extern "C" {
+            fn cuTexRefSetFilterMode(hTexRef: CUtexref, fm: CUfilter_mode) -> CUresult;
+        }
         cuTexRefSetFilterMode(hTexRef, fm)
     }
 }
@@ -14287,7 +15255,9 @@ pub unsafe fn cuTexRefSetFlags(hTexRef: CUtexref, Flags: ::core::ffi::c_uint) ->
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefSetFlags(hTexRef: CUtexref, Flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuTexRefSetFlags(hTexRef: CUtexref, Flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuTexRefSetFlags(hTexRef, Flags)
     }
 }
@@ -14301,7 +15271,9 @@ pub unsafe fn cuTexRefSetFormat(hTexRef: CUtexref, fmt: CUarray_format, NumPacke
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefSetFormat(hTexRef: CUtexref, fmt: CUarray_format, NumPackedComponents: ::core::ffi::c_int) -> CUresult;
+        extern "C" {
+            fn cuTexRefSetFormat(hTexRef: CUtexref, fmt: CUarray_format, NumPackedComponents: ::core::ffi::c_int) -> CUresult;
+        }
         cuTexRefSetFormat(hTexRef, fmt, NumPackedComponents)
     }
 }
@@ -14315,7 +15287,9 @@ pub unsafe fn cuTexRefSetMaxAnisotropy(hTexRef: CUtexref, maxAniso: ::core::ffi:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefSetMaxAnisotropy(hTexRef: CUtexref, maxAniso: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuTexRefSetMaxAnisotropy(hTexRef: CUtexref, maxAniso: ::core::ffi::c_uint) -> CUresult;
+        }
         cuTexRefSetMaxAnisotropy(hTexRef, maxAniso)
     }
 }
@@ -14329,7 +15303,9 @@ pub unsafe fn cuTexRefSetMipmapFilterMode(hTexRef: CUtexref, fm: CUfilter_mode) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefSetMipmapFilterMode(hTexRef: CUtexref, fm: CUfilter_mode) -> CUresult;
+        extern "C" {
+            fn cuTexRefSetMipmapFilterMode(hTexRef: CUtexref, fm: CUfilter_mode) -> CUresult;
+        }
         cuTexRefSetMipmapFilterMode(hTexRef, fm)
     }
 }
@@ -14343,7 +15319,9 @@ pub unsafe fn cuTexRefSetMipmapLevelBias(hTexRef: CUtexref, bias: f32) -> CUresu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefSetMipmapLevelBias(hTexRef: CUtexref, bias: f32) -> CUresult;
+        extern "C" {
+            fn cuTexRefSetMipmapLevelBias(hTexRef: CUtexref, bias: f32) -> CUresult;
+        }
         cuTexRefSetMipmapLevelBias(hTexRef, bias)
     }
 }
@@ -14357,7 +15335,9 @@ pub unsafe fn cuTexRefSetMipmapLevelClamp(hTexRef: CUtexref, minMipmapLevelClamp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefSetMipmapLevelClamp(hTexRef: CUtexref, minMipmapLevelClamp: f32, maxMipmapLevelClamp: f32) -> CUresult;
+        extern "C" {
+            fn cuTexRefSetMipmapLevelClamp(hTexRef: CUtexref, minMipmapLevelClamp: f32, maxMipmapLevelClamp: f32) -> CUresult;
+        }
         cuTexRefSetMipmapLevelClamp(hTexRef, minMipmapLevelClamp, maxMipmapLevelClamp)
     }
 }
@@ -14371,7 +15351,9 @@ pub unsafe fn cuTexRefSetMipmappedArray(hTexRef: CUtexref, hMipmappedArray: CUmi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuTexRefSetMipmappedArray(hTexRef: CUtexref, hMipmappedArray: CUmipmappedArray, Flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuTexRefSetMipmappedArray(hTexRef: CUtexref, hMipmappedArray: CUmipmappedArray, Flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuTexRefSetMipmappedArray(hTexRef, hMipmappedArray, Flags)
     }
 }
@@ -14385,7 +15367,9 @@ pub unsafe fn cuThreadExchangeStreamCaptureMode(mode: *mut CUstreamCaptureMode) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuThreadExchangeStreamCaptureMode(mode: *mut CUstreamCaptureMode) -> CUresult;
+        extern "C" {
+            fn cuThreadExchangeStreamCaptureMode(mode: *mut CUstreamCaptureMode) -> CUresult;
+        }
         cuThreadExchangeStreamCaptureMode(mode)
     }
 }
@@ -14399,7 +15383,9 @@ pub unsafe fn cuUserObjectCreate(object_out: *mut CUuserObject, ptr: *mut ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuUserObjectCreate(object_out: *mut CUuserObject, ptr: *mut ::core::ffi::c_void, destroy: CUhostFn, initialRefcount: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuUserObjectCreate(object_out: *mut CUuserObject, ptr: *mut ::core::ffi::c_void, destroy: CUhostFn, initialRefcount: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> CUresult;
+        }
         cuUserObjectCreate(object_out, ptr, destroy, initialRefcount, flags)
     }
 }
@@ -14413,7 +15399,9 @@ pub unsafe fn cuUserObjectRelease(object: CUuserObject, count: ::core::ffi::c_ui
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuUserObjectRelease(object: CUuserObject, count: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuUserObjectRelease(object: CUuserObject, count: ::core::ffi::c_uint) -> CUresult;
+        }
         cuUserObjectRelease(object, count)
     }
 }
@@ -14427,7 +15415,9 @@ pub unsafe fn cuUserObjectRetain(object: CUuserObject, count: ::core::ffi::c_uin
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuUserObjectRetain(object: CUuserObject, count: ::core::ffi::c_uint) -> CUresult;
+        extern "C" {
+            fn cuUserObjectRetain(object: CUuserObject, count: ::core::ffi::c_uint) -> CUresult;
+        }
         cuUserObjectRetain(object, count)
     }
 }
@@ -14441,7 +15431,9 @@ pub unsafe fn cuWaitExternalSemaphoresAsync(extSemArray: *const CUexternalSemaph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cuWaitExternalSemaphoresAsync(extSemArray: *const CUexternalSemaphore, paramsArray: *const CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS, numExtSems: ::core::ffi::c_uint, stream: CUstream) -> CUresult;
+        extern "C" {
+            fn cuWaitExternalSemaphoresAsync(extSemArray: *const CUexternalSemaphore, paramsArray: *const CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS, numExtSems: ::core::ffi::c_uint, stream: CUstream) -> CUresult;
+        }
         cuWaitExternalSemaphoresAsync(extSemArray, paramsArray, numExtSems, stream)
     }
 }

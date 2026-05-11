@@ -441,7 +441,9 @@ pub unsafe fn cublasAsumEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasAsumEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasAsumEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        }
         cublasAsumEx(handle, n, x, xType, incx, result, resultType, executiontype)
     }
 }
@@ -456,7 +458,9 @@ pub unsafe fn cublasAsumEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasAsumEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasAsumEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        }
         cublasAsumEx_64(handle, n, x, xType, incx, result, resultType, executiontype)
     }
 }
@@ -470,7 +474,9 @@ pub unsafe fn cublasAxpyEx(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasAxpyEx(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const ::core::ffi::c_void, alphaType: cudaDataType, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: ::core::ffi::c_int, executiontype: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasAxpyEx(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const ::core::ffi::c_void, alphaType: cudaDataType, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: ::core::ffi::c_int, executiontype: cudaDataType) -> cublasStatus_t;
+        }
         cublasAxpyEx(handle, n, alpha, alphaType, x, xType, incx, y, yType, incy, executiontype)
     }
 }
@@ -485,7 +491,9 @@ pub unsafe fn cublasAxpyEx_64(handle: cublasHandle_t, n: i64, alpha: *const ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasAxpyEx_64(handle: cublasHandle_t, n: i64, alpha: *const ::core::ffi::c_void, alphaType: cudaDataType, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: i64, executiontype: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasAxpyEx_64(handle: cublasHandle_t, n: i64, alpha: *const ::core::ffi::c_void, alphaType: cudaDataType, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: i64, executiontype: cudaDataType) -> cublasStatus_t;
+        }
         cublasAxpyEx_64(handle, n, alpha, alphaType, x, xType, incx, y, yType, incy, executiontype)
     }
 }
@@ -499,7 +507,9 @@ pub unsafe fn cublasCaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCaxpy_v2(handle, n, alpha, x, incx, y, incy)
     }
 }
@@ -514,7 +524,9 @@ pub unsafe fn cublasCaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasCaxpy_v2_64(handle, n, alpha, x, incx, y, incy)
     }
 }
@@ -528,7 +540,9 @@ pub unsafe fn cublasCcopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCcopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCcopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCcopy_v2(handle, n, x, incx, y, incy)
     }
 }
@@ -543,7 +557,9 @@ pub unsafe fn cublasCcopy_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCcopy_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCcopy_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasCcopy_v2_64(handle, n, x, incx, y, incy)
     }
 }
@@ -557,7 +573,9 @@ pub unsafe fn cublasCdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, A: *const cuComplex, lda: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, A: *const cuComplex, lda: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCdgmm(handle, mode, m, n, A, lda, x, incx, C, ldc)
     }
 }
@@ -572,7 +590,9 @@ pub unsafe fn cublasCdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: i64, n: i64, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: i64, n: i64, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasCdgmm_64(handle, mode, m, n, A, lda, x, incx, C, ldc)
     }
 }
@@ -586,7 +606,9 @@ pub unsafe fn cublasCdotc_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCdotc_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, y: *const cuComplex, incy: ::core::ffi::c_int, result: *mut cuComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCdotc_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, y: *const cuComplex, incy: ::core::ffi::c_int, result: *mut cuComplex) -> cublasStatus_t;
+        }
         cublasCdotc_v2(handle, n, x, incx, y, incy, result)
     }
 }
@@ -601,7 +623,9 @@ pub unsafe fn cublasCdotc_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCdotc_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, result: *mut cuComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCdotc_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, result: *mut cuComplex) -> cublasStatus_t;
+        }
         cublasCdotc_v2_64(handle, n, x, incx, y, incy, result)
     }
 }
@@ -615,7 +639,9 @@ pub unsafe fn cublasCdotu_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCdotu_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, y: *const cuComplex, incy: ::core::ffi::c_int, result: *mut cuComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCdotu_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, y: *const cuComplex, incy: ::core::ffi::c_int, result: *mut cuComplex) -> cublasStatus_t;
+        }
         cublasCdotu_v2(handle, n, x, incx, y, incy, result)
     }
 }
@@ -630,7 +656,9 @@ pub unsafe fn cublasCdotu_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCdotu_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, result: *mut cuComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCdotu_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, result: *mut cuComplex) -> cublasStatus_t;
+        }
         cublasCdotu_v2_64(handle, n, x, incx, y, incy, result)
     }
 }
@@ -644,7 +672,9 @@ pub unsafe fn cublasCgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, kl: ::core::ffi::c_int, ku: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, beta: *const cuComplex, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, kl: ::core::ffi::c_int, ku: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, beta: *const cuComplex, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgbmv_v2(handle, trans, m, n, kl, ku, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -659,7 +689,9 @@ pub unsafe fn cublasCgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, kl: i64, ku: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, kl: i64, ku: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasCgbmv_v2_64(handle, trans, m, n, kl, ku, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -673,7 +705,9 @@ pub unsafe fn cublasCgeam(handle: cublasHandle_t, transa: cublasOperation_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgeam(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, beta: *const cuComplex, B: *const cuComplex, ldb: ::core::ffi::c_int, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgeam(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, beta: *const cuComplex, B: *const cuComplex, ldb: ::core::ffi::c_int, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgeam(handle, transa, transb, m, n, alpha, A, lda, beta, B, ldb, C, ldc)
     }
 }
@@ -688,7 +722,9 @@ pub unsafe fn cublasCgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, beta: *const cuComplex, B: *const cuComplex, ldb: i64, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, beta: *const cuComplex, B: *const cuComplex, ldb: i64, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasCgeam_64(handle, transa, transb, m, n, alpha, A, lda, beta, B, ldb, C, ldc)
     }
 }
@@ -702,7 +738,9 @@ pub unsafe fn cublasCgelsBatched(handle: cublasHandle_t, trans: cublasOperation_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgelsBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *mut cuComplex, lda: ::core::ffi::c_int, Carray: *const *mut cuComplex, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, devInfoArray: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgelsBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *mut cuComplex, lda: ::core::ffi::c_int, Carray: *const *mut cuComplex, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, devInfoArray: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgelsBatched(handle, trans, m, n, nrhs, Aarray, lda, Carray, ldc, info, devInfoArray, batchSize)
     }
 }
@@ -716,7 +754,9 @@ pub unsafe fn cublasCgemm3m(handle: cublasHandle_t, transa: cublasOperation_t, t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemm3m(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemm3m(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgemm3m(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -730,7 +770,9 @@ pub unsafe fn cublasCgemm3mBatched(handle: cublasHandle_t, transa: cublasOperati
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemm3mBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: ::core::ffi::c_int, Barray: *const *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, Carray: *const *mut cuComplex, ldc: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemm3mBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: ::core::ffi::c_int, Barray: *const *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, Carray: *const *mut cuComplex, ldc: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgemm3mBatched(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
@@ -745,7 +787,9 @@ pub unsafe fn cublasCgemm3mBatched_64(handle: cublasHandle_t, transa: cublasOper
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemm3mBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: i64, Barray: *const *const cuComplex, ldb: i64, beta: *const cuComplex, Carray: *const *mut cuComplex, ldc: i64, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemm3mBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: i64, Barray: *const *const cuComplex, ldb: i64, beta: *const cuComplex, Carray: *const *mut cuComplex, ldc: i64, batchCount: i64) -> cublasStatus_t;
+        }
         cublasCgemm3mBatched_64(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
@@ -759,7 +803,9 @@ pub unsafe fn cublasCgemm3mEx(handle: cublasHandle_t, transa: cublasOperation_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemm3mEx(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemm3mEx(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgemm3mEx(handle, transa, transb, m, n, k, alpha, A, Atype, lda, B, Btype, ldb, beta, C, Ctype, ldc)
     }
 }
@@ -774,7 +820,9 @@ pub unsafe fn cublasCgemm3mEx_64(handle: cublasHandle_t, transa: cublasOperation
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemm3mEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemm3mEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t;
+        }
         cublasCgemm3mEx_64(handle, transa, transb, m, n, k, alpha, A, Atype, lda, B, Btype, ldb, beta, C, Ctype, ldc)
     }
 }
@@ -788,7 +836,9 @@ pub unsafe fn cublasCgemm3mStridedBatched(handle: cublasHandle_t, transa: cublas
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemm3mStridedBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, B: *const cuComplex, ldb: ::core::ffi::c_int, strideB: ::core::ffi::c_longlong, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int, strideC: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemm3mStridedBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, B: *const cuComplex, ldb: ::core::ffi::c_int, strideB: ::core::ffi::c_longlong, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int, strideC: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgemm3mStridedBatched(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
@@ -803,7 +853,9 @@ pub unsafe fn cublasCgemm3mStridedBatched_64(handle: cublasHandle_t, transa: cub
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemm3mStridedBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, strideA: ::core::ffi::c_longlong, B: *const cuComplex, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const cuComplex, C: *mut cuComplex, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemm3mStridedBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, strideA: ::core::ffi::c_longlong, B: *const cuComplex, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const cuComplex, C: *mut cuComplex, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        }
         cublasCgemm3mStridedBatched_64(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
@@ -818,7 +870,9 @@ pub unsafe fn cublasCgemm3m_64(handle: cublasHandle_t, transa: cublasOperation_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemm3m_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemm3m_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasCgemm3m_64(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -832,7 +886,9 @@ pub unsafe fn cublasCgemmBatched(handle: cublasHandle_t, transa: cublasOperation
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemmBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: ::core::ffi::c_int, Barray: *const *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, Carray: *const *mut cuComplex, ldc: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemmBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: ::core::ffi::c_int, Barray: *const *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, Carray: *const *mut cuComplex, ldc: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgemmBatched(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
@@ -847,7 +903,9 @@ pub unsafe fn cublasCgemmBatched_64(handle: cublasHandle_t, transa: cublasOperat
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemmBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: i64, Barray: *const *const cuComplex, ldb: i64, beta: *const cuComplex, Carray: *const *mut cuComplex, ldc: i64, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemmBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: i64, Barray: *const *const cuComplex, ldb: i64, beta: *const cuComplex, Carray: *const *mut cuComplex, ldc: i64, batchCount: i64) -> cublasStatus_t;
+        }
         cublasCgemmBatched_64(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
@@ -861,7 +919,9 @@ pub unsafe fn cublasCgemmEx(handle: cublasHandle_t, transa: cublasOperation_t, t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemmEx(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemmEx(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgemmEx(handle, transa, transb, m, n, k, alpha, A, Atype, lda, B, Btype, ldb, beta, C, Ctype, ldc)
     }
 }
@@ -876,7 +936,9 @@ pub unsafe fn cublasCgemmEx_64(handle: cublasHandle_t, transa: cublasOperation_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemmEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemmEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t;
+        }
         cublasCgemmEx_64(handle, transa, transb, m, n, k, alpha, A, Atype, lda, B, Btype, ldb, beta, C, Ctype, ldc)
     }
 }
@@ -890,7 +952,9 @@ pub unsafe fn cublasCgemmStridedBatched(handle: cublasHandle_t, transa: cublasOp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemmStridedBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, B: *const cuComplex, ldb: ::core::ffi::c_int, strideB: ::core::ffi::c_longlong, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int, strideC: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemmStridedBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, B: *const cuComplex, ldb: ::core::ffi::c_int, strideB: ::core::ffi::c_longlong, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int, strideC: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgemmStridedBatched(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
@@ -905,7 +969,9 @@ pub unsafe fn cublasCgemmStridedBatched_64(handle: cublasHandle_t, transa: cubla
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemmStridedBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, strideA: ::core::ffi::c_longlong, B: *const cuComplex, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const cuComplex, C: *mut cuComplex, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemmStridedBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, strideA: ::core::ffi::c_longlong, B: *const cuComplex, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const cuComplex, C: *mut cuComplex, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        }
         cublasCgemmStridedBatched_64(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
@@ -919,7 +985,9 @@ pub unsafe fn cublasCgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgemm_v2(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -934,7 +1002,9 @@ pub unsafe fn cublasCgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasCgemm_v2_64(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -949,7 +1019,9 @@ pub unsafe fn cublasCgemvBatched(handle: cublasHandle_t, trans: cublasOperation_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemvBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: ::core::ffi::c_int, xarray: *const *const cuComplex, incx: ::core::ffi::c_int, beta: *const cuComplex, yarray: *const *mut cuComplex, incy: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemvBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: ::core::ffi::c_int, xarray: *const *const cuComplex, incx: ::core::ffi::c_int, beta: *const cuComplex, yarray: *const *mut cuComplex, incy: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgemvBatched(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
@@ -964,7 +1036,9 @@ pub unsafe fn cublasCgemvBatched_64(handle: cublasHandle_t, trans: cublasOperati
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemvBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: i64, xarray: *const *const cuComplex, incx: i64, beta: *const cuComplex, yarray: *const *mut cuComplex, incy: i64, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemvBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: i64, xarray: *const *const cuComplex, incx: i64, beta: *const cuComplex, yarray: *const *mut cuComplex, incy: i64, batchCount: i64) -> cublasStatus_t;
+        }
         cublasCgemvBatched_64(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
@@ -979,7 +1053,9 @@ pub unsafe fn cublasCgemvStridedBatched(handle: cublasHandle_t, trans: cublasOpe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemvStridedBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, x: *const cuComplex, incx: ::core::ffi::c_int, stridex: ::core::ffi::c_longlong, beta: *const cuComplex, y: *mut cuComplex, incy: ::core::ffi::c_int, stridey: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemvStridedBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, x: *const cuComplex, incx: ::core::ffi::c_int, stridex: ::core::ffi::c_longlong, beta: *const cuComplex, y: *mut cuComplex, incy: ::core::ffi::c_int, stridey: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgemvStridedBatched(handle, trans, m, n, alpha, A, lda, strideA, x, incx, stridex, beta, y, incy, stridey, batchCount)
     }
 }
@@ -994,7 +1070,9 @@ pub unsafe fn cublasCgemvStridedBatched_64(handle: cublasHandle_t, trans: cublas
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemvStridedBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, strideA: ::core::ffi::c_longlong, x: *const cuComplex, incx: i64, stridex: ::core::ffi::c_longlong, beta: *const cuComplex, y: *mut cuComplex, incy: i64, stridey: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemvStridedBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, strideA: ::core::ffi::c_longlong, x: *const cuComplex, incx: i64, stridex: ::core::ffi::c_longlong, beta: *const cuComplex, y: *mut cuComplex, incy: i64, stridey: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        }
         cublasCgemvStridedBatched_64(handle, trans, m, n, alpha, A, lda, strideA, x, incx, stridex, beta, y, incy, stridey, batchCount)
     }
 }
@@ -1008,7 +1086,9 @@ pub unsafe fn cublasCgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, beta: *const cuComplex, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, beta: *const cuComplex, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgemv_v2(handle, trans, m, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -1023,7 +1103,9 @@ pub unsafe fn cublasCgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasCgemv_v2_64(handle, trans, m, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -1037,7 +1119,9 @@ pub unsafe fn cublasCgeqrfBatched(handle: cublasHandle_t, m: ::core::ffi::c_int,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgeqrfBatched(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, Aarray: *const *mut cuComplex, lda: ::core::ffi::c_int, TauArray: *const *mut cuComplex, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgeqrfBatched(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, Aarray: *const *mut cuComplex, lda: ::core::ffi::c_int, TauArray: *const *mut cuComplex, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgeqrfBatched(handle, m, n, Aarray, lda, TauArray, info, batchSize)
     }
 }
@@ -1051,7 +1135,9 @@ pub unsafe fn cublasCgerc_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgerc_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, y: *const cuComplex, incy: ::core::ffi::c_int, A: *mut cuComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgerc_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, y: *const cuComplex, incy: ::core::ffi::c_int, A: *mut cuComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgerc_v2(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -1066,7 +1152,9 @@ pub unsafe fn cublasCgerc_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgerc_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgerc_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t;
+        }
         cublasCgerc_v2_64(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -1080,7 +1168,9 @@ pub unsafe fn cublasCgeru_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgeru_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, y: *const cuComplex, incy: ::core::ffi::c_int, A: *mut cuComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgeru_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, y: *const cuComplex, incy: ::core::ffi::c_int, A: *mut cuComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgeru_v2(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -1095,7 +1185,9 @@ pub unsafe fn cublasCgeru_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgeru_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgeru_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t;
+        }
         cublasCgeru_v2_64(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -1109,7 +1201,9 @@ pub unsafe fn cublasCgetrfBatched(handle: cublasHandle_t, n: ::core::ffi::c_int,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgetrfBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *mut cuComplex, lda: ::core::ffi::c_int, P: *mut ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgetrfBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *mut cuComplex, lda: ::core::ffi::c_int, P: *mut ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgetrfBatched(handle, n, A, lda, P, info, batchSize)
     }
 }
@@ -1123,7 +1217,9 @@ pub unsafe fn cublasCgetriBatched(handle: cublasHandle_t, n: ::core::ffi::c_int,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgetriBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const cuComplex, lda: ::core::ffi::c_int, P: *const ::core::ffi::c_int, C: *const *mut cuComplex, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgetriBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const cuComplex, lda: ::core::ffi::c_int, P: *const ::core::ffi::c_int, C: *const *mut cuComplex, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgetriBatched(handle, n, A, lda, P, C, ldc, info, batchSize)
     }
 }
@@ -1137,7 +1233,9 @@ pub unsafe fn cublasCgetrsBatched(handle: cublasHandle_t, trans: cublasOperation
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCgetrsBatched(handle: cublasHandle_t, trans: cublasOperation_t, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *const cuComplex, lda: ::core::ffi::c_int, devIpiv: *const ::core::ffi::c_int, Barray: *const *mut cuComplex, ldb: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCgetrsBatched(handle: cublasHandle_t, trans: cublasOperation_t, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *const cuComplex, lda: ::core::ffi::c_int, devIpiv: *const ::core::ffi::c_int, Barray: *const *mut cuComplex, ldb: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCgetrsBatched(handle, trans, n, nrhs, Aarray, lda, devIpiv, Barray, ldb, info, batchSize)
     }
 }
@@ -1151,7 +1249,9 @@ pub unsafe fn cublasChbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasChbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, beta: *const cuComplex, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasChbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, beta: *const cuComplex, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasChbmv_v2(handle, uplo, n, k, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -1166,7 +1266,9 @@ pub unsafe fn cublasChbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasChbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasChbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasChbmv_v2_64(handle, uplo, n, k, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -1180,7 +1282,9 @@ pub unsafe fn cublasChemm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasChemm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasChemm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasChemm_v2(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -1195,7 +1299,9 @@ pub unsafe fn cublasChemm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasChemm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasChemm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasChemm_v2_64(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -1209,7 +1315,9 @@ pub unsafe fn cublasChemv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasChemv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, beta: *const cuComplex, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasChemv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, beta: *const cuComplex, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasChemv_v2(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -1224,7 +1332,9 @@ pub unsafe fn cublasChemv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasChemv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasChemv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasChemv_v2_64(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -1238,7 +1348,9 @@ pub unsafe fn cublasCher2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCher2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, y: *const cuComplex, incy: ::core::ffi::c_int, A: *mut cuComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCher2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, y: *const cuComplex, incy: ::core::ffi::c_int, A: *mut cuComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCher2_v2(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -1253,7 +1365,9 @@ pub unsafe fn cublasCher2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCher2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCher2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t;
+        }
         cublasCher2_v2_64(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -1267,7 +1381,9 @@ pub unsafe fn cublasCher2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCher2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const f32, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCher2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const f32, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCher2k_v2(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -1282,7 +1398,9 @@ pub unsafe fn cublasCher2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCher2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const f32, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCher2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const f32, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasCher2k_v2_64(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -1296,7 +1414,9 @@ pub unsafe fn cublasCher_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCher_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, x: *const cuComplex, incx: ::core::ffi::c_int, A: *mut cuComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCher_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, x: *const cuComplex, incx: ::core::ffi::c_int, A: *mut cuComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCher_v2(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
@@ -1311,7 +1431,9 @@ pub unsafe fn cublasCher_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCher_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const cuComplex, incx: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCher_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const cuComplex, incx: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t;
+        }
         cublasCher_v2_64(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
@@ -1325,7 +1447,9 @@ pub unsafe fn cublasCherk3mEx(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCherk3mEx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, beta: *const f32, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCherk3mEx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, beta: *const f32, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCherk3mEx(handle, uplo, trans, n, k, alpha, A, Atype, lda, beta, C, Ctype, ldc)
     }
 }
@@ -1340,7 +1464,9 @@ pub unsafe fn cublasCherk3mEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCherk3mEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, beta: *const f32, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCherk3mEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, beta: *const f32, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t;
+        }
         cublasCherk3mEx_64(handle, uplo, trans, n, k, alpha, A, Atype, lda, beta, C, Ctype, ldc)
     }
 }
@@ -1354,7 +1480,9 @@ pub unsafe fn cublasCherkEx(handle: cublasHandle_t, uplo: cublasFillMode_t, tran
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCherkEx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, beta: *const f32, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCherkEx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, beta: *const f32, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCherkEx(handle, uplo, trans, n, k, alpha, A, Atype, lda, beta, C, Ctype, ldc)
     }
 }
@@ -1369,7 +1497,9 @@ pub unsafe fn cublasCherkEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCherkEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, beta: *const f32, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCherkEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, beta: *const f32, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t;
+        }
         cublasCherkEx_64(handle, uplo, trans, n, k, alpha, A, Atype, lda, beta, C, Ctype, ldc)
     }
 }
@@ -1383,7 +1513,9 @@ pub unsafe fn cublasCherk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCherk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const cuComplex, lda: ::core::ffi::c_int, beta: *const f32, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCherk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const cuComplex, lda: ::core::ffi::c_int, beta: *const f32, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCherk_v2(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
@@ -1398,7 +1530,9 @@ pub unsafe fn cublasCherk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCherk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const cuComplex, lda: i64, beta: *const f32, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCherk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const cuComplex, lda: i64, beta: *const f32, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasCherk_v2_64(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
@@ -1412,7 +1546,9 @@ pub unsafe fn cublasCherkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCherkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const f32, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCherkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const f32, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCherkx(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -1427,7 +1563,9 @@ pub unsafe fn cublasCherkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCherkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const f32, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCherkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const f32, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasCherkx_64(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -1441,7 +1579,9 @@ pub unsafe fn cublasChpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasChpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuComplex, AP: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, beta: *const cuComplex, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasChpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuComplex, AP: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, beta: *const cuComplex, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasChpmv_v2(handle, uplo, n, alpha, AP, x, incx, beta, y, incy)
     }
 }
@@ -1456,7 +1596,9 @@ pub unsafe fn cublasChpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasChpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, AP: *const cuComplex, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasChpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, AP: *const cuComplex, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasChpmv_v2_64(handle, uplo, n, alpha, AP, x, incx, beta, y, incy)
     }
 }
@@ -1470,7 +1612,9 @@ pub unsafe fn cublasChpr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasChpr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, y: *const cuComplex, incy: ::core::ffi::c_int, AP: *mut cuComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasChpr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, y: *const cuComplex, incy: ::core::ffi::c_int, AP: *mut cuComplex) -> cublasStatus_t;
+        }
         cublasChpr2_v2(handle, uplo, n, alpha, x, incx, y, incy, AP)
     }
 }
@@ -1485,7 +1629,9 @@ pub unsafe fn cublasChpr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasChpr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, AP: *mut cuComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasChpr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, AP: *mut cuComplex) -> cublasStatus_t;
+        }
         cublasChpr2_v2_64(handle, uplo, n, alpha, x, incx, y, incy, AP)
     }
 }
@@ -1499,7 +1645,9 @@ pub unsafe fn cublasChpr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasChpr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, x: *const cuComplex, incx: ::core::ffi::c_int, AP: *mut cuComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasChpr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, x: *const cuComplex, incx: ::core::ffi::c_int, AP: *mut cuComplex) -> cublasStatus_t;
+        }
         cublasChpr_v2(handle, uplo, n, alpha, x, incx, AP)
     }
 }
@@ -1514,7 +1662,9 @@ pub unsafe fn cublasChpr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasChpr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const cuComplex, incx: i64, AP: *mut cuComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasChpr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const cuComplex, incx: i64, AP: *mut cuComplex) -> cublasStatus_t;
+        }
         cublasChpr_v2_64(handle, uplo, n, alpha, x, incx, AP)
     }
 }
@@ -1528,7 +1678,9 @@ pub unsafe fn cublasCmatinvBatched(handle: cublasHandle_t, n: ::core::ffi::c_int
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCmatinvBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const cuComplex, lda: ::core::ffi::c_int, Ainv: *const *mut cuComplex, lda_inv: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCmatinvBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const cuComplex, lda: ::core::ffi::c_int, Ainv: *const *mut cuComplex, lda_inv: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCmatinvBatched(handle, n, A, lda, Ainv, lda_inv, info, batchSize)
     }
 }
@@ -1542,7 +1694,9 @@ pub unsafe fn cublasCopyEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCopyEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCopyEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCopyEx(handle, n, x, xType, incx, y, yType, incy)
     }
 }
@@ -1557,7 +1711,9 @@ pub unsafe fn cublasCopyEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCopyEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCopyEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: i64) -> cublasStatus_t;
+        }
         cublasCopyEx_64(handle, n, x, xType, incx, y, yType, incy)
     }
 }
@@ -1571,7 +1727,9 @@ pub unsafe fn cublasCreate_v2(handle: *mut cublasHandle_t) -> cublasStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCreate_v2(handle: *mut cublasHandle_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCreate_v2(handle: *mut cublasHandle_t) -> cublasStatus_t;
+        }
         cublasCreate_v2(handle)
     }
 }
@@ -1585,7 +1743,9 @@ pub unsafe fn cublasCrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut cuComplex, incx: ::core::ffi::c_int, y: *mut cuComplex, incy: ::core::ffi::c_int, c: *const f32, s: *const cuComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut cuComplex, incx: ::core::ffi::c_int, y: *mut cuComplex, incy: ::core::ffi::c_int, c: *const f32, s: *const cuComplex) -> cublasStatus_t;
+        }
         cublasCrot_v2(handle, n, x, incx, y, incy, c, s)
     }
 }
@@ -1600,7 +1760,9 @@ pub unsafe fn cublasCrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuComplex
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuComplex, incx: i64, y: *mut cuComplex, incy: i64, c: *const f32, s: *const cuComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuComplex, incx: i64, y: *mut cuComplex, incy: i64, c: *const f32, s: *const cuComplex) -> cublasStatus_t;
+        }
         cublasCrot_v2_64(handle, n, x, incx, y, incy, c, s)
     }
 }
@@ -1614,7 +1776,9 @@ pub unsafe fn cublasCrotg_v2(handle: cublasHandle_t, a: *mut cuComplex, b: *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCrotg_v2(handle: cublasHandle_t, a: *mut cuComplex, b: *mut cuComplex, c: *mut f32, s: *mut cuComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCrotg_v2(handle: cublasHandle_t, a: *mut cuComplex, b: *mut cuComplex, c: *mut f32, s: *mut cuComplex) -> cublasStatus_t;
+        }
         cublasCrotg_v2(handle, a, b, c, s)
     }
 }
@@ -1628,7 +1792,9 @@ pub unsafe fn cublasCscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCscal_v2(handle, n, alpha, x, incx)
     }
 }
@@ -1643,7 +1809,9 @@ pub unsafe fn cublasCscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cuComplex, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cuComplex, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasCscal_v2_64(handle, n, alpha, x, incx)
     }
 }
@@ -1657,7 +1825,9 @@ pub unsafe fn cublasCsrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut cuComplex, incx: ::core::ffi::c_int, y: *mut cuComplex, incy: ::core::ffi::c_int, c: *const f32, s: *const f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut cuComplex, incx: ::core::ffi::c_int, y: *mut cuComplex, incy: ::core::ffi::c_int, c: *const f32, s: *const f32) -> cublasStatus_t;
+        }
         cublasCsrot_v2(handle, n, x, incx, y, incy, c, s)
     }
 }
@@ -1672,7 +1842,9 @@ pub unsafe fn cublasCsrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuComple
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuComplex, incx: i64, y: *mut cuComplex, incy: i64, c: *const f32, s: *const f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuComplex, incx: i64, y: *mut cuComplex, incy: i64, c: *const f32, s: *const f32) -> cublasStatus_t;
+        }
         cublasCsrot_v2_64(handle, n, x, incx, y, incy, c, s)
     }
 }
@@ -1686,7 +1858,9 @@ pub unsafe fn cublasCsscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const f32, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const f32, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCsscal_v2(handle, n, alpha, x, incx)
     }
 }
@@ -1701,7 +1875,9 @@ pub unsafe fn cublasCsscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f32, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f32, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasCsscal_v2_64(handle, n, alpha, x, incx)
     }
 }
@@ -1715,7 +1891,9 @@ pub unsafe fn cublasCswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut cuComplex, incx: ::core::ffi::c_int, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut cuComplex, incx: ::core::ffi::c_int, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCswap_v2(handle, n, x, incx, y, incy)
     }
 }
@@ -1730,7 +1908,9 @@ pub unsafe fn cublasCswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuComple
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuComplex, incx: i64, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuComplex, incx: i64, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasCswap_v2_64(handle, n, x, incx, y, incy)
     }
 }
@@ -1744,7 +1924,9 @@ pub unsafe fn cublasCsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCsymm_v2(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -1759,7 +1941,9 @@ pub unsafe fn cublasCsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasCsymm_v2_64(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -1773,7 +1957,9 @@ pub unsafe fn cublasCsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, beta: *const cuComplex, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, beta: *const cuComplex, y: *mut cuComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCsymv_v2(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -1788,7 +1974,9 @@ pub unsafe fn cublasCsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasCsymv_v2_64(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -1802,7 +1990,9 @@ pub unsafe fn cublasCsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, y: *const cuComplex, incy: ::core::ffi::c_int, A: *mut cuComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, y: *const cuComplex, incy: ::core::ffi::c_int, A: *mut cuComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCsyr2_v2(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -1817,7 +2007,9 @@ pub unsafe fn cublasCsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t;
+        }
         cublasCsyr2_v2_64(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -1831,7 +2023,9 @@ pub unsafe fn cublasCsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCsyr2k_v2(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -1846,7 +2040,9 @@ pub unsafe fn cublasCsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasCsyr2k_v2_64(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -1860,7 +2056,9 @@ pub unsafe fn cublasCsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, A: *mut cuComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuComplex, x: *const cuComplex, incx: ::core::ffi::c_int, A: *mut cuComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCsyr_v2(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
@@ -1875,7 +2073,9 @@ pub unsafe fn cublasCsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t;
+        }
         cublasCsyr_v2_64(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
@@ -1889,7 +2089,9 @@ pub unsafe fn cublasCsyrk3mEx(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsyrk3mEx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsyrk3mEx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCsyrk3mEx(handle, uplo, trans, n, k, alpha, A, Atype, lda, beta, C, Ctype, ldc)
     }
 }
@@ -1904,7 +2106,9 @@ pub unsafe fn cublasCsyrk3mEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsyrk3mEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsyrk3mEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t;
+        }
         cublasCsyrk3mEx_64(handle, uplo, trans, n, k, alpha, A, Atype, lda, beta, C, Ctype, ldc)
     }
 }
@@ -1918,7 +2122,9 @@ pub unsafe fn cublasCsyrkEx(handle: cublasHandle_t, uplo: cublasFillMode_t, tran
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsyrkEx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsyrkEx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCsyrkEx(handle, uplo, trans, n, k, alpha, A, Atype, lda, beta, C, Ctype, ldc)
     }
 }
@@ -1933,7 +2139,9 @@ pub unsafe fn cublasCsyrkEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsyrkEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsyrkEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t;
+        }
         cublasCsyrkEx_64(handle, uplo, trans, n, k, alpha, A, Atype, lda, beta, C, Ctype, ldc)
     }
 }
@@ -1947,7 +2155,9 @@ pub unsafe fn cublasCsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCsyrk_v2(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
@@ -1962,7 +2172,9 @@ pub unsafe fn cublasCsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasCsyrk_v2_64(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
@@ -1976,7 +2188,9 @@ pub unsafe fn cublasCsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, beta: *const cuComplex, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCsyrkx(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -1991,7 +2205,9 @@ pub unsafe fn cublasCsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasCsyrkx_64(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -2005,7 +2221,9 @@ pub unsafe fn cublasCtbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const cuComplex, lda: ::core::ffi::c_int, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const cuComplex, lda: ::core::ffi::c_int, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCtbmv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -2020,7 +2238,9 @@ pub unsafe fn cublasCtbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const cuComplex, lda: i64, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const cuComplex, lda: i64, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasCtbmv_v2_64(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -2034,7 +2254,9 @@ pub unsafe fn cublasCtbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const cuComplex, lda: ::core::ffi::c_int, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const cuComplex, lda: ::core::ffi::c_int, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCtbsv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -2049,7 +2271,9 @@ pub unsafe fn cublasCtbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const cuComplex, lda: i64, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const cuComplex, lda: i64, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasCtbsv_v2_64(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -2063,7 +2287,9 @@ pub unsafe fn cublasCtpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const cuComplex, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const cuComplex, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCtpmv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -2078,7 +2304,9 @@ pub unsafe fn cublasCtpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const cuComplex, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const cuComplex, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasCtpmv_v2_64(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -2092,7 +2320,9 @@ pub unsafe fn cublasCtpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const cuComplex, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const cuComplex, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCtpsv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -2107,7 +2337,9 @@ pub unsafe fn cublasCtpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const cuComplex, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const cuComplex, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasCtpsv_v2_64(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -2121,7 +2353,9 @@ pub unsafe fn cublasCtpttr(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtpttr(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, AP: *const cuComplex, A: *mut cuComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtpttr(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, AP: *const cuComplex, A: *mut cuComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCtpttr(handle, uplo, n, AP, A, lda)
     }
 }
@@ -2135,7 +2369,9 @@ pub unsafe fn cublasCtrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *const cuComplex, ldb: ::core::ffi::c_int, C: *mut cuComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCtrmm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, C, ldc)
     }
 }
@@ -2150,7 +2386,9 @@ pub unsafe fn cublasCtrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, C: *mut cuComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasCtrmm_v2_64(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, C, ldc)
     }
 }
@@ -2164,7 +2402,9 @@ pub unsafe fn cublasCtrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const cuComplex, lda: ::core::ffi::c_int, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const cuComplex, lda: ::core::ffi::c_int, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCtrmv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -2179,7 +2419,9 @@ pub unsafe fn cublasCtrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const cuComplex, lda: i64, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const cuComplex, lda: i64, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasCtrmv_v2_64(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -2193,7 +2435,9 @@ pub unsafe fn cublasCtrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const *const cuComplex, lda: ::core::ffi::c_int, B: *const *mut cuComplex, ldb: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const *const cuComplex, lda: ::core::ffi::c_int, B: *const *mut cuComplex, ldb: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCtrsmBatched(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, batchCount)
     }
 }
@@ -2208,7 +2452,9 @@ pub unsafe fn cublasCtrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuComplex, A: *const *const cuComplex, lda: i64, B: *const *mut cuComplex, ldb: i64, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuComplex, A: *const *const cuComplex, lda: i64, B: *const *mut cuComplex, ldb: i64, batchCount: i64) -> cublasStatus_t;
+        }
         cublasCtrsmBatched_64(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, batchCount)
     }
 }
@@ -2222,7 +2468,9 @@ pub unsafe fn cublasCtrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *mut cuComplex, ldb: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, B: *mut cuComplex, ldb: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCtrsm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb)
     }
 }
@@ -2237,7 +2485,9 @@ pub unsafe fn cublasCtrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *mut cuComplex, ldb: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *mut cuComplex, ldb: i64) -> cublasStatus_t;
+        }
         cublasCtrsm_v2_64(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb)
     }
 }
@@ -2251,7 +2501,9 @@ pub unsafe fn cublasCtrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const cuComplex, lda: ::core::ffi::c_int, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const cuComplex, lda: ::core::ffi::c_int, x: *mut cuComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasCtrsv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -2266,7 +2518,9 @@ pub unsafe fn cublasCtrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const cuComplex, lda: i64, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const cuComplex, lda: i64, x: *mut cuComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasCtrsv_v2_64(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -2280,7 +2534,9 @@ pub unsafe fn cublasCtrttp(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasCtrttp(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, A: *const cuComplex, lda: ::core::ffi::c_int, AP: *mut cuComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasCtrttp(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, A: *const cuComplex, lda: ::core::ffi::c_int, AP: *mut cuComplex) -> cublasStatus_t;
+        }
         cublasCtrttp(handle, uplo, n, A, lda, AP)
     }
 }
@@ -2294,7 +2550,9 @@ pub unsafe fn cublasDasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, result: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, result: *mut f64) -> cublasStatus_t;
+        }
         cublasDasum_v2(handle, n, x, incx, result)
     }
 }
@@ -2309,7 +2567,9 @@ pub unsafe fn cublasDasum_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, i
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDasum_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, result: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDasum_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, result: *mut f64) -> cublasStatus_t;
+        }
         cublasDasum_v2_64(handle, n, x, incx, result)
     }
 }
@@ -2323,7 +2583,9 @@ pub unsafe fn cublasDaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const f64, x: *const f64, incx: ::core::ffi::c_int, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const f64, x: *const f64, incx: ::core::ffi::c_int, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDaxpy_v2(handle, n, alpha, x, incx, y, incy)
     }
 }
@@ -2338,7 +2600,9 @@ pub unsafe fn cublasDaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f6
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f64, x: *const f64, incx: i64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f64, x: *const f64, incx: i64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        }
         cublasDaxpy_v2_64(handle, n, alpha, x, incx, y, incy)
     }
 }
@@ -2352,7 +2616,9 @@ pub unsafe fn cublasDcopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDcopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDcopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDcopy_v2(handle, n, x, incx, y, incy)
     }
 }
@@ -2367,7 +2633,9 @@ pub unsafe fn cublasDcopy_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, i
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDcopy_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDcopy_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        }
         cublasDcopy_v2_64(handle, n, x, incx, y, incy)
     }
 }
@@ -2381,7 +2649,9 @@ pub unsafe fn cublasDdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, A: *const f64, lda: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, A: *const f64, lda: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDdgmm(handle, mode, m, n, A, lda, x, incx, C, ldc)
     }
 }
@@ -2396,7 +2666,9 @@ pub unsafe fn cublasDdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: i64, n: i64, A: *const f64, lda: i64, x: *const f64, incx: i64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: i64, n: i64, A: *const f64, lda: i64, x: *const f64, incx: i64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        }
         cublasDdgmm_64(handle, mode, m, n, A, lda, x, incx, C, ldc)
     }
 }
@@ -2410,7 +2682,9 @@ pub unsafe fn cublasDdot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDdot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, y: *const f64, incy: ::core::ffi::c_int, result: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDdot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, y: *const f64, incy: ::core::ffi::c_int, result: *mut f64) -> cublasStatus_t;
+        }
         cublasDdot_v2(handle, n, x, incx, y, incy, result)
     }
 }
@@ -2425,7 +2699,9 @@ pub unsafe fn cublasDdot_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, in
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDdot_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, y: *const f64, incy: i64, result: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDdot_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, y: *const f64, incy: i64, result: *mut f64) -> cublasStatus_t;
+        }
         cublasDdot_v2_64(handle, n, x, incx, y, incy, result)
     }
 }
@@ -2439,7 +2715,9 @@ pub unsafe fn cublasDestroy_v2(handle: cublasHandle_t) -> cublasStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDestroy_v2(handle: cublasHandle_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDestroy_v2(handle: cublasHandle_t) -> cublasStatus_t;
+        }
         cublasDestroy_v2(handle)
     }
 }
@@ -2453,7 +2731,9 @@ pub unsafe fn cublasDgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, kl: ::core::ffi::c_int, ku: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, beta: *const f64, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, kl: ::core::ffi::c_int, ku: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, beta: *const f64, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDgbmv_v2(handle, trans, m, n, kl, ku, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -2468,7 +2748,9 @@ pub unsafe fn cublasDgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, kl: i64, ku: i64, alpha: *const f64, A: *const f64, lda: i64, x: *const f64, incx: i64, beta: *const f64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, kl: i64, ku: i64, alpha: *const f64, A: *const f64, lda: i64, x: *const f64, incx: i64, beta: *const f64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        }
         cublasDgbmv_v2_64(handle, trans, m, n, kl, ku, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -2482,7 +2764,9 @@ pub unsafe fn cublasDgeam(handle: cublasHandle_t, transa: cublasOperation_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgeam(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, beta: *const f64, B: *const f64, ldb: ::core::ffi::c_int, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgeam(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, beta: *const f64, B: *const f64, ldb: ::core::ffi::c_int, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDgeam(handle, transa, transb, m, n, alpha, A, lda, beta, B, ldb, C, ldc)
     }
 }
@@ -2497,7 +2781,9 @@ pub unsafe fn cublasDgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, beta: *const f64, B: *const f64, ldb: i64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, beta: *const f64, B: *const f64, ldb: i64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        }
         cublasDgeam_64(handle, transa, transb, m, n, alpha, A, lda, beta, B, ldb, C, ldc)
     }
 }
@@ -2511,7 +2797,9 @@ pub unsafe fn cublasDgelsBatched(handle: cublasHandle_t, trans: cublasOperation_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgelsBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *mut f64, lda: ::core::ffi::c_int, Carray: *const *mut f64, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, devInfoArray: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgelsBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *mut f64, lda: ::core::ffi::c_int, Carray: *const *mut f64, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, devInfoArray: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDgelsBatched(handle, trans, m, n, nrhs, Aarray, lda, Carray, ldc, info, devInfoArray, batchSize)
     }
 }
@@ -2525,7 +2813,9 @@ pub unsafe fn cublasDgemmBatched(handle: cublasHandle_t, transa: cublasOperation
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgemmBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, Aarray: *const *const f64, lda: ::core::ffi::c_int, Barray: *const *const f64, ldb: ::core::ffi::c_int, beta: *const f64, Carray: *const *mut f64, ldc: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgemmBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, Aarray: *const *const f64, lda: ::core::ffi::c_int, Barray: *const *const f64, ldb: ::core::ffi::c_int, beta: *const f64, Carray: *const *mut f64, ldc: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDgemmBatched(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
@@ -2540,7 +2830,9 @@ pub unsafe fn cublasDgemmBatched_64(handle: cublasHandle_t, transa: cublasOperat
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgemmBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f64, Aarray: *const *const f64, lda: i64, Barray: *const *const f64, ldb: i64, beta: *const f64, Carray: *const *mut f64, ldc: i64, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgemmBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f64, Aarray: *const *const f64, lda: i64, Barray: *const *const f64, ldb: i64, beta: *const f64, Carray: *const *mut f64, ldc: i64, batchCount: i64) -> cublasStatus_t;
+        }
         cublasDgemmBatched_64(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
@@ -2555,7 +2847,9 @@ pub unsafe fn cublasDgemmGroupedBatched(handle: cublasHandle_t, transa_array: *c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgemmGroupedBatched(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const ::core::ffi::c_int, n_array: *const ::core::ffi::c_int, k_array: *const ::core::ffi::c_int, alpha_array: *const f64, Aarray: *const *const f64, lda_array: *const ::core::ffi::c_int, Barray: *const *const f64, ldb_array: *const ::core::ffi::c_int, beta_array: *const f64, Carray: *const *mut f64, ldc_array: *const ::core::ffi::c_int, group_count: ::core::ffi::c_int, group_size: *const ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgemmGroupedBatched(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const ::core::ffi::c_int, n_array: *const ::core::ffi::c_int, k_array: *const ::core::ffi::c_int, alpha_array: *const f64, Aarray: *const *const f64, lda_array: *const ::core::ffi::c_int, Barray: *const *const f64, ldb_array: *const ::core::ffi::c_int, beta_array: *const f64, Carray: *const *mut f64, ldc_array: *const ::core::ffi::c_int, group_count: ::core::ffi::c_int, group_size: *const ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDgemmGroupedBatched(handle, transa_array, transb_array, m_array, n_array, k_array, alpha_array, Aarray, lda_array, Barray, ldb_array, beta_array, Carray, ldc_array, group_count, group_size)
     }
 }
@@ -2570,7 +2864,9 @@ pub unsafe fn cublasDgemmGroupedBatched_64(handle: cublasHandle_t, transa_array:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgemmGroupedBatched_64(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const i64, n_array: *const i64, k_array: *const i64, alpha_array: *const f64, Aarray: *const *const f64, lda_array: *const i64, Barray: *const *const f64, ldb_array: *const i64, beta_array: *const f64, Carray: *const *mut f64, ldc_array: *const i64, group_count: i64, group_size: *const i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgemmGroupedBatched_64(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const i64, n_array: *const i64, k_array: *const i64, alpha_array: *const f64, Aarray: *const *const f64, lda_array: *const i64, Barray: *const *const f64, ldb_array: *const i64, beta_array: *const f64, Carray: *const *mut f64, ldc_array: *const i64, group_count: i64, group_size: *const i64) -> cublasStatus_t;
+        }
         cublasDgemmGroupedBatched_64(handle, transa_array, transb_array, m_array, n_array, k_array, alpha_array, Aarray, lda_array, Barray, ldb_array, beta_array, Carray, ldc_array, group_count, group_size)
     }
 }
@@ -2584,7 +2880,9 @@ pub unsafe fn cublasDgemmStridedBatched(handle: cublasHandle_t, transa: cublasOp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgemmStridedBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, B: *const f64, ldb: ::core::ffi::c_int, strideB: ::core::ffi::c_longlong, beta: *const f64, C: *mut f64, ldc: ::core::ffi::c_int, strideC: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgemmStridedBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, B: *const f64, ldb: ::core::ffi::c_int, strideB: ::core::ffi::c_longlong, beta: *const f64, C: *mut f64, ldc: ::core::ffi::c_int, strideC: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDgemmStridedBatched(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
@@ -2599,7 +2897,9 @@ pub unsafe fn cublasDgemmStridedBatched_64(handle: cublasHandle_t, transa: cubla
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgemmStridedBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, strideA: ::core::ffi::c_longlong, B: *const f64, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const f64, C: *mut f64, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgemmStridedBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, strideA: ::core::ffi::c_longlong, B: *const f64, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const f64, C: *mut f64, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        }
         cublasDgemmStridedBatched_64(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
@@ -2613,7 +2913,9 @@ pub unsafe fn cublasDgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, B: *const f64, ldb: ::core::ffi::c_int, beta: *const f64, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, B: *const f64, ldb: ::core::ffi::c_int, beta: *const f64, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDgemm_v2(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -2628,7 +2930,9 @@ pub unsafe fn cublasDgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, B: *const f64, ldb: i64, beta: *const f64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, B: *const f64, ldb: i64, beta: *const f64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        }
         cublasDgemm_v2_64(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -2643,7 +2947,9 @@ pub unsafe fn cublasDgemvBatched(handle: cublasHandle_t, trans: cublasOperation_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgemvBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, Aarray: *const *const f64, lda: ::core::ffi::c_int, xarray: *const *const f64, incx: ::core::ffi::c_int, beta: *const f64, yarray: *const *mut f64, incy: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgemvBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, Aarray: *const *const f64, lda: ::core::ffi::c_int, xarray: *const *const f64, incx: ::core::ffi::c_int, beta: *const f64, yarray: *const *mut f64, incy: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDgemvBatched(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
@@ -2658,7 +2964,9 @@ pub unsafe fn cublasDgemvBatched_64(handle: cublasHandle_t, trans: cublasOperati
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgemvBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f64, Aarray: *const *const f64, lda: i64, xarray: *const *const f64, incx: i64, beta: *const f64, yarray: *const *mut f64, incy: i64, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgemvBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f64, Aarray: *const *const f64, lda: i64, xarray: *const *const f64, incx: i64, beta: *const f64, yarray: *const *mut f64, incy: i64, batchCount: i64) -> cublasStatus_t;
+        }
         cublasDgemvBatched_64(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
@@ -2673,7 +2981,9 @@ pub unsafe fn cublasDgemvStridedBatched(handle: cublasHandle_t, trans: cublasOpe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgemvStridedBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, x: *const f64, incx: ::core::ffi::c_int, stridex: ::core::ffi::c_longlong, beta: *const f64, y: *mut f64, incy: ::core::ffi::c_int, stridey: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgemvStridedBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, x: *const f64, incx: ::core::ffi::c_int, stridex: ::core::ffi::c_longlong, beta: *const f64, y: *mut f64, incy: ::core::ffi::c_int, stridey: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDgemvStridedBatched(handle, trans, m, n, alpha, A, lda, strideA, x, incx, stridex, beta, y, incy, stridey, batchCount)
     }
 }
@@ -2688,7 +2998,9 @@ pub unsafe fn cublasDgemvStridedBatched_64(handle: cublasHandle_t, trans: cublas
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgemvStridedBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, strideA: ::core::ffi::c_longlong, x: *const f64, incx: i64, stridex: ::core::ffi::c_longlong, beta: *const f64, y: *mut f64, incy: i64, stridey: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgemvStridedBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, strideA: ::core::ffi::c_longlong, x: *const f64, incx: i64, stridex: ::core::ffi::c_longlong, beta: *const f64, y: *mut f64, incy: i64, stridey: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        }
         cublasDgemvStridedBatched_64(handle, trans, m, n, alpha, A, lda, strideA, x, incx, stridex, beta, y, incy, stridey, batchCount)
     }
 }
@@ -2702,7 +3014,9 @@ pub unsafe fn cublasDgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, beta: *const f64, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, beta: *const f64, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDgemv_v2(handle, trans, m, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -2717,7 +3031,9 @@ pub unsafe fn cublasDgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, x: *const f64, incx: i64, beta: *const f64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, x: *const f64, incx: i64, beta: *const f64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        }
         cublasDgemv_v2_64(handle, trans, m, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -2731,7 +3047,9 @@ pub unsafe fn cublasDgeqrfBatched(handle: cublasHandle_t, m: ::core::ffi::c_int,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgeqrfBatched(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, Aarray: *const *mut f64, lda: ::core::ffi::c_int, TauArray: *const *mut f64, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgeqrfBatched(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, Aarray: *const *mut f64, lda: ::core::ffi::c_int, TauArray: *const *mut f64, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDgeqrfBatched(handle, m, n, Aarray, lda, TauArray, info, batchSize)
     }
 }
@@ -2745,7 +3063,9 @@ pub unsafe fn cublasDger_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDger_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, x: *const f64, incx: ::core::ffi::c_int, y: *const f64, incy: ::core::ffi::c_int, A: *mut f64, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDger_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, x: *const f64, incx: ::core::ffi::c_int, y: *const f64, incy: ::core::ffi::c_int, A: *mut f64, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDger_v2(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -2760,7 +3080,9 @@ pub unsafe fn cublasDger_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDger_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const f64, x: *const f64, incx: i64, y: *const f64, incy: i64, A: *mut f64, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDger_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const f64, x: *const f64, incx: i64, y: *const f64, incy: i64, A: *mut f64, lda: i64) -> cublasStatus_t;
+        }
         cublasDger_v2_64(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -2774,7 +3096,9 @@ pub unsafe fn cublasDgetrfBatched(handle: cublasHandle_t, n: ::core::ffi::c_int,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgetrfBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *mut f64, lda: ::core::ffi::c_int, P: *mut ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgetrfBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *mut f64, lda: ::core::ffi::c_int, P: *mut ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDgetrfBatched(handle, n, A, lda, P, info, batchSize)
     }
 }
@@ -2788,7 +3112,9 @@ pub unsafe fn cublasDgetriBatched(handle: cublasHandle_t, n: ::core::ffi::c_int,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgetriBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const f64, lda: ::core::ffi::c_int, P: *const ::core::ffi::c_int, C: *const *mut f64, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgetriBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const f64, lda: ::core::ffi::c_int, P: *const ::core::ffi::c_int, C: *const *mut f64, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDgetriBatched(handle, n, A, lda, P, C, ldc, info, batchSize)
     }
 }
@@ -2802,7 +3128,9 @@ pub unsafe fn cublasDgetrsBatched(handle: cublasHandle_t, trans: cublasOperation
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDgetrsBatched(handle: cublasHandle_t, trans: cublasOperation_t, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *const f64, lda: ::core::ffi::c_int, devIpiv: *const ::core::ffi::c_int, Barray: *const *mut f64, ldb: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDgetrsBatched(handle: cublasHandle_t, trans: cublasOperation_t, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *const f64, lda: ::core::ffi::c_int, devIpiv: *const ::core::ffi::c_int, Barray: *const *mut f64, ldb: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDgetrsBatched(handle, trans, n, nrhs, Aarray, lda, devIpiv, Barray, ldb, info, batchSize)
     }
 }
@@ -2816,7 +3144,9 @@ pub unsafe fn cublasDmatinvBatched(handle: cublasHandle_t, n: ::core::ffi::c_int
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDmatinvBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const f64, lda: ::core::ffi::c_int, Ainv: *const *mut f64, lda_inv: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDmatinvBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const f64, lda: ::core::ffi::c_int, Ainv: *const *mut f64, lda_inv: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDmatinvBatched(handle, n, A, lda, Ainv, lda_inv, info, batchSize)
     }
 }
@@ -2830,7 +3160,9 @@ pub unsafe fn cublasDnrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDnrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, result: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDnrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, result: *mut f64) -> cublasStatus_t;
+        }
         cublasDnrm2_v2(handle, n, x, incx, result)
     }
 }
@@ -2845,7 +3177,9 @@ pub unsafe fn cublasDnrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, i
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDnrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, result: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDnrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, result: *mut f64) -> cublasStatus_t;
+        }
         cublasDnrm2_v2_64(handle, n, x, incx, result)
     }
 }
@@ -2859,7 +3193,9 @@ pub unsafe fn cublasDotEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *con
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDotEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, y: *const ::core::ffi::c_void, yType: cudaDataType, incy: ::core::ffi::c_int, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executionType: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDotEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, y: *const ::core::ffi::c_void, yType: cudaDataType, incy: ::core::ffi::c_int, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executionType: cudaDataType) -> cublasStatus_t;
+        }
         cublasDotEx(handle, n, x, xType, incx, y, yType, incy, result, resultType, executionType)
     }
 }
@@ -2874,7 +3210,9 @@ pub unsafe fn cublasDotEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::f
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDotEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *const ::core::ffi::c_void, yType: cudaDataType, incy: i64, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executionType: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDotEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *const ::core::ffi::c_void, yType: cudaDataType, incy: i64, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executionType: cudaDataType) -> cublasStatus_t;
+        }
         cublasDotEx_64(handle, n, x, xType, incx, y, yType, incy, result, resultType, executionType)
     }
 }
@@ -2888,7 +3226,9 @@ pub unsafe fn cublasDotcEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDotcEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, y: *const ::core::ffi::c_void, yType: cudaDataType, incy: ::core::ffi::c_int, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executionType: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDotcEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, y: *const ::core::ffi::c_void, yType: cudaDataType, incy: ::core::ffi::c_int, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executionType: cudaDataType) -> cublasStatus_t;
+        }
         cublasDotcEx(handle, n, x, xType, incx, y, yType, incy, result, resultType, executionType)
     }
 }
@@ -2903,7 +3243,9 @@ pub unsafe fn cublasDotcEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDotcEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *const ::core::ffi::c_void, yType: cudaDataType, incy: i64, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executionType: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDotcEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *const ::core::ffi::c_void, yType: cudaDataType, incy: i64, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executionType: cudaDataType) -> cublasStatus_t;
+        }
         cublasDotcEx_64(handle, n, x, xType, incx, y, yType, incy, result, resultType, executionType)
     }
 }
@@ -2917,7 +3259,9 @@ pub unsafe fn cublasDrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut f64, incx: ::core::ffi::c_int, y: *mut f64, incy: ::core::ffi::c_int, c: *const f64, s: *const f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut f64, incx: ::core::ffi::c_int, y: *mut f64, incy: ::core::ffi::c_int, c: *const f64, s: *const f64) -> cublasStatus_t;
+        }
         cublasDrot_v2(handle, n, x, incx, y, incy, c, s)
     }
 }
@@ -2932,7 +3276,9 @@ pub unsafe fn cublasDrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut f64, incx
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut f64, incx: i64, y: *mut f64, incy: i64, c: *const f64, s: *const f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut f64, incx: i64, y: *mut f64, incy: i64, c: *const f64, s: *const f64) -> cublasStatus_t;
+        }
         cublasDrot_v2_64(handle, n, x, incx, y, incy, c, s)
     }
 }
@@ -2946,7 +3292,9 @@ pub unsafe fn cublasDrotg_v2(handle: cublasHandle_t, a: *mut f64, b: *mut f64, c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDrotg_v2(handle: cublasHandle_t, a: *mut f64, b: *mut f64, c: *mut f64, s: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDrotg_v2(handle: cublasHandle_t, a: *mut f64, b: *mut f64, c: *mut f64, s: *mut f64) -> cublasStatus_t;
+        }
         cublasDrotg_v2(handle, a, b, c, s)
     }
 }
@@ -2960,7 +3308,9 @@ pub unsafe fn cublasDrotm_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDrotm_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut f64, incx: ::core::ffi::c_int, y: *mut f64, incy: ::core::ffi::c_int, param: *const f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDrotm_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut f64, incx: ::core::ffi::c_int, y: *mut f64, incy: ::core::ffi::c_int, param: *const f64) -> cublasStatus_t;
+        }
         cublasDrotm_v2(handle, n, x, incx, y, incy, param)
     }
 }
@@ -2975,7 +3325,9 @@ pub unsafe fn cublasDrotm_v2_64(handle: cublasHandle_t, n: i64, x: *mut f64, inc
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDrotm_v2_64(handle: cublasHandle_t, n: i64, x: *mut f64, incx: i64, y: *mut f64, incy: i64, param: *const f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDrotm_v2_64(handle: cublasHandle_t, n: i64, x: *mut f64, incx: i64, y: *mut f64, incy: i64, param: *const f64) -> cublasStatus_t;
+        }
         cublasDrotm_v2_64(handle, n, x, incx, y, incy, param)
     }
 }
@@ -2989,7 +3341,9 @@ pub unsafe fn cublasDrotmg_v2(handle: cublasHandle_t, d1: *mut f64, d2: *mut f64
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDrotmg_v2(handle: cublasHandle_t, d1: *mut f64, d2: *mut f64, x1: *mut f64, y1: *const f64, param: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDrotmg_v2(handle: cublasHandle_t, d1: *mut f64, d2: *mut f64, x1: *mut f64, y1: *const f64, param: *mut f64) -> cublasStatus_t;
+        }
         cublasDrotmg_v2(handle, d1, d2, x1, y1, param)
     }
 }
@@ -3003,7 +3357,9 @@ pub unsafe fn cublasDsbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, beta: *const f64, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, beta: *const f64, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDsbmv_v2(handle, uplo, n, k, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -3018,7 +3374,9 @@ pub unsafe fn cublasDsbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, x: *const f64, incx: i64, beta: *const f64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, x: *const f64, incx: i64, beta: *const f64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        }
         cublasDsbmv_v2_64(handle, uplo, n, k, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -3032,7 +3390,9 @@ pub unsafe fn cublasDscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const f64, x: *mut f64, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const f64, x: *mut f64, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDscal_v2(handle, n, alpha, x, incx)
     }
 }
@@ -3047,7 +3407,9 @@ pub unsafe fn cublasDscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f6
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f64, x: *mut f64, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f64, x: *mut f64, incx: i64) -> cublasStatus_t;
+        }
         cublasDscal_v2_64(handle, n, alpha, x, incx)
     }
 }
@@ -3061,7 +3423,9 @@ pub unsafe fn cublasDspmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDspmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, AP: *const f64, x: *const f64, incx: ::core::ffi::c_int, beta: *const f64, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDspmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, AP: *const f64, x: *const f64, incx: ::core::ffi::c_int, beta: *const f64, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDspmv_v2(handle, uplo, n, alpha, AP, x, incx, beta, y, incy)
     }
 }
@@ -3076,7 +3440,9 @@ pub unsafe fn cublasDspmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDspmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, AP: *const f64, x: *const f64, incx: i64, beta: *const f64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDspmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, AP: *const f64, x: *const f64, incx: i64, beta: *const f64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        }
         cublasDspmv_v2_64(handle, uplo, n, alpha, AP, x, incx, beta, y, incy)
     }
 }
@@ -3090,7 +3456,9 @@ pub unsafe fn cublasDspr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDspr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, x: *const f64, incx: ::core::ffi::c_int, y: *const f64, incy: ::core::ffi::c_int, AP: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDspr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, x: *const f64, incx: ::core::ffi::c_int, y: *const f64, incy: ::core::ffi::c_int, AP: *mut f64) -> cublasStatus_t;
+        }
         cublasDspr2_v2(handle, uplo, n, alpha, x, incx, y, incy, AP)
     }
 }
@@ -3105,7 +3473,9 @@ pub unsafe fn cublasDspr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDspr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const f64, incx: i64, y: *const f64, incy: i64, AP: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDspr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const f64, incx: i64, y: *const f64, incy: i64, AP: *mut f64) -> cublasStatus_t;
+        }
         cublasDspr2_v2_64(handle, uplo, n, alpha, x, incx, y, incy, AP)
     }
 }
@@ -3119,7 +3489,9 @@ pub unsafe fn cublasDspr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDspr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, x: *const f64, incx: ::core::ffi::c_int, AP: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDspr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, x: *const f64, incx: ::core::ffi::c_int, AP: *mut f64) -> cublasStatus_t;
+        }
         cublasDspr_v2(handle, uplo, n, alpha, x, incx, AP)
     }
 }
@@ -3134,7 +3506,9 @@ pub unsafe fn cublasDspr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDspr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const f64, incx: i64, AP: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDspr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const f64, incx: i64, AP: *mut f64) -> cublasStatus_t;
+        }
         cublasDspr_v2_64(handle, uplo, n, alpha, x, incx, AP)
     }
 }
@@ -3148,7 +3522,9 @@ pub unsafe fn cublasDswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut f64, incx: ::core::ffi::c_int, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut f64, incx: ::core::ffi::c_int, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDswap_v2(handle, n, x, incx, y, incy)
     }
 }
@@ -3163,7 +3539,9 @@ pub unsafe fn cublasDswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut f64, inc
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut f64, incx: i64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut f64, incx: i64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        }
         cublasDswap_v2_64(handle, n, x, incx, y, incy)
     }
 }
@@ -3177,7 +3555,9 @@ pub unsafe fn cublasDsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, B: *const f64, ldb: ::core::ffi::c_int, beta: *const f64, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, B: *const f64, ldb: ::core::ffi::c_int, beta: *const f64, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDsymm_v2(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -3192,7 +3572,9 @@ pub unsafe fn cublasDsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, B: *const f64, ldb: i64, beta: *const f64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, B: *const f64, ldb: i64, beta: *const f64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        }
         cublasDsymm_v2_64(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -3206,7 +3588,9 @@ pub unsafe fn cublasDsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, beta: *const f64, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, beta: *const f64, y: *mut f64, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDsymv_v2(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -3221,7 +3605,9 @@ pub unsafe fn cublasDsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, A: *const f64, lda: i64, x: *const f64, incx: i64, beta: *const f64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, A: *const f64, lda: i64, x: *const f64, incx: i64, beta: *const f64, y: *mut f64, incy: i64) -> cublasStatus_t;
+        }
         cublasDsymv_v2_64(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -3235,7 +3621,9 @@ pub unsafe fn cublasDsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, x: *const f64, incx: ::core::ffi::c_int, y: *const f64, incy: ::core::ffi::c_int, A: *mut f64, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, x: *const f64, incx: ::core::ffi::c_int, y: *const f64, incy: ::core::ffi::c_int, A: *mut f64, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDsyr2_v2(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -3250,7 +3638,9 @@ pub unsafe fn cublasDsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const f64, incx: i64, y: *const f64, incy: i64, A: *mut f64, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const f64, incx: i64, y: *const f64, incy: i64, A: *mut f64, lda: i64) -> cublasStatus_t;
+        }
         cublasDsyr2_v2_64(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -3264,7 +3654,9 @@ pub unsafe fn cublasDsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, B: *const f64, ldb: ::core::ffi::c_int, beta: *const f64, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, B: *const f64, ldb: ::core::ffi::c_int, beta: *const f64, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDsyr2k_v2(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -3279,7 +3671,9 @@ pub unsafe fn cublasDsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, B: *const f64, ldb: i64, beta: *const f64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, B: *const f64, ldb: i64, beta: *const f64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        }
         cublasDsyr2k_v2_64(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -3293,7 +3687,9 @@ pub unsafe fn cublasDsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, x: *const f64, incx: ::core::ffi::c_int, A: *mut f64, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, x: *const f64, incx: ::core::ffi::c_int, A: *mut f64, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDsyr_v2(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
@@ -3308,7 +3704,9 @@ pub unsafe fn cublasDsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const f64, incx: i64, A: *mut f64, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const f64, incx: i64, A: *mut f64, lda: i64) -> cublasStatus_t;
+        }
         cublasDsyr_v2_64(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
@@ -3322,7 +3720,9 @@ pub unsafe fn cublasDsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, beta: *const f64, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, beta: *const f64, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDsyrk_v2(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
@@ -3337,7 +3737,9 @@ pub unsafe fn cublasDsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, beta: *const f64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, beta: *const f64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        }
         cublasDsyrk_v2_64(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
@@ -3351,7 +3753,9 @@ pub unsafe fn cublasDsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, B: *const f64, ldb: ::core::ffi::c_int, beta: *const f64, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, B: *const f64, ldb: ::core::ffi::c_int, beta: *const f64, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDsyrkx(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -3366,7 +3770,9 @@ pub unsafe fn cublasDsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, B: *const f64, ldb: i64, beta: *const f64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, B: *const f64, ldb: i64, beta: *const f64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        }
         cublasDsyrkx_64(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -3380,7 +3786,9 @@ pub unsafe fn cublasDtbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const f64, lda: ::core::ffi::c_int, x: *mut f64, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const f64, lda: ::core::ffi::c_int, x: *mut f64, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDtbmv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -3395,7 +3803,9 @@ pub unsafe fn cublasDtbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const f64, lda: i64, x: *mut f64, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const f64, lda: i64, x: *mut f64, incx: i64) -> cublasStatus_t;
+        }
         cublasDtbmv_v2_64(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -3409,7 +3819,9 @@ pub unsafe fn cublasDtbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const f64, lda: ::core::ffi::c_int, x: *mut f64, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const f64, lda: ::core::ffi::c_int, x: *mut f64, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDtbsv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -3424,7 +3836,9 @@ pub unsafe fn cublasDtbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const f64, lda: i64, x: *mut f64, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const f64, lda: i64, x: *mut f64, incx: i64) -> cublasStatus_t;
+        }
         cublasDtbsv_v2_64(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -3438,7 +3852,9 @@ pub unsafe fn cublasDtpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const f64, x: *mut f64, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const f64, x: *mut f64, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDtpmv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -3453,7 +3869,9 @@ pub unsafe fn cublasDtpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const f64, x: *mut f64, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const f64, x: *mut f64, incx: i64) -> cublasStatus_t;
+        }
         cublasDtpmv_v2_64(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -3467,7 +3885,9 @@ pub unsafe fn cublasDtpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const f64, x: *mut f64, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const f64, x: *mut f64, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDtpsv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -3482,7 +3902,9 @@ pub unsafe fn cublasDtpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const f64, x: *mut f64, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const f64, x: *mut f64, incx: i64) -> cublasStatus_t;
+        }
         cublasDtpsv_v2_64(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -3496,7 +3918,9 @@ pub unsafe fn cublasDtpttr(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtpttr(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, AP: *const f64, A: *mut f64, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtpttr(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, AP: *const f64, A: *mut f64, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDtpttr(handle, uplo, n, AP, A, lda)
     }
 }
@@ -3510,7 +3934,9 @@ pub unsafe fn cublasDtrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, B: *const f64, ldb: ::core::ffi::c_int, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, B: *const f64, ldb: ::core::ffi::c_int, C: *mut f64, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDtrmm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, C, ldc)
     }
 }
@@ -3525,7 +3951,9 @@ pub unsafe fn cublasDtrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, B: *const f64, ldb: i64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, B: *const f64, ldb: i64, C: *mut f64, ldc: i64) -> cublasStatus_t;
+        }
         cublasDtrmm_v2_64(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, C, ldc)
     }
 }
@@ -3539,7 +3967,9 @@ pub unsafe fn cublasDtrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const f64, lda: ::core::ffi::c_int, x: *mut f64, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const f64, lda: ::core::ffi::c_int, x: *mut f64, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDtrmv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -3554,7 +3984,9 @@ pub unsafe fn cublasDtrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const f64, lda: i64, x: *mut f64, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const f64, lda: i64, x: *mut f64, incx: i64) -> cublasStatus_t;
+        }
         cublasDtrmv_v2_64(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -3568,7 +4000,9 @@ pub unsafe fn cublasDtrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, A: *const *const f64, lda: ::core::ffi::c_int, B: *const *mut f64, ldb: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, A: *const *const f64, lda: ::core::ffi::c_int, B: *const *mut f64, ldb: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDtrsmBatched(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, batchCount)
     }
 }
@@ -3583,7 +4017,9 @@ pub unsafe fn cublasDtrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f64, A: *const *const f64, lda: i64, B: *const *mut f64, ldb: i64, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f64, A: *const *const f64, lda: i64, B: *const *mut f64, ldb: i64, batchCount: i64) -> cublasStatus_t;
+        }
         cublasDtrsmBatched_64(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, batchCount)
     }
 }
@@ -3597,7 +4033,9 @@ pub unsafe fn cublasDtrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, B: *mut f64, ldb: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, B: *mut f64, ldb: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDtrsm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb)
     }
 }
@@ -3612,7 +4050,9 @@ pub unsafe fn cublasDtrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, B: *mut f64, ldb: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, B: *mut f64, ldb: i64) -> cublasStatus_t;
+        }
         cublasDtrsm_v2_64(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb)
     }
 }
@@ -3626,7 +4066,9 @@ pub unsafe fn cublasDtrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const f64, lda: ::core::ffi::c_int, x: *mut f64, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const f64, lda: ::core::ffi::c_int, x: *mut f64, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasDtrsv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -3641,7 +4083,9 @@ pub unsafe fn cublasDtrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const f64, lda: i64, x: *mut f64, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const f64, lda: i64, x: *mut f64, incx: i64) -> cublasStatus_t;
+        }
         cublasDtrsv_v2_64(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -3655,7 +4099,9 @@ pub unsafe fn cublasDtrttp(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDtrttp(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, A: *const f64, lda: ::core::ffi::c_int, AP: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDtrttp(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, A: *const f64, lda: ::core::ffi::c_int, AP: *mut f64) -> cublasStatus_t;
+        }
         cublasDtrttp(handle, uplo, n, A, lda, AP)
     }
 }
@@ -3669,7 +4115,9 @@ pub unsafe fn cublasDzasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDzasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, result: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDzasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, result: *mut f64) -> cublasStatus_t;
+        }
         cublasDzasum_v2(handle, n, x, incx, result)
     }
 }
@@ -3684,7 +4132,9 @@ pub unsafe fn cublasDzasum_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDou
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDzasum_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, result: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDzasum_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, result: *mut f64) -> cublasStatus_t;
+        }
         cublasDzasum_v2_64(handle, n, x, incx, result)
     }
 }
@@ -3698,7 +4148,9 @@ pub unsafe fn cublasDznrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDznrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, result: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDznrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, result: *mut f64) -> cublasStatus_t;
+        }
         cublasDznrm2_v2(handle, n, x, incx, result)
     }
 }
@@ -3713,7 +4165,9 @@ pub unsafe fn cublasDznrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDou
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasDznrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, result: *mut f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasDznrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, result: *mut f64) -> cublasStatus_t;
+        }
         cublasDznrm2_v2_64(handle, n, x, incx, result)
     }
 }
@@ -3727,7 +4181,9 @@ pub unsafe fn cublasGemmBatchedEx(handle: cublasHandle_t, transa: cublasOperatio
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGemmBatchedEx(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const ::core::ffi::c_void, Aarray: *const *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, Barray: *const *const ::core::ffi::c_void, Btype: cudaDataType, ldb: ::core::ffi::c_int, beta: *const ::core::ffi::c_void, Carray: *const *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int, batchCount: ::core::ffi::c_int, computeType: cublasComputeType_t, algo: cublasGemmAlgo_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGemmBatchedEx(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const ::core::ffi::c_void, Aarray: *const *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, Barray: *const *const ::core::ffi::c_void, Btype: cudaDataType, ldb: ::core::ffi::c_int, beta: *const ::core::ffi::c_void, Carray: *const *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int, batchCount: ::core::ffi::c_int, computeType: cublasComputeType_t, algo: cublasGemmAlgo_t) -> cublasStatus_t;
+        }
         cublasGemmBatchedEx(handle, transa, transb, m, n, k, alpha, Aarray, Atype, lda, Barray, Btype, ldb, beta, Carray, Ctype, ldc, batchCount, computeType, algo)
     }
 }
@@ -3742,7 +4198,9 @@ pub unsafe fn cublasGemmBatchedEx_64(handle: cublasHandle_t, transa: cublasOpera
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGemmBatchedEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const ::core::ffi::c_void, Aarray: *const *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, Barray: *const *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, beta: *const ::core::ffi::c_void, Carray: *const *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64, batchCount: i64, computeType: cublasComputeType_t, algo: cublasGemmAlgo_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGemmBatchedEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const ::core::ffi::c_void, Aarray: *const *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, Barray: *const *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, beta: *const ::core::ffi::c_void, Carray: *const *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64, batchCount: i64, computeType: cublasComputeType_t, algo: cublasGemmAlgo_t) -> cublasStatus_t;
+        }
         cublasGemmBatchedEx_64(handle, transa, transb, m, n, k, alpha, Aarray, Atype, lda, Barray, Btype, ldb, beta, Carray, Ctype, ldc, batchCount, computeType, algo)
     }
 }
@@ -3756,7 +4214,9 @@ pub unsafe fn cublasGemmEx(handle: cublasHandle_t, transa: cublasOperation_t, tr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGemmEx(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: ::core::ffi::c_int, beta: *const ::core::ffi::c_void, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int, computeType: cublasComputeType_t, algo: cublasGemmAlgo_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGemmEx(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: ::core::ffi::c_int, beta: *const ::core::ffi::c_void, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int, computeType: cublasComputeType_t, algo: cublasGemmAlgo_t) -> cublasStatus_t;
+        }
         cublasGemmEx(handle, transa, transb, m, n, k, alpha, A, Atype, lda, B, Btype, ldb, beta, C, Ctype, ldc, computeType, algo)
     }
 }
@@ -3771,7 +4231,9 @@ pub unsafe fn cublasGemmEx_64(handle: cublasHandle_t, transa: cublasOperation_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGemmEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, beta: *const ::core::ffi::c_void, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64, computeType: cublasComputeType_t, algo: cublasGemmAlgo_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGemmEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, beta: *const ::core::ffi::c_void, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64, computeType: cublasComputeType_t, algo: cublasGemmAlgo_t) -> cublasStatus_t;
+        }
         cublasGemmEx_64(handle, transa, transb, m, n, k, alpha, A, Atype, lda, B, Btype, ldb, beta, C, Ctype, ldc, computeType, algo)
     }
 }
@@ -3786,7 +4248,9 @@ pub unsafe fn cublasGemmGroupedBatchedEx(handle: cublasHandle_t, transa_array: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGemmGroupedBatchedEx(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const ::core::ffi::c_int, n_array: *const ::core::ffi::c_int, k_array: *const ::core::ffi::c_int, alpha_array: *const ::core::ffi::c_void, Aarray: *const *const ::core::ffi::c_void, Atype: cudaDataType_t, lda_array: *const ::core::ffi::c_int, Barray: *const *const ::core::ffi::c_void, Btype: cudaDataType_t, ldb_array: *const ::core::ffi::c_int, beta_array: *const ::core::ffi::c_void, Carray: *const *mut ::core::ffi::c_void, Ctype: cudaDataType_t, ldc_array: *const ::core::ffi::c_int, group_count: ::core::ffi::c_int, group_size: *const ::core::ffi::c_int, computeType: cublasComputeType_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGemmGroupedBatchedEx(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const ::core::ffi::c_int, n_array: *const ::core::ffi::c_int, k_array: *const ::core::ffi::c_int, alpha_array: *const ::core::ffi::c_void, Aarray: *const *const ::core::ffi::c_void, Atype: cudaDataType_t, lda_array: *const ::core::ffi::c_int, Barray: *const *const ::core::ffi::c_void, Btype: cudaDataType_t, ldb_array: *const ::core::ffi::c_int, beta_array: *const ::core::ffi::c_void, Carray: *const *mut ::core::ffi::c_void, Ctype: cudaDataType_t, ldc_array: *const ::core::ffi::c_int, group_count: ::core::ffi::c_int, group_size: *const ::core::ffi::c_int, computeType: cublasComputeType_t) -> cublasStatus_t;
+        }
         cublasGemmGroupedBatchedEx(handle, transa_array, transb_array, m_array, n_array, k_array, alpha_array, Aarray, Atype, lda_array, Barray, Btype, ldb_array, beta_array, Carray, Ctype, ldc_array, group_count, group_size, computeType)
     }
 }
@@ -3801,7 +4265,9 @@ pub unsafe fn cublasGemmGroupedBatchedEx_64(handle: cublasHandle_t, transa_array
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGemmGroupedBatchedEx_64(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const i64, n_array: *const i64, k_array: *const i64, alpha_array: *const ::core::ffi::c_void, Aarray: *const *const ::core::ffi::c_void, Atype: cudaDataType_t, lda_array: *const i64, Barray: *const *const ::core::ffi::c_void, Btype: cudaDataType_t, ldb_array: *const i64, beta_array: *const ::core::ffi::c_void, Carray: *const *mut ::core::ffi::c_void, Ctype: cudaDataType_t, ldc_array: *const i64, group_count: i64, group_size: *const i64, computeType: cublasComputeType_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGemmGroupedBatchedEx_64(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const i64, n_array: *const i64, k_array: *const i64, alpha_array: *const ::core::ffi::c_void, Aarray: *const *const ::core::ffi::c_void, Atype: cudaDataType_t, lda_array: *const i64, Barray: *const *const ::core::ffi::c_void, Btype: cudaDataType_t, ldb_array: *const i64, beta_array: *const ::core::ffi::c_void, Carray: *const *mut ::core::ffi::c_void, Ctype: cudaDataType_t, ldc_array: *const i64, group_count: i64, group_size: *const i64, computeType: cublasComputeType_t) -> cublasStatus_t;
+        }
         cublasGemmGroupedBatchedEx_64(handle, transa_array, transb_array, m_array, n_array, k_array, alpha_array, Aarray, Atype, lda_array, Barray, Btype, ldb_array, beta_array, Carray, Ctype, ldc_array, group_count, group_size, computeType)
     }
 }
@@ -3815,7 +4281,9 @@ pub unsafe fn cublasGemmStridedBatchedEx(handle: cublasHandle_t, transa: cublasO
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGemmStridedBatchedEx(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: ::core::ffi::c_int, strideB: ::core::ffi::c_longlong, beta: *const ::core::ffi::c_void, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int, strideC: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int, computeType: cublasComputeType_t, algo: cublasGemmAlgo_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGemmStridedBatchedEx(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: ::core::ffi::c_int, strideB: ::core::ffi::c_longlong, beta: *const ::core::ffi::c_void, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int, strideC: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int, computeType: cublasComputeType_t, algo: cublasGemmAlgo_t) -> cublasStatus_t;
+        }
         cublasGemmStridedBatchedEx(handle, transa, transb, m, n, k, alpha, A, Atype, lda, strideA, B, Btype, ldb, strideB, beta, C, Ctype, ldc, strideC, batchCount, computeType, algo)
     }
 }
@@ -3830,7 +4298,9 @@ pub unsafe fn cublasGemmStridedBatchedEx_64(handle: cublasHandle_t, transa: cubl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGemmStridedBatchedEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, strideA: ::core::ffi::c_longlong, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const ::core::ffi::c_void, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64, computeType: cublasComputeType_t, algo: cublasGemmAlgo_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGemmStridedBatchedEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, strideA: ::core::ffi::c_longlong, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const ::core::ffi::c_void, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64, computeType: cublasComputeType_t, algo: cublasGemmAlgo_t) -> cublasStatus_t;
+        }
         cublasGemmStridedBatchedEx_64(handle, transa, transb, m, n, k, alpha, A, Atype, lda, strideA, B, Btype, ldb, strideB, beta, C, Ctype, ldc, strideC, batchCount, computeType, algo)
     }
 }
@@ -3844,7 +4314,9 @@ pub unsafe fn cublasGetAtomicsMode(handle: cublasHandle_t, mode: *mut cublasAtom
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetAtomicsMode(handle: cublasHandle_t, mode: *mut cublasAtomicsMode_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetAtomicsMode(handle: cublasHandle_t, mode: *mut cublasAtomicsMode_t) -> cublasStatus_t;
+        }
         cublasGetAtomicsMode(handle, mode)
     }
 }
@@ -3858,7 +4330,9 @@ pub unsafe fn cublasGetCudartVersion() -> usize {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetCudartVersion() -> usize;
+        extern "C" {
+            fn cublasGetCudartVersion() -> usize;
+        }
         cublasGetCudartVersion()
     }
 }
@@ -3873,7 +4347,9 @@ pub unsafe fn cublasGetEmulationStrategy(handle: cublasHandle_t, emulationStrate
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetEmulationStrategy(handle: cublasHandle_t, emulationStrategy: *mut cublasEmulationStrategy_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetEmulationStrategy(handle: cublasHandle_t, emulationStrategy: *mut cublasEmulationStrategy_t) -> cublasStatus_t;
+        }
         cublasGetEmulationStrategy(handle, emulationStrategy)
     }
 }
@@ -3887,7 +4363,9 @@ pub unsafe fn cublasGetLoggerCallback(userCallback: *mut cublasLogCallback) -> c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetLoggerCallback(userCallback: *mut cublasLogCallback) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetLoggerCallback(userCallback: *mut cublasLogCallback) -> cublasStatus_t;
+        }
         cublasGetLoggerCallback(userCallback)
     }
 }
@@ -3901,7 +4379,9 @@ pub unsafe fn cublasGetMathMode(handle: cublasHandle_t, mode: *mut cublasMath_t)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetMathMode(handle: cublasHandle_t, mode: *mut cublasMath_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetMathMode(handle: cublasHandle_t, mode: *mut cublasMath_t) -> cublasStatus_t;
+        }
         cublasGetMathMode(handle, mode)
     }
 }
@@ -3915,7 +4395,9 @@ pub unsafe fn cublasGetMatrix(rows: ::core::ffi::c_int, cols: ::core::ffi::c_int
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetMatrix(rows: ::core::ffi::c_int, cols: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, A: *const ::core::ffi::c_void, lda: ::core::ffi::c_int, B: *mut ::core::ffi::c_void, ldb: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetMatrix(rows: ::core::ffi::c_int, cols: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, A: *const ::core::ffi::c_void, lda: ::core::ffi::c_int, B: *mut ::core::ffi::c_void, ldb: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasGetMatrix(rows, cols, elemSize, A, lda, B, ldb)
     }
 }
@@ -3929,7 +4411,9 @@ pub unsafe fn cublasGetMatrixAsync(rows: ::core::ffi::c_int, cols: ::core::ffi::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetMatrixAsync(rows: ::core::ffi::c_int, cols: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, A: *const ::core::ffi::c_void, lda: ::core::ffi::c_int, B: *mut ::core::ffi::c_void, ldb: ::core::ffi::c_int, stream: cudaStream_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetMatrixAsync(rows: ::core::ffi::c_int, cols: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, A: *const ::core::ffi::c_void, lda: ::core::ffi::c_int, B: *mut ::core::ffi::c_void, ldb: ::core::ffi::c_int, stream: cudaStream_t) -> cublasStatus_t;
+        }
         cublasGetMatrixAsync(rows, cols, elemSize, A, lda, B, ldb, stream)
     }
 }
@@ -3944,7 +4428,9 @@ pub unsafe fn cublasGetMatrixAsync_64(rows: i64, cols: i64, elemSize: i64, A: *c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetMatrixAsync_64(rows: i64, cols: i64, elemSize: i64, A: *const ::core::ffi::c_void, lda: i64, B: *mut ::core::ffi::c_void, ldb: i64, stream: cudaStream_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetMatrixAsync_64(rows: i64, cols: i64, elemSize: i64, A: *const ::core::ffi::c_void, lda: i64, B: *mut ::core::ffi::c_void, ldb: i64, stream: cudaStream_t) -> cublasStatus_t;
+        }
         cublasGetMatrixAsync_64(rows, cols, elemSize, A, lda, B, ldb, stream)
     }
 }
@@ -3959,7 +4445,9 @@ pub unsafe fn cublasGetMatrix_64(rows: i64, cols: i64, elemSize: i64, A: *const 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetMatrix_64(rows: i64, cols: i64, elemSize: i64, A: *const ::core::ffi::c_void, lda: i64, B: *mut ::core::ffi::c_void, ldb: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetMatrix_64(rows: i64, cols: i64, elemSize: i64, A: *const ::core::ffi::c_void, lda: i64, B: *mut ::core::ffi::c_void, ldb: i64) -> cublasStatus_t;
+        }
         cublasGetMatrix_64(rows, cols, elemSize, A, lda, B, ldb)
     }
 }
@@ -3973,7 +4461,9 @@ pub unsafe fn cublasGetPointerMode_v2(handle: cublasHandle_t, mode: *mut cublasP
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetPointerMode_v2(handle: cublasHandle_t, mode: *mut cublasPointerMode_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetPointerMode_v2(handle: cublasHandle_t, mode: *mut cublasPointerMode_t) -> cublasStatus_t;
+        }
         cublasGetPointerMode_v2(handle, mode)
     }
 }
@@ -3987,7 +4477,9 @@ pub unsafe fn cublasGetProperty(type_: libraryPropertyType, value: *mut ::core::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetProperty(type_: libraryPropertyType, value: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetProperty(type_: libraryPropertyType, value: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasGetProperty(type_, value)
     }
 }
@@ -4001,7 +4493,9 @@ pub unsafe fn cublasGetSmCountTarget(handle: cublasHandle_t, smCountTarget: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetSmCountTarget(handle: cublasHandle_t, smCountTarget: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetSmCountTarget(handle: cublasHandle_t, smCountTarget: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasGetSmCountTarget(handle, smCountTarget)
     }
 }
@@ -4015,7 +4509,9 @@ pub unsafe fn cublasGetStatusName(status: cublasStatus_t) -> *const ::core::ffi:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetStatusName(status: cublasStatus_t) -> *const ::core::ffi::c_char;
+        extern "C" {
+            fn cublasGetStatusName(status: cublasStatus_t) -> *const ::core::ffi::c_char;
+        }
         cublasGetStatusName(status)
     }
 }
@@ -4029,7 +4525,9 @@ pub unsafe fn cublasGetStatusString(status: cublasStatus_t) -> *const ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetStatusString(status: cublasStatus_t) -> *const ::core::ffi::c_char;
+        extern "C" {
+            fn cublasGetStatusString(status: cublasStatus_t) -> *const ::core::ffi::c_char;
+        }
         cublasGetStatusString(status)
     }
 }
@@ -4043,7 +4541,9 @@ pub unsafe fn cublasGetStream_v2(handle: cublasHandle_t, streamId: *mut cudaStre
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetStream_v2(handle: cublasHandle_t, streamId: *mut cudaStream_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetStream_v2(handle: cublasHandle_t, streamId: *mut cudaStream_t) -> cublasStatus_t;
+        }
         cublasGetStream_v2(handle, streamId)
     }
 }
@@ -4057,7 +4557,9 @@ pub unsafe fn cublasGetVector(n: ::core::ffi::c_int, elemSize: ::core::ffi::c_in
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetVector(n: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, x: *const ::core::ffi::c_void, incx: ::core::ffi::c_int, y: *mut ::core::ffi::c_void, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetVector(n: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, x: *const ::core::ffi::c_void, incx: ::core::ffi::c_int, y: *mut ::core::ffi::c_void, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasGetVector(n, elemSize, x, incx, y, incy)
     }
 }
@@ -4071,7 +4573,9 @@ pub unsafe fn cublasGetVectorAsync(n: ::core::ffi::c_int, elemSize: ::core::ffi:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetVectorAsync(n: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, devicePtr: *const ::core::ffi::c_void, incx: ::core::ffi::c_int, hostPtr: *mut ::core::ffi::c_void, incy: ::core::ffi::c_int, stream: cudaStream_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetVectorAsync(n: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, devicePtr: *const ::core::ffi::c_void, incx: ::core::ffi::c_int, hostPtr: *mut ::core::ffi::c_void, incy: ::core::ffi::c_int, stream: cudaStream_t) -> cublasStatus_t;
+        }
         cublasGetVectorAsync(n, elemSize, devicePtr, incx, hostPtr, incy, stream)
     }
 }
@@ -4086,7 +4590,9 @@ pub unsafe fn cublasGetVectorAsync_64(n: i64, elemSize: i64, devicePtr: *const :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetVectorAsync_64(n: i64, elemSize: i64, devicePtr: *const ::core::ffi::c_void, incx: i64, hostPtr: *mut ::core::ffi::c_void, incy: i64, stream: cudaStream_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetVectorAsync_64(n: i64, elemSize: i64, devicePtr: *const ::core::ffi::c_void, incx: i64, hostPtr: *mut ::core::ffi::c_void, incy: i64, stream: cudaStream_t) -> cublasStatus_t;
+        }
         cublasGetVectorAsync_64(n, elemSize, devicePtr, incx, hostPtr, incy, stream)
     }
 }
@@ -4101,7 +4607,9 @@ pub unsafe fn cublasGetVector_64(n: i64, elemSize: i64, x: *const ::core::ffi::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetVector_64(n: i64, elemSize: i64, x: *const ::core::ffi::c_void, incx: i64, y: *mut ::core::ffi::c_void, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetVector_64(n: i64, elemSize: i64, x: *const ::core::ffi::c_void, incx: i64, y: *mut ::core::ffi::c_void, incy: i64) -> cublasStatus_t;
+        }
         cublasGetVector_64(n, elemSize, x, incx, y, incy)
     }
 }
@@ -4115,7 +4623,9 @@ pub unsafe fn cublasGetVersion_v2(handle: cublasHandle_t, version: *mut ::core::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasGetVersion_v2(handle: cublasHandle_t, version: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasGetVersion_v2(handle: cublasHandle_t, version: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasGetVersion_v2(handle, version)
     }
 }
@@ -4129,7 +4639,9 @@ pub unsafe fn cublasIamaxEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIamaxEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIamaxEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasIamaxEx(handle, n, x, xType, incx, result)
     }
 }
@@ -4144,7 +4656,9 @@ pub unsafe fn cublasIamaxEx_64(handle: cublasHandle_t, n: i64, x: *const ::core:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIamaxEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, result: *mut i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIamaxEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, result: *mut i64) -> cublasStatus_t;
+        }
         cublasIamaxEx_64(handle, n, x, xType, incx, result)
     }
 }
@@ -4158,7 +4672,9 @@ pub unsafe fn cublasIaminEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIaminEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIaminEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasIaminEx(handle, n, x, xType, incx, result)
     }
 }
@@ -4173,7 +4689,9 @@ pub unsafe fn cublasIaminEx_64(handle: cublasHandle_t, n: i64, x: *const ::core:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIaminEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, result: *mut i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIaminEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, result: *mut i64) -> cublasStatus_t;
+        }
         cublasIaminEx_64(handle, n, x, xType, incx, result)
     }
 }
@@ -4187,7 +4705,9 @@ pub unsafe fn cublasIcamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIcamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIcamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasIcamax_v2(handle, n, x, incx, result)
     }
 }
@@ -4202,7 +4722,9 @@ pub unsafe fn cublasIcamax_v2_64(handle: cublasHandle_t, n: i64, x: *const cuCom
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIcamax_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, result: *mut i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIcamax_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, result: *mut i64) -> cublasStatus_t;
+        }
         cublasIcamax_v2_64(handle, n, x, incx, result)
     }
 }
@@ -4216,7 +4738,9 @@ pub unsafe fn cublasIcamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIcamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIcamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasIcamin_v2(handle, n, x, incx, result)
     }
 }
@@ -4231,7 +4755,9 @@ pub unsafe fn cublasIcamin_v2_64(handle: cublasHandle_t, n: i64, x: *const cuCom
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIcamin_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, result: *mut i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIcamin_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, result: *mut i64) -> cublasStatus_t;
+        }
         cublasIcamin_v2_64(handle, n, x, incx, result)
     }
 }
@@ -4245,7 +4771,9 @@ pub unsafe fn cublasIdamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIdamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIdamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasIdamax_v2(handle, n, x, incx, result)
     }
 }
@@ -4260,7 +4788,9 @@ pub unsafe fn cublasIdamax_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIdamax_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, result: *mut i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIdamax_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, result: *mut i64) -> cublasStatus_t;
+        }
         cublasIdamax_v2_64(handle, n, x, incx, result)
     }
 }
@@ -4274,7 +4804,9 @@ pub unsafe fn cublasIdamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIdamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIdamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f64, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasIdamin_v2(handle, n, x, incx, result)
     }
 }
@@ -4289,7 +4821,9 @@ pub unsafe fn cublasIdamin_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIdamin_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, result: *mut i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIdamin_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, result: *mut i64) -> cublasStatus_t;
+        }
         cublasIdamin_v2_64(handle, n, x, incx, result)
     }
 }
@@ -4303,7 +4837,9 @@ pub unsafe fn cublasIsamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIsamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIsamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasIsamax_v2(handle, n, x, incx, result)
     }
 }
@@ -4318,7 +4854,9 @@ pub unsafe fn cublasIsamax_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIsamax_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, result: *mut i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIsamax_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, result: *mut i64) -> cublasStatus_t;
+        }
         cublasIsamax_v2_64(handle, n, x, incx, result)
     }
 }
@@ -4332,7 +4870,9 @@ pub unsafe fn cublasIsamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIsamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIsamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasIsamin_v2(handle, n, x, incx, result)
     }
 }
@@ -4347,7 +4887,9 @@ pub unsafe fn cublasIsamin_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIsamin_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, result: *mut i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIsamin_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, result: *mut i64) -> cublasStatus_t;
+        }
         cublasIsamin_v2_64(handle, n, x, incx, result)
     }
 }
@@ -4361,7 +4903,9 @@ pub unsafe fn cublasIzamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIzamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIzamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasIzamax_v2(handle, n, x, incx, result)
     }
 }
@@ -4376,7 +4920,9 @@ pub unsafe fn cublasIzamax_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDou
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIzamax_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, result: *mut i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIzamax_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, result: *mut i64) -> cublasStatus_t;
+        }
         cublasIzamax_v2_64(handle, n, x, incx, result)
     }
 }
@@ -4390,7 +4936,9 @@ pub unsafe fn cublasIzamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIzamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIzamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasIzamin_v2(handle, n, x, incx, result)
     }
 }
@@ -4405,7 +4953,9 @@ pub unsafe fn cublasIzamin_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDou
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasIzamin_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, result: *mut i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasIzamin_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, result: *mut i64) -> cublasStatus_t;
+        }
         cublasIzamin_v2_64(handle, n, x, incx, result)
     }
 }
@@ -4419,7 +4969,9 @@ pub unsafe fn cublasLoggerConfigure(logIsOn: ::core::ffi::c_int, logToStdOut: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasLoggerConfigure(logIsOn: ::core::ffi::c_int, logToStdOut: ::core::ffi::c_int, logToStdErr: ::core::ffi::c_int, logFileName: *const ::core::ffi::c_char) -> cublasStatus_t;
+        extern "C" {
+            fn cublasLoggerConfigure(logIsOn: ::core::ffi::c_int, logToStdOut: ::core::ffi::c_int, logToStdErr: ::core::ffi::c_int, logFileName: *const ::core::ffi::c_char) -> cublasStatus_t;
+        }
         cublasLoggerConfigure(logIsOn, logToStdOut, logToStdErr, logFileName)
     }
 }
@@ -4433,7 +4985,9 @@ pub unsafe fn cublasNrm2Ex(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasNrm2Ex(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executionType: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasNrm2Ex(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executionType: cudaDataType) -> cublasStatus_t;
+        }
         cublasNrm2Ex(handle, n, x, xType, incx, result, resultType, executionType)
     }
 }
@@ -4448,7 +5002,9 @@ pub unsafe fn cublasNrm2Ex_64(handle: cublasHandle_t, n: i64, x: *const ::core::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasNrm2Ex_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executionType: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasNrm2Ex_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executionType: cudaDataType) -> cublasStatus_t;
+        }
         cublasNrm2Ex_64(handle, n, x, xType, incx, result, resultType, executionType)
     }
 }
@@ -4462,7 +5018,9 @@ pub unsafe fn cublasRotEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasRotEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: ::core::ffi::c_int, c: *const ::core::ffi::c_void, s: *const ::core::ffi::c_void, csType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasRotEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: ::core::ffi::c_int, c: *const ::core::ffi::c_void, s: *const ::core::ffi::c_void, csType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        }
         cublasRotEx(handle, n, x, xType, incx, y, yType, incy, c, s, csType, executiontype)
     }
 }
@@ -4477,7 +5035,9 @@ pub unsafe fn cublasRotEx_64(handle: cublasHandle_t, n: i64, x: *mut ::core::ffi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasRotEx_64(handle: cublasHandle_t, n: i64, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: i64, c: *const ::core::ffi::c_void, s: *const ::core::ffi::c_void, csType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasRotEx_64(handle: cublasHandle_t, n: i64, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: i64, c: *const ::core::ffi::c_void, s: *const ::core::ffi::c_void, csType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        }
         cublasRotEx_64(handle, n, x, xType, incx, y, yType, incy, c, s, csType, executiontype)
     }
 }
@@ -4491,7 +5051,9 @@ pub unsafe fn cublasRotgEx(handle: cublasHandle_t, a: *mut ::core::ffi::c_void, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasRotgEx(handle: cublasHandle_t, a: *mut ::core::ffi::c_void, b: *mut ::core::ffi::c_void, abType: cudaDataType, c: *mut ::core::ffi::c_void, s: *mut ::core::ffi::c_void, csType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasRotgEx(handle: cublasHandle_t, a: *mut ::core::ffi::c_void, b: *mut ::core::ffi::c_void, abType: cudaDataType, c: *mut ::core::ffi::c_void, s: *mut ::core::ffi::c_void, csType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        }
         cublasRotgEx(handle, a, b, abType, c, s, csType, executiontype)
     }
 }
@@ -4505,7 +5067,9 @@ pub unsafe fn cublasRotmEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasRotmEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: ::core::ffi::c_int, param: *const ::core::ffi::c_void, paramType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasRotmEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: ::core::ffi::c_int, param: *const ::core::ffi::c_void, paramType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        }
         cublasRotmEx(handle, n, x, xType, incx, y, yType, incy, param, paramType, executiontype)
     }
 }
@@ -4520,7 +5084,9 @@ pub unsafe fn cublasRotmEx_64(handle: cublasHandle_t, n: i64, x: *mut ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasRotmEx_64(handle: cublasHandle_t, n: i64, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: i64, param: *const ::core::ffi::c_void, paramType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasRotmEx_64(handle: cublasHandle_t, n: i64, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: i64, param: *const ::core::ffi::c_void, paramType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        }
         cublasRotmEx_64(handle, n, x, xType, incx, y, yType, incy, param, paramType, executiontype)
     }
 }
@@ -4534,7 +5100,9 @@ pub unsafe fn cublasRotmgEx(handle: cublasHandle_t, d1: *mut ::core::ffi::c_void
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasRotmgEx(handle: cublasHandle_t, d1: *mut ::core::ffi::c_void, d1Type: cudaDataType, d2: *mut ::core::ffi::c_void, d2Type: cudaDataType, x1: *mut ::core::ffi::c_void, x1Type: cudaDataType, y1: *const ::core::ffi::c_void, y1Type: cudaDataType, param: *mut ::core::ffi::c_void, paramType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasRotmgEx(handle: cublasHandle_t, d1: *mut ::core::ffi::c_void, d1Type: cudaDataType, d2: *mut ::core::ffi::c_void, d2Type: cudaDataType, x1: *mut ::core::ffi::c_void, x1Type: cudaDataType, y1: *const ::core::ffi::c_void, y1Type: cudaDataType, param: *mut ::core::ffi::c_void, paramType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t;
+        }
         cublasRotmgEx(handle, d1, d1Type, d2, d2Type, x1, x1Type, y1, y1Type, param, paramType, executiontype)
     }
 }
@@ -4548,7 +5116,9 @@ pub unsafe fn cublasSasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, result: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, result: *mut f32) -> cublasStatus_t;
+        }
         cublasSasum_v2(handle, n, x, incx, result)
     }
 }
@@ -4563,7 +5133,9 @@ pub unsafe fn cublasSasum_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, i
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSasum_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, result: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSasum_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, result: *mut f32) -> cublasStatus_t;
+        }
         cublasSasum_v2_64(handle, n, x, incx, result)
     }
 }
@@ -4577,7 +5149,9 @@ pub unsafe fn cublasSaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const f32, x: *const f32, incx: ::core::ffi::c_int, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const f32, x: *const f32, incx: ::core::ffi::c_int, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSaxpy_v2(handle, n, alpha, x, incx, y, incy)
     }
 }
@@ -4592,7 +5166,9 @@ pub unsafe fn cublasSaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f3
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f32, x: *const f32, incx: i64, y: *mut f32, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f32, x: *const f32, incx: i64, y: *mut f32, incy: i64) -> cublasStatus_t;
+        }
         cublasSaxpy_v2_64(handle, n, alpha, x, incx, y, incy)
     }
 }
@@ -4606,7 +5182,9 @@ pub unsafe fn cublasScalEx(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasScalEx(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const ::core::ffi::c_void, alphaType: cudaDataType, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, executionType: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasScalEx(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const ::core::ffi::c_void, alphaType: cudaDataType, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, executionType: cudaDataType) -> cublasStatus_t;
+        }
         cublasScalEx(handle, n, alpha, alphaType, x, xType, incx, executionType)
     }
 }
@@ -4621,7 +5199,9 @@ pub unsafe fn cublasScalEx_64(handle: cublasHandle_t, n: i64, alpha: *const ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasScalEx_64(handle: cublasHandle_t, n: i64, alpha: *const ::core::ffi::c_void, alphaType: cudaDataType, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: i64, executionType: cudaDataType) -> cublasStatus_t;
+        extern "C" {
+            fn cublasScalEx_64(handle: cublasHandle_t, n: i64, alpha: *const ::core::ffi::c_void, alphaType: cudaDataType, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: i64, executionType: cudaDataType) -> cublasStatus_t;
+        }
         cublasScalEx_64(handle, n, alpha, alphaType, x, xType, incx, executionType)
     }
 }
@@ -4635,7 +5215,9 @@ pub unsafe fn cublasScasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasScasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, result: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasScasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, result: *mut f32) -> cublasStatus_t;
+        }
         cublasScasum_v2(handle, n, x, incx, result)
     }
 }
@@ -4650,7 +5232,9 @@ pub unsafe fn cublasScasum_v2_64(handle: cublasHandle_t, n: i64, x: *const cuCom
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasScasum_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, result: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasScasum_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, result: *mut f32) -> cublasStatus_t;
+        }
         cublasScasum_v2_64(handle, n, x, incx, result)
     }
 }
@@ -4664,7 +5248,9 @@ pub unsafe fn cublasScnrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasScnrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, result: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasScnrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuComplex, incx: ::core::ffi::c_int, result: *mut f32) -> cublasStatus_t;
+        }
         cublasScnrm2_v2(handle, n, x, incx, result)
     }
 }
@@ -4679,7 +5265,9 @@ pub unsafe fn cublasScnrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const cuCom
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasScnrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, result: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasScnrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, result: *mut f32) -> cublasStatus_t;
+        }
         cublasScnrm2_v2_64(handle, n, x, incx, result)
     }
 }
@@ -4693,7 +5281,9 @@ pub unsafe fn cublasScopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasScopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasScopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasScopy_v2(handle, n, x, incx, y, incy)
     }
 }
@@ -4708,7 +5298,9 @@ pub unsafe fn cublasScopy_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, i
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasScopy_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, y: *mut f32, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasScopy_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, y: *mut f32, incy: i64) -> cublasStatus_t;
+        }
         cublasScopy_v2_64(handle, n, x, incx, y, incy)
     }
 }
@@ -4722,7 +5314,9 @@ pub unsafe fn cublasSdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, A: *const f32, lda: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, A: *const f32, lda: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSdgmm(handle, mode, m, n, A, lda, x, incx, C, ldc)
     }
 }
@@ -4737,7 +5331,9 @@ pub unsafe fn cublasSdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: i64, n: i64, A: *const f32, lda: i64, x: *const f32, incx: i64, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: i64, n: i64, A: *const f32, lda: i64, x: *const f32, incx: i64, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        }
         cublasSdgmm_64(handle, mode, m, n, A, lda, x, incx, C, ldc)
     }
 }
@@ -4751,7 +5347,9 @@ pub unsafe fn cublasSdot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSdot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, y: *const f32, incy: ::core::ffi::c_int, result: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSdot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, y: *const f32, incy: ::core::ffi::c_int, result: *mut f32) -> cublasStatus_t;
+        }
         cublasSdot_v2(handle, n, x, incx, y, incy, result)
     }
 }
@@ -4766,7 +5364,9 @@ pub unsafe fn cublasSdot_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, in
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSdot_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, y: *const f32, incy: i64, result: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSdot_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, y: *const f32, incy: i64, result: *mut f32) -> cublasStatus_t;
+        }
         cublasSdot_v2_64(handle, n, x, incx, y, incy, result)
     }
 }
@@ -4780,7 +5380,9 @@ pub unsafe fn cublasSetAtomicsMode(handle: cublasHandle_t, mode: cublasAtomicsMo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetAtomicsMode(handle: cublasHandle_t, mode: cublasAtomicsMode_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetAtomicsMode(handle: cublasHandle_t, mode: cublasAtomicsMode_t) -> cublasStatus_t;
+        }
         cublasSetAtomicsMode(handle, mode)
     }
 }
@@ -4795,7 +5397,9 @@ pub unsafe fn cublasSetEmulationStrategy(handle: cublasHandle_t, emulationStrate
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetEmulationStrategy(handle: cublasHandle_t, emulationStrategy: cublasEmulationStrategy_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetEmulationStrategy(handle: cublasHandle_t, emulationStrategy: cublasEmulationStrategy_t) -> cublasStatus_t;
+        }
         cublasSetEmulationStrategy(handle, emulationStrategy)
     }
 }
@@ -4809,7 +5413,9 @@ pub unsafe fn cublasSetLoggerCallback(userCallback: cublasLogCallback) -> cublas
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetLoggerCallback(userCallback: cublasLogCallback) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetLoggerCallback(userCallback: cublasLogCallback) -> cublasStatus_t;
+        }
         cublasSetLoggerCallback(userCallback)
     }
 }
@@ -4823,7 +5429,9 @@ pub unsafe fn cublasSetMathMode(handle: cublasHandle_t, mode: cublasMath_t) -> c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetMathMode(handle: cublasHandle_t, mode: cublasMath_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetMathMode(handle: cublasHandle_t, mode: cublasMath_t) -> cublasStatus_t;
+        }
         cublasSetMathMode(handle, mode)
     }
 }
@@ -4837,7 +5445,9 @@ pub unsafe fn cublasSetMatrix(rows: ::core::ffi::c_int, cols: ::core::ffi::c_int
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetMatrix(rows: ::core::ffi::c_int, cols: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, A: *const ::core::ffi::c_void, lda: ::core::ffi::c_int, B: *mut ::core::ffi::c_void, ldb: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetMatrix(rows: ::core::ffi::c_int, cols: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, A: *const ::core::ffi::c_void, lda: ::core::ffi::c_int, B: *mut ::core::ffi::c_void, ldb: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSetMatrix(rows, cols, elemSize, A, lda, B, ldb)
     }
 }
@@ -4851,7 +5461,9 @@ pub unsafe fn cublasSetMatrixAsync(rows: ::core::ffi::c_int, cols: ::core::ffi::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetMatrixAsync(rows: ::core::ffi::c_int, cols: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, A: *const ::core::ffi::c_void, lda: ::core::ffi::c_int, B: *mut ::core::ffi::c_void, ldb: ::core::ffi::c_int, stream: cudaStream_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetMatrixAsync(rows: ::core::ffi::c_int, cols: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, A: *const ::core::ffi::c_void, lda: ::core::ffi::c_int, B: *mut ::core::ffi::c_void, ldb: ::core::ffi::c_int, stream: cudaStream_t) -> cublasStatus_t;
+        }
         cublasSetMatrixAsync(rows, cols, elemSize, A, lda, B, ldb, stream)
     }
 }
@@ -4866,7 +5478,9 @@ pub unsafe fn cublasSetMatrixAsync_64(rows: i64, cols: i64, elemSize: i64, A: *c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetMatrixAsync_64(rows: i64, cols: i64, elemSize: i64, A: *const ::core::ffi::c_void, lda: i64, B: *mut ::core::ffi::c_void, ldb: i64, stream: cudaStream_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetMatrixAsync_64(rows: i64, cols: i64, elemSize: i64, A: *const ::core::ffi::c_void, lda: i64, B: *mut ::core::ffi::c_void, ldb: i64, stream: cudaStream_t) -> cublasStatus_t;
+        }
         cublasSetMatrixAsync_64(rows, cols, elemSize, A, lda, B, ldb, stream)
     }
 }
@@ -4881,7 +5495,9 @@ pub unsafe fn cublasSetMatrix_64(rows: i64, cols: i64, elemSize: i64, A: *const 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetMatrix_64(rows: i64, cols: i64, elemSize: i64, A: *const ::core::ffi::c_void, lda: i64, B: *mut ::core::ffi::c_void, ldb: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetMatrix_64(rows: i64, cols: i64, elemSize: i64, A: *const ::core::ffi::c_void, lda: i64, B: *mut ::core::ffi::c_void, ldb: i64) -> cublasStatus_t;
+        }
         cublasSetMatrix_64(rows, cols, elemSize, A, lda, B, ldb)
     }
 }
@@ -4895,7 +5511,9 @@ pub unsafe fn cublasSetPointerMode_v2(handle: cublasHandle_t, mode: cublasPointe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetPointerMode_v2(handle: cublasHandle_t, mode: cublasPointerMode_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetPointerMode_v2(handle: cublasHandle_t, mode: cublasPointerMode_t) -> cublasStatus_t;
+        }
         cublasSetPointerMode_v2(handle, mode)
     }
 }
@@ -4909,7 +5527,9 @@ pub unsafe fn cublasSetSmCountTarget(handle: cublasHandle_t, smCountTarget: ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetSmCountTarget(handle: cublasHandle_t, smCountTarget: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetSmCountTarget(handle: cublasHandle_t, smCountTarget: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSetSmCountTarget(handle, smCountTarget)
     }
 }
@@ -4923,7 +5543,9 @@ pub unsafe fn cublasSetStream_v2(handle: cublasHandle_t, streamId: cudaStream_t)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetStream_v2(handle: cublasHandle_t, streamId: cudaStream_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetStream_v2(handle: cublasHandle_t, streamId: cudaStream_t) -> cublasStatus_t;
+        }
         cublasSetStream_v2(handle, streamId)
     }
 }
@@ -4937,7 +5559,9 @@ pub unsafe fn cublasSetVector(n: ::core::ffi::c_int, elemSize: ::core::ffi::c_in
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetVector(n: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, x: *const ::core::ffi::c_void, incx: ::core::ffi::c_int, devicePtr: *mut ::core::ffi::c_void, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetVector(n: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, x: *const ::core::ffi::c_void, incx: ::core::ffi::c_int, devicePtr: *mut ::core::ffi::c_void, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSetVector(n, elemSize, x, incx, devicePtr, incy)
     }
 }
@@ -4951,7 +5575,9 @@ pub unsafe fn cublasSetVectorAsync(n: ::core::ffi::c_int, elemSize: ::core::ffi:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetVectorAsync(n: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, hostPtr: *const ::core::ffi::c_void, incx: ::core::ffi::c_int, devicePtr: *mut ::core::ffi::c_void, incy: ::core::ffi::c_int, stream: cudaStream_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetVectorAsync(n: ::core::ffi::c_int, elemSize: ::core::ffi::c_int, hostPtr: *const ::core::ffi::c_void, incx: ::core::ffi::c_int, devicePtr: *mut ::core::ffi::c_void, incy: ::core::ffi::c_int, stream: cudaStream_t) -> cublasStatus_t;
+        }
         cublasSetVectorAsync(n, elemSize, hostPtr, incx, devicePtr, incy, stream)
     }
 }
@@ -4966,7 +5592,9 @@ pub unsafe fn cublasSetVectorAsync_64(n: i64, elemSize: i64, hostPtr: *const ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetVectorAsync_64(n: i64, elemSize: i64, hostPtr: *const ::core::ffi::c_void, incx: i64, devicePtr: *mut ::core::ffi::c_void, incy: i64, stream: cudaStream_t) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetVectorAsync_64(n: i64, elemSize: i64, hostPtr: *const ::core::ffi::c_void, incx: i64, devicePtr: *mut ::core::ffi::c_void, incy: i64, stream: cudaStream_t) -> cublasStatus_t;
+        }
         cublasSetVectorAsync_64(n, elemSize, hostPtr, incx, devicePtr, incy, stream)
     }
 }
@@ -4981,7 +5609,9 @@ pub unsafe fn cublasSetVector_64(n: i64, elemSize: i64, x: *const ::core::ffi::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetVector_64(n: i64, elemSize: i64, x: *const ::core::ffi::c_void, incx: i64, devicePtr: *mut ::core::ffi::c_void, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetVector_64(n: i64, elemSize: i64, x: *const ::core::ffi::c_void, incx: i64, devicePtr: *mut ::core::ffi::c_void, incy: i64) -> cublasStatus_t;
+        }
         cublasSetVector_64(n, elemSize, x, incx, devicePtr, incy)
     }
 }
@@ -4995,7 +5625,9 @@ pub unsafe fn cublasSetWorkspace_v2(handle: cublasHandle_t, workspace: *mut ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSetWorkspace_v2(handle: cublasHandle_t, workspace: *mut ::core::ffi::c_void, workspaceSizeInBytes: usize) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSetWorkspace_v2(handle: cublasHandle_t, workspace: *mut ::core::ffi::c_void, workspaceSizeInBytes: usize) -> cublasStatus_t;
+        }
         cublasSetWorkspace_v2(handle, workspace, workspaceSizeInBytes)
     }
 }
@@ -5009,7 +5641,9 @@ pub unsafe fn cublasSgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, kl: ::core::ffi::c_int, ku: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, beta: *const f32, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, kl: ::core::ffi::c_int, ku: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, beta: *const f32, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSgbmv_v2(handle, trans, m, n, kl, ku, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -5024,7 +5658,9 @@ pub unsafe fn cublasSgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, kl: i64, ku: i64, alpha: *const f32, A: *const f32, lda: i64, x: *const f32, incx: i64, beta: *const f32, y: *mut f32, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, kl: i64, ku: i64, alpha: *const f32, A: *const f32, lda: i64, x: *const f32, incx: i64, beta: *const f32, y: *mut f32, incy: i64) -> cublasStatus_t;
+        }
         cublasSgbmv_v2_64(handle, trans, m, n, kl, ku, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -5038,7 +5674,9 @@ pub unsafe fn cublasSgeam(handle: cublasHandle_t, transa: cublasOperation_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgeam(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, beta: *const f32, B: *const f32, ldb: ::core::ffi::c_int, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgeam(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, beta: *const f32, B: *const f32, ldb: ::core::ffi::c_int, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSgeam(handle, transa, transb, m, n, alpha, A, lda, beta, B, ldb, C, ldc)
     }
 }
@@ -5053,7 +5691,9 @@ pub unsafe fn cublasSgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, beta: *const f32, B: *const f32, ldb: i64, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, beta: *const f32, B: *const f32, ldb: i64, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        }
         cublasSgeam_64(handle, transa, transb, m, n, alpha, A, lda, beta, B, ldb, C, ldc)
     }
 }
@@ -5067,7 +5707,9 @@ pub unsafe fn cublasSgelsBatched(handle: cublasHandle_t, trans: cublasOperation_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgelsBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *mut f32, lda: ::core::ffi::c_int, Carray: *const *mut f32, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, devInfoArray: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgelsBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *mut f32, lda: ::core::ffi::c_int, Carray: *const *mut f32, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, devInfoArray: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSgelsBatched(handle, trans, m, n, nrhs, Aarray, lda, Carray, ldc, info, devInfoArray, batchSize)
     }
 }
@@ -5081,7 +5723,9 @@ pub unsafe fn cublasSgemmBatched(handle: cublasHandle_t, transa: cublasOperation
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemmBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, Aarray: *const *const f32, lda: ::core::ffi::c_int, Barray: *const *const f32, ldb: ::core::ffi::c_int, beta: *const f32, Carray: *const *mut f32, ldc: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemmBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, Aarray: *const *const f32, lda: ::core::ffi::c_int, Barray: *const *const f32, ldb: ::core::ffi::c_int, beta: *const f32, Carray: *const *mut f32, ldc: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSgemmBatched(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
@@ -5096,7 +5740,9 @@ pub unsafe fn cublasSgemmBatched_64(handle: cublasHandle_t, transa: cublasOperat
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemmBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f32, Aarray: *const *const f32, lda: i64, Barray: *const *const f32, ldb: i64, beta: *const f32, Carray: *const *mut f32, ldc: i64, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemmBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f32, Aarray: *const *const f32, lda: i64, Barray: *const *const f32, ldb: i64, beta: *const f32, Carray: *const *mut f32, ldc: i64, batchCount: i64) -> cublasStatus_t;
+        }
         cublasSgemmBatched_64(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
@@ -5110,7 +5756,9 @@ pub unsafe fn cublasSgemmEx(handle: cublasHandle_t, transa: cublasOperation_t, t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemmEx(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: ::core::ffi::c_int, beta: *const f32, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemmEx(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: ::core::ffi::c_int, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: ::core::ffi::c_int, beta: *const f32, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSgemmEx(handle, transa, transb, m, n, k, alpha, A, Atype, lda, B, Btype, ldb, beta, C, Ctype, ldc)
     }
 }
@@ -5125,7 +5773,9 @@ pub unsafe fn cublasSgemmEx_64(handle: cublasHandle_t, transa: cublasOperation_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemmEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f32, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, beta: *const f32, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemmEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f32, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, beta: *const f32, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t;
+        }
         cublasSgemmEx_64(handle, transa, transb, m, n, k, alpha, A, Atype, lda, B, Btype, ldb, beta, C, Ctype, ldc)
     }
 }
@@ -5140,7 +5790,9 @@ pub unsafe fn cublasSgemmGroupedBatched(handle: cublasHandle_t, transa_array: *c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemmGroupedBatched(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const ::core::ffi::c_int, n_array: *const ::core::ffi::c_int, k_array: *const ::core::ffi::c_int, alpha_array: *const f32, Aarray: *const *const f32, lda_array: *const ::core::ffi::c_int, Barray: *const *const f32, ldb_array: *const ::core::ffi::c_int, beta_array: *const f32, Carray: *const *mut f32, ldc_array: *const ::core::ffi::c_int, group_count: ::core::ffi::c_int, group_size: *const ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemmGroupedBatched(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const ::core::ffi::c_int, n_array: *const ::core::ffi::c_int, k_array: *const ::core::ffi::c_int, alpha_array: *const f32, Aarray: *const *const f32, lda_array: *const ::core::ffi::c_int, Barray: *const *const f32, ldb_array: *const ::core::ffi::c_int, beta_array: *const f32, Carray: *const *mut f32, ldc_array: *const ::core::ffi::c_int, group_count: ::core::ffi::c_int, group_size: *const ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSgemmGroupedBatched(handle, transa_array, transb_array, m_array, n_array, k_array, alpha_array, Aarray, lda_array, Barray, ldb_array, beta_array, Carray, ldc_array, group_count, group_size)
     }
 }
@@ -5155,7 +5807,9 @@ pub unsafe fn cublasSgemmGroupedBatched_64(handle: cublasHandle_t, transa_array:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemmGroupedBatched_64(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const i64, n_array: *const i64, k_array: *const i64, alpha_array: *const f32, Aarray: *const *const f32, lda_array: *const i64, Barray: *const *const f32, ldb_array: *const i64, beta_array: *const f32, Carray: *const *mut f32, ldc_array: *const i64, group_count: i64, group_size: *const i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemmGroupedBatched_64(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const i64, n_array: *const i64, k_array: *const i64, alpha_array: *const f32, Aarray: *const *const f32, lda_array: *const i64, Barray: *const *const f32, ldb_array: *const i64, beta_array: *const f32, Carray: *const *mut f32, ldc_array: *const i64, group_count: i64, group_size: *const i64) -> cublasStatus_t;
+        }
         cublasSgemmGroupedBatched_64(handle, transa_array, transb_array, m_array, n_array, k_array, alpha_array, Aarray, lda_array, Barray, ldb_array, beta_array, Carray, ldc_array, group_count, group_size)
     }
 }
@@ -5169,7 +5823,9 @@ pub unsafe fn cublasSgemmStridedBatched(handle: cublasHandle_t, transa: cublasOp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemmStridedBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, B: *const f32, ldb: ::core::ffi::c_int, strideB: ::core::ffi::c_longlong, beta: *const f32, C: *mut f32, ldc: ::core::ffi::c_int, strideC: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemmStridedBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, B: *const f32, ldb: ::core::ffi::c_int, strideB: ::core::ffi::c_longlong, beta: *const f32, C: *mut f32, ldc: ::core::ffi::c_int, strideC: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSgemmStridedBatched(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
@@ -5184,7 +5840,9 @@ pub unsafe fn cublasSgemmStridedBatched_64(handle: cublasHandle_t, transa: cubla
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemmStridedBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, strideA: ::core::ffi::c_longlong, B: *const f32, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const f32, C: *mut f32, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemmStridedBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, strideA: ::core::ffi::c_longlong, B: *const f32, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const f32, C: *mut f32, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        }
         cublasSgemmStridedBatched_64(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
@@ -5198,7 +5856,9 @@ pub unsafe fn cublasSgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, B: *const f32, ldb: ::core::ffi::c_int, beta: *const f32, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, B: *const f32, ldb: ::core::ffi::c_int, beta: *const f32, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSgemm_v2(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -5213,7 +5873,9 @@ pub unsafe fn cublasSgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, B: *const f32, ldb: i64, beta: *const f32, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, B: *const f32, ldb: i64, beta: *const f32, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        }
         cublasSgemm_v2_64(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -5228,7 +5890,9 @@ pub unsafe fn cublasSgemvBatched(handle: cublasHandle_t, trans: cublasOperation_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemvBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, Aarray: *const *const f32, lda: ::core::ffi::c_int, xarray: *const *const f32, incx: ::core::ffi::c_int, beta: *const f32, yarray: *const *mut f32, incy: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemvBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, Aarray: *const *const f32, lda: ::core::ffi::c_int, xarray: *const *const f32, incx: ::core::ffi::c_int, beta: *const f32, yarray: *const *mut f32, incy: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSgemvBatched(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
@@ -5243,7 +5907,9 @@ pub unsafe fn cublasSgemvBatched_64(handle: cublasHandle_t, trans: cublasOperati
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemvBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f32, Aarray: *const *const f32, lda: i64, xarray: *const *const f32, incx: i64, beta: *const f32, yarray: *const *mut f32, incy: i64, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemvBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f32, Aarray: *const *const f32, lda: i64, xarray: *const *const f32, incx: i64, beta: *const f32, yarray: *const *mut f32, incy: i64, batchCount: i64) -> cublasStatus_t;
+        }
         cublasSgemvBatched_64(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
@@ -5258,7 +5924,9 @@ pub unsafe fn cublasSgemvStridedBatched(handle: cublasHandle_t, trans: cublasOpe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemvStridedBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, x: *const f32, incx: ::core::ffi::c_int, stridex: ::core::ffi::c_longlong, beta: *const f32, y: *mut f32, incy: ::core::ffi::c_int, stridey: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemvStridedBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, x: *const f32, incx: ::core::ffi::c_int, stridex: ::core::ffi::c_longlong, beta: *const f32, y: *mut f32, incy: ::core::ffi::c_int, stridey: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSgemvStridedBatched(handle, trans, m, n, alpha, A, lda, strideA, x, incx, stridex, beta, y, incy, stridey, batchCount)
     }
 }
@@ -5273,7 +5941,9 @@ pub unsafe fn cublasSgemvStridedBatched_64(handle: cublasHandle_t, trans: cublas
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemvStridedBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, strideA: ::core::ffi::c_longlong, x: *const f32, incx: i64, stridex: ::core::ffi::c_longlong, beta: *const f32, y: *mut f32, incy: i64, stridey: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemvStridedBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, strideA: ::core::ffi::c_longlong, x: *const f32, incx: i64, stridex: ::core::ffi::c_longlong, beta: *const f32, y: *mut f32, incy: i64, stridey: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        }
         cublasSgemvStridedBatched_64(handle, trans, m, n, alpha, A, lda, strideA, x, incx, stridex, beta, y, incy, stridey, batchCount)
     }
 }
@@ -5287,7 +5957,9 @@ pub unsafe fn cublasSgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, beta: *const f32, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, beta: *const f32, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSgemv_v2(handle, trans, m, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -5302,7 +5974,9 @@ pub unsafe fn cublasSgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, x: *const f32, incx: i64, beta: *const f32, y: *mut f32, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, x: *const f32, incx: i64, beta: *const f32, y: *mut f32, incy: i64) -> cublasStatus_t;
+        }
         cublasSgemv_v2_64(handle, trans, m, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -5316,7 +5990,9 @@ pub unsafe fn cublasSgeqrfBatched(handle: cublasHandle_t, m: ::core::ffi::c_int,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgeqrfBatched(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, Aarray: *const *mut f32, lda: ::core::ffi::c_int, TauArray: *const *mut f32, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgeqrfBatched(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, Aarray: *const *mut f32, lda: ::core::ffi::c_int, TauArray: *const *mut f32, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSgeqrfBatched(handle, m, n, Aarray, lda, TauArray, info, batchSize)
     }
 }
@@ -5330,7 +6006,9 @@ pub unsafe fn cublasSger_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSger_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, x: *const f32, incx: ::core::ffi::c_int, y: *const f32, incy: ::core::ffi::c_int, A: *mut f32, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSger_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, x: *const f32, incx: ::core::ffi::c_int, y: *const f32, incy: ::core::ffi::c_int, A: *mut f32, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSger_v2(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -5345,7 +6023,9 @@ pub unsafe fn cublasSger_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSger_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const f32, x: *const f32, incx: i64, y: *const f32, incy: i64, A: *mut f32, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSger_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const f32, x: *const f32, incx: i64, y: *const f32, incy: i64, A: *mut f32, lda: i64) -> cublasStatus_t;
+        }
         cublasSger_v2_64(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -5359,7 +6039,9 @@ pub unsafe fn cublasSgetrfBatched(handle: cublasHandle_t, n: ::core::ffi::c_int,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgetrfBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *mut f32, lda: ::core::ffi::c_int, P: *mut ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgetrfBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *mut f32, lda: ::core::ffi::c_int, P: *mut ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSgetrfBatched(handle, n, A, lda, P, info, batchSize)
     }
 }
@@ -5373,7 +6055,9 @@ pub unsafe fn cublasSgetriBatched(handle: cublasHandle_t, n: ::core::ffi::c_int,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgetriBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const f32, lda: ::core::ffi::c_int, P: *const ::core::ffi::c_int, C: *const *mut f32, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgetriBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const f32, lda: ::core::ffi::c_int, P: *const ::core::ffi::c_int, C: *const *mut f32, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSgetriBatched(handle, n, A, lda, P, C, ldc, info, batchSize)
     }
 }
@@ -5387,7 +6071,9 @@ pub unsafe fn cublasSgetrsBatched(handle: cublasHandle_t, trans: cublasOperation
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSgetrsBatched(handle: cublasHandle_t, trans: cublasOperation_t, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *const f32, lda: ::core::ffi::c_int, devIpiv: *const ::core::ffi::c_int, Barray: *const *mut f32, ldb: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSgetrsBatched(handle: cublasHandle_t, trans: cublasOperation_t, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *const f32, lda: ::core::ffi::c_int, devIpiv: *const ::core::ffi::c_int, Barray: *const *mut f32, ldb: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSgetrsBatched(handle, trans, n, nrhs, Aarray, lda, devIpiv, Barray, ldb, info, batchSize)
     }
 }
@@ -5401,7 +6087,9 @@ pub unsafe fn cublasSmatinvBatched(handle: cublasHandle_t, n: ::core::ffi::c_int
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSmatinvBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const f32, lda: ::core::ffi::c_int, Ainv: *const *mut f32, lda_inv: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSmatinvBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const f32, lda: ::core::ffi::c_int, Ainv: *const *mut f32, lda_inv: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSmatinvBatched(handle, n, A, lda, Ainv, lda_inv, info, batchSize)
     }
 }
@@ -5415,7 +6103,9 @@ pub unsafe fn cublasSnrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSnrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, result: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSnrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, result: *mut f32) -> cublasStatus_t;
+        }
         cublasSnrm2_v2(handle, n, x, incx, result)
     }
 }
@@ -5430,7 +6120,9 @@ pub unsafe fn cublasSnrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, i
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSnrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, result: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSnrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, result: *mut f32) -> cublasStatus_t;
+        }
         cublasSnrm2_v2_64(handle, n, x, incx, result)
     }
 }
@@ -5444,7 +6136,9 @@ pub unsafe fn cublasSrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut f32, incx: ::core::ffi::c_int, y: *mut f32, incy: ::core::ffi::c_int, c: *const f32, s: *const f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut f32, incx: ::core::ffi::c_int, y: *mut f32, incy: ::core::ffi::c_int, c: *const f32, s: *const f32) -> cublasStatus_t;
+        }
         cublasSrot_v2(handle, n, x, incx, y, incy, c, s)
     }
 }
@@ -5459,7 +6153,9 @@ pub unsafe fn cublasSrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut f32, incx
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut f32, incx: i64, y: *mut f32, incy: i64, c: *const f32, s: *const f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut f32, incx: i64, y: *mut f32, incy: i64, c: *const f32, s: *const f32) -> cublasStatus_t;
+        }
         cublasSrot_v2_64(handle, n, x, incx, y, incy, c, s)
     }
 }
@@ -5473,7 +6169,9 @@ pub unsafe fn cublasSrotg_v2(handle: cublasHandle_t, a: *mut f32, b: *mut f32, c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSrotg_v2(handle: cublasHandle_t, a: *mut f32, b: *mut f32, c: *mut f32, s: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSrotg_v2(handle: cublasHandle_t, a: *mut f32, b: *mut f32, c: *mut f32, s: *mut f32) -> cublasStatus_t;
+        }
         cublasSrotg_v2(handle, a, b, c, s)
     }
 }
@@ -5487,7 +6185,9 @@ pub unsafe fn cublasSrotm_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSrotm_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut f32, incx: ::core::ffi::c_int, y: *mut f32, incy: ::core::ffi::c_int, param: *const f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSrotm_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut f32, incx: ::core::ffi::c_int, y: *mut f32, incy: ::core::ffi::c_int, param: *const f32) -> cublasStatus_t;
+        }
         cublasSrotm_v2(handle, n, x, incx, y, incy, param)
     }
 }
@@ -5502,7 +6202,9 @@ pub unsafe fn cublasSrotm_v2_64(handle: cublasHandle_t, n: i64, x: *mut f32, inc
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSrotm_v2_64(handle: cublasHandle_t, n: i64, x: *mut f32, incx: i64, y: *mut f32, incy: i64, param: *const f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSrotm_v2_64(handle: cublasHandle_t, n: i64, x: *mut f32, incx: i64, y: *mut f32, incy: i64, param: *const f32) -> cublasStatus_t;
+        }
         cublasSrotm_v2_64(handle, n, x, incx, y, incy, param)
     }
 }
@@ -5516,7 +6218,9 @@ pub unsafe fn cublasSrotmg_v2(handle: cublasHandle_t, d1: *mut f32, d2: *mut f32
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSrotmg_v2(handle: cublasHandle_t, d1: *mut f32, d2: *mut f32, x1: *mut f32, y1: *const f32, param: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSrotmg_v2(handle: cublasHandle_t, d1: *mut f32, d2: *mut f32, x1: *mut f32, y1: *const f32, param: *mut f32) -> cublasStatus_t;
+        }
         cublasSrotmg_v2(handle, d1, d2, x1, y1, param)
     }
 }
@@ -5530,7 +6234,9 @@ pub unsafe fn cublasSsbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, beta: *const f32, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, beta: *const f32, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSsbmv_v2(handle, uplo, n, k, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -5545,7 +6251,9 @@ pub unsafe fn cublasSsbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, x: *const f32, incx: i64, beta: *const f32, y: *mut f32, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, x: *const f32, incx: i64, beta: *const f32, y: *mut f32, incy: i64) -> cublasStatus_t;
+        }
         cublasSsbmv_v2_64(handle, uplo, n, k, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -5559,7 +6267,9 @@ pub unsafe fn cublasSscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const f32, x: *mut f32, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const f32, x: *mut f32, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSscal_v2(handle, n, alpha, x, incx)
     }
 }
@@ -5574,7 +6284,9 @@ pub unsafe fn cublasSscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f3
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f32, x: *mut f32, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f32, x: *mut f32, incx: i64) -> cublasStatus_t;
+        }
         cublasSscal_v2_64(handle, n, alpha, x, incx)
     }
 }
@@ -5588,7 +6300,9 @@ pub unsafe fn cublasSspmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSspmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, AP: *const f32, x: *const f32, incx: ::core::ffi::c_int, beta: *const f32, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSspmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, AP: *const f32, x: *const f32, incx: ::core::ffi::c_int, beta: *const f32, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSspmv_v2(handle, uplo, n, alpha, AP, x, incx, beta, y, incy)
     }
 }
@@ -5603,7 +6317,9 @@ pub unsafe fn cublasSspmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSspmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, AP: *const f32, x: *const f32, incx: i64, beta: *const f32, y: *mut f32, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSspmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, AP: *const f32, x: *const f32, incx: i64, beta: *const f32, y: *mut f32, incy: i64) -> cublasStatus_t;
+        }
         cublasSspmv_v2_64(handle, uplo, n, alpha, AP, x, incx, beta, y, incy)
     }
 }
@@ -5617,7 +6333,9 @@ pub unsafe fn cublasSspr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSspr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, x: *const f32, incx: ::core::ffi::c_int, y: *const f32, incy: ::core::ffi::c_int, AP: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSspr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, x: *const f32, incx: ::core::ffi::c_int, y: *const f32, incy: ::core::ffi::c_int, AP: *mut f32) -> cublasStatus_t;
+        }
         cublasSspr2_v2(handle, uplo, n, alpha, x, incx, y, incy, AP)
     }
 }
@@ -5632,7 +6350,9 @@ pub unsafe fn cublasSspr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSspr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const f32, incx: i64, y: *const f32, incy: i64, AP: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSspr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const f32, incx: i64, y: *const f32, incy: i64, AP: *mut f32) -> cublasStatus_t;
+        }
         cublasSspr2_v2_64(handle, uplo, n, alpha, x, incx, y, incy, AP)
     }
 }
@@ -5646,7 +6366,9 @@ pub unsafe fn cublasSspr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSspr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, x: *const f32, incx: ::core::ffi::c_int, AP: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSspr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, x: *const f32, incx: ::core::ffi::c_int, AP: *mut f32) -> cublasStatus_t;
+        }
         cublasSspr_v2(handle, uplo, n, alpha, x, incx, AP)
     }
 }
@@ -5661,7 +6383,9 @@ pub unsafe fn cublasSspr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSspr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const f32, incx: i64, AP: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSspr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const f32, incx: i64, AP: *mut f32) -> cublasStatus_t;
+        }
         cublasSspr_v2_64(handle, uplo, n, alpha, x, incx, AP)
     }
 }
@@ -5675,7 +6399,9 @@ pub unsafe fn cublasSswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut f32, incx: ::core::ffi::c_int, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut f32, incx: ::core::ffi::c_int, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSswap_v2(handle, n, x, incx, y, incy)
     }
 }
@@ -5690,7 +6416,9 @@ pub unsafe fn cublasSswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut f32, inc
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut f32, incx: i64, y: *mut f32, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut f32, incx: i64, y: *mut f32, incy: i64) -> cublasStatus_t;
+        }
         cublasSswap_v2_64(handle, n, x, incx, y, incy)
     }
 }
@@ -5704,7 +6432,9 @@ pub unsafe fn cublasSsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, B: *const f32, ldb: ::core::ffi::c_int, beta: *const f32, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, B: *const f32, ldb: ::core::ffi::c_int, beta: *const f32, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSsymm_v2(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -5719,7 +6449,9 @@ pub unsafe fn cublasSsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, B: *const f32, ldb: i64, beta: *const f32, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, B: *const f32, ldb: i64, beta: *const f32, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        }
         cublasSsymm_v2_64(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -5733,7 +6465,9 @@ pub unsafe fn cublasSsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, beta: *const f32, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, x: *const f32, incx: ::core::ffi::c_int, beta: *const f32, y: *mut f32, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSsymv_v2(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -5748,7 +6482,9 @@ pub unsafe fn cublasSsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, A: *const f32, lda: i64, x: *const f32, incx: i64, beta: *const f32, y: *mut f32, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, A: *const f32, lda: i64, x: *const f32, incx: i64, beta: *const f32, y: *mut f32, incy: i64) -> cublasStatus_t;
+        }
         cublasSsymv_v2_64(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -5762,7 +6498,9 @@ pub unsafe fn cublasSsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, x: *const f32, incx: ::core::ffi::c_int, y: *const f32, incy: ::core::ffi::c_int, A: *mut f32, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, x: *const f32, incx: ::core::ffi::c_int, y: *const f32, incy: ::core::ffi::c_int, A: *mut f32, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSsyr2_v2(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -5777,7 +6515,9 @@ pub unsafe fn cublasSsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const f32, incx: i64, y: *const f32, incy: i64, A: *mut f32, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const f32, incx: i64, y: *const f32, incy: i64, A: *mut f32, lda: i64) -> cublasStatus_t;
+        }
         cublasSsyr2_v2_64(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -5791,7 +6531,9 @@ pub unsafe fn cublasSsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, B: *const f32, ldb: ::core::ffi::c_int, beta: *const f32, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, B: *const f32, ldb: ::core::ffi::c_int, beta: *const f32, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSsyr2k_v2(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -5806,7 +6548,9 @@ pub unsafe fn cublasSsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, B: *const f32, ldb: i64, beta: *const f32, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, B: *const f32, ldb: i64, beta: *const f32, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        }
         cublasSsyr2k_v2_64(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -5820,7 +6564,9 @@ pub unsafe fn cublasSsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, x: *const f32, incx: ::core::ffi::c_int, A: *mut f32, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f32, x: *const f32, incx: ::core::ffi::c_int, A: *mut f32, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSsyr_v2(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
@@ -5835,7 +6581,9 @@ pub unsafe fn cublasSsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const f32, incx: i64, A: *mut f32, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const f32, incx: i64, A: *mut f32, lda: i64) -> cublasStatus_t;
+        }
         cublasSsyr_v2_64(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
@@ -5849,7 +6597,9 @@ pub unsafe fn cublasSsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, beta: *const f32, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, beta: *const f32, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSsyrk_v2(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
@@ -5864,7 +6614,9 @@ pub unsafe fn cublasSsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, beta: *const f32, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, beta: *const f32, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        }
         cublasSsyrk_v2_64(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
@@ -5878,7 +6630,9 @@ pub unsafe fn cublasSsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, B: *const f32, ldb: ::core::ffi::c_int, beta: *const f32, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, B: *const f32, ldb: ::core::ffi::c_int, beta: *const f32, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSsyrkx(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -5893,7 +6647,9 @@ pub unsafe fn cublasSsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, B: *const f32, ldb: i64, beta: *const f32, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, B: *const f32, ldb: i64, beta: *const f32, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        }
         cublasSsyrkx_64(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -5907,7 +6663,9 @@ pub unsafe fn cublasStbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const f32, lda: ::core::ffi::c_int, x: *mut f32, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const f32, lda: ::core::ffi::c_int, x: *mut f32, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasStbmv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -5922,7 +6680,9 @@ pub unsafe fn cublasStbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const f32, lda: i64, x: *mut f32, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const f32, lda: i64, x: *mut f32, incx: i64) -> cublasStatus_t;
+        }
         cublasStbmv_v2_64(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -5936,7 +6696,9 @@ pub unsafe fn cublasStbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const f32, lda: ::core::ffi::c_int, x: *mut f32, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const f32, lda: ::core::ffi::c_int, x: *mut f32, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasStbsv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -5951,7 +6713,9 @@ pub unsafe fn cublasStbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const f32, lda: i64, x: *mut f32, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const f32, lda: i64, x: *mut f32, incx: i64) -> cublasStatus_t;
+        }
         cublasStbsv_v2_64(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -5965,7 +6729,9 @@ pub unsafe fn cublasStpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const f32, x: *mut f32, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const f32, x: *mut f32, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasStpmv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -5980,7 +6746,9 @@ pub unsafe fn cublasStpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const f32, x: *mut f32, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const f32, x: *mut f32, incx: i64) -> cublasStatus_t;
+        }
         cublasStpmv_v2_64(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -5994,7 +6762,9 @@ pub unsafe fn cublasStpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const f32, x: *mut f32, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const f32, x: *mut f32, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasStpsv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -6009,7 +6779,9 @@ pub unsafe fn cublasStpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const f32, x: *mut f32, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const f32, x: *mut f32, incx: i64) -> cublasStatus_t;
+        }
         cublasStpsv_v2_64(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -6023,7 +6795,9 @@ pub unsafe fn cublasStpttr(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStpttr(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, AP: *const f32, A: *mut f32, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStpttr(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, AP: *const f32, A: *mut f32, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasStpttr(handle, uplo, n, AP, A, lda)
     }
 }
@@ -6037,7 +6811,9 @@ pub unsafe fn cublasStrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, B: *const f32, ldb: ::core::ffi::c_int, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, B: *const f32, ldb: ::core::ffi::c_int, C: *mut f32, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasStrmm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, C, ldc)
     }
 }
@@ -6052,7 +6828,9 @@ pub unsafe fn cublasStrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, B: *const f32, ldb: i64, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, B: *const f32, ldb: i64, C: *mut f32, ldc: i64) -> cublasStatus_t;
+        }
         cublasStrmm_v2_64(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, C, ldc)
     }
 }
@@ -6066,7 +6844,9 @@ pub unsafe fn cublasStrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const f32, lda: ::core::ffi::c_int, x: *mut f32, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const f32, lda: ::core::ffi::c_int, x: *mut f32, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasStrmv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -6081,7 +6861,9 @@ pub unsafe fn cublasStrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const f32, lda: i64, x: *mut f32, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const f32, lda: i64, x: *mut f32, incx: i64) -> cublasStatus_t;
+        }
         cublasStrmv_v2_64(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -6095,7 +6877,9 @@ pub unsafe fn cublasStrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, A: *const *const f32, lda: ::core::ffi::c_int, B: *const *mut f32, ldb: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, A: *const *const f32, lda: ::core::ffi::c_int, B: *const *mut f32, ldb: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasStrsmBatched(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, batchCount)
     }
 }
@@ -6110,7 +6894,9 @@ pub unsafe fn cublasStrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f32, A: *const *const f32, lda: i64, B: *const *mut f32, ldb: i64, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f32, A: *const *const f32, lda: i64, B: *const *mut f32, ldb: i64, batchCount: i64) -> cublasStatus_t;
+        }
         cublasStrsmBatched_64(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, batchCount)
     }
 }
@@ -6124,7 +6910,9 @@ pub unsafe fn cublasStrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, B: *mut f32, ldb: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, B: *mut f32, ldb: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasStrsm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb)
     }
 }
@@ -6139,7 +6927,9 @@ pub unsafe fn cublasStrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, B: *mut f32, ldb: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, B: *mut f32, ldb: i64) -> cublasStatus_t;
+        }
         cublasStrsm_v2_64(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb)
     }
 }
@@ -6153,7 +6943,9 @@ pub unsafe fn cublasStrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const f32, lda: ::core::ffi::c_int, x: *mut f32, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const f32, lda: ::core::ffi::c_int, x: *mut f32, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasStrsv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -6168,7 +6960,9 @@ pub unsafe fn cublasStrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const f32, lda: i64, x: *mut f32, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const f32, lda: i64, x: *mut f32, incx: i64) -> cublasStatus_t;
+        }
         cublasStrsv_v2_64(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -6182,7 +6976,9 @@ pub unsafe fn cublasStrttp(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasStrttp(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, A: *const f32, lda: ::core::ffi::c_int, AP: *mut f32) -> cublasStatus_t;
+        extern "C" {
+            fn cublasStrttp(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, A: *const f32, lda: ::core::ffi::c_int, AP: *mut f32) -> cublasStatus_t;
+        }
         cublasStrttp(handle, uplo, n, A, lda, AP)
     }
 }
@@ -6196,7 +6992,9 @@ pub unsafe fn cublasSwapEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSwapEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSwapEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: ::core::ffi::c_int, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasSwapEx(handle, n, x, xType, incx, y, yType, incy)
     }
 }
@@ -6211,7 +7009,9 @@ pub unsafe fn cublasSwapEx_64(handle: cublasHandle_t, n: i64, x: *mut ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasSwapEx_64(handle: cublasHandle_t, n: i64, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasSwapEx_64(handle: cublasHandle_t, n: i64, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: i64) -> cublasStatus_t;
+        }
         cublasSwapEx_64(handle, n, x, xType, incx, y, yType, incy)
     }
 }
@@ -6225,7 +7025,9 @@ pub unsafe fn cublasUint8gemmBias(handle: cublasHandle_t, transa: cublasOperatio
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasUint8gemmBias(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, transc: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const ::core::ffi::c_uchar, A_bias: ::core::ffi::c_int, lda: ::core::ffi::c_int, B: *const ::core::ffi::c_uchar, B_bias: ::core::ffi::c_int, ldb: ::core::ffi::c_int, C: *mut ::core::ffi::c_uchar, C_bias: ::core::ffi::c_int, ldc: ::core::ffi::c_int, C_mult: ::core::ffi::c_int, C_shift: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasUint8gemmBias(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, transc: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const ::core::ffi::c_uchar, A_bias: ::core::ffi::c_int, lda: ::core::ffi::c_int, B: *const ::core::ffi::c_uchar, B_bias: ::core::ffi::c_int, ldb: ::core::ffi::c_int, C: *mut ::core::ffi::c_uchar, C_bias: ::core::ffi::c_int, ldc: ::core::ffi::c_int, C_mult: ::core::ffi::c_int, C_shift: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasUint8gemmBias(handle, transa, transb, transc, m, n, k, A, A_bias, lda, B, B_bias, ldb, C, C_bias, ldc, C_mult, C_shift)
     }
 }
@@ -6239,7 +7041,9 @@ pub unsafe fn cublasXerbla(srName: *const ::core::ffi::c_char, info: ::core::ffi
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasXerbla(srName: *const ::core::ffi::c_char, info: ::core::ffi::c_int);
+        extern "C" {
+            fn cublasXerbla(srName: *const ::core::ffi::c_char, info: ::core::ffi::c_int);
+        }
         cublasXerbla(srName, info)
     }
 }
@@ -6253,7 +7057,9 @@ pub unsafe fn cublasZaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZaxpy_v2(handle, n, alpha, x, incx, y, incy)
     }
 }
@@ -6268,7 +7074,9 @@ pub unsafe fn cublasZaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasZaxpy_v2_64(handle, n, alpha, x, incx, y, incy)
     }
 }
@@ -6282,7 +7090,9 @@ pub unsafe fn cublasZcopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZcopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZcopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZcopy_v2(handle, n, x, incx, y, incy)
     }
 }
@@ -6297,7 +7107,9 @@ pub unsafe fn cublasZcopy_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoub
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZcopy_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZcopy_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasZcopy_v2_64(handle, n, x, incx, y, incy)
     }
 }
@@ -6311,7 +7123,9 @@ pub unsafe fn cublasZdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZdgmm(handle, mode, m, n, A, lda, x, incx, C, ldc)
     }
 }
@@ -6326,7 +7140,9 @@ pub unsafe fn cublasZdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: i64, n: i64, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: i64, n: i64, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasZdgmm_64(handle, mode, m, n, A, lda, x, incx, C, ldc)
     }
 }
@@ -6340,7 +7156,9 @@ pub unsafe fn cublasZdotc_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZdotc_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *const cuDoubleComplex, incy: ::core::ffi::c_int, result: *mut cuDoubleComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZdotc_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *const cuDoubleComplex, incy: ::core::ffi::c_int, result: *mut cuDoubleComplex) -> cublasStatus_t;
+        }
         cublasZdotc_v2(handle, n, x, incx, y, incy, result)
     }
 }
@@ -6355,7 +7173,9 @@ pub unsafe fn cublasZdotc_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoub
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZdotc_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, result: *mut cuDoubleComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZdotc_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, result: *mut cuDoubleComplex) -> cublasStatus_t;
+        }
         cublasZdotc_v2_64(handle, n, x, incx, y, incy, result)
     }
 }
@@ -6369,7 +7189,9 @@ pub unsafe fn cublasZdotu_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZdotu_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *const cuDoubleComplex, incy: ::core::ffi::c_int, result: *mut cuDoubleComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZdotu_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *const cuDoubleComplex, incy: ::core::ffi::c_int, result: *mut cuDoubleComplex) -> cublasStatus_t;
+        }
         cublasZdotu_v2(handle, n, x, incx, y, incy, result)
     }
 }
@@ -6384,7 +7206,9 @@ pub unsafe fn cublasZdotu_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoub
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZdotu_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, result: *mut cuDoubleComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZdotu_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, result: *mut cuDoubleComplex) -> cublasStatus_t;
+        }
         cublasZdotu_v2_64(handle, n, x, incx, y, incy, result)
     }
 }
@@ -6398,7 +7222,9 @@ pub unsafe fn cublasZdrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZdrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int, c: *const f64, s: *const f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZdrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int, c: *const f64, s: *const f64) -> cublasStatus_t;
+        }
         cublasZdrot_v2(handle, n, x, incx, y, incy, c, s)
     }
 }
@@ -6413,7 +7239,9 @@ pub unsafe fn cublasZdrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuDouble
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZdrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuDoubleComplex, incx: i64, y: *mut cuDoubleComplex, incy: i64, c: *const f64, s: *const f64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZdrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuDoubleComplex, incx: i64, y: *mut cuDoubleComplex, incy: i64, c: *const f64, s: *const f64) -> cublasStatus_t;
+        }
         cublasZdrot_v2_64(handle, n, x, incx, y, incy, c, s)
     }
 }
@@ -6427,7 +7255,9 @@ pub unsafe fn cublasZdscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZdscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const f64, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZdscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const f64, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZdscal_v2(handle, n, alpha, x, incx)
     }
 }
@@ -6442,7 +7272,9 @@ pub unsafe fn cublasZdscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZdscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f64, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZdscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f64, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasZdscal_v2_64(handle, n, alpha, x, incx)
     }
 }
@@ -6456,7 +7288,9 @@ pub unsafe fn cublasZgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, kl: ::core::ffi::c_int, ku: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, kl: ::core::ffi::c_int, ku: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgbmv_v2(handle, trans, m, n, kl, ku, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -6471,7 +7305,9 @@ pub unsafe fn cublasZgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, kl: i64, ku: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, kl: i64, ku: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasZgbmv_v2_64(handle, trans, m, n, kl, ku, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -6485,7 +7321,9 @@ pub unsafe fn cublasZgeam(handle: cublasHandle_t, transa: cublasOperation_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgeam(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, beta: *const cuDoubleComplex, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgeam(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, beta: *const cuDoubleComplex, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgeam(handle, transa, transb, m, n, alpha, A, lda, beta, B, ldb, C, ldc)
     }
 }
@@ -6500,7 +7338,9 @@ pub unsafe fn cublasZgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, beta: *const cuDoubleComplex, B: *const cuDoubleComplex, ldb: i64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, beta: *const cuDoubleComplex, B: *const cuDoubleComplex, ldb: i64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasZgeam_64(handle, transa, transb, m, n, alpha, A, lda, beta, B, ldb, C, ldc)
     }
 }
@@ -6514,7 +7354,9 @@ pub unsafe fn cublasZgelsBatched(handle: cublasHandle_t, trans: cublasOperation_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgelsBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *mut cuDoubleComplex, lda: ::core::ffi::c_int, Carray: *const *mut cuDoubleComplex, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, devInfoArray: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgelsBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *mut cuDoubleComplex, lda: ::core::ffi::c_int, Carray: *const *mut cuDoubleComplex, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, devInfoArray: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgelsBatched(handle, trans, m, n, nrhs, Aarray, lda, Carray, ldc, info, devInfoArray, batchSize)
     }
 }
@@ -6528,7 +7370,9 @@ pub unsafe fn cublasZgemm3m(handle: cublasHandle_t, transa: cublasOperation_t, t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgemm3m(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgemm3m(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgemm3m(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -6543,7 +7387,9 @@ pub unsafe fn cublasZgemm3m_64(handle: cublasHandle_t, transa: cublasOperation_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgemm3m_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgemm3m_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasZgemm3m_64(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -6557,7 +7403,9 @@ pub unsafe fn cublasZgemmBatched(handle: cublasHandle_t, transa: cublasOperation
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgemmBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, Aarray: *const *const cuDoubleComplex, lda: ::core::ffi::c_int, Barray: *const *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const cuDoubleComplex, Carray: *const *mut cuDoubleComplex, ldc: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgemmBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, Aarray: *const *const cuDoubleComplex, lda: ::core::ffi::c_int, Barray: *const *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const cuDoubleComplex, Carray: *const *mut cuDoubleComplex, ldc: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgemmBatched(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
@@ -6572,7 +7420,9 @@ pub unsafe fn cublasZgemmBatched_64(handle: cublasHandle_t, transa: cublasOperat
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgemmBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuDoubleComplex, Aarray: *const *const cuDoubleComplex, lda: i64, Barray: *const *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, Carray: *const *mut cuDoubleComplex, ldc: i64, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgemmBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuDoubleComplex, Aarray: *const *const cuDoubleComplex, lda: i64, Barray: *const *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, Carray: *const *mut cuDoubleComplex, ldc: i64, batchCount: i64) -> cublasStatus_t;
+        }
         cublasZgemmBatched_64(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
@@ -6586,7 +7436,9 @@ pub unsafe fn cublasZgemmStridedBatched(handle: cublasHandle_t, transa: cublasOp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgemmStridedBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, strideB: ::core::ffi::c_longlong, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int, strideC: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgemmStridedBatched(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, strideB: ::core::ffi::c_longlong, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int, strideC: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgemmStridedBatched(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
@@ -6601,7 +7453,9 @@ pub unsafe fn cublasZgemmStridedBatched_64(handle: cublasHandle_t, transa: cubla
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgemmStridedBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, strideA: ::core::ffi::c_longlong, B: *const cuDoubleComplex, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgemmStridedBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, strideA: ::core::ffi::c_longlong, B: *const cuDoubleComplex, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        }
         cublasZgemmStridedBatched_64(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
@@ -6615,7 +7469,9 @@ pub unsafe fn cublasZgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgemm_v2(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -6630,7 +7486,9 @@ pub unsafe fn cublasZgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasZgemm_v2_64(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -6645,7 +7503,9 @@ pub unsafe fn cublasZgemvBatched(handle: cublasHandle_t, trans: cublasOperation_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgemvBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, Aarray: *const *const cuDoubleComplex, lda: ::core::ffi::c_int, xarray: *const *const cuDoubleComplex, incx: ::core::ffi::c_int, beta: *const cuDoubleComplex, yarray: *const *mut cuDoubleComplex, incy: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgemvBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, Aarray: *const *const cuDoubleComplex, lda: ::core::ffi::c_int, xarray: *const *const cuDoubleComplex, incx: ::core::ffi::c_int, beta: *const cuDoubleComplex, yarray: *const *mut cuDoubleComplex, incy: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgemvBatched(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
@@ -6660,7 +7520,9 @@ pub unsafe fn cublasZgemvBatched_64(handle: cublasHandle_t, trans: cublasOperati
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgemvBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuDoubleComplex, Aarray: *const *const cuDoubleComplex, lda: i64, xarray: *const *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, yarray: *const *mut cuDoubleComplex, incy: i64, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgemvBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuDoubleComplex, Aarray: *const *const cuDoubleComplex, lda: i64, xarray: *const *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, yarray: *const *mut cuDoubleComplex, incy: i64, batchCount: i64) -> cublasStatus_t;
+        }
         cublasZgemvBatched_64(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
@@ -6675,7 +7537,9 @@ pub unsafe fn cublasZgemvStridedBatched(handle: cublasHandle_t, trans: cublasOpe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgemvStridedBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, stridex: ::core::ffi::c_longlong, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int, stridey: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgemvStridedBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, stridex: ::core::ffi::c_longlong, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int, stridey: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgemvStridedBatched(handle, trans, m, n, alpha, A, lda, strideA, x, incx, stridex, beta, y, incy, stridey, batchCount)
     }
 }
@@ -6690,7 +7554,9 @@ pub unsafe fn cublasZgemvStridedBatched_64(handle: cublasHandle_t, trans: cublas
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgemvStridedBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, strideA: ::core::ffi::c_longlong, x: *const cuDoubleComplex, incx: i64, stridex: ::core::ffi::c_longlong, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64, stridey: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgemvStridedBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, strideA: ::core::ffi::c_longlong, x: *const cuDoubleComplex, incx: i64, stridex: ::core::ffi::c_longlong, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64, stridey: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t;
+        }
         cublasZgemvStridedBatched_64(handle, trans, m, n, alpha, A, lda, strideA, x, incx, stridex, beta, y, incy, stridey, batchCount)
     }
 }
@@ -6704,7 +7570,9 @@ pub unsafe fn cublasZgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgemv_v2(handle, trans, m, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -6719,7 +7587,9 @@ pub unsafe fn cublasZgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasZgemv_v2_64(handle, trans, m, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -6733,7 +7603,9 @@ pub unsafe fn cublasZgeqrfBatched(handle: cublasHandle_t, m: ::core::ffi::c_int,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgeqrfBatched(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, Aarray: *const *mut cuDoubleComplex, lda: ::core::ffi::c_int, TauArray: *const *mut cuDoubleComplex, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgeqrfBatched(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, Aarray: *const *mut cuDoubleComplex, lda: ::core::ffi::c_int, TauArray: *const *mut cuDoubleComplex, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgeqrfBatched(handle, m, n, Aarray, lda, TauArray, info, batchSize)
     }
 }
@@ -6747,7 +7619,9 @@ pub unsafe fn cublasZgerc_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgerc_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *const cuDoubleComplex, incy: ::core::ffi::c_int, A: *mut cuDoubleComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgerc_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *const cuDoubleComplex, incy: ::core::ffi::c_int, A: *mut cuDoubleComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgerc_v2(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -6762,7 +7636,9 @@ pub unsafe fn cublasZgerc_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgerc_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgerc_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t;
+        }
         cublasZgerc_v2_64(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -6776,7 +7652,9 @@ pub unsafe fn cublasZgeru_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgeru_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *const cuDoubleComplex, incy: ::core::ffi::c_int, A: *mut cuDoubleComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgeru_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *const cuDoubleComplex, incy: ::core::ffi::c_int, A: *mut cuDoubleComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgeru_v2(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -6791,7 +7669,9 @@ pub unsafe fn cublasZgeru_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgeru_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgeru_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t;
+        }
         cublasZgeru_v2_64(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -6805,7 +7685,9 @@ pub unsafe fn cublasZgetrfBatched(handle: cublasHandle_t, n: ::core::ffi::c_int,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgetrfBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *mut cuDoubleComplex, lda: ::core::ffi::c_int, P: *mut ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgetrfBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *mut cuDoubleComplex, lda: ::core::ffi::c_int, P: *mut ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgetrfBatched(handle, n, A, lda, P, info, batchSize)
     }
 }
@@ -6819,7 +7701,9 @@ pub unsafe fn cublasZgetriBatched(handle: cublasHandle_t, n: ::core::ffi::c_int,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgetriBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const cuDoubleComplex, lda: ::core::ffi::c_int, P: *const ::core::ffi::c_int, C: *const *mut cuDoubleComplex, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgetriBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const cuDoubleComplex, lda: ::core::ffi::c_int, P: *const ::core::ffi::c_int, C: *const *mut cuDoubleComplex, ldc: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgetriBatched(handle, n, A, lda, P, C, ldc, info, batchSize)
     }
 }
@@ -6833,7 +7717,9 @@ pub unsafe fn cublasZgetrsBatched(handle: cublasHandle_t, trans: cublasOperation
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZgetrsBatched(handle: cublasHandle_t, trans: cublasOperation_t, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *const cuDoubleComplex, lda: ::core::ffi::c_int, devIpiv: *const ::core::ffi::c_int, Barray: *const *mut cuDoubleComplex, ldb: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZgetrsBatched(handle: cublasHandle_t, trans: cublasOperation_t, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, Aarray: *const *const cuDoubleComplex, lda: ::core::ffi::c_int, devIpiv: *const ::core::ffi::c_int, Barray: *const *mut cuDoubleComplex, ldb: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZgetrsBatched(handle, trans, n, nrhs, Aarray, lda, devIpiv, Barray, ldb, info, batchSize)
     }
 }
@@ -6847,7 +7733,9 @@ pub unsafe fn cublasZhbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZhbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZhbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZhbmv_v2(handle, uplo, n, k, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -6862,7 +7750,9 @@ pub unsafe fn cublasZhbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZhbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZhbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasZhbmv_v2_64(handle, uplo, n, k, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -6876,7 +7766,9 @@ pub unsafe fn cublasZhemm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZhemm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZhemm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZhemm_v2(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -6891,7 +7783,9 @@ pub unsafe fn cublasZhemm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZhemm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZhemm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasZhemm_v2_64(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -6905,7 +7799,9 @@ pub unsafe fn cublasZhemv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZhemv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZhemv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZhemv_v2(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -6920,7 +7816,9 @@ pub unsafe fn cublasZhemv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZhemv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZhemv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasZhemv_v2_64(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -6934,7 +7832,9 @@ pub unsafe fn cublasZher2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZher2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *const cuDoubleComplex, incy: ::core::ffi::c_int, A: *mut cuDoubleComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZher2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *const cuDoubleComplex, incy: ::core::ffi::c_int, A: *mut cuDoubleComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZher2_v2(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -6949,7 +7849,9 @@ pub unsafe fn cublasZher2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZher2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZher2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t;
+        }
         cublasZher2_v2_64(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -6963,7 +7865,9 @@ pub unsafe fn cublasZher2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZher2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const f64, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZher2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const f64, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZher2k_v2(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -6978,7 +7882,9 @@ pub unsafe fn cublasZher2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZher2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const f64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZher2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const f64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasZher2k_v2_64(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -6992,7 +7898,9 @@ pub unsafe fn cublasZher_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZher_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, A: *mut cuDoubleComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZher_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, A: *mut cuDoubleComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZher_v2(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
@@ -7007,7 +7915,9 @@ pub unsafe fn cublasZher_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZher_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const cuDoubleComplex, incx: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZher_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const cuDoubleComplex, incx: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t;
+        }
         cublasZher_v2_64(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
@@ -7021,7 +7931,9 @@ pub unsafe fn cublasZherk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZherk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, beta: *const f64, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZherk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const f64, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, beta: *const f64, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZherk_v2(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
@@ -7036,7 +7948,9 @@ pub unsafe fn cublasZherk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZherk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f64, A: *const cuDoubleComplex, lda: i64, beta: *const f64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZherk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f64, A: *const cuDoubleComplex, lda: i64, beta: *const f64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasZherk_v2_64(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
@@ -7050,7 +7964,9 @@ pub unsafe fn cublasZherkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZherkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const f64, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZherkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const f64, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZherkx(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -7065,7 +7981,9 @@ pub unsafe fn cublasZherkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZherkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const f64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZherkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const f64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasZherkx_64(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -7079,7 +7997,9 @@ pub unsafe fn cublasZhpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZhpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, AP: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZhpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, AP: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZhpmv_v2(handle, uplo, n, alpha, AP, x, incx, beta, y, incy)
     }
 }
@@ -7094,7 +8014,9 @@ pub unsafe fn cublasZhpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZhpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, AP: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZhpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, AP: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasZhpmv_v2_64(handle, uplo, n, alpha, AP, x, incx, beta, y, incy)
     }
 }
@@ -7108,7 +8030,9 @@ pub unsafe fn cublasZhpr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZhpr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *const cuDoubleComplex, incy: ::core::ffi::c_int, AP: *mut cuDoubleComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZhpr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *const cuDoubleComplex, incy: ::core::ffi::c_int, AP: *mut cuDoubleComplex) -> cublasStatus_t;
+        }
         cublasZhpr2_v2(handle, uplo, n, alpha, x, incx, y, incy, AP)
     }
 }
@@ -7123,7 +8047,9 @@ pub unsafe fn cublasZhpr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZhpr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, AP: *mut cuDoubleComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZhpr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, AP: *mut cuDoubleComplex) -> cublasStatus_t;
+        }
         cublasZhpr2_v2_64(handle, uplo, n, alpha, x, incx, y, incy, AP)
     }
 }
@@ -7137,7 +8063,9 @@ pub unsafe fn cublasZhpr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZhpr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, AP: *mut cuDoubleComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZhpr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const f64, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, AP: *mut cuDoubleComplex) -> cublasStatus_t;
+        }
         cublasZhpr_v2(handle, uplo, n, alpha, x, incx, AP)
     }
 }
@@ -7152,7 +8080,9 @@ pub unsafe fn cublasZhpr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZhpr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const cuDoubleComplex, incx: i64, AP: *mut cuDoubleComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZhpr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const cuDoubleComplex, incx: i64, AP: *mut cuDoubleComplex) -> cublasStatus_t;
+        }
         cublasZhpr_v2_64(handle, uplo, n, alpha, x, incx, AP)
     }
 }
@@ -7166,7 +8096,9 @@ pub unsafe fn cublasZmatinvBatched(handle: cublasHandle_t, n: ::core::ffi::c_int
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZmatinvBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const cuDoubleComplex, lda: ::core::ffi::c_int, Ainv: *const *mut cuDoubleComplex, lda_inv: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZmatinvBatched(handle: cublasHandle_t, n: ::core::ffi::c_int, A: *const *const cuDoubleComplex, lda: ::core::ffi::c_int, Ainv: *const *mut cuDoubleComplex, lda_inv: ::core::ffi::c_int, info: *mut ::core::ffi::c_int, batchSize: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZmatinvBatched(handle, n, A, lda, Ainv, lda_inv, info, batchSize)
     }
 }
@@ -7180,7 +8112,9 @@ pub unsafe fn cublasZrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int, c: *const f64, s: *const cuDoubleComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int, c: *const f64, s: *const cuDoubleComplex) -> cublasStatus_t;
+        }
         cublasZrot_v2(handle, n, x, incx, y, incy, c, s)
     }
 }
@@ -7195,7 +8129,9 @@ pub unsafe fn cublasZrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuDoubleC
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuDoubleComplex, incx: i64, y: *mut cuDoubleComplex, incy: i64, c: *const f64, s: *const cuDoubleComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuDoubleComplex, incx: i64, y: *mut cuDoubleComplex, incy: i64, c: *const f64, s: *const cuDoubleComplex) -> cublasStatus_t;
+        }
         cublasZrot_v2_64(handle, n, x, incx, y, incy, c, s)
     }
 }
@@ -7209,7 +8145,9 @@ pub unsafe fn cublasZrotg_v2(handle: cublasHandle_t, a: *mut cuDoubleComplex, b:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZrotg_v2(handle: cublasHandle_t, a: *mut cuDoubleComplex, b: *mut cuDoubleComplex, c: *mut f64, s: *mut cuDoubleComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZrotg_v2(handle: cublasHandle_t, a: *mut cuDoubleComplex, b: *mut cuDoubleComplex, c: *mut f64, s: *mut cuDoubleComplex) -> cublasStatus_t;
+        }
         cublasZrotg_v2(handle, a, b, c, s)
     }
 }
@@ -7223,7 +8161,9 @@ pub unsafe fn cublasZscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZscal_v2(handle, n, alpha, x, incx)
     }
 }
@@ -7238,7 +8178,9 @@ pub unsafe fn cublasZscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cuDoubleComplex, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cuDoubleComplex, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasZscal_v2_64(handle, n, alpha, x, incx)
     }
 }
@@ -7252,7 +8194,9 @@ pub unsafe fn cublasZswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZswap_v2(handle, n, x, incx, y, incy)
     }
 }
@@ -7267,7 +8211,9 @@ pub unsafe fn cublasZswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuDouble
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuDoubleComplex, incx: i64, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuDoubleComplex, incx: i64, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasZswap_v2_64(handle, n, x, incx, y, incy)
     }
 }
@@ -7281,7 +8227,9 @@ pub unsafe fn cublasZsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZsymm_v2(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -7296,7 +8244,9 @@ pub unsafe fn cublasZsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasZsymm_v2_64(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -7310,7 +8260,9 @@ pub unsafe fn cublasZsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZsymv_v2(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -7325,7 +8277,9 @@ pub unsafe fn cublasZsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t;
+        }
         cublasZsymv_v2_64(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
@@ -7339,7 +8293,9 @@ pub unsafe fn cublasZsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *const cuDoubleComplex, incy: ::core::ffi::c_int, A: *mut cuDoubleComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, y: *const cuDoubleComplex, incy: ::core::ffi::c_int, A: *mut cuDoubleComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZsyr2_v2(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -7354,7 +8310,9 @@ pub unsafe fn cublasZsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t;
+        }
         cublasZsyr2_v2_64(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
@@ -7368,7 +8326,9 @@ pub unsafe fn cublasZsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZsyr2k_v2(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -7383,7 +8343,9 @@ pub unsafe fn cublasZsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasZsyr2k_v2_64(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -7397,7 +8359,9 @@ pub unsafe fn cublasZsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, A: *mut cuDoubleComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, A: *mut cuDoubleComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZsyr_v2(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
@@ -7412,7 +8376,9 @@ pub unsafe fn cublasZsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t;
+        }
         cublasZsyr_v2_64(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
@@ -7426,7 +8392,9 @@ pub unsafe fn cublasZsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZsyrk_v2(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
@@ -7441,7 +8409,9 @@ pub unsafe fn cublasZsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasZsyrk_v2_64(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
@@ -7455,7 +8425,9 @@ pub unsafe fn cublasZsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZsyrkx(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -7470,7 +8442,9 @@ pub unsafe fn cublasZsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasZsyrkx_64(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
@@ -7484,7 +8458,9 @@ pub unsafe fn cublasZtbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZtbmv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -7499,7 +8475,9 @@ pub unsafe fn cublasZtbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const cuDoubleComplex, lda: i64, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const cuDoubleComplex, lda: i64, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasZtbmv_v2_64(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -7513,7 +8491,9 @@ pub unsafe fn cublasZtbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, k: ::core::ffi::c_int, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZtbsv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -7528,7 +8508,9 @@ pub unsafe fn cublasZtbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const cuDoubleComplex, lda: i64, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const cuDoubleComplex, lda: i64, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasZtbsv_v2_64(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
@@ -7542,7 +8524,9 @@ pub unsafe fn cublasZtpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const cuDoubleComplex, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const cuDoubleComplex, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZtpmv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -7557,7 +8541,9 @@ pub unsafe fn cublasZtpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const cuDoubleComplex, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const cuDoubleComplex, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasZtpmv_v2_64(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -7571,7 +8557,9 @@ pub unsafe fn cublasZtpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const cuDoubleComplex, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, AP: *const cuDoubleComplex, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZtpsv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -7586,7 +8574,9 @@ pub unsafe fn cublasZtpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const cuDoubleComplex, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const cuDoubleComplex, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasZtpsv_v2_64(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
@@ -7600,7 +8590,9 @@ pub unsafe fn cublasZtpttr(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtpttr(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, AP: *const cuDoubleComplex, A: *mut cuDoubleComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtpttr(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, AP: *const cuDoubleComplex, A: *mut cuDoubleComplex, lda: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZtpttr(handle, uplo, n, AP, A, lda)
     }
 }
@@ -7614,7 +8606,9 @@ pub unsafe fn cublasZtrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const cuDoubleComplex, ldb: ::core::ffi::c_int, C: *mut cuDoubleComplex, ldc: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZtrmm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, C, ldc)
     }
 }
@@ -7629,7 +8623,9 @@ pub unsafe fn cublasZtrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t;
+        }
         cublasZtrmm_v2_64(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, C, ldc)
     }
 }
@@ -7643,7 +8639,9 @@ pub unsafe fn cublasZtrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZtrmv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -7658,7 +8656,9 @@ pub unsafe fn cublasZtrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const cuDoubleComplex, lda: i64, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const cuDoubleComplex, lda: i64, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasZtrmv_v2_64(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -7672,7 +8672,9 @@ pub unsafe fn cublasZtrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const *mut cuDoubleComplex, ldb: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *const *mut cuDoubleComplex, ldb: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZtrsmBatched(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, batchCount)
     }
 }
@@ -7687,7 +8689,9 @@ pub unsafe fn cublasZtrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const *const cuDoubleComplex, lda: i64, B: *const *mut cuDoubleComplex, ldb: i64, batchCount: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const *const cuDoubleComplex, lda: i64, B: *const *mut cuDoubleComplex, ldb: i64, batchCount: i64) -> cublasStatus_t;
+        }
         cublasZtrsmBatched_64(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, batchCount)
     }
 }
@@ -7701,7 +8705,9 @@ pub unsafe fn cublasZtrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *mut cuDoubleComplex, ldb: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, B: *mut cuDoubleComplex, ldb: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZtrsm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb)
     }
 }
@@ -7716,7 +8722,9 @@ pub unsafe fn cublasZtrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *mut cuDoubleComplex, ldb: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *mut cuDoubleComplex, ldb: i64) -> cublasStatus_t;
+        }
         cublasZtrsm_v2_64(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb)
     }
 }
@@ -7730,7 +8738,9 @@ pub unsafe fn cublasZtrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: ::core::ffi::c_int, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, x: *mut cuDoubleComplex, incx: ::core::ffi::c_int) -> cublasStatus_t;
+        }
         cublasZtrsv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -7745,7 +8755,9 @@ pub unsafe fn cublasZtrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const cuDoubleComplex, lda: i64, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const cuDoubleComplex, lda: i64, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t;
+        }
         cublasZtrsv_v2_64(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
@@ -7759,7 +8771,9 @@ pub unsafe fn cublasZtrttp(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cublasZtrttp(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, AP: *mut cuDoubleComplex) -> cublasStatus_t;
+        extern "C" {
+            fn cublasZtrttp(handle: cublasHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, AP: *mut cuDoubleComplex) -> cublasStatus_t;
+        }
         cublasZtrttp(handle, uplo, n, A, lda, AP)
     }
 }

@@ -293,7 +293,9 @@ pub unsafe fn cutensorBlockSparseContract(handle: cutensorHandle_t, plan: cutens
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorBlockSparseContract(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const *const ::core::ffi::c_void, B: *const *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, C: *const *const ::core::ffi::c_void, D: *const *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorBlockSparseContract(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const *const ::core::ffi::c_void, B: *const *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, C: *const *const ::core::ffi::c_void, D: *const *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t;
+        }
         cutensorBlockSparseContract(handle, plan, alpha, A, B, beta, C, D, workspace, workspaceSize, stream)
     }
 }
@@ -307,7 +309,9 @@ pub unsafe fn cutensorContract(handle: cutensorHandle_t, plan: cutensorPlan_t, a
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorContract(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, B: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorContract(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, B: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t;
+        }
         cutensorContract(handle, plan, alpha, A, B, beta, C, D, workspace, workspaceSize, stream)
     }
 }
@@ -321,7 +325,9 @@ pub unsafe fn cutensorContractTrinary(handle: cutensorHandle_t, plan: cutensorPl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorContractTrinary(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, B: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, D: *const ::core::ffi::c_void, E: *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorContractTrinary(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, B: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, D: *const ::core::ffi::c_void, E: *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t;
+        }
         cutensorContractTrinary(handle, plan, alpha, A, B, C, beta, D, E, workspace, workspaceSize, stream)
     }
 }
@@ -335,7 +341,9 @@ pub unsafe fn cutensorCreate(handle: *mut cutensorHandle_t) -> cutensorStatus_t 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorCreate(handle: *mut cutensorHandle_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorCreate(handle: *mut cutensorHandle_t) -> cutensorStatus_t;
+        }
         cutensorCreate(handle)
     }
 }
@@ -349,7 +357,9 @@ pub unsafe fn cutensorCreateBlockSparseContraction(handle: cutensorHandle_t, des
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorCreateBlockSparseContraction(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorBlockSparseTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorBlockSparseTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorBlockSparseTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorBlockSparseTensorDescriptor_t, modeD: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorCreateBlockSparseContraction(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorBlockSparseTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorBlockSparseTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorBlockSparseTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorBlockSparseTensorDescriptor_t, modeD: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        }
         cutensorCreateBlockSparseContraction(handle, desc, descA, modeA, opA, descB, modeB, opB, descC, modeC, opC, descD, modeD, descCompute)
     }
 }
@@ -363,7 +373,9 @@ pub unsafe fn cutensorCreateBlockSparseTensorDescriptor(handle: cutensorHandle_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorCreateBlockSparseTensorDescriptor(handle: cutensorHandle_t, desc: *mut cutensorBlockSparseTensorDescriptor_t, numModes: u32, numNonZeroBlocks: u64, numSectionsPerMode: *const u32, extent: *const i64, nonZeroCoordinates: *const i32, stride: *const i64, dataType: cudaDataType_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorCreateBlockSparseTensorDescriptor(handle: cutensorHandle_t, desc: *mut cutensorBlockSparseTensorDescriptor_t, numModes: u32, numNonZeroBlocks: u64, numSectionsPerMode: *const u32, extent: *const i64, nonZeroCoordinates: *const i32, stride: *const i64, dataType: cudaDataType_t) -> cutensorStatus_t;
+        }
         cutensorCreateBlockSparseTensorDescriptor(handle, desc, numModes, numNonZeroBlocks, numSectionsPerMode, extent, nonZeroCoordinates, stride, dataType)
     }
 }
@@ -377,7 +389,9 @@ pub unsafe fn cutensorCreateContraction(handle: cutensorHandle_t, desc: *mut cut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorCreateContraction(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorCreateContraction(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        }
         cutensorCreateContraction(handle, desc, descA, modeA, opA, descB, modeB, opB, descC, modeC, opC, descD, modeD, descCompute)
     }
 }
@@ -391,7 +405,9 @@ pub unsafe fn cutensorCreateContractionTrinary(handle: cutensorHandle_t, desc: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorCreateContractionTrinary(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opD: cutensorOperator_t, descE: cutensorTensorDescriptor_t, modeE: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorCreateContractionTrinary(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opD: cutensorOperator_t, descE: cutensorTensorDescriptor_t, modeE: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        }
         cutensorCreateContractionTrinary(handle, desc, descA, modeA, opA, descB, modeB, opB, descC, modeC, opC, descD, modeD, opD, descE, modeE, descCompute)
     }
 }
@@ -405,7 +421,9 @@ pub unsafe fn cutensorCreateElementwiseBinary(handle: cutensorHandle_t, desc: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorCreateElementwiseBinary(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opAC: cutensorOperator_t, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorCreateElementwiseBinary(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opAC: cutensorOperator_t, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        }
         cutensorCreateElementwiseBinary(handle, desc, descA, modeA, opA, descC, modeC, opC, descD, modeD, opAC, descCompute)
     }
 }
@@ -419,7 +437,9 @@ pub unsafe fn cutensorCreateElementwiseTrinary(handle: cutensorHandle_t, desc: *
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorCreateElementwiseTrinary(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opAB: cutensorOperator_t, opABC: cutensorOperator_t, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorCreateElementwiseTrinary(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, opB: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opAB: cutensorOperator_t, opABC: cutensorOperator_t, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        }
         cutensorCreateElementwiseTrinary(handle, desc, descA, modeA, opA, descB, modeB, opB, descC, modeC, opC, descD, modeD, opAB, opABC, descCompute)
     }
 }
@@ -433,7 +453,9 @@ pub unsafe fn cutensorCreatePermutation(handle: cutensorHandle_t, desc: *mut cut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorCreatePermutation(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorCreatePermutation(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descB: cutensorTensorDescriptor_t, modeB: *const i32, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        }
         cutensorCreatePermutation(handle, desc, descA, modeA, opA, descB, modeB, descCompute)
     }
 }
@@ -447,7 +469,9 @@ pub unsafe fn cutensorCreatePlan(handle: cutensorHandle_t, plan: *mut cutensorPl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorCreatePlan(handle: cutensorHandle_t, plan: *mut cutensorPlan_t, desc: cutensorOperationDescriptor_t, pref: cutensorPlanPreference_t, workspaceSizeLimit: u64) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorCreatePlan(handle: cutensorHandle_t, plan: *mut cutensorPlan_t, desc: cutensorOperationDescriptor_t, pref: cutensorPlanPreference_t, workspaceSizeLimit: u64) -> cutensorStatus_t;
+        }
         cutensorCreatePlan(handle, plan, desc, pref, workspaceSizeLimit)
     }
 }
@@ -461,7 +485,9 @@ pub unsafe fn cutensorCreatePlanPreference(handle: cutensorHandle_t, pref: *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorCreatePlanPreference(handle: cutensorHandle_t, pref: *mut cutensorPlanPreference_t, algo: cutensorAlgo_t, jitMode: cutensorJitMode_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorCreatePlanPreference(handle: cutensorHandle_t, pref: *mut cutensorPlanPreference_t, algo: cutensorAlgo_t, jitMode: cutensorJitMode_t) -> cutensorStatus_t;
+        }
         cutensorCreatePlanPreference(handle, pref, algo, jitMode)
     }
 }
@@ -475,7 +501,9 @@ pub unsafe fn cutensorCreateReduction(handle: cutensorHandle_t, desc: *mut cuten
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorCreateReduction(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opReduce: cutensorOperator_t, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorCreateReduction(handle: cutensorHandle_t, desc: *mut cutensorOperationDescriptor_t, descA: cutensorTensorDescriptor_t, modeA: *const i32, opA: cutensorOperator_t, descC: cutensorTensorDescriptor_t, modeC: *const i32, opC: cutensorOperator_t, descD: cutensorTensorDescriptor_t, modeD: *const i32, opReduce: cutensorOperator_t, descCompute: cutensorComputeDescriptor_t) -> cutensorStatus_t;
+        }
         cutensorCreateReduction(handle, desc, descA, modeA, opA, descC, modeC, opC, descD, modeD, opReduce, descCompute)
     }
 }
@@ -489,7 +517,9 @@ pub unsafe fn cutensorCreateTensorDescriptor(handle: cutensorHandle_t, desc: *mu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorCreateTensorDescriptor(handle: cutensorHandle_t, desc: *mut cutensorTensorDescriptor_t, numModes: u32, extent: *const i64, stride: *const i64, dataType: cudaDataType_t, alignmentRequirement: u32) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorCreateTensorDescriptor(handle: cutensorHandle_t, desc: *mut cutensorTensorDescriptor_t, numModes: u32, extent: *const i64, stride: *const i64, dataType: cudaDataType_t, alignmentRequirement: u32) -> cutensorStatus_t;
+        }
         cutensorCreateTensorDescriptor(handle, desc, numModes, extent, stride, dataType, alignmentRequirement)
     }
 }
@@ -503,7 +533,9 @@ pub unsafe fn cutensorDestroy(handle: cutensorHandle_t) -> cutensorStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorDestroy(handle: cutensorHandle_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorDestroy(handle: cutensorHandle_t) -> cutensorStatus_t;
+        }
         cutensorDestroy(handle)
     }
 }
@@ -517,7 +549,9 @@ pub unsafe fn cutensorDestroyBlockSparseTensorDescriptor(desc: cutensorBlockSpar
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorDestroyBlockSparseTensorDescriptor(desc: cutensorBlockSparseTensorDescriptor_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorDestroyBlockSparseTensorDescriptor(desc: cutensorBlockSparseTensorDescriptor_t) -> cutensorStatus_t;
+        }
         cutensorDestroyBlockSparseTensorDescriptor(desc)
     }
 }
@@ -531,7 +565,9 @@ pub unsafe fn cutensorDestroyOperationDescriptor(desc: cutensorOperationDescript
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorDestroyOperationDescriptor(desc: cutensorOperationDescriptor_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorDestroyOperationDescriptor(desc: cutensorOperationDescriptor_t) -> cutensorStatus_t;
+        }
         cutensorDestroyOperationDescriptor(desc)
     }
 }
@@ -545,7 +581,9 @@ pub unsafe fn cutensorDestroyPlan(plan: cutensorPlan_t) -> cutensorStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorDestroyPlan(plan: cutensorPlan_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorDestroyPlan(plan: cutensorPlan_t) -> cutensorStatus_t;
+        }
         cutensorDestroyPlan(plan)
     }
 }
@@ -559,7 +597,9 @@ pub unsafe fn cutensorDestroyPlanPreference(pref: cutensorPlanPreference_t) -> c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorDestroyPlanPreference(pref: cutensorPlanPreference_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorDestroyPlanPreference(pref: cutensorPlanPreference_t) -> cutensorStatus_t;
+        }
         cutensorDestroyPlanPreference(pref)
     }
 }
@@ -573,7 +613,9 @@ pub unsafe fn cutensorDestroyTensorDescriptor(desc: cutensorTensorDescriptor_t) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorDestroyTensorDescriptor(desc: cutensorTensorDescriptor_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorDestroyTensorDescriptor(desc: cutensorTensorDescriptor_t) -> cutensorStatus_t;
+        }
         cutensorDestroyTensorDescriptor(desc)
     }
 }
@@ -587,7 +629,9 @@ pub unsafe fn cutensorElementwiseBinaryExecute(handle: cutensorHandle_t, plan: c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorElementwiseBinaryExecute(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, gamma: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, stream: cudaStream_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorElementwiseBinaryExecute(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, gamma: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, stream: cudaStream_t) -> cutensorStatus_t;
+        }
         cutensorElementwiseBinaryExecute(handle, plan, alpha, A, gamma, C, D, stream)
     }
 }
@@ -601,7 +645,9 @@ pub unsafe fn cutensorElementwiseTrinaryExecute(handle: cutensorHandle_t, plan: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorElementwiseTrinaryExecute(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, B: *const ::core::ffi::c_void, gamma: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, stream: cudaStream_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorElementwiseTrinaryExecute(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, B: *const ::core::ffi::c_void, gamma: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, stream: cudaStream_t) -> cutensorStatus_t;
+        }
         cutensorElementwiseTrinaryExecute(handle, plan, alpha, A, beta, B, gamma, C, D, stream)
     }
 }
@@ -615,7 +661,9 @@ pub unsafe fn cutensorEstimateWorkspaceSize(handle: cutensorHandle_t, desc: cute
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorEstimateWorkspaceSize(handle: cutensorHandle_t, desc: cutensorOperationDescriptor_t, planPref: cutensorPlanPreference_t, workspacePref: cutensorWorksizePreference_t, workspaceSizeEstimate: *mut u64) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorEstimateWorkspaceSize(handle: cutensorHandle_t, desc: cutensorOperationDescriptor_t, planPref: cutensorPlanPreference_t, workspacePref: cutensorWorksizePreference_t, workspaceSizeEstimate: *mut u64) -> cutensorStatus_t;
+        }
         cutensorEstimateWorkspaceSize(handle, desc, planPref, workspacePref, workspaceSizeEstimate)
     }
 }
@@ -629,7 +677,9 @@ pub unsafe fn cutensorGetCudartVersion() -> usize {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorGetCudartVersion() -> usize;
+        extern "C" {
+            fn cutensorGetCudartVersion() -> usize;
+        }
         cutensorGetCudartVersion()
     }
 }
@@ -643,7 +693,9 @@ pub unsafe fn cutensorGetErrorString(error: cutensorStatus_t) -> *const ::core::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorGetErrorString(error: cutensorStatus_t) -> *const ::core::ffi::c_char;
+        extern "C" {
+            fn cutensorGetErrorString(error: cutensorStatus_t) -> *const ::core::ffi::c_char;
+        }
         cutensorGetErrorString(error)
     }
 }
@@ -657,7 +709,9 @@ pub unsafe fn cutensorGetVersion() -> usize {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorGetVersion() -> usize;
+        extern "C" {
+            fn cutensorGetVersion() -> usize;
+        }
         cutensorGetVersion()
     }
 }
@@ -671,7 +725,9 @@ pub unsafe fn cutensorHandleReadPlanCacheFromFile(handle: cutensorHandle_t, file
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorHandleReadPlanCacheFromFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char, numCachelinesRead: *mut u32) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorHandleReadPlanCacheFromFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char, numCachelinesRead: *mut u32) -> cutensorStatus_t;
+        }
         cutensorHandleReadPlanCacheFromFile(handle, filename, numCachelinesRead)
     }
 }
@@ -685,7 +741,9 @@ pub unsafe fn cutensorHandleResizePlanCache(handle: cutensorHandle_t, numEntries
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorHandleResizePlanCache(handle: cutensorHandle_t, numEntries: u32) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorHandleResizePlanCache(handle: cutensorHandle_t, numEntries: u32) -> cutensorStatus_t;
+        }
         cutensorHandleResizePlanCache(handle, numEntries)
     }
 }
@@ -699,7 +757,9 @@ pub unsafe fn cutensorHandleWritePlanCacheToFile(handle: cutensorHandle_t, filen
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorHandleWritePlanCacheToFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorHandleWritePlanCacheToFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char) -> cutensorStatus_t;
+        }
         cutensorHandleWritePlanCacheToFile(handle, filename)
     }
 }
@@ -713,7 +773,9 @@ pub unsafe fn cutensorLoggerForceDisable() -> cutensorStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorLoggerForceDisable() -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorLoggerForceDisable() -> cutensorStatus_t;
+        }
         cutensorLoggerForceDisable()
     }
 }
@@ -727,7 +789,9 @@ pub unsafe fn cutensorLoggerOpenFile(logFile: *const ::core::ffi::c_char) -> cut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorLoggerOpenFile(logFile: *const ::core::ffi::c_char) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorLoggerOpenFile(logFile: *const ::core::ffi::c_char) -> cutensorStatus_t;
+        }
         cutensorLoggerOpenFile(logFile)
     }
 }
@@ -741,7 +805,9 @@ pub unsafe fn cutensorLoggerSetCallback(callback: cutensorLoggerCallback_t) -> c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorLoggerSetCallback(callback: cutensorLoggerCallback_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorLoggerSetCallback(callback: cutensorLoggerCallback_t) -> cutensorStatus_t;
+        }
         cutensorLoggerSetCallback(callback)
     }
 }
@@ -755,7 +821,9 @@ pub unsafe fn cutensorLoggerSetFile(file: *mut FILE) -> cutensorStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorLoggerSetFile(file: *mut FILE) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorLoggerSetFile(file: *mut FILE) -> cutensorStatus_t;
+        }
         cutensorLoggerSetFile(file)
     }
 }
@@ -769,7 +837,9 @@ pub unsafe fn cutensorLoggerSetLevel(level: i32) -> cutensorStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorLoggerSetLevel(level: i32) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorLoggerSetLevel(level: i32) -> cutensorStatus_t;
+        }
         cutensorLoggerSetLevel(level)
     }
 }
@@ -783,7 +853,9 @@ pub unsafe fn cutensorLoggerSetMask(mask: i32) -> cutensorStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorLoggerSetMask(mask: i32) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorLoggerSetMask(mask: i32) -> cutensorStatus_t;
+        }
         cutensorLoggerSetMask(mask)
     }
 }
@@ -797,7 +869,9 @@ pub unsafe fn cutensorOperationDescriptorGetAttribute(handle: cutensorHandle_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorOperationDescriptorGetAttribute(handle: cutensorHandle_t, desc: cutensorOperationDescriptor_t, attr: cutensorOperationDescriptorAttribute_t, buf: *mut ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorOperationDescriptorGetAttribute(handle: cutensorHandle_t, desc: cutensorOperationDescriptor_t, attr: cutensorOperationDescriptorAttribute_t, buf: *mut ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t;
+        }
         cutensorOperationDescriptorGetAttribute(handle, desc, attr, buf, sizeInBytes)
     }
 }
@@ -811,7 +885,9 @@ pub unsafe fn cutensorOperationDescriptorSetAttribute(handle: cutensorHandle_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorOperationDescriptorSetAttribute(handle: cutensorHandle_t, desc: cutensorOperationDescriptor_t, attr: cutensorOperationDescriptorAttribute_t, buf: *const ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorOperationDescriptorSetAttribute(handle: cutensorHandle_t, desc: cutensorOperationDescriptor_t, attr: cutensorOperationDescriptorAttribute_t, buf: *const ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t;
+        }
         cutensorOperationDescriptorSetAttribute(handle, desc, attr, buf, sizeInBytes)
     }
 }
@@ -825,7 +901,9 @@ pub unsafe fn cutensorPermute(handle: cutensorHandle_t, plan: cutensorPlan_t, al
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorPermute(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, B: *mut ::core::ffi::c_void, stream: cudaStream_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorPermute(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, B: *mut ::core::ffi::c_void, stream: cudaStream_t) -> cutensorStatus_t;
+        }
         cutensorPermute(handle, plan, alpha, A, B, stream)
     }
 }
@@ -839,7 +917,9 @@ pub unsafe fn cutensorPlanGetAttribute(handle: cutensorHandle_t, plan: cutensorP
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorPlanGetAttribute(handle: cutensorHandle_t, plan: cutensorPlan_t, attr: cutensorPlanAttribute_t, buf: *mut ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorPlanGetAttribute(handle: cutensorHandle_t, plan: cutensorPlan_t, attr: cutensorPlanAttribute_t, buf: *mut ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t;
+        }
         cutensorPlanGetAttribute(handle, plan, attr, buf, sizeInBytes)
     }
 }
@@ -854,7 +934,9 @@ pub unsafe fn cutensorPlanPreferenceGetAttribute(handle: cutensorHandle_t, pref:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorPlanPreferenceGetAttribute(handle: cutensorHandle_t, pref: cutensorPlanPreference_t, attr: cutensorPlanPreferenceAttribute_t, buf: *mut ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorPlanPreferenceGetAttribute(handle: cutensorHandle_t, pref: cutensorPlanPreference_t, attr: cutensorPlanPreferenceAttribute_t, buf: *mut ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t;
+        }
         cutensorPlanPreferenceGetAttribute(handle, pref, attr, buf, sizeInBytes)
     }
 }
@@ -868,7 +950,9 @@ pub unsafe fn cutensorPlanPreferenceSetAttribute(handle: cutensorHandle_t, pref:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorPlanPreferenceSetAttribute(handle: cutensorHandle_t, pref: cutensorPlanPreference_t, attr: cutensorPlanPreferenceAttribute_t, buf: *const ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorPlanPreferenceSetAttribute(handle: cutensorHandle_t, pref: cutensorPlanPreference_t, attr: cutensorPlanPreferenceAttribute_t, buf: *const ::core::ffi::c_void, sizeInBytes: usize) -> cutensorStatus_t;
+        }
         cutensorPlanPreferenceSetAttribute(handle, pref, attr, buf, sizeInBytes)
     }
 }
@@ -882,7 +966,9 @@ pub unsafe fn cutensorReadKernelCacheFromFile(handle: cutensorHandle_t, filename
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorReadKernelCacheFromFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorReadKernelCacheFromFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char) -> cutensorStatus_t;
+        }
         cutensorReadKernelCacheFromFile(handle, filename)
     }
 }
@@ -896,7 +982,9 @@ pub unsafe fn cutensorReduce(handle: cutensorHandle_t, plan: cutensorPlan_t, alp
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorReduce(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorReduce(handle: cutensorHandle_t, plan: cutensorPlan_t, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, C: *const ::core::ffi::c_void, D: *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workspaceSize: u64, stream: cudaStream_t) -> cutensorStatus_t;
+        }
         cutensorReduce(handle, plan, alpha, A, beta, C, D, workspace, workspaceSize, stream)
     }
 }
@@ -910,7 +998,9 @@ pub unsafe fn cutensorWriteKernelCacheToFile(handle: cutensorHandle_t, filename:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cutensorWriteKernelCacheToFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char) -> cutensorStatus_t;
+        extern "C" {
+            fn cutensorWriteKernelCacheToFile(handle: cutensorHandle_t, filename: *const ::core::ffi::c_char) -> cutensorStatus_t;
+        }
         cutensorWriteKernelCacheToFile(handle, filename)
     }
 }

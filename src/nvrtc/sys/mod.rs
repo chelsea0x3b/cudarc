@@ -107,7 +107,9 @@ pub unsafe fn nvrtcAddNameExpression(prog: nvrtcProgram, name_expression: *const
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcAddNameExpression(prog: nvrtcProgram, name_expression: *const ::core::ffi::c_char) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcAddNameExpression(prog: nvrtcProgram, name_expression: *const ::core::ffi::c_char) -> nvrtcResult;
+        }
         nvrtcAddNameExpression(prog, name_expression)
     }
 }
@@ -121,7 +123,9 @@ pub unsafe fn nvrtcCompileProgram(prog: nvrtcProgram, numOptions: ::core::ffi::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcCompileProgram(prog: nvrtcProgram, numOptions: ::core::ffi::c_int, options: *const *const ::core::ffi::c_char) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcCompileProgram(prog: nvrtcProgram, numOptions: ::core::ffi::c_int, options: *const *const ::core::ffi::c_char) -> nvrtcResult;
+        }
         nvrtcCompileProgram(prog, numOptions, options)
     }
 }
@@ -135,7 +139,9 @@ pub unsafe fn nvrtcCreateProgram(prog: *mut nvrtcProgram, src: *const ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcCreateProgram(prog: *mut nvrtcProgram, src: *const ::core::ffi::c_char, name: *const ::core::ffi::c_char, numHeaders: ::core::ffi::c_int, headers: *const *const ::core::ffi::c_char, includeNames: *const *const ::core::ffi::c_char) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcCreateProgram(prog: *mut nvrtcProgram, src: *const ::core::ffi::c_char, name: *const ::core::ffi::c_char, numHeaders: ::core::ffi::c_int, headers: *const *const ::core::ffi::c_char, includeNames: *const *const ::core::ffi::c_char) -> nvrtcResult;
+        }
         nvrtcCreateProgram(prog, src, name, numHeaders, headers, includeNames)
     }
 }
@@ -149,7 +155,9 @@ pub unsafe fn nvrtcDestroyProgram(prog: *mut nvrtcProgram) -> nvrtcResult {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcDestroyProgram(prog: *mut nvrtcProgram) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcDestroyProgram(prog: *mut nvrtcProgram) -> nvrtcResult;
+        }
         nvrtcDestroyProgram(prog)
     }
 }
@@ -163,7 +171,9 @@ pub unsafe fn nvrtcGetCUBIN(prog: nvrtcProgram, cubin: *mut ::core::ffi::c_char)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetCUBIN(prog: nvrtcProgram, cubin: *mut ::core::ffi::c_char) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcGetCUBIN(prog: nvrtcProgram, cubin: *mut ::core::ffi::c_char) -> nvrtcResult;
+        }
         nvrtcGetCUBIN(prog, cubin)
     }
 }
@@ -177,7 +187,9 @@ pub unsafe fn nvrtcGetCUBINSize(prog: nvrtcProgram, cubinSizeRet: *mut usize) ->
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetCUBINSize(prog: nvrtcProgram, cubinSizeRet: *mut usize) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcGetCUBINSize(prog: nvrtcProgram, cubinSizeRet: *mut usize) -> nvrtcResult;
+        }
         nvrtcGetCUBINSize(prog, cubinSizeRet)
     }
 }
@@ -191,7 +203,9 @@ pub unsafe fn nvrtcGetErrorString(result: nvrtcResult) -> *const ::core::ffi::c_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetErrorString(result: nvrtcResult) -> *const ::core::ffi::c_char;
+        extern "C" {
+            fn nvrtcGetErrorString(result: nvrtcResult) -> *const ::core::ffi::c_char;
+        }
         nvrtcGetErrorString(result)
     }
 }
@@ -206,7 +220,9 @@ pub unsafe fn nvrtcGetLTOIR(prog: nvrtcProgram, LTOIR: *mut ::core::ffi::c_char)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetLTOIR(prog: nvrtcProgram, LTOIR: *mut ::core::ffi::c_char) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcGetLTOIR(prog: nvrtcProgram, LTOIR: *mut ::core::ffi::c_char) -> nvrtcResult;
+        }
         nvrtcGetLTOIR(prog, LTOIR)
     }
 }
@@ -221,7 +237,9 @@ pub unsafe fn nvrtcGetLTOIRSize(prog: nvrtcProgram, LTOIRSizeRet: *mut usize) ->
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetLTOIRSize(prog: nvrtcProgram, LTOIRSizeRet: *mut usize) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcGetLTOIRSize(prog: nvrtcProgram, LTOIRSizeRet: *mut usize) -> nvrtcResult;
+        }
         nvrtcGetLTOIRSize(prog, LTOIRSizeRet)
     }
 }
@@ -235,7 +253,9 @@ pub unsafe fn nvrtcGetLoweredName(prog: nvrtcProgram, name_expression: *const ::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetLoweredName(prog: nvrtcProgram, name_expression: *const ::core::ffi::c_char, lowered_name: *mut *const ::core::ffi::c_char) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcGetLoweredName(prog: nvrtcProgram, name_expression: *const ::core::ffi::c_char, lowered_name: *mut *const ::core::ffi::c_char) -> nvrtcResult;
+        }
         nvrtcGetLoweredName(prog, name_expression, lowered_name)
     }
 }
@@ -249,7 +269,9 @@ pub unsafe fn nvrtcGetNumSupportedArchs(numArchs: *mut ::core::ffi::c_int) -> nv
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetNumSupportedArchs(numArchs: *mut ::core::ffi::c_int) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcGetNumSupportedArchs(numArchs: *mut ::core::ffi::c_int) -> nvrtcResult;
+        }
         nvrtcGetNumSupportedArchs(numArchs)
     }
 }
@@ -264,7 +286,9 @@ pub unsafe fn nvrtcGetOptiXIR(prog: nvrtcProgram, optixir: *mut ::core::ffi::c_c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetOptiXIR(prog: nvrtcProgram, optixir: *mut ::core::ffi::c_char) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcGetOptiXIR(prog: nvrtcProgram, optixir: *mut ::core::ffi::c_char) -> nvrtcResult;
+        }
         nvrtcGetOptiXIR(prog, optixir)
     }
 }
@@ -279,7 +303,9 @@ pub unsafe fn nvrtcGetOptiXIRSize(prog: nvrtcProgram, optixirSizeRet: *mut usize
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetOptiXIRSize(prog: nvrtcProgram, optixirSizeRet: *mut usize) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcGetOptiXIRSize(prog: nvrtcProgram, optixirSizeRet: *mut usize) -> nvrtcResult;
+        }
         nvrtcGetOptiXIRSize(prog, optixirSizeRet)
     }
 }
@@ -293,7 +319,9 @@ pub unsafe fn nvrtcGetPTX(prog: nvrtcProgram, ptx: *mut ::core::ffi::c_char) -> 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetPTX(prog: nvrtcProgram, ptx: *mut ::core::ffi::c_char) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcGetPTX(prog: nvrtcProgram, ptx: *mut ::core::ffi::c_char) -> nvrtcResult;
+        }
         nvrtcGetPTX(prog, ptx)
     }
 }
@@ -307,7 +335,9 @@ pub unsafe fn nvrtcGetPTXSize(prog: nvrtcProgram, ptxSizeRet: *mut usize) -> nvr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetPTXSize(prog: nvrtcProgram, ptxSizeRet: *mut usize) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcGetPTXSize(prog: nvrtcProgram, ptxSizeRet: *mut usize) -> nvrtcResult;
+        }
         nvrtcGetPTXSize(prog, ptxSizeRet)
     }
 }
@@ -321,7 +351,9 @@ pub unsafe fn nvrtcGetProgramLog(prog: nvrtcProgram, log: *mut ::core::ffi::c_ch
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetProgramLog(prog: nvrtcProgram, log: *mut ::core::ffi::c_char) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcGetProgramLog(prog: nvrtcProgram, log: *mut ::core::ffi::c_char) -> nvrtcResult;
+        }
         nvrtcGetProgramLog(prog, log)
     }
 }
@@ -335,7 +367,9 @@ pub unsafe fn nvrtcGetProgramLogSize(prog: nvrtcProgram, logSizeRet: *mut usize)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetProgramLogSize(prog: nvrtcProgram, logSizeRet: *mut usize) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcGetProgramLogSize(prog: nvrtcProgram, logSizeRet: *mut usize) -> nvrtcResult;
+        }
         nvrtcGetProgramLogSize(prog, logSizeRet)
     }
 }
@@ -349,7 +383,9 @@ pub unsafe fn nvrtcGetSupportedArchs(supportedArchs: *mut ::core::ffi::c_int) ->
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetSupportedArchs(supportedArchs: *mut ::core::ffi::c_int) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcGetSupportedArchs(supportedArchs: *mut ::core::ffi::c_int) -> nvrtcResult;
+        }
         nvrtcGetSupportedArchs(supportedArchs)
     }
 }
@@ -364,7 +400,9 @@ pub unsafe fn nvrtcGetTileIR(prog: nvrtcProgram, TileIR: *mut ::core::ffi::c_cha
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetTileIR(prog: nvrtcProgram, TileIR: *mut ::core::ffi::c_char) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcGetTileIR(prog: nvrtcProgram, TileIR: *mut ::core::ffi::c_char) -> nvrtcResult;
+        }
         nvrtcGetTileIR(prog, TileIR)
     }
 }
@@ -379,7 +417,9 @@ pub unsafe fn nvrtcGetTileIRSize(prog: nvrtcProgram, TileIRSizeRet: *mut usize) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcGetTileIRSize(prog: nvrtcProgram, TileIRSizeRet: *mut usize) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcGetTileIRSize(prog: nvrtcProgram, TileIRSizeRet: *mut usize) -> nvrtcResult;
+        }
         nvrtcGetTileIRSize(prog, TileIRSizeRet)
     }
 }
@@ -393,7 +433,9 @@ pub unsafe fn nvrtcVersion(major: *mut ::core::ffi::c_int, minor: *mut ::core::f
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn nvrtcVersion(major: *mut ::core::ffi::c_int, minor: *mut ::core::ffi::c_int) -> nvrtcResult;
+        extern "C" {
+            fn nvrtcVersion(major: *mut ::core::ffi::c_int, minor: *mut ::core::ffi::c_int) -> nvrtcResult;
+        }
         nvrtcVersion(major, minor)
     }
 }

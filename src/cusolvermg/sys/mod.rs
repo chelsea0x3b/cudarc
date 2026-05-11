@@ -200,7 +200,9 @@ pub unsafe fn cusolverMgCreate(handle: *mut cusolverMgHandle_t) -> cusolverStatu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgCreate(handle: *mut cusolverMgHandle_t) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgCreate(handle: *mut cusolverMgHandle_t) -> cusolverStatus_t;
+        }
         cusolverMgCreate(handle)
     }
 }
@@ -214,7 +216,9 @@ pub unsafe fn cusolverMgCreateDeviceGrid(grid: *mut cudaLibMgGrid_t, numRowDevic
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgCreateDeviceGrid(grid: *mut cudaLibMgGrid_t, numRowDevices: i32, numColDevices: i32, deviceId: *const i32, mapping: cusolverMgGridMapping_t) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgCreateDeviceGrid(grid: *mut cudaLibMgGrid_t, numRowDevices: i32, numColDevices: i32, deviceId: *const i32, mapping: cusolverMgGridMapping_t) -> cusolverStatus_t;
+        }
         cusolverMgCreateDeviceGrid(grid, numRowDevices, numColDevices, deviceId, mapping)
     }
 }
@@ -228,7 +232,9 @@ pub unsafe fn cusolverMgCreateMatrixDesc(desc: *mut cudaLibMgMatrixDesc_t, numRo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgCreateMatrixDesc(desc: *mut cudaLibMgMatrixDesc_t, numRows: i64, numCols: i64, rowBlockSize: i64, colBlockSize: i64, dataType: cudaDataType, grid: cudaLibMgGrid_t) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgCreateMatrixDesc(desc: *mut cudaLibMgMatrixDesc_t, numRows: i64, numCols: i64, rowBlockSize: i64, colBlockSize: i64, dataType: cudaDataType, grid: cudaLibMgGrid_t) -> cusolverStatus_t;
+        }
         cusolverMgCreateMatrixDesc(desc, numRows, numCols, rowBlockSize, colBlockSize, dataType, grid)
     }
 }
@@ -242,7 +248,9 @@ pub unsafe fn cusolverMgDestroy(handle: cusolverMgHandle_t) -> cusolverStatus_t 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgDestroy(handle: cusolverMgHandle_t) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgDestroy(handle: cusolverMgHandle_t) -> cusolverStatus_t;
+        }
         cusolverMgDestroy(handle)
     }
 }
@@ -256,7 +264,9 @@ pub unsafe fn cusolverMgDestroyGrid(grid: cudaLibMgGrid_t) -> cusolverStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgDestroyGrid(grid: cudaLibMgGrid_t) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgDestroyGrid(grid: cudaLibMgGrid_t) -> cusolverStatus_t;
+        }
         cusolverMgDestroyGrid(grid)
     }
 }
@@ -270,7 +280,9 @@ pub unsafe fn cusolverMgDestroyMatrixDesc(desc: cudaLibMgMatrixDesc_t) -> cusolv
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgDestroyMatrixDesc(desc: cudaLibMgMatrixDesc_t) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgDestroyMatrixDesc(desc: cudaLibMgMatrixDesc_t) -> cusolverStatus_t;
+        }
         cusolverMgDestroyMatrixDesc(desc)
     }
 }
@@ -284,7 +296,9 @@ pub unsafe fn cusolverMgDeviceSelect(handle: cusolverMgHandle_t, nbDevices: ::co
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgDeviceSelect(handle: cusolverMgHandle_t, nbDevices: ::core::ffi::c_int, deviceId: *mut ::core::ffi::c_int) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgDeviceSelect(handle: cusolverMgHandle_t, nbDevices: ::core::ffi::c_int, deviceId: *mut ::core::ffi::c_int) -> cusolverStatus_t;
+        }
         cusolverMgDeviceSelect(handle, nbDevices, deviceId)
     }
 }
@@ -298,7 +312,9 @@ pub unsafe fn cusolverMgGetrf(handle: cusolverMgHandle_t, M: ::core::ffi::c_int,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgGetrf(handle: cusolverMgHandle_t, M: ::core::ffi::c_int, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, array_d_IPIV: *mut *mut ::core::ffi::c_int, computeType: cudaDataType, array_d_work: *mut *mut ::core::ffi::c_void, lwork: i64, info: *mut ::core::ffi::c_int) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgGetrf(handle: cusolverMgHandle_t, M: ::core::ffi::c_int, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, array_d_IPIV: *mut *mut ::core::ffi::c_int, computeType: cudaDataType, array_d_work: *mut *mut ::core::ffi::c_void, lwork: i64, info: *mut ::core::ffi::c_int) -> cusolverStatus_t;
+        }
         cusolverMgGetrf(handle, M, N, array_d_A, IA, JA, descrA, array_d_IPIV, computeType, array_d_work, lwork, info)
     }
 }
@@ -312,7 +328,9 @@ pub unsafe fn cusolverMgGetrf_bufferSize(handle: cusolverMgHandle_t, M: ::core::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgGetrf_bufferSize(handle: cusolverMgHandle_t, M: ::core::ffi::c_int, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, array_d_IPIV: *mut *mut ::core::ffi::c_int, computeType: cudaDataType, lwork: *mut i64) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgGetrf_bufferSize(handle: cusolverMgHandle_t, M: ::core::ffi::c_int, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, array_d_IPIV: *mut *mut ::core::ffi::c_int, computeType: cudaDataType, lwork: *mut i64) -> cusolverStatus_t;
+        }
         cusolverMgGetrf_bufferSize(handle, M, N, array_d_A, IA, JA, descrA, array_d_IPIV, computeType, lwork)
     }
 }
@@ -326,7 +344,9 @@ pub unsafe fn cusolverMgGetrs(handle: cusolverMgHandle_t, TRANS: cublasOperation
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgGetrs(handle: cusolverMgHandle_t, TRANS: cublasOperation_t, N: ::core::ffi::c_int, NRHS: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, array_d_IPIV: *mut *mut ::core::ffi::c_int, array_d_B: *mut *mut ::core::ffi::c_void, IB: ::core::ffi::c_int, JB: ::core::ffi::c_int, descrB: cudaLibMgMatrixDesc_t, computeType: cudaDataType, array_d_work: *mut *mut ::core::ffi::c_void, lwork: i64, info: *mut ::core::ffi::c_int) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgGetrs(handle: cusolverMgHandle_t, TRANS: cublasOperation_t, N: ::core::ffi::c_int, NRHS: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, array_d_IPIV: *mut *mut ::core::ffi::c_int, array_d_B: *mut *mut ::core::ffi::c_void, IB: ::core::ffi::c_int, JB: ::core::ffi::c_int, descrB: cudaLibMgMatrixDesc_t, computeType: cudaDataType, array_d_work: *mut *mut ::core::ffi::c_void, lwork: i64, info: *mut ::core::ffi::c_int) -> cusolverStatus_t;
+        }
         cusolverMgGetrs(handle, TRANS, N, NRHS, array_d_A, IA, JA, descrA, array_d_IPIV, array_d_B, IB, JB, descrB, computeType, array_d_work, lwork, info)
     }
 }
@@ -340,7 +360,9 @@ pub unsafe fn cusolverMgGetrs_bufferSize(handle: cusolverMgHandle_t, TRANS: cubl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgGetrs_bufferSize(handle: cusolverMgHandle_t, TRANS: cublasOperation_t, N: ::core::ffi::c_int, NRHS: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, array_d_IPIV: *mut *mut ::core::ffi::c_int, array_d_B: *mut *mut ::core::ffi::c_void, IB: ::core::ffi::c_int, JB: ::core::ffi::c_int, descrB: cudaLibMgMatrixDesc_t, computeType: cudaDataType, lwork: *mut i64) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgGetrs_bufferSize(handle: cusolverMgHandle_t, TRANS: cublasOperation_t, N: ::core::ffi::c_int, NRHS: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, array_d_IPIV: *mut *mut ::core::ffi::c_int, array_d_B: *mut *mut ::core::ffi::c_void, IB: ::core::ffi::c_int, JB: ::core::ffi::c_int, descrB: cudaLibMgMatrixDesc_t, computeType: cudaDataType, lwork: *mut i64) -> cusolverStatus_t;
+        }
         cusolverMgGetrs_bufferSize(handle, TRANS, N, NRHS, array_d_A, IA, JA, descrA, array_d_IPIV, array_d_B, IB, JB, descrB, computeType, lwork)
     }
 }
@@ -354,7 +376,9 @@ pub unsafe fn cusolverMgPotrf(handle: cusolverMgHandle_t, uplo: cublasFillMode_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgPotrf(handle: cusolverMgHandle_t, uplo: cublasFillMode_t, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, computeType: cudaDataType, array_d_work: *mut *mut ::core::ffi::c_void, lwork: i64, h_info: *mut ::core::ffi::c_int) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgPotrf(handle: cusolverMgHandle_t, uplo: cublasFillMode_t, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, computeType: cudaDataType, array_d_work: *mut *mut ::core::ffi::c_void, lwork: i64, h_info: *mut ::core::ffi::c_int) -> cusolverStatus_t;
+        }
         cusolverMgPotrf(handle, uplo, N, array_d_A, IA, JA, descrA, computeType, array_d_work, lwork, h_info)
     }
 }
@@ -368,7 +392,9 @@ pub unsafe fn cusolverMgPotrf_bufferSize(handle: cusolverMgHandle_t, uplo: cubla
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgPotrf_bufferSize(handle: cusolverMgHandle_t, uplo: cublasFillMode_t, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, computeType: cudaDataType, lwork: *mut i64) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgPotrf_bufferSize(handle: cusolverMgHandle_t, uplo: cublasFillMode_t, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, computeType: cudaDataType, lwork: *mut i64) -> cusolverStatus_t;
+        }
         cusolverMgPotrf_bufferSize(handle, uplo, N, array_d_A, IA, JA, descrA, computeType, lwork)
     }
 }
@@ -382,7 +408,9 @@ pub unsafe fn cusolverMgPotri(handle: cusolverMgHandle_t, uplo: cublasFillMode_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgPotri(handle: cusolverMgHandle_t, uplo: cublasFillMode_t, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, computeType: cudaDataType, array_d_work: *mut *mut ::core::ffi::c_void, lwork: i64, h_info: *mut ::core::ffi::c_int) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgPotri(handle: cusolverMgHandle_t, uplo: cublasFillMode_t, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, computeType: cudaDataType, array_d_work: *mut *mut ::core::ffi::c_void, lwork: i64, h_info: *mut ::core::ffi::c_int) -> cusolverStatus_t;
+        }
         cusolverMgPotri(handle, uplo, N, array_d_A, IA, JA, descrA, computeType, array_d_work, lwork, h_info)
     }
 }
@@ -396,7 +424,9 @@ pub unsafe fn cusolverMgPotri_bufferSize(handle: cusolverMgHandle_t, uplo: cubla
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgPotri_bufferSize(handle: cusolverMgHandle_t, uplo: cublasFillMode_t, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, computeType: cudaDataType, lwork: *mut i64) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgPotri_bufferSize(handle: cusolverMgHandle_t, uplo: cublasFillMode_t, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, computeType: cudaDataType, lwork: *mut i64) -> cusolverStatus_t;
+        }
         cusolverMgPotri_bufferSize(handle, uplo, N, array_d_A, IA, JA, descrA, computeType, lwork)
     }
 }
@@ -410,7 +440,9 @@ pub unsafe fn cusolverMgPotrs(handle: cusolverMgHandle_t, uplo: cublasFillMode_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgPotrs(handle: cusolverMgHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, array_d_B: *mut *mut ::core::ffi::c_void, IB: ::core::ffi::c_int, JB: ::core::ffi::c_int, descrB: cudaLibMgMatrixDesc_t, computeType: cudaDataType, array_d_work: *mut *mut ::core::ffi::c_void, lwork: i64, h_info: *mut ::core::ffi::c_int) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgPotrs(handle: cusolverMgHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, array_d_B: *mut *mut ::core::ffi::c_void, IB: ::core::ffi::c_int, JB: ::core::ffi::c_int, descrB: cudaLibMgMatrixDesc_t, computeType: cudaDataType, array_d_work: *mut *mut ::core::ffi::c_void, lwork: i64, h_info: *mut ::core::ffi::c_int) -> cusolverStatus_t;
+        }
         cusolverMgPotrs(handle, uplo, n, nrhs, array_d_A, IA, JA, descrA, array_d_B, IB, JB, descrB, computeType, array_d_work, lwork, h_info)
     }
 }
@@ -424,7 +456,9 @@ pub unsafe fn cusolverMgPotrs_bufferSize(handle: cusolverMgHandle_t, uplo: cubla
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgPotrs_bufferSize(handle: cusolverMgHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, array_d_B: *mut *mut ::core::ffi::c_void, IB: ::core::ffi::c_int, JB: ::core::ffi::c_int, descrB: cudaLibMgMatrixDesc_t, computeType: cudaDataType, lwork: *mut i64) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgPotrs_bufferSize(handle: cusolverMgHandle_t, uplo: cublasFillMode_t, n: ::core::ffi::c_int, nrhs: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, array_d_B: *mut *mut ::core::ffi::c_void, IB: ::core::ffi::c_int, JB: ::core::ffi::c_int, descrB: cudaLibMgMatrixDesc_t, computeType: cudaDataType, lwork: *mut i64) -> cusolverStatus_t;
+        }
         cusolverMgPotrs_bufferSize(handle, uplo, n, nrhs, array_d_A, IA, JA, descrA, array_d_B, IB, JB, descrB, computeType, lwork)
     }
 }
@@ -438,7 +472,9 @@ pub unsafe fn cusolverMgSyevd(handle: cusolverMgHandle_t, jobz: cusolverEigMode_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgSyevd(handle: cusolverMgHandle_t, jobz: cusolverEigMode_t, uplo: cublasFillMode_t, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, W: *mut ::core::ffi::c_void, dataTypeW: cudaDataType, computeType: cudaDataType, array_d_work: *mut *mut ::core::ffi::c_void, lwork: i64, info: *mut ::core::ffi::c_int) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgSyevd(handle: cusolverMgHandle_t, jobz: cusolverEigMode_t, uplo: cublasFillMode_t, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, W: *mut ::core::ffi::c_void, dataTypeW: cudaDataType, computeType: cudaDataType, array_d_work: *mut *mut ::core::ffi::c_void, lwork: i64, info: *mut ::core::ffi::c_int) -> cusolverStatus_t;
+        }
         cusolverMgSyevd(handle, jobz, uplo, N, array_d_A, IA, JA, descrA, W, dataTypeW, computeType, array_d_work, lwork, info)
     }
 }
@@ -452,7 +488,9 @@ pub unsafe fn cusolverMgSyevd_bufferSize(handle: cusolverMgHandle_t, jobz: cusol
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cusolverMgSyevd_bufferSize(handle: cusolverMgHandle_t, jobz: cusolverEigMode_t, uplo: cublasFillMode_t, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, W: *mut ::core::ffi::c_void, dataTypeW: cudaDataType, computeType: cudaDataType, lwork: *mut i64) -> cusolverStatus_t;
+        extern "C" {
+            fn cusolverMgSyevd_bufferSize(handle: cusolverMgHandle_t, jobz: cusolverEigMode_t, uplo: cublasFillMode_t, N: ::core::ffi::c_int, array_d_A: *mut *mut ::core::ffi::c_void, IA: ::core::ffi::c_int, JA: ::core::ffi::c_int, descrA: cudaLibMgMatrixDesc_t, W: *mut ::core::ffi::c_void, dataTypeW: cudaDataType, computeType: cudaDataType, lwork: *mut i64) -> cusolverStatus_t;
+        }
         cusolverMgSyevd_bufferSize(handle, jobz, uplo, N, array_d_A, IA, JA, descrA, W, dataTypeW, computeType, lwork)
     }
 }

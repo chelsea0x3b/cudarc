@@ -2337,7 +2337,9 @@ pub unsafe fn cudnnActivationBackward(handle: cudnnHandle_t, activationDesc: cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnActivationBackward(handle: cudnnHandle_t, activationDesc: cudnnActivationDescriptor_t, alpha: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnActivationBackward(handle: cudnnHandle_t, activationDesc: cudnnActivationDescriptor_t, alpha: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnActivationBackward(handle, activationDesc, alpha, yDesc, y, dyDesc, dy, xDesc, x, beta, dxDesc, dx)
     }
 }
@@ -2351,7 +2353,9 @@ pub unsafe fn cudnnActivationForward(handle: cudnnHandle_t, activationDesc: cudn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnActivationForward(handle: cudnnHandle_t, activationDesc: cudnnActivationDescriptor_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnActivationForward(handle: cudnnHandle_t, activationDesc: cudnnActivationDescriptor_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnActivationForward(handle, activationDesc, alpha, xDesc, x, beta, yDesc, y)
     }
 }
@@ -2365,7 +2369,9 @@ pub unsafe fn cudnnAddTensor(handle: cudnnHandle_t, alpha: *const ::core::ffi::c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnAddTensor(handle: cudnnHandle_t, alpha: *const ::core::ffi::c_void, aDesc: cudnnTensorDescriptor_t, A: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, cDesc: cudnnTensorDescriptor_t, C: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnAddTensor(handle: cudnnHandle_t, alpha: *const ::core::ffi::c_void, aDesc: cudnnTensorDescriptor_t, A: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, cDesc: cudnnTensorDescriptor_t, C: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnAddTensor(handle, alpha, aDesc, A, beta, cDesc, C)
     }
 }
@@ -2380,7 +2386,9 @@ pub unsafe fn cudnnAdvInferVersionCheck() -> cudnnStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnAdvInferVersionCheck() -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnAdvInferVersionCheck() -> cudnnStatus_t;
+        }
         cudnnAdvInferVersionCheck()
     }
 }
@@ -2395,7 +2403,9 @@ pub unsafe fn cudnnAdvTrainVersionCheck() -> cudnnStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnAdvTrainVersionCheck() -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnAdvTrainVersionCheck() -> cudnnStatus_t;
+        }
         cudnnAdvTrainVersionCheck()
     }
 }
@@ -2410,7 +2420,9 @@ pub unsafe fn cudnnAdvVersionCheck() -> cudnnStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnAdvVersionCheck() -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnAdvVersionCheck() -> cudnnStatus_t;
+        }
         cudnnAdvVersionCheck()
     }
 }
@@ -2424,7 +2436,9 @@ pub unsafe fn cudnnBackendCreateDescriptor(descriptorType: cudnnBackendDescripto
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnBackendCreateDescriptor(descriptorType: cudnnBackendDescriptorType_t, descriptor: *mut cudnnBackendDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnBackendCreateDescriptor(descriptorType: cudnnBackendDescriptorType_t, descriptor: *mut cudnnBackendDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnBackendCreateDescriptor(descriptorType, descriptor)
     }
 }
@@ -2438,7 +2452,9 @@ pub unsafe fn cudnnBackendDestroyDescriptor(descriptor: cudnnBackendDescriptor_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnBackendDestroyDescriptor(descriptor: cudnnBackendDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnBackendDestroyDescriptor(descriptor: cudnnBackendDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnBackendDestroyDescriptor(descriptor)
     }
 }
@@ -2452,7 +2468,9 @@ pub unsafe fn cudnnBackendExecute(handle: cudnnHandle_t, executionPlan: cudnnBac
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnBackendExecute(handle: cudnnHandle_t, executionPlan: cudnnBackendDescriptor_t, variantPack: cudnnBackendDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnBackendExecute(handle: cudnnHandle_t, executionPlan: cudnnBackendDescriptor_t, variantPack: cudnnBackendDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnBackendExecute(handle, executionPlan, variantPack)
     }
 }
@@ -2466,7 +2484,9 @@ pub unsafe fn cudnnBackendFinalize(descriptor: cudnnBackendDescriptor_t) -> cudn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnBackendFinalize(descriptor: cudnnBackendDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnBackendFinalize(descriptor: cudnnBackendDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnBackendFinalize(descriptor)
     }
 }
@@ -2480,7 +2500,9 @@ pub unsafe fn cudnnBackendGetAttribute(descriptor: cudnnBackendDescriptor_t, att
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnBackendGetAttribute(descriptor: cudnnBackendDescriptor_t, attributeName: cudnnBackendAttributeName_t, attributeType: cudnnBackendAttributeType_t, requestedElementCount: i64, elementCount: *mut i64, arrayOfElements: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnBackendGetAttribute(descriptor: cudnnBackendDescriptor_t, attributeName: cudnnBackendAttributeName_t, attributeType: cudnnBackendAttributeType_t, requestedElementCount: i64, elementCount: *mut i64, arrayOfElements: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnBackendGetAttribute(descriptor, attributeName, attributeType, requestedElementCount, elementCount, arrayOfElements)
     }
 }
@@ -2494,7 +2516,9 @@ pub unsafe fn cudnnBackendInitialize(descriptor: cudnnBackendDescriptor_t) -> cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnBackendInitialize(descriptor: cudnnBackendDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnBackendInitialize(descriptor: cudnnBackendDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnBackendInitialize(descriptor)
     }
 }
@@ -2509,7 +2533,9 @@ pub unsafe fn cudnnBackendPopulateCudaGraph(handle: cudnnHandle_t, executionPlan
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnBackendPopulateCudaGraph(handle: cudnnHandle_t, executionPlan: cudnnBackendDescriptor_t, variantPack: cudnnBackendDescriptor_t, graph: cudaGraph_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnBackendPopulateCudaGraph(handle: cudnnHandle_t, executionPlan: cudnnBackendDescriptor_t, variantPack: cudnnBackendDescriptor_t, graph: cudaGraph_t) -> cudnnStatus_t;
+        }
         cudnnBackendPopulateCudaGraph(handle, executionPlan, variantPack, graph)
     }
 }
@@ -2523,7 +2549,9 @@ pub unsafe fn cudnnBackendSetAttribute(descriptor: cudnnBackendDescriptor_t, att
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnBackendSetAttribute(descriptor: cudnnBackendDescriptor_t, attributeName: cudnnBackendAttributeName_t, attributeType: cudnnBackendAttributeType_t, elementCount: i64, arrayOfElements: *const ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnBackendSetAttribute(descriptor: cudnnBackendDescriptor_t, attributeName: cudnnBackendAttributeName_t, attributeType: cudnnBackendAttributeType_t, elementCount: i64, arrayOfElements: *const ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnBackendSetAttribute(descriptor, attributeName, attributeType, elementCount, arrayOfElements)
     }
 }
@@ -2538,7 +2566,9 @@ pub unsafe fn cudnnBackendUpdateCudaGraph(handle: cudnnHandle_t, executionPlan: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnBackendUpdateCudaGraph(handle: cudnnHandle_t, executionPlan: cudnnBackendDescriptor_t, variantPack: cudnnBackendDescriptor_t, graph: cudaGraph_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnBackendUpdateCudaGraph(handle: cudnnHandle_t, executionPlan: cudnnBackendDescriptor_t, variantPack: cudnnBackendDescriptor_t, graph: cudaGraph_t) -> cudnnStatus_t;
+        }
         cudnnBackendUpdateCudaGraph(handle, executionPlan, variantPack, graph)
     }
 }
@@ -2552,7 +2582,9 @@ pub unsafe fn cudnnBatchNormalizationBackward(handle: cudnnHandle_t, mode: cudnn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnBatchNormalizationBackward(handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, alphaDataDiff: *const ::core::ffi::c_void, betaDataDiff: *const ::core::ffi::c_void, alphaParamDiff: *const ::core::ffi::c_void, betaParamDiff: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void, dBnScaleBiasDesc: cudnnTensorDescriptor_t, bnScale: *const ::core::ffi::c_void, dBnScaleResult: *mut ::core::ffi::c_void, dBnBiasResult: *mut ::core::ffi::c_void, epsilon: f64, savedMean: *const ::core::ffi::c_void, savedInvVariance: *const ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnBatchNormalizationBackward(handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, alphaDataDiff: *const ::core::ffi::c_void, betaDataDiff: *const ::core::ffi::c_void, alphaParamDiff: *const ::core::ffi::c_void, betaParamDiff: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void, dBnScaleBiasDesc: cudnnTensorDescriptor_t, bnScale: *const ::core::ffi::c_void, dBnScaleResult: *mut ::core::ffi::c_void, dBnBiasResult: *mut ::core::ffi::c_void, epsilon: f64, savedMean: *const ::core::ffi::c_void, savedInvVariance: *const ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnBatchNormalizationBackward(handle, mode, alphaDataDiff, betaDataDiff, alphaParamDiff, betaParamDiff, xDesc, x, dyDesc, dy, dxDesc, dx, dBnScaleBiasDesc, bnScale, dBnScaleResult, dBnBiasResult, epsilon, savedMean, savedInvVariance)
     }
 }
@@ -2569,10 +2601,12 @@ pub unsafe fn cudnnBatchNormalizationBackwardEx(
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnBatchNormalizationBackwardEx(
-            handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, bnOps: cudnnBatchNormOps_t, alphaDataDiff: *const ::core::ffi::c_void, betaDataDiff: *const ::core::ffi::c_void, alphaParamDiff: *const ::core::ffi::c_void, betaParamDiff: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, xData: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, yData: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dyData: *const ::core::ffi::c_void, dzDesc: cudnnTensorDescriptor_t, dzData: *mut ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dxData: *mut ::core::ffi::c_void, dBnScaleBiasDesc: cudnnTensorDescriptor_t, bnScaleData: *const ::core::ffi::c_void, bnBiasData: *const ::core::ffi::c_void, dBnScaleData: *mut ::core::ffi::c_void, dBnBiasData: *mut ::core::ffi::c_void, epsilon: f64, savedMean: *const ::core::ffi::c_void, savedInvVariance: *const ::core::ffi::c_void, activationDesc: cudnnActivationDescriptor_t, workSpace: *mut ::core::ffi::c_void,
-            workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize,
-        ) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnBatchNormalizationBackwardEx(
+                handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, bnOps: cudnnBatchNormOps_t, alphaDataDiff: *const ::core::ffi::c_void, betaDataDiff: *const ::core::ffi::c_void, alphaParamDiff: *const ::core::ffi::c_void, betaParamDiff: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, xData: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, yData: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dyData: *const ::core::ffi::c_void, dzDesc: cudnnTensorDescriptor_t, dzData: *mut ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dxData: *mut ::core::ffi::c_void, dBnScaleBiasDesc: cudnnTensorDescriptor_t, bnScaleData: *const ::core::ffi::c_void, bnBiasData: *const ::core::ffi::c_void, dBnScaleData: *mut ::core::ffi::c_void, dBnBiasData: *mut ::core::ffi::c_void, epsilon: f64, savedMean: *const ::core::ffi::c_void, savedInvVariance: *const ::core::ffi::c_void, activationDesc: cudnnActivationDescriptor_t, workSpace: *mut ::core::ffi::c_void,
+                workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize,
+            ) -> cudnnStatus_t;
+        }
         cudnnBatchNormalizationBackwardEx(handle, mode, bnOps, alphaDataDiff, betaDataDiff, alphaParamDiff, betaParamDiff, xDesc, xData, yDesc, yData, dyDesc, dyData, dzDesc, dzData, dxDesc, dxData, dBnScaleBiasDesc, bnScaleData, bnBiasData, dBnScaleData, dBnBiasData, epsilon, savedMean, savedInvVariance, activationDesc, workSpace, workSpaceSizeInBytes, reserveSpace, reserveSpaceSizeInBytes)
     }
 }
@@ -2586,7 +2620,9 @@ pub unsafe fn cudnnBatchNormalizationForwardInference(handle: cudnnHandle_t, mod
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnBatchNormalizationForwardInference(handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, alpha: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, bnScaleBiasMeanVarDesc: cudnnTensorDescriptor_t, bnScale: *const ::core::ffi::c_void, bnBias: *const ::core::ffi::c_void, estimatedMean: *const ::core::ffi::c_void, estimatedVariance: *const ::core::ffi::c_void, epsilon: f64) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnBatchNormalizationForwardInference(handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, alpha: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, bnScaleBiasMeanVarDesc: cudnnTensorDescriptor_t, bnScale: *const ::core::ffi::c_void, bnBias: *const ::core::ffi::c_void, estimatedMean: *const ::core::ffi::c_void, estimatedVariance: *const ::core::ffi::c_void, epsilon: f64) -> cudnnStatus_t;
+        }
         cudnnBatchNormalizationForwardInference(handle, mode, alpha, beta, xDesc, x, yDesc, y, bnScaleBiasMeanVarDesc, bnScale, bnBias, estimatedMean, estimatedVariance, epsilon)
     }
 }
@@ -2600,7 +2636,9 @@ pub unsafe fn cudnnBatchNormalizationForwardTraining(handle: cudnnHandle_t, mode
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnBatchNormalizationForwardTraining(handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, alpha: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, bnScaleBiasMeanVarDesc: cudnnTensorDescriptor_t, bnScale: *const ::core::ffi::c_void, bnBias: *const ::core::ffi::c_void, exponentialAverageFactor: f64, resultRunningMean: *mut ::core::ffi::c_void, resultRunningVariance: *mut ::core::ffi::c_void, epsilon: f64, resultSaveMean: *mut ::core::ffi::c_void, resultSaveInvVariance: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnBatchNormalizationForwardTraining(handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, alpha: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, bnScaleBiasMeanVarDesc: cudnnTensorDescriptor_t, bnScale: *const ::core::ffi::c_void, bnBias: *const ::core::ffi::c_void, exponentialAverageFactor: f64, resultRunningMean: *mut ::core::ffi::c_void, resultRunningVariance: *mut ::core::ffi::c_void, epsilon: f64, resultSaveMean: *mut ::core::ffi::c_void, resultSaveInvVariance: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnBatchNormalizationForwardTraining(handle, mode, alpha, beta, xDesc, x, yDesc, y, bnScaleBiasMeanVarDesc, bnScale, bnBias, exponentialAverageFactor, resultRunningMean, resultRunningVariance, epsilon, resultSaveMean, resultSaveInvVariance)
     }
 }
@@ -2614,7 +2652,9 @@ pub unsafe fn cudnnBatchNormalizationForwardTrainingEx(handle: cudnnHandle_t, mo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnBatchNormalizationForwardTrainingEx(handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, bnOps: cudnnBatchNormOps_t, alpha: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, xData: *const ::core::ffi::c_void, zDesc: cudnnTensorDescriptor_t, zData: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, yData: *mut ::core::ffi::c_void, bnScaleBiasMeanVarDesc: cudnnTensorDescriptor_t, bnScale: *const ::core::ffi::c_void, bnBias: *const ::core::ffi::c_void, exponentialAverageFactor: f64, resultRunningMean: *mut ::core::ffi::c_void, resultRunningVariance: *mut ::core::ffi::c_void, epsilon: f64, resultSaveMean: *mut ::core::ffi::c_void, resultSaveInvVariance: *mut ::core::ffi::c_void, activationDesc: cudnnActivationDescriptor_t, workspace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnBatchNormalizationForwardTrainingEx(handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, bnOps: cudnnBatchNormOps_t, alpha: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, xData: *const ::core::ffi::c_void, zDesc: cudnnTensorDescriptor_t, zData: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, yData: *mut ::core::ffi::c_void, bnScaleBiasMeanVarDesc: cudnnTensorDescriptor_t, bnScale: *const ::core::ffi::c_void, bnBias: *const ::core::ffi::c_void, exponentialAverageFactor: f64, resultRunningMean: *mut ::core::ffi::c_void, resultRunningVariance: *mut ::core::ffi::c_void, epsilon: f64, resultSaveMean: *mut ::core::ffi::c_void, resultSaveInvVariance: *mut ::core::ffi::c_void, activationDesc: cudnnActivationDescriptor_t, workspace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnBatchNormalizationForwardTrainingEx(handle, mode, bnOps, alpha, beta, xDesc, xData, zDesc, zData, yDesc, yData, bnScaleBiasMeanVarDesc, bnScale, bnBias, exponentialAverageFactor, resultRunningMean, resultRunningVariance, epsilon, resultSaveMean, resultSaveInvVariance, activationDesc, workspace, workSpaceSizeInBytes, reserveSpace, reserveSpaceSizeInBytes)
     }
 }
@@ -2628,7 +2668,9 @@ pub unsafe fn cudnnBuildRNNDynamic(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnBuildRNNDynamic(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, miniBatch: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnBuildRNNDynamic(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, miniBatch: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnBuildRNNDynamic(handle, rnnDesc, miniBatch)
     }
 }
@@ -2642,7 +2684,9 @@ pub unsafe fn cudnnCTCLoss(handle: cudnnHandle_t, probsDesc: cudnnTensorDescript
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCTCLoss(handle: cudnnHandle_t, probsDesc: cudnnTensorDescriptor_t, probs: *const ::core::ffi::c_void, hostLabels: *const ::core::ffi::c_int, hostLabelLengths: *const ::core::ffi::c_int, hostInputLengths: *const ::core::ffi::c_int, costs: *mut ::core::ffi::c_void, gradientsDesc: cudnnTensorDescriptor_t, gradients: *mut ::core::ffi::c_void, algo: cudnnCTCLossAlgo_t, ctcLossDesc: cudnnCTCLossDescriptor_t, workspace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCTCLoss(handle: cudnnHandle_t, probsDesc: cudnnTensorDescriptor_t, probs: *const ::core::ffi::c_void, hostLabels: *const ::core::ffi::c_int, hostLabelLengths: *const ::core::ffi::c_int, hostInputLengths: *const ::core::ffi::c_int, costs: *mut ::core::ffi::c_void, gradientsDesc: cudnnTensorDescriptor_t, gradients: *mut ::core::ffi::c_void, algo: cudnnCTCLossAlgo_t, ctcLossDesc: cudnnCTCLossDescriptor_t, workspace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnCTCLoss(handle, probsDesc, probs, hostLabels, hostLabelLengths, hostInputLengths, costs, gradientsDesc, gradients, algo, ctcLossDesc, workspace, workSpaceSizeInBytes)
     }
 }
@@ -2656,7 +2700,9 @@ pub unsafe fn cudnnCTCLoss_v8(handle: cudnnHandle_t, algo: cudnnCTCLossAlgo_t, c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCTCLoss_v8(handle: cudnnHandle_t, algo: cudnnCTCLossAlgo_t, ctcLossDesc: cudnnCTCLossDescriptor_t, probsDesc: cudnnTensorDescriptor_t, probs: *const ::core::ffi::c_void, labels: *const ::core::ffi::c_int, labelLengths: *const ::core::ffi::c_int, inputLengths: *const ::core::ffi::c_int, costs: *mut ::core::ffi::c_void, gradientsDesc: cudnnTensorDescriptor_t, gradients: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, workspace: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCTCLoss_v8(handle: cudnnHandle_t, algo: cudnnCTCLossAlgo_t, ctcLossDesc: cudnnCTCLossDescriptor_t, probsDesc: cudnnTensorDescriptor_t, probs: *const ::core::ffi::c_void, labels: *const ::core::ffi::c_int, labelLengths: *const ::core::ffi::c_int, inputLengths: *const ::core::ffi::c_int, costs: *mut ::core::ffi::c_void, gradientsDesc: cudnnTensorDescriptor_t, gradients: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, workspace: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnCTCLoss_v8(handle, algo, ctcLossDesc, probsDesc, probs, labels, labelLengths, inputLengths, costs, gradientsDesc, gradients, workSpaceSizeInBytes, workspace)
     }
 }
@@ -2671,7 +2717,9 @@ pub unsafe fn cudnnCnnInferVersionCheck() -> cudnnStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCnnInferVersionCheck() -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCnnInferVersionCheck() -> cudnnStatus_t;
+        }
         cudnnCnnInferVersionCheck()
     }
 }
@@ -2686,7 +2734,9 @@ pub unsafe fn cudnnCnnTrainVersionCheck() -> cudnnStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCnnTrainVersionCheck() -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCnnTrainVersionCheck() -> cudnnStatus_t;
+        }
         cudnnCnnTrainVersionCheck()
     }
 }
@@ -2701,7 +2751,9 @@ pub unsafe fn cudnnCnnVersionCheck() -> cudnnStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCnnVersionCheck() -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCnnVersionCheck() -> cudnnStatus_t;
+        }
         cudnnCnnVersionCheck()
     }
 }
@@ -2715,7 +2767,9 @@ pub unsafe fn cudnnConvolutionBackwardBias(handle: cudnnHandle_t, alpha: *const 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnConvolutionBackwardBias(handle: cudnnHandle_t, alpha: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, dbDesc: cudnnTensorDescriptor_t, db: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnConvolutionBackwardBias(handle: cudnnHandle_t, alpha: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, dbDesc: cudnnTensorDescriptor_t, db: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnConvolutionBackwardBias(handle, alpha, dyDesc, dy, beta, dbDesc, db)
     }
 }
@@ -2729,7 +2783,9 @@ pub unsafe fn cudnnConvolutionBackwardData(handle: cudnnHandle_t, alpha: *const 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnConvolutionBackwardData(handle: cudnnHandle_t, alpha: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, convDesc: cudnnConvolutionDescriptor_t, algo: cudnnConvolutionBwdDataAlgo_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, beta: *const ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnConvolutionBackwardData(handle: cudnnHandle_t, alpha: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, convDesc: cudnnConvolutionDescriptor_t, algo: cudnnConvolutionBwdDataAlgo_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, beta: *const ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnConvolutionBackwardData(handle, alpha, wDesc, w, dyDesc, dy, convDesc, algo, workSpace, workSpaceSizeInBytes, beta, dxDesc, dx)
     }
 }
@@ -2743,7 +2799,9 @@ pub unsafe fn cudnnConvolutionBackwardFilter(handle: cudnnHandle_t, alpha: *cons
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnConvolutionBackwardFilter(handle: cudnnHandle_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, convDesc: cudnnConvolutionDescriptor_t, algo: cudnnConvolutionBwdFilterAlgo_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, beta: *const ::core::ffi::c_void, dwDesc: cudnnFilterDescriptor_t, dw: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnConvolutionBackwardFilter(handle: cudnnHandle_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, convDesc: cudnnConvolutionDescriptor_t, algo: cudnnConvolutionBwdFilterAlgo_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, beta: *const ::core::ffi::c_void, dwDesc: cudnnFilterDescriptor_t, dw: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnConvolutionBackwardFilter(handle, alpha, xDesc, x, dyDesc, dy, convDesc, algo, workSpace, workSpaceSizeInBytes, beta, dwDesc, dw)
     }
 }
@@ -2757,7 +2815,9 @@ pub unsafe fn cudnnConvolutionBiasActivationForward(handle: cudnnHandle_t, alpha
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnConvolutionBiasActivationForward(handle: cudnnHandle_t, alpha1: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, convDesc: cudnnConvolutionDescriptor_t, algo: cudnnConvolutionFwdAlgo_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, alpha2: *const ::core::ffi::c_void, zDesc: cudnnTensorDescriptor_t, z: *const ::core::ffi::c_void, biasDesc: cudnnTensorDescriptor_t, bias: *const ::core::ffi::c_void, activationDesc: cudnnActivationDescriptor_t, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnConvolutionBiasActivationForward(handle: cudnnHandle_t, alpha1: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, convDesc: cudnnConvolutionDescriptor_t, algo: cudnnConvolutionFwdAlgo_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, alpha2: *const ::core::ffi::c_void, zDesc: cudnnTensorDescriptor_t, z: *const ::core::ffi::c_void, biasDesc: cudnnTensorDescriptor_t, bias: *const ::core::ffi::c_void, activationDesc: cudnnActivationDescriptor_t, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnConvolutionBiasActivationForward(handle, alpha1, xDesc, x, wDesc, w, convDesc, algo, workSpace, workSpaceSizeInBytes, alpha2, zDesc, z, biasDesc, bias, activationDesc, yDesc, y)
     }
 }
@@ -2771,7 +2831,9 @@ pub unsafe fn cudnnConvolutionForward(handle: cudnnHandle_t, alpha: *const ::cor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnConvolutionForward(handle: cudnnHandle_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, convDesc: cudnnConvolutionDescriptor_t, algo: cudnnConvolutionFwdAlgo_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnConvolutionForward(handle: cudnnHandle_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, convDesc: cudnnConvolutionDescriptor_t, algo: cudnnConvolutionFwdAlgo_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnConvolutionForward(handle, alpha, xDesc, x, wDesc, w, convDesc, algo, workSpace, workSpaceSizeInBytes, beta, yDesc, y)
     }
 }
@@ -2786,7 +2848,9 @@ pub unsafe fn cudnnCopyAlgorithmDescriptor(src: cudnnAlgorithmDescriptor_t, dest
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCopyAlgorithmDescriptor(src: cudnnAlgorithmDescriptor_t, dest: cudnnAlgorithmDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCopyAlgorithmDescriptor(src: cudnnAlgorithmDescriptor_t, dest: cudnnAlgorithmDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCopyAlgorithmDescriptor(src, dest)
     }
 }
@@ -2800,7 +2864,9 @@ pub unsafe fn cudnnCreate(handle: *mut cudnnHandle_t) -> cudnnStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreate(handle: *mut cudnnHandle_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreate(handle: *mut cudnnHandle_t) -> cudnnStatus_t;
+        }
         cudnnCreate(handle)
     }
 }
@@ -2814,7 +2880,9 @@ pub unsafe fn cudnnCreateActivationDescriptor(activationDesc: *mut cudnnActivati
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateActivationDescriptor(activationDesc: *mut cudnnActivationDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateActivationDescriptor(activationDesc: *mut cudnnActivationDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateActivationDescriptor(activationDesc)
     }
 }
@@ -2829,7 +2897,9 @@ pub unsafe fn cudnnCreateAlgorithmDescriptor(algoDesc: *mut cudnnAlgorithmDescri
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateAlgorithmDescriptor(algoDesc: *mut cudnnAlgorithmDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateAlgorithmDescriptor(algoDesc: *mut cudnnAlgorithmDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateAlgorithmDescriptor(algoDesc)
     }
 }
@@ -2844,7 +2914,9 @@ pub unsafe fn cudnnCreateAlgorithmPerformance(algoPerf: *mut cudnnAlgorithmPerfo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateAlgorithmPerformance(algoPerf: *mut cudnnAlgorithmPerformance_t, numberToCreate: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateAlgorithmPerformance(algoPerf: *mut cudnnAlgorithmPerformance_t, numberToCreate: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnCreateAlgorithmPerformance(algoPerf, numberToCreate)
     }
 }
@@ -2858,7 +2930,9 @@ pub unsafe fn cudnnCreateAttnDescriptor(attnDesc: *mut cudnnAttnDescriptor_t) ->
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateAttnDescriptor(attnDesc: *mut cudnnAttnDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateAttnDescriptor(attnDesc: *mut cudnnAttnDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateAttnDescriptor(attnDesc)
     }
 }
@@ -2872,7 +2946,9 @@ pub unsafe fn cudnnCreateCTCLossDescriptor(ctcLossDesc: *mut cudnnCTCLossDescrip
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateCTCLossDescriptor(ctcLossDesc: *mut cudnnCTCLossDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateCTCLossDescriptor(ctcLossDesc: *mut cudnnCTCLossDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateCTCLossDescriptor(ctcLossDesc)
     }
 }
@@ -2886,7 +2962,9 @@ pub unsafe fn cudnnCreateConvolutionDescriptor(convDesc: *mut cudnnConvolutionDe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateConvolutionDescriptor(convDesc: *mut cudnnConvolutionDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateConvolutionDescriptor(convDesc: *mut cudnnConvolutionDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateConvolutionDescriptor(convDesc)
     }
 }
@@ -2900,7 +2978,9 @@ pub unsafe fn cudnnCreateDropoutDescriptor(dropoutDesc: *mut cudnnDropoutDescrip
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateDropoutDescriptor(dropoutDesc: *mut cudnnDropoutDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateDropoutDescriptor(dropoutDesc: *mut cudnnDropoutDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateDropoutDescriptor(dropoutDesc)
     }
 }
@@ -2914,7 +2994,9 @@ pub unsafe fn cudnnCreateFilterDescriptor(filterDesc: *mut cudnnFilterDescriptor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateFilterDescriptor(filterDesc: *mut cudnnFilterDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateFilterDescriptor(filterDesc: *mut cudnnFilterDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateFilterDescriptor(filterDesc)
     }
 }
@@ -2928,7 +3010,9 @@ pub unsafe fn cudnnCreateFusedOpsConstParamPack(constPack: *mut cudnnFusedOpsCon
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateFusedOpsConstParamPack(constPack: *mut cudnnFusedOpsConstParamPack_t, ops: cudnnFusedOps_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateFusedOpsConstParamPack(constPack: *mut cudnnFusedOpsConstParamPack_t, ops: cudnnFusedOps_t) -> cudnnStatus_t;
+        }
         cudnnCreateFusedOpsConstParamPack(constPack, ops)
     }
 }
@@ -2942,7 +3026,9 @@ pub unsafe fn cudnnCreateFusedOpsPlan(plan: *mut cudnnFusedOpsPlan_t, ops: cudnn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateFusedOpsPlan(plan: *mut cudnnFusedOpsPlan_t, ops: cudnnFusedOps_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateFusedOpsPlan(plan: *mut cudnnFusedOpsPlan_t, ops: cudnnFusedOps_t) -> cudnnStatus_t;
+        }
         cudnnCreateFusedOpsPlan(plan, ops)
     }
 }
@@ -2956,7 +3042,9 @@ pub unsafe fn cudnnCreateFusedOpsVariantParamPack(varPack: *mut cudnnFusedOpsVar
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateFusedOpsVariantParamPack(varPack: *mut cudnnFusedOpsVariantParamPack_t, ops: cudnnFusedOps_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateFusedOpsVariantParamPack(varPack: *mut cudnnFusedOpsVariantParamPack_t, ops: cudnnFusedOps_t) -> cudnnStatus_t;
+        }
         cudnnCreateFusedOpsVariantParamPack(varPack, ops)
     }
 }
@@ -2970,7 +3058,9 @@ pub unsafe fn cudnnCreateLRNDescriptor(normDesc: *mut cudnnLRNDescriptor_t) -> c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateLRNDescriptor(normDesc: *mut cudnnLRNDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateLRNDescriptor(normDesc: *mut cudnnLRNDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateLRNDescriptor(normDesc)
     }
 }
@@ -2984,7 +3074,9 @@ pub unsafe fn cudnnCreateOpTensorDescriptor(opTensorDesc: *mut cudnnOpTensorDesc
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateOpTensorDescriptor(opTensorDesc: *mut cudnnOpTensorDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateOpTensorDescriptor(opTensorDesc: *mut cudnnOpTensorDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateOpTensorDescriptor(opTensorDesc)
     }
 }
@@ -2999,7 +3091,9 @@ pub unsafe fn cudnnCreatePersistentRNNPlan(rnnDesc: cudnnRNNDescriptor_t, miniba
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreatePersistentRNNPlan(rnnDesc: cudnnRNNDescriptor_t, minibatch: ::core::ffi::c_int, dataType: cudnnDataType_t, plan: *mut cudnnPersistentRNNPlan_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreatePersistentRNNPlan(rnnDesc: cudnnRNNDescriptor_t, minibatch: ::core::ffi::c_int, dataType: cudnnDataType_t, plan: *mut cudnnPersistentRNNPlan_t) -> cudnnStatus_t;
+        }
         cudnnCreatePersistentRNNPlan(rnnDesc, minibatch, dataType, plan)
     }
 }
@@ -3013,7 +3107,9 @@ pub unsafe fn cudnnCreatePoolingDescriptor(poolingDesc: *mut cudnnPoolingDescrip
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreatePoolingDescriptor(poolingDesc: *mut cudnnPoolingDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreatePoolingDescriptor(poolingDesc: *mut cudnnPoolingDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreatePoolingDescriptor(poolingDesc)
     }
 }
@@ -3027,7 +3123,9 @@ pub unsafe fn cudnnCreateRNNDataDescriptor(rnnDataDesc: *mut cudnnRNNDataDescrip
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateRNNDataDescriptor(rnnDataDesc: *mut cudnnRNNDataDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateRNNDataDescriptor(rnnDataDesc: *mut cudnnRNNDataDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateRNNDataDescriptor(rnnDataDesc)
     }
 }
@@ -3041,7 +3139,9 @@ pub unsafe fn cudnnCreateRNNDescriptor(rnnDesc: *mut cudnnRNNDescriptor_t) -> cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateRNNDescriptor(rnnDesc: *mut cudnnRNNDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateRNNDescriptor(rnnDesc: *mut cudnnRNNDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateRNNDescriptor(rnnDesc)
     }
 }
@@ -3055,7 +3155,9 @@ pub unsafe fn cudnnCreateReduceTensorDescriptor(reduceTensorDesc: *mut cudnnRedu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateReduceTensorDescriptor(reduceTensorDesc: *mut cudnnReduceTensorDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateReduceTensorDescriptor(reduceTensorDesc: *mut cudnnReduceTensorDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateReduceTensorDescriptor(reduceTensorDesc)
     }
 }
@@ -3069,7 +3171,9 @@ pub unsafe fn cudnnCreateSeqDataDescriptor(seqDataDesc: *mut cudnnSeqDataDescrip
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateSeqDataDescriptor(seqDataDesc: *mut cudnnSeqDataDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateSeqDataDescriptor(seqDataDesc: *mut cudnnSeqDataDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateSeqDataDescriptor(seqDataDesc)
     }
 }
@@ -3083,7 +3187,9 @@ pub unsafe fn cudnnCreateSpatialTransformerDescriptor(stDesc: *mut cudnnSpatialT
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateSpatialTransformerDescriptor(stDesc: *mut cudnnSpatialTransformerDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateSpatialTransformerDescriptor(stDesc: *mut cudnnSpatialTransformerDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateSpatialTransformerDescriptor(stDesc)
     }
 }
@@ -3097,7 +3203,9 @@ pub unsafe fn cudnnCreateTensorDescriptor(tensorDesc: *mut cudnnTensorDescriptor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateTensorDescriptor(tensorDesc: *mut cudnnTensorDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateTensorDescriptor(tensorDesc: *mut cudnnTensorDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateTensorDescriptor(tensorDesc)
     }
 }
@@ -3111,7 +3219,9 @@ pub unsafe fn cudnnCreateTensorTransformDescriptor(transformDesc: *mut cudnnTens
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnCreateTensorTransformDescriptor(transformDesc: *mut cudnnTensorTransformDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnCreateTensorTransformDescriptor(transformDesc: *mut cudnnTensorTransformDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnCreateTensorTransformDescriptor(transformDesc)
     }
 }
@@ -3125,7 +3235,9 @@ pub unsafe fn cudnnDeriveBNTensorDescriptor(derivedBnDesc: cudnnTensorDescriptor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDeriveBNTensorDescriptor(derivedBnDesc: cudnnTensorDescriptor_t, xDesc: cudnnTensorDescriptor_t, mode: cudnnBatchNormMode_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDeriveBNTensorDescriptor(derivedBnDesc: cudnnTensorDescriptor_t, xDesc: cudnnTensorDescriptor_t, mode: cudnnBatchNormMode_t) -> cudnnStatus_t;
+        }
         cudnnDeriveBNTensorDescriptor(derivedBnDesc, xDesc, mode)
     }
 }
@@ -3139,7 +3251,9 @@ pub unsafe fn cudnnDeriveNormTensorDescriptor(derivedNormScaleBiasDesc: cudnnTen
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDeriveNormTensorDescriptor(derivedNormScaleBiasDesc: cudnnTensorDescriptor_t, derivedNormMeanVarDesc: cudnnTensorDescriptor_t, xDesc: cudnnTensorDescriptor_t, mode: cudnnNormMode_t, groupCnt: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDeriveNormTensorDescriptor(derivedNormScaleBiasDesc: cudnnTensorDescriptor_t, derivedNormMeanVarDesc: cudnnTensorDescriptor_t, xDesc: cudnnTensorDescriptor_t, mode: cudnnNormMode_t, groupCnt: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnDeriveNormTensorDescriptor(derivedNormScaleBiasDesc, derivedNormMeanVarDesc, xDesc, mode, groupCnt)
     }
 }
@@ -3153,7 +3267,9 @@ pub unsafe fn cudnnDestroy(handle: cudnnHandle_t) -> cudnnStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroy(handle: cudnnHandle_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroy(handle: cudnnHandle_t) -> cudnnStatus_t;
+        }
         cudnnDestroy(handle)
     }
 }
@@ -3167,7 +3283,9 @@ pub unsafe fn cudnnDestroyActivationDescriptor(activationDesc: cudnnActivationDe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyActivationDescriptor(activationDesc: cudnnActivationDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyActivationDescriptor(activationDesc: cudnnActivationDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroyActivationDescriptor(activationDesc)
     }
 }
@@ -3182,7 +3300,9 @@ pub unsafe fn cudnnDestroyAlgorithmDescriptor(algoDesc: cudnnAlgorithmDescriptor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyAlgorithmDescriptor(algoDesc: cudnnAlgorithmDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyAlgorithmDescriptor(algoDesc: cudnnAlgorithmDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroyAlgorithmDescriptor(algoDesc)
     }
 }
@@ -3197,7 +3317,9 @@ pub unsafe fn cudnnDestroyAlgorithmPerformance(algoPerf: *mut cudnnAlgorithmPerf
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyAlgorithmPerformance(algoPerf: *mut cudnnAlgorithmPerformance_t, numberToDestroy: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyAlgorithmPerformance(algoPerf: *mut cudnnAlgorithmPerformance_t, numberToDestroy: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnDestroyAlgorithmPerformance(algoPerf, numberToDestroy)
     }
 }
@@ -3211,7 +3333,9 @@ pub unsafe fn cudnnDestroyAttnDescriptor(attnDesc: cudnnAttnDescriptor_t) -> cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyAttnDescriptor(attnDesc: cudnnAttnDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyAttnDescriptor(attnDesc: cudnnAttnDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroyAttnDescriptor(attnDesc)
     }
 }
@@ -3225,7 +3349,9 @@ pub unsafe fn cudnnDestroyCTCLossDescriptor(ctcLossDesc: cudnnCTCLossDescriptor_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyCTCLossDescriptor(ctcLossDesc: cudnnCTCLossDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyCTCLossDescriptor(ctcLossDesc: cudnnCTCLossDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroyCTCLossDescriptor(ctcLossDesc)
     }
 }
@@ -3239,7 +3365,9 @@ pub unsafe fn cudnnDestroyConvolutionDescriptor(convDesc: cudnnConvolutionDescri
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyConvolutionDescriptor(convDesc: cudnnConvolutionDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyConvolutionDescriptor(convDesc: cudnnConvolutionDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroyConvolutionDescriptor(convDesc)
     }
 }
@@ -3253,7 +3381,9 @@ pub unsafe fn cudnnDestroyDropoutDescriptor(dropoutDesc: cudnnDropoutDescriptor_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyDropoutDescriptor(dropoutDesc: cudnnDropoutDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyDropoutDescriptor(dropoutDesc: cudnnDropoutDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroyDropoutDescriptor(dropoutDesc)
     }
 }
@@ -3267,7 +3397,9 @@ pub unsafe fn cudnnDestroyFilterDescriptor(filterDesc: cudnnFilterDescriptor_t) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyFilterDescriptor(filterDesc: cudnnFilterDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyFilterDescriptor(filterDesc: cudnnFilterDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroyFilterDescriptor(filterDesc)
     }
 }
@@ -3281,7 +3413,9 @@ pub unsafe fn cudnnDestroyFusedOpsConstParamPack(constPack: cudnnFusedOpsConstPa
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyFusedOpsConstParamPack(constPack: cudnnFusedOpsConstParamPack_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyFusedOpsConstParamPack(constPack: cudnnFusedOpsConstParamPack_t) -> cudnnStatus_t;
+        }
         cudnnDestroyFusedOpsConstParamPack(constPack)
     }
 }
@@ -3295,7 +3429,9 @@ pub unsafe fn cudnnDestroyFusedOpsPlan(plan: cudnnFusedOpsPlan_t) -> cudnnStatus
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyFusedOpsPlan(plan: cudnnFusedOpsPlan_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyFusedOpsPlan(plan: cudnnFusedOpsPlan_t) -> cudnnStatus_t;
+        }
         cudnnDestroyFusedOpsPlan(plan)
     }
 }
@@ -3309,7 +3445,9 @@ pub unsafe fn cudnnDestroyFusedOpsVariantParamPack(varPack: cudnnFusedOpsVariant
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyFusedOpsVariantParamPack(varPack: cudnnFusedOpsVariantParamPack_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyFusedOpsVariantParamPack(varPack: cudnnFusedOpsVariantParamPack_t) -> cudnnStatus_t;
+        }
         cudnnDestroyFusedOpsVariantParamPack(varPack)
     }
 }
@@ -3323,7 +3461,9 @@ pub unsafe fn cudnnDestroyLRNDescriptor(lrnDesc: cudnnLRNDescriptor_t) -> cudnnS
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyLRNDescriptor(lrnDesc: cudnnLRNDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyLRNDescriptor(lrnDesc: cudnnLRNDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroyLRNDescriptor(lrnDesc)
     }
 }
@@ -3337,7 +3477,9 @@ pub unsafe fn cudnnDestroyOpTensorDescriptor(opTensorDesc: cudnnOpTensorDescript
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyOpTensorDescriptor(opTensorDesc: cudnnOpTensorDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyOpTensorDescriptor(opTensorDesc: cudnnOpTensorDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroyOpTensorDescriptor(opTensorDesc)
     }
 }
@@ -3352,7 +3494,9 @@ pub unsafe fn cudnnDestroyPersistentRNNPlan(plan: cudnnPersistentRNNPlan_t) -> c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyPersistentRNNPlan(plan: cudnnPersistentRNNPlan_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyPersistentRNNPlan(plan: cudnnPersistentRNNPlan_t) -> cudnnStatus_t;
+        }
         cudnnDestroyPersistentRNNPlan(plan)
     }
 }
@@ -3366,7 +3510,9 @@ pub unsafe fn cudnnDestroyPoolingDescriptor(poolingDesc: cudnnPoolingDescriptor_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyPoolingDescriptor(poolingDesc: cudnnPoolingDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyPoolingDescriptor(poolingDesc: cudnnPoolingDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroyPoolingDescriptor(poolingDesc)
     }
 }
@@ -3380,7 +3526,9 @@ pub unsafe fn cudnnDestroyRNNDataDescriptor(rnnDataDesc: cudnnRNNDataDescriptor_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyRNNDataDescriptor(rnnDataDesc: cudnnRNNDataDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyRNNDataDescriptor(rnnDataDesc: cudnnRNNDataDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroyRNNDataDescriptor(rnnDataDesc)
     }
 }
@@ -3394,7 +3542,9 @@ pub unsafe fn cudnnDestroyRNNDescriptor(rnnDesc: cudnnRNNDescriptor_t) -> cudnnS
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyRNNDescriptor(rnnDesc: cudnnRNNDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyRNNDescriptor(rnnDesc: cudnnRNNDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroyRNNDescriptor(rnnDesc)
     }
 }
@@ -3408,7 +3558,9 @@ pub unsafe fn cudnnDestroyReduceTensorDescriptor(reduceTensorDesc: cudnnReduceTe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyReduceTensorDescriptor(reduceTensorDesc: cudnnReduceTensorDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyReduceTensorDescriptor(reduceTensorDesc: cudnnReduceTensorDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroyReduceTensorDescriptor(reduceTensorDesc)
     }
 }
@@ -3422,7 +3574,9 @@ pub unsafe fn cudnnDestroySeqDataDescriptor(seqDataDesc: cudnnSeqDataDescriptor_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroySeqDataDescriptor(seqDataDesc: cudnnSeqDataDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroySeqDataDescriptor(seqDataDesc: cudnnSeqDataDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroySeqDataDescriptor(seqDataDesc)
     }
 }
@@ -3436,7 +3590,9 @@ pub unsafe fn cudnnDestroySpatialTransformerDescriptor(stDesc: cudnnSpatialTrans
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroySpatialTransformerDescriptor(stDesc: cudnnSpatialTransformerDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroySpatialTransformerDescriptor(stDesc: cudnnSpatialTransformerDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroySpatialTransformerDescriptor(stDesc)
     }
 }
@@ -3450,7 +3606,9 @@ pub unsafe fn cudnnDestroyTensorDescriptor(tensorDesc: cudnnTensorDescriptor_t) 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyTensorDescriptor(tensorDesc: cudnnTensorDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyTensorDescriptor(tensorDesc: cudnnTensorDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroyTensorDescriptor(tensorDesc)
     }
 }
@@ -3464,7 +3622,9 @@ pub unsafe fn cudnnDestroyTensorTransformDescriptor(transformDesc: cudnnTensorTr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDestroyTensorTransformDescriptor(transformDesc: cudnnTensorTransformDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDestroyTensorTransformDescriptor(transformDesc: cudnnTensorTransformDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnDestroyTensorTransformDescriptor(transformDesc)
     }
 }
@@ -3478,7 +3638,9 @@ pub unsafe fn cudnnDivisiveNormalizationBackward(handle: cudnnHandle_t, normDesc
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDivisiveNormalizationBackward(handle: cudnnHandle_t, normDesc: cudnnLRNDescriptor_t, mode: cudnnDivNormMode_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, means: *const ::core::ffi::c_void, dy: *const ::core::ffi::c_void, temp: *mut ::core::ffi::c_void, temp2: *mut ::core::ffi::c_void, beta: *const ::core::ffi::c_void, dXdMeansDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void, dMeans: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDivisiveNormalizationBackward(handle: cudnnHandle_t, normDesc: cudnnLRNDescriptor_t, mode: cudnnDivNormMode_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, means: *const ::core::ffi::c_void, dy: *const ::core::ffi::c_void, temp: *mut ::core::ffi::c_void, temp2: *mut ::core::ffi::c_void, beta: *const ::core::ffi::c_void, dXdMeansDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void, dMeans: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnDivisiveNormalizationBackward(handle, normDesc, mode, alpha, xDesc, x, means, dy, temp, temp2, beta, dXdMeansDesc, dx, dMeans)
     }
 }
@@ -3492,7 +3654,9 @@ pub unsafe fn cudnnDivisiveNormalizationForward(handle: cudnnHandle_t, normDesc:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDivisiveNormalizationForward(handle: cudnnHandle_t, normDesc: cudnnLRNDescriptor_t, mode: cudnnDivNormMode_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, means: *const ::core::ffi::c_void, temp: *mut ::core::ffi::c_void, temp2: *mut ::core::ffi::c_void, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDivisiveNormalizationForward(handle: cudnnHandle_t, normDesc: cudnnLRNDescriptor_t, mode: cudnnDivNormMode_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, means: *const ::core::ffi::c_void, temp: *mut ::core::ffi::c_void, temp2: *mut ::core::ffi::c_void, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnDivisiveNormalizationForward(handle, normDesc, mode, alpha, xDesc, x, means, temp, temp2, beta, yDesc, y)
     }
 }
@@ -3506,7 +3670,9 @@ pub unsafe fn cudnnDropoutBackward(handle: cudnnHandle_t, dropoutDesc: cudnnDrop
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDropoutBackward(handle: cudnnHandle_t, dropoutDesc: cudnnDropoutDescriptor_t, dydesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, dxdesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDropoutBackward(handle: cudnnHandle_t, dropoutDesc: cudnnDropoutDescriptor_t, dydesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, dxdesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnDropoutBackward(handle, dropoutDesc, dydesc, dy, dxdesc, dx, reserveSpace, reserveSpaceSizeInBytes)
     }
 }
@@ -3520,7 +3686,9 @@ pub unsafe fn cudnnDropoutForward(handle: cudnnHandle_t, dropoutDesc: cudnnDropo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDropoutForward(handle: cudnnHandle_t, dropoutDesc: cudnnDropoutDescriptor_t, xdesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, ydesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDropoutForward(handle: cudnnHandle_t, dropoutDesc: cudnnDropoutDescriptor_t, xdesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, ydesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnDropoutForward(handle, dropoutDesc, xdesc, x, ydesc, y, reserveSpace, reserveSpaceSizeInBytes)
     }
 }
@@ -3534,7 +3702,9 @@ pub unsafe fn cudnnDropoutGetReserveSpaceSize(xdesc: cudnnTensorDescriptor_t, si
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDropoutGetReserveSpaceSize(xdesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDropoutGetReserveSpaceSize(xdesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnDropoutGetReserveSpaceSize(xdesc, sizeInBytes)
     }
 }
@@ -3548,7 +3718,9 @@ pub unsafe fn cudnnDropoutGetStatesSize(handle: cudnnHandle_t, sizeInBytes: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnDropoutGetStatesSize(handle: cudnnHandle_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnDropoutGetStatesSize(handle: cudnnHandle_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnDropoutGetStatesSize(handle, sizeInBytes)
     }
 }
@@ -3562,7 +3734,9 @@ pub unsafe fn cudnnFindConvolutionBackwardDataAlgorithm(handle: cudnnHandle_t, w
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnFindConvolutionBackwardDataAlgorithm(handle: cudnnHandle_t, wDesc: cudnnFilterDescriptor_t, dyDesc: cudnnTensorDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, dxDesc: cudnnTensorDescriptor_t, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionBwdDataAlgoPerf_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnFindConvolutionBackwardDataAlgorithm(handle: cudnnHandle_t, wDesc: cudnnFilterDescriptor_t, dyDesc: cudnnTensorDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, dxDesc: cudnnTensorDescriptor_t, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionBwdDataAlgoPerf_t) -> cudnnStatus_t;
+        }
         cudnnFindConvolutionBackwardDataAlgorithm(handle, wDesc, dyDesc, convDesc, dxDesc, requestedAlgoCount, returnedAlgoCount, perfResults)
     }
 }
@@ -3576,7 +3750,9 @@ pub unsafe fn cudnnFindConvolutionBackwardDataAlgorithmEx(handle: cudnnHandle_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnFindConvolutionBackwardDataAlgorithmEx(handle: cudnnHandle_t, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, convDesc: cudnnConvolutionDescriptor_t, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionBwdDataAlgoPerf_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnFindConvolutionBackwardDataAlgorithmEx(handle: cudnnHandle_t, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, convDesc: cudnnConvolutionDescriptor_t, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionBwdDataAlgoPerf_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnFindConvolutionBackwardDataAlgorithmEx(handle, wDesc, w, dyDesc, dy, convDesc, dxDesc, dx, requestedAlgoCount, returnedAlgoCount, perfResults, workSpace, workSpaceSizeInBytes)
     }
 }
@@ -3590,7 +3766,9 @@ pub unsafe fn cudnnFindConvolutionBackwardFilterAlgorithm(handle: cudnnHandle_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnFindConvolutionBackwardFilterAlgorithm(handle: cudnnHandle_t, xDesc: cudnnTensorDescriptor_t, dyDesc: cudnnTensorDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, dwDesc: cudnnFilterDescriptor_t, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionBwdFilterAlgoPerf_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnFindConvolutionBackwardFilterAlgorithm(handle: cudnnHandle_t, xDesc: cudnnTensorDescriptor_t, dyDesc: cudnnTensorDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, dwDesc: cudnnFilterDescriptor_t, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionBwdFilterAlgoPerf_t) -> cudnnStatus_t;
+        }
         cudnnFindConvolutionBackwardFilterAlgorithm(handle, xDesc, dyDesc, convDesc, dwDesc, requestedAlgoCount, returnedAlgoCount, perfResults)
     }
 }
@@ -3604,7 +3782,9 @@ pub unsafe fn cudnnFindConvolutionBackwardFilterAlgorithmEx(handle: cudnnHandle_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnFindConvolutionBackwardFilterAlgorithmEx(handle: cudnnHandle_t, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, convDesc: cudnnConvolutionDescriptor_t, dwDesc: cudnnFilterDescriptor_t, dw: *mut ::core::ffi::c_void, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionBwdFilterAlgoPerf_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnFindConvolutionBackwardFilterAlgorithmEx(handle: cudnnHandle_t, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, convDesc: cudnnConvolutionDescriptor_t, dwDesc: cudnnFilterDescriptor_t, dw: *mut ::core::ffi::c_void, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionBwdFilterAlgoPerf_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnFindConvolutionBackwardFilterAlgorithmEx(handle, xDesc, x, dyDesc, y, convDesc, dwDesc, dw, requestedAlgoCount, returnedAlgoCount, perfResults, workSpace, workSpaceSizeInBytes)
     }
 }
@@ -3618,7 +3798,9 @@ pub unsafe fn cudnnFindConvolutionForwardAlgorithm(handle: cudnnHandle_t, xDesc:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnFindConvolutionForwardAlgorithm(handle: cudnnHandle_t, xDesc: cudnnTensorDescriptor_t, wDesc: cudnnFilterDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, yDesc: cudnnTensorDescriptor_t, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionFwdAlgoPerf_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnFindConvolutionForwardAlgorithm(handle: cudnnHandle_t, xDesc: cudnnTensorDescriptor_t, wDesc: cudnnFilterDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, yDesc: cudnnTensorDescriptor_t, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionFwdAlgoPerf_t) -> cudnnStatus_t;
+        }
         cudnnFindConvolutionForwardAlgorithm(handle, xDesc, wDesc, convDesc, yDesc, requestedAlgoCount, returnedAlgoCount, perfResults)
     }
 }
@@ -3632,7 +3814,9 @@ pub unsafe fn cudnnFindConvolutionForwardAlgorithmEx(handle: cudnnHandle_t, xDes
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnFindConvolutionForwardAlgorithmEx(handle: cudnnHandle_t, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, convDesc: cudnnConvolutionDescriptor_t, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionFwdAlgoPerf_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnFindConvolutionForwardAlgorithmEx(handle: cudnnHandle_t, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, convDesc: cudnnConvolutionDescriptor_t, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionFwdAlgoPerf_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnFindConvolutionForwardAlgorithmEx(handle, xDesc, x, wDesc, w, convDesc, yDesc, y, requestedAlgoCount, returnedAlgoCount, perfResults, workSpace, workSpaceSizeInBytes)
     }
 }
@@ -3650,10 +3834,12 @@ pub unsafe fn cudnnFindRNNBackwardDataAlgorithmEx(
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnFindRNNBackwardDataAlgorithmEx(
-            handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, yDesc: *const cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, dyDesc: *const cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, dhyDesc: cudnnTensorDescriptor_t, dhy: *const ::core::ffi::c_void, dcyDesc: cudnnTensorDescriptor_t, dcy: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, dxDesc: *const cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void, dhxDesc: cudnnTensorDescriptor_t, dhx: *mut ::core::ffi::c_void, dcxDesc: cudnnTensorDescriptor_t, dcx: *mut ::core::ffi::c_void, findIntensity: f32, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnAlgorithmPerformance_t, workspace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize,
-            reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize,
-        ) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnFindRNNBackwardDataAlgorithmEx(
+                handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, yDesc: *const cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, dyDesc: *const cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, dhyDesc: cudnnTensorDescriptor_t, dhy: *const ::core::ffi::c_void, dcyDesc: cudnnTensorDescriptor_t, dcy: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, dxDesc: *const cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void, dhxDesc: cudnnTensorDescriptor_t, dhx: *mut ::core::ffi::c_void, dcxDesc: cudnnTensorDescriptor_t, dcx: *mut ::core::ffi::c_void, findIntensity: f32, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnAlgorithmPerformance_t, workspace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize,
+                reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize,
+            ) -> cudnnStatus_t;
+        }
         cudnnFindRNNBackwardDataAlgorithmEx(handle, rnnDesc, seqLength, yDesc, y, dyDesc, dy, dhyDesc, dhy, dcyDesc, dcy, wDesc, w, hxDesc, hx, cxDesc, cx, dxDesc, dx, dhxDesc, dhx, dcxDesc, dcx, findIntensity, requestedAlgoCount, returnedAlgoCount, perfResults, workspace, workSpaceSizeInBytes, reserveSpace, reserveSpaceSizeInBytes)
     }
 }
@@ -3668,7 +3854,9 @@ pub unsafe fn cudnnFindRNNBackwardWeightsAlgorithmEx(handle: cudnnHandle_t, rnnD
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnFindRNNBackwardWeightsAlgorithmEx(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, yDesc: *const cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, findIntensity: f32, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnAlgorithmPerformance_t, workspace: *const ::core::ffi::c_void, workSpaceSizeInBytes: usize, dwDesc: cudnnFilterDescriptor_t, dw: *mut ::core::ffi::c_void, reserveSpace: *const ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnFindRNNBackwardWeightsAlgorithmEx(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, yDesc: *const cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, findIntensity: f32, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnAlgorithmPerformance_t, workspace: *const ::core::ffi::c_void, workSpaceSizeInBytes: usize, dwDesc: cudnnFilterDescriptor_t, dw: *mut ::core::ffi::c_void, reserveSpace: *const ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnFindRNNBackwardWeightsAlgorithmEx(handle, rnnDesc, seqLength, xDesc, x, hxDesc, hx, yDesc, y, findIntensity, requestedAlgoCount, returnedAlgoCount, perfResults, workspace, workSpaceSizeInBytes, dwDesc, dw, reserveSpace, reserveSpaceSizeInBytes)
     }
 }
@@ -3683,7 +3871,9 @@ pub unsafe fn cudnnFindRNNForwardInferenceAlgorithmEx(handle: cudnnHandle_t, rnn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnFindRNNForwardInferenceAlgorithmEx(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, yDesc: *const cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, hyDesc: cudnnTensorDescriptor_t, hy: *mut ::core::ffi::c_void, cyDesc: cudnnTensorDescriptor_t, cy: *mut ::core::ffi::c_void, findIntensity: f32, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnAlgorithmPerformance_t, workspace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnFindRNNForwardInferenceAlgorithmEx(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, yDesc: *const cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, hyDesc: cudnnTensorDescriptor_t, hy: *mut ::core::ffi::c_void, cyDesc: cudnnTensorDescriptor_t, cy: *mut ::core::ffi::c_void, findIntensity: f32, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnAlgorithmPerformance_t, workspace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnFindRNNForwardInferenceAlgorithmEx(handle, rnnDesc, seqLength, xDesc, x, hxDesc, hx, cxDesc, cx, wDesc, w, yDesc, y, hyDesc, hy, cyDesc, cy, findIntensity, requestedAlgoCount, returnedAlgoCount, perfResults, workspace, workSpaceSizeInBytes)
     }
 }
@@ -3698,7 +3888,9 @@ pub unsafe fn cudnnFindRNNForwardTrainingAlgorithmEx(handle: cudnnHandle_t, rnnD
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnFindRNNForwardTrainingAlgorithmEx(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, yDesc: *const cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, hyDesc: cudnnTensorDescriptor_t, hy: *mut ::core::ffi::c_void, cyDesc: cudnnTensorDescriptor_t, cy: *mut ::core::ffi::c_void, findIntensity: f32, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnAlgorithmPerformance_t, workspace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnFindRNNForwardTrainingAlgorithmEx(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, yDesc: *const cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, hyDesc: cudnnTensorDescriptor_t, hy: *mut ::core::ffi::c_void, cyDesc: cudnnTensorDescriptor_t, cy: *mut ::core::ffi::c_void, findIntensity: f32, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnAlgorithmPerformance_t, workspace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnFindRNNForwardTrainingAlgorithmEx(handle, rnnDesc, seqLength, xDesc, x, hxDesc, hx, cxDesc, cx, wDesc, w, yDesc, y, hyDesc, hy, cyDesc, cy, findIntensity, requestedAlgoCount, returnedAlgoCount, perfResults, workspace, workSpaceSizeInBytes, reserveSpace, reserveSpaceSizeInBytes)
     }
 }
@@ -3712,7 +3904,9 @@ pub unsafe fn cudnnFusedOpsExecute(handle: cudnnHandle_t, plan: cudnnFusedOpsPla
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnFusedOpsExecute(handle: cudnnHandle_t, plan: cudnnFusedOpsPlan_t, varPack: cudnnFusedOpsVariantParamPack_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnFusedOpsExecute(handle: cudnnHandle_t, plan: cudnnFusedOpsPlan_t, varPack: cudnnFusedOpsVariantParamPack_t) -> cudnnStatus_t;
+        }
         cudnnFusedOpsExecute(handle, plan, varPack)
     }
 }
@@ -3726,7 +3920,9 @@ pub unsafe fn cudnnGetActivationDescriptor(activationDesc: cudnnActivationDescri
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetActivationDescriptor(activationDesc: cudnnActivationDescriptor_t, mode: *mut cudnnActivationMode_t, reluNanOpt: *mut cudnnNanPropagation_t, coef: *mut f64) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetActivationDescriptor(activationDesc: cudnnActivationDescriptor_t, mode: *mut cudnnActivationMode_t, reluNanOpt: *mut cudnnNanPropagation_t, coef: *mut f64) -> cudnnStatus_t;
+        }
         cudnnGetActivationDescriptor(activationDesc, mode, reluNanOpt, coef)
     }
 }
@@ -3740,7 +3936,9 @@ pub unsafe fn cudnnGetActivationDescriptorSwishBeta(activationDesc: cudnnActivat
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetActivationDescriptorSwishBeta(activationDesc: cudnnActivationDescriptor_t, swish_beta: *mut f64) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetActivationDescriptorSwishBeta(activationDesc: cudnnActivationDescriptor_t, swish_beta: *mut f64) -> cudnnStatus_t;
+        }
         cudnnGetActivationDescriptorSwishBeta(activationDesc, swish_beta)
     }
 }
@@ -3755,7 +3953,9 @@ pub unsafe fn cudnnGetAlgorithmDescriptor(algoDesc: cudnnAlgorithmDescriptor_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetAlgorithmDescriptor(algoDesc: cudnnAlgorithmDescriptor_t, algorithm: *mut cudnnAlgorithm_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetAlgorithmDescriptor(algoDesc: cudnnAlgorithmDescriptor_t, algorithm: *mut cudnnAlgorithm_t) -> cudnnStatus_t;
+        }
         cudnnGetAlgorithmDescriptor(algoDesc, algorithm)
     }
 }
@@ -3770,7 +3970,9 @@ pub unsafe fn cudnnGetAlgorithmPerformance(algoPerf: cudnnAlgorithmPerformance_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetAlgorithmPerformance(algoPerf: cudnnAlgorithmPerformance_t, algoDesc: *mut cudnnAlgorithmDescriptor_t, status: *mut cudnnStatus_t, time: *mut f32, memory: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetAlgorithmPerformance(algoPerf: cudnnAlgorithmPerformance_t, algoDesc: *mut cudnnAlgorithmDescriptor_t, status: *mut cudnnStatus_t, time: *mut f32, memory: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetAlgorithmPerformance(algoPerf, algoDesc, status, time, memory)
     }
 }
@@ -3785,7 +3987,9 @@ pub unsafe fn cudnnGetAlgorithmSpaceSize(handle: cudnnHandle_t, algoDesc: cudnnA
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetAlgorithmSpaceSize(handle: cudnnHandle_t, algoDesc: cudnnAlgorithmDescriptor_t, algoSpaceSizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetAlgorithmSpaceSize(handle: cudnnHandle_t, algoDesc: cudnnAlgorithmDescriptor_t, algoSpaceSizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetAlgorithmSpaceSize(handle, algoDesc, algoSpaceSizeInBytes)
     }
 }
@@ -3799,7 +4003,9 @@ pub unsafe fn cudnnGetAttnDescriptor(attnDesc: cudnnAttnDescriptor_t, attnMode: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetAttnDescriptor(attnDesc: cudnnAttnDescriptor_t, attnMode: *mut ::core::ffi::c_uint, nHeads: *mut ::core::ffi::c_int, smScaler: *mut f64, dataType: *mut cudnnDataType_t, computePrec: *mut cudnnDataType_t, mathType: *mut cudnnMathType_t, attnDropoutDesc: *mut cudnnDropoutDescriptor_t, postDropoutDesc: *mut cudnnDropoutDescriptor_t, qSize: *mut ::core::ffi::c_int, kSize: *mut ::core::ffi::c_int, vSize: *mut ::core::ffi::c_int, qProjSize: *mut ::core::ffi::c_int, kProjSize: *mut ::core::ffi::c_int, vProjSize: *mut ::core::ffi::c_int, oProjSize: *mut ::core::ffi::c_int, qoMaxSeqLength: *mut ::core::ffi::c_int, kvMaxSeqLength: *mut ::core::ffi::c_int, maxBatchSize: *mut ::core::ffi::c_int, maxBeamSize: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetAttnDescriptor(attnDesc: cudnnAttnDescriptor_t, attnMode: *mut ::core::ffi::c_uint, nHeads: *mut ::core::ffi::c_int, smScaler: *mut f64, dataType: *mut cudnnDataType_t, computePrec: *mut cudnnDataType_t, mathType: *mut cudnnMathType_t, attnDropoutDesc: *mut cudnnDropoutDescriptor_t, postDropoutDesc: *mut cudnnDropoutDescriptor_t, qSize: *mut ::core::ffi::c_int, kSize: *mut ::core::ffi::c_int, vSize: *mut ::core::ffi::c_int, qProjSize: *mut ::core::ffi::c_int, kProjSize: *mut ::core::ffi::c_int, vProjSize: *mut ::core::ffi::c_int, oProjSize: *mut ::core::ffi::c_int, qoMaxSeqLength: *mut ::core::ffi::c_int, kvMaxSeqLength: *mut ::core::ffi::c_int, maxBatchSize: *mut ::core::ffi::c_int, maxBeamSize: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetAttnDescriptor(attnDesc, attnMode, nHeads, smScaler, dataType, computePrec, mathType, attnDropoutDesc, postDropoutDesc, qSize, kSize, vSize, qProjSize, kProjSize, vProjSize, oProjSize, qoMaxSeqLength, kvMaxSeqLength, maxBatchSize, maxBeamSize)
     }
 }
@@ -3813,7 +4019,9 @@ pub unsafe fn cudnnGetBatchNormalizationBackwardExWorkspaceSize(handle: cudnnHan
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetBatchNormalizationBackwardExWorkspaceSize(handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, bnOps: cudnnBatchNormOps_t, xDesc: cudnnTensorDescriptor_t, yDesc: cudnnTensorDescriptor_t, dyDesc: cudnnTensorDescriptor_t, dzDesc: cudnnTensorDescriptor_t, dxDesc: cudnnTensorDescriptor_t, dBnScaleBiasDesc: cudnnTensorDescriptor_t, activationDesc: cudnnActivationDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetBatchNormalizationBackwardExWorkspaceSize(handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, bnOps: cudnnBatchNormOps_t, xDesc: cudnnTensorDescriptor_t, yDesc: cudnnTensorDescriptor_t, dyDesc: cudnnTensorDescriptor_t, dzDesc: cudnnTensorDescriptor_t, dxDesc: cudnnTensorDescriptor_t, dBnScaleBiasDesc: cudnnTensorDescriptor_t, activationDesc: cudnnActivationDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetBatchNormalizationBackwardExWorkspaceSize(handle, mode, bnOps, xDesc, yDesc, dyDesc, dzDesc, dxDesc, dBnScaleBiasDesc, activationDesc, sizeInBytes)
     }
 }
@@ -3827,7 +4035,9 @@ pub unsafe fn cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize(handle: c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize(handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, bnOps: cudnnBatchNormOps_t, xDesc: cudnnTensorDescriptor_t, zDesc: cudnnTensorDescriptor_t, yDesc: cudnnTensorDescriptor_t, bnScaleBiasMeanVarDesc: cudnnTensorDescriptor_t, activationDesc: cudnnActivationDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize(handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, bnOps: cudnnBatchNormOps_t, xDesc: cudnnTensorDescriptor_t, zDesc: cudnnTensorDescriptor_t, yDesc: cudnnTensorDescriptor_t, bnScaleBiasMeanVarDesc: cudnnTensorDescriptor_t, activationDesc: cudnnActivationDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize(handle, mode, bnOps, xDesc, zDesc, yDesc, bnScaleBiasMeanVarDesc, activationDesc, sizeInBytes)
     }
 }
@@ -3841,7 +4051,9 @@ pub unsafe fn cudnnGetBatchNormalizationTrainingExReserveSpaceSize(handle: cudnn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetBatchNormalizationTrainingExReserveSpaceSize(handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, bnOps: cudnnBatchNormOps_t, activationDesc: cudnnActivationDescriptor_t, xDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetBatchNormalizationTrainingExReserveSpaceSize(handle: cudnnHandle_t, mode: cudnnBatchNormMode_t, bnOps: cudnnBatchNormOps_t, activationDesc: cudnnActivationDescriptor_t, xDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetBatchNormalizationTrainingExReserveSpaceSize(handle, mode, bnOps, activationDesc, xDesc, sizeInBytes)
     }
 }
@@ -3855,7 +4067,9 @@ pub unsafe fn cudnnGetCTCLossDescriptor(ctcLossDesc: cudnnCTCLossDescriptor_t, c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetCTCLossDescriptor(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: *mut cudnnDataType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetCTCLossDescriptor(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: *mut cudnnDataType_t) -> cudnnStatus_t;
+        }
         cudnnGetCTCLossDescriptor(ctcLossDesc, compType)
     }
 }
@@ -3869,7 +4083,9 @@ pub unsafe fn cudnnGetCTCLossDescriptorEx(ctcLossDesc: cudnnCTCLossDescriptor_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetCTCLossDescriptorEx(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: *mut cudnnDataType_t, normMode: *mut cudnnLossNormalizationMode_t, gradMode: *mut cudnnNanPropagation_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetCTCLossDescriptorEx(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: *mut cudnnDataType_t, normMode: *mut cudnnLossNormalizationMode_t, gradMode: *mut cudnnNanPropagation_t) -> cudnnStatus_t;
+        }
         cudnnGetCTCLossDescriptorEx(ctcLossDesc, compType, normMode, gradMode)
     }
 }
@@ -3883,7 +4099,9 @@ pub unsafe fn cudnnGetCTCLossDescriptor_v8(ctcLossDesc: cudnnCTCLossDescriptor_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetCTCLossDescriptor_v8(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: *mut cudnnDataType_t, normMode: *mut cudnnLossNormalizationMode_t, gradMode: *mut cudnnNanPropagation_t, maxLabelLength: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetCTCLossDescriptor_v8(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: *mut cudnnDataType_t, normMode: *mut cudnnLossNormalizationMode_t, gradMode: *mut cudnnNanPropagation_t, maxLabelLength: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetCTCLossDescriptor_v8(ctcLossDesc, compType, normMode, gradMode, maxLabelLength)
     }
 }
@@ -3898,7 +4116,9 @@ pub unsafe fn cudnnGetCTCLossDescriptor_v9(ctcLossDesc: cudnnCTCLossDescriptor_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetCTCLossDescriptor_v9(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: *mut cudnnDataType_t, normMode: *mut cudnnLossNormalizationMode_t, ctcGradMode: *mut cudnnCTCGradMode_t, maxLabelLength: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetCTCLossDescriptor_v9(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: *mut cudnnDataType_t, normMode: *mut cudnnLossNormalizationMode_t, ctcGradMode: *mut cudnnCTCGradMode_t, maxLabelLength: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetCTCLossDescriptor_v9(ctcLossDesc, compType, normMode, ctcGradMode, maxLabelLength)
     }
 }
@@ -3912,7 +4132,9 @@ pub unsafe fn cudnnGetCTCLossWorkspaceSize(handle: cudnnHandle_t, probsDesc: cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetCTCLossWorkspaceSize(handle: cudnnHandle_t, probsDesc: cudnnTensorDescriptor_t, gradientsDesc: cudnnTensorDescriptor_t, labels: *const ::core::ffi::c_int, labelLengths: *const ::core::ffi::c_int, inputLengths: *const ::core::ffi::c_int, algo: cudnnCTCLossAlgo_t, ctcLossDesc: cudnnCTCLossDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetCTCLossWorkspaceSize(handle: cudnnHandle_t, probsDesc: cudnnTensorDescriptor_t, gradientsDesc: cudnnTensorDescriptor_t, labels: *const ::core::ffi::c_int, labelLengths: *const ::core::ffi::c_int, inputLengths: *const ::core::ffi::c_int, algo: cudnnCTCLossAlgo_t, ctcLossDesc: cudnnCTCLossDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetCTCLossWorkspaceSize(handle, probsDesc, gradientsDesc, labels, labelLengths, inputLengths, algo, ctcLossDesc, sizeInBytes)
     }
 }
@@ -3926,7 +4148,9 @@ pub unsafe fn cudnnGetCTCLossWorkspaceSize_v8(handle: cudnnHandle_t, algo: cudnn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetCTCLossWorkspaceSize_v8(handle: cudnnHandle_t, algo: cudnnCTCLossAlgo_t, ctcLossDesc: cudnnCTCLossDescriptor_t, probsDesc: cudnnTensorDescriptor_t, gradientsDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetCTCLossWorkspaceSize_v8(handle: cudnnHandle_t, algo: cudnnCTCLossAlgo_t, ctcLossDesc: cudnnCTCLossDescriptor_t, probsDesc: cudnnTensorDescriptor_t, gradientsDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetCTCLossWorkspaceSize_v8(handle, algo, ctcLossDesc, probsDesc, gradientsDesc, sizeInBytes)
     }
 }
@@ -3940,7 +4164,9 @@ pub unsafe fn cudnnGetCallback(mask: *mut ::core::ffi::c_uint, udata: *mut *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetCallback(mask: *mut ::core::ffi::c_uint, udata: *mut *mut ::core::ffi::c_void, fptr: *mut cudnnCallback_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetCallback(mask: *mut ::core::ffi::c_uint, udata: *mut *mut ::core::ffi::c_void, fptr: *mut cudnnCallback_t) -> cudnnStatus_t;
+        }
         cudnnGetCallback(mask, udata, fptr)
     }
 }
@@ -3954,7 +4180,9 @@ pub unsafe fn cudnnGetConvolution2dDescriptor(convDesc: cudnnConvolutionDescript
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolution2dDescriptor(convDesc: cudnnConvolutionDescriptor_t, pad_h: *mut ::core::ffi::c_int, pad_w: *mut ::core::ffi::c_int, u: *mut ::core::ffi::c_int, v: *mut ::core::ffi::c_int, dilation_h: *mut ::core::ffi::c_int, dilation_w: *mut ::core::ffi::c_int, mode: *mut cudnnConvolutionMode_t, computeType: *mut cudnnDataType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolution2dDescriptor(convDesc: cudnnConvolutionDescriptor_t, pad_h: *mut ::core::ffi::c_int, pad_w: *mut ::core::ffi::c_int, u: *mut ::core::ffi::c_int, v: *mut ::core::ffi::c_int, dilation_h: *mut ::core::ffi::c_int, dilation_w: *mut ::core::ffi::c_int, mode: *mut cudnnConvolutionMode_t, computeType: *mut cudnnDataType_t) -> cudnnStatus_t;
+        }
         cudnnGetConvolution2dDescriptor(convDesc, pad_h, pad_w, u, v, dilation_h, dilation_w, mode, computeType)
     }
 }
@@ -3968,7 +4196,9 @@ pub unsafe fn cudnnGetConvolution2dForwardOutputDim(convDesc: cudnnConvolutionDe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolution2dForwardOutputDim(convDesc: cudnnConvolutionDescriptor_t, inputTensorDesc: cudnnTensorDescriptor_t, filterDesc: cudnnFilterDescriptor_t, n: *mut ::core::ffi::c_int, c: *mut ::core::ffi::c_int, h: *mut ::core::ffi::c_int, w: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolution2dForwardOutputDim(convDesc: cudnnConvolutionDescriptor_t, inputTensorDesc: cudnnTensorDescriptor_t, filterDesc: cudnnFilterDescriptor_t, n: *mut ::core::ffi::c_int, c: *mut ::core::ffi::c_int, h: *mut ::core::ffi::c_int, w: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetConvolution2dForwardOutputDim(convDesc, inputTensorDesc, filterDesc, n, c, h, w)
     }
 }
@@ -3982,7 +4212,9 @@ pub unsafe fn cudnnGetConvolutionBackwardDataAlgorithmMaxCount(handle: cudnnHand
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolutionBackwardDataAlgorithmMaxCount(handle: cudnnHandle_t, count: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolutionBackwardDataAlgorithmMaxCount(handle: cudnnHandle_t, count: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetConvolutionBackwardDataAlgorithmMaxCount(handle, count)
     }
 }
@@ -3996,7 +4228,9 @@ pub unsafe fn cudnnGetConvolutionBackwardDataAlgorithm_v7(handle: cudnnHandle_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolutionBackwardDataAlgorithm_v7(handle: cudnnHandle_t, filterDesc: cudnnFilterDescriptor_t, diffDesc: cudnnTensorDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, gradDesc: cudnnTensorDescriptor_t, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionBwdDataAlgoPerf_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolutionBackwardDataAlgorithm_v7(handle: cudnnHandle_t, filterDesc: cudnnFilterDescriptor_t, diffDesc: cudnnTensorDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, gradDesc: cudnnTensorDescriptor_t, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionBwdDataAlgoPerf_t) -> cudnnStatus_t;
+        }
         cudnnGetConvolutionBackwardDataAlgorithm_v7(handle, filterDesc, diffDesc, convDesc, gradDesc, requestedAlgoCount, returnedAlgoCount, perfResults)
     }
 }
@@ -4010,7 +4244,9 @@ pub unsafe fn cudnnGetConvolutionBackwardDataWorkspaceSize(handle: cudnnHandle_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolutionBackwardDataWorkspaceSize(handle: cudnnHandle_t, wDesc: cudnnFilterDescriptor_t, dyDesc: cudnnTensorDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, dxDesc: cudnnTensorDescriptor_t, algo: cudnnConvolutionBwdDataAlgo_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolutionBackwardDataWorkspaceSize(handle: cudnnHandle_t, wDesc: cudnnFilterDescriptor_t, dyDesc: cudnnTensorDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, dxDesc: cudnnTensorDescriptor_t, algo: cudnnConvolutionBwdDataAlgo_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetConvolutionBackwardDataWorkspaceSize(handle, wDesc, dyDesc, convDesc, dxDesc, algo, sizeInBytes)
     }
 }
@@ -4024,7 +4260,9 @@ pub unsafe fn cudnnGetConvolutionBackwardFilterAlgorithmMaxCount(handle: cudnnHa
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolutionBackwardFilterAlgorithmMaxCount(handle: cudnnHandle_t, count: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolutionBackwardFilterAlgorithmMaxCount(handle: cudnnHandle_t, count: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetConvolutionBackwardFilterAlgorithmMaxCount(handle, count)
     }
 }
@@ -4038,7 +4276,9 @@ pub unsafe fn cudnnGetConvolutionBackwardFilterAlgorithm_v7(handle: cudnnHandle_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolutionBackwardFilterAlgorithm_v7(handle: cudnnHandle_t, srcDesc: cudnnTensorDescriptor_t, diffDesc: cudnnTensorDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, gradDesc: cudnnFilterDescriptor_t, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionBwdFilterAlgoPerf_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolutionBackwardFilterAlgorithm_v7(handle: cudnnHandle_t, srcDesc: cudnnTensorDescriptor_t, diffDesc: cudnnTensorDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, gradDesc: cudnnFilterDescriptor_t, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionBwdFilterAlgoPerf_t) -> cudnnStatus_t;
+        }
         cudnnGetConvolutionBackwardFilterAlgorithm_v7(handle, srcDesc, diffDesc, convDesc, gradDesc, requestedAlgoCount, returnedAlgoCount, perfResults)
     }
 }
@@ -4052,7 +4292,9 @@ pub unsafe fn cudnnGetConvolutionBackwardFilterWorkspaceSize(handle: cudnnHandle
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolutionBackwardFilterWorkspaceSize(handle: cudnnHandle_t, xDesc: cudnnTensorDescriptor_t, dyDesc: cudnnTensorDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, gradDesc: cudnnFilterDescriptor_t, algo: cudnnConvolutionBwdFilterAlgo_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolutionBackwardFilterWorkspaceSize(handle: cudnnHandle_t, xDesc: cudnnTensorDescriptor_t, dyDesc: cudnnTensorDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, gradDesc: cudnnFilterDescriptor_t, algo: cudnnConvolutionBwdFilterAlgo_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetConvolutionBackwardFilterWorkspaceSize(handle, xDesc, dyDesc, convDesc, gradDesc, algo, sizeInBytes)
     }
 }
@@ -4066,7 +4308,9 @@ pub unsafe fn cudnnGetConvolutionForwardAlgorithmMaxCount(handle: cudnnHandle_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolutionForwardAlgorithmMaxCount(handle: cudnnHandle_t, count: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolutionForwardAlgorithmMaxCount(handle: cudnnHandle_t, count: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetConvolutionForwardAlgorithmMaxCount(handle, count)
     }
 }
@@ -4080,7 +4324,9 @@ pub unsafe fn cudnnGetConvolutionForwardAlgorithm_v7(handle: cudnnHandle_t, srcD
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolutionForwardAlgorithm_v7(handle: cudnnHandle_t, srcDesc: cudnnTensorDescriptor_t, filterDesc: cudnnFilterDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, destDesc: cudnnTensorDescriptor_t, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionFwdAlgoPerf_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolutionForwardAlgorithm_v7(handle: cudnnHandle_t, srcDesc: cudnnTensorDescriptor_t, filterDesc: cudnnFilterDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, destDesc: cudnnTensorDescriptor_t, requestedAlgoCount: ::core::ffi::c_int, returnedAlgoCount: *mut ::core::ffi::c_int, perfResults: *mut cudnnConvolutionFwdAlgoPerf_t) -> cudnnStatus_t;
+        }
         cudnnGetConvolutionForwardAlgorithm_v7(handle, srcDesc, filterDesc, convDesc, destDesc, requestedAlgoCount, returnedAlgoCount, perfResults)
     }
 }
@@ -4094,7 +4340,9 @@ pub unsafe fn cudnnGetConvolutionForwardWorkspaceSize(handle: cudnnHandle_t, xDe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolutionForwardWorkspaceSize(handle: cudnnHandle_t, xDesc: cudnnTensorDescriptor_t, wDesc: cudnnFilterDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, yDesc: cudnnTensorDescriptor_t, algo: cudnnConvolutionFwdAlgo_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolutionForwardWorkspaceSize(handle: cudnnHandle_t, xDesc: cudnnTensorDescriptor_t, wDesc: cudnnFilterDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, yDesc: cudnnTensorDescriptor_t, algo: cudnnConvolutionFwdAlgo_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetConvolutionForwardWorkspaceSize(handle, xDesc, wDesc, convDesc, yDesc, algo, sizeInBytes)
     }
 }
@@ -4108,7 +4356,9 @@ pub unsafe fn cudnnGetConvolutionGroupCount(convDesc: cudnnConvolutionDescriptor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolutionGroupCount(convDesc: cudnnConvolutionDescriptor_t, groupCount: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolutionGroupCount(convDesc: cudnnConvolutionDescriptor_t, groupCount: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetConvolutionGroupCount(convDesc, groupCount)
     }
 }
@@ -4122,7 +4372,9 @@ pub unsafe fn cudnnGetConvolutionMathType(convDesc: cudnnConvolutionDescriptor_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolutionMathType(convDesc: cudnnConvolutionDescriptor_t, mathType: *mut cudnnMathType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolutionMathType(convDesc: cudnnConvolutionDescriptor_t, mathType: *mut cudnnMathType_t) -> cudnnStatus_t;
+        }
         cudnnGetConvolutionMathType(convDesc, mathType)
     }
 }
@@ -4136,7 +4388,9 @@ pub unsafe fn cudnnGetConvolutionNdDescriptor(convDesc: cudnnConvolutionDescript
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolutionNdDescriptor(convDesc: cudnnConvolutionDescriptor_t, arrayLengthRequested: ::core::ffi::c_int, arrayLength: *mut ::core::ffi::c_int, padA: *mut ::core::ffi::c_int, strideA: *mut ::core::ffi::c_int, dilationA: *mut ::core::ffi::c_int, mode: *mut cudnnConvolutionMode_t, computeType: *mut cudnnDataType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolutionNdDescriptor(convDesc: cudnnConvolutionDescriptor_t, arrayLengthRequested: ::core::ffi::c_int, arrayLength: *mut ::core::ffi::c_int, padA: *mut ::core::ffi::c_int, strideA: *mut ::core::ffi::c_int, dilationA: *mut ::core::ffi::c_int, mode: *mut cudnnConvolutionMode_t, computeType: *mut cudnnDataType_t) -> cudnnStatus_t;
+        }
         cudnnGetConvolutionNdDescriptor(convDesc, arrayLengthRequested, arrayLength, padA, strideA, dilationA, mode, computeType)
     }
 }
@@ -4150,7 +4404,9 @@ pub unsafe fn cudnnGetConvolutionNdForwardOutputDim(convDesc: cudnnConvolutionDe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolutionNdForwardOutputDim(convDesc: cudnnConvolutionDescriptor_t, inputTensorDesc: cudnnTensorDescriptor_t, filterDesc: cudnnFilterDescriptor_t, nbDims: ::core::ffi::c_int, tensorOuputDimA: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolutionNdForwardOutputDim(convDesc: cudnnConvolutionDescriptor_t, inputTensorDesc: cudnnTensorDescriptor_t, filterDesc: cudnnFilterDescriptor_t, nbDims: ::core::ffi::c_int, tensorOuputDimA: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetConvolutionNdForwardOutputDim(convDesc, inputTensorDesc, filterDesc, nbDims, tensorOuputDimA)
     }
 }
@@ -4164,7 +4420,9 @@ pub unsafe fn cudnnGetConvolutionReorderType(convDesc: cudnnConvolutionDescripto
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetConvolutionReorderType(convDesc: cudnnConvolutionDescriptor_t, reorderType: *mut cudnnReorderType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetConvolutionReorderType(convDesc: cudnnConvolutionDescriptor_t, reorderType: *mut cudnnReorderType_t) -> cudnnStatus_t;
+        }
         cudnnGetConvolutionReorderType(convDesc, reorderType)
     }
 }
@@ -4178,7 +4436,9 @@ pub unsafe fn cudnnGetCudartVersion() -> usize {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetCudartVersion() -> usize;
+        extern "C" {
+            fn cudnnGetCudartVersion() -> usize;
+        }
         cudnnGetCudartVersion()
     }
 }
@@ -4192,7 +4452,9 @@ pub unsafe fn cudnnGetDropoutDescriptor(dropoutDesc: cudnnDropoutDescriptor_t, h
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetDropoutDescriptor(dropoutDesc: cudnnDropoutDescriptor_t, handle: cudnnHandle_t, dropout: *mut f32, states: *mut *mut ::core::ffi::c_void, seed: *mut ::core::ffi::c_ulonglong) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetDropoutDescriptor(dropoutDesc: cudnnDropoutDescriptor_t, handle: cudnnHandle_t, dropout: *mut f32, states: *mut *mut ::core::ffi::c_void, seed: *mut ::core::ffi::c_ulonglong) -> cudnnStatus_t;
+        }
         cudnnGetDropoutDescriptor(dropoutDesc, handle, dropout, states, seed)
     }
 }
@@ -4206,7 +4468,9 @@ pub unsafe fn cudnnGetErrorString(status: cudnnStatus_t) -> *const ::core::ffi::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetErrorString(status: cudnnStatus_t) -> *const ::core::ffi::c_char;
+        extern "C" {
+            fn cudnnGetErrorString(status: cudnnStatus_t) -> *const ::core::ffi::c_char;
+        }
         cudnnGetErrorString(status)
     }
 }
@@ -4220,7 +4484,9 @@ pub unsafe fn cudnnGetFilter4dDescriptor(filterDesc: cudnnFilterDescriptor_t, da
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetFilter4dDescriptor(filterDesc: cudnnFilterDescriptor_t, dataType: *mut cudnnDataType_t, format: *mut cudnnTensorFormat_t, k: *mut ::core::ffi::c_int, c: *mut ::core::ffi::c_int, h: *mut ::core::ffi::c_int, w: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetFilter4dDescriptor(filterDesc: cudnnFilterDescriptor_t, dataType: *mut cudnnDataType_t, format: *mut cudnnTensorFormat_t, k: *mut ::core::ffi::c_int, c: *mut ::core::ffi::c_int, h: *mut ::core::ffi::c_int, w: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetFilter4dDescriptor(filterDesc, dataType, format, k, c, h, w)
     }
 }
@@ -4234,7 +4500,9 @@ pub unsafe fn cudnnGetFilterNdDescriptor(filterDesc: cudnnFilterDescriptor_t, nb
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetFilterNdDescriptor(filterDesc: cudnnFilterDescriptor_t, nbDimsRequested: ::core::ffi::c_int, dataType: *mut cudnnDataType_t, format: *mut cudnnTensorFormat_t, nbDims: *mut ::core::ffi::c_int, filterDimA: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetFilterNdDescriptor(filterDesc: cudnnFilterDescriptor_t, nbDimsRequested: ::core::ffi::c_int, dataType: *mut cudnnDataType_t, format: *mut cudnnTensorFormat_t, nbDims: *mut ::core::ffi::c_int, filterDimA: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetFilterNdDescriptor(filterDesc, nbDimsRequested, dataType, format, nbDims, filterDimA)
     }
 }
@@ -4248,7 +4516,9 @@ pub unsafe fn cudnnGetFilterSizeInBytes(filterDesc: cudnnFilterDescriptor_t, siz
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetFilterSizeInBytes(filterDesc: cudnnFilterDescriptor_t, size: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetFilterSizeInBytes(filterDesc: cudnnFilterDescriptor_t, size: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetFilterSizeInBytes(filterDesc, size)
     }
 }
@@ -4262,7 +4532,9 @@ pub unsafe fn cudnnGetFoldedConvBackwardDataDescriptors(handle: cudnnHandle_t, f
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetFoldedConvBackwardDataDescriptors(handle: cudnnHandle_t, filterDesc: cudnnFilterDescriptor_t, diffDesc: cudnnTensorDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, gradDesc: cudnnTensorDescriptor_t, transformFormat: cudnnTensorFormat_t, foldedFilterDesc: cudnnFilterDescriptor_t, paddedDiffDesc: cudnnTensorDescriptor_t, foldedConvDesc: cudnnConvolutionDescriptor_t, foldedGradDesc: cudnnTensorDescriptor_t, filterFoldTransDesc: cudnnTensorTransformDescriptor_t, diffPadTransDesc: cudnnTensorTransformDescriptor_t, gradFoldTransDesc: cudnnTensorTransformDescriptor_t, gradUnfoldTransDesc: cudnnTensorTransformDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetFoldedConvBackwardDataDescriptors(handle: cudnnHandle_t, filterDesc: cudnnFilterDescriptor_t, diffDesc: cudnnTensorDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, gradDesc: cudnnTensorDescriptor_t, transformFormat: cudnnTensorFormat_t, foldedFilterDesc: cudnnFilterDescriptor_t, paddedDiffDesc: cudnnTensorDescriptor_t, foldedConvDesc: cudnnConvolutionDescriptor_t, foldedGradDesc: cudnnTensorDescriptor_t, filterFoldTransDesc: cudnnTensorTransformDescriptor_t, diffPadTransDesc: cudnnTensorTransformDescriptor_t, gradFoldTransDesc: cudnnTensorTransformDescriptor_t, gradUnfoldTransDesc: cudnnTensorTransformDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnGetFoldedConvBackwardDataDescriptors(handle, filterDesc, diffDesc, convDesc, gradDesc, transformFormat, foldedFilterDesc, paddedDiffDesc, foldedConvDesc, foldedGradDesc, filterFoldTransDesc, diffPadTransDesc, gradFoldTransDesc, gradUnfoldTransDesc)
     }
 }
@@ -4276,7 +4548,9 @@ pub unsafe fn cudnnGetFusedOpsConstParamPackAttribute(constPack: cudnnFusedOpsCo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetFusedOpsConstParamPackAttribute(constPack: cudnnFusedOpsConstParamPack_t, paramLabel: cudnnFusedOpsConstParamLabel_t, param: *mut ::core::ffi::c_void, isNULL: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetFusedOpsConstParamPackAttribute(constPack: cudnnFusedOpsConstParamPack_t, paramLabel: cudnnFusedOpsConstParamLabel_t, param: *mut ::core::ffi::c_void, isNULL: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetFusedOpsConstParamPackAttribute(constPack, paramLabel, param, isNULL)
     }
 }
@@ -4290,7 +4564,9 @@ pub unsafe fn cudnnGetFusedOpsVariantParamPackAttribute(varPack: cudnnFusedOpsVa
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetFusedOpsVariantParamPackAttribute(varPack: cudnnFusedOpsVariantParamPack_t, paramLabel: cudnnFusedOpsVariantParamLabel_t, ptr: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetFusedOpsVariantParamPackAttribute(varPack: cudnnFusedOpsVariantParamPack_t, paramLabel: cudnnFusedOpsVariantParamLabel_t, ptr: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnGetFusedOpsVariantParamPackAttribute(varPack, paramLabel, ptr)
     }
 }
@@ -4304,7 +4580,9 @@ pub unsafe fn cudnnGetLRNDescriptor(normDesc: cudnnLRNDescriptor_t, lrnN: *mut :
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetLRNDescriptor(normDesc: cudnnLRNDescriptor_t, lrnN: *mut ::core::ffi::c_uint, lrnAlpha: *mut f64, lrnBeta: *mut f64, lrnK: *mut f64) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetLRNDescriptor(normDesc: cudnnLRNDescriptor_t, lrnN: *mut ::core::ffi::c_uint, lrnAlpha: *mut f64, lrnBeta: *mut f64, lrnK: *mut f64) -> cudnnStatus_t;
+        }
         cudnnGetLRNDescriptor(normDesc, lrnN, lrnAlpha, lrnBeta, lrnK)
     }
 }
@@ -4319,7 +4597,9 @@ pub unsafe fn cudnnGetLastErrorString(message: *mut ::core::ffi::c_char, max_siz
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetLastErrorString(message: *mut ::core::ffi::c_char, max_size: usize);
+        extern "C" {
+            fn cudnnGetLastErrorString(message: *mut ::core::ffi::c_char, max_size: usize);
+        }
         cudnnGetLastErrorString(message, max_size)
     }
 }
@@ -4333,7 +4613,9 @@ pub unsafe fn cudnnGetMaxDeviceVersion() -> usize {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetMaxDeviceVersion() -> usize;
+        extern "C" {
+            fn cudnnGetMaxDeviceVersion() -> usize;
+        }
         cudnnGetMaxDeviceVersion()
     }
 }
@@ -4347,7 +4629,9 @@ pub unsafe fn cudnnGetMultiHeadAttnBuffers(handle: cudnnHandle_t, attnDesc: cudn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetMultiHeadAttnBuffers(handle: cudnnHandle_t, attnDesc: cudnnAttnDescriptor_t, weightSizeInBytes: *mut usize, workSpaceSizeInBytes: *mut usize, reserveSpaceSizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetMultiHeadAttnBuffers(handle: cudnnHandle_t, attnDesc: cudnnAttnDescriptor_t, weightSizeInBytes: *mut usize, workSpaceSizeInBytes: *mut usize, reserveSpaceSizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetMultiHeadAttnBuffers(handle, attnDesc, weightSizeInBytes, workSpaceSizeInBytes, reserveSpaceSizeInBytes)
     }
 }
@@ -4361,7 +4645,9 @@ pub unsafe fn cudnnGetMultiHeadAttnWeights(handle: cudnnHandle_t, attnDesc: cudn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetMultiHeadAttnWeights(handle: cudnnHandle_t, attnDesc: cudnnAttnDescriptor_t, wKind: cudnnMultiHeadAttnWeightKind_t, weightSizeInBytes: usize, weights: *const ::core::ffi::c_void, wDesc: cudnnTensorDescriptor_t, wAddr: *mut *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetMultiHeadAttnWeights(handle: cudnnHandle_t, attnDesc: cudnnAttnDescriptor_t, wKind: cudnnMultiHeadAttnWeightKind_t, weightSizeInBytes: usize, weights: *const ::core::ffi::c_void, wDesc: cudnnTensorDescriptor_t, wAddr: *mut *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnGetMultiHeadAttnWeights(handle, attnDesc, wKind, weightSizeInBytes, weights, wDesc, wAddr)
     }
 }
@@ -4375,7 +4661,9 @@ pub unsafe fn cudnnGetNormalizationBackwardWorkspaceSize(handle: cudnnHandle_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetNormalizationBackwardWorkspaceSize(handle: cudnnHandle_t, mode: cudnnNormMode_t, normOps: cudnnNormOps_t, algo: cudnnNormAlgo_t, xDesc: cudnnTensorDescriptor_t, yDesc: cudnnTensorDescriptor_t, dyDesc: cudnnTensorDescriptor_t, dzDesc: cudnnTensorDescriptor_t, dxDesc: cudnnTensorDescriptor_t, dNormScaleBiasDesc: cudnnTensorDescriptor_t, activationDesc: cudnnActivationDescriptor_t, normMeanVarDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize, groupCnt: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetNormalizationBackwardWorkspaceSize(handle: cudnnHandle_t, mode: cudnnNormMode_t, normOps: cudnnNormOps_t, algo: cudnnNormAlgo_t, xDesc: cudnnTensorDescriptor_t, yDesc: cudnnTensorDescriptor_t, dyDesc: cudnnTensorDescriptor_t, dzDesc: cudnnTensorDescriptor_t, dxDesc: cudnnTensorDescriptor_t, dNormScaleBiasDesc: cudnnTensorDescriptor_t, activationDesc: cudnnActivationDescriptor_t, normMeanVarDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize, groupCnt: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetNormalizationBackwardWorkspaceSize(handle, mode, normOps, algo, xDesc, yDesc, dyDesc, dzDesc, dxDesc, dNormScaleBiasDesc, activationDesc, normMeanVarDesc, sizeInBytes, groupCnt)
     }
 }
@@ -4389,7 +4677,9 @@ pub unsafe fn cudnnGetNormalizationForwardTrainingWorkspaceSize(handle: cudnnHan
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetNormalizationForwardTrainingWorkspaceSize(handle: cudnnHandle_t, mode: cudnnNormMode_t, normOps: cudnnNormOps_t, algo: cudnnNormAlgo_t, xDesc: cudnnTensorDescriptor_t, zDesc: cudnnTensorDescriptor_t, yDesc: cudnnTensorDescriptor_t, normScaleBiasDesc: cudnnTensorDescriptor_t, activationDesc: cudnnActivationDescriptor_t, normMeanVarDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize, groupCnt: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetNormalizationForwardTrainingWorkspaceSize(handle: cudnnHandle_t, mode: cudnnNormMode_t, normOps: cudnnNormOps_t, algo: cudnnNormAlgo_t, xDesc: cudnnTensorDescriptor_t, zDesc: cudnnTensorDescriptor_t, yDesc: cudnnTensorDescriptor_t, normScaleBiasDesc: cudnnTensorDescriptor_t, activationDesc: cudnnActivationDescriptor_t, normMeanVarDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize, groupCnt: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetNormalizationForwardTrainingWorkspaceSize(handle, mode, normOps, algo, xDesc, zDesc, yDesc, normScaleBiasDesc, activationDesc, normMeanVarDesc, sizeInBytes, groupCnt)
     }
 }
@@ -4403,7 +4693,9 @@ pub unsafe fn cudnnGetNormalizationTrainingReserveSpaceSize(handle: cudnnHandle_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetNormalizationTrainingReserveSpaceSize(handle: cudnnHandle_t, mode: cudnnNormMode_t, normOps: cudnnNormOps_t, algo: cudnnNormAlgo_t, activationDesc: cudnnActivationDescriptor_t, xDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize, groupCnt: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetNormalizationTrainingReserveSpaceSize(handle: cudnnHandle_t, mode: cudnnNormMode_t, normOps: cudnnNormOps_t, algo: cudnnNormAlgo_t, activationDesc: cudnnActivationDescriptor_t, xDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize, groupCnt: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetNormalizationTrainingReserveSpaceSize(handle, mode, normOps, algo, activationDesc, xDesc, sizeInBytes, groupCnt)
     }
 }
@@ -4417,7 +4709,9 @@ pub unsafe fn cudnnGetOpTensorDescriptor(opTensorDesc: cudnnOpTensorDescriptor_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetOpTensorDescriptor(opTensorDesc: cudnnOpTensorDescriptor_t, opTensorOp: *mut cudnnOpTensorOp_t, opTensorCompType: *mut cudnnDataType_t, opTensorNanOpt: *mut cudnnNanPropagation_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetOpTensorDescriptor(opTensorDesc: cudnnOpTensorDescriptor_t, opTensorOp: *mut cudnnOpTensorOp_t, opTensorCompType: *mut cudnnDataType_t, opTensorNanOpt: *mut cudnnNanPropagation_t) -> cudnnStatus_t;
+        }
         cudnnGetOpTensorDescriptor(opTensorDesc, opTensorOp, opTensorCompType, opTensorNanOpt)
     }
 }
@@ -4431,7 +4725,9 @@ pub unsafe fn cudnnGetPooling2dDescriptor(poolingDesc: cudnnPoolingDescriptor_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetPooling2dDescriptor(poolingDesc: cudnnPoolingDescriptor_t, mode: *mut cudnnPoolingMode_t, maxpoolingNanOpt: *mut cudnnNanPropagation_t, windowHeight: *mut ::core::ffi::c_int, windowWidth: *mut ::core::ffi::c_int, verticalPadding: *mut ::core::ffi::c_int, horizontalPadding: *mut ::core::ffi::c_int, verticalStride: *mut ::core::ffi::c_int, horizontalStride: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetPooling2dDescriptor(poolingDesc: cudnnPoolingDescriptor_t, mode: *mut cudnnPoolingMode_t, maxpoolingNanOpt: *mut cudnnNanPropagation_t, windowHeight: *mut ::core::ffi::c_int, windowWidth: *mut ::core::ffi::c_int, verticalPadding: *mut ::core::ffi::c_int, horizontalPadding: *mut ::core::ffi::c_int, verticalStride: *mut ::core::ffi::c_int, horizontalStride: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetPooling2dDescriptor(poolingDesc, mode, maxpoolingNanOpt, windowHeight, windowWidth, verticalPadding, horizontalPadding, verticalStride, horizontalStride)
     }
 }
@@ -4445,7 +4741,9 @@ pub unsafe fn cudnnGetPooling2dForwardOutputDim(poolingDesc: cudnnPoolingDescrip
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetPooling2dForwardOutputDim(poolingDesc: cudnnPoolingDescriptor_t, inputTensorDesc: cudnnTensorDescriptor_t, n: *mut ::core::ffi::c_int, c: *mut ::core::ffi::c_int, h: *mut ::core::ffi::c_int, w: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetPooling2dForwardOutputDim(poolingDesc: cudnnPoolingDescriptor_t, inputTensorDesc: cudnnTensorDescriptor_t, n: *mut ::core::ffi::c_int, c: *mut ::core::ffi::c_int, h: *mut ::core::ffi::c_int, w: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetPooling2dForwardOutputDim(poolingDesc, inputTensorDesc, n, c, h, w)
     }
 }
@@ -4459,7 +4757,9 @@ pub unsafe fn cudnnGetPoolingNdDescriptor(poolingDesc: cudnnPoolingDescriptor_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetPoolingNdDescriptor(poolingDesc: cudnnPoolingDescriptor_t, nbDimsRequested: ::core::ffi::c_int, mode: *mut cudnnPoolingMode_t, maxpoolingNanOpt: *mut cudnnNanPropagation_t, nbDims: *mut ::core::ffi::c_int, windowDimA: *mut ::core::ffi::c_int, paddingA: *mut ::core::ffi::c_int, strideA: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetPoolingNdDescriptor(poolingDesc: cudnnPoolingDescriptor_t, nbDimsRequested: ::core::ffi::c_int, mode: *mut cudnnPoolingMode_t, maxpoolingNanOpt: *mut cudnnNanPropagation_t, nbDims: *mut ::core::ffi::c_int, windowDimA: *mut ::core::ffi::c_int, paddingA: *mut ::core::ffi::c_int, strideA: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetPoolingNdDescriptor(poolingDesc, nbDimsRequested, mode, maxpoolingNanOpt, nbDims, windowDimA, paddingA, strideA)
     }
 }
@@ -4473,7 +4773,9 @@ pub unsafe fn cudnnGetPoolingNdForwardOutputDim(poolingDesc: cudnnPoolingDescrip
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetPoolingNdForwardOutputDim(poolingDesc: cudnnPoolingDescriptor_t, inputTensorDesc: cudnnTensorDescriptor_t, nbDims: ::core::ffi::c_int, outputTensorDimA: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetPoolingNdForwardOutputDim(poolingDesc: cudnnPoolingDescriptor_t, inputTensorDesc: cudnnTensorDescriptor_t, nbDims: ::core::ffi::c_int, outputTensorDimA: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetPoolingNdForwardOutputDim(poolingDesc, inputTensorDesc, nbDims, outputTensorDimA)
     }
 }
@@ -4487,7 +4789,9 @@ pub unsafe fn cudnnGetProperty(type_: libraryPropertyType, value: *mut ::core::f
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetProperty(type_: libraryPropertyType, value: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetProperty(type_: libraryPropertyType, value: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetProperty(type_, value)
     }
 }
@@ -4502,7 +4806,9 @@ pub unsafe fn cudnnGetRNNBackwardDataAlgorithmMaxCount(handle: cudnnHandle_t, rn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNBackwardDataAlgorithmMaxCount(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, count: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNBackwardDataAlgorithmMaxCount(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, count: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetRNNBackwardDataAlgorithmMaxCount(handle, rnnDesc, count)
     }
 }
@@ -4517,7 +4823,9 @@ pub unsafe fn cudnnGetRNNBackwardWeightsAlgorithmMaxCount(handle: cudnnHandle_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNBackwardWeightsAlgorithmMaxCount(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, count: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNBackwardWeightsAlgorithmMaxCount(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, count: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetRNNBackwardWeightsAlgorithmMaxCount(handle, rnnDesc, count)
     }
 }
@@ -4532,7 +4840,9 @@ pub unsafe fn cudnnGetRNNBiasMode(rnnDesc: cudnnRNNDescriptor_t, biasMode: *mut 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNBiasMode(rnnDesc: cudnnRNNDescriptor_t, biasMode: *mut cudnnRNNBiasMode_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNBiasMode(rnnDesc: cudnnRNNDescriptor_t, biasMode: *mut cudnnRNNBiasMode_t) -> cudnnStatus_t;
+        }
         cudnnGetRNNBiasMode(rnnDesc, biasMode)
     }
 }
@@ -4546,7 +4856,9 @@ pub unsafe fn cudnnGetRNNDataDescriptor(rnnDataDesc: cudnnRNNDataDescriptor_t, d
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNDataDescriptor(rnnDataDesc: cudnnRNNDataDescriptor_t, dataType: *mut cudnnDataType_t, layout: *mut cudnnRNNDataLayout_t, maxSeqLength: *mut ::core::ffi::c_int, batchSize: *mut ::core::ffi::c_int, vectorSize: *mut ::core::ffi::c_int, arrayLengthRequested: ::core::ffi::c_int, seqLengthArray: *mut ::core::ffi::c_int, paddingFill: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNDataDescriptor(rnnDataDesc: cudnnRNNDataDescriptor_t, dataType: *mut cudnnDataType_t, layout: *mut cudnnRNNDataLayout_t, maxSeqLength: *mut ::core::ffi::c_int, batchSize: *mut ::core::ffi::c_int, vectorSize: *mut ::core::ffi::c_int, arrayLengthRequested: ::core::ffi::c_int, seqLengthArray: *mut ::core::ffi::c_int, paddingFill: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnGetRNNDataDescriptor(rnnDataDesc, dataType, layout, maxSeqLength, batchSize, vectorSize, arrayLengthRequested, seqLengthArray, paddingFill)
     }
 }
@@ -4561,7 +4873,9 @@ pub unsafe fn cudnnGetRNNDescriptor_v6(handle: cudnnHandle_t, rnnDesc: cudnnRNND
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNDescriptor_v6(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, hiddenSize: *mut ::core::ffi::c_int, numLayers: *mut ::core::ffi::c_int, dropoutDesc: *mut cudnnDropoutDescriptor_t, inputMode: *mut cudnnRNNInputMode_t, direction: *mut cudnnDirectionMode_t, cellMode: *mut cudnnRNNMode_t, algo: *mut cudnnRNNAlgo_t, mathPrec: *mut cudnnDataType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNDescriptor_v6(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, hiddenSize: *mut ::core::ffi::c_int, numLayers: *mut ::core::ffi::c_int, dropoutDesc: *mut cudnnDropoutDescriptor_t, inputMode: *mut cudnnRNNInputMode_t, direction: *mut cudnnDirectionMode_t, cellMode: *mut cudnnRNNMode_t, algo: *mut cudnnRNNAlgo_t, mathPrec: *mut cudnnDataType_t) -> cudnnStatus_t;
+        }
         cudnnGetRNNDescriptor_v6(handle, rnnDesc, hiddenSize, numLayers, dropoutDesc, inputMode, direction, cellMode, algo, mathPrec)
     }
 }
@@ -4575,7 +4889,9 @@ pub unsafe fn cudnnGetRNNDescriptor_v8(rnnDesc: cudnnRNNDescriptor_t, algo: *mut
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNDescriptor_v8(rnnDesc: cudnnRNNDescriptor_t, algo: *mut cudnnRNNAlgo_t, cellMode: *mut cudnnRNNMode_t, biasMode: *mut cudnnRNNBiasMode_t, dirMode: *mut cudnnDirectionMode_t, inputMode: *mut cudnnRNNInputMode_t, dataType: *mut cudnnDataType_t, mathPrec: *mut cudnnDataType_t, mathType: *mut cudnnMathType_t, inputSize: *mut i32, hiddenSize: *mut i32, projSize: *mut i32, numLayers: *mut i32, dropoutDesc: *mut cudnnDropoutDescriptor_t, auxFlags: *mut u32) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNDescriptor_v8(rnnDesc: cudnnRNNDescriptor_t, algo: *mut cudnnRNNAlgo_t, cellMode: *mut cudnnRNNMode_t, biasMode: *mut cudnnRNNBiasMode_t, dirMode: *mut cudnnDirectionMode_t, inputMode: *mut cudnnRNNInputMode_t, dataType: *mut cudnnDataType_t, mathPrec: *mut cudnnDataType_t, mathType: *mut cudnnMathType_t, inputSize: *mut i32, hiddenSize: *mut i32, projSize: *mut i32, numLayers: *mut i32, dropoutDesc: *mut cudnnDropoutDescriptor_t, auxFlags: *mut u32) -> cudnnStatus_t;
+        }
         cudnnGetRNNDescriptor_v8(rnnDesc, algo, cellMode, biasMode, dirMode, inputMode, dataType, mathPrec, mathType, inputSize, hiddenSize, projSize, numLayers, dropoutDesc, auxFlags)
     }
 }
@@ -4590,7 +4906,9 @@ pub unsafe fn cudnnGetRNNForwardInferenceAlgorithmMaxCount(handle: cudnnHandle_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNForwardInferenceAlgorithmMaxCount(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, count: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNForwardInferenceAlgorithmMaxCount(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, count: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetRNNForwardInferenceAlgorithmMaxCount(handle, rnnDesc, count)
     }
 }
@@ -4605,7 +4923,9 @@ pub unsafe fn cudnnGetRNNForwardTrainingAlgorithmMaxCount(handle: cudnnHandle_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNForwardTrainingAlgorithmMaxCount(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, count: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNForwardTrainingAlgorithmMaxCount(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, count: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetRNNForwardTrainingAlgorithmMaxCount(handle, rnnDesc, count)
     }
 }
@@ -4620,7 +4940,9 @@ pub unsafe fn cudnnGetRNNLinLayerBiasParams(handle: cudnnHandle_t, rnnDesc: cudn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNLinLayerBiasParams(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, pseudoLayer: ::core::ffi::c_int, xDesc: cudnnTensorDescriptor_t, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, linLayerID: ::core::ffi::c_int, linLayerBiasDesc: cudnnFilterDescriptor_t, linLayerBias: *mut *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNLinLayerBiasParams(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, pseudoLayer: ::core::ffi::c_int, xDesc: cudnnTensorDescriptor_t, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, linLayerID: ::core::ffi::c_int, linLayerBiasDesc: cudnnFilterDescriptor_t, linLayerBias: *mut *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnGetRNNLinLayerBiasParams(handle, rnnDesc, pseudoLayer, xDesc, wDesc, w, linLayerID, linLayerBiasDesc, linLayerBias)
     }
 }
@@ -4635,7 +4957,9 @@ pub unsafe fn cudnnGetRNNLinLayerMatrixParams(handle: cudnnHandle_t, rnnDesc: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNLinLayerMatrixParams(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, pseudoLayer: ::core::ffi::c_int, xDesc: cudnnTensorDescriptor_t, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, linLayerID: ::core::ffi::c_int, linLayerMatDesc: cudnnFilterDescriptor_t, linLayerMat: *mut *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNLinLayerMatrixParams(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, pseudoLayer: ::core::ffi::c_int, xDesc: cudnnTensorDescriptor_t, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, linLayerID: ::core::ffi::c_int, linLayerMatDesc: cudnnFilterDescriptor_t, linLayerMat: *mut *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnGetRNNLinLayerMatrixParams(handle, rnnDesc, pseudoLayer, xDesc, wDesc, w, linLayerID, linLayerMatDesc, linLayerMat)
     }
 }
@@ -4650,7 +4974,9 @@ pub unsafe fn cudnnGetRNNMatrixMathType(rnnDesc: cudnnRNNDescriptor_t, mType: *m
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNMatrixMathType(rnnDesc: cudnnRNNDescriptor_t, mType: *mut cudnnMathType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNMatrixMathType(rnnDesc: cudnnRNNDescriptor_t, mType: *mut cudnnMathType_t) -> cudnnStatus_t;
+        }
         cudnnGetRNNMatrixMathType(rnnDesc, mType)
     }
 }
@@ -4665,7 +4991,9 @@ pub unsafe fn cudnnGetRNNPaddingMode(rnnDesc: cudnnRNNDescriptor_t, paddingMode:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNPaddingMode(rnnDesc: cudnnRNNDescriptor_t, paddingMode: *mut ::core::ffi::c_uint) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNPaddingMode(rnnDesc: cudnnRNNDescriptor_t, paddingMode: *mut ::core::ffi::c_uint) -> cudnnStatus_t;
+        }
         cudnnGetRNNPaddingMode(rnnDesc, paddingMode)
     }
 }
@@ -4680,7 +5008,9 @@ pub unsafe fn cudnnGetRNNParamsSize(handle: cudnnHandle_t, rnnDesc: cudnnRNNDesc
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNParamsSize(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, xDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize, dataType: cudnnDataType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNParamsSize(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, xDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize, dataType: cudnnDataType_t) -> cudnnStatus_t;
+        }
         cudnnGetRNNParamsSize(handle, rnnDesc, xDesc, sizeInBytes, dataType)
     }
 }
@@ -4695,7 +5025,9 @@ pub unsafe fn cudnnGetRNNProjectionLayers(handle: cudnnHandle_t, rnnDesc: cudnnR
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNProjectionLayers(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, recProjSize: *mut ::core::ffi::c_int, outProjSize: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNProjectionLayers(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, recProjSize: *mut ::core::ffi::c_int, outProjSize: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetRNNProjectionLayers(handle, rnnDesc, recProjSize, outProjSize)
     }
 }
@@ -4709,7 +5041,9 @@ pub unsafe fn cudnnGetRNNTempSpaceSizes(handle: cudnnHandle_t, rnnDesc: cudnnRNN
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNTempSpaceSizes(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, fwdMode: cudnnForwardMode_t, xDesc: cudnnRNNDataDescriptor_t, workSpaceSize: *mut usize, reserveSpaceSize: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNTempSpaceSizes(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, fwdMode: cudnnForwardMode_t, xDesc: cudnnRNNDataDescriptor_t, workSpaceSize: *mut usize, reserveSpaceSize: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetRNNTempSpaceSizes(handle, rnnDesc, fwdMode, xDesc, workSpaceSize, reserveSpaceSize)
     }
 }
@@ -4724,7 +5058,9 @@ pub unsafe fn cudnnGetRNNTrainingReserveSize(handle: cudnnHandle_t, rnnDesc: cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNTrainingReserveSize(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNTrainingReserveSize(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetRNNTrainingReserveSize(handle, rnnDesc, seqLength, xDesc, sizeInBytes)
     }
 }
@@ -4738,7 +5074,9 @@ pub unsafe fn cudnnGetRNNWeightParams(handle: cudnnHandle_t, rnnDesc: cudnnRNNDe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNWeightParams(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, pseudoLayer: i32, weightSpaceSize: usize, weightSpace: *const ::core::ffi::c_void, linLayerID: i32, mDesc: cudnnTensorDescriptor_t, mAddr: *mut *mut ::core::ffi::c_void, bDesc: cudnnTensorDescriptor_t, bAddr: *mut *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNWeightParams(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, pseudoLayer: i32, weightSpaceSize: usize, weightSpace: *const ::core::ffi::c_void, linLayerID: i32, mDesc: cudnnTensorDescriptor_t, mAddr: *mut *mut ::core::ffi::c_void, bDesc: cudnnTensorDescriptor_t, bAddr: *mut *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnGetRNNWeightParams(handle, rnnDesc, pseudoLayer, weightSpaceSize, weightSpace, linLayerID, mDesc, mAddr, bDesc, bAddr)
     }
 }
@@ -4752,7 +5090,9 @@ pub unsafe fn cudnnGetRNNWeightSpaceSize(handle: cudnnHandle_t, rnnDesc: cudnnRN
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNWeightSpaceSize(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, weightSpaceSize: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNWeightSpaceSize(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, weightSpaceSize: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetRNNWeightSpaceSize(handle, rnnDesc, weightSpaceSize)
     }
 }
@@ -4767,7 +5107,9 @@ pub unsafe fn cudnnGetRNNWorkspaceSize(handle: cudnnHandle_t, rnnDesc: cudnnRNND
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetRNNWorkspaceSize(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetRNNWorkspaceSize(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetRNNWorkspaceSize(handle, rnnDesc, seqLength, xDesc, sizeInBytes)
     }
 }
@@ -4781,7 +5123,9 @@ pub unsafe fn cudnnGetReduceTensorDescriptor(reduceTensorDesc: cudnnReduceTensor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetReduceTensorDescriptor(reduceTensorDesc: cudnnReduceTensorDescriptor_t, reduceTensorOp: *mut cudnnReduceTensorOp_t, reduceTensorCompType: *mut cudnnDataType_t, reduceTensorNanOpt: *mut cudnnNanPropagation_t, reduceTensorIndices: *mut cudnnReduceTensorIndices_t, reduceTensorIndicesType: *mut cudnnIndicesType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetReduceTensorDescriptor(reduceTensorDesc: cudnnReduceTensorDescriptor_t, reduceTensorOp: *mut cudnnReduceTensorOp_t, reduceTensorCompType: *mut cudnnDataType_t, reduceTensorNanOpt: *mut cudnnNanPropagation_t, reduceTensorIndices: *mut cudnnReduceTensorIndices_t, reduceTensorIndicesType: *mut cudnnIndicesType_t) -> cudnnStatus_t;
+        }
         cudnnGetReduceTensorDescriptor(reduceTensorDesc, reduceTensorOp, reduceTensorCompType, reduceTensorNanOpt, reduceTensorIndices, reduceTensorIndicesType)
     }
 }
@@ -4795,7 +5139,9 @@ pub unsafe fn cudnnGetReductionIndicesSize(handle: cudnnHandle_t, reduceTensorDe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetReductionIndicesSize(handle: cudnnHandle_t, reduceTensorDesc: cudnnReduceTensorDescriptor_t, aDesc: cudnnTensorDescriptor_t, cDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetReductionIndicesSize(handle: cudnnHandle_t, reduceTensorDesc: cudnnReduceTensorDescriptor_t, aDesc: cudnnTensorDescriptor_t, cDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetReductionIndicesSize(handle, reduceTensorDesc, aDesc, cDesc, sizeInBytes)
     }
 }
@@ -4809,7 +5155,9 @@ pub unsafe fn cudnnGetReductionWorkspaceSize(handle: cudnnHandle_t, reduceTensor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetReductionWorkspaceSize(handle: cudnnHandle_t, reduceTensorDesc: cudnnReduceTensorDescriptor_t, aDesc: cudnnTensorDescriptor_t, cDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetReductionWorkspaceSize(handle: cudnnHandle_t, reduceTensorDesc: cudnnReduceTensorDescriptor_t, aDesc: cudnnTensorDescriptor_t, cDesc: cudnnTensorDescriptor_t, sizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetReductionWorkspaceSize(handle, reduceTensorDesc, aDesc, cDesc, sizeInBytes)
     }
 }
@@ -4823,7 +5171,9 @@ pub unsafe fn cudnnGetSeqDataDescriptor(seqDataDesc: cudnnSeqDataDescriptor_t, d
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetSeqDataDescriptor(seqDataDesc: cudnnSeqDataDescriptor_t, dataType: *mut cudnnDataType_t, nbDims: *mut ::core::ffi::c_int, nbDimsRequested: ::core::ffi::c_int, dimA: *mut ::core::ffi::c_int, axes: *mut cudnnSeqDataAxis_t, seqLengthArraySize: *mut usize, seqLengthSizeRequested: usize, seqLengthArray: *mut ::core::ffi::c_int, paddingFill: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetSeqDataDescriptor(seqDataDesc: cudnnSeqDataDescriptor_t, dataType: *mut cudnnDataType_t, nbDims: *mut ::core::ffi::c_int, nbDimsRequested: ::core::ffi::c_int, dimA: *mut ::core::ffi::c_int, axes: *mut cudnnSeqDataAxis_t, seqLengthArraySize: *mut usize, seqLengthSizeRequested: usize, seqLengthArray: *mut ::core::ffi::c_int, paddingFill: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnGetSeqDataDescriptor(seqDataDesc, dataType, nbDims, nbDimsRequested, dimA, axes, seqLengthArraySize, seqLengthSizeRequested, seqLengthArray, paddingFill)
     }
 }
@@ -4837,7 +5187,9 @@ pub unsafe fn cudnnGetStream(handle: cudnnHandle_t, streamId: *mut cudaStream_t)
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetStream(handle: cudnnHandle_t, streamId: *mut cudaStream_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetStream(handle: cudnnHandle_t, streamId: *mut cudaStream_t) -> cudnnStatus_t;
+        }
         cudnnGetStream(handle, streamId)
     }
 }
@@ -4851,7 +5203,9 @@ pub unsafe fn cudnnGetTensor4dDescriptor(tensorDesc: cudnnTensorDescriptor_t, da
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetTensor4dDescriptor(tensorDesc: cudnnTensorDescriptor_t, dataType: *mut cudnnDataType_t, n: *mut ::core::ffi::c_int, c: *mut ::core::ffi::c_int, h: *mut ::core::ffi::c_int, w: *mut ::core::ffi::c_int, nStride: *mut ::core::ffi::c_int, cStride: *mut ::core::ffi::c_int, hStride: *mut ::core::ffi::c_int, wStride: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetTensor4dDescriptor(tensorDesc: cudnnTensorDescriptor_t, dataType: *mut cudnnDataType_t, n: *mut ::core::ffi::c_int, c: *mut ::core::ffi::c_int, h: *mut ::core::ffi::c_int, w: *mut ::core::ffi::c_int, nStride: *mut ::core::ffi::c_int, cStride: *mut ::core::ffi::c_int, hStride: *mut ::core::ffi::c_int, wStride: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetTensor4dDescriptor(tensorDesc, dataType, n, c, h, w, nStride, cStride, hStride, wStride)
     }
 }
@@ -4865,7 +5219,9 @@ pub unsafe fn cudnnGetTensorNdDescriptor(tensorDesc: cudnnTensorDescriptor_t, nb
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetTensorNdDescriptor(tensorDesc: cudnnTensorDescriptor_t, nbDimsRequested: ::core::ffi::c_int, dataType: *mut cudnnDataType_t, nbDims: *mut ::core::ffi::c_int, dimA: *mut ::core::ffi::c_int, strideA: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetTensorNdDescriptor(tensorDesc: cudnnTensorDescriptor_t, nbDimsRequested: ::core::ffi::c_int, dataType: *mut cudnnDataType_t, nbDims: *mut ::core::ffi::c_int, dimA: *mut ::core::ffi::c_int, strideA: *mut ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnGetTensorNdDescriptor(tensorDesc, nbDimsRequested, dataType, nbDims, dimA, strideA)
     }
 }
@@ -4879,7 +5235,9 @@ pub unsafe fn cudnnGetTensorSizeInBytes(tensorDesc: cudnnTensorDescriptor_t, siz
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetTensorSizeInBytes(tensorDesc: cudnnTensorDescriptor_t, size: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetTensorSizeInBytes(tensorDesc: cudnnTensorDescriptor_t, size: *mut usize) -> cudnnStatus_t;
+        }
         cudnnGetTensorSizeInBytes(tensorDesc, size)
     }
 }
@@ -4893,7 +5251,9 @@ pub unsafe fn cudnnGetTensorTransformDescriptor(transformDesc: cudnnTensorTransf
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetTensorTransformDescriptor(transformDesc: cudnnTensorTransformDescriptor_t, nbDimsRequested: u32, destFormat: *mut cudnnTensorFormat_t, padBeforeA: *mut i32, padAfterA: *mut i32, foldA: *mut u32, direction: *mut cudnnFoldingDirection_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGetTensorTransformDescriptor(transformDesc: cudnnTensorTransformDescriptor_t, nbDimsRequested: u32, destFormat: *mut cudnnTensorFormat_t, padBeforeA: *mut i32, padAfterA: *mut i32, foldA: *mut u32, direction: *mut cudnnFoldingDirection_t) -> cudnnStatus_t;
+        }
         cudnnGetTensorTransformDescriptor(transformDesc, nbDimsRequested, destFormat, padBeforeA, padAfterA, foldA, direction)
     }
 }
@@ -4907,7 +5267,9 @@ pub unsafe fn cudnnGetVersion() -> usize {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGetVersion() -> usize;
+        extern "C" {
+            fn cudnnGetVersion() -> usize;
+        }
         cudnnGetVersion()
     }
 }
@@ -4922,7 +5284,9 @@ pub unsafe fn cudnnGraphVersionCheck() -> cudnnStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnGraphVersionCheck() -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnGraphVersionCheck() -> cudnnStatus_t;
+        }
         cudnnGraphVersionCheck()
     }
 }
@@ -4936,7 +5300,9 @@ pub unsafe fn cudnnIm2Col(handle: cudnnHandle_t, xDesc: cudnnTensorDescriptor_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnIm2Col(handle: cudnnHandle_t, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, colBuffer: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnIm2Col(handle: cudnnHandle_t, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, convDesc: cudnnConvolutionDescriptor_t, colBuffer: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnIm2Col(handle, xDesc, x, wDesc, convDesc, colBuffer)
     }
 }
@@ -4950,7 +5316,9 @@ pub unsafe fn cudnnInitTransformDest(transformDesc: cudnnTensorTransformDescript
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnInitTransformDest(transformDesc: cudnnTensorTransformDescriptor_t, srcDesc: cudnnTensorDescriptor_t, destDesc: cudnnTensorDescriptor_t, destSizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnInitTransformDest(transformDesc: cudnnTensorTransformDescriptor_t, srcDesc: cudnnTensorDescriptor_t, destDesc: cudnnTensorDescriptor_t, destSizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnInitTransformDest(transformDesc, srcDesc, destDesc, destSizeInBytes)
     }
 }
@@ -4964,7 +5332,9 @@ pub unsafe fn cudnnLRNCrossChannelBackward(handle: cudnnHandle_t, normDesc: cudn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnLRNCrossChannelBackward(handle: cudnnHandle_t, normDesc: cudnnLRNDescriptor_t, lrnMode: cudnnLRNMode_t, alpha: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnLRNCrossChannelBackward(handle: cudnnHandle_t, normDesc: cudnnLRNDescriptor_t, lrnMode: cudnnLRNMode_t, alpha: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnLRNCrossChannelBackward(handle, normDesc, lrnMode, alpha, yDesc, y, dyDesc, dy, xDesc, x, beta, dxDesc, dx)
     }
 }
@@ -4978,7 +5348,9 @@ pub unsafe fn cudnnLRNCrossChannelForward(handle: cudnnHandle_t, normDesc: cudnn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnLRNCrossChannelForward(handle: cudnnHandle_t, normDesc: cudnnLRNDescriptor_t, lrnMode: cudnnLRNMode_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnLRNCrossChannelForward(handle: cudnnHandle_t, normDesc: cudnnLRNDescriptor_t, lrnMode: cudnnLRNMode_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnLRNCrossChannelForward(handle, normDesc, lrnMode, alpha, xDesc, x, beta, yDesc, y)
     }
 }
@@ -4992,7 +5364,9 @@ pub unsafe fn cudnnMakeFusedOpsPlan(handle: cudnnHandle_t, plan: cudnnFusedOpsPl
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnMakeFusedOpsPlan(handle: cudnnHandle_t, plan: cudnnFusedOpsPlan_t, constPack: cudnnFusedOpsConstParamPack_t, workspaceSizeInBytes: *mut usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnMakeFusedOpsPlan(handle: cudnnHandle_t, plan: cudnnFusedOpsPlan_t, constPack: cudnnFusedOpsConstParamPack_t, workspaceSizeInBytes: *mut usize) -> cudnnStatus_t;
+        }
         cudnnMakeFusedOpsPlan(handle, plan, constPack, workspaceSizeInBytes)
     }
 }
@@ -5006,7 +5380,9 @@ pub unsafe fn cudnnMultiHeadAttnBackwardData(handle: cudnnHandle_t, attnDesc: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnMultiHeadAttnBackwardData(handle: cudnnHandle_t, attnDesc: cudnnAttnDescriptor_t, loWinIdx: *const ::core::ffi::c_int, hiWinIdx: *const ::core::ffi::c_int, devSeqLengthsDQDO: *const ::core::ffi::c_int, devSeqLengthsDKDV: *const ::core::ffi::c_int, doDesc: cudnnSeqDataDescriptor_t, dout: *const ::core::ffi::c_void, dqDesc: cudnnSeqDataDescriptor_t, dqueries: *mut ::core::ffi::c_void, queries: *const ::core::ffi::c_void, dkDesc: cudnnSeqDataDescriptor_t, dkeys: *mut ::core::ffi::c_void, keys: *const ::core::ffi::c_void, dvDesc: cudnnSeqDataDescriptor_t, dvalues: *mut ::core::ffi::c_void, values: *const ::core::ffi::c_void, weightSizeInBytes: usize, weights: *const ::core::ffi::c_void, workSpaceSizeInBytes: usize, workSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnMultiHeadAttnBackwardData(handle: cudnnHandle_t, attnDesc: cudnnAttnDescriptor_t, loWinIdx: *const ::core::ffi::c_int, hiWinIdx: *const ::core::ffi::c_int, devSeqLengthsDQDO: *const ::core::ffi::c_int, devSeqLengthsDKDV: *const ::core::ffi::c_int, doDesc: cudnnSeqDataDescriptor_t, dout: *const ::core::ffi::c_void, dqDesc: cudnnSeqDataDescriptor_t, dqueries: *mut ::core::ffi::c_void, queries: *const ::core::ffi::c_void, dkDesc: cudnnSeqDataDescriptor_t, dkeys: *mut ::core::ffi::c_void, keys: *const ::core::ffi::c_void, dvDesc: cudnnSeqDataDescriptor_t, dvalues: *mut ::core::ffi::c_void, values: *const ::core::ffi::c_void, weightSizeInBytes: usize, weights: *const ::core::ffi::c_void, workSpaceSizeInBytes: usize, workSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnMultiHeadAttnBackwardData(handle, attnDesc, loWinIdx, hiWinIdx, devSeqLengthsDQDO, devSeqLengthsDKDV, doDesc, dout, dqDesc, dqueries, queries, dkDesc, dkeys, keys, dvDesc, dvalues, values, weightSizeInBytes, weights, workSpaceSizeInBytes, workSpace, reserveSpaceSizeInBytes, reserveSpace)
     }
 }
@@ -5020,7 +5396,9 @@ pub unsafe fn cudnnMultiHeadAttnBackwardWeights(handle: cudnnHandle_t, attnDesc:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnMultiHeadAttnBackwardWeights(handle: cudnnHandle_t, attnDesc: cudnnAttnDescriptor_t, addGrad: cudnnWgradMode_t, qDesc: cudnnSeqDataDescriptor_t, queries: *const ::core::ffi::c_void, kDesc: cudnnSeqDataDescriptor_t, keys: *const ::core::ffi::c_void, vDesc: cudnnSeqDataDescriptor_t, values: *const ::core::ffi::c_void, doDesc: cudnnSeqDataDescriptor_t, dout: *const ::core::ffi::c_void, weightSizeInBytes: usize, weights: *const ::core::ffi::c_void, dweights: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, workSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnMultiHeadAttnBackwardWeights(handle: cudnnHandle_t, attnDesc: cudnnAttnDescriptor_t, addGrad: cudnnWgradMode_t, qDesc: cudnnSeqDataDescriptor_t, queries: *const ::core::ffi::c_void, kDesc: cudnnSeqDataDescriptor_t, keys: *const ::core::ffi::c_void, vDesc: cudnnSeqDataDescriptor_t, values: *const ::core::ffi::c_void, doDesc: cudnnSeqDataDescriptor_t, dout: *const ::core::ffi::c_void, weightSizeInBytes: usize, weights: *const ::core::ffi::c_void, dweights: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, workSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnMultiHeadAttnBackwardWeights(handle, attnDesc, addGrad, qDesc, queries, kDesc, keys, vDesc, values, doDesc, dout, weightSizeInBytes, weights, dweights, workSpaceSizeInBytes, workSpace, reserveSpaceSizeInBytes, reserveSpace)
     }
 }
@@ -5034,7 +5412,9 @@ pub unsafe fn cudnnMultiHeadAttnForward(handle: cudnnHandle_t, attnDesc: cudnnAt
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnMultiHeadAttnForward(handle: cudnnHandle_t, attnDesc: cudnnAttnDescriptor_t, currIdx: ::core::ffi::c_int, loWinIdx: *const ::core::ffi::c_int, hiWinIdx: *const ::core::ffi::c_int, devSeqLengthsQO: *const ::core::ffi::c_int, devSeqLengthsKV: *const ::core::ffi::c_int, qDesc: cudnnSeqDataDescriptor_t, queries: *const ::core::ffi::c_void, residuals: *const ::core::ffi::c_void, kDesc: cudnnSeqDataDescriptor_t, keys: *const ::core::ffi::c_void, vDesc: cudnnSeqDataDescriptor_t, values: *const ::core::ffi::c_void, oDesc: cudnnSeqDataDescriptor_t, out: *mut ::core::ffi::c_void, weightSizeInBytes: usize, weights: *const ::core::ffi::c_void, workSpaceSizeInBytes: usize, workSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnMultiHeadAttnForward(handle: cudnnHandle_t, attnDesc: cudnnAttnDescriptor_t, currIdx: ::core::ffi::c_int, loWinIdx: *const ::core::ffi::c_int, hiWinIdx: *const ::core::ffi::c_int, devSeqLengthsQO: *const ::core::ffi::c_int, devSeqLengthsKV: *const ::core::ffi::c_int, qDesc: cudnnSeqDataDescriptor_t, queries: *const ::core::ffi::c_void, residuals: *const ::core::ffi::c_void, kDesc: cudnnSeqDataDescriptor_t, keys: *const ::core::ffi::c_void, vDesc: cudnnSeqDataDescriptor_t, values: *const ::core::ffi::c_void, oDesc: cudnnSeqDataDescriptor_t, out: *mut ::core::ffi::c_void, weightSizeInBytes: usize, weights: *const ::core::ffi::c_void, workSpaceSizeInBytes: usize, workSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnMultiHeadAttnForward(handle, attnDesc, currIdx, loWinIdx, hiWinIdx, devSeqLengthsQO, devSeqLengthsKV, qDesc, queries, residuals, kDesc, keys, vDesc, values, oDesc, out, weightSizeInBytes, weights, workSpaceSizeInBytes, workSpace, reserveSpaceSizeInBytes, reserveSpace)
     }
 }
@@ -5051,10 +5431,12 @@ pub unsafe fn cudnnNormalizationBackward(
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnNormalizationBackward(
-            handle: cudnnHandle_t, mode: cudnnNormMode_t, normOps: cudnnNormOps_t, algo: cudnnNormAlgo_t, alphaDataDiff: *const ::core::ffi::c_void, betaDataDiff: *const ::core::ffi::c_void, alphaParamDiff: *const ::core::ffi::c_void, betaParamDiff: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, xData: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, yData: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dyData: *const ::core::ffi::c_void, dzDesc: cudnnTensorDescriptor_t, dzData: *mut ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dxData: *mut ::core::ffi::c_void, dNormScaleBiasDesc: cudnnTensorDescriptor_t, normScaleData: *const ::core::ffi::c_void, normBiasData: *const ::core::ffi::c_void, dNormScaleData: *mut ::core::ffi::c_void, dNormBiasData: *mut ::core::ffi::c_void, epsilon: f64, normMeanVarDesc: cudnnTensorDescriptor_t, savedMean: *const ::core::ffi::c_void, savedInvVariance: *const ::core::ffi::c_void,
-            activationDesc: cudnnActivationDescriptor_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize, groupCnt: ::core::ffi::c_int,
-        ) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnNormalizationBackward(
+                handle: cudnnHandle_t, mode: cudnnNormMode_t, normOps: cudnnNormOps_t, algo: cudnnNormAlgo_t, alphaDataDiff: *const ::core::ffi::c_void, betaDataDiff: *const ::core::ffi::c_void, alphaParamDiff: *const ::core::ffi::c_void, betaParamDiff: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, xData: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, yData: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dyData: *const ::core::ffi::c_void, dzDesc: cudnnTensorDescriptor_t, dzData: *mut ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dxData: *mut ::core::ffi::c_void, dNormScaleBiasDesc: cudnnTensorDescriptor_t, normScaleData: *const ::core::ffi::c_void, normBiasData: *const ::core::ffi::c_void, dNormScaleData: *mut ::core::ffi::c_void, dNormBiasData: *mut ::core::ffi::c_void, epsilon: f64, normMeanVarDesc: cudnnTensorDescriptor_t, savedMean: *const ::core::ffi::c_void, savedInvVariance: *const ::core::ffi::c_void,
+                activationDesc: cudnnActivationDescriptor_t, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize, groupCnt: ::core::ffi::c_int,
+            ) -> cudnnStatus_t;
+        }
         cudnnNormalizationBackward(handle, mode, normOps, algo, alphaDataDiff, betaDataDiff, alphaParamDiff, betaParamDiff, xDesc, xData, yDesc, yData, dyDesc, dyData, dzDesc, dzData, dxDesc, dxData, dNormScaleBiasDesc, normScaleData, normBiasData, dNormScaleData, dNormBiasData, epsilon, normMeanVarDesc, savedMean, savedInvVariance, activationDesc, workSpace, workSpaceSizeInBytes, reserveSpace, reserveSpaceSizeInBytes, groupCnt)
     }
 }
@@ -5068,7 +5450,9 @@ pub unsafe fn cudnnNormalizationForwardInference(handle: cudnnHandle_t, mode: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnNormalizationForwardInference(handle: cudnnHandle_t, mode: cudnnNormMode_t, normOps: cudnnNormOps_t, algo: cudnnNormAlgo_t, alpha: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, normScaleBiasDesc: cudnnTensorDescriptor_t, normScale: *const ::core::ffi::c_void, normBias: *const ::core::ffi::c_void, normMeanVarDesc: cudnnTensorDescriptor_t, estimatedMean: *const ::core::ffi::c_void, estimatedVariance: *const ::core::ffi::c_void, zDesc: cudnnTensorDescriptor_t, z: *const ::core::ffi::c_void, activationDesc: cudnnActivationDescriptor_t, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, epsilon: f64, groupCnt: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnNormalizationForwardInference(handle: cudnnHandle_t, mode: cudnnNormMode_t, normOps: cudnnNormOps_t, algo: cudnnNormAlgo_t, alpha: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, normScaleBiasDesc: cudnnTensorDescriptor_t, normScale: *const ::core::ffi::c_void, normBias: *const ::core::ffi::c_void, normMeanVarDesc: cudnnTensorDescriptor_t, estimatedMean: *const ::core::ffi::c_void, estimatedVariance: *const ::core::ffi::c_void, zDesc: cudnnTensorDescriptor_t, z: *const ::core::ffi::c_void, activationDesc: cudnnActivationDescriptor_t, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, epsilon: f64, groupCnt: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnNormalizationForwardInference(handle, mode, normOps, algo, alpha, beta, xDesc, x, normScaleBiasDesc, normScale, normBias, normMeanVarDesc, estimatedMean, estimatedVariance, zDesc, z, activationDesc, yDesc, y, epsilon, groupCnt)
     }
 }
@@ -5084,9 +5468,11 @@ pub unsafe fn cudnnNormalizationForwardTraining(
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnNormalizationForwardTraining(
-            handle: cudnnHandle_t, mode: cudnnNormMode_t, normOps: cudnnNormOps_t, algo: cudnnNormAlgo_t, alpha: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, xData: *const ::core::ffi::c_void, normScaleBiasDesc: cudnnTensorDescriptor_t, normScale: *const ::core::ffi::c_void, normBias: *const ::core::ffi::c_void, exponentialAverageFactor: f64, normMeanVarDesc: cudnnTensorDescriptor_t, resultRunningMean: *mut ::core::ffi::c_void, resultRunningVariance: *mut ::core::ffi::c_void, epsilon: f64, resultSaveMean: *mut ::core::ffi::c_void, resultSaveInvVariance: *mut ::core::ffi::c_void, activationDesc: cudnnActivationDescriptor_t, zDesc: cudnnTensorDescriptor_t, zData: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, yData: *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize, groupCnt: ::core::ffi::c_int,
-        ) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnNormalizationForwardTraining(
+                handle: cudnnHandle_t, mode: cudnnNormMode_t, normOps: cudnnNormOps_t, algo: cudnnNormAlgo_t, alpha: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, xData: *const ::core::ffi::c_void, normScaleBiasDesc: cudnnTensorDescriptor_t, normScale: *const ::core::ffi::c_void, normBias: *const ::core::ffi::c_void, exponentialAverageFactor: f64, normMeanVarDesc: cudnnTensorDescriptor_t, resultRunningMean: *mut ::core::ffi::c_void, resultRunningVariance: *mut ::core::ffi::c_void, epsilon: f64, resultSaveMean: *mut ::core::ffi::c_void, resultSaveInvVariance: *mut ::core::ffi::c_void, activationDesc: cudnnActivationDescriptor_t, zDesc: cudnnTensorDescriptor_t, zData: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, yData: *mut ::core::ffi::c_void, workspace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize, groupCnt: ::core::ffi::c_int,
+            ) -> cudnnStatus_t;
+        }
         cudnnNormalizationForwardTraining(handle, mode, normOps, algo, alpha, beta, xDesc, xData, normScaleBiasDesc, normScale, normBias, exponentialAverageFactor, normMeanVarDesc, resultRunningMean, resultRunningVariance, epsilon, resultSaveMean, resultSaveInvVariance, activationDesc, zDesc, zData, yDesc, yData, workspace, workSpaceSizeInBytes, reserveSpace, reserveSpaceSizeInBytes, groupCnt)
     }
 }
@@ -5100,7 +5486,9 @@ pub unsafe fn cudnnOpTensor(handle: cudnnHandle_t, opTensorDesc: cudnnOpTensorDe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnOpTensor(handle: cudnnHandle_t, opTensorDesc: cudnnOpTensorDescriptor_t, alpha1: *const ::core::ffi::c_void, aDesc: cudnnTensorDescriptor_t, A: *const ::core::ffi::c_void, alpha2: *const ::core::ffi::c_void, bDesc: cudnnTensorDescriptor_t, B: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, cDesc: cudnnTensorDescriptor_t, C: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnOpTensor(handle: cudnnHandle_t, opTensorDesc: cudnnOpTensorDescriptor_t, alpha1: *const ::core::ffi::c_void, aDesc: cudnnTensorDescriptor_t, A: *const ::core::ffi::c_void, alpha2: *const ::core::ffi::c_void, bDesc: cudnnTensorDescriptor_t, B: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, cDesc: cudnnTensorDescriptor_t, C: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnOpTensor(handle, opTensorDesc, alpha1, aDesc, A, alpha2, bDesc, B, beta, cDesc, C)
     }
 }
@@ -5115,7 +5503,9 @@ pub unsafe fn cudnnOpsInferVersionCheck() -> cudnnStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnOpsInferVersionCheck() -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnOpsInferVersionCheck() -> cudnnStatus_t;
+        }
         cudnnOpsInferVersionCheck()
     }
 }
@@ -5130,7 +5520,9 @@ pub unsafe fn cudnnOpsTrainVersionCheck() -> cudnnStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnOpsTrainVersionCheck() -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnOpsTrainVersionCheck() -> cudnnStatus_t;
+        }
         cudnnOpsTrainVersionCheck()
     }
 }
@@ -5145,7 +5537,9 @@ pub unsafe fn cudnnOpsVersionCheck() -> cudnnStatus_t {
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnOpsVersionCheck() -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnOpsVersionCheck() -> cudnnStatus_t;
+        }
         cudnnOpsVersionCheck()
     }
 }
@@ -5159,7 +5553,9 @@ pub unsafe fn cudnnPoolingBackward(handle: cudnnHandle_t, poolingDesc: cudnnPool
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnPoolingBackward(handle: cudnnHandle_t, poolingDesc: cudnnPoolingDescriptor_t, alpha: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnPoolingBackward(handle: cudnnHandle_t, poolingDesc: cudnnPoolingDescriptor_t, alpha: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnPoolingBackward(handle, poolingDesc, alpha, yDesc, y, dyDesc, dy, xDesc, x, beta, dxDesc, dx)
     }
 }
@@ -5173,7 +5569,9 @@ pub unsafe fn cudnnPoolingForward(handle: cudnnHandle_t, poolingDesc: cudnnPooli
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnPoolingForward(handle: cudnnHandle_t, poolingDesc: cudnnPoolingDescriptor_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnPoolingForward(handle: cudnnHandle_t, poolingDesc: cudnnPoolingDescriptor_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnPoolingForward(handle, poolingDesc, alpha, xDesc, x, beta, yDesc, y)
     }
 }
@@ -5187,7 +5585,9 @@ pub unsafe fn cudnnQueryRuntimeError(handle: cudnnHandle_t, rstatus: *mut cudnnS
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnQueryRuntimeError(handle: cudnnHandle_t, rstatus: *mut cudnnStatus_t, mode: cudnnErrQueryMode_t, tag: *mut cudnnRuntimeTag_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnQueryRuntimeError(handle: cudnnHandle_t, rstatus: *mut cudnnStatus_t, mode: cudnnErrQueryMode_t, tag: *mut cudnnRuntimeTag_t) -> cudnnStatus_t;
+        }
         cudnnQueryRuntimeError(handle, rstatus, mode, tag)
     }
 }
@@ -5202,7 +5602,9 @@ pub unsafe fn cudnnRNNBackwardData(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescr
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNBackwardData(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, yDesc: *const cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, dyDesc: *const cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, dhyDesc: cudnnTensorDescriptor_t, dhy: *const ::core::ffi::c_void, dcyDesc: cudnnTensorDescriptor_t, dcy: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, dxDesc: *const cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void, dhxDesc: cudnnTensorDescriptor_t, dhx: *mut ::core::ffi::c_void, dcxDesc: cudnnTensorDescriptor_t, dcx: *mut ::core::ffi::c_void, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNBackwardData(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, yDesc: *const cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, dyDesc: *const cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, dhyDesc: cudnnTensorDescriptor_t, dhy: *const ::core::ffi::c_void, dcyDesc: cudnnTensorDescriptor_t, dcy: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, dxDesc: *const cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void, dhxDesc: cudnnTensorDescriptor_t, dhx: *mut ::core::ffi::c_void, dcxDesc: cudnnTensorDescriptor_t, dcx: *mut ::core::ffi::c_void, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnRNNBackwardData(handle, rnnDesc, seqLength, yDesc, y, dyDesc, dy, dhyDesc, dhy, dcyDesc, dcy, wDesc, w, hxDesc, hx, cxDesc, cx, dxDesc, dx, dhxDesc, dhx, dcxDesc, dcx, workSpace, workSpaceSizeInBytes, reserveSpace, reserveSpaceSizeInBytes)
     }
 }
@@ -5219,9 +5621,11 @@ pub unsafe fn cudnnRNNBackwardDataEx(
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNBackwardDataEx(
-            handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, yDesc: cudnnRNNDataDescriptor_t, y: *const ::core::ffi::c_void, dyDesc: cudnnRNNDataDescriptor_t, dy: *const ::core::ffi::c_void, dcDesc: cudnnRNNDataDescriptor_t, dcAttn: *const ::core::ffi::c_void, dhyDesc: cudnnTensorDescriptor_t, dhy: *const ::core::ffi::c_void, dcyDesc: cudnnTensorDescriptor_t, dcy: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, dxDesc: cudnnRNNDataDescriptor_t, dx: *mut ::core::ffi::c_void, dhxDesc: cudnnTensorDescriptor_t, dhx: *mut ::core::ffi::c_void, dcxDesc: cudnnTensorDescriptor_t, dcx: *mut ::core::ffi::c_void, dkDesc: cudnnRNNDataDescriptor_t, dkeys: *mut ::core::ffi::c_void, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize,
-        ) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNBackwardDataEx(
+                handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, yDesc: cudnnRNNDataDescriptor_t, y: *const ::core::ffi::c_void, dyDesc: cudnnRNNDataDescriptor_t, dy: *const ::core::ffi::c_void, dcDesc: cudnnRNNDataDescriptor_t, dcAttn: *const ::core::ffi::c_void, dhyDesc: cudnnTensorDescriptor_t, dhy: *const ::core::ffi::c_void, dcyDesc: cudnnTensorDescriptor_t, dcy: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, dxDesc: cudnnRNNDataDescriptor_t, dx: *mut ::core::ffi::c_void, dhxDesc: cudnnTensorDescriptor_t, dhx: *mut ::core::ffi::c_void, dcxDesc: cudnnTensorDescriptor_t, dcx: *mut ::core::ffi::c_void, dkDesc: cudnnRNNDataDescriptor_t, dkeys: *mut ::core::ffi::c_void, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize,
+            ) -> cudnnStatus_t;
+        }
         cudnnRNNBackwardDataEx(handle, rnnDesc, yDesc, y, dyDesc, dy, dcDesc, dcAttn, dhyDesc, dhy, dcyDesc, dcy, wDesc, w, hxDesc, hx, cxDesc, cx, dxDesc, dx, dhxDesc, dhx, dcxDesc, dcx, dkDesc, dkeys, workSpace, workSpaceSizeInBytes, reserveSpace, reserveSpaceSizeInBytes)
     }
 }
@@ -5235,7 +5639,9 @@ pub unsafe fn cudnnRNNBackwardData_v8(handle: cudnnHandle_t, rnnDesc: cudnnRNNDe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNBackwardData_v8(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, devSeqLengths: *const i32, yDesc: cudnnRNNDataDescriptor_t, y: *const ::core::ffi::c_void, dy: *const ::core::ffi::c_void, xDesc: cudnnRNNDataDescriptor_t, dx: *mut ::core::ffi::c_void, hDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, dhy: *const ::core::ffi::c_void, dhx: *mut ::core::ffi::c_void, cDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, dcy: *const ::core::ffi::c_void, dcx: *mut ::core::ffi::c_void, weightSpaceSize: usize, weightSpace: *const ::core::ffi::c_void, workSpaceSize: usize, workSpace: *mut ::core::ffi::c_void, reserveSpaceSize: usize, reserveSpace: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNBackwardData_v8(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, devSeqLengths: *const i32, yDesc: cudnnRNNDataDescriptor_t, y: *const ::core::ffi::c_void, dy: *const ::core::ffi::c_void, xDesc: cudnnRNNDataDescriptor_t, dx: *mut ::core::ffi::c_void, hDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, dhy: *const ::core::ffi::c_void, dhx: *mut ::core::ffi::c_void, cDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, dcy: *const ::core::ffi::c_void, dcx: *mut ::core::ffi::c_void, weightSpaceSize: usize, weightSpace: *const ::core::ffi::c_void, workSpaceSize: usize, workSpace: *mut ::core::ffi::c_void, reserveSpaceSize: usize, reserveSpace: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnRNNBackwardData_v8(handle, rnnDesc, devSeqLengths, yDesc, y, dy, xDesc, dx, hDesc, hx, dhy, dhx, cDesc, cx, dcy, dcx, weightSpaceSize, weightSpace, workSpaceSize, workSpace, reserveSpaceSize, reserveSpace)
     }
 }
@@ -5250,7 +5656,9 @@ pub unsafe fn cudnnRNNBackwardWeights(handle: cudnnHandle_t, rnnDesc: cudnnRNNDe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNBackwardWeights(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, yDesc: *const cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, workSpace: *const ::core::ffi::c_void, workSpaceSizeInBytes: usize, dwDesc: cudnnFilterDescriptor_t, dw: *mut ::core::ffi::c_void, reserveSpace: *const ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNBackwardWeights(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, yDesc: *const cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, workSpace: *const ::core::ffi::c_void, workSpaceSizeInBytes: usize, dwDesc: cudnnFilterDescriptor_t, dw: *mut ::core::ffi::c_void, reserveSpace: *const ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnRNNBackwardWeights(handle, rnnDesc, seqLength, xDesc, x, hxDesc, hx, yDesc, y, workSpace, workSpaceSizeInBytes, dwDesc, dw, reserveSpace, reserveSpaceSizeInBytes)
     }
 }
@@ -5265,7 +5673,9 @@ pub unsafe fn cudnnRNNBackwardWeightsEx(handle: cudnnHandle_t, rnnDesc: cudnnRNN
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNBackwardWeightsEx(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, xDesc: cudnnRNNDataDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, yDesc: cudnnRNNDataDescriptor_t, y: *const ::core::ffi::c_void, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, dwDesc: cudnnFilterDescriptor_t, dw: *mut ::core::ffi::c_void, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNBackwardWeightsEx(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, xDesc: cudnnRNNDataDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, yDesc: cudnnRNNDataDescriptor_t, y: *const ::core::ffi::c_void, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, dwDesc: cudnnFilterDescriptor_t, dw: *mut ::core::ffi::c_void, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnRNNBackwardWeightsEx(handle, rnnDesc, xDesc, x, hxDesc, hx, yDesc, y, workSpace, workSpaceSizeInBytes, dwDesc, dw, reserveSpace, reserveSpaceSizeInBytes)
     }
 }
@@ -5279,7 +5689,9 @@ pub unsafe fn cudnnRNNBackwardWeights_v8(handle: cudnnHandle_t, rnnDesc: cudnnRN
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNBackwardWeights_v8(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, addGrad: cudnnWgradMode_t, devSeqLengths: *const i32, xDesc: cudnnRNNDataDescriptor_t, x: *const ::core::ffi::c_void, hDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, yDesc: cudnnRNNDataDescriptor_t, y: *const ::core::ffi::c_void, weightSpaceSize: usize, dweightSpace: *mut ::core::ffi::c_void, workSpaceSize: usize, workSpace: *mut ::core::ffi::c_void, reserveSpaceSize: usize, reserveSpace: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNBackwardWeights_v8(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, addGrad: cudnnWgradMode_t, devSeqLengths: *const i32, xDesc: cudnnRNNDataDescriptor_t, x: *const ::core::ffi::c_void, hDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, yDesc: cudnnRNNDataDescriptor_t, y: *const ::core::ffi::c_void, weightSpaceSize: usize, dweightSpace: *mut ::core::ffi::c_void, workSpaceSize: usize, workSpace: *mut ::core::ffi::c_void, reserveSpaceSize: usize, reserveSpace: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnRNNBackwardWeights_v8(handle, rnnDesc, addGrad, devSeqLengths, xDesc, x, hDesc, hx, yDesc, y, weightSpaceSize, dweightSpace, workSpaceSize, workSpace, reserveSpaceSize, reserveSpace)
     }
 }
@@ -5293,7 +5705,9 @@ pub unsafe fn cudnnRNNForward(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNForward(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, fwdMode: cudnnForwardMode_t, devSeqLengths: *const i32, xDesc: cudnnRNNDataDescriptor_t, x: *const ::core::ffi::c_void, yDesc: cudnnRNNDataDescriptor_t, y: *mut ::core::ffi::c_void, hDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, hy: *mut ::core::ffi::c_void, cDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, cy: *mut ::core::ffi::c_void, weightSpaceSize: usize, weightSpace: *const ::core::ffi::c_void, workSpaceSize: usize, workSpace: *mut ::core::ffi::c_void, reserveSpaceSize: usize, reserveSpace: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNForward(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, fwdMode: cudnnForwardMode_t, devSeqLengths: *const i32, xDesc: cudnnRNNDataDescriptor_t, x: *const ::core::ffi::c_void, yDesc: cudnnRNNDataDescriptor_t, y: *mut ::core::ffi::c_void, hDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, hy: *mut ::core::ffi::c_void, cDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, cy: *mut ::core::ffi::c_void, weightSpaceSize: usize, weightSpace: *const ::core::ffi::c_void, workSpaceSize: usize, workSpace: *mut ::core::ffi::c_void, reserveSpaceSize: usize, reserveSpace: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnRNNForward(handle, rnnDesc, fwdMode, devSeqLengths, xDesc, x, yDesc, y, hDesc, hx, hy, cDesc, cx, cy, weightSpaceSize, weightSpace, workSpaceSize, workSpace, reserveSpaceSize, reserveSpace)
     }
 }
@@ -5308,7 +5722,9 @@ pub unsafe fn cudnnRNNForwardInference(handle: cudnnHandle_t, rnnDesc: cudnnRNND
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNForwardInference(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, yDesc: *const cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, hyDesc: cudnnTensorDescriptor_t, hy: *mut ::core::ffi::c_void, cyDesc: cudnnTensorDescriptor_t, cy: *mut ::core::ffi::c_void, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNForwardInference(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, yDesc: *const cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, hyDesc: cudnnTensorDescriptor_t, hy: *mut ::core::ffi::c_void, cyDesc: cudnnTensorDescriptor_t, cy: *mut ::core::ffi::c_void, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnRNNForwardInference(handle, rnnDesc, seqLength, xDesc, x, hxDesc, hx, cxDesc, cx, wDesc, w, yDesc, y, hyDesc, hy, cyDesc, cy, workSpace, workSpaceSizeInBytes)
     }
 }
@@ -5323,7 +5739,9 @@ pub unsafe fn cudnnRNNForwardInferenceEx(handle: cudnnHandle_t, rnnDesc: cudnnRN
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNForwardInferenceEx(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, xDesc: cudnnRNNDataDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, yDesc: cudnnRNNDataDescriptor_t, y: *mut ::core::ffi::c_void, hyDesc: cudnnTensorDescriptor_t, hy: *mut ::core::ffi::c_void, cyDesc: cudnnTensorDescriptor_t, cy: *mut ::core::ffi::c_void, kDesc: cudnnRNNDataDescriptor_t, keys: *const ::core::ffi::c_void, cDesc: cudnnRNNDataDescriptor_t, cAttn: *mut ::core::ffi::c_void, iDesc: cudnnRNNDataDescriptor_t, iAttn: *mut ::core::ffi::c_void, qDesc: cudnnRNNDataDescriptor_t, queries: *mut ::core::ffi::c_void, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNForwardInferenceEx(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, xDesc: cudnnRNNDataDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, yDesc: cudnnRNNDataDescriptor_t, y: *mut ::core::ffi::c_void, hyDesc: cudnnTensorDescriptor_t, hy: *mut ::core::ffi::c_void, cyDesc: cudnnTensorDescriptor_t, cy: *mut ::core::ffi::c_void, kDesc: cudnnRNNDataDescriptor_t, keys: *const ::core::ffi::c_void, cDesc: cudnnRNNDataDescriptor_t, cAttn: *mut ::core::ffi::c_void, iDesc: cudnnRNNDataDescriptor_t, iAttn: *mut ::core::ffi::c_void, qDesc: cudnnRNNDataDescriptor_t, queries: *mut ::core::ffi::c_void, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnRNNForwardInferenceEx(handle, rnnDesc, xDesc, x, hxDesc, hx, cxDesc, cx, wDesc, w, yDesc, y, hyDesc, hy, cyDesc, cy, kDesc, keys, cDesc, cAttn, iDesc, iAttn, qDesc, queries, workSpace, workSpaceSizeInBytes)
     }
 }
@@ -5338,7 +5756,9 @@ pub unsafe fn cudnnRNNForwardTraining(handle: cudnnHandle_t, rnnDesc: cudnnRNNDe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNForwardTraining(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, yDesc: *const cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, hyDesc: cudnnTensorDescriptor_t, hy: *mut ::core::ffi::c_void, cyDesc: cudnnTensorDescriptor_t, cy: *mut ::core::ffi::c_void, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNForwardTraining(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, seqLength: ::core::ffi::c_int, xDesc: *const cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, yDesc: *const cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, hyDesc: cudnnTensorDescriptor_t, hy: *mut ::core::ffi::c_void, cyDesc: cudnnTensorDescriptor_t, cy: *mut ::core::ffi::c_void, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnRNNForwardTraining(handle, rnnDesc, seqLength, xDesc, x, hxDesc, hx, cxDesc, cx, wDesc, w, yDesc, y, hyDesc, hy, cyDesc, cy, workSpace, workSpaceSizeInBytes, reserveSpace, reserveSpaceSizeInBytes)
     }
 }
@@ -5353,7 +5773,9 @@ pub unsafe fn cudnnRNNForwardTrainingEx(handle: cudnnHandle_t, rnnDesc: cudnnRNN
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNForwardTrainingEx(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, xDesc: cudnnRNNDataDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, yDesc: cudnnRNNDataDescriptor_t, y: *mut ::core::ffi::c_void, hyDesc: cudnnTensorDescriptor_t, hy: *mut ::core::ffi::c_void, cyDesc: cudnnTensorDescriptor_t, cy: *mut ::core::ffi::c_void, kDesc: cudnnRNNDataDescriptor_t, keys: *const ::core::ffi::c_void, cDesc: cudnnRNNDataDescriptor_t, cAttn: *mut ::core::ffi::c_void, iDesc: cudnnRNNDataDescriptor_t, iAttn: *mut ::core::ffi::c_void, qDesc: cudnnRNNDataDescriptor_t, queries: *mut ::core::ffi::c_void, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNForwardTrainingEx(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, xDesc: cudnnRNNDataDescriptor_t, x: *const ::core::ffi::c_void, hxDesc: cudnnTensorDescriptor_t, hx: *const ::core::ffi::c_void, cxDesc: cudnnTensorDescriptor_t, cx: *const ::core::ffi::c_void, wDesc: cudnnFilterDescriptor_t, w: *const ::core::ffi::c_void, yDesc: cudnnRNNDataDescriptor_t, y: *mut ::core::ffi::c_void, hyDesc: cudnnTensorDescriptor_t, hy: *mut ::core::ffi::c_void, cyDesc: cudnnTensorDescriptor_t, cy: *mut ::core::ffi::c_void, kDesc: cudnnRNNDataDescriptor_t, keys: *const ::core::ffi::c_void, cDesc: cudnnRNNDataDescriptor_t, cAttn: *mut ::core::ffi::c_void, iDesc: cudnnRNNDataDescriptor_t, iAttn: *mut ::core::ffi::c_void, qDesc: cudnnRNNDataDescriptor_t, queries: *mut ::core::ffi::c_void, workSpace: *mut ::core::ffi::c_void, workSpaceSizeInBytes: usize, reserveSpace: *mut ::core::ffi::c_void, reserveSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnRNNForwardTrainingEx(handle, rnnDesc, xDesc, x, hxDesc, hx, cxDesc, cx, wDesc, w, yDesc, y, hyDesc, hy, cyDesc, cy, kDesc, keys, cDesc, cAttn, iDesc, iAttn, qDesc, queries, workSpace, workSpaceSizeInBytes, reserveSpace, reserveSpaceSizeInBytes)
     }
 }
@@ -5368,7 +5790,9 @@ pub unsafe fn cudnnRNNGetClip(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNGetClip(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, clipMode: *mut cudnnRNNClipMode_t, clipNanOpt: *mut cudnnNanPropagation_t, lclip: *mut f64, rclip: *mut f64) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNGetClip(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, clipMode: *mut cudnnRNNClipMode_t, clipNanOpt: *mut cudnnNanPropagation_t, lclip: *mut f64, rclip: *mut f64) -> cudnnStatus_t;
+        }
         cudnnRNNGetClip(handle, rnnDesc, clipMode, clipNanOpt, lclip, rclip)
     }
 }
@@ -5382,7 +5806,9 @@ pub unsafe fn cudnnRNNGetClip_v8(rnnDesc: cudnnRNNDescriptor_t, clipMode: *mut c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNGetClip_v8(rnnDesc: cudnnRNNDescriptor_t, clipMode: *mut cudnnRNNClipMode_t, clipNanOpt: *mut cudnnNanPropagation_t, lclip: *mut f64, rclip: *mut f64) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNGetClip_v8(rnnDesc: cudnnRNNDescriptor_t, clipMode: *mut cudnnRNNClipMode_t, clipNanOpt: *mut cudnnNanPropagation_t, lclip: *mut f64, rclip: *mut f64) -> cudnnStatus_t;
+        }
         cudnnRNNGetClip_v8(rnnDesc, clipMode, clipNanOpt, lclip, rclip)
     }
 }
@@ -5397,7 +5823,9 @@ pub unsafe fn cudnnRNNGetClip_v9(rnnDesc: cudnnRNNDescriptor_t, clipMode: *mut c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNGetClip_v9(rnnDesc: cudnnRNNDescriptor_t, clipMode: *mut cudnnRNNClipMode_t, lclip: *mut f64, rclip: *mut f64) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNGetClip_v9(rnnDesc: cudnnRNNDescriptor_t, clipMode: *mut cudnnRNNClipMode_t, lclip: *mut f64, rclip: *mut f64) -> cudnnStatus_t;
+        }
         cudnnRNNGetClip_v9(rnnDesc, clipMode, lclip, rclip)
     }
 }
@@ -5412,7 +5840,9 @@ pub unsafe fn cudnnRNNSetClip(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNSetClip(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, clipMode: cudnnRNNClipMode_t, clipNanOpt: cudnnNanPropagation_t, lclip: f64, rclip: f64) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNSetClip(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, clipMode: cudnnRNNClipMode_t, clipNanOpt: cudnnNanPropagation_t, lclip: f64, rclip: f64) -> cudnnStatus_t;
+        }
         cudnnRNNSetClip(handle, rnnDesc, clipMode, clipNanOpt, lclip, rclip)
     }
 }
@@ -5426,7 +5856,9 @@ pub unsafe fn cudnnRNNSetClip_v8(rnnDesc: cudnnRNNDescriptor_t, clipMode: cudnnR
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNSetClip_v8(rnnDesc: cudnnRNNDescriptor_t, clipMode: cudnnRNNClipMode_t, clipNanOpt: cudnnNanPropagation_t, lclip: f64, rclip: f64) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNSetClip_v8(rnnDesc: cudnnRNNDescriptor_t, clipMode: cudnnRNNClipMode_t, clipNanOpt: cudnnNanPropagation_t, lclip: f64, rclip: f64) -> cudnnStatus_t;
+        }
         cudnnRNNSetClip_v8(rnnDesc, clipMode, clipNanOpt, lclip, rclip)
     }
 }
@@ -5441,7 +5873,9 @@ pub unsafe fn cudnnRNNSetClip_v9(rnnDesc: cudnnRNNDescriptor_t, clipMode: cudnnR
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRNNSetClip_v9(rnnDesc: cudnnRNNDescriptor_t, clipMode: cudnnRNNClipMode_t, lclip: f64, rclip: f64) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRNNSetClip_v9(rnnDesc: cudnnRNNDescriptor_t, clipMode: cudnnRNNClipMode_t, lclip: f64, rclip: f64) -> cudnnStatus_t;
+        }
         cudnnRNNSetClip_v9(rnnDesc, clipMode, lclip, rclip)
     }
 }
@@ -5455,7 +5889,9 @@ pub unsafe fn cudnnReduceTensor(handle: cudnnHandle_t, reduceTensorDesc: cudnnRe
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnReduceTensor(handle: cudnnHandle_t, reduceTensorDesc: cudnnReduceTensorDescriptor_t, indices: *mut ::core::ffi::c_void, indicesSizeInBytes: usize, workspace: *mut ::core::ffi::c_void, workspaceSizeInBytes: usize, alpha: *const ::core::ffi::c_void, aDesc: cudnnTensorDescriptor_t, A: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, cDesc: cudnnTensorDescriptor_t, C: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnReduceTensor(handle: cudnnHandle_t, reduceTensorDesc: cudnnReduceTensorDescriptor_t, indices: *mut ::core::ffi::c_void, indicesSizeInBytes: usize, workspace: *mut ::core::ffi::c_void, workspaceSizeInBytes: usize, alpha: *const ::core::ffi::c_void, aDesc: cudnnTensorDescriptor_t, A: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, cDesc: cudnnTensorDescriptor_t, C: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnReduceTensor(handle, reduceTensorDesc, indices, indicesSizeInBytes, workspace, workspaceSizeInBytes, alpha, aDesc, A, beta, cDesc, C)
     }
 }
@@ -5469,7 +5905,9 @@ pub unsafe fn cudnnReorderFilterAndBias(handle: cudnnHandle_t, filterDesc: cudnn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnReorderFilterAndBias(handle: cudnnHandle_t, filterDesc: cudnnFilterDescriptor_t, reorderType: cudnnReorderType_t, filterData: *const ::core::ffi::c_void, reorderedFilterData: *mut ::core::ffi::c_void, reorderBias: ::core::ffi::c_int, biasData: *const ::core::ffi::c_void, reorderedBiasData: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnReorderFilterAndBias(handle: cudnnHandle_t, filterDesc: cudnnFilterDescriptor_t, reorderType: cudnnReorderType_t, filterData: *const ::core::ffi::c_void, reorderedFilterData: *mut ::core::ffi::c_void, reorderBias: ::core::ffi::c_int, biasData: *const ::core::ffi::c_void, reorderedBiasData: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnReorderFilterAndBias(handle, filterDesc, reorderType, filterData, reorderedFilterData, reorderBias, biasData, reorderedBiasData)
     }
 }
@@ -5484,7 +5922,9 @@ pub unsafe fn cudnnRestoreAlgorithm(handle: cudnnHandle_t, algoSpace: *mut ::cor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRestoreAlgorithm(handle: cudnnHandle_t, algoSpace: *mut ::core::ffi::c_void, algoSpaceSizeInBytes: usize, algoDesc: cudnnAlgorithmDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRestoreAlgorithm(handle: cudnnHandle_t, algoSpace: *mut ::core::ffi::c_void, algoSpaceSizeInBytes: usize, algoDesc: cudnnAlgorithmDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnRestoreAlgorithm(handle, algoSpace, algoSpaceSizeInBytes, algoDesc)
     }
 }
@@ -5498,7 +5938,9 @@ pub unsafe fn cudnnRestoreDropoutDescriptor(dropoutDesc: cudnnDropoutDescriptor_
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnRestoreDropoutDescriptor(dropoutDesc: cudnnDropoutDescriptor_t, handle: cudnnHandle_t, dropout: f32, states: *mut ::core::ffi::c_void, stateSizeInBytes: usize, seed: ::core::ffi::c_ulonglong) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnRestoreDropoutDescriptor(dropoutDesc: cudnnDropoutDescriptor_t, handle: cudnnHandle_t, dropout: f32, states: *mut ::core::ffi::c_void, stateSizeInBytes: usize, seed: ::core::ffi::c_ulonglong) -> cudnnStatus_t;
+        }
         cudnnRestoreDropoutDescriptor(dropoutDesc, handle, dropout, states, stateSizeInBytes, seed)
     }
 }
@@ -5513,7 +5955,9 @@ pub unsafe fn cudnnSaveAlgorithm(handle: cudnnHandle_t, algoDesc: cudnnAlgorithm
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSaveAlgorithm(handle: cudnnHandle_t, algoDesc: cudnnAlgorithmDescriptor_t, algoSpace: *mut ::core::ffi::c_void, algoSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSaveAlgorithm(handle: cudnnHandle_t, algoDesc: cudnnAlgorithmDescriptor_t, algoSpace: *mut ::core::ffi::c_void, algoSpaceSizeInBytes: usize) -> cudnnStatus_t;
+        }
         cudnnSaveAlgorithm(handle, algoDesc, algoSpace, algoSpaceSizeInBytes)
     }
 }
@@ -5527,7 +5971,9 @@ pub unsafe fn cudnnScaleTensor(handle: cudnnHandle_t, yDesc: cudnnTensorDescript
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnScaleTensor(handle: cudnnHandle_t, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, alpha: *const ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnScaleTensor(handle: cudnnHandle_t, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, alpha: *const ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnScaleTensor(handle, yDesc, y, alpha)
     }
 }
@@ -5541,7 +5987,9 @@ pub unsafe fn cudnnSetActivationDescriptor(activationDesc: cudnnActivationDescri
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetActivationDescriptor(activationDesc: cudnnActivationDescriptor_t, mode: cudnnActivationMode_t, reluNanOpt: cudnnNanPropagation_t, coef: f64) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetActivationDescriptor(activationDesc: cudnnActivationDescriptor_t, mode: cudnnActivationMode_t, reluNanOpt: cudnnNanPropagation_t, coef: f64) -> cudnnStatus_t;
+        }
         cudnnSetActivationDescriptor(activationDesc, mode, reluNanOpt, coef)
     }
 }
@@ -5555,7 +6003,9 @@ pub unsafe fn cudnnSetActivationDescriptorSwishBeta(activationDesc: cudnnActivat
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetActivationDescriptorSwishBeta(activationDesc: cudnnActivationDescriptor_t, swish_beta: f64) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetActivationDescriptorSwishBeta(activationDesc: cudnnActivationDescriptor_t, swish_beta: f64) -> cudnnStatus_t;
+        }
         cudnnSetActivationDescriptorSwishBeta(activationDesc, swish_beta)
     }
 }
@@ -5570,7 +6020,9 @@ pub unsafe fn cudnnSetAlgorithmDescriptor(algoDesc: cudnnAlgorithmDescriptor_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetAlgorithmDescriptor(algoDesc: cudnnAlgorithmDescriptor_t, algorithm: cudnnAlgorithm_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetAlgorithmDescriptor(algoDesc: cudnnAlgorithmDescriptor_t, algorithm: cudnnAlgorithm_t) -> cudnnStatus_t;
+        }
         cudnnSetAlgorithmDescriptor(algoDesc, algorithm)
     }
 }
@@ -5585,7 +6037,9 @@ pub unsafe fn cudnnSetAlgorithmPerformance(algoPerf: cudnnAlgorithmPerformance_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetAlgorithmPerformance(algoPerf: cudnnAlgorithmPerformance_t, algoDesc: cudnnAlgorithmDescriptor_t, status: cudnnStatus_t, time: f32, memory: usize) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetAlgorithmPerformance(algoPerf: cudnnAlgorithmPerformance_t, algoDesc: cudnnAlgorithmDescriptor_t, status: cudnnStatus_t, time: f32, memory: usize) -> cudnnStatus_t;
+        }
         cudnnSetAlgorithmPerformance(algoPerf, algoDesc, status, time, memory)
     }
 }
@@ -5599,7 +6053,9 @@ pub unsafe fn cudnnSetAttnDescriptor(attnDesc: cudnnAttnDescriptor_t, attnMode: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetAttnDescriptor(attnDesc: cudnnAttnDescriptor_t, attnMode: ::core::ffi::c_uint, nHeads: ::core::ffi::c_int, smScaler: f64, dataType: cudnnDataType_t, computePrec: cudnnDataType_t, mathType: cudnnMathType_t, attnDropoutDesc: cudnnDropoutDescriptor_t, postDropoutDesc: cudnnDropoutDescriptor_t, qSize: ::core::ffi::c_int, kSize: ::core::ffi::c_int, vSize: ::core::ffi::c_int, qProjSize: ::core::ffi::c_int, kProjSize: ::core::ffi::c_int, vProjSize: ::core::ffi::c_int, oProjSize: ::core::ffi::c_int, qoMaxSeqLength: ::core::ffi::c_int, kvMaxSeqLength: ::core::ffi::c_int, maxBatchSize: ::core::ffi::c_int, maxBeamSize: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetAttnDescriptor(attnDesc: cudnnAttnDescriptor_t, attnMode: ::core::ffi::c_uint, nHeads: ::core::ffi::c_int, smScaler: f64, dataType: cudnnDataType_t, computePrec: cudnnDataType_t, mathType: cudnnMathType_t, attnDropoutDesc: cudnnDropoutDescriptor_t, postDropoutDesc: cudnnDropoutDescriptor_t, qSize: ::core::ffi::c_int, kSize: ::core::ffi::c_int, vSize: ::core::ffi::c_int, qProjSize: ::core::ffi::c_int, kProjSize: ::core::ffi::c_int, vProjSize: ::core::ffi::c_int, oProjSize: ::core::ffi::c_int, qoMaxSeqLength: ::core::ffi::c_int, kvMaxSeqLength: ::core::ffi::c_int, maxBatchSize: ::core::ffi::c_int, maxBeamSize: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnSetAttnDescriptor(attnDesc, attnMode, nHeads, smScaler, dataType, computePrec, mathType, attnDropoutDesc, postDropoutDesc, qSize, kSize, vSize, qProjSize, kProjSize, vProjSize, oProjSize, qoMaxSeqLength, kvMaxSeqLength, maxBatchSize, maxBeamSize)
     }
 }
@@ -5613,7 +6069,9 @@ pub unsafe fn cudnnSetCTCLossDescriptor(ctcLossDesc: cudnnCTCLossDescriptor_t, c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetCTCLossDescriptor(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: cudnnDataType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetCTCLossDescriptor(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: cudnnDataType_t) -> cudnnStatus_t;
+        }
         cudnnSetCTCLossDescriptor(ctcLossDesc, compType)
     }
 }
@@ -5627,7 +6085,9 @@ pub unsafe fn cudnnSetCTCLossDescriptorEx(ctcLossDesc: cudnnCTCLossDescriptor_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetCTCLossDescriptorEx(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: cudnnDataType_t, normMode: cudnnLossNormalizationMode_t, gradMode: cudnnNanPropagation_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetCTCLossDescriptorEx(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: cudnnDataType_t, normMode: cudnnLossNormalizationMode_t, gradMode: cudnnNanPropagation_t) -> cudnnStatus_t;
+        }
         cudnnSetCTCLossDescriptorEx(ctcLossDesc, compType, normMode, gradMode)
     }
 }
@@ -5641,7 +6101,9 @@ pub unsafe fn cudnnSetCTCLossDescriptor_v8(ctcLossDesc: cudnnCTCLossDescriptor_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetCTCLossDescriptor_v8(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: cudnnDataType_t, normMode: cudnnLossNormalizationMode_t, gradMode: cudnnNanPropagation_t, maxLabelLength: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetCTCLossDescriptor_v8(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: cudnnDataType_t, normMode: cudnnLossNormalizationMode_t, gradMode: cudnnNanPropagation_t, maxLabelLength: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnSetCTCLossDescriptor_v8(ctcLossDesc, compType, normMode, gradMode, maxLabelLength)
     }
 }
@@ -5656,7 +6118,9 @@ pub unsafe fn cudnnSetCTCLossDescriptor_v9(ctcLossDesc: cudnnCTCLossDescriptor_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetCTCLossDescriptor_v9(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: cudnnDataType_t, normMode: cudnnLossNormalizationMode_t, ctcGradMode: cudnnCTCGradMode_t, maxLabelLength: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetCTCLossDescriptor_v9(ctcLossDesc: cudnnCTCLossDescriptor_t, compType: cudnnDataType_t, normMode: cudnnLossNormalizationMode_t, ctcGradMode: cudnnCTCGradMode_t, maxLabelLength: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnSetCTCLossDescriptor_v9(ctcLossDesc, compType, normMode, ctcGradMode, maxLabelLength)
     }
 }
@@ -5670,7 +6134,9 @@ pub unsafe fn cudnnSetCallback(mask: ::core::ffi::c_uint, udata: *mut ::core::ff
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetCallback(mask: ::core::ffi::c_uint, udata: *mut ::core::ffi::c_void, fptr: cudnnCallback_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetCallback(mask: ::core::ffi::c_uint, udata: *mut ::core::ffi::c_void, fptr: cudnnCallback_t) -> cudnnStatus_t;
+        }
         cudnnSetCallback(mask, udata, fptr)
     }
 }
@@ -5684,7 +6150,9 @@ pub unsafe fn cudnnSetConvolution2dDescriptor(convDesc: cudnnConvolutionDescript
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetConvolution2dDescriptor(convDesc: cudnnConvolutionDescriptor_t, pad_h: ::core::ffi::c_int, pad_w: ::core::ffi::c_int, u: ::core::ffi::c_int, v: ::core::ffi::c_int, dilation_h: ::core::ffi::c_int, dilation_w: ::core::ffi::c_int, mode: cudnnConvolutionMode_t, computeType: cudnnDataType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetConvolution2dDescriptor(convDesc: cudnnConvolutionDescriptor_t, pad_h: ::core::ffi::c_int, pad_w: ::core::ffi::c_int, u: ::core::ffi::c_int, v: ::core::ffi::c_int, dilation_h: ::core::ffi::c_int, dilation_w: ::core::ffi::c_int, mode: cudnnConvolutionMode_t, computeType: cudnnDataType_t) -> cudnnStatus_t;
+        }
         cudnnSetConvolution2dDescriptor(convDesc, pad_h, pad_w, u, v, dilation_h, dilation_w, mode, computeType)
     }
 }
@@ -5698,7 +6166,9 @@ pub unsafe fn cudnnSetConvolutionGroupCount(convDesc: cudnnConvolutionDescriptor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetConvolutionGroupCount(convDesc: cudnnConvolutionDescriptor_t, groupCount: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetConvolutionGroupCount(convDesc: cudnnConvolutionDescriptor_t, groupCount: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnSetConvolutionGroupCount(convDesc, groupCount)
     }
 }
@@ -5712,7 +6182,9 @@ pub unsafe fn cudnnSetConvolutionMathType(convDesc: cudnnConvolutionDescriptor_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetConvolutionMathType(convDesc: cudnnConvolutionDescriptor_t, mathType: cudnnMathType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetConvolutionMathType(convDesc: cudnnConvolutionDescriptor_t, mathType: cudnnMathType_t) -> cudnnStatus_t;
+        }
         cudnnSetConvolutionMathType(convDesc, mathType)
     }
 }
@@ -5726,7 +6198,9 @@ pub unsafe fn cudnnSetConvolutionNdDescriptor(convDesc: cudnnConvolutionDescript
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetConvolutionNdDescriptor(convDesc: cudnnConvolutionDescriptor_t, arrayLength: ::core::ffi::c_int, padA: *const ::core::ffi::c_int, filterStrideA: *const ::core::ffi::c_int, dilationA: *const ::core::ffi::c_int, mode: cudnnConvolutionMode_t, computeType: cudnnDataType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetConvolutionNdDescriptor(convDesc: cudnnConvolutionDescriptor_t, arrayLength: ::core::ffi::c_int, padA: *const ::core::ffi::c_int, filterStrideA: *const ::core::ffi::c_int, dilationA: *const ::core::ffi::c_int, mode: cudnnConvolutionMode_t, computeType: cudnnDataType_t) -> cudnnStatus_t;
+        }
         cudnnSetConvolutionNdDescriptor(convDesc, arrayLength, padA, filterStrideA, dilationA, mode, computeType)
     }
 }
@@ -5740,7 +6214,9 @@ pub unsafe fn cudnnSetConvolutionReorderType(convDesc: cudnnConvolutionDescripto
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetConvolutionReorderType(convDesc: cudnnConvolutionDescriptor_t, reorderType: cudnnReorderType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetConvolutionReorderType(convDesc: cudnnConvolutionDescriptor_t, reorderType: cudnnReorderType_t) -> cudnnStatus_t;
+        }
         cudnnSetConvolutionReorderType(convDesc, reorderType)
     }
 }
@@ -5754,7 +6230,9 @@ pub unsafe fn cudnnSetDropoutDescriptor(dropoutDesc: cudnnDropoutDescriptor_t, h
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetDropoutDescriptor(dropoutDesc: cudnnDropoutDescriptor_t, handle: cudnnHandle_t, dropout: f32, states: *mut ::core::ffi::c_void, stateSizeInBytes: usize, seed: ::core::ffi::c_ulonglong) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetDropoutDescriptor(dropoutDesc: cudnnDropoutDescriptor_t, handle: cudnnHandle_t, dropout: f32, states: *mut ::core::ffi::c_void, stateSizeInBytes: usize, seed: ::core::ffi::c_ulonglong) -> cudnnStatus_t;
+        }
         cudnnSetDropoutDescriptor(dropoutDesc, handle, dropout, states, stateSizeInBytes, seed)
     }
 }
@@ -5768,7 +6246,9 @@ pub unsafe fn cudnnSetFilter4dDescriptor(filterDesc: cudnnFilterDescriptor_t, da
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetFilter4dDescriptor(filterDesc: cudnnFilterDescriptor_t, dataType: cudnnDataType_t, format: cudnnTensorFormat_t, k: ::core::ffi::c_int, c: ::core::ffi::c_int, h: ::core::ffi::c_int, w: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetFilter4dDescriptor(filterDesc: cudnnFilterDescriptor_t, dataType: cudnnDataType_t, format: cudnnTensorFormat_t, k: ::core::ffi::c_int, c: ::core::ffi::c_int, h: ::core::ffi::c_int, w: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnSetFilter4dDescriptor(filterDesc, dataType, format, k, c, h, w)
     }
 }
@@ -5782,7 +6262,9 @@ pub unsafe fn cudnnSetFilterNdDescriptor(filterDesc: cudnnFilterDescriptor_t, da
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetFilterNdDescriptor(filterDesc: cudnnFilterDescriptor_t, dataType: cudnnDataType_t, format: cudnnTensorFormat_t, nbDims: ::core::ffi::c_int, filterDimA: *const ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetFilterNdDescriptor(filterDesc: cudnnFilterDescriptor_t, dataType: cudnnDataType_t, format: cudnnTensorFormat_t, nbDims: ::core::ffi::c_int, filterDimA: *const ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnSetFilterNdDescriptor(filterDesc, dataType, format, nbDims, filterDimA)
     }
 }
@@ -5796,7 +6278,9 @@ pub unsafe fn cudnnSetFusedOpsConstParamPackAttribute(constPack: cudnnFusedOpsCo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetFusedOpsConstParamPackAttribute(constPack: cudnnFusedOpsConstParamPack_t, paramLabel: cudnnFusedOpsConstParamLabel_t, param: *const ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetFusedOpsConstParamPackAttribute(constPack: cudnnFusedOpsConstParamPack_t, paramLabel: cudnnFusedOpsConstParamLabel_t, param: *const ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnSetFusedOpsConstParamPackAttribute(constPack, paramLabel, param)
     }
 }
@@ -5810,7 +6294,9 @@ pub unsafe fn cudnnSetFusedOpsVariantParamPackAttribute(varPack: cudnnFusedOpsVa
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetFusedOpsVariantParamPackAttribute(varPack: cudnnFusedOpsVariantParamPack_t, paramLabel: cudnnFusedOpsVariantParamLabel_t, ptr: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetFusedOpsVariantParamPackAttribute(varPack: cudnnFusedOpsVariantParamPack_t, paramLabel: cudnnFusedOpsVariantParamLabel_t, ptr: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnSetFusedOpsVariantParamPackAttribute(varPack, paramLabel, ptr)
     }
 }
@@ -5824,7 +6310,9 @@ pub unsafe fn cudnnSetLRNDescriptor(normDesc: cudnnLRNDescriptor_t, lrnN: ::core
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetLRNDescriptor(normDesc: cudnnLRNDescriptor_t, lrnN: ::core::ffi::c_uint, lrnAlpha: f64, lrnBeta: f64, lrnK: f64) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetLRNDescriptor(normDesc: cudnnLRNDescriptor_t, lrnN: ::core::ffi::c_uint, lrnAlpha: f64, lrnBeta: f64, lrnK: f64) -> cudnnStatus_t;
+        }
         cudnnSetLRNDescriptor(normDesc, lrnN, lrnAlpha, lrnBeta, lrnK)
     }
 }
@@ -5838,7 +6326,9 @@ pub unsafe fn cudnnSetOpTensorDescriptor(opTensorDesc: cudnnOpTensorDescriptor_t
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetOpTensorDescriptor(opTensorDesc: cudnnOpTensorDescriptor_t, opTensorOp: cudnnOpTensorOp_t, opTensorCompType: cudnnDataType_t, opTensorNanOpt: cudnnNanPropagation_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetOpTensorDescriptor(opTensorDesc: cudnnOpTensorDescriptor_t, opTensorOp: cudnnOpTensorOp_t, opTensorCompType: cudnnDataType_t, opTensorNanOpt: cudnnNanPropagation_t) -> cudnnStatus_t;
+        }
         cudnnSetOpTensorDescriptor(opTensorDesc, opTensorOp, opTensorCompType, opTensorNanOpt)
     }
 }
@@ -5853,7 +6343,9 @@ pub unsafe fn cudnnSetPersistentRNNPlan(rnnDesc: cudnnRNNDescriptor_t, plan: cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetPersistentRNNPlan(rnnDesc: cudnnRNNDescriptor_t, plan: cudnnPersistentRNNPlan_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetPersistentRNNPlan(rnnDesc: cudnnRNNDescriptor_t, plan: cudnnPersistentRNNPlan_t) -> cudnnStatus_t;
+        }
         cudnnSetPersistentRNNPlan(rnnDesc, plan)
     }
 }
@@ -5867,7 +6359,9 @@ pub unsafe fn cudnnSetPooling2dDescriptor(poolingDesc: cudnnPoolingDescriptor_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetPooling2dDescriptor(poolingDesc: cudnnPoolingDescriptor_t, mode: cudnnPoolingMode_t, maxpoolingNanOpt: cudnnNanPropagation_t, windowHeight: ::core::ffi::c_int, windowWidth: ::core::ffi::c_int, verticalPadding: ::core::ffi::c_int, horizontalPadding: ::core::ffi::c_int, verticalStride: ::core::ffi::c_int, horizontalStride: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetPooling2dDescriptor(poolingDesc: cudnnPoolingDescriptor_t, mode: cudnnPoolingMode_t, maxpoolingNanOpt: cudnnNanPropagation_t, windowHeight: ::core::ffi::c_int, windowWidth: ::core::ffi::c_int, verticalPadding: ::core::ffi::c_int, horizontalPadding: ::core::ffi::c_int, verticalStride: ::core::ffi::c_int, horizontalStride: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnSetPooling2dDescriptor(poolingDesc, mode, maxpoolingNanOpt, windowHeight, windowWidth, verticalPadding, horizontalPadding, verticalStride, horizontalStride)
     }
 }
@@ -5881,7 +6375,9 @@ pub unsafe fn cudnnSetPoolingNdDescriptor(poolingDesc: cudnnPoolingDescriptor_t,
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetPoolingNdDescriptor(poolingDesc: cudnnPoolingDescriptor_t, mode: cudnnPoolingMode_t, maxpoolingNanOpt: cudnnNanPropagation_t, nbDims: ::core::ffi::c_int, windowDimA: *const ::core::ffi::c_int, paddingA: *const ::core::ffi::c_int, strideA: *const ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetPoolingNdDescriptor(poolingDesc: cudnnPoolingDescriptor_t, mode: cudnnPoolingMode_t, maxpoolingNanOpt: cudnnNanPropagation_t, nbDims: ::core::ffi::c_int, windowDimA: *const ::core::ffi::c_int, paddingA: *const ::core::ffi::c_int, strideA: *const ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnSetPoolingNdDescriptor(poolingDesc, mode, maxpoolingNanOpt, nbDims, windowDimA, paddingA, strideA)
     }
 }
@@ -5896,7 +6392,9 @@ pub unsafe fn cudnnSetRNNAlgorithmDescriptor(handle: cudnnHandle_t, rnnDesc: cud
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetRNNAlgorithmDescriptor(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, algoDesc: cudnnAlgorithmDescriptor_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetRNNAlgorithmDescriptor(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, algoDesc: cudnnAlgorithmDescriptor_t) -> cudnnStatus_t;
+        }
         cudnnSetRNNAlgorithmDescriptor(handle, rnnDesc, algoDesc)
     }
 }
@@ -5911,7 +6409,9 @@ pub unsafe fn cudnnSetRNNBiasMode(rnnDesc: cudnnRNNDescriptor_t, biasMode: cudnn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetRNNBiasMode(rnnDesc: cudnnRNNDescriptor_t, biasMode: cudnnRNNBiasMode_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetRNNBiasMode(rnnDesc: cudnnRNNDescriptor_t, biasMode: cudnnRNNBiasMode_t) -> cudnnStatus_t;
+        }
         cudnnSetRNNBiasMode(rnnDesc, biasMode)
     }
 }
@@ -5925,7 +6425,9 @@ pub unsafe fn cudnnSetRNNDataDescriptor(rnnDataDesc: cudnnRNNDataDescriptor_t, d
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetRNNDataDescriptor(rnnDataDesc: cudnnRNNDataDescriptor_t, dataType: cudnnDataType_t, layout: cudnnRNNDataLayout_t, maxSeqLength: ::core::ffi::c_int, batchSize: ::core::ffi::c_int, vectorSize: ::core::ffi::c_int, seqLengthArray: *const ::core::ffi::c_int, paddingFill: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetRNNDataDescriptor(rnnDataDesc: cudnnRNNDataDescriptor_t, dataType: cudnnDataType_t, layout: cudnnRNNDataLayout_t, maxSeqLength: ::core::ffi::c_int, batchSize: ::core::ffi::c_int, vectorSize: ::core::ffi::c_int, seqLengthArray: *const ::core::ffi::c_int, paddingFill: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnSetRNNDataDescriptor(rnnDataDesc, dataType, layout, maxSeqLength, batchSize, vectorSize, seqLengthArray, paddingFill)
     }
 }
@@ -5940,7 +6442,9 @@ pub unsafe fn cudnnSetRNNDescriptor_v6(handle: cudnnHandle_t, rnnDesc: cudnnRNND
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetRNNDescriptor_v6(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, hiddenSize: ::core::ffi::c_int, numLayers: ::core::ffi::c_int, dropoutDesc: cudnnDropoutDescriptor_t, inputMode: cudnnRNNInputMode_t, direction: cudnnDirectionMode_t, cellMode: cudnnRNNMode_t, algo: cudnnRNNAlgo_t, mathPrec: cudnnDataType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetRNNDescriptor_v6(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, hiddenSize: ::core::ffi::c_int, numLayers: ::core::ffi::c_int, dropoutDesc: cudnnDropoutDescriptor_t, inputMode: cudnnRNNInputMode_t, direction: cudnnDirectionMode_t, cellMode: cudnnRNNMode_t, algo: cudnnRNNAlgo_t, mathPrec: cudnnDataType_t) -> cudnnStatus_t;
+        }
         cudnnSetRNNDescriptor_v6(handle, rnnDesc, hiddenSize, numLayers, dropoutDesc, inputMode, direction, cellMode, algo, mathPrec)
     }
 }
@@ -5954,7 +6458,9 @@ pub unsafe fn cudnnSetRNNDescriptor_v8(rnnDesc: cudnnRNNDescriptor_t, algo: cudn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetRNNDescriptor_v8(rnnDesc: cudnnRNNDescriptor_t, algo: cudnnRNNAlgo_t, cellMode: cudnnRNNMode_t, biasMode: cudnnRNNBiasMode_t, dirMode: cudnnDirectionMode_t, inputMode: cudnnRNNInputMode_t, dataType: cudnnDataType_t, mathPrec: cudnnDataType_t, mathType: cudnnMathType_t, inputSize: i32, hiddenSize: i32, projSize: i32, numLayers: i32, dropoutDesc: cudnnDropoutDescriptor_t, auxFlags: u32) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetRNNDescriptor_v8(rnnDesc: cudnnRNNDescriptor_t, algo: cudnnRNNAlgo_t, cellMode: cudnnRNNMode_t, biasMode: cudnnRNNBiasMode_t, dirMode: cudnnDirectionMode_t, inputMode: cudnnRNNInputMode_t, dataType: cudnnDataType_t, mathPrec: cudnnDataType_t, mathType: cudnnMathType_t, inputSize: i32, hiddenSize: i32, projSize: i32, numLayers: i32, dropoutDesc: cudnnDropoutDescriptor_t, auxFlags: u32) -> cudnnStatus_t;
+        }
         cudnnSetRNNDescriptor_v8(rnnDesc, algo, cellMode, biasMode, dirMode, inputMode, dataType, mathPrec, mathType, inputSize, hiddenSize, projSize, numLayers, dropoutDesc, auxFlags)
     }
 }
@@ -5969,7 +6475,9 @@ pub unsafe fn cudnnSetRNNMatrixMathType(rnnDesc: cudnnRNNDescriptor_t, mType: cu
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetRNNMatrixMathType(rnnDesc: cudnnRNNDescriptor_t, mType: cudnnMathType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetRNNMatrixMathType(rnnDesc: cudnnRNNDescriptor_t, mType: cudnnMathType_t) -> cudnnStatus_t;
+        }
         cudnnSetRNNMatrixMathType(rnnDesc, mType)
     }
 }
@@ -5984,7 +6492,9 @@ pub unsafe fn cudnnSetRNNPaddingMode(rnnDesc: cudnnRNNDescriptor_t, paddingMode:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetRNNPaddingMode(rnnDesc: cudnnRNNDescriptor_t, paddingMode: ::core::ffi::c_uint) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetRNNPaddingMode(rnnDesc: cudnnRNNDescriptor_t, paddingMode: ::core::ffi::c_uint) -> cudnnStatus_t;
+        }
         cudnnSetRNNPaddingMode(rnnDesc, paddingMode)
     }
 }
@@ -5999,7 +6509,9 @@ pub unsafe fn cudnnSetRNNProjectionLayers(handle: cudnnHandle_t, rnnDesc: cudnnR
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetRNNProjectionLayers(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, recProjSize: ::core::ffi::c_int, outProjSize: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetRNNProjectionLayers(handle: cudnnHandle_t, rnnDesc: cudnnRNNDescriptor_t, recProjSize: ::core::ffi::c_int, outProjSize: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnSetRNNProjectionLayers(handle, rnnDesc, recProjSize, outProjSize)
     }
 }
@@ -6013,7 +6525,9 @@ pub unsafe fn cudnnSetReduceTensorDescriptor(reduceTensorDesc: cudnnReduceTensor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetReduceTensorDescriptor(reduceTensorDesc: cudnnReduceTensorDescriptor_t, reduceTensorOp: cudnnReduceTensorOp_t, reduceTensorCompType: cudnnDataType_t, reduceTensorNanOpt: cudnnNanPropagation_t, reduceTensorIndices: cudnnReduceTensorIndices_t, reduceTensorIndicesType: cudnnIndicesType_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetReduceTensorDescriptor(reduceTensorDesc: cudnnReduceTensorDescriptor_t, reduceTensorOp: cudnnReduceTensorOp_t, reduceTensorCompType: cudnnDataType_t, reduceTensorNanOpt: cudnnNanPropagation_t, reduceTensorIndices: cudnnReduceTensorIndices_t, reduceTensorIndicesType: cudnnIndicesType_t) -> cudnnStatus_t;
+        }
         cudnnSetReduceTensorDescriptor(reduceTensorDesc, reduceTensorOp, reduceTensorCompType, reduceTensorNanOpt, reduceTensorIndices, reduceTensorIndicesType)
     }
 }
@@ -6027,7 +6541,9 @@ pub unsafe fn cudnnSetSeqDataDescriptor(seqDataDesc: cudnnSeqDataDescriptor_t, d
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetSeqDataDescriptor(seqDataDesc: cudnnSeqDataDescriptor_t, dataType: cudnnDataType_t, nbDims: ::core::ffi::c_int, dimA: *const ::core::ffi::c_int, axes: *const cudnnSeqDataAxis_t, seqLengthArraySize: usize, seqLengthArray: *const ::core::ffi::c_int, paddingFill: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetSeqDataDescriptor(seqDataDesc: cudnnSeqDataDescriptor_t, dataType: cudnnDataType_t, nbDims: ::core::ffi::c_int, dimA: *const ::core::ffi::c_int, axes: *const cudnnSeqDataAxis_t, seqLengthArraySize: usize, seqLengthArray: *const ::core::ffi::c_int, paddingFill: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnSetSeqDataDescriptor(seqDataDesc, dataType, nbDims, dimA, axes, seqLengthArraySize, seqLengthArray, paddingFill)
     }
 }
@@ -6041,7 +6557,9 @@ pub unsafe fn cudnnSetSpatialTransformerNdDescriptor(stDesc: cudnnSpatialTransfo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetSpatialTransformerNdDescriptor(stDesc: cudnnSpatialTransformerDescriptor_t, samplerType: cudnnSamplerType_t, dataType: cudnnDataType_t, nbDims: ::core::ffi::c_int, dimA: *const ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetSpatialTransformerNdDescriptor(stDesc: cudnnSpatialTransformerDescriptor_t, samplerType: cudnnSamplerType_t, dataType: cudnnDataType_t, nbDims: ::core::ffi::c_int, dimA: *const ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnSetSpatialTransformerNdDescriptor(stDesc, samplerType, dataType, nbDims, dimA)
     }
 }
@@ -6055,7 +6573,9 @@ pub unsafe fn cudnnSetStream(handle: cudnnHandle_t, streamId: cudaStream_t) -> c
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetStream(handle: cudnnHandle_t, streamId: cudaStream_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetStream(handle: cudnnHandle_t, streamId: cudaStream_t) -> cudnnStatus_t;
+        }
         cudnnSetStream(handle, streamId)
     }
 }
@@ -6069,7 +6589,9 @@ pub unsafe fn cudnnSetTensor(handle: cudnnHandle_t, yDesc: cudnnTensorDescriptor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetTensor(handle: cudnnHandle_t, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, valuePtr: *const ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetTensor(handle: cudnnHandle_t, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void, valuePtr: *const ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnSetTensor(handle, yDesc, y, valuePtr)
     }
 }
@@ -6083,7 +6605,9 @@ pub unsafe fn cudnnSetTensor4dDescriptor(tensorDesc: cudnnTensorDescriptor_t, fo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetTensor4dDescriptor(tensorDesc: cudnnTensorDescriptor_t, format: cudnnTensorFormat_t, dataType: cudnnDataType_t, n: ::core::ffi::c_int, c: ::core::ffi::c_int, h: ::core::ffi::c_int, w: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetTensor4dDescriptor(tensorDesc: cudnnTensorDescriptor_t, format: cudnnTensorFormat_t, dataType: cudnnDataType_t, n: ::core::ffi::c_int, c: ::core::ffi::c_int, h: ::core::ffi::c_int, w: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnSetTensor4dDescriptor(tensorDesc, format, dataType, n, c, h, w)
     }
 }
@@ -6097,7 +6621,9 @@ pub unsafe fn cudnnSetTensor4dDescriptorEx(tensorDesc: cudnnTensorDescriptor_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetTensor4dDescriptorEx(tensorDesc: cudnnTensorDescriptor_t, dataType: cudnnDataType_t, n: ::core::ffi::c_int, c: ::core::ffi::c_int, h: ::core::ffi::c_int, w: ::core::ffi::c_int, nStride: ::core::ffi::c_int, cStride: ::core::ffi::c_int, hStride: ::core::ffi::c_int, wStride: ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetTensor4dDescriptorEx(tensorDesc: cudnnTensorDescriptor_t, dataType: cudnnDataType_t, n: ::core::ffi::c_int, c: ::core::ffi::c_int, h: ::core::ffi::c_int, w: ::core::ffi::c_int, nStride: ::core::ffi::c_int, cStride: ::core::ffi::c_int, hStride: ::core::ffi::c_int, wStride: ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnSetTensor4dDescriptorEx(tensorDesc, dataType, n, c, h, w, nStride, cStride, hStride, wStride)
     }
 }
@@ -6111,7 +6637,9 @@ pub unsafe fn cudnnSetTensorNdDescriptor(tensorDesc: cudnnTensorDescriptor_t, da
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetTensorNdDescriptor(tensorDesc: cudnnTensorDescriptor_t, dataType: cudnnDataType_t, nbDims: ::core::ffi::c_int, dimA: *const ::core::ffi::c_int, strideA: *const ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetTensorNdDescriptor(tensorDesc: cudnnTensorDescriptor_t, dataType: cudnnDataType_t, nbDims: ::core::ffi::c_int, dimA: *const ::core::ffi::c_int, strideA: *const ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnSetTensorNdDescriptor(tensorDesc, dataType, nbDims, dimA, strideA)
     }
 }
@@ -6125,7 +6653,9 @@ pub unsafe fn cudnnSetTensorNdDescriptorEx(tensorDesc: cudnnTensorDescriptor_t, 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetTensorNdDescriptorEx(tensorDesc: cudnnTensorDescriptor_t, format: cudnnTensorFormat_t, dataType: cudnnDataType_t, nbDims: ::core::ffi::c_int, dimA: *const ::core::ffi::c_int) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetTensorNdDescriptorEx(tensorDesc: cudnnTensorDescriptor_t, format: cudnnTensorFormat_t, dataType: cudnnDataType_t, nbDims: ::core::ffi::c_int, dimA: *const ::core::ffi::c_int) -> cudnnStatus_t;
+        }
         cudnnSetTensorNdDescriptorEx(tensorDesc, format, dataType, nbDims, dimA)
     }
 }
@@ -6139,7 +6669,9 @@ pub unsafe fn cudnnSetTensorTransformDescriptor(transformDesc: cudnnTensorTransf
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSetTensorTransformDescriptor(transformDesc: cudnnTensorTransformDescriptor_t, nbDims: u32, destFormat: cudnnTensorFormat_t, padBeforeA: *const i32, padAfterA: *const i32, foldA: *const u32, direction: cudnnFoldingDirection_t) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSetTensorTransformDescriptor(transformDesc: cudnnTensorTransformDescriptor_t, nbDims: u32, destFormat: cudnnTensorFormat_t, padBeforeA: *const i32, padAfterA: *const i32, foldA: *const u32, direction: cudnnFoldingDirection_t) -> cudnnStatus_t;
+        }
         cudnnSetTensorTransformDescriptor(transformDesc, nbDims, destFormat, padBeforeA, padAfterA, foldA, direction)
     }
 }
@@ -6153,7 +6685,9 @@ pub unsafe fn cudnnSoftmaxBackward(handle: cudnnHandle_t, algo: cudnnSoftmaxAlgo
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSoftmaxBackward(handle: cudnnHandle_t, algo: cudnnSoftmaxAlgorithm_t, mode: cudnnSoftmaxMode_t, alpha: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSoftmaxBackward(handle: cudnnHandle_t, algo: cudnnSoftmaxAlgorithm_t, mode: cudnnSoftmaxMode_t, alpha: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnSoftmaxBackward(handle, algo, mode, alpha, yDesc, y, dyDesc, dy, beta, dxDesc, dx)
     }
 }
@@ -6167,7 +6701,9 @@ pub unsafe fn cudnnSoftmaxForward(handle: cudnnHandle_t, algo: cudnnSoftmaxAlgor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSoftmaxForward(handle: cudnnHandle_t, algo: cudnnSoftmaxAlgorithm_t, mode: cudnnSoftmaxMode_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSoftmaxForward(handle: cudnnHandle_t, algo: cudnnSoftmaxAlgorithm_t, mode: cudnnSoftmaxMode_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnSoftmaxForward(handle, algo, mode, alpha, xDesc, x, beta, yDesc, y)
     }
 }
@@ -6181,7 +6717,9 @@ pub unsafe fn cudnnSpatialTfGridGeneratorBackward(handle: cudnnHandle_t, stDesc:
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSpatialTfGridGeneratorBackward(handle: cudnnHandle_t, stDesc: cudnnSpatialTransformerDescriptor_t, dgrid: *const ::core::ffi::c_void, dtheta: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSpatialTfGridGeneratorBackward(handle: cudnnHandle_t, stDesc: cudnnSpatialTransformerDescriptor_t, dgrid: *const ::core::ffi::c_void, dtheta: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnSpatialTfGridGeneratorBackward(handle, stDesc, dgrid, dtheta)
     }
 }
@@ -6195,7 +6733,9 @@ pub unsafe fn cudnnSpatialTfGridGeneratorForward(handle: cudnnHandle_t, stDesc: 
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSpatialTfGridGeneratorForward(handle: cudnnHandle_t, stDesc: cudnnSpatialTransformerDescriptor_t, theta: *const ::core::ffi::c_void, grid: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSpatialTfGridGeneratorForward(handle: cudnnHandle_t, stDesc: cudnnSpatialTransformerDescriptor_t, theta: *const ::core::ffi::c_void, grid: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnSpatialTfGridGeneratorForward(handle, stDesc, theta, grid)
     }
 }
@@ -6209,7 +6749,9 @@ pub unsafe fn cudnnSpatialTfSamplerBackward(handle: cudnnHandle_t, stDesc: cudnn
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSpatialTfSamplerBackward(handle: cudnnHandle_t, stDesc: cudnnSpatialTransformerDescriptor_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void, alphaDgrid: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, grid: *const ::core::ffi::c_void, betaDgrid: *const ::core::ffi::c_void, dgrid: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSpatialTfSamplerBackward(handle: cudnnHandle_t, stDesc: cudnnSpatialTransformerDescriptor_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, dxDesc: cudnnTensorDescriptor_t, dx: *mut ::core::ffi::c_void, alphaDgrid: *const ::core::ffi::c_void, dyDesc: cudnnTensorDescriptor_t, dy: *const ::core::ffi::c_void, grid: *const ::core::ffi::c_void, betaDgrid: *const ::core::ffi::c_void, dgrid: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnSpatialTfSamplerBackward(handle, stDesc, alpha, xDesc, x, beta, dxDesc, dx, alphaDgrid, dyDesc, dy, grid, betaDgrid, dgrid)
     }
 }
@@ -6223,7 +6765,9 @@ pub unsafe fn cudnnSpatialTfSamplerForward(handle: cudnnHandle_t, stDesc: cudnnS
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnSpatialTfSamplerForward(handle: cudnnHandle_t, stDesc: cudnnSpatialTransformerDescriptor_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, grid: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnSpatialTfSamplerForward(handle: cudnnHandle_t, stDesc: cudnnSpatialTransformerDescriptor_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, grid: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnSpatialTfSamplerForward(handle, stDesc, alpha, xDesc, x, grid, beta, yDesc, y)
     }
 }
@@ -6237,7 +6781,9 @@ pub unsafe fn cudnnTransformFilter(handle: cudnnHandle_t, transDesc: cudnnTensor
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnTransformFilter(handle: cudnnHandle_t, transDesc: cudnnTensorTransformDescriptor_t, alpha: *const ::core::ffi::c_void, srcDesc: cudnnFilterDescriptor_t, srcData: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, destDesc: cudnnFilterDescriptor_t, destData: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnTransformFilter(handle: cudnnHandle_t, transDesc: cudnnTensorTransformDescriptor_t, alpha: *const ::core::ffi::c_void, srcDesc: cudnnFilterDescriptor_t, srcData: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, destDesc: cudnnFilterDescriptor_t, destData: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnTransformFilter(handle, transDesc, alpha, srcDesc, srcData, beta, destDesc, destData)
     }
 }
@@ -6251,7 +6797,9 @@ pub unsafe fn cudnnTransformTensor(handle: cudnnHandle_t, alpha: *const ::core::
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnTransformTensor(handle: cudnnHandle_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnTransformTensor(handle: cudnnHandle_t, alpha: *const ::core::ffi::c_void, xDesc: cudnnTensorDescriptor_t, x: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, yDesc: cudnnTensorDescriptor_t, y: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnTransformTensor(handle, alpha, xDesc, x, beta, yDesc, y)
     }
 }
@@ -6265,7 +6813,9 @@ pub unsafe fn cudnnTransformTensorEx(handle: cudnnHandle_t, transDesc: cudnnTens
     }
     #[cfg(not(feature = "dynamic-loading"))]
     {
-        extern "C" fn cudnnTransformTensorEx(handle: cudnnHandle_t, transDesc: cudnnTensorTransformDescriptor_t, alpha: *const ::core::ffi::c_void, srcDesc: cudnnTensorDescriptor_t, srcData: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, destDesc: cudnnTensorDescriptor_t, destData: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        extern "C" {
+            fn cudnnTransformTensorEx(handle: cudnnHandle_t, transDesc: cudnnTensorTransformDescriptor_t, alpha: *const ::core::ffi::c_void, srcDesc: cudnnTensorDescriptor_t, srcData: *const ::core::ffi::c_void, beta: *const ::core::ffi::c_void, destDesc: cudnnTensorDescriptor_t, destData: *mut ::core::ffi::c_void) -> cudnnStatus_t;
+        }
         cudnnTransformTensorEx(handle, transDesc, alpha, srcDesc, srcData, beta, destDesc, destData)
     }
 }
