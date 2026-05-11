@@ -130,19 +130,19 @@ fn main() {
     #[cfg(feature = "nccl-version-from-build-system")]
     {
         let (major, minor) = nccl_version_from_build_system();
-        println!("cargo:rustc-cfg=feature=\"nccl-{major:02}{minor:02}\"");
+        println!("cargo:rustc-cfg=feature=\"nccl-{major:02}{minor:03}\"");
     }
 
     #[cfg(feature = "cudnn-version-from-build-system")]
     {
         let (major, minor) = cudnn_version_from_build_system();
-        println!("cargo:rustc-cfg=feature=\"cudnn-{major:02}{minor:02}\"");
+        println!("cargo:rustc-cfg=feature=\"cudnn-{major:02}{minor:03}\"");
     }
 
     #[cfg(feature = "cutensor-version-from-build-system")]
     {
         let (major, minor) = cutensor_version_from_build_system();
-        println!("cargo:rustc-cfg=feature=\"cutensor-{major:02}{minor:02}\"");
+        println!("cargo:rustc-cfg=feature=\"cutensor-{major:02}{minor:03}\"");
     }
 
     #[cfg(feature = "dynamic-linking")]
