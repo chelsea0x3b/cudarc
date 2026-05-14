@@ -639,8 +639,14 @@ impl Drop for CuTensor {
 /// ([sys::cutensorTensorDescriptor_t]).
 ///
 /// Automatically destroyed on drop.
+///
+/// Holds an [`Arc<CudaStream>`] cloned from the originating [`CuTensor`] so
+/// the CUDA context outlives the descriptor.  Without this, dropping the
+/// [`CuTensor`] (and its last stream reference) before the descriptor would
+/// leave [`Drop`] calling into a torn-down context.
 pub struct TensorDescriptor {
     pub(crate) desc: sys::cutensorTensorDescriptor_t,
+    pub(crate) stream: Arc<CudaStream>,
 }
 
 impl TensorDescriptor {
@@ -648,7 +654,7 @@ impl TensorDescriptor {
     ///
     /// # Arguments
     ///
-    /// * `handle` - The cuTENSOR handle
+    /// * `handle` - The cuTENSOR handle (its stream is retained)
     /// * `extent` - Size of each dimension
     /// * `stride` - Stride (in elements) of each dimension
     /// * `data_type` - Element data type
@@ -665,6 +671,9 @@ impl TensorDescriptor {
             stride.len(),
             "extent and stride must have the same length"
         );
+        let stream = handle.stream.clone();
+        let ctx = stream.context();
+        ctx.record_err(ctx.bind_to_thread());
         let desc = unsafe {
             result::create_tensor_descriptor(
                 handle.handle,
@@ -675,12 +684,17 @@ impl TensorDescriptor {
                 alignment,
             )?
         };
-        Ok(Self { desc })
+        Ok(Self { desc, stream })
     }
 
     /// Returns the underlying descriptor pointer.
     pub fn desc(&self) -> sys::cutensorTensorDescriptor_t {
         self.desc
+    }
+
+    /// Returns the [`Arc<CudaStream>`] retained by this descriptor.
+    pub fn stream(&self) -> &Arc<CudaStream> {
+        &self.stream
     }
 }
 
@@ -688,6 +702,8 @@ impl Drop for TensorDescriptor {
     fn drop(&mut self) {
         let desc = std::mem::replace(&mut self.desc, std::ptr::null_mut());
         if !desc.is_null() {
+            let ctx = self.stream.context();
+            ctx.record_err(ctx.bind_to_thread());
             unsafe { result::destroy_tensor_descriptor(desc) }.unwrap();
         }
     }
@@ -698,12 +714,17 @@ impl Drop for TensorDescriptor {
 ///
 /// Created by [`OperationDescriptor::new_contraction`] or
 /// [`OperationDescriptor::new_reduction`]. Automatically destroyed on drop.
+///
+/// Holds an [`Arc<CudaStream>`] cloned from the originating [`CuTensor`] so
+/// the CUDA context outlives the descriptor.
 pub struct OperationDescriptor {
     pub(crate) desc: sys::cutensorOperationDescriptor_t,
+    pub(crate) stream: Arc<CudaStream>,
 }
 
 impl OperationDescriptor {
-    /// Creates a contraction operation descriptor.
+    /// Creates a contraction operation descriptor.  The handle's stream is
+    /// retained so the CUDA context outlives this descriptor.
     ///
     /// # Safety
     ///
@@ -725,6 +746,9 @@ impl OperationDescriptor {
         mode_d: &[i32],
         compute_desc: sys::cutensorComputeDescriptor_t,
     ) -> Result<Self, CutensorError> {
+        let stream = handle.stream.clone();
+        let ctx = stream.context();
+        ctx.record_err(ctx.bind_to_thread());
         let desc = result::create_contraction(
             handle.handle,
             desc_a.desc,
@@ -740,10 +764,11 @@ impl OperationDescriptor {
             mode_d.as_ptr(),
             compute_desc,
         )?;
-        Ok(Self { desc })
+        Ok(Self { desc, stream })
     }
 
-    /// Creates a reduction operation descriptor.
+    /// Creates a reduction operation descriptor.  The handle's stream is
+    /// retained so the CUDA context outlives this descriptor.
     ///
     /// # Safety
     ///
@@ -763,6 +788,9 @@ impl OperationDescriptor {
         op_reduce: Operator,
         compute_desc: sys::cutensorComputeDescriptor_t,
     ) -> Result<Self, CutensorError> {
+        let stream = handle.stream.clone();
+        let ctx = stream.context();
+        ctx.record_err(ctx.bind_to_thread());
         let desc = result::create_reduction(
             handle.handle,
             desc_a.desc,
@@ -776,12 +804,17 @@ impl OperationDescriptor {
             op_reduce.into(),
             compute_desc,
         )?;
-        Ok(Self { desc })
+        Ok(Self { desc, stream })
     }
 
     /// Returns the underlying descriptor pointer.
     pub fn desc(&self) -> sys::cutensorOperationDescriptor_t {
         self.desc
+    }
+
+    /// Returns the [`Arc<CudaStream>`] retained by this descriptor.
+    pub fn stream(&self) -> &Arc<CudaStream> {
+        &self.stream
     }
 }
 
@@ -789,6 +822,8 @@ impl Drop for OperationDescriptor {
     fn drop(&mut self) {
         let desc = std::mem::replace(&mut self.desc, std::ptr::null_mut());
         if !desc.is_null() {
+            let ctx = self.stream.context();
+            ctx.record_err(ctx.bind_to_thread());
             unsafe { result::destroy_operation_descriptor(desc) }.unwrap();
         }
     }
@@ -796,20 +831,28 @@ impl Drop for OperationDescriptor {
 
 /// RAII wrapper around a cuTENSOR plan preference
 /// ([sys::cutensorPlanPreference_t]).
+///
+/// Holds an [`Arc<CudaStream>`] cloned from the originating [`CuTensor`] so
+/// the CUDA context outlives the descriptor.
 pub struct PlanPreference {
     pub(crate) pref: sys::cutensorPlanPreference_t,
+    pub(crate) stream: Arc<CudaStream>,
 }
 
 impl PlanPreference {
-    /// Creates a new plan preference.
+    /// Creates a new plan preference.  The handle's stream is retained so
+    /// the CUDA context outlives this descriptor.
     pub fn new(
         handle: &CuTensor,
         algo: Algorithm,
         jit_mode: JitMode,
     ) -> Result<Self, CutensorError> {
+        let stream = handle.stream.clone();
+        let ctx = stream.context();
+        ctx.record_err(ctx.bind_to_thread());
         let pref =
             unsafe { result::create_plan_preference(handle.handle, algo.into(), jit_mode.into())? };
-        Ok(Self { pref })
+        Ok(Self { pref, stream })
     }
 
     /// Estimates the workspace size for a given operation.
@@ -833,38 +876,58 @@ impl PlanPreference {
     pub fn pref(&self) -> sys::cutensorPlanPreference_t {
         self.pref
     }
+
+    /// Returns the [`Arc<CudaStream>`] retained by this descriptor.
+    pub fn stream(&self) -> &Arc<CudaStream> {
+        &self.stream
+    }
 }
 
 impl Drop for PlanPreference {
     fn drop(&mut self) {
         let pref = std::mem::replace(&mut self.pref, std::ptr::null_mut());
         if !pref.is_null() {
+            let ctx = self.stream.context();
+            ctx.record_err(ctx.bind_to_thread());
             unsafe { result::destroy_plan_preference(pref) }.unwrap();
         }
     }
 }
 
 /// RAII wrapper around a cuTENSOR execution plan ([sys::cutensorPlan_t]).
+///
+/// Holds an [`Arc<CudaStream>`] cloned from the originating [`CuTensor`] so
+/// the CUDA context outlives the descriptor.
 pub struct ContractionPlan {
     pub(crate) plan: sys::cutensorPlan_t,
+    pub(crate) stream: Arc<CudaStream>,
 }
 
 impl ContractionPlan {
-    /// Creates a new execution plan.
+    /// Creates a new execution plan.  The handle's stream is retained so the
+    /// CUDA context outlives this descriptor.
     pub fn new(
         handle: &CuTensor,
         op_desc: &OperationDescriptor,
         pref: &PlanPreference,
         workspace_size: u64,
     ) -> Result<Self, CutensorError> {
+        let stream = handle.stream.clone();
+        let ctx = stream.context();
+        ctx.record_err(ctx.bind_to_thread());
         let plan =
             unsafe { result::create_plan(handle.handle, op_desc.desc, pref.pref, workspace_size)? };
-        Ok(Self { plan })
+        Ok(Self { plan, stream })
     }
 
     /// Returns the underlying plan pointer.
     pub fn plan(&self) -> sys::cutensorPlan_t {
         self.plan
+    }
+
+    /// Returns the [`Arc<CudaStream>`] retained by this descriptor.
+    pub fn stream(&self) -> &Arc<CudaStream> {
+        &self.stream
     }
 }
 
@@ -872,6 +935,8 @@ impl Drop for ContractionPlan {
     fn drop(&mut self) {
         let plan = std::mem::replace(&mut self.plan, std::ptr::null_mut());
         if !plan.is_null() {
+            let ctx = self.stream.context();
+            ctx.record_err(ctx.bind_to_thread());
             unsafe { result::destroy_plan(plan) }.unwrap();
         }
     }
