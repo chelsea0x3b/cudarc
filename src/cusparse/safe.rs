@@ -341,18 +341,28 @@ impl Drop for CudaSparse {
 ///
 /// Created via [`SpMatDescr::new_csr`], [`SpMatDescr::new_csc`], or
 /// [`SpMatDescr::new_coo`].  Automatically destroyed on drop.
+///
+/// Holds an [`Arc<CudaStream>`] to keep the originating CUDA context alive
+/// for the lifetime of the descriptor.  Without this, dropping the device
+/// before the descriptor would leave [`Drop`] calling into a torn-down
+/// context.
 pub struct SpMatDescr {
     pub(crate) descr: sys::cusparseSpMatDescr_t,
+    pub(crate) stream: Arc<CudaStream>,
 }
 
 impl SpMatDescr {
     /// Creates a CSR sparse matrix descriptor.
     ///
+    /// `stream` is retained so the CUDA context outlives this descriptor.
+    ///
     /// # Safety
     /// `csr_row_offsets`, `csr_col_ind`, and `csr_values` must be valid
-    /// device pointers that remain live for the lifetime of this descriptor.
+    /// device pointers in `stream`'s context that remain live for the
+    /// lifetime of this descriptor.
     #[allow(clippy::too_many_arguments)]
     pub unsafe fn new_csr(
+        stream: Arc<CudaStream>,
         rows: i64,
         cols: i64,
         nnz: i64,
@@ -364,6 +374,8 @@ impl SpMatDescr {
         idx_base: IndexBase,
         value_type: sys::cudaDataType,
     ) -> Result<Self, CusparseError> {
+        let ctx = stream.context();
+        ctx.record_err(ctx.bind_to_thread());
         let descr = result::create_csr(
             rows,
             cols,
@@ -376,16 +388,20 @@ impl SpMatDescr {
             idx_base.into(),
             value_type,
         )?;
-        Ok(Self { descr })
+        Ok(Self { descr, stream })
     }
 
     /// Creates a CSC sparse matrix descriptor.
     ///
+    /// `stream` is retained so the CUDA context outlives this descriptor.
+    ///
     /// # Safety
     /// `csc_col_offsets`, `csc_row_ind`, and `csc_values` must be valid
-    /// device pointers that remain live for the lifetime of this descriptor.
+    /// device pointers in `stream`'s context that remain live for the
+    /// lifetime of this descriptor.
     #[allow(clippy::too_many_arguments)]
     pub unsafe fn new_csc(
+        stream: Arc<CudaStream>,
         rows: i64,
         cols: i64,
         nnz: i64,
@@ -397,6 +413,8 @@ impl SpMatDescr {
         idx_base: IndexBase,
         value_type: sys::cudaDataType,
     ) -> Result<Self, CusparseError> {
+        let ctx = stream.context();
+        ctx.record_err(ctx.bind_to_thread());
         let descr = result::create_csc(
             rows,
             cols,
@@ -409,16 +427,20 @@ impl SpMatDescr {
             idx_base.into(),
             value_type,
         )?;
-        Ok(Self { descr })
+        Ok(Self { descr, stream })
     }
 
     /// Creates a COO sparse matrix descriptor.
     ///
+    /// `stream` is retained so the CUDA context outlives this descriptor.
+    ///
     /// # Safety
     /// `coo_row_ind`, `coo_col_ind`, and `coo_values` must be valid
-    /// device pointers that remain live for the lifetime of this descriptor.
+    /// device pointers in `stream`'s context that remain live for the
+    /// lifetime of this descriptor.
     #[allow(clippy::too_many_arguments)]
     pub unsafe fn new_coo(
+        stream: Arc<CudaStream>,
         rows: i64,
         cols: i64,
         nnz: i64,
@@ -429,6 +451,8 @@ impl SpMatDescr {
         idx_base: IndexBase,
         value_type: sys::cudaDataType,
     ) -> Result<Self, CusparseError> {
+        let ctx = stream.context();
+        ctx.record_err(ctx.bind_to_thread());
         let descr = result::create_coo(
             rows,
             cols,
@@ -440,7 +464,7 @@ impl SpMatDescr {
             idx_base.into(),
             value_type,
         )?;
-        Ok(Self { descr })
+        Ok(Self { descr, stream })
     }
 
     /// Returns the dimensions `(rows, cols, nnz)` of this sparse matrix.
@@ -452,30 +476,44 @@ impl SpMatDescr {
     pub fn get_format(&self) -> Result<sys::cusparseFormat_t, CusparseError> {
         unsafe { result::sp_mat_get_format(self.descr) }
     }
+
+    /// Returns the [`Arc<CudaStream>`] retained by this descriptor.
+    pub fn stream(&self) -> &Arc<CudaStream> {
+        &self.stream
+    }
 }
 
 impl Drop for SpMatDescr {
     fn drop(&mut self) {
         let descr = std::mem::replace(&mut self.descr, std::ptr::null_mut());
         if !descr.is_null() {
+            let ctx = self.stream.context();
+            ctx.record_err(ctx.bind_to_thread());
             unsafe { result::destroy_sp_mat(descr) }.unwrap();
         }
     }
 }
 
 /// RAII wrapper around a sparse vector descriptor (`cusparseSpVecDescr_t`).
+///
+/// Holds an [`Arc<CudaStream>`] to keep the originating CUDA context alive
+/// for the lifetime of the descriptor.
 pub struct SpVecDescr {
     pub(crate) descr: sys::cusparseSpVecDescr_t,
+    pub(crate) stream: Arc<CudaStream>,
 }
 
 impl SpVecDescr {
     /// Creates a sparse vector descriptor.
     ///
+    /// `stream` is retained so the CUDA context outlives this descriptor.
+    ///
     /// # Safety
-    /// `indices` and `values` must be valid device pointers that remain
-    /// live for the lifetime of this descriptor.
+    /// `indices` and `values` must be valid device pointers in `stream`'s
+    /// context that remain live for the lifetime of this descriptor.
     #[allow(clippy::too_many_arguments)]
     pub unsafe fn new(
+        stream: Arc<CudaStream>,
         size: i64,
         nnz: i64,
         indices: *mut c_void,
@@ -484,6 +522,8 @@ impl SpVecDescr {
         idx_base: IndexBase,
         value_type: sys::cudaDataType,
     ) -> Result<Self, CusparseError> {
+        let ctx = stream.context();
+        ctx.record_err(ctx.bind_to_thread());
         let descr = result::create_sp_vec(
             size,
             nnz,
@@ -493,7 +533,12 @@ impl SpVecDescr {
             idx_base.into(),
             value_type,
         )?;
-        Ok(Self { descr })
+        Ok(Self { descr, stream })
+    }
+
+    /// Returns the [`Arc<CudaStream>`] retained by this descriptor.
+    pub fn stream(&self) -> &Arc<CudaStream> {
+        &self.stream
     }
 }
 
@@ -501,29 +546,45 @@ impl Drop for SpVecDescr {
     fn drop(&mut self) {
         let descr = std::mem::replace(&mut self.descr, std::ptr::null_mut());
         if !descr.is_null() {
+            let ctx = self.stream.context();
+            ctx.record_err(ctx.bind_to_thread());
             unsafe { result::destroy_sp_vec(descr) }.unwrap();
         }
     }
 }
 
 /// RAII wrapper around a dense vector descriptor (`cusparseDnVecDescr_t`).
+///
+/// Holds an [`Arc<CudaStream>`] to keep the originating CUDA context alive
+/// for the lifetime of the descriptor.
 pub struct DnVecDescr {
     pub(crate) descr: sys::cusparseDnVecDescr_t,
+    pub(crate) stream: Arc<CudaStream>,
 }
 
 impl DnVecDescr {
     /// Creates a dense vector descriptor.
     ///
+    /// `stream` is retained so the CUDA context outlives this descriptor.
+    ///
     /// # Safety
-    /// `values` must be a valid device pointer that remains live for the
-    /// lifetime of this descriptor.
+    /// `values` must be a valid device pointer in `stream`'s context that
+    /// remains live for the lifetime of this descriptor.
     pub unsafe fn new(
+        stream: Arc<CudaStream>,
         size: i64,
         values: *mut c_void,
         value_type: sys::cudaDataType,
     ) -> Result<Self, CusparseError> {
+        let ctx = stream.context();
+        ctx.record_err(ctx.bind_to_thread());
         let descr = result::create_dn_vec(size, values, value_type)?;
-        Ok(Self { descr })
+        Ok(Self { descr, stream })
+    }
+
+    /// Returns the [`Arc<CudaStream>`] retained by this descriptor.
+    pub fn stream(&self) -> &Arc<CudaStream> {
+        &self.stream
     }
 }
 
@@ -531,23 +592,32 @@ impl Drop for DnVecDescr {
     fn drop(&mut self) {
         let descr = std::mem::replace(&mut self.descr, std::ptr::null_mut());
         if !descr.is_null() {
+            let ctx = self.stream.context();
+            ctx.record_err(ctx.bind_to_thread());
             unsafe { result::destroy_dn_vec(descr) }.unwrap();
         }
     }
 }
 
 /// RAII wrapper around a dense matrix descriptor (`cusparseDnMatDescr_t`).
+///
+/// Holds an [`Arc<CudaStream>`] to keep the originating CUDA context alive
+/// for the lifetime of the descriptor.
 pub struct DnMatDescr {
     pub(crate) descr: sys::cusparseDnMatDescr_t,
+    pub(crate) stream: Arc<CudaStream>,
 }
 
 impl DnMatDescr {
     /// Creates a dense matrix descriptor.
     ///
+    /// `stream` is retained so the CUDA context outlives this descriptor.
+    ///
     /// # Safety
-    /// `values` must be a valid device pointer that remains live for the
-    /// lifetime of this descriptor.
+    /// `values` must be a valid device pointer in `stream`'s context that
+    /// remains live for the lifetime of this descriptor.
     pub unsafe fn new(
+        stream: Arc<CudaStream>,
         rows: i64,
         cols: i64,
         ld: i64,
@@ -555,8 +625,15 @@ impl DnMatDescr {
         value_type: sys::cudaDataType,
         order: Order,
     ) -> Result<Self, CusparseError> {
+        let ctx = stream.context();
+        ctx.record_err(ctx.bind_to_thread());
         let descr = result::create_dn_mat(rows, cols, ld, values, value_type, order.into())?;
-        Ok(Self { descr })
+        Ok(Self { descr, stream })
+    }
+
+    /// Returns the [`Arc<CudaStream>`] retained by this descriptor.
+    pub fn stream(&self) -> &Arc<CudaStream> {
+        &self.stream
     }
 }
 
@@ -564,6 +641,8 @@ impl Drop for DnMatDescr {
     fn drop(&mut self) {
         let descr = std::mem::replace(&mut self.descr, std::ptr::null_mut());
         if !descr.is_null() {
+            let ctx = self.stream.context();
+            ctx.record_err(ctx.bind_to_thread());
             unsafe { result::destroy_dn_mat(descr) }.unwrap();
         }
     }
@@ -615,6 +694,7 @@ mod tests {
 
         let mat_a = unsafe {
             SpMatDescr::new_csr(
+                stream.clone(),
                 rows,
                 cols,
                 nnz,
@@ -633,6 +713,7 @@ mod tests {
         let x_dev = stream.clone_htod(&x_data).unwrap();
         let vec_x = unsafe {
             DnVecDescr::new(
+                stream.clone(),
                 cols,
                 x_dev.cu_device_ptr as *mut c_void,
                 f32::cuda_data_type(),
@@ -644,6 +725,7 @@ mod tests {
         let y_dev = stream.clone_htod(&y_data).unwrap();
         let mut vec_y = unsafe {
             DnVecDescr::new(
+                stream.clone(),
                 rows,
                 y_dev.cu_device_ptr as *mut c_void,
                 f32::cuda_data_type(),
@@ -712,6 +794,7 @@ mod tests {
 
         let mat_a = unsafe {
             SpMatDescr::new_csr(
+                stream.clone(),
                 a_rows,
                 a_cols,
                 a_nnz,
@@ -733,6 +816,7 @@ mod tests {
         let b_dev = stream.clone_htod(&b_data).unwrap();
         let mat_b = unsafe {
             DnMatDescr::new(
+                stream.clone(),
                 b_rows,
                 b_cols,
                 b_rows, // ld = rows for column-major
@@ -749,6 +833,7 @@ mod tests {
         let c_dev = stream.clone_htod(&c_data).unwrap();
         let mut mat_c = unsafe {
             DnMatDescr::new(
+                stream.clone(),
                 c_rows,
                 c_cols,
                 c_rows,
