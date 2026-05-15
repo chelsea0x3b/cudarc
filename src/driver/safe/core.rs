@@ -1947,8 +1947,11 @@ impl<'a, T> CudaView<'a, T> {
         (mid <= self.len()).then(|| (self.resize(0, mid), self.resize(mid, self.len)))
     }
 
+    /// Returns an iterarow over subviews of size `chunk_size`. Differs from [std::slice::ChunksExact],
+    /// in that it asserts that the chunk_size must divide evenly into the length, instead of returning
+    /// a remainder.
     pub fn chunks_exact(&self, chunk_size: usize) -> impl Iterator<Item = CudaView<'a, T>> + '_ {
-        assert!(self.len % chunk_size == 0);
+        assert!(self.len.is_multiple_of(chunk_size));
         let num_chunks = self.len / chunk_size;
         (0..num_chunks).map(move |i| self.resize(i * chunk_size, (i + 1) * chunk_size))
     }
@@ -2085,8 +2088,11 @@ impl<'a, T> CudaViewMut<'a, T> {
         })
     }
 
+    /// Returns an iterarow over subviews of size `chunk_size`. Differs from [std::slice::ChunksExactMut],
+    /// in that it asserts that the chunk_size must divide evenly into the length, instead of returning
+    /// a remainder.
     pub fn chunks_exact_mut(self, chunk_size: usize) -> impl Iterator<Item = CudaViewMut<'a, T>> {
-        assert!(self.len % chunk_size == 0);
+        assert!(self.len.is_multiple_of(chunk_size));
         let num_chunks = self.len / chunk_size;
         (0..num_chunks).map(move |i| CudaViewMut {
             ptr: self.ptr + (i * chunk_size * std::mem::size_of::<T>()) as u64,
