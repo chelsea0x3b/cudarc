@@ -1,5 +1,5 @@
 use super::{result, sys};
-use crate::driver::{CudaContext, CudaStream, DevicePtr, DevicePtrMut, SyncOnDrop};
+use crate::driver::{CudaContext, CudaStream, CudaView, CudaViewMut, DevicePtr, DevicePtrMut, SyncOnDrop};
 use std::{mem::MaybeUninit, sync::Arc, vec, vec::Vec};
 
 pub use result::{group_end, group_start};
@@ -473,23 +473,24 @@ impl Comm {
     }
 }
 
-impl<'a> Group<'a> {
+impl<'g> Group<'g> {
     /// The underlying [Comm] object.
-    pub fn comm(&self) -> &'a Comm {
+    pub fn comm(&self) -> &'g Comm {
         self.comm
     }
 
     /// Send data to one peer, see [cuda docs](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/p2p.html#ncclsend)
-    pub fn send<'b: 'a, S: DevicePtr<T>, T: NcclType>(
+    pub fn send<'s: 'g, T: NcclType>(
         &mut self,
-        data: &'b S,
+        data: CudaView<'s, T>,
         peer: i32,
     ) -> Result<(), result::NcclError> {
-        let (src, record_src) = data.device_ptr(&self.comm.stream);
+        let count = data.len();
+        let (src, record_src) = data.view_ptr(&self.comm.stream);
         unsafe {
             result::send(
                 src as _,
-                data.len(),
+                count,
                 T::as_nccl_type(),
                 peer,
                 self.comm.comm,
@@ -501,13 +502,13 @@ impl<'a> Group<'a> {
     }
 
     /// Receive data from one peer, see [cuda docs](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/p2p.html#ncclrecv)
-    pub fn recv<'b: 'a, R: DevicePtrMut<T>, T: NcclType>(
+    pub fn recv<'r: 'g, T: NcclType>(
         &mut self,
-        buff: &'b mut R,
+        buff: CudaViewMut<'r, T>,
         peer: i32,
     ) -> Result<result::NcclStatus, result::NcclError> {
         let count = buff.len();
-        let (dst, record_dst) = buff.device_ptr_mut(&self.comm.stream);
+        let (dst, record_dst) = buff.view_ptr_mut(&self.comm.stream);
         let status = unsafe {
             result::recv(
                 dst as _,
@@ -529,16 +530,16 @@ impl<'a> Group<'a> {
     /// sendbuff must be Some on root rank!
     ///
     /// See [nccl docs](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#broadcast)
-    pub fn broadcast<'b: 'a, 'c: 'a, S: DevicePtr<T>, R: DevicePtrMut<T>, T: NcclType>(
+    pub fn broadcast<'s: 'g, 'r: 'g, T: NcclType>(
         &mut self,
-        sendbuff: Option<&'b S>,
-        recvbuff: &'c mut R,
+        sendbuff: Option<CudaView<'s, T>>,
+        recvbuff: CudaViewMut<'r, T>,
         root: i32,
     ) -> Result<result::NcclStatus, result::NcclError> {
         debug_assert!(sendbuff.is_some() || self.comm.rank != root as usize);
         let count = recvbuff.len();
-        let (src, record_src) = sendbuff.map(|b| b.device_ptr(&self.comm.stream)).unzip();
-        let (dst, record_dst) = recvbuff.device_ptr_mut(&self.comm.stream);
+        let (src, record_src) = sendbuff.map(|b| b.view_ptr(&self.comm.stream)).unzip();
+        let (dst, record_dst) = recvbuff.view_ptr_mut(&self.comm.stream);
         let status = unsafe {
             result::broadcast(
                 src.map(|ptr| ptr as _).unwrap_or(std::ptr::null()),
@@ -559,13 +560,13 @@ impl<'a> Group<'a> {
 
     /// In place version of [Comm::broadcast()].
     /// See [nccl docs](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#broadcast)
-    pub fn broadcast_in_place<'b: 'a, R: DevicePtrMut<T>, T: NcclType>(
+    pub fn broadcast_in_place<'r: 'g, T: NcclType>(
         &mut self,
-        recvbuff: &'b mut R,
+        recvbuff: CudaViewMut<'r, T>,
         root: i32,
     ) -> Result<result::NcclStatus, result::NcclError> {
         let count = recvbuff.len();
-        let (dst, record_dst) = recvbuff.device_ptr_mut(&self.comm.stream);
+        let (dst, record_dst) = recvbuff.view_ptr_mut(&self.comm.stream);
         let status = unsafe {
             result::broadcast(
                 dst as _,
@@ -582,18 +583,19 @@ impl<'a> Group<'a> {
     }
 
     /// See [nccl docs](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#allgather)
-    pub fn all_gather<'b: 'a, 'c: 'a, S: DevicePtr<T>, R: DevicePtrMut<T>, T: NcclType>(
+    pub fn all_gather<'s: 'g, 'r: 'g, T: NcclType>(
         &mut self,
-        sendbuff: &'b S,
-        recvbuff: &'c mut R,
+        sendbuff: CudaView<'s, T>,
+        recvbuff: CudaViewMut<'r, T>,
     ) -> Result<result::NcclStatus, result::NcclError> {
-        let (src, record_src) = sendbuff.device_ptr(&self.comm.stream);
-        let (dst, record_dst) = recvbuff.device_ptr_mut(&self.comm.stream);
+        let sendcount = sendbuff.len();
+        let (src, record_src) = sendbuff.view_ptr(&self.comm.stream);
+        let (dst, record_dst) = recvbuff.view_ptr_mut(&self.comm.stream);
         let status = unsafe {
             result::all_gather(
                 src as _,
                 dst as _,
-                sendbuff.len(),
+                sendcount,
                 T::as_nccl_type(),
                 self.comm.comm,
                 self.comm.stream.cu_stream as _,
@@ -605,19 +607,20 @@ impl<'a> Group<'a> {
     }
 
     /// See [nccl docs](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#allreduce)
-    pub fn all_reduce<'b: 'a, 'c: 'a, S: DevicePtr<T>, R: DevicePtrMut<T>, T: NcclType>(
+    pub fn all_reduce<'s: 'g, 'r: 'g, T: NcclType>(
         &mut self,
-        sendbuff: &'b S,
-        recvbuff: &'c mut R,
+        sendbuff: CudaView<'s, T>,
+        recvbuff: CudaViewMut<'r, T>,
         reduce_op: &ReduceOp,
     ) -> Result<result::NcclStatus, result::NcclError> {
-        let (src, record_src) = sendbuff.device_ptr(&self.comm.stream);
-        let (dst, record_dst) = recvbuff.device_ptr_mut(&self.comm.stream);
+        let count = sendbuff.len();
+        let (src, record_src) = sendbuff.view_ptr(&self.comm.stream);
+        let (dst, record_dst) = recvbuff.view_ptr_mut(&self.comm.stream);
         let status = unsafe {
             result::all_reduce(
                 src as _,
                 dst as _,
-                sendbuff.len(),
+                count,
                 T::as_nccl_type(),
                 convert_to_nccl_reduce_op(reduce_op),
                 self.comm.comm,
@@ -631,13 +634,13 @@ impl<'a> Group<'a> {
 
     /// In place version of [Comm::all_reduce()].
     /// See [nccl docs](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#allreduce)
-    pub fn all_reduce_in_place<'b: 'a, R: DevicePtrMut<T>, T: NcclType>(
+    pub fn all_reduce_in_place<'r: 'g, T: NcclType>(
         &mut self,
-        buff: &'b mut R,
+        buff: CudaViewMut<'r, T>,
         reduce_op: &ReduceOp,
     ) -> Result<result::NcclStatus, result::NcclError> {
         let count = buff.len();
-        let (dst, record_dst) = buff.device_ptr_mut(&self.comm.stream);
+        let (dst, record_dst) = buff.view_ptr_mut(&self.comm.stream);
         let status = unsafe {
             result::all_reduce(
                 dst as _,
@@ -659,24 +662,24 @@ impl<'a> Group<'a> {
     /// recvbuff must be Some on the root rank!
     ///
     /// See [nccl docs](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#reduce)
-    pub fn reduce<'b: 'a, 'c: 'a, S: DevicePtr<T>, R: DevicePtrMut<T>, T: NcclType>(
+    pub fn reduce<'s: 'g, 'r: 'g, T: NcclType>(
         &mut self,
-        sendbuff: &'b S,
-        recvbuff: Option<&'c mut R>,
+        sendbuff: CudaView<'s, T>,
+        recvbuff: Option<CudaViewMut<'r, T>>,
         reduce_op: &ReduceOp,
         root: i32,
     ) -> Result<result::NcclStatus, result::NcclError> {
         debug_assert!(recvbuff.is_some() || self.comm.rank != root as usize);
-
-        let (src, record_src) = sendbuff.device_ptr(&self.comm.stream);
+        let count = sendbuff.len();
+        let (src, record_src) = sendbuff.view_ptr(&self.comm.stream);
         let (dst, record_dst) = recvbuff
-            .map(|b| b.device_ptr_mut(&self.comm.stream))
+            .map(|b| b.view_ptr_mut(&self.comm.stream))
             .unzip();
         let status = unsafe {
             result::reduce(
                 src as _,
                 dst.map(|ptr| ptr as _).unwrap_or(std::ptr::null_mut()),
-                sendbuff.len(),
+                count,
                 T::as_nccl_type(),
                 convert_to_nccl_reduce_op(reduce_op),
                 root,
@@ -693,14 +696,14 @@ impl<'a> Group<'a> {
 
     /// In place version of [Comm::reduce()].
     /// See [nccl docs](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#reduce)
-    pub fn reduce_in_place<'b: 'a, R: DevicePtrMut<T>, T: NcclType>(
+    pub fn reduce_in_place<'s: 'g, T: NcclType>(
         &mut self,
-        recvbuff: &'b mut R,
+        recvbuff: CudaViewMut<'s, T>,
         reduce_op: &ReduceOp,
         root: i32,
     ) -> Result<result::NcclStatus, result::NcclError> {
         let count = recvbuff.len();
-        let (dst, record_dst) = recvbuff.device_ptr_mut(&self.comm.stream);
+        let (dst, record_dst) = recvbuff.view_ptr_mut(&self.comm.stream);
         let status = unsafe {
             result::reduce(
                 dst as _,
@@ -718,15 +721,15 @@ impl<'a> Group<'a> {
     }
 
     /// See [nccl docs](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#reducescatter)
-    pub fn reduce_scatter<'b: 'a, 'c: 'a, S: DevicePtr<T>, R: DevicePtrMut<T>, T: NcclType>(
+    pub fn reduce_scatter<'s: 'g, 'r: 'g, T: NcclType>(
         &mut self,
-        sendbuff: &'b S,
-        recvbuff: &'c mut R,
+        sendbuff: CudaView<'s, T>,
+        recvbuff: CudaViewMut<'r, T>,
         reduce_op: &ReduceOp,
     ) -> Result<result::NcclStatus, result::NcclError> {
         let count = recvbuff.len();
-        let (src, record_src) = sendbuff.device_ptr(&self.comm.stream);
-        let (dst, record_dst) = recvbuff.device_ptr_mut(&self.comm.stream);
+        let (src, record_src) = sendbuff.view_ptr(&self.comm.stream);
+        let (dst, record_dst) = recvbuff.view_ptr_mut(&self.comm.stream);
         let status = unsafe {
             result::reduce_scatter(
                 src as _,
