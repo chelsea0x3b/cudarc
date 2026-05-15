@@ -1189,6 +1189,8 @@ impl<T> DevicePtr<T> for CudaView<'_, T> {
 }
 
 impl<'a, T> CudaView<'a, T> {
+    /// Identical behavior to [DevicePtr::device_ptr()], but the lifetime on the returned
+    /// [SyncOnDrop], matches the lifetime of the view.
     pub fn view_ptr(self, stream: &'a CudaStream) -> (sys::CUdeviceptr, SyncOnDrop<'a>) {
         if self.stream.context().is_managing_stream_synchronization() {
             if let Some(write) = self.write.as_ref() {
@@ -1211,6 +1213,8 @@ impl<T> DevicePtr<T> for CudaViewMut<'_, T> {
 }
 
 impl<'a, T> CudaViewMut<'a, T> {
+    /// Identical behavior to [DevicePtr::device_ptr()], but the lifetime on the returned
+    /// [SyncOnDrop], matches the lifetime of the view.
     pub fn view_ptr(self, stream: &'a CudaStream) -> (sys::CUdeviceptr, SyncOnDrop<'a>) {
         if self.stream.context().is_managing_stream_synchronization() {
             if let Some(write) = self.write.as_ref() {
@@ -1281,6 +1285,8 @@ impl<T> DevicePtrMut<T> for CudaViewMut<'_, T> {
 }
 
 impl<'a, T> CudaViewMut<'a, T> {
+    /// Identical behavior to [DevicePtrMut::device_ptr_mut()], but the lifetime on the returned
+    /// [SyncOnDrop], matches the lifetime of the view.
     pub fn view_ptr_mut(self, stream: &'a CudaStream) -> (sys::CUdeviceptr, SyncOnDrop<'a>) {
         if self.stream.context().is_managing_stream_synchronization() {
             if let Some(read) = self.read.as_ref() {
