@@ -1188,8 +1188,30 @@ impl<T> DevicePtr<T> for CudaView<'_, T> {
     }
 }
 
+impl<'a, T> CudaView<'a, T> {
+    pub fn view_ptr(self, stream: &'a CudaStream) -> (sys::CUdeviceptr, SyncOnDrop<'a>) {
+        if self.stream.context().is_managing_stream_synchronization() {
+            if let Some(write) = self.write.as_ref() {
+                stream.ctx.record_err(stream.wait(write));
+            }
+        }
+        (self.ptr, SyncOnDrop::record_event(self.read, stream))
+    }
+}
+
 impl<T> DevicePtr<T> for CudaViewMut<'_, T> {
     fn device_ptr<'a>(&'a self, stream: &'a CudaStream) -> (sys::CUdeviceptr, SyncOnDrop<'a>) {
+        if self.stream.context().is_managing_stream_synchronization() {
+            if let Some(write) = self.write.as_ref() {
+                stream.ctx.record_err(stream.wait(write));
+            }
+        }
+        (self.ptr, SyncOnDrop::record_event(self.read, stream))
+    }
+}
+
+impl<'a, T> CudaViewMut<'a, T> {
+    pub fn view_ptr(self, stream: &'a CudaStream) -> (sys::CUdeviceptr, SyncOnDrop<'a>) {
         if self.stream.context().is_managing_stream_synchronization() {
             if let Some(write) = self.write.as_ref() {
                 stream.ctx.record_err(stream.wait(write));
@@ -1246,6 +1268,20 @@ impl<T> DevicePtrMut<T> for CudaViewMut<'_, T> {
         &'a mut self,
         stream: &'a CudaStream,
     ) -> (sys::CUdeviceptr, SyncOnDrop<'a>) {
+        if self.stream.context().is_managing_stream_synchronization() {
+            if let Some(read) = self.read.as_ref() {
+                stream.ctx.record_err(stream.wait(read));
+            }
+            if let Some(write) = self.write.as_ref() {
+                stream.ctx.record_err(stream.wait(write));
+            }
+        }
+        (self.ptr, SyncOnDrop::record_event(self.write, stream))
+    }
+}
+
+impl<'a, T> CudaViewMut<'a, T> {
+    pub fn view_ptr_mut(self, stream: &'a CudaStream) -> (sys::CUdeviceptr, SyncOnDrop<'a>) {
         if self.stream.context().is_managing_stream_synchronization() {
             if let Some(read) = self.read.as_ref() {
                 stream.ctx.record_err(stream.wait(read));
@@ -1910,6 +1946,12 @@ impl<'a, T> CudaView<'a, T> {
     pub fn try_split_at(&self, mid: usize) -> Option<(Self, Self)> {
         (mid <= self.len()).then(|| (self.resize(0, mid), self.resize(mid, self.len)))
     }
+
+    pub fn chunks_exact(&self, chunk_size: usize) -> impl Iterator<Item = CudaView<'a, T>> + '_ {
+        assert!(self.len % chunk_size == 0);
+        let num_chunks = self.len / chunk_size;
+        (0..num_chunks).map(move |i| self.resize(i * chunk_size, (i + 1) * chunk_size))
+    }
 }
 
 impl<'a, T> CudaViewMut<'a, T> {
@@ -2040,6 +2082,19 @@ impl<'a, T> CudaViewMut<'a, T> {
                 marker: PhantomData,
             };
             (a, b)
+        })
+    }
+
+    pub fn chunks_exact_mut(self, chunk_size: usize) -> impl Iterator<Item = CudaViewMut<'a, T>> {
+        assert!(self.len % chunk_size == 0);
+        let num_chunks = self.len / chunk_size;
+        (0..num_chunks).map(move |i| CudaViewMut {
+            ptr: self.ptr + (i * chunk_size * std::mem::size_of::<T>()) as u64,
+            len: chunk_size,
+            read: self.read,
+            write: self.write,
+            stream: self.stream,
+            marker: PhantomData,
         })
     }
 
