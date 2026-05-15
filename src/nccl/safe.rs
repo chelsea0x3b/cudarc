@@ -1,5 +1,7 @@
 use super::{result, sys};
-use crate::driver::{CudaContext, CudaStream, CudaView, CudaViewMut, DevicePtr, DevicePtrMut, SyncOnDrop};
+use crate::driver::{
+    CudaContext, CudaStream, CudaView, CudaViewMut, DevicePtr, DevicePtrMut, SyncOnDrop,
+};
 use std::{mem::MaybeUninit, sync::Arc, vec, vec::Vec};
 
 pub use result::{group_end, group_start};
@@ -448,7 +450,25 @@ impl Comm {
 /// An NCCL Group. Calls [group_start()] via [Comm::group()], and [group_end()] on Drop.
 ///
 /// Works with the event tracking system in [CudaContext] by delaying the drop of [SyncOnDrop] of all
-/// [DevicePtr]/[DevicePtrMut] until **after** [group_end()] is called on drop.
+/// [CudaView]/[CudaViewMut] until **after** [group_end()] is called on drop.
+///
+/// Note that the main difference between the calls on [Group] vs [Comm] is that group **requires**
+/// [CudaView]/[CudaViewMut]. This is because we need to enforce that the view's lifetimes outlive the
+/// group's lifetime. This is not necessarily possible with [DevicePtr]/[DevicePtrMut] because they capture
+/// the &self lifetime of the borrow instead of the view's original data lifetime.
+///
+/// When using [Group], you will likely need to create all the views you intend to use within the group
+/// **before** starting the group.
+///
+/// ```ignore
+/// let send_view: CudaView<'_, u8> = ...;
+/// let recv_view: CudaViewMut<'_, u8> = ...;
+/// let mut group = comm.group();
+/// group.all_gather(send_view, recv_view);
+/// ```
+///
+/// If you create the views after the group is created, rust will complain about the views not outliving the
+/// group lifetime.
 ///
 /// See [nvidia docs](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/groups.html)
 #[derive(Debug)]
@@ -466,6 +486,7 @@ impl<'a> Drop for Group<'a> {
 impl Comm {
     /// Initializes a new group call: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/groups.html
     pub fn group(&self) -> Group<'_> {
+        group_start().unwrap();
         Group {
             comm: self,
             syncs: Vec::new(),
@@ -672,9 +693,7 @@ impl<'g> Group<'g> {
         debug_assert!(recvbuff.is_some() || self.comm.rank != root as usize);
         let count = sendbuff.len();
         let (src, record_src) = sendbuff.view_ptr(&self.comm.stream);
-        let (dst, record_dst) = recvbuff
-            .map(|b| b.view_ptr_mut(&self.comm.stream))
-            .unzip();
+        let (dst, record_dst) = recvbuff.map(|b| b.view_ptr_mut(&self.comm.stream)).unzip();
         let status = unsafe {
             result::reduce(
                 src as _,
