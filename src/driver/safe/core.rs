@@ -1433,10 +1433,13 @@ impl CudaContext {
         flags: u32,
     ) -> Result<PinnedHostSlice<T>, DriverError> {
         self.bind_to_thread()?;
-        let ptr = result::malloc_host(len * std::mem::size_of::<T>(), flags)?;
+        let num_bytes = len
+            .checked_mul(std::mem::size_of::<T>())
+            .expect("Pinned host allocation size overflow");
+        assert!(num_bytes < isize::MAX as usize);
+        let ptr = result::malloc_host(num_bytes, flags)?;
         let ptr = ptr as *mut T;
         assert!(!ptr.is_null());
-        assert!(len * std::mem::size_of::<T>() < isize::MAX as usize);
         assert!(ptr.is_aligned());
         let event = self.new_event(Some(sys::CUevent_flags::CU_EVENT_BLOCKING_SYNC))?;
         Ok(PinnedHostSlice { ptr, len, event })
@@ -2715,6 +2718,13 @@ mod tests {
         let dst = stream.clone_htod(&pinned).unwrap();
         let host = stream.clone_dtoh(&dst).unwrap();
         assert_eq!(&host, &truth);
+    }
+
+    #[test]
+    #[should_panic(expected = "Pinned host allocation size overflow")]
+    fn test_alloc_pinned_panics_on_size_overflow() {
+        let ctx = CudaContext::new(0).unwrap();
+        let _ = unsafe { ctx.alloc_pinned_with_flags::<u32>(usize::MAX, 0) };
     }
 
     #[test]
