@@ -1405,6 +1405,11 @@ impl<T> Drop for PinnedHostSlice<T> {
 impl CudaContext {
     /// Allocates page locked host memory with [sys::CU_MEMHOSTALLOC_WRITECOMBINED] flags.
     ///
+    /// Write-combined memory is intended for memory primarily written by the
+    /// host before a device transfer; it has poor CPU read performance. Use
+    /// [CudaContext::alloc_pinned_with_flags()] with `0` for default page
+    /// locked host memory if CPU reads matter.
+    ///
     /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MEM.html#group__CUDA__MEM_1g572ca4011bfcb25034888a14d4e035b9)
     ///
     /// # Safety
@@ -1417,11 +1422,6 @@ impl CudaContext {
     }
 
     /// Allocates page locked host memory with the specified `flags`.
-    ///
-    /// Pass `0` for default page locked host memory. Use
-    /// [sys::CU_MEMHOSTALLOC_WRITECOMBINED] for memory primarily written by the
-    /// host before a device transfer; write-combined memory has poor CPU read
-    /// performance.
     ///
     /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MEM.html#group__CUDA__MEM_1g572ca4011bfcb25034888a14d4e035b9)
     ///
