@@ -1413,11 +1413,27 @@ impl CudaContext {
         self: &Arc<Self>,
         len: usize,
     ) -> Result<PinnedHostSlice<T>, DriverError> {
+        self.alloc_pinned_with_flags(len, sys::CU_MEMHOSTALLOC_WRITECOMBINED)
+    }
+
+    /// Allocates page locked host memory with the specified `flags`.
+    ///
+    /// Pass `0` for default page locked host memory. Use
+    /// [sys::CU_MEMHOSTALLOC_WRITECOMBINED] for memory primarily written by the
+    /// host before a device transfer; write-combined memory has poor CPU read
+    /// performance.
+    ///
+    /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MEM.html#group__CUDA__MEM_1g572ca4011bfcb25034888a14d4e035b9)
+    ///
+    /// # Safety
+    /// 1. This is unsafe because the memory is unset after this call.
+    pub unsafe fn alloc_pinned_with_flags<T: DeviceRepr>(
+        self: &Arc<Self>,
+        len: usize,
+        flags: u32,
+    ) -> Result<PinnedHostSlice<T>, DriverError> {
         self.bind_to_thread()?;
-        let ptr = result::malloc_host(
-            len * std::mem::size_of::<T>(),
-            sys::CU_MEMHOSTALLOC_WRITECOMBINED,
-        )?;
+        let ptr = result::malloc_host(len * std::mem::size_of::<T>(), flags)?;
         let ptr = ptr as *mut T;
         assert!(!ptr.is_null());
         assert!(len * std::mem::size_of::<T>() < isize::MAX as usize);
@@ -2680,6 +2696,19 @@ mod tests {
         let ctx = CudaContext::new(0).unwrap();
         let stream = ctx.default_stream();
         let mut pinned = unsafe { ctx.alloc_pinned::<f32>(10) }.unwrap();
+        pinned.as_mut_slice().unwrap().clone_from_slice(&truth);
+        assert_eq!(pinned.as_slice().unwrap(), &truth);
+        let dst = stream.clone_htod(&pinned).unwrap();
+        let host = stream.clone_dtoh(&dst).unwrap();
+        assert_eq!(&host, &truth);
+    }
+
+    #[test]
+    fn test_htod_copy_pinned_with_default_flags() {
+        let truth = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0];
+        let ctx = CudaContext::new(0).unwrap();
+        let stream = ctx.default_stream();
+        let mut pinned = unsafe { ctx.alloc_pinned_with_flags::<f32>(10, 0) }.unwrap();
         pinned.as_mut_slice().unwrap().clone_from_slice(&truth);
         assert_eq!(pinned.as_slice().unwrap(), &truth);
         let dst = stream.clone_htod(&pinned).unwrap();
