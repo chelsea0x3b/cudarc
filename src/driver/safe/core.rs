@@ -2535,6 +2535,7 @@ impl CudaStream {
 
 #[cfg(test)]
 mod tests {
+    use std::hint::black_box;
     use std::time::Instant;
 
     use super::*;
@@ -2714,6 +2715,44 @@ mod tests {
         let dst = stream.clone_htod(&pinned).unwrap();
         let host = stream.clone_dtoh(&dst).unwrap();
         assert_eq!(&host, &truth);
+    }
+
+    #[test]
+    fn test_default_pinned_host_reads_are_faster_than_write_combined() {
+        fn timed_host_reads(values: &[u32], n_samples: usize) -> (std::time::Duration, u64) {
+            let start = Instant::now();
+            let mut sum = 0_u64;
+            for _ in 0..n_samples {
+                for value in black_box(values) {
+                    sum = sum.wrapping_add(u64::from(*value));
+                }
+            }
+            (start.elapsed(), black_box(sum))
+        }
+
+        let ctx = CudaContext::new(0).unwrap();
+        let n = 1 << 20;
+        let n_samples = 5;
+        let mut write_combined =
+            unsafe { ctx.alloc_pinned_with_flags::<u32>(n, sys::CU_MEMHOSTALLOC_WRITECOMBINED) }
+                .unwrap();
+        let mut default = unsafe { ctx.alloc_pinned_with_flags::<u32>(n, 0) }.unwrap();
+        write_combined.as_mut_slice().unwrap().fill(1);
+        default.as_mut_slice().unwrap().fill(1);
+
+        let (write_combined_elapsed, write_combined_sum) =
+            timed_host_reads(write_combined.as_slice().unwrap(), n_samples);
+        let (default_elapsed, default_sum) =
+            timed_host_reads(default.as_slice().unwrap(), n_samples);
+        assert_eq!(write_combined_sum, default_sum);
+        std::println!(
+            "default pinned host reads: {default_elapsed:?}; write-combined host reads: {write_combined_elapsed:?}"
+        );
+        // The performance gap should be large, but leave margin for device and host variance.
+        assert!(
+            default_elapsed.as_secs_f32() * 2.0 < write_combined_elapsed.as_secs_f32(),
+            "{default_elapsed:?} vs {write_combined_elapsed:?}"
+        );
     }
 
     #[test]
