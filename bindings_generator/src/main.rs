@@ -5,6 +5,7 @@ use std::{
     collections::HashMap,
     fs,
     path::{Path, PathBuf},
+    sync::Mutex,
 };
 
 use anyhow::{Context, Result};
@@ -13,6 +14,7 @@ use bindgen::Builder;
 mod download;
 mod extract;
 mod merge;
+mod reconstruct;
 mod version;
 
 use crate::version::Version;
@@ -417,6 +419,20 @@ impl ModuleConfig {
         self.bindings_path(version).exists()
     }
 
+    /// The versions this module is generated for: its own library versions
+    /// if it has any, otherwise the supported subset of the CUDA versions.
+    fn versions(&self, cuda_versions: &[Version]) -> Vec<Version> {
+        if self.lib_versions.is_empty() {
+            cuda_versions
+                .iter()
+                .copied()
+                .filter(|&v| self.supports_cuda_version(v))
+                .collect()
+        } else {
+            self.lib_versions.clone()
+        }
+    }
+
     fn run_bindgen(
         &self,
         version: Version,
@@ -552,31 +568,24 @@ fn create_bindings(modules: &[ModuleConfig], cuda_versions: &[Version]) -> Resul
 
     let multi_progress = MultiProgress::new();
 
-    // Phase A: download primary archives for all versions in parallel.
-    // These are done upfront so module tasks don't race on the shared primary archive paths.
-    let pb = multi_progress.add(ProgressBar::new(cuda_versions.len() as u64));
+    // Phase A: download primary archives in parallel, only for versions that
+    // still need bindgen work. They are done upfront so module tasks don't
+    // race on the shared primary archive paths.
+    let versions_needing_work: Vec<Version> = cuda_versions
+        .iter()
+        .copied()
+        .filter(|&v| {
+            modules.iter().any(|m| {
+                m.lib_versions.is_empty() && m.supports_cuda_version(v) && !m.bindings_exist(v)
+            })
+        })
+        .collect();
+    let pb = multi_progress.add(ProgressBar::new(versions_needing_work.len() as u64));
     pb.set_style(ProgressStyle::default_bar().template("primary archives {bar} {pos}/{len}")?);
-    let primary_archives = cuda_versions
+    let primary_archives = versions_needing_work
         .par_iter()
         .map(|cuda_version| {
-            // cuda_cudart provides cuda.h / cuda_runtime.h, which virtually every module
-            // transitively includes. It must be a primary archive so all parallel module
-            // tasks have those headers on their include path.
-            let names = match cuda_version.major {
-                13 => vec!["cuda_nvcc", "cuda_cccl", "cuda_crt", "cuda_cudart"],
-                12 => vec!["cuda_nvcc", "cuda_cccl", "cuda_cudart"],
-                _ => vec!["cuda_nvcc", "cuda_cudart"],
-            };
-            let mut archives = vec![];
-            for name in names {
-                archives.push(get_archive(
-                    cuda_version,
-                    name,
-                    "primary",
-                    &downloads_dir,
-                    &multi_progress,
-                )?);
-            }
+            let archives = get_primary_archives(cuda_version, &downloads_dir, &multi_progress)?;
             pb.inc(1);
             Ok((*cuda_version, archives))
         })
@@ -662,6 +671,9 @@ fn create_bindings(modules: &[ModuleConfig], cuda_versions: &[Version]) -> Resul
 
     let pb = multi_progress.add(ProgressBar::new(lib_tasks.len() as u64));
     pb.set_style(ProgressStyle::default_bar().template("downstream {bar} {pos}/{len} ({eta})")?);
+    // Lib archives can pair with a CUDA version that needed no phase B work;
+    // its primary archives are then fetched on demand, once.
+    let ondemand_primaries: Mutex<HashMap<Version, Vec<PathBuf>>> = Mutex::new(HashMap::new());
     lib_tasks
         .into_par_iter()
         .map(|(module, lib_version)| {
@@ -674,17 +686,25 @@ fn create_bindings(modules: &[ModuleConfig], cuda_versions: &[Version]) -> Resul
             } else {
                 get_cuda_major_archive(lib_version, module, &downloads_dir, &multi_progress)?
             };
-            let Some(primary) = primary_archives.get(&cuda_version) else {
-                // Happens when running with --cuda-version: the lib maps to a
-                // CUDA version outside the selection. A full run generates it.
-                log::warn!(
-                    "Skipping {} {lib_version}: needs CUDA {cuda_version}, not in this run",
-                    module.cudarc_name
-                );
-                pb.inc(1);
-                return Ok(());
+            let primary = match primary_archives.get(&cuda_version) {
+                Some(primary) => primary.clone(),
+                None => {
+                    let mut cache = ondemand_primaries.lock().unwrap();
+                    match cache.get(&cuda_version) {
+                        Some(primary) => primary.clone(),
+                        None => {
+                            let primary = get_primary_archives(
+                                &cuda_version,
+                                &downloads_dir,
+                                &multi_progress,
+                            )?;
+                            cache.insert(cuda_version, primary.clone());
+                            primary
+                        }
+                    }
+                }
             };
-            module.run_bindgen(lib_version, &archive_dir, primary)?;
+            module.run_bindgen(lib_version, &archive_dir, &primary)?;
             pb.inc(1);
             Ok(())
         })
@@ -694,6 +714,28 @@ fn create_bindings(modules: &[ModuleConfig], cuda_versions: &[Version]) -> Resul
     drop(pb);
 
     Ok(())
+}
+
+/// Download and extract the archives whose headers every module needs on its
+/// include path. cuda_cudart provides cuda.h / cuda_runtime.h, which
+/// virtually every module transitively includes.
+fn get_primary_archives(
+    cuda_version: &Version,
+    downloads_dir: &Path,
+    multi_progress: &MultiProgress,
+) -> Result<Vec<PathBuf>> {
+    // cuda_cudart provides cuda.h / cuda_runtime.h, which virtually every module
+    // transitively includes. It must be a primary archive so all parallel module
+    // tasks have those headers on their include path.
+    let names = match cuda_version.major {
+        13 => vec!["cuda_nvcc", "cuda_cccl", "cuda_crt", "cuda_cudart"],
+        12 => vec!["cuda_nvcc", "cuda_cccl", "cuda_cudart"],
+        _ => vec!["cuda_nvcc", "cuda_cudart"],
+    };
+    names
+        .into_iter()
+        .map(|name| get_archive(cuda_version, name, "primary", downloads_dir, multi_progress))
+        .collect()
 }
 
 const CUDA_REDIST_URL: &str = "https://developer.download.nvidia.com/compute/cuda/redist/";
@@ -892,6 +934,17 @@ struct Args {
     /// Specify a single target to generate bindings for.
     #[arg(long, action)]
     target: Option<String>,
+
+    /// Skip seeding per-version bindings from the committed merged files,
+    /// forcing bindgen to regenerate everything from the NVIDIA archives.
+    #[arg(long, action)]
+    no_reconstruct: bool,
+
+    /// Check that bindings reconstructed from the merged files match the
+    /// per-version files currently in out/, then exit. Maintainer check,
+    /// requires a previously generated out/.
+    #[arg(long, action)]
+    validate_reconstruction: bool,
 }
 
 const CUDA_VERSIONS: &[Version] = &[
@@ -925,6 +978,20 @@ fn main() -> Result<()> {
     let mut cuda_versions: Vec<Version> = CUDA_VERSIONS.to_vec();
     if let Some(version) = args.cuda_version {
         cuda_versions.retain(|&v| v == version);
+    }
+
+    if args.validate_reconstruction {
+        return reconstruct::validate(&modules, CUDA_VERSIONS);
+    }
+
+    if !args.no_reconstruct {
+        // Seed for every known version (not just the selected ones): the
+        // merge step reads all of out/, so it must be complete regardless
+        // of any --cuda-version filter.
+        let seeded = reconstruct::seed_from_merged(&modules, CUDA_VERSIONS)?;
+        if seeded > 0 {
+            println!("Seeded {seeded} binding files from the committed merged bindings");
+        }
     }
 
     if !args.skip_bindings {
