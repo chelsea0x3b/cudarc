@@ -13,14 +13,8 @@ fn load<F: Copy>(name: &str) -> F {
 }
 pub use self::cudaDataType_t as cudaDataType;
 pub use self::libraryPropertyType_t as libraryPropertyType;
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub type FILE = _IO_FILE;
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
-pub type _IO_lock_t = ::core::ffi::c_void;
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
-pub type __off64_t = ::core::ffi::c_long;
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
-pub type __off_t = ::core::ffi::c_long;
 pub type csrqrInfo_t = *mut csrqrInfo;
 pub type cuComplex = cuFloatComplex;
 pub type cuDoubleComplex = double2;
@@ -31,7 +25,7 @@ pub type cudaStream_t = *mut CUstream_st;
 pub type cusolverDnHandle_t = *mut cusolverDnContext;
 pub type cusolverDnIRSInfos_t = *mut cusolverDnIRSInfos;
 pub type cusolverDnIRSParams_t = *mut cusolverDnIRSParams;
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub type cusolverDnLoggerCallback_t = ::core::option::Option<unsafe extern "C" fn(logLevel: ::core::ffi::c_int, functionName: *const ::core::ffi::c_char, message: *const ::core::ffi::c_char)>;
 pub type cusolverDnParams_t = *mut cusolverDnParams;
 pub type cusolverRfHandle_t = *mut cusolverRfCommon;
@@ -135,7 +129,7 @@ pub enum cudaDataType_t {
     CUDA_R_8F_E4M3 = 28,
     CUDA_R_8F_E5M2 = 29,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cudaDataType_t {
@@ -174,14 +168,14 @@ pub enum cudaDataType_t {
     CUDA_R_6F_E3M2 = 32,
     CUDA_R_4F_E2M1 = 33,
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cudaEmulationMantissaControl_t {
     CUDA_EMULATION_MANTISSA_CONTROL_DYNAMIC = 0,
     CUDA_EMULATION_MANTISSA_CONTROL_FIXED = 1,
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cudaEmulationSpecialValuesSupport_t {
@@ -190,7 +184,7 @@ pub enum cudaEmulationSpecialValuesSupport_t {
     CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_INFINITY = 1,
     CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NAN = 2,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cudaEmulationStrategy_t {
@@ -205,7 +199,7 @@ pub enum cusolverAlgMode_t {
     CUSOLVER_ALG_0 = 0,
     CUSOLVER_ALG_1 = 1,
 }
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cusolverAlgMode_t {
@@ -213,7 +207,7 @@ pub enum cusolverAlgMode_t {
     CUSOLVER_ALG_1 = 1,
     CUSOLVER_ALG_2 = 2,
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cusolverDeterministicMode_t {
@@ -247,7 +241,7 @@ pub enum cusolverDnFunction_t {
     CUSOLVERDN_POTRF = 1,
     CUSOLVERDN_SYEVBATCHED = 2,
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cusolverDnFunction_t {
@@ -256,7 +250,7 @@ pub enum cusolverDnFunction_t {
     CUSOLVERDN_SYEVBATCHED = 2,
     CUSOLVERDN_GEQRF = 3,
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cusolverEigComp_t {
@@ -305,7 +299,7 @@ pub enum cusolverMathMode_t {
     CUSOLVER_DEFAULT_MATH = 1,
     CUSOLVER_FP32_EMULATED_BF16X9_MATH = 2,
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cusolverMathMode_t {
@@ -429,57 +423,11 @@ pub enum libraryPropertyType_t {
 pub struct CUstream_st {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct _IO_FILE {
-    pub _flags: ::core::ffi::c_int,
-    pub _IO_read_ptr: *mut ::core::ffi::c_char,
-    pub _IO_read_end: *mut ::core::ffi::c_char,
-    pub _IO_read_base: *mut ::core::ffi::c_char,
-    pub _IO_write_base: *mut ::core::ffi::c_char,
-    pub _IO_write_ptr: *mut ::core::ffi::c_char,
-    pub _IO_write_end: *mut ::core::ffi::c_char,
-    pub _IO_buf_base: *mut ::core::ffi::c_char,
-    pub _IO_buf_end: *mut ::core::ffi::c_char,
-    pub _IO_save_base: *mut ::core::ffi::c_char,
-    pub _IO_backup_base: *mut ::core::ffi::c_char,
-    pub _IO_save_end: *mut ::core::ffi::c_char,
-    pub _markers: *mut _IO_marker,
-    pub _chain: *mut _IO_FILE,
-    pub _fileno: ::core::ffi::c_int,
-    pub _flags2: ::core::ffi::c_int,
-    pub _old_offset: __off_t,
-    pub _cur_column: ::core::ffi::c_ushort,
-    pub _vtable_offset: ::core::ffi::c_schar,
-    pub _shortbuf: [::core::ffi::c_char; 1usize],
-    pub _lock: *mut _IO_lock_t,
-    pub _offset: __off64_t,
-    pub _codecvt: *mut _IO_codecvt,
-    pub _wide_data: *mut _IO_wide_data,
-    pub _freeres_list: *mut _IO_FILE,
-    pub _freeres_buf: *mut ::core::ffi::c_void,
-    pub __pad5: usize,
-    pub _mode: ::core::ffi::c_int,
-    pub _unused2: [::core::ffi::c_char; 20usize],
-}
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _IO_codecvt {
-    _unused: [u8; 0],
-}
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _IO_marker {
-    _unused: [u8; 0],
-}
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _IO_wide_data {
-    _unused: [u8; 0],
+    pub _address: u8,
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -548,7 +496,7 @@ pub struct syevjInfo {
 impl cublasOperation_t {
     pub const CUBLAS_OP_HERMITAN: cublasOperation_t = cublasOperation_t::CUBLAS_OP_C;
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 impl cudaDataType_t {
     pub const CUDA_R_8F_UE4M3: cudaDataType_t = cudaDataType_t::CUDA_R_8F_E4M3;
 }
@@ -3084,7 +3032,7 @@ pub unsafe fn cusolverDnGesvd_bufferSize(handle: cusolverDnHandle_t, params: cus
         cusolverDnGesvd_bufferSize(handle, params, jobu, jobvt, m, n, dataTypeA, A, lda, dataTypeS, S, dataTypeU, U, ldu, dataTypeVT, VT, ldvt, computeType, workspaceInBytes)
     }
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnGetDeterministicMode(handle: cusolverDnHandle_t, mode: *mut cusolverDeterministicMode_t) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3101,7 +3049,7 @@ pub unsafe fn cusolverDnGetDeterministicMode(handle: cusolverDnHandle_t, mode: *
         cusolverDnGetDeterministicMode(handle, mode)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnGetEmulationSpecialValuesSupport(handle: cusolverDnHandle_t, mask: *mut cudaEmulationSpecialValuesSupport_t) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3118,7 +3066,7 @@ pub unsafe fn cusolverDnGetEmulationSpecialValuesSupport(handle: cusolverDnHandl
         cusolverDnGetEmulationSpecialValuesSupport(handle, mask)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnGetEmulationStrategy(handle: cusolverDnHandle_t, strategy: *mut cudaEmulationStrategy_t) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3135,7 +3083,7 @@ pub unsafe fn cusolverDnGetEmulationStrategy(handle: cusolverDnHandle_t, strateg
         cusolverDnGetEmulationStrategy(handle, strategy)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnGetFixedPointEmulationMantissaBitOffset(handle: cusolverDnHandle_t, mantissaBitOffset: *mut ::core::ffi::c_int) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3152,7 +3100,7 @@ pub unsafe fn cusolverDnGetFixedPointEmulationMantissaBitOffset(handle: cusolver
         cusolverDnGetFixedPointEmulationMantissaBitOffset(handle, mantissaBitOffset)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnGetFixedPointEmulationMantissaControl(handle: cusolverDnHandle_t, control: *mut cudaEmulationMantissaControl_t) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3169,7 +3117,7 @@ pub unsafe fn cusolverDnGetFixedPointEmulationMantissaControl(handle: cusolverDn
         cusolverDnGetFixedPointEmulationMantissaControl(handle, control)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnGetFixedPointEmulationMaxMantissaBitCount(handle: cusolverDnHandle_t, mantissaBitCount: *mut ::core::ffi::c_int) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3186,7 +3134,7 @@ pub unsafe fn cusolverDnGetFixedPointEmulationMaxMantissaBitCount(handle: cusolv
         cusolverDnGetFixedPointEmulationMaxMantissaBitCount(handle, mantissaBitCount)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnGetMathMode(handle: cusolverDnHandle_t, mode: *mut cusolverMathMode_t) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3977,7 +3925,7 @@ pub unsafe fn cusolverDnSetAdvOptions(params: cusolverDnParams_t, function: cuso
         cusolverDnSetAdvOptions(params, function, algo)
     }
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnSetDeterministicMode(handle: cusolverDnHandle_t, mode: cusolverDeterministicMode_t) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3994,7 +3942,7 @@ pub unsafe fn cusolverDnSetDeterministicMode(handle: cusolverDnHandle_t, mode: c
         cusolverDnSetDeterministicMode(handle, mode)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnSetEmulationSpecialValuesSupport(handle: cusolverDnHandle_t, mask: cudaEmulationSpecialValuesSupport_t) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4011,7 +3959,7 @@ pub unsafe fn cusolverDnSetEmulationSpecialValuesSupport(handle: cusolverDnHandl
         cusolverDnSetEmulationSpecialValuesSupport(handle, mask)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnSetEmulationStrategy(handle: cusolverDnHandle_t, strategy: cudaEmulationStrategy_t) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4028,7 +3976,7 @@ pub unsafe fn cusolverDnSetEmulationStrategy(handle: cusolverDnHandle_t, strateg
         cusolverDnSetEmulationStrategy(handle, strategy)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnSetFixedPointEmulationMantissaBitOffset(handle: cusolverDnHandle_t, mantissaBitOffset: ::core::ffi::c_int) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4045,7 +3993,7 @@ pub unsafe fn cusolverDnSetFixedPointEmulationMantissaBitOffset(handle: cusolver
         cusolverDnSetFixedPointEmulationMantissaBitOffset(handle, mantissaBitOffset)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnSetFixedPointEmulationMantissaControl(handle: cusolverDnHandle_t, control: cudaEmulationMantissaControl_t) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4062,7 +4010,7 @@ pub unsafe fn cusolverDnSetFixedPointEmulationMantissaControl(handle: cusolverDn
         cusolverDnSetFixedPointEmulationMantissaControl(handle, control)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnSetFixedPointEmulationMaxMantissaBitCount(handle: cusolverDnHandle_t, mantissaBitCount: ::core::ffi::c_int) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4079,7 +4027,7 @@ pub unsafe fn cusolverDnSetFixedPointEmulationMaxMantissaBitCount(handle: cusolv
         cusolverDnSetFixedPointEmulationMaxMantissaBitCount(handle, mantissaBitCount)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnSetMathMode(handle: cusolverDnHandle_t, mode: cusolverMathMode_t) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5060,7 +5008,7 @@ pub unsafe fn cusolverDnSyevdx_bufferSize(handle: cusolverDnHandle_t, params: cu
         cusolverDnSyevdx_bufferSize(handle, params, jobz, range, uplo, n, dataTypeA, A, lda, vl, vu, il, iu, h_meig, dataTypeW, W, computeType, workspaceInBytes)
     }
 }
-#[cfg(any(feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnXgeev(handle: cusolverDnHandle_t, params: cusolverDnParams_t, jobvl: cusolverEigMode_t, jobvr: cusolverEigMode_t, n: i64, dataTypeA: cudaDataType, A: *mut ::core::ffi::c_void, lda: i64, dataTypeW: cudaDataType, W: *mut ::core::ffi::c_void, dataTypeVL: cudaDataType, VL: *mut ::core::ffi::c_void, ldvl: i64, dataTypeVR: cudaDataType, VR: *mut ::core::ffi::c_void, ldvr: i64, computeType: cudaDataType, bufferOnDevice: *mut ::core::ffi::c_void, workspaceInBytesOnDevice: usize, bufferOnHost: *mut ::core::ffi::c_void, workspaceInBytesOnHost: usize, info: *mut ::core::ffi::c_int) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5077,7 +5025,7 @@ pub unsafe fn cusolverDnXgeev(handle: cusolverDnHandle_t, params: cusolverDnPara
         cusolverDnXgeev(handle, params, jobvl, jobvr, n, dataTypeA, A, lda, dataTypeW, W, dataTypeVL, VL, ldvl, dataTypeVR, VR, ldvr, computeType, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, info)
     }
 }
-#[cfg(any(feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnXgeev_bufferSize(handle: cusolverDnHandle_t, params: cusolverDnParams_t, jobvl: cusolverEigMode_t, jobvr: cusolverEigMode_t, n: i64, dataTypeA: cudaDataType, A: *const ::core::ffi::c_void, lda: i64, dataTypeW: cudaDataType, W: *const ::core::ffi::c_void, dataTypeVL: cudaDataType, VL: *const ::core::ffi::c_void, ldvl: i64, dataTypeVR: cudaDataType, VR: *const ::core::ffi::c_void, ldvr: i64, computeType: cudaDataType, workspaceInBytesOnDevice: *mut usize, workspaceInBytesOnHost: *mut usize) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5367,7 +5315,7 @@ pub unsafe fn cusolverDnXlarft(handle: cusolverDnHandle_t, params: cusolverDnPar
         cusolverDnXlarft(handle, params, direct, storev, N, K, dataTypeV, d_V, ldv, dataTypeTau, d_tau, dataTypeT, d_T, ldt, computeType, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost)
     }
 }
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnXlarft(handle: cusolverDnHandle_t, params: cusolverDnParams_t, direct: cusolverDirectMode_t, storev: cusolverStorevMode_t, n: i64, k: i64, dataTypeV: cudaDataType, V: *const ::core::ffi::c_void, ldv: i64, dataTypeTau: cudaDataType, tau: *const ::core::ffi::c_void, dataTypeT: cudaDataType, T: *mut ::core::ffi::c_void, ldt: i64, computeType: cudaDataType, bufferOnDevice: *mut ::core::ffi::c_void, workspaceInBytesOnDevice: usize, bufferOnHost: *mut ::core::ffi::c_void, workspaceInBytesOnHost: usize) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5401,7 +5349,7 @@ pub unsafe fn cusolverDnXlarft_bufferSize(handle: cusolverDnHandle_t, params: cu
         cusolverDnXlarft_bufferSize(handle, params, direct, storev, N, K, dataTypeV, d_V, ldv, dataTypeTau, d_tau, dataTypeT, d_T, ldt, computeType, workspaceInBytesOnDevice, workspaceInBytesOnHost)
     }
 }
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnXlarft_bufferSize(handle: cusolverDnHandle_t, params: cusolverDnParams_t, direct: cusolverDirectMode_t, storev: cusolverStorevMode_t, n: i64, k: i64, dataTypeV: cudaDataType, V: *const ::core::ffi::c_void, ldv: i64, dataTypeTau: cudaDataType, tau: *const ::core::ffi::c_void, dataTypeT: cudaDataType, T: *mut ::core::ffi::c_void, ldt: i64, computeType: cudaDataType, workspaceInBytesOnDevice: *mut usize, workspaceInBytesOnHost: *mut usize) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5418,7 +5366,7 @@ pub unsafe fn cusolverDnXlarft_bufferSize(handle: cusolverDnHandle_t, params: cu
         cusolverDnXlarft_bufferSize(handle, params, direct, storev, n, k, dataTypeV, V, ldv, dataTypeTau, tau, dataTypeT, T, ldt, computeType, workspaceInBytesOnDevice, workspaceInBytesOnHost)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnXpolar(handle: cusolverDnHandle_t, params: cusolverDnParams_t, uplo: cublasFillMode_t, M: i64, N: i64, dataTypeA: cudaDataType, A: *mut ::core::ffi::c_void, lda: i64, dataTypeH: cudaDataType, H: *mut ::core::ffi::c_void, ldh: i64, computeType: cudaDataType, bufferOnDevice: *mut ::core::ffi::c_void, workspaceInBytesOnDevice: usize, bufferOnHost: *mut ::core::ffi::c_void, workspaceInBytesOnHost: usize, d_res_nrm: *mut f64, d_A_nrmF: *mut f64, d_rcond: *mut f64, d_info: *mut ::core::ffi::c_int) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5435,7 +5383,7 @@ pub unsafe fn cusolverDnXpolar(handle: cusolverDnHandle_t, params: cusolverDnPar
         cusolverDnXpolar(handle, params, uplo, M, N, dataTypeA, A, lda, dataTypeH, H, ldh, computeType, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, d_res_nrm, d_A_nrmF, d_rcond, d_info)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnXpolar_bufferSize(handle: cusolverDnHandle_t, params: cusolverDnParams_t, uplo: cublasFillMode_t, M: i64, N: i64, dataTypeA: cudaDataType, A: *const ::core::ffi::c_void, lda: i64, dataTypeH: cudaDataType, H: *const ::core::ffi::c_void, ldh: i64, computeType: cudaDataType, workspaceInBytesOnDevice: *mut usize, workspaceInBytesOnHost: *mut usize) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5500,7 +5448,7 @@ pub unsafe fn cusolverDnXpotrs(handle: cusolverDnHandle_t, params: cusolverDnPar
         cusolverDnXpotrs(handle, params, uplo, n, nrhs, dataTypeA, A, lda, dataTypeB, B, ldb, info)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnXstedc(handle: cusolverDnHandle_t, params: cusolverDnParams_t, compz: cusolverEigComp_t, n: i64, dataTypeDE: cudaDataType, D: *mut ::core::ffi::c_void, E: *mut ::core::ffi::c_void, dataTypeZ: cudaDataType, Z: *mut ::core::ffi::c_void, ldz: i64, computeType: cudaDataType, bufferOnDevice: *mut ::core::ffi::c_void, workspaceInBytesOnDevice: usize, bufferOnHost: *mut ::core::ffi::c_void, workspaceInBytesOnHost: usize, info: *mut ::core::ffi::c_int) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5517,7 +5465,7 @@ pub unsafe fn cusolverDnXstedc(handle: cusolverDnHandle_t, params: cusolverDnPar
         cusolverDnXstedc(handle, params, compz, n, dataTypeDE, D, E, dataTypeZ, Z, ldz, computeType, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, info)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnXstedc_bufferSize(handle: cusolverDnHandle_t, params: cusolverDnParams_t, compz: cusolverEigComp_t, n: i64, dataTypeDE: cudaDataType, D: *const ::core::ffi::c_void, E: *const ::core::ffi::c_void, dataTypeZ: cudaDataType, Z: *const ::core::ffi::c_void, ldz: i64, computeType: cudaDataType, workspaceInBytesOnDevice: *mut usize, workspaceInBytesOnHost: *mut usize) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5534,7 +5482,7 @@ pub unsafe fn cusolverDnXstedc_bufferSize(handle: cusolverDnHandle_t, params: cu
         cusolverDnXstedc_bufferSize(handle, params, compz, n, dataTypeDE, D, E, dataTypeZ, Z, ldz, computeType, workspaceInBytesOnDevice, workspaceInBytesOnHost)
     }
 }
-#[cfg(any(feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnXsyevBatched(handle: cusolverDnHandle_t, params: cusolverDnParams_t, jobz: cusolverEigMode_t, uplo: cublasFillMode_t, n: i64, dataTypeA: cudaDataType, A: *mut ::core::ffi::c_void, lda: i64, dataTypeW: cudaDataType, W: *mut ::core::ffi::c_void, computeType: cudaDataType, bufferOnDevice: *mut ::core::ffi::c_void, workspaceInBytesOnDevice: usize, bufferOnHost: *mut ::core::ffi::c_void, workspaceInBytesOnHost: usize, info: *mut ::core::ffi::c_int, batchSize: i64) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5551,7 +5499,7 @@ pub unsafe fn cusolverDnXsyevBatched(handle: cusolverDnHandle_t, params: cusolve
         cusolverDnXsyevBatched(handle, params, jobz, uplo, n, dataTypeA, A, lda, dataTypeW, W, computeType, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, info, batchSize)
     }
 }
-#[cfg(any(feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnXsyevBatched_bufferSize(handle: cusolverDnHandle_t, params: cusolverDnParams_t, jobz: cusolverEigMode_t, uplo: cublasFillMode_t, n: i64, dataTypeA: cudaDataType, A: *const ::core::ffi::c_void, lda: i64, dataTypeW: cudaDataType, W: *const ::core::ffi::c_void, computeType: cudaDataType, workspaceInBytesOnDevice: *mut usize, workspaceInBytesOnHost: *mut usize, batchSize: i64) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5712,7 +5660,7 @@ pub unsafe fn cusolverDnXsyevjSetTolerance(info: syevjInfo_t, tolerance: f64) ->
         cusolverDnXsyevjSetTolerance(info, tolerance)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnXsygvd(handle: cusolverDnHandle_t, params: cusolverDnParams_t, itype: cusolverEigType_t, jobz: cusolverEigMode_t, uplo: cublasFillMode_t, n: i64, dataTypeA: cudaDataType, d_A: *mut ::core::ffi::c_void, lda: i64, dataTypeB: cudaDataType, d_B: *mut ::core::ffi::c_void, ldb: i64, dataTypeW: cudaDataType, d_W: *mut ::core::ffi::c_void, computeType: cudaDataType, bufferOnDevice: *mut ::core::ffi::c_void, workspaceInBytesOnDevice: usize, bufferOnHost: *mut ::core::ffi::c_void, workspaceInBytesOnHost: usize, d_info: *mut ::core::ffi::c_int) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5729,7 +5677,7 @@ pub unsafe fn cusolverDnXsygvd(handle: cusolverDnHandle_t, params: cusolverDnPar
         cusolverDnXsygvd(handle, params, itype, jobz, uplo, n, dataTypeA, d_A, lda, dataTypeB, d_B, ldb, dataTypeW, d_W, computeType, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, d_info)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnXsygvd_bufferSize(handle: cusolverDnHandle_t, params: cusolverDnParams_t, itype: cusolverEigType_t, jobz: cusolverEigMode_t, uplo: cublasFillMode_t, n: i64, dataTypeA: cudaDataType, d_A: *const ::core::ffi::c_void, lda: i64, dataTypeB: cudaDataType, d_B: *const ::core::ffi::c_void, ldb: i64, dataTypeW: cudaDataType, d_W: *const ::core::ffi::c_void, computeType: cudaDataType, workspaceInBytesOnDevice: *mut usize, workspaceInBytesOnHost: *mut usize) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5746,7 +5694,7 @@ pub unsafe fn cusolverDnXsygvd_bufferSize(handle: cusolverDnHandle_t, params: cu
         cusolverDnXsygvd_bufferSize(handle, params, itype, jobz, uplo, n, dataTypeA, d_A, lda, dataTypeB, d_B, ldb, dataTypeW, d_W, computeType, workspaceInBytesOnDevice, workspaceInBytesOnHost)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnXsygvdx(handle: cusolverDnHandle_t, params: cusolverDnParams_t, itype: cusolverEigType_t, jobz: cusolverEigMode_t, range: cusolverEigRange_t, uplo: cublasFillMode_t, n: i64, dataTypeA: cudaDataType, d_A: *mut ::core::ffi::c_void, lda: i64, dataTypeB: cudaDataType, d_B: *mut ::core::ffi::c_void, ldb: i64, vl: *mut ::core::ffi::c_void, vu: *mut ::core::ffi::c_void, il: i64, iu: i64, meig: *mut i64, dataTypeW: cudaDataType, d_W: *mut ::core::ffi::c_void, computeType: cudaDataType, bufferOnDevice: *mut ::core::ffi::c_void, workspaceInBytesOnDevice: usize, bufferOnHost: *mut ::core::ffi::c_void, workspaceInBytesOnHost: usize, d_info: *mut ::core::ffi::c_int) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5763,7 +5711,7 @@ pub unsafe fn cusolverDnXsygvdx(handle: cusolverDnHandle_t, params: cusolverDnPa
         cusolverDnXsygvdx(handle, params, itype, jobz, range, uplo, n, dataTypeA, d_A, lda, dataTypeB, d_B, ldb, vl, vu, il, iu, meig, dataTypeW, d_W, computeType, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, d_info)
     }
 }
-#[cfg(any(feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cusolverDnXsygvdx_bufferSize(handle: cusolverDnHandle_t, params: cusolverDnParams_t, itype: cusolverEigType_t, jobz: cusolverEigMode_t, uplo: cublasFillMode_t, n: i64, dataTypeA: cudaDataType, d_A: *const ::core::ffi::c_void, lda: i64, dataTypeB: cudaDataType, d_B: *const ::core::ffi::c_void, ldb: i64, vl: *mut ::core::ffi::c_void, vu: *mut ::core::ffi::c_void, il: i64, iu: i64, meig: *mut i64, dataTypeW: cudaDataType, d_W: *const ::core::ffi::c_void, computeType: cudaDataType, workspaceInBytesOnDevice: *mut usize, workspaceInBytesOnHost: *mut usize) -> cusolverStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
