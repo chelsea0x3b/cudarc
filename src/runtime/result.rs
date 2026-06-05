@@ -201,7 +201,8 @@ pub mod device {
             feature = "cuda-11040",
             feature = "cuda-13000",
             feature = "cuda-13010",
-            feature = "cuda-13020"
+            feature = "cuda-13020",
+            feature = "cuda-13030"
         )))]
         unsafe {
             sys::cudaGetDeviceProperties_v2(prop.as_mut_ptr(), ordinal).result()?;
@@ -215,7 +216,8 @@ pub mod device {
             feature = "cuda-11040",
             feature = "cuda-13000",
             feature = "cuda-13010",
-            feature = "cuda-13020"
+            feature = "cuda-13020",
+            feature = "cuda-13030"
         ))]
         unsafe {
             sys::cudaGetDeviceProperties(prop.as_mut_ptr(), ordinal).result()?;
@@ -947,7 +949,12 @@ pub mod external_memory {
             handle: sys::cudaExternalMemoryHandleDesc__bindgen_ty_1 { fd },
             size,
             flags: 0,
-            #[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+            #[cfg(any(
+                feature = "cuda-13000",
+                feature = "cuda-13010",
+                feature = "cuda-13020",
+                feature = "cuda-13030"
+            ))]
             reserved: [0; 16],
         };
         sys::cudaImportExternalMemory(external_memory.as_mut_ptr(), &handle_description)
@@ -979,7 +986,12 @@ pub mod external_memory {
             },
             size,
             flags: 0,
-            #[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+            #[cfg(any(
+                feature = "cuda-13000",
+                feature = "cuda-13010",
+                feature = "cuda-13020",
+                feature = "cuda-13030"
+            ))]
             reserved: [0; 16],
         };
         sys::cudaImportExternalMemory(external_memory.as_mut_ptr(), &handle_description)
@@ -1018,7 +1030,12 @@ pub mod external_memory {
             offset,
             size,
             flags: 0,
-            #[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+            #[cfg(any(
+                feature = "cuda-13000",
+                feature = "cuda-13010",
+                feature = "cuda-13020",
+                feature = "cuda-13030"
+            ))]
             reserved: [0; 16],
         };
         sys::cudaExternalMemoryGetMappedBuffer(
