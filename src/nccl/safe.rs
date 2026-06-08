@@ -157,6 +157,44 @@ impl Comm {
         self.world_size
     }
 
+    /// The raw `ncclComm_t` handle backing this `Comm`.
+    ///
+    /// Escape hatch for driving NCCL APIs not yet wrapped by this crate.
+    /// The handle is only valid for this `Comm`'s lifetime; the returned
+    /// pointer must not be used after the `Comm` is dropped.
+    pub fn comm(&self) -> sys::ncclComm_t {
+        self.comm
+    }
+
+    /// Abort this communicator (`ncclCommAbort`).
+    ///
+    /// Unlike [`Drop`] (which also aborts), this works on a live `&self`
+    /// and — crucially — may be called from a *different* thread than one
+    /// currently blocked inside a collective. That is how NCCL unblocks a
+    /// hung or failed collective so the surviving ranks can resynchronise.
+    /// After abort the communicator is unusable; rebuild a fresh `Comm`
+    /// (e.g. via [`Comm::from_rank`]) to continue.
+    pub fn abort(&self) -> Result<(), result::NcclError> {
+        unsafe { result::comm_abort(self.comm) }.map(|_| ())
+    }
+
+    /// Poll this communicator's asynchronous error state
+    /// (`ncclCommGetAsyncError`).
+    ///
+    /// Returns `Ok(())` when the communicator is healthy and `Err(_)` with
+    /// the NCCL async error when a collective has failed. Lets a watchdog
+    /// detect a wedged/failed collective without itself blocking.
+    pub fn get_async_error(&self) -> Result<(), result::NcclError> {
+        let mut async_err = sys::ncclResult_t::ncclSuccess;
+        unsafe { sys::ncclCommGetAsyncError(self.comm, &mut async_err) }.result()?;
+        match async_err {
+            // Success, or a still-running non-blocking collective, are both
+            // "not failed" — only a real error code signals a wedged comm.
+            sys::ncclResult_t::ncclSuccess | sys::ncclResult_t::ncclInProgress => Ok(()),
+            other => Err(result::NcclError(other)),
+        }
+    }
+
     /// Primitive to create new communication link on each process (threads are possible but not
     /// recommended).
     ///
