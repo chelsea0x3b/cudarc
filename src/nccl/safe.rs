@@ -2,17 +2,37 @@ use super::{result, sys};
 use crate::driver::{
     CudaContext, CudaStream, CudaView, CudaViewMut, DevicePtr, DevicePtrMut, SyncOnDrop,
 };
-use std::{mem::MaybeUninit, sync::Arc, vec, vec::Vec};
+use std::{
+    mem::MaybeUninit,
+    sync::{
+        atomic::{AtomicBool, Ordering},
+        Arc,
+    },
+    vec,
+    vec::Vec,
+};
 
 pub use result::{group_end, group_start};
 
 #[derive(Debug)]
 pub struct Comm {
     comm: sys::ncclComm_t,
+    /// Set once `ncclCommAbort` has been issued for `comm` (via [`Comm::abort`]
+    /// or [`Drop`]). `ncclCommAbort` frees the communicator, so it must run at
+    /// most once — this flag is swapped to `true` by whichever caller wins.
+    aborted: AtomicBool,
     stream: Arc<CudaStream>,
     rank: usize,
     world_size: usize,
 }
+
+// SAFETY: `ncclComm_t` is an opaque handle that NCCL allows to be used from
+// multiple threads. In particular `ncclCommAbort` is explicitly designed to be
+// called from a different thread than one blocked inside a collective, which is
+// the whole point of [`Comm::abort`]. The single-abort invariant is enforced by
+// the `aborted` flag, so sharing a `Comm` across threads is sound.
+unsafe impl Send for Comm {}
+unsafe impl Sync for Comm {}
 
 #[derive(Debug, Clone, Copy)]
 pub struct Id {
@@ -57,12 +77,14 @@ impl Drop for Comm {
     fn drop(&mut self) {
         // TODO(thenerdstation): Shoule we instead do finalize then destory?
         //
-        // Ignore the abort result rather than `expect`: a `Drop` must not
-        // panic, and the communicator may already have been aborted out of
-        // band (e.g. via `Comm::abort` to unblock a hung collective), in
-        // which case this second abort returns a non-success code.
-        unsafe {
-            let _ = result::comm_abort(self.comm);
+        // Only abort if no one already has: `ncclCommAbort` frees the
+        // communicator, so calling it twice (e.g. after an out-of-band
+        // `Comm::abort` to unblock a hung collective) would be a use-after-free.
+        // Ignore the result rather than `expect` — a `Drop` must not panic.
+        if !self.aborted.swap(true, Ordering::AcqRel) {
+            unsafe {
+                let _ = result::comm_abort(self.comm);
+            }
         }
     }
 }
@@ -133,6 +155,7 @@ impl Comm {
             .enumerate()
             .map(|(rank, (comm, stream))| Self {
                 comm,
+                aborted: AtomicBool::new(false),
                 stream,
                 rank,
                 world_size: n_streams,
@@ -179,7 +202,14 @@ impl Comm {
     /// hung or failed collective so the surviving ranks can resynchronise.
     /// After abort the communicator is unusable; rebuild a fresh `Comm`
     /// (e.g. via [`Comm::from_rank`]) to continue.
+    ///
+    /// Idempotent: aborting an already-aborted `Comm` (or one that will be
+    /// aborted again by [`Drop`]) is a no-op returning `Ok(())`, since
+    /// `ncclCommAbort` frees the communicator and must run at most once.
     pub fn abort(&self) -> Result<(), result::NcclError> {
+        if self.aborted.swap(true, Ordering::AcqRel) {
+            return Ok(());
+        }
         unsafe { result::comm_abort(self.comm) }.map(|_| ())
     }
 
@@ -247,6 +277,7 @@ impl Comm {
         };
         Ok(Self {
             comm,
+            aborted: AtomicBool::new(false),
             stream,
             rank,
             world_size,
