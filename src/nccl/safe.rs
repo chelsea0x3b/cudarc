@@ -56,8 +56,13 @@ fn convert_to_nccl_reduce_op(op: &ReduceOp) -> sys::ncclRedOp_t {
 impl Drop for Comm {
     fn drop(&mut self) {
         // TODO(thenerdstation): Shoule we instead do finalize then destory?
+        //
+        // Ignore the abort result rather than `expect`: a `Drop` must not
+        // panic, and the communicator may already have been aborted out of
+        // band (e.g. via `Comm::abort` to unblock a hung collective), in
+        // which case this second abort returns a non-success code.
         unsafe {
-            result::comm_abort(self.comm).expect("Error when aborting Comm.");
+            let _ = result::comm_abort(self.comm);
         }
     }
 }
