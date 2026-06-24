@@ -26,11 +26,6 @@ pub struct Comm {
     world_size: usize,
 }
 
-// SAFETY: `ncclComm_t` is an opaque handle that NCCL allows to be used from
-// multiple threads. In particular `ncclCommAbort` is explicitly designed to be
-// called from a different thread than one blocked inside a collective, which is
-// the whole point of [`Comm::abort`]. The single-abort invariant is enforced by
-// the `aborted` flag, so sharing a `Comm` across threads is sound.
 unsafe impl Send for Comm {}
 unsafe impl Sync for Comm {}
 
@@ -190,18 +185,22 @@ impl Comm {
     /// Escape hatch for driving NCCL APIs not yet wrapped by this crate.
     /// The handle is only valid for this `Comm`'s lifetime; the returned
     /// pointer must not be used after the `Comm` is dropped.
-    pub fn comm(&self) -> sys::ncclComm_t {
+    pub fn cu_comm(&self) -> sys::ncclComm_t {
         self.comm
     }
 
     /// Abort this communicator (`ncclCommAbort`).
     ///
-    /// Unlike [`Drop`] (which also aborts), this works on a live `&self`
-    /// and — crucially — may be called from a *different* thread than one
-    /// currently blocked inside a collective. That is how NCCL unblocks a
-    /// hung or failed collective so the surviving ranks can resynchronise.
-    /// After abort the communicator is unusable; rebuild a fresh `Comm`
-    /// (e.g. via [`Comm::from_rank`]) to continue.
+    /// `ncclCommAbort` frees the communicator's resources; afterwards the
+    /// `Comm` is unusable and a fresh one must be built (e.g. via
+    /// [`Comm::from_rank`]) to continue.
+    ///
+    /// NCCL only permits one thread to operate a communicator at a time, so
+    /// the caller must ensure no other thread is issuing operations on this
+    /// `Comm` while `abort` runs. Interrupting a thread that is *blocked*
+    /// inside a collective additionally requires the communicator to have been
+    /// created non-blocking (so collectives never block in the first place and
+    /// abort can be issued at any point); see the NCCL fault-tolerance docs.
     ///
     /// Idempotent: aborting an already-aborted `Comm` (or one that will be
     /// aborted again by [`Drop`]) is a no-op returning `Ok(())`, since
