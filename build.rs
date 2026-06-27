@@ -9,6 +9,7 @@ const TYPICAL_CUDA_PATH_ENV_VARS: [&str; 5] = [
 ];
 
 const SUPPORTED_CUDA_VERSIONS: &[((usize, usize), bool)] = &[
+    ((13, 3), cfg!(feature = "cuda-13030")),
     ((13, 2), cfg!(feature = "cuda-13020")),
     ((13, 1), cfg!(feature = "cuda-13010")),
     ((13, 0), cfg!(feature = "cuda-13000")),
@@ -114,7 +115,7 @@ fn main() {
         (major, minor)
     } else {
         #[cfg(not(feature = "cuda-version-from-build-system"))]
-        panic!("Must specify one of the following features: [cuda-version-from-build-system, cuda-13020, cuda-13010, cuda-13000, cuda-12090, cuda-12080, cuda-12060, cuda-12050, cuda-12040, cuda-12030, cuda-12020, cuda-12010, cuda-12000, cuda-11080, cuda-11070, cuda-11060, cuda-11050, cuda-11040]");
+        panic!("Must specify one of the following features: [cuda-version-from-build-system, cuda-13030, cuda-13020, cuda-13010, cuda-13000, cuda-12090, cuda-12080, cuda-12060, cuda-12050, cuda-12040, cuda-12030, cuda-12020, cuda-12010, cuda-12000, cuda-11080, cuda-11070, cuda-11060, cuda-11050, cuda-11040]");
 
         #[cfg(feature = "cuda-version-from-build-system")]
         {

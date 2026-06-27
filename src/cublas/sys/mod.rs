@@ -13,9 +13,9 @@ fn load<F: Copy>(name: &str) -> F {
 }
 pub use self::cudaDataType as cublasDataType_t;
 pub use self::cudaDataType_t as cudaDataType;
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub use self::cudaEmulationMantissaControl_t as cudaEmulationMantissaControl;
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub use self::cudaEmulationSpecialValuesSupport_t as cudaEmulationSpecialValuesSupport;
 pub use self::libraryPropertyType_t as libraryPropertyType;
 pub type cuComplex = cuFloatComplex;
@@ -63,7 +63,7 @@ pub enum cublasComputeType_t {
     CUBLAS_COMPUTE_32I = 72,
     CUBLAS_COMPUTE_32I_PEDANTIC = 73,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cublasComputeType_t {
@@ -87,7 +87,7 @@ pub enum cublasDiagType_t {
     CUBLAS_DIAG_NON_UNIT = 0,
     CUBLAS_DIAG_UNIT = 1,
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cublasEmulationStrategy_t {
@@ -149,7 +149,7 @@ pub enum cublasGemmAlgo_t {
     CUBLAS_GEMM_ALGO14_TENSOR_OP = 114,
     CUBLAS_GEMM_ALGO15_TENSOR_OP = 115,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(i32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cublasGemmAlgo_t {
@@ -218,7 +218,7 @@ pub enum cublasMath_t {
     CUBLAS_FP32_EMULATED_BF16X9_MATH = 4,
     CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION = 16,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cublasMath_t {
@@ -332,7 +332,7 @@ pub enum cudaDataType_t {
     CUDA_R_8F_E4M3 = 28,
     CUDA_R_8F_E5M2 = 29,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cudaDataType_t {
@@ -371,14 +371,14 @@ pub enum cudaDataType_t {
     CUDA_R_6F_E3M2 = 32,
     CUDA_R_4F_E2M1 = 33,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cudaEmulationMantissaControl_t {
     CUDA_EMULATION_MANTISSA_CONTROL_DYNAMIC = 0,
     CUDA_EMULATION_MANTISSA_CONTROL_FIXED = 1,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cudaEmulationSpecialValuesSupport_t {
@@ -427,7 +427,7 @@ impl cublasGemmAlgo_t {
 impl cublasOperation_t {
     pub const CUBLAS_OP_HERMITAN: cublasOperation_t = cublasOperation_t::CUBLAS_OP_C;
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 impl cudaDataType_t {
     pub const CUDA_R_8F_UE4M3: cudaDataType_t = cudaDataType_t::CUDA_R_8F_E4M3;
 }
@@ -447,7 +447,7 @@ pub unsafe fn cublasAsumEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *co
         cublasAsumEx(handle, n, x, xType, incx, result, resultType, executiontype)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasAsumEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -480,7 +480,7 @@ pub unsafe fn cublasAxpyEx(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha:
         cublasAxpyEx(handle, n, alpha, alphaType, x, xType, incx, y, yType, incy, executiontype)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasAxpyEx_64(handle: cublasHandle_t, n: i64, alpha: *const ::core::ffi::c_void, alphaType: cudaDataType, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: i64, executiontype: cudaDataType) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -513,7 +513,7 @@ pub unsafe fn cublasCaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
         cublasCaxpy_v2(handle, n, alpha, x, incx, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *mut cuComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -546,7 +546,7 @@ pub unsafe fn cublasCcopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasCcopy_v2(handle, n, x, incx, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCcopy_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, y: *mut cuComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -579,7 +579,7 @@ pub unsafe fn cublasCdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::c
         cublasCdgmm(handle, mode, m, n, A, lda, x, incx, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: i64, n: i64, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, C: *mut cuComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -612,7 +612,7 @@ pub unsafe fn cublasCdotc_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasCdotc_v2(handle, n, x, incx, y, incy, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCdotc_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, result: *mut cuComplex) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -645,7 +645,7 @@ pub unsafe fn cublasCdotu_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasCdotu_v2(handle, n, x, incx, y, incy, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCdotu_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, result: *mut cuComplex) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -678,7 +678,7 @@ pub unsafe fn cublasCgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
         cublasCgbmv_v2(handle, trans, m, n, kl, ku, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, kl: i64, ku: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -711,7 +711,7 @@ pub unsafe fn cublasCgeam(handle: cublasHandle_t, transa: cublasOperation_t, tra
         cublasCgeam(handle, transa, transb, m, n, alpha, A, lda, beta, B, ldb, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, beta: *const cuComplex, B: *const cuComplex, ldb: i64, C: *mut cuComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -776,7 +776,7 @@ pub unsafe fn cublasCgemm3mBatched(handle: cublasHandle_t, transa: cublasOperati
         cublasCgemm3mBatched(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgemm3mBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: i64, Barray: *const *const cuComplex, ldb: i64, beta: *const cuComplex, Carray: *const *mut cuComplex, ldc: i64, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -809,7 +809,7 @@ pub unsafe fn cublasCgemm3mEx(handle: cublasHandle_t, transa: cublasOperation_t,
         cublasCgemm3mEx(handle, transa, transb, m, n, k, alpha, A, Atype, lda, B, Btype, ldb, beta, C, Ctype, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgemm3mEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -842,7 +842,7 @@ pub unsafe fn cublasCgemm3mStridedBatched(handle: cublasHandle_t, transa: cublas
         cublasCgemm3mStridedBatched(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgemm3mStridedBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, strideA: ::core::ffi::c_longlong, B: *const cuComplex, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const cuComplex, C: *mut cuComplex, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -859,7 +859,7 @@ pub unsafe fn cublasCgemm3mStridedBatched_64(handle: cublasHandle_t, transa: cub
         cublasCgemm3mStridedBatched_64(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgemm3m_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -892,7 +892,7 @@ pub unsafe fn cublasCgemmBatched(handle: cublasHandle_t, transa: cublasOperation
         cublasCgemmBatched(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgemmBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: i64, Barray: *const *const cuComplex, ldb: i64, beta: *const cuComplex, Carray: *const *mut cuComplex, ldc: i64, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -925,7 +925,7 @@ pub unsafe fn cublasCgemmEx(handle: cublasHandle_t, transa: cublasOperation_t, t
         cublasCgemmEx(handle, transa, transb, m, n, k, alpha, A, Atype, lda, B, Btype, ldb, beta, C, Ctype, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgemmEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -958,7 +958,7 @@ pub unsafe fn cublasCgemmStridedBatched(handle: cublasHandle_t, transa: cublasOp
         cublasCgemmStridedBatched(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgemmStridedBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, strideA: ::core::ffi::c_longlong, B: *const cuComplex, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const cuComplex, C: *mut cuComplex, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -991,7 +991,7 @@ pub unsafe fn cublasCgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, 
         cublasCgemm_v2(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1008,7 +1008,7 @@ pub unsafe fn cublasCgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_
         cublasCgemm_v2_64(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgemvBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: ::core::ffi::c_int, xarray: *const *const cuComplex, incx: ::core::ffi::c_int, beta: *const cuComplex, yarray: *const *mut cuComplex, incy: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1025,7 +1025,7 @@ pub unsafe fn cublasCgemvBatched(handle: cublasHandle_t, trans: cublasOperation_
         cublasCgemvBatched(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgemvBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuComplex, Aarray: *const *const cuComplex, lda: i64, xarray: *const *const cuComplex, incx: i64, beta: *const cuComplex, yarray: *const *mut cuComplex, incy: i64, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1042,7 +1042,7 @@ pub unsafe fn cublasCgemvBatched_64(handle: cublasHandle_t, trans: cublasOperati
         cublasCgemvBatched_64(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgemvStridedBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuComplex, A: *const cuComplex, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, x: *const cuComplex, incx: ::core::ffi::c_int, stridex: ::core::ffi::c_longlong, beta: *const cuComplex, y: *mut cuComplex, incy: ::core::ffi::c_int, stridey: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1059,7 +1059,7 @@ pub unsafe fn cublasCgemvStridedBatched(handle: cublasHandle_t, trans: cublasOpe
         cublasCgemvStridedBatched(handle, trans, m, n, alpha, A, lda, strideA, x, incx, stridex, beta, y, incy, stridey, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgemvStridedBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, strideA: ::core::ffi::c_longlong, x: *const cuComplex, incx: i64, stridex: ::core::ffi::c_longlong, beta: *const cuComplex, y: *mut cuComplex, incy: i64, stridey: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1092,7 +1092,7 @@ pub unsafe fn cublasCgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
         cublasCgemv_v2(handle, trans, m, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1141,7 +1141,7 @@ pub unsafe fn cublasCgerc_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: :
         cublasCgerc_v2(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgerc_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1174,7 +1174,7 @@ pub unsafe fn cublasCgeru_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: :
         cublasCgeru_v2(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCgeru_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1255,7 +1255,7 @@ pub unsafe fn cublasChbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasChbmv_v2(handle, uplo, n, k, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasChbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1288,7 +1288,7 @@ pub unsafe fn cublasChemm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
         cublasChemm_v2(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasChemm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1321,7 +1321,7 @@ pub unsafe fn cublasChemv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasChemv_v2(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasChemv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1354,7 +1354,7 @@ pub unsafe fn cublasCher2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasCher2_v2(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCher2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1387,7 +1387,7 @@ pub unsafe fn cublasCher2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
         cublasCher2k_v2(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCher2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const f32, C: *mut cuComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1420,7 +1420,7 @@ pub unsafe fn cublasCher_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
         cublasCher_v2(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCher_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const cuComplex, incx: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1453,7 +1453,7 @@ pub unsafe fn cublasCherk3mEx(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
         cublasCherk3mEx(handle, uplo, trans, n, k, alpha, A, Atype, lda, beta, C, Ctype, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCherk3mEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, beta: *const f32, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1486,7 +1486,7 @@ pub unsafe fn cublasCherkEx(handle: cublasHandle_t, uplo: cublasFillMode_t, tran
         cublasCherkEx(handle, uplo, trans, n, k, alpha, A, Atype, lda, beta, C, Ctype, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCherkEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, beta: *const f32, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1519,7 +1519,7 @@ pub unsafe fn cublasCherk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasCherk_v2(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCherk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const cuComplex, lda: i64, beta: *const f32, C: *mut cuComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1552,7 +1552,7 @@ pub unsafe fn cublasCherkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans
         cublasCherkx(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCherkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const f32, C: *mut cuComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1585,7 +1585,7 @@ pub unsafe fn cublasChpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasChpmv_v2(handle, uplo, n, alpha, AP, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasChpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, AP: *const cuComplex, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1618,7 +1618,7 @@ pub unsafe fn cublasChpr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasChpr2_v2(handle, uplo, n, alpha, x, incx, y, incy, AP)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasChpr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, AP: *mut cuComplex) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1651,7 +1651,7 @@ pub unsafe fn cublasChpr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
         cublasChpr_v2(handle, uplo, n, alpha, x, incx, AP)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasChpr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const cuComplex, incx: i64, AP: *mut cuComplex) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1700,7 +1700,7 @@ pub unsafe fn cublasCopyEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *co
         cublasCopyEx(handle, n, x, xType, incx, y, yType, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCopyEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1749,7 +1749,7 @@ pub unsafe fn cublasCrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *m
         cublasCrot_v2(handle, n, x, incx, y, incy, c, s)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuComplex, incx: i64, y: *mut cuComplex, incy: i64, c: *const f32, s: *const cuComplex) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1798,7 +1798,7 @@ pub unsafe fn cublasCscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
         cublasCscal_v2(handle, n, alpha, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cuComplex, x: *mut cuComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1831,7 +1831,7 @@ pub unsafe fn cublasCsrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasCsrot_v2(handle, n, x, incx, y, incy, c, s)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCsrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuComplex, incx: i64, y: *mut cuComplex, incy: i64, c: *const f32, s: *const f32) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1864,7 +1864,7 @@ pub unsafe fn cublasCsscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alp
         cublasCsscal_v2(handle, n, alpha, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCsscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f32, x: *mut cuComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1897,7 +1897,7 @@ pub unsafe fn cublasCswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasCswap_v2(handle, n, x, incx, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuComplex, incx: i64, y: *mut cuComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1930,7 +1930,7 @@ pub unsafe fn cublasCsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
         cublasCsymm_v2(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1963,7 +1963,7 @@ pub unsafe fn cublasCsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasCsymv_v2(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, x: *const cuComplex, incx: i64, beta: *const cuComplex, y: *mut cuComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1996,7 +1996,7 @@ pub unsafe fn cublasCsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasCsyr2_v2(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, y: *const cuComplex, incy: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2029,7 +2029,7 @@ pub unsafe fn cublasCsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
         cublasCsyr2k_v2(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2062,7 +2062,7 @@ pub unsafe fn cublasCsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
         cublasCsyr_v2(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuComplex, x: *const cuComplex, incx: i64, A: *mut cuComplex, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2095,7 +2095,7 @@ pub unsafe fn cublasCsyrk3mEx(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
         cublasCsyrk3mEx(handle, uplo, trans, n, k, alpha, A, Atype, lda, beta, C, Ctype, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCsyrk3mEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2128,7 +2128,7 @@ pub unsafe fn cublasCsyrkEx(handle: cublasHandle_t, uplo: cublasFillMode_t, tran
         cublasCsyrkEx(handle, uplo, trans, n, k, alpha, A, Atype, lda, beta, C, Ctype, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCsyrkEx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, beta: *const cuComplex, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2161,7 +2161,7 @@ pub unsafe fn cublasCsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasCsyrk_v2(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2194,7 +2194,7 @@ pub unsafe fn cublasCsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans
         cublasCsyrkx(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, beta: *const cuComplex, C: *mut cuComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2227,7 +2227,7 @@ pub unsafe fn cublasCtbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasCtbmv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCtbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const cuComplex, lda: i64, x: *mut cuComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2260,7 +2260,7 @@ pub unsafe fn cublasCtbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasCtbsv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCtbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const cuComplex, lda: i64, x: *mut cuComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2293,7 +2293,7 @@ pub unsafe fn cublasCtpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasCtpmv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCtpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const cuComplex, x: *mut cuComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2326,7 +2326,7 @@ pub unsafe fn cublasCtpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasCtpsv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCtpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const cuComplex, x: *mut cuComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2375,7 +2375,7 @@ pub unsafe fn cublasCtrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
         cublasCtrmm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCtrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *const cuComplex, ldb: i64, C: *mut cuComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2408,7 +2408,7 @@ pub unsafe fn cublasCtrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasCtrmv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCtrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const cuComplex, lda: i64, x: *mut cuComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2441,7 +2441,7 @@ pub unsafe fn cublasCtrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t,
         cublasCtrsmBatched(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCtrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuComplex, A: *const *const cuComplex, lda: i64, B: *const *mut cuComplex, ldb: i64, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2474,7 +2474,7 @@ pub unsafe fn cublasCtrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
         cublasCtrsm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCtrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuComplex, A: *const cuComplex, lda: i64, B: *mut cuComplex, ldb: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2507,7 +2507,7 @@ pub unsafe fn cublasCtrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasCtrsv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasCtrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const cuComplex, lda: i64, x: *mut cuComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2556,7 +2556,7 @@ pub unsafe fn cublasDasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasDasum_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDasum_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, result: *mut f64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2589,7 +2589,7 @@ pub unsafe fn cublasDaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
         cublasDaxpy_v2(handle, n, alpha, x, incx, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f64, x: *const f64, incx: i64, y: *mut f64, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2622,7 +2622,7 @@ pub unsafe fn cublasDcopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasDcopy_v2(handle, n, x, incx, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDcopy_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, y: *mut f64, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2655,7 +2655,7 @@ pub unsafe fn cublasDdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::c
         cublasDdgmm(handle, mode, m, n, A, lda, x, incx, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: i64, n: i64, A: *const f64, lda: i64, x: *const f64, incx: i64, C: *mut f64, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2688,7 +2688,7 @@ pub unsafe fn cublasDdot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *c
         cublasDdot_v2(handle, n, x, incx, y, incy, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDdot_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, y: *const f64, incy: i64, result: *mut f64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2737,7 +2737,7 @@ pub unsafe fn cublasDgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
         cublasDgbmv_v2(handle, trans, m, n, kl, ku, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, kl: i64, ku: i64, alpha: *const f64, A: *const f64, lda: i64, x: *const f64, incx: i64, beta: *const f64, y: *mut f64, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2770,7 +2770,7 @@ pub unsafe fn cublasDgeam(handle: cublasHandle_t, transa: cublasOperation_t, tra
         cublasDgeam(handle, transa, transb, m, n, alpha, A, lda, beta, B, ldb, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, beta: *const f64, B: *const f64, ldb: i64, C: *mut f64, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2819,7 +2819,7 @@ pub unsafe fn cublasDgemmBatched(handle: cublasHandle_t, transa: cublasOperation
         cublasDgemmBatched(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDgemmBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f64, Aarray: *const *const f64, lda: i64, Barray: *const *const f64, ldb: i64, beta: *const f64, Carray: *const *mut f64, ldc: i64, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2836,7 +2836,7 @@ pub unsafe fn cublasDgemmBatched_64(handle: cublasHandle_t, transa: cublasOperat
         cublasDgemmBatched_64(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDgemmGroupedBatched(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const ::core::ffi::c_int, n_array: *const ::core::ffi::c_int, k_array: *const ::core::ffi::c_int, alpha_array: *const f64, Aarray: *const *const f64, lda_array: *const ::core::ffi::c_int, Barray: *const *const f64, ldb_array: *const ::core::ffi::c_int, beta_array: *const f64, Carray: *const *mut f64, ldc_array: *const ::core::ffi::c_int, group_count: ::core::ffi::c_int, group_size: *const ::core::ffi::c_int) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2853,7 +2853,7 @@ pub unsafe fn cublasDgemmGroupedBatched(handle: cublasHandle_t, transa_array: *c
         cublasDgemmGroupedBatched(handle, transa_array, transb_array, m_array, n_array, k_array, alpha_array, Aarray, lda_array, Barray, ldb_array, beta_array, Carray, ldc_array, group_count, group_size)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDgemmGroupedBatched_64(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const i64, n_array: *const i64, k_array: *const i64, alpha_array: *const f64, Aarray: *const *const f64, lda_array: *const i64, Barray: *const *const f64, ldb_array: *const i64, beta_array: *const f64, Carray: *const *mut f64, ldc_array: *const i64, group_count: i64, group_size: *const i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2886,7 +2886,7 @@ pub unsafe fn cublasDgemmStridedBatched(handle: cublasHandle_t, transa: cublasOp
         cublasDgemmStridedBatched(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDgemmStridedBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, strideA: ::core::ffi::c_longlong, B: *const f64, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const f64, C: *mut f64, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2919,7 +2919,7 @@ pub unsafe fn cublasDgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, 
         cublasDgemm_v2(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, B: *const f64, ldb: i64, beta: *const f64, C: *mut f64, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2936,7 +2936,7 @@ pub unsafe fn cublasDgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_
         cublasDgemm_v2_64(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDgemvBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, Aarray: *const *const f64, lda: ::core::ffi::c_int, xarray: *const *const f64, incx: ::core::ffi::c_int, beta: *const f64, yarray: *const *mut f64, incy: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2953,7 +2953,7 @@ pub unsafe fn cublasDgemvBatched(handle: cublasHandle_t, trans: cublasOperation_
         cublasDgemvBatched(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDgemvBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f64, Aarray: *const *const f64, lda: i64, xarray: *const *const f64, incx: i64, beta: *const f64, yarray: *const *mut f64, incy: i64, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2970,7 +2970,7 @@ pub unsafe fn cublasDgemvBatched_64(handle: cublasHandle_t, trans: cublasOperati
         cublasDgemvBatched_64(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDgemvStridedBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f64, A: *const f64, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, x: *const f64, incx: ::core::ffi::c_int, stridex: ::core::ffi::c_longlong, beta: *const f64, y: *mut f64, incy: ::core::ffi::c_int, stridey: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2987,7 +2987,7 @@ pub unsafe fn cublasDgemvStridedBatched(handle: cublasHandle_t, trans: cublasOpe
         cublasDgemvStridedBatched(handle, trans, m, n, alpha, A, lda, strideA, x, incx, stridex, beta, y, incy, stridey, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDgemvStridedBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, strideA: ::core::ffi::c_longlong, x: *const f64, incx: i64, stridex: ::core::ffi::c_longlong, beta: *const f64, y: *mut f64, incy: i64, stridey: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3020,7 +3020,7 @@ pub unsafe fn cublasDgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
         cublasDgemv_v2(handle, trans, m, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, x: *const f64, incx: i64, beta: *const f64, y: *mut f64, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3069,7 +3069,7 @@ pub unsafe fn cublasDger_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::
         cublasDger_v2(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDger_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const f64, x: *const f64, incx: i64, y: *const f64, incy: i64, A: *mut f64, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3166,7 +3166,7 @@ pub unsafe fn cublasDnrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasDnrm2_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDnrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, result: *mut f64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3199,7 +3199,7 @@ pub unsafe fn cublasDotEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *con
         cublasDotEx(handle, n, x, xType, incx, y, yType, incy, result, resultType, executionType)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDotEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *const ::core::ffi::c_void, yType: cudaDataType, incy: i64, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executionType: cudaDataType) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3232,7 +3232,7 @@ pub unsafe fn cublasDotcEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *co
         cublasDotcEx(handle, n, x, xType, incx, y, yType, incy, result, resultType, executionType)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDotcEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *const ::core::ffi::c_void, yType: cudaDataType, incy: i64, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executionType: cudaDataType) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3265,7 +3265,7 @@ pub unsafe fn cublasDrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *m
         cublasDrot_v2(handle, n, x, incx, y, incy, c, s)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut f64, incx: i64, y: *mut f64, incy: i64, c: *const f64, s: *const f64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3314,7 +3314,7 @@ pub unsafe fn cublasDrotm_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasDrotm_v2(handle, n, x, incx, y, incy, param)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDrotm_v2_64(handle: cublasHandle_t, n: i64, x: *mut f64, incx: i64, y: *mut f64, incy: i64, param: *const f64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3363,7 +3363,7 @@ pub unsafe fn cublasDsbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasDsbmv_v2(handle, uplo, n, k, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDsbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, x: *const f64, incx: i64, beta: *const f64, y: *mut f64, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3396,7 +3396,7 @@ pub unsafe fn cublasDscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
         cublasDscal_v2(handle, n, alpha, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f64, x: *mut f64, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3429,7 +3429,7 @@ pub unsafe fn cublasDspmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasDspmv_v2(handle, uplo, n, alpha, AP, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDspmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, AP: *const f64, x: *const f64, incx: i64, beta: *const f64, y: *mut f64, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3462,7 +3462,7 @@ pub unsafe fn cublasDspr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasDspr2_v2(handle, uplo, n, alpha, x, incx, y, incy, AP)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDspr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const f64, incx: i64, y: *const f64, incy: i64, AP: *mut f64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3495,7 +3495,7 @@ pub unsafe fn cublasDspr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
         cublasDspr_v2(handle, uplo, n, alpha, x, incx, AP)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDspr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const f64, incx: i64, AP: *mut f64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3528,7 +3528,7 @@ pub unsafe fn cublasDswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasDswap_v2(handle, n, x, incx, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut f64, incx: i64, y: *mut f64, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3561,7 +3561,7 @@ pub unsafe fn cublasDsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
         cublasDsymm_v2(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, B: *const f64, ldb: i64, beta: *const f64, C: *mut f64, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3594,7 +3594,7 @@ pub unsafe fn cublasDsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasDsymv_v2(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, A: *const f64, lda: i64, x: *const f64, incx: i64, beta: *const f64, y: *mut f64, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3627,7 +3627,7 @@ pub unsafe fn cublasDsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasDsyr2_v2(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const f64, incx: i64, y: *const f64, incy: i64, A: *mut f64, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3660,7 +3660,7 @@ pub unsafe fn cublasDsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
         cublasDsyr2k_v2(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, B: *const f64, ldb: i64, beta: *const f64, C: *mut f64, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3693,7 +3693,7 @@ pub unsafe fn cublasDsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
         cublasDsyr_v2(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const f64, incx: i64, A: *mut f64, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3726,7 +3726,7 @@ pub unsafe fn cublasDsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasDsyrk_v2(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, beta: *const f64, C: *mut f64, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3759,7 +3759,7 @@ pub unsafe fn cublasDsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans
         cublasDsyrkx(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f64, A: *const f64, lda: i64, B: *const f64, ldb: i64, beta: *const f64, C: *mut f64, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3792,7 +3792,7 @@ pub unsafe fn cublasDtbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasDtbmv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDtbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const f64, lda: i64, x: *mut f64, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3825,7 +3825,7 @@ pub unsafe fn cublasDtbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasDtbsv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDtbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const f64, lda: i64, x: *mut f64, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3858,7 +3858,7 @@ pub unsafe fn cublasDtpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasDtpmv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDtpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const f64, x: *mut f64, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3891,7 +3891,7 @@ pub unsafe fn cublasDtpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasDtpsv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDtpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const f64, x: *mut f64, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3940,7 +3940,7 @@ pub unsafe fn cublasDtrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
         cublasDtrmm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDtrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, B: *const f64, ldb: i64, C: *mut f64, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3973,7 +3973,7 @@ pub unsafe fn cublasDtrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasDtrmv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDtrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const f64, lda: i64, x: *mut f64, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4006,7 +4006,7 @@ pub unsafe fn cublasDtrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t,
         cublasDtrsmBatched(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDtrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f64, A: *const *const f64, lda: i64, B: *const *mut f64, ldb: i64, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4039,7 +4039,7 @@ pub unsafe fn cublasDtrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
         cublasDtrsm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDtrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f64, A: *const f64, lda: i64, B: *mut f64, ldb: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4072,7 +4072,7 @@ pub unsafe fn cublasDtrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasDtrsv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDtrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const f64, lda: i64, x: *mut f64, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4121,7 +4121,7 @@ pub unsafe fn cublasDzasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
         cublasDzasum_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDzasum_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, result: *mut f64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4154,7 +4154,7 @@ pub unsafe fn cublasDznrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
         cublasDznrm2_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasDznrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, result: *mut f64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4187,7 +4187,7 @@ pub unsafe fn cublasGemmBatchedEx(handle: cublasHandle_t, transa: cublasOperatio
         cublasGemmBatchedEx(handle, transa, transb, m, n, k, alpha, Aarray, Atype, lda, Barray, Btype, ldb, beta, Carray, Ctype, ldc, batchCount, computeType, algo)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasGemmBatchedEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const ::core::ffi::c_void, Aarray: *const *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, Barray: *const *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, beta: *const ::core::ffi::c_void, Carray: *const *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64, batchCount: i64, computeType: cublasComputeType_t, algo: cublasGemmAlgo_t) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4220,7 +4220,7 @@ pub unsafe fn cublasGemmEx(handle: cublasHandle_t, transa: cublasOperation_t, tr
         cublasGemmEx(handle, transa, transb, m, n, k, alpha, A, Atype, lda, B, Btype, ldb, beta, C, Ctype, ldc, computeType, algo)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasGemmEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, beta: *const ::core::ffi::c_void, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64, computeType: cublasComputeType_t, algo: cublasGemmAlgo_t) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4237,7 +4237,7 @@ pub unsafe fn cublasGemmEx_64(handle: cublasHandle_t, transa: cublasOperation_t,
         cublasGemmEx_64(handle, transa, transb, m, n, k, alpha, A, Atype, lda, B, Btype, ldb, beta, C, Ctype, ldc, computeType, algo)
     }
 }
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasGemmGroupedBatchedEx(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const ::core::ffi::c_int, n_array: *const ::core::ffi::c_int, k_array: *const ::core::ffi::c_int, alpha_array: *const ::core::ffi::c_void, Aarray: *const *const ::core::ffi::c_void, Atype: cudaDataType_t, lda_array: *const ::core::ffi::c_int, Barray: *const *const ::core::ffi::c_void, Btype: cudaDataType_t, ldb_array: *const ::core::ffi::c_int, beta_array: *const ::core::ffi::c_void, Carray: *const *mut ::core::ffi::c_void, Ctype: cudaDataType_t, ldc_array: *const ::core::ffi::c_int, group_count: ::core::ffi::c_int, group_size: *const ::core::ffi::c_int, computeType: cublasComputeType_t) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4254,7 +4254,7 @@ pub unsafe fn cublasGemmGroupedBatchedEx(handle: cublasHandle_t, transa_array: *
         cublasGemmGroupedBatchedEx(handle, transa_array, transb_array, m_array, n_array, k_array, alpha_array, Aarray, Atype, lda_array, Barray, Btype, ldb_array, beta_array, Carray, Ctype, ldc_array, group_count, group_size, computeType)
     }
 }
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasGemmGroupedBatchedEx_64(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const i64, n_array: *const i64, k_array: *const i64, alpha_array: *const ::core::ffi::c_void, Aarray: *const *const ::core::ffi::c_void, Atype: cudaDataType_t, lda_array: *const i64, Barray: *const *const ::core::ffi::c_void, Btype: cudaDataType_t, ldb_array: *const i64, beta_array: *const ::core::ffi::c_void, Carray: *const *mut ::core::ffi::c_void, Ctype: cudaDataType_t, ldc_array: *const i64, group_count: i64, group_size: *const i64, computeType: cublasComputeType_t) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4287,7 +4287,7 @@ pub unsafe fn cublasGemmStridedBatchedEx(handle: cublasHandle_t, transa: cublasO
         cublasGemmStridedBatchedEx(handle, transa, transb, m, n, k, alpha, A, Atype, lda, strideA, B, Btype, ldb, strideB, beta, C, Ctype, ldc, strideC, batchCount, computeType, algo)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasGemmStridedBatchedEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const ::core::ffi::c_void, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, strideA: ::core::ffi::c_longlong, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const ::core::ffi::c_void, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64, computeType: cublasComputeType_t, algo: cublasGemmAlgo_t) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4336,7 +4336,7 @@ pub unsafe fn cublasGetCudartVersion() -> usize {
         cublasGetCudartVersion()
     }
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasGetEmulationStrategy(handle: cublasHandle_t, emulationStrategy: *mut cublasEmulationStrategy_t) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4417,7 +4417,7 @@ pub unsafe fn cublasGetMatrixAsync(rows: ::core::ffi::c_int, cols: ::core::ffi::
         cublasGetMatrixAsync(rows, cols, elemSize, A, lda, B, ldb, stream)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasGetMatrixAsync_64(rows: i64, cols: i64, elemSize: i64, A: *const ::core::ffi::c_void, lda: i64, B: *mut ::core::ffi::c_void, ldb: i64, stream: cudaStream_t) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4434,7 +4434,7 @@ pub unsafe fn cublasGetMatrixAsync_64(rows: i64, cols: i64, elemSize: i64, A: *c
         cublasGetMatrixAsync_64(rows, cols, elemSize, A, lda, B, ldb, stream)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasGetMatrix_64(rows: i64, cols: i64, elemSize: i64, A: *const ::core::ffi::c_void, lda: i64, B: *mut ::core::ffi::c_void, ldb: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4579,7 +4579,7 @@ pub unsafe fn cublasGetVectorAsync(n: ::core::ffi::c_int, elemSize: ::core::ffi:
         cublasGetVectorAsync(n, elemSize, devicePtr, incx, hostPtr, incy, stream)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasGetVectorAsync_64(n: i64, elemSize: i64, devicePtr: *const ::core::ffi::c_void, incx: i64, hostPtr: *mut ::core::ffi::c_void, incy: i64, stream: cudaStream_t) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4596,7 +4596,7 @@ pub unsafe fn cublasGetVectorAsync_64(n: i64, elemSize: i64, devicePtr: *const :
         cublasGetVectorAsync_64(n, elemSize, devicePtr, incx, hostPtr, incy, stream)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasGetVector_64(n: i64, elemSize: i64, x: *const ::core::ffi::c_void, incx: i64, y: *mut ::core::ffi::c_void, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4645,7 +4645,7 @@ pub unsafe fn cublasIamaxEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *c
         cublasIamaxEx(handle, n, x, xType, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasIamaxEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, result: *mut i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4678,7 +4678,7 @@ pub unsafe fn cublasIaminEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *c
         cublasIaminEx(handle, n, x, xType, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasIaminEx_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, result: *mut i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4711,7 +4711,7 @@ pub unsafe fn cublasIcamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
         cublasIcamax_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasIcamax_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, result: *mut i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4744,7 +4744,7 @@ pub unsafe fn cublasIcamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
         cublasIcamin_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasIcamin_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, result: *mut i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4777,7 +4777,7 @@ pub unsafe fn cublasIdamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
         cublasIdamax_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasIdamax_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, result: *mut i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4810,7 +4810,7 @@ pub unsafe fn cublasIdamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
         cublasIdamin_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasIdamin_v2_64(handle: cublasHandle_t, n: i64, x: *const f64, incx: i64, result: *mut i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4843,7 +4843,7 @@ pub unsafe fn cublasIsamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
         cublasIsamax_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasIsamax_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, result: *mut i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4876,7 +4876,7 @@ pub unsafe fn cublasIsamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
         cublasIsamin_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasIsamin_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, result: *mut i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4909,7 +4909,7 @@ pub unsafe fn cublasIzamax_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
         cublasIzamax_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasIzamax_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, result: *mut i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4942,7 +4942,7 @@ pub unsafe fn cublasIzamin_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
         cublasIzamin_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasIzamin_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, result: *mut i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4991,7 +4991,7 @@ pub unsafe fn cublasNrm2Ex(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *co
         cublasNrm2Ex(handle, n, x, xType, incx, result, resultType, executionType)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasNrm2Ex_64(handle: cublasHandle_t, n: i64, x: *const ::core::ffi::c_void, xType: cudaDataType, incx: i64, result: *mut ::core::ffi::c_void, resultType: cudaDataType, executionType: cudaDataType) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5024,7 +5024,7 @@ pub unsafe fn cublasRotEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mut
         cublasRotEx(handle, n, x, xType, incx, y, yType, incy, c, s, csType, executiontype)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasRotEx_64(handle: cublasHandle_t, n: i64, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: i64, c: *const ::core::ffi::c_void, s: *const ::core::ffi::c_void, csType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5073,7 +5073,7 @@ pub unsafe fn cublasRotmEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mu
         cublasRotmEx(handle, n, x, xType, incx, y, yType, incy, param, paramType, executiontype)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasRotmEx_64(handle: cublasHandle_t, n: i64, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: i64, param: *const ::core::ffi::c_void, paramType: cudaDataType, executiontype: cudaDataType) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5122,7 +5122,7 @@ pub unsafe fn cublasSasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasSasum_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSasum_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, result: *mut f32) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5155,7 +5155,7 @@ pub unsafe fn cublasSaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
         cublasSaxpy_v2(handle, n, alpha, x, incx, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f32, x: *const f32, incx: i64, y: *mut f32, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5188,7 +5188,7 @@ pub unsafe fn cublasScalEx(handle: cublasHandle_t, n: ::core::ffi::c_int, alpha:
         cublasScalEx(handle, n, alpha, alphaType, x, xType, incx, executionType)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasScalEx_64(handle: cublasHandle_t, n: i64, alpha: *const ::core::ffi::c_void, alphaType: cudaDataType, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: i64, executionType: cudaDataType) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5221,7 +5221,7 @@ pub unsafe fn cublasScasum_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
         cublasScasum_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasScasum_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, result: *mut f32) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5254,7 +5254,7 @@ pub unsafe fn cublasScnrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: 
         cublasScnrm2_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasScnrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const cuComplex, incx: i64, result: *mut f32) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5287,7 +5287,7 @@ pub unsafe fn cublasScopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasScopy_v2(handle, n, x, incx, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasScopy_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, y: *mut f32, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5320,7 +5320,7 @@ pub unsafe fn cublasSdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::c
         cublasSdgmm(handle, mode, m, n, A, lda, x, incx, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: i64, n: i64, A: *const f32, lda: i64, x: *const f32, incx: i64, C: *mut f32, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5353,7 +5353,7 @@ pub unsafe fn cublasSdot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *c
         cublasSdot_v2(handle, n, x, incx, y, incy, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSdot_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, y: *const f32, incy: i64, result: *mut f32) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5386,7 +5386,7 @@ pub unsafe fn cublasSetAtomicsMode(handle: cublasHandle_t, mode: cublasAtomicsMo
         cublasSetAtomicsMode(handle, mode)
     }
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSetEmulationStrategy(handle: cublasHandle_t, emulationStrategy: cublasEmulationStrategy_t) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5467,7 +5467,7 @@ pub unsafe fn cublasSetMatrixAsync(rows: ::core::ffi::c_int, cols: ::core::ffi::
         cublasSetMatrixAsync(rows, cols, elemSize, A, lda, B, ldb, stream)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSetMatrixAsync_64(rows: i64, cols: i64, elemSize: i64, A: *const ::core::ffi::c_void, lda: i64, B: *mut ::core::ffi::c_void, ldb: i64, stream: cudaStream_t) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5484,7 +5484,7 @@ pub unsafe fn cublasSetMatrixAsync_64(rows: i64, cols: i64, elemSize: i64, A: *c
         cublasSetMatrixAsync_64(rows, cols, elemSize, A, lda, B, ldb, stream)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSetMatrix_64(rows: i64, cols: i64, elemSize: i64, A: *const ::core::ffi::c_void, lda: i64, B: *mut ::core::ffi::c_void, ldb: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5581,7 +5581,7 @@ pub unsafe fn cublasSetVectorAsync(n: ::core::ffi::c_int, elemSize: ::core::ffi:
         cublasSetVectorAsync(n, elemSize, hostPtr, incx, devicePtr, incy, stream)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSetVectorAsync_64(n: i64, elemSize: i64, hostPtr: *const ::core::ffi::c_void, incx: i64, devicePtr: *mut ::core::ffi::c_void, incy: i64, stream: cudaStream_t) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5598,7 +5598,7 @@ pub unsafe fn cublasSetVectorAsync_64(n: i64, elemSize: i64, hostPtr: *const ::c
         cublasSetVectorAsync_64(n, elemSize, hostPtr, incx, devicePtr, incy, stream)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSetVector_64(n: i64, elemSize: i64, x: *const ::core::ffi::c_void, incx: i64, devicePtr: *mut ::core::ffi::c_void, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5647,7 +5647,7 @@ pub unsafe fn cublasSgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
         cublasSgbmv_v2(handle, trans, m, n, kl, ku, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, kl: i64, ku: i64, alpha: *const f32, A: *const f32, lda: i64, x: *const f32, incx: i64, beta: *const f32, y: *mut f32, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5680,7 +5680,7 @@ pub unsafe fn cublasSgeam(handle: cublasHandle_t, transa: cublasOperation_t, tra
         cublasSgeam(handle, transa, transb, m, n, alpha, A, lda, beta, B, ldb, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, beta: *const f32, B: *const f32, ldb: i64, C: *mut f32, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5729,7 +5729,7 @@ pub unsafe fn cublasSgemmBatched(handle: cublasHandle_t, transa: cublasOperation
         cublasSgemmBatched(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSgemmBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f32, Aarray: *const *const f32, lda: i64, Barray: *const *const f32, ldb: i64, beta: *const f32, Carray: *const *mut f32, ldc: i64, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5762,7 +5762,7 @@ pub unsafe fn cublasSgemmEx(handle: cublasHandle_t, transa: cublasOperation_t, t
         cublasSgemmEx(handle, transa, transb, m, n, k, alpha, A, Atype, lda, B, Btype, ldb, beta, C, Ctype, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSgemmEx_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f32, A: *const ::core::ffi::c_void, Atype: cudaDataType, lda: i64, B: *const ::core::ffi::c_void, Btype: cudaDataType, ldb: i64, beta: *const f32, C: *mut ::core::ffi::c_void, Ctype: cudaDataType, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5779,7 +5779,7 @@ pub unsafe fn cublasSgemmEx_64(handle: cublasHandle_t, transa: cublasOperation_t
         cublasSgemmEx_64(handle, transa, transb, m, n, k, alpha, A, Atype, lda, B, Btype, ldb, beta, C, Ctype, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSgemmGroupedBatched(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const ::core::ffi::c_int, n_array: *const ::core::ffi::c_int, k_array: *const ::core::ffi::c_int, alpha_array: *const f32, Aarray: *const *const f32, lda_array: *const ::core::ffi::c_int, Barray: *const *const f32, ldb_array: *const ::core::ffi::c_int, beta_array: *const f32, Carray: *const *mut f32, ldc_array: *const ::core::ffi::c_int, group_count: ::core::ffi::c_int, group_size: *const ::core::ffi::c_int) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5796,7 +5796,7 @@ pub unsafe fn cublasSgemmGroupedBatched(handle: cublasHandle_t, transa_array: *c
         cublasSgemmGroupedBatched(handle, transa_array, transb_array, m_array, n_array, k_array, alpha_array, Aarray, lda_array, Barray, ldb_array, beta_array, Carray, ldc_array, group_count, group_size)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSgemmGroupedBatched_64(handle: cublasHandle_t, transa_array: *const cublasOperation_t, transb_array: *const cublasOperation_t, m_array: *const i64, n_array: *const i64, k_array: *const i64, alpha_array: *const f32, Aarray: *const *const f32, lda_array: *const i64, Barray: *const *const f32, ldb_array: *const i64, beta_array: *const f32, Carray: *const *mut f32, ldc_array: *const i64, group_count: i64, group_size: *const i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5829,7 +5829,7 @@ pub unsafe fn cublasSgemmStridedBatched(handle: cublasHandle_t, transa: cublasOp
         cublasSgemmStridedBatched(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSgemmStridedBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, strideA: ::core::ffi::c_longlong, B: *const f32, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const f32, C: *mut f32, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5862,7 +5862,7 @@ pub unsafe fn cublasSgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, 
         cublasSgemm_v2(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, B: *const f32, ldb: i64, beta: *const f32, C: *mut f32, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5879,7 +5879,7 @@ pub unsafe fn cublasSgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_
         cublasSgemm_v2_64(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSgemvBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, Aarray: *const *const f32, lda: ::core::ffi::c_int, xarray: *const *const f32, incx: ::core::ffi::c_int, beta: *const f32, yarray: *const *mut f32, incy: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5896,7 +5896,7 @@ pub unsafe fn cublasSgemvBatched(handle: cublasHandle_t, trans: cublasOperation_
         cublasSgemvBatched(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSgemvBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f32, Aarray: *const *const f32, lda: i64, xarray: *const *const f32, incx: i64, beta: *const f32, yarray: *const *mut f32, incy: i64, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5913,7 +5913,7 @@ pub unsafe fn cublasSgemvBatched_64(handle: cublasHandle_t, trans: cublasOperati
         cublasSgemvBatched_64(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSgemvStridedBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const f32, A: *const f32, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, x: *const f32, incx: ::core::ffi::c_int, stridex: ::core::ffi::c_longlong, beta: *const f32, y: *mut f32, incy: ::core::ffi::c_int, stridey: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5930,7 +5930,7 @@ pub unsafe fn cublasSgemvStridedBatched(handle: cublasHandle_t, trans: cublasOpe
         cublasSgemvStridedBatched(handle, trans, m, n, alpha, A, lda, strideA, x, incx, stridex, beta, y, incy, stridey, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSgemvStridedBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, strideA: ::core::ffi::c_longlong, x: *const f32, incx: i64, stridex: ::core::ffi::c_longlong, beta: *const f32, y: *mut f32, incy: i64, stridey: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5963,7 +5963,7 @@ pub unsafe fn cublasSgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
         cublasSgemv_v2(handle, trans, m, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, x: *const f32, incx: i64, beta: *const f32, y: *mut f32, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6012,7 +6012,7 @@ pub unsafe fn cublasSger_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: ::
         cublasSger_v2(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSger_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const f32, x: *const f32, incx: i64, y: *const f32, incy: i64, A: *mut f32, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6109,7 +6109,7 @@ pub unsafe fn cublasSnrm2_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasSnrm2_v2(handle, n, x, incx, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSnrm2_v2_64(handle: cublasHandle_t, n: i64, x: *const f32, incx: i64, result: *mut f32) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6142,7 +6142,7 @@ pub unsafe fn cublasSrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *m
         cublasSrot_v2(handle, n, x, incx, y, incy, c, s)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut f32, incx: i64, y: *mut f32, incy: i64, c: *const f32, s: *const f32) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6191,7 +6191,7 @@ pub unsafe fn cublasSrotm_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasSrotm_v2(handle, n, x, incx, y, incy, param)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSrotm_v2_64(handle: cublasHandle_t, n: i64, x: *mut f32, incx: i64, y: *mut f32, incy: i64, param: *const f32) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6240,7 +6240,7 @@ pub unsafe fn cublasSsbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasSsbmv_v2(handle, uplo, n, k, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSsbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, x: *const f32, incx: i64, beta: *const f32, y: *mut f32, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6273,7 +6273,7 @@ pub unsafe fn cublasSscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
         cublasSscal_v2(handle, n, alpha, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f32, x: *mut f32, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6306,7 +6306,7 @@ pub unsafe fn cublasSspmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasSspmv_v2(handle, uplo, n, alpha, AP, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSspmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, AP: *const f32, x: *const f32, incx: i64, beta: *const f32, y: *mut f32, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6339,7 +6339,7 @@ pub unsafe fn cublasSspr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasSspr2_v2(handle, uplo, n, alpha, x, incx, y, incy, AP)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSspr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const f32, incx: i64, y: *const f32, incy: i64, AP: *mut f32) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6372,7 +6372,7 @@ pub unsafe fn cublasSspr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
         cublasSspr_v2(handle, uplo, n, alpha, x, incx, AP)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSspr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const f32, incx: i64, AP: *mut f32) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6405,7 +6405,7 @@ pub unsafe fn cublasSswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasSswap_v2(handle, n, x, incx, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut f32, incx: i64, y: *mut f32, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6438,7 +6438,7 @@ pub unsafe fn cublasSsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
         cublasSsymm_v2(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, B: *const f32, ldb: i64, beta: *const f32, C: *mut f32, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6471,7 +6471,7 @@ pub unsafe fn cublasSsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasSsymv_v2(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, A: *const f32, lda: i64, x: *const f32, incx: i64, beta: *const f32, y: *mut f32, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6504,7 +6504,7 @@ pub unsafe fn cublasSsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasSsyr2_v2(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const f32, incx: i64, y: *const f32, incy: i64, A: *mut f32, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6537,7 +6537,7 @@ pub unsafe fn cublasSsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
         cublasSsyr2k_v2(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, B: *const f32, ldb: i64, beta: *const f32, C: *mut f32, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6570,7 +6570,7 @@ pub unsafe fn cublasSsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
         cublasSsyr_v2(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f32, x: *const f32, incx: i64, A: *mut f32, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6603,7 +6603,7 @@ pub unsafe fn cublasSsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasSsyrk_v2(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, beta: *const f32, C: *mut f32, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6636,7 +6636,7 @@ pub unsafe fn cublasSsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans
         cublasSsyrkx(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f32, A: *const f32, lda: i64, B: *const f32, ldb: i64, beta: *const f32, C: *mut f32, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6669,7 +6669,7 @@ pub unsafe fn cublasStbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasStbmv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasStbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const f32, lda: i64, x: *mut f32, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6702,7 +6702,7 @@ pub unsafe fn cublasStbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasStbsv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasStbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const f32, lda: i64, x: *mut f32, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6735,7 +6735,7 @@ pub unsafe fn cublasStpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasStpmv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasStpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const f32, x: *mut f32, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6768,7 +6768,7 @@ pub unsafe fn cublasStpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasStpsv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasStpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const f32, x: *mut f32, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6817,7 +6817,7 @@ pub unsafe fn cublasStrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
         cublasStrmm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasStrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, B: *const f32, ldb: i64, C: *mut f32, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6850,7 +6850,7 @@ pub unsafe fn cublasStrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasStrmv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasStrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const f32, lda: i64, x: *mut f32, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6883,7 +6883,7 @@ pub unsafe fn cublasStrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t,
         cublasStrsmBatched(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasStrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f32, A: *const *const f32, lda: i64, B: *const *mut f32, ldb: i64, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6916,7 +6916,7 @@ pub unsafe fn cublasStrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
         cublasStrsm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasStrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const f32, A: *const f32, lda: i64, B: *mut f32, ldb: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6949,7 +6949,7 @@ pub unsafe fn cublasStrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasStrsv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasStrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const f32, lda: i64, x: *mut f32, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6998,7 +6998,7 @@ pub unsafe fn cublasSwapEx(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *mu
         cublasSwapEx(handle, n, x, xType, incx, y, yType, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasSwapEx_64(handle: cublasHandle_t, n: i64, x: *mut ::core::ffi::c_void, xType: cudaDataType, incx: i64, y: *mut ::core::ffi::c_void, yType: cudaDataType, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7063,7 +7063,7 @@ pub unsafe fn cublasZaxpy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
         cublasZaxpy_v2(handle, n, alpha, x, incx, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZaxpy_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7096,7 +7096,7 @@ pub unsafe fn cublasZcopy_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasZcopy_v2(handle, n, x, incx, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZcopy_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7129,7 +7129,7 @@ pub unsafe fn cublasZdgmm(handle: cublasHandle_t, mode: cublasSideMode_t, m: ::c
         cublasZdgmm(handle, mode, m, n, A, lda, x, incx, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZdgmm_64(handle: cublasHandle_t, mode: cublasSideMode_t, m: i64, n: i64, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7162,7 +7162,7 @@ pub unsafe fn cublasZdotc_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasZdotc_v2(handle, n, x, incx, y, incy, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZdotc_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, result: *mut cuDoubleComplex) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7195,7 +7195,7 @@ pub unsafe fn cublasZdotu_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasZdotu_v2(handle, n, x, incx, y, incy, result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZdotu_v2_64(handle: cublasHandle_t, n: i64, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, result: *mut cuDoubleComplex) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7228,7 +7228,7 @@ pub unsafe fn cublasZdrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasZdrot_v2(handle, n, x, incx, y, incy, c, s)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZdrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuDoubleComplex, incx: i64, y: *mut cuDoubleComplex, incy: i64, c: *const f64, s: *const f64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7261,7 +7261,7 @@ pub unsafe fn cublasZdscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alp
         cublasZdscal_v2(handle, n, alpha, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZdscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const f64, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7294,7 +7294,7 @@ pub unsafe fn cublasZgbmv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
         cublasZgbmv_v2(handle, trans, m, n, kl, ku, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZgbmv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, kl: i64, ku: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7327,7 +7327,7 @@ pub unsafe fn cublasZgeam(handle: cublasHandle_t, transa: cublasOperation_t, tra
         cublasZgeam(handle, transa, transb, m, n, alpha, A, lda, beta, B, ldb, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZgeam_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, beta: *const cuDoubleComplex, B: *const cuDoubleComplex, ldb: i64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7376,7 +7376,7 @@ pub unsafe fn cublasZgemm3m(handle: cublasHandle_t, transa: cublasOperation_t, t
         cublasZgemm3m(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZgemm3m_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7409,7 +7409,7 @@ pub unsafe fn cublasZgemmBatched(handle: cublasHandle_t, transa: cublasOperation
         cublasZgemmBatched(handle, transa, transb, m, n, k, alpha, Aarray, lda, Barray, ldb, beta, Carray, ldc, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZgemmBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuDoubleComplex, Aarray: *const *const cuDoubleComplex, lda: i64, Barray: *const *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, Carray: *const *mut cuDoubleComplex, ldc: i64, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7442,7 +7442,7 @@ pub unsafe fn cublasZgemmStridedBatched(handle: cublasHandle_t, transa: cublasOp
         cublasZgemmStridedBatched(handle, transa, transb, m, n, k, alpha, A, lda, strideA, B, ldb, strideB, beta, C, ldc, strideC, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZgemmStridedBatched_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, strideA: ::core::ffi::c_longlong, B: *const cuDoubleComplex, ldb: i64, strideB: ::core::ffi::c_longlong, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64, strideC: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7475,7 +7475,7 @@ pub unsafe fn cublasZgemm_v2(handle: cublasHandle_t, transa: cublasOperation_t, 
         cublasZgemm_v2(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_t, transb: cublasOperation_t, m: i64, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7492,7 +7492,7 @@ pub unsafe fn cublasZgemm_v2_64(handle: cublasHandle_t, transa: cublasOperation_
         cublasZgemm_v2_64(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZgemvBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, Aarray: *const *const cuDoubleComplex, lda: ::core::ffi::c_int, xarray: *const *const cuDoubleComplex, incx: ::core::ffi::c_int, beta: *const cuDoubleComplex, yarray: *const *mut cuDoubleComplex, incy: ::core::ffi::c_int, batchCount: ::core::ffi::c_int) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7509,7 +7509,7 @@ pub unsafe fn cublasZgemvBatched(handle: cublasHandle_t, trans: cublasOperation_
         cublasZgemvBatched(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZgemvBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuDoubleComplex, Aarray: *const *const cuDoubleComplex, lda: i64, xarray: *const *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, yarray: *const *mut cuDoubleComplex, incy: i64, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7526,7 +7526,7 @@ pub unsafe fn cublasZgemvBatched_64(handle: cublasHandle_t, trans: cublasOperati
         cublasZgemvBatched_64(handle, trans, m, n, alpha, Aarray, lda, xarray, incx, beta, yarray, incy, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZgemvStridedBatched(handle: cublasHandle_t, trans: cublasOperation_t, m: ::core::ffi::c_int, n: ::core::ffi::c_int, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: ::core::ffi::c_int, strideA: ::core::ffi::c_longlong, x: *const cuDoubleComplex, incx: ::core::ffi::c_int, stridex: ::core::ffi::c_longlong, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: ::core::ffi::c_int, stridey: ::core::ffi::c_longlong, batchCount: ::core::ffi::c_int) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7543,7 +7543,7 @@ pub unsafe fn cublasZgemvStridedBatched(handle: cublasHandle_t, trans: cublasOpe
         cublasZgemvStridedBatched(handle, trans, m, n, alpha, A, lda, strideA, x, incx, stridex, beta, y, incy, stridey, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZgemvStridedBatched_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, strideA: ::core::ffi::c_longlong, x: *const cuDoubleComplex, incx: i64, stridex: ::core::ffi::c_longlong, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64, stridey: ::core::ffi::c_longlong, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7576,7 +7576,7 @@ pub unsafe fn cublasZgemv_v2(handle: cublasHandle_t, trans: cublasOperation_t, m
         cublasZgemv_v2(handle, trans, m, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZgemv_v2_64(handle: cublasHandle_t, trans: cublasOperation_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7625,7 +7625,7 @@ pub unsafe fn cublasZgerc_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: :
         cublasZgerc_v2(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZgerc_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7658,7 +7658,7 @@ pub unsafe fn cublasZgeru_v2(handle: cublasHandle_t, m: ::core::ffi::c_int, n: :
         cublasZgeru_v2(handle, m, n, alpha, x, incx, y, incy, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZgeru_v2_64(handle: cublasHandle_t, m: i64, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7739,7 +7739,7 @@ pub unsafe fn cublasZhbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasZhbmv_v2(handle, uplo, n, k, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZhbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7772,7 +7772,7 @@ pub unsafe fn cublasZhemm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
         cublasZhemm_v2(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZhemm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7805,7 +7805,7 @@ pub unsafe fn cublasZhemv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasZhemv_v2(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZhemv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7838,7 +7838,7 @@ pub unsafe fn cublasZher2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasZher2_v2(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZher2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7871,7 +7871,7 @@ pub unsafe fn cublasZher2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
         cublasZher2k_v2(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZher2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const f64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7904,7 +7904,7 @@ pub unsafe fn cublasZher_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
         cublasZher_v2(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZher_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const cuDoubleComplex, incx: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7937,7 +7937,7 @@ pub unsafe fn cublasZherk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasZherk_v2(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZherk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const f64, A: *const cuDoubleComplex, lda: i64, beta: *const f64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7970,7 +7970,7 @@ pub unsafe fn cublasZherkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans
         cublasZherkx(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZherkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const f64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8003,7 +8003,7 @@ pub unsafe fn cublasZhpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasZhpmv_v2(handle, uplo, n, alpha, AP, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZhpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, AP: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8036,7 +8036,7 @@ pub unsafe fn cublasZhpr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasZhpr2_v2(handle, uplo, n, alpha, x, incx, y, incy, AP)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZhpr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, AP: *mut cuDoubleComplex) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8069,7 +8069,7 @@ pub unsafe fn cublasZhpr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
         cublasZhpr_v2(handle, uplo, n, alpha, x, incx, AP)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZhpr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const f64, x: *const cuDoubleComplex, incx: i64, AP: *mut cuDoubleComplex) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8118,7 +8118,7 @@ pub unsafe fn cublasZrot_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *m
         cublasZrot_v2(handle, n, x, incx, y, incy, c, s)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZrot_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuDoubleComplex, incx: i64, y: *mut cuDoubleComplex, incy: i64, c: *const f64, s: *const cuDoubleComplex) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8167,7 +8167,7 @@ pub unsafe fn cublasZscal_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, alph
         cublasZscal_v2(handle, n, alpha, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZscal_v2_64(handle: cublasHandle_t, n: i64, alpha: *const cuDoubleComplex, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8200,7 +8200,7 @@ pub unsafe fn cublasZswap_v2(handle: cublasHandle_t, n: ::core::ffi::c_int, x: *
         cublasZswap_v2(handle, n, x, incx, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZswap_v2_64(handle: cublasHandle_t, n: i64, x: *mut cuDoubleComplex, incx: i64, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8233,7 +8233,7 @@ pub unsafe fn cublasZsymm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
         cublasZsymm_v2(handle, side, uplo, m, n, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZsymm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8266,7 +8266,7 @@ pub unsafe fn cublasZsymv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasZsymv_v2(handle, uplo, n, alpha, A, lda, x, incx, beta, y, incy)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZsymv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, x: *const cuDoubleComplex, incx: i64, beta: *const cuDoubleComplex, y: *mut cuDoubleComplex, incy: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8299,7 +8299,7 @@ pub unsafe fn cublasZsyr2_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: 
         cublasZsyr2_v2(handle, uplo, n, alpha, x, incx, y, incy, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZsyr2_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, y: *const cuDoubleComplex, incy: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8332,7 +8332,7 @@ pub unsafe fn cublasZsyr2k_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tr
         cublasZsyr2k_v2(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZsyr2k_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8365,7 +8365,7 @@ pub unsafe fn cublasZsyr_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, n: :
         cublasZsyr_v2(handle, uplo, n, alpha, x, incx, A, lda)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZsyr_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, n: i64, alpha: *const cuDoubleComplex, x: *const cuDoubleComplex, incx: i64, A: *mut cuDoubleComplex, lda: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8398,7 +8398,7 @@ pub unsafe fn cublasZsyrk_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasZsyrk_v2(handle, uplo, trans, n, k, alpha, A, lda, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZsyrk_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8431,7 +8431,7 @@ pub unsafe fn cublasZsyrkx(handle: cublasHandle_t, uplo: cublasFillMode_t, trans
         cublasZsyrkx(handle, uplo, trans, n, k, alpha, A, lda, B, ldb, beta, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZsyrkx_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, n: i64, k: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, beta: *const cuDoubleComplex, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8464,7 +8464,7 @@ pub unsafe fn cublasZtbmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasZtbmv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZtbmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const cuDoubleComplex, lda: i64, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8497,7 +8497,7 @@ pub unsafe fn cublasZtbsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasZtbsv_v2(handle, uplo, trans, diag, n, k, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZtbsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, k: i64, A: *const cuDoubleComplex, lda: i64, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8530,7 +8530,7 @@ pub unsafe fn cublasZtpmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasZtpmv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZtpmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const cuDoubleComplex, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8563,7 +8563,7 @@ pub unsafe fn cublasZtpsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasZtpsv_v2(handle, uplo, trans, diag, n, AP, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZtpsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, AP: *const cuDoubleComplex, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8612,7 +8612,7 @@ pub unsafe fn cublasZtrmm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
         cublasZtrmm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, C, ldc)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZtrmm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *const cuDoubleComplex, ldb: i64, C: *mut cuDoubleComplex, ldc: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8645,7 +8645,7 @@ pub unsafe fn cublasZtrmv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasZtrmv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZtrmv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const cuDoubleComplex, lda: i64, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8678,7 +8678,7 @@ pub unsafe fn cublasZtrsmBatched(handle: cublasHandle_t, side: cublasSideMode_t,
         cublasZtrsmBatched(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZtrsmBatched_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const *const cuDoubleComplex, lda: i64, B: *const *mut cuDoubleComplex, ldb: i64, batchCount: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8711,7 +8711,7 @@ pub unsafe fn cublasZtrsm_v2(handle: cublasHandle_t, side: cublasSideMode_t, upl
         cublasZtrsm_v2(handle, side, uplo, trans, diag, m, n, alpha, A, lda, B, ldb)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZtrsm_v2_64(handle: cublasHandle_t, side: cublasSideMode_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, m: i64, n: i64, alpha: *const cuDoubleComplex, A: *const cuDoubleComplex, lda: i64, B: *mut cuDoubleComplex, ldb: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8744,7 +8744,7 @@ pub unsafe fn cublasZtrsv_v2(handle: cublasHandle_t, uplo: cublasFillMode_t, tra
         cublasZtrsv_v2(handle, uplo, trans, diag, n, A, lda, x, incx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
 pub unsafe fn cublasZtrsv_v2_64(handle: cublasHandle_t, uplo: cublasFillMode_t, trans: cublasOperation_t, diag: cublasDiagType_t, n: i64, A: *const cuDoubleComplex, lda: i64, x: *mut cuDoubleComplex, incx: i64) -> cublasStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {

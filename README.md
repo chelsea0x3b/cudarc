@@ -29,7 +29,7 @@ Safe CUDA wrappers for:
 CUDA Versions supported (choose with `-F cuda-<version>`, like `cuda-13010`):
 - 11.4-11.8
 - 12.0-12.9
-- 13.0
+- 13.0-13.3
 
 CUDNN versions supported (choose with `-F cudnn-<version>`, like `cudnn-09021`):
 - 8.9.7

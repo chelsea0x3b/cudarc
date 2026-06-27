@@ -585,7 +585,26 @@ fn create_bindings(modules: &[ModuleConfig], cuda_versions: &[Version]) -> Resul
     let primary_archives = versions_needing_work
         .par_iter()
         .map(|cuda_version| {
-            let archives = get_primary_archives(cuda_version, &downloads_dir, &multi_progress)?;
+            // cuda_cudart provides cuda.h / cuda_runtime.h, which virtually every module
+            // transitively includes. It must be a primary archive so all parallel module
+            // tasks have those headers on their include path.
+            let names = match (cuda_version.major, cuda_version.minor) {
+                // CCCL was renamed from `cuda_cccl` to `cccl` in the 13.3 redistrib manifest.
+                (13, 3..) => vec!["cuda_nvcc", "cccl", "cuda_crt", "cuda_cudart"],
+                (13, _) => vec!["cuda_nvcc", "cuda_cccl", "cuda_crt", "cuda_cudart"],
+                (12, _) => vec!["cuda_nvcc", "cuda_cccl", "cuda_cudart"],
+                _ => vec!["cuda_nvcc", "cuda_cudart"],
+            };
+            let mut archives = vec![];
+            for name in names {
+                archives.push(get_archive(
+                    cuda_version,
+                    name,
+                    "primary",
+                    &downloads_dir,
+                    &multi_progress,
+                )?);
+            }
             pb.inc(1);
             Ok((*cuda_version, archives))
         })
@@ -965,6 +984,7 @@ const CUDA_VERSIONS: &[Version] = &[
     Version::new(13, 0, 0),
     Version::new(13, 1, 0),
     Version::new(13, 2, 0),
+    Version::new(13, 3, 0),
 ];
 
 fn main() -> Result<()> {
