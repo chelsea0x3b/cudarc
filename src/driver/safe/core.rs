@@ -800,11 +800,13 @@ unsafe impl<T> Sync for CudaSlice<T> {}
 impl<T> Drop for CudaSlice<T> {
     fn drop(&mut self) {
         let ctx = &self.stream.ctx;
-        if let Some(read) = self.read.as_ref() {
-            ctx.record_err(self.stream.wait(read));
-        }
-        if let Some(write) = self.write.as_ref() {
-            ctx.record_err(self.stream.wait(write));
+        if ctx.is_managing_stream_synchronization() {
+            if let Some(read) = self.read.as_ref() {
+                ctx.record_err(self.stream.wait(read));
+            }
+            if let Some(write) = self.write.as_ref() {
+                ctx.record_err(self.stream.wait(write));
+            }
         }
         if ctx.has_async_alloc {
             ctx.record_err(unsafe {
@@ -1132,7 +1134,9 @@ impl Drop for SyncOnDrop<'_> {
         match self {
             SyncOnDrop::Record(target) => {
                 if let Some((event, stream)) = std::mem::take(target) {
-                    stream.ctx.record_err(event.record(stream));
+                    if stream.ctx.is_managing_stream_synchronization() {
+                        stream.ctx.record_err(event.record(stream));
+                    }
                 }
             }
             SyncOnDrop::Sync(target) => {
