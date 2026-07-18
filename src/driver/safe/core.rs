@@ -2470,11 +2470,13 @@ impl<T> CudaSlice<T> {
         let ptr = s.cu_device_ptr;
 
         // Ensure pending operations are complete before resources are released.
-        if let Some(read) = s.read.as_ref() {
-            s.stream.ctx.record_err(s.stream.wait(read));
-        }
-        if let Some(write) = s.write.as_ref() {
-            s.stream.ctx.record_err(s.stream.wait(write));
+        if s.stream.ctx.is_managing_stream_synchronization() {
+            if let Some(read) = s.read.as_ref() {
+                s.stream.ctx.record_err(s.stream.wait(read));
+            }
+            if let Some(write) = s.write.as_ref() {
+                s.stream.ctx.record_err(s.stream.wait(write));
+            }
         }
 
         // Manually drop fields that own resources.
