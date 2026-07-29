@@ -287,7 +287,7 @@ fn create_modules() -> Vec<ModuleConfig> {
                     "CUDA_MEMCPY3D_v1",
                     "CUdeviceptr_v1",
                 ],
-                functions: vec!["^cupti.*"],
+                functions: vec!["^cupti.*", "^CUpti.*"],
                 vars: vec!["^[Cc][Uu][Pp][Tt][Ii].*"],
             },
             allowlist_recursively: false,
@@ -309,7 +309,10 @@ fn create_modules() -> Vec<ModuleConfig> {
                 ..Filters::none()
             },
             libs: vec!["cupti"],
+            clang_args: vec!["-I../src/cupti/sys/"],
             raw_lines: vec!["use crate::driver::sys::*;", "use crate::runtime::sys::*;"],
+            constified_enums: vec!["CUpti_.*_STRUCT_SIZES"],
+            prepend_enum_names: false,
             ..Default::default()
         },
         ModuleConfig {
@@ -372,6 +375,10 @@ struct ModuleConfig {
     /// These are generated as transparent newtypes instead of Rust enums so that bitwise OR
     /// is well-defined, and `BitOr`/`BitOrAssign` impls are emitted for them.
     bitflag_enums: Vec<&'static str>,
+    /// Enums to translate into various constants.
+    constified_enums: Vec<&'static str>,
+    /// Whether to prepend enum names to their variants
+    prepend_enum_names: bool,
 }
 
 impl Default for ModuleConfig {
@@ -390,6 +397,8 @@ impl Default for ModuleConfig {
             feature_prefix: "cuda",
             lib_versions: vec![],
             bitflag_enums: vec![],
+            constified_enums: vec![],
+            prepend_enum_names: true,
         }
     }
 }
@@ -470,6 +479,10 @@ impl ModuleConfig {
             builder = builder.bitfield_enum(n);
         }
 
+        for &en in self.constified_enums.iter() {
+            builder = builder.constified_enum(en);
+        }
+
         let parent_sysdir = Path::new("..")
             .join("src")
             .join(self.cudarc_name)
@@ -488,6 +501,7 @@ impl ModuleConfig {
         builder = builder
             .header(wrapper_h.to_string_lossy())
             .clang_arg(format!("-I{}", cuda_directory.display()))
+            .prepend_enum_name(self.prepend_enum_names)
             // For cuda profiler which has a very simple consistent API
             .clang_arg(format!(
                 "-I{}",
