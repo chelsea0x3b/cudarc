@@ -185,9 +185,9 @@ impl<T> UnifiedSlice<T> {
                 }
                 sys::CUmemLocation {
                     type_: sys::CUmemLocationType::CU_MEM_LOCATION_TYPE_DEVICE,
-                    #[cfg(not(feature = "cuda-13020"))]
+                    #[cfg(not(any(feature = "cuda-13020", feature = "cuda-13030")))]
                     id: self.stream.ctx.ordinal as i32,
-                    #[cfg(feature = "cuda-13020")]
+                    #[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
                     __bindgen_anon_1: sys::CUmemLocation_st__bindgen_ty_1 {
                         id: self.stream.ctx.ordinal as i32,
                     },
@@ -197,9 +197,9 @@ impl<T> UnifiedSlice<T> {
                 // > Specifying CU_MEM_LOCATION_TYPE_HOST as CUmemLocation::type will prefetch data to host memory. Applications can request prefetching memory to a specific host NUMA node by specifying CU_MEM_LOCATION_TYPE_HOST_NUMA for CUmemLocation::type and a valid host NUMA node id in CUmemLocation::id Users can also request prefetching memory to the host NUMA node closest to the current thread's CPU by specifying CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT for CUmemLocation::type.
                 sys::CUmemLocation {
                     type_: sys::CUmemLocationType::CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT,
-                    #[cfg(not(feature = "cuda-13020"))]
+                    #[cfg(not(any(feature = "cuda-13020", feature = "cuda-13030")))]
                     id: 0, // NOTE: ignored
-                    #[cfg(feature = "cuda-13020")]
+                    #[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
                     __bindgen_anon_1: sys::CUmemLocation_st__bindgen_ty_1 { id: 0 },
                 }
             }

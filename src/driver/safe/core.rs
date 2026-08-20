@@ -800,11 +800,13 @@ unsafe impl<T> Sync for CudaSlice<T> {}
 impl<T> Drop for CudaSlice<T> {
     fn drop(&mut self) {
         let ctx = &self.stream.ctx;
-        if let Some(read) = self.read.as_ref() {
-            ctx.record_err(self.stream.wait(read));
-        }
-        if let Some(write) = self.write.as_ref() {
-            ctx.record_err(self.stream.wait(write));
+        if ctx.is_managing_stream_synchronization() {
+            if let Some(read) = self.read.as_ref() {
+                ctx.record_err(self.stream.wait(read));
+            }
+            if let Some(write) = self.write.as_ref() {
+                ctx.record_err(self.stream.wait(write));
+            }
         }
         if ctx.has_async_alloc {
             ctx.record_err(unsafe {
@@ -1132,7 +1134,9 @@ impl Drop for SyncOnDrop<'_> {
         match self {
             SyncOnDrop::Record(target) => {
                 if let Some((event, stream)) = std::mem::take(target) {
-                    stream.ctx.record_err(event.record(stream));
+                    if stream.ctx.is_managing_stream_synchronization() {
+                        stream.ctx.record_err(event.record(stream));
+                    }
                 }
             }
             SyncOnDrop::Sync(target) => {
@@ -1413,14 +1417,35 @@ impl CudaContext {
         self: &Arc<Self>,
         len: usize,
     ) -> Result<PinnedHostSlice<T>, DriverError> {
+        self.alloc_pinned_with_flags(len, sys::CU_MEMHOSTALLOC_WRITECOMBINED)
+    }
+
+    /// Allocates page-locked host memory with the specified `flags`.
+    ///
+    /// `flags` may contain any combination of the following options:
+    ///
+    /// - [sys::CU_MEMHOSTALLOC_PORTABLE]
+    /// - [sys::CU_MEMHOSTALLOC_DEVICEMAP]
+    /// - [sys::CU_MEMHOSTALLOC_WRITECOMBINED]
+    ///
+    /// These flags are orthogonal and may be combined without restriction.
+    /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MEM.html#group__CUDA__MEM_1g572ca4011bfcb25034888a14d4e035b9)
+    ///
+    /// # Safety
+    /// 1. This is unsafe because the memory is unset after this call.
+    pub unsafe fn alloc_pinned_with_flags<T: DeviceRepr>(
+        self: &Arc<Self>,
+        len: usize,
+        flags: u32,
+    ) -> Result<PinnedHostSlice<T>, DriverError> {
         self.bind_to_thread()?;
-        let ptr = result::malloc_host(
-            len * std::mem::size_of::<T>(),
-            sys::CU_MEMHOSTALLOC_WRITECOMBINED,
-        )?;
+        let num_bytes = len
+            .checked_mul(std::mem::size_of::<T>())
+            .expect("Pinned host allocation size overflow");
+        assert!(num_bytes < isize::MAX as usize);
+        let ptr = result::malloc_host(num_bytes, flags)?;
         let ptr = ptr as *mut T;
         assert!(!ptr.is_null());
-        assert!(len * std::mem::size_of::<T>() < isize::MAX as usize);
         assert!(ptr.is_aligned());
         let event = self.new_event(Some(sys::CUevent_flags::CU_EVENT_BLOCKING_SYNC))?;
         Ok(PinnedHostSlice { ptr, len, event })
@@ -2535,11 +2560,13 @@ impl<T> CudaSlice<T> {
         let ptr = s.cu_device_ptr;
 
         // Ensure pending operations are complete before resources are released.
-        if let Some(read) = s.read.as_ref() {
-            s.stream.ctx.record_err(s.stream.wait(read));
-        }
-        if let Some(write) = s.write.as_ref() {
-            s.stream.ctx.record_err(s.stream.wait(write));
+        if s.stream.ctx.is_managing_stream_synchronization() {
+            if let Some(read) = s.read.as_ref() {
+                s.stream.ctx.record_err(s.stream.wait(read));
+            }
+            if let Some(write) = s.write.as_ref() {
+                s.stream.ctx.record_err(s.stream.wait(write));
+            }
         }
 
         // Manually drop fields that own resources.
@@ -2588,6 +2615,7 @@ impl CudaStream {
 
 #[cfg(test)]
 mod tests {
+    use std::hint::black_box;
     use std::time::Instant;
 
     use super::*;
@@ -2754,6 +2782,64 @@ mod tests {
         let dst = stream.clone_htod(&pinned).unwrap();
         let host = stream.clone_dtoh(&dst).unwrap();
         assert_eq!(&host, &truth);
+    }
+
+    #[test]
+    fn test_htod_copy_pinned_with_default_flags() {
+        let truth = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0];
+        let ctx = CudaContext::new(0).unwrap();
+        let stream = ctx.default_stream();
+        let mut pinned = unsafe { ctx.alloc_pinned_with_flags::<f32>(10, 0) }.unwrap();
+        pinned.as_mut_slice().unwrap().clone_from_slice(&truth);
+        assert_eq!(pinned.as_slice().unwrap(), &truth);
+        let dst = stream.clone_htod(&pinned).unwrap();
+        let host = stream.clone_dtoh(&dst).unwrap();
+        assert_eq!(&host, &truth);
+    }
+
+    #[test]
+    #[should_panic(expected = "Pinned host allocation size overflow")]
+    fn test_alloc_pinned_panics_on_size_overflow() {
+        let ctx = CudaContext::new(0).unwrap();
+        let _ = unsafe { ctx.alloc_pinned_with_flags::<u32>(usize::MAX, 0) };
+    }
+
+    #[test]
+    fn test_default_pinned_host_reads_are_faster_than_write_combined() {
+        fn timed_host_reads(values: &[u32], n_samples: usize) -> (std::time::Duration, u64) {
+            let start = Instant::now();
+            let mut sum = 0_u64;
+            for _ in 0..n_samples {
+                for value in black_box(values) {
+                    sum = sum.wrapping_add(u64::from(*value));
+                }
+            }
+            (start.elapsed(), black_box(sum))
+        }
+
+        let ctx = CudaContext::new(0).unwrap();
+        let n = 1 << 20;
+        let n_samples = 5;
+        let mut write_combined =
+            unsafe { ctx.alloc_pinned_with_flags::<u32>(n, sys::CU_MEMHOSTALLOC_WRITECOMBINED) }
+                .unwrap();
+        let mut default = unsafe { ctx.alloc_pinned_with_flags::<u32>(n, 0) }.unwrap();
+        write_combined.as_mut_slice().unwrap().fill(1);
+        default.as_mut_slice().unwrap().fill(1);
+
+        let (write_combined_elapsed, write_combined_sum) =
+            timed_host_reads(write_combined.as_slice().unwrap(), n_samples);
+        let (default_elapsed, default_sum) =
+            timed_host_reads(default.as_slice().unwrap(), n_samples);
+        assert_eq!(write_combined_sum, default_sum);
+        std::println!(
+            "default pinned host reads: {default_elapsed:?}; write-combined host reads: {write_combined_elapsed:?}"
+        );
+        // The performance gap should be large, but leave margin for device and host variance.
+        assert!(
+            default_elapsed.as_secs_f32() * 2.0 < write_combined_elapsed.as_secs_f32(),
+            "{default_elapsed:?} vs {write_combined_elapsed:?}"
+        );
     }
 
     #[test]
