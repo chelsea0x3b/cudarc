@@ -2,7 +2,7 @@
 #![allow(clippy::too_many_arguments)]
 
 use super::{result, result::CublasError, sys};
-use crate::driver::CudaStream;
+use crate::driver::{CudaSlice, CudaStream, DevicePtrMut};
 use std::sync::Arc;
 
 mod asum;
@@ -27,6 +27,7 @@ pub use grouped_gemm::*;
 pub struct CudaBlas {
     pub(crate) handle: sys::cublasHandle_t,
     pub(crate) stream: Arc<CudaStream>,
+    workspace: Option<CudaSlice<u8>>,
 }
 
 unsafe impl Send for CudaBlas {}
@@ -39,7 +40,11 @@ impl CudaBlas {
         ctx.record_err(ctx.bind_to_thread());
         let handle = result::create_handle()?;
         unsafe { result::set_stream(handle, stream.cu_stream() as _) }?;
-        let blas = Self { handle, stream };
+        let blas = Self {
+            handle,
+            stream,
+            workspace: None,
+        };
         Ok(blas)
     }
 
@@ -56,7 +61,31 @@ impl CudaBlas {
     /// write to the same memory address.
     pub unsafe fn set_stream(&mut self, stream: Arc<CudaStream>) -> Result<(), CublasError> {
         self.stream = stream;
-        unsafe { result::set_stream(self.handle, self.stream.cu_stream() as _) }
+        unsafe { result::set_stream(self.handle, self.stream.cu_stream() as _) }?;
+        // `cublasSetStream` unconditionally resets the workspace to cuBLAS's
+        // default pool, so a caller-owned workspace must be bound again.
+        if let Some(workspace) = self.workspace.as_mut() {
+            bind_workspace(self.handle, &self.stream, workspace)?;
+        }
+        Ok(())
+    }
+
+    /// Assigns a caller-owned workspace to this handle and retains it for the
+    /// handle's lifetime, including across [CudaBlas::set_stream()].
+    /// Assigning workspace before CUDA Graph capture keeps cuBLAS from
+    /// recording internal allocation and free nodes into the graph.
+    /// ref: <https://docs.nvidia.com/cuda/cublas/#cublassetworkspace>
+    ///
+    /// # Safety
+    /// Any previously assigned workspace is dropped, so no kernel launched on
+    /// this handle may still be using it.
+    pub unsafe fn set_workspace(
+        &mut self,
+        mut workspace: CudaSlice<u8>,
+    ) -> Result<(), CublasError> {
+        bind_workspace(self.handle, &self.stream, &mut workspace)?;
+        self.workspace = Some(workspace);
+        Ok(())
     }
 
     /// Set the handle's pointer mode.
@@ -93,6 +122,29 @@ impl Drop for CudaBlas {
         if !handle.is_null() {
             unsafe { result::destroy_handle(handle) }.unwrap();
         }
+    }
+}
+
+fn bind_workspace(
+    handle: sys::cublasHandle_t,
+    stream: &Arc<CudaStream>,
+    workspace: &mut CudaSlice<u8>,
+) -> Result<(), CublasError> {
+    // `cublasSetWorkspace` accepts a pointer from another context without
+    // error, so the mismatch has to be caught here.
+    if !Arc::ptr_eq(workspace.context(), stream.context()) {
+        return Err(CublasError(
+            sys::cublasStatus_t::CUBLAS_STATUS_INVALID_VALUE,
+        ));
+    }
+    let workspace_size = workspace.num_bytes();
+    let (workspace_ptr, _workspace_access) = workspace.device_ptr_mut(stream);
+    unsafe {
+        result::set_workspace(
+            handle,
+            workspace_ptr as *mut core::ffi::c_void,
+            workspace_size,
+        )
     }
 }
 
