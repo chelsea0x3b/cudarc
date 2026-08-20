@@ -57,6 +57,20 @@ pub unsafe fn set_stream(
     sys::cublasSetStream_v2(handle, stream).result()
 }
 
+/// Assigns caller-owned device storage as the handle's workspace.
+///
+/// # Safety
+///
+/// `workspace` must remain valid until another workspace is assigned or the
+/// handle is destroyed.
+pub unsafe fn set_workspace(
+    handle: sys::cublasHandle_t,
+    workspace: *mut c_void,
+    workspace_size_in_bytes: usize,
+) -> Result<(), CublasError> {
+    sys::cublasSetWorkspace_v2(handle, workspace, workspace_size_in_bytes).result()
+}
+
 /// Single precision matrix vector multiplication. See
 /// [nvidia docs](https://docs.nvidia.com/cuda/cublas/index.html#cublas-t-gemv)
 ///

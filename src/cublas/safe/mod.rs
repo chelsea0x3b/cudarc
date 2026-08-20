@@ -2,8 +2,8 @@
 #![allow(clippy::too_many_arguments)]
 
 use super::{result, result::CublasError, sys};
-use crate::driver::CudaStream;
-use std::sync::Arc;
+use crate::driver::{CudaSlice, CudaStream, DevicePtrMut};
+use std::sync::{Arc, Mutex};
 
 mod asum;
 mod gemm;
@@ -27,6 +27,7 @@ pub use grouped_gemm::*;
 pub struct CudaBlas {
     pub(crate) handle: sys::cublasHandle_t,
     pub(crate) stream: Arc<CudaStream>,
+    workspace: Mutex<Option<CudaSlice<u8>>>,
 }
 
 unsafe impl Send for CudaBlas {}
@@ -39,7 +40,11 @@ impl CudaBlas {
         ctx.record_err(ctx.bind_to_thread());
         let handle = result::create_handle()?;
         unsafe { result::set_stream(handle, stream.cu_stream() as _) }?;
-        let blas = Self { handle, stream };
+        let blas = Self {
+            handle,
+            stream,
+            workspace: Mutex::new(None),
+        };
         Ok(blas)
     }
 
@@ -56,7 +61,51 @@ impl CudaBlas {
     /// write to the same memory address.
     pub unsafe fn set_stream(&mut self, stream: Arc<CudaStream>) -> Result<(), CublasError> {
         self.stream = stream;
-        unsafe { result::set_stream(self.handle, self.stream.cu_stream() as _) }
+        unsafe { result::set_stream(self.handle, self.stream.cu_stream() as _) }?;
+        let mut workspace = self
+            .workspace
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner);
+        if let Some(workspace) = workspace.as_mut() {
+            self.bind_workspace(workspace)?;
+        }
+        Ok(())
+    }
+
+    /// Assigns and retains a rank-local workspace for every operation on this
+    /// handle. Supplying workspace before CUDA Graph capture prevents cuBLAS
+    /// from recording internal allocation and free nodes.
+    ///
+    /// # Safety
+    ///
+    /// No operation may use this handle concurrently while its workspace is
+    /// being replaced.
+    pub unsafe fn set_workspace(&self, mut workspace: CudaSlice<u8>) -> Result<(), CublasError> {
+        self.bind_workspace(&mut workspace)?;
+        *self
+            .workspace
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner) = Some(workspace);
+        Ok(())
+    }
+
+    fn bind_workspace(&self, workspace: &mut CudaSlice<u8>) -> Result<(), CublasError> {
+        if !Arc::ptr_eq(workspace.context(), self.stream.context()) {
+            return Err(CublasError(
+                sys::cublasStatus_t::CUBLAS_STATUS_INVALID_VALUE,
+            ));
+        }
+        let workspace_size = workspace.num_bytes();
+        let (workspace_ptr, workspace_access) = workspace.device_ptr_mut(&self.stream);
+        unsafe {
+            result::set_workspace(
+                self.handle,
+                workspace_ptr as *mut core::ffi::c_void,
+                workspace_size,
+            )
+        }?;
+        drop(workspace_access);
+        Ok(())
     }
 
     /// Set the handle's pointer mode.
