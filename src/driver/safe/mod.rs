@@ -3,6 +3,7 @@
 pub(crate) mod core;
 pub(crate) mod external_memory;
 pub(crate) mod graph;
+pub(crate) mod graph_memory;
 pub(crate) mod launch;
 pub(crate) mod profile;
 pub(crate) mod unified_memory;
@@ -14,6 +15,9 @@ pub use self::core::{
 };
 pub use self::external_memory::{ExternalMemory, MappedBuffer};
 pub use self::graph::CudaGraph;
+pub use self::graph_memory::CudaGraphMemoryPool;
+#[cfg(not(feature = "no-std"))]
+pub use self::graph_memory::{CudaGraphMemoryPoolProbe, CudaGraphMemoryPoolSession};
 pub use self::launch::{LaunchArgs, LaunchConfig, PushKernelArg};
 pub use self::profile::{profiler_start, profiler_stop, Profiler};
 pub use self::unified_memory::{UnifiedSlice, UnifiedView, UnifiedViewMut};

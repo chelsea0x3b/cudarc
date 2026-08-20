@@ -1,5 +1,6 @@
 use crate::driver::{
     result::{self, DriverError},
+    safe::graph_memory::{route_allocation, CudaGraphMemoryPoolInner},
     sys::{self, CUfunc_cache_enum, CUfunction_attribute_enum},
 };
 
@@ -791,6 +792,8 @@ pub struct CudaSlice<T> {
     pub(crate) read: Option<CudaEvent>,
     pub(crate) write: Option<CudaEvent>,
     pub(crate) stream: Arc<CudaStream>,
+    pub(crate) graph_memory: Option<Arc<CudaGraphMemoryPoolInner>>,
+    pub(crate) external_owner: Option<Arc<dyn std::fmt::Debug + Send + Sync>>,
     pub(crate) marker: PhantomData<*const T>,
 }
 
@@ -799,6 +802,9 @@ unsafe impl<T> Sync for CudaSlice<T> {}
 
 impl<T> Drop for CudaSlice<T> {
     fn drop(&mut self) {
+        if self.graph_memory.is_some() || self.external_owner.is_some() {
+            return;
+        }
         let ctx = &self.stream.ctx;
         if ctx.is_managing_stream_synchronization() {
             if let Some(read) = self.read.as_ref() {
@@ -1534,17 +1540,22 @@ impl CudaStream {
     /// Allocates an empty [CudaSlice] with 0 length.
     pub fn null<T>(self: &Arc<Self>) -> Result<CudaSlice<T>, result::DriverError> {
         self.ctx.bind_to_thread()?;
-        let cu_device_ptr = if self.ctx.has_async_alloc {
-            unsafe { result::malloc_async(self.cu_stream, 0) }?
-        } else {
-            unsafe { result::malloc_sync(0) }?
-        };
+        let (cu_device_ptr, graph_memory) =
+            if let Some((pointer, graph_memory)) = route_allocation(self, 0)? {
+                (pointer, Some(graph_memory))
+            } else if self.ctx.has_async_alloc {
+                (unsafe { result::malloc_async(self.cu_stream, 0) }?, None)
+            } else {
+                (unsafe { result::malloc_sync(0) }?, None)
+            };
         Ok(CudaSlice {
             cu_device_ptr,
             len: 0,
             read: None,
             write: None,
             stream: self.clone(),
+            graph_memory,
+            external_owner: None,
             marker: PhantomData,
         })
     }
@@ -1557,11 +1568,17 @@ impl CudaStream {
         len: usize,
     ) -> Result<CudaSlice<T>, DriverError> {
         self.ctx.bind_to_thread()?;
-        let cu_device_ptr = if self.ctx.has_async_alloc {
-            result::malloc_async(self.cu_stream, len * std::mem::size_of::<T>())?
-        } else {
-            result::malloc_sync(len * std::mem::size_of::<T>())?
-        };
+        let bytes = len
+            .checked_mul(std::mem::size_of::<T>())
+            .ok_or(DriverError(sys::CUresult::CUDA_ERROR_OUT_OF_MEMORY))?;
+        let (cu_device_ptr, graph_memory) =
+            if let Some((pointer, graph_memory)) = route_allocation(self, bytes)? {
+                (pointer, Some(graph_memory))
+            } else if self.ctx.has_async_alloc {
+                (result::malloc_async(self.cu_stream, bytes)?, None)
+            } else {
+                (result::malloc_sync(bytes)?, None)
+            };
         let (read, write) = if self.ctx.is_event_tracking() {
             (
                 Some(self.ctx.new_event(None)?),
@@ -1576,6 +1593,8 @@ impl CudaStream {
             read,
             write,
             stream: self.clone(),
+            graph_memory,
+            external_owner: None,
             marker: PhantomData,
         })
     }
@@ -2488,6 +2507,10 @@ impl<T> CudaSlice<T> {
     /// Drops the underlying host_buf if there is one.
     pub fn leak(self) -> sys::CUdeviceptr {
         let mut s = std::mem::ManuallyDrop::new(self);
+        assert!(
+            s.graph_memory.is_none() && s.external_owner.is_none(),
+            "a CUDA slice backed by an external owner cannot transfer ownership of its device pointer"
+        );
         let ptr = s.cu_device_ptr;
 
         // Ensure pending operations are complete before resources are released.
@@ -2505,6 +2528,8 @@ impl<T> CudaSlice<T> {
             std::ptr::drop_in_place(&mut s.read);
             std::ptr::drop_in_place(&mut s.write);
             std::ptr::drop_in_place(&mut s.stream);
+            std::ptr::drop_in_place(&mut s.graph_memory);
+            std::ptr::drop_in_place(&mut s.external_owner);
         }
 
         ptr
@@ -2539,8 +2564,52 @@ impl CudaStream {
             read,
             write,
             stream: self.clone(),
+            graph_memory: None,
+            external_owner: None,
             marker: PhantomData,
         }
+    }
+
+    /// Creates a non-owning CUDA slice while retaining the object that owns
+    /// the device address. Dropping the slice releases the owner instead of
+    /// calling `cuMemFree` on the pointer.
+    ///
+    /// This is intended for allocations whose lifetime is governed outside
+    /// CUDA's ordinary allocation APIs, including VMM mappings and imported
+    /// IPC allocations.
+    ///
+    /// # Safety
+    /// - `cu_device_ptr` must belong to this stream's CUDA context.
+    /// - Before any operation accesses the slice, the range must be readable
+    ///   or writable as required for `len * size_of::<T>()` bytes.
+    /// - `owner` must keep that range reserved for the complete slice lifetime.
+    pub unsafe fn upgrade_external_device_ptr<T, Owner>(
+        self: &Arc<Self>,
+        cu_device_ptr: sys::CUdeviceptr,
+        len: usize,
+        owner: Arc<Owner>,
+    ) -> Result<CudaSlice<T>, DriverError>
+    where
+        Owner: std::fmt::Debug + Send + Sync + 'static,
+    {
+        let (read, write) = if self.ctx.is_event_tracking() {
+            (
+                Some(self.ctx.new_event(None)?),
+                Some(self.ctx.new_event(None)?),
+            )
+        } else {
+            (None, None)
+        };
+        Ok(CudaSlice {
+            cu_device_ptr,
+            len,
+            read,
+            write,
+            stream: self.clone(),
+            graph_memory: None,
+            external_owner: Some(owner),
+            marker: PhantomData,
+        })
     }
 }
 
