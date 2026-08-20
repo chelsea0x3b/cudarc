@@ -2280,6 +2280,14 @@ impl CudaModule {
 }
 
 impl CudaFunction {
+    /// Returns the raw CUDA Driver function handle.
+    ///
+    /// The returned handle remains valid only while this function and its
+    /// owning module remain alive.
+    pub fn cu_function(&self) -> sys::CUfunction {
+        self.cu_function
+    }
+
     pub fn occupancy_available_dynamic_smem_per_block(
         &self,
         num_blocks: u32,
