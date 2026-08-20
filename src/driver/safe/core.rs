@@ -2356,9 +2356,46 @@ impl CudaFunction {
         Ok(num_clusters as u32)
     }
 
-    pub fn occupancy_max_potential_block_size(
+    /// Suggest a launch configuration with reasonable occupancy.
+    ///
+    /// Returns a block size that can achieve the maximum occupancy (or, the maximum number of
+    /// active warps with the fewest blocks per multiprocessor), along with the minimum grid size
+    /// needed to achieve that maximum occupancy.
+    ///
+    /// If `block_size_limit` is 0, the maximum block size permitted by the device/function is used.
+    ///
+    /// ### Dynamic Shared Memory
+    ///
+    /// - If dynamic shared memory is **not** needed, pass `None` for `block_size_to_dynamic_smem_size`
+    ///   and `0` for `dynamic_smem_size`.
+    /// - If dynamic shared memory is **constant** regardless of block size, pass `None` for the
+    ///   callback and the constant size in `dynamic_smem_size`.
+    /// - If dynamic shared memory **varies** with block size, provide a callback via
+    ///   `block_size_to_dynamic_smem_size` that computes the required shared memory for any given
+    ///   block size. The `dynamic_smem_size` parameter is ignored in this case.
+    ///
+    /// ### Flags
+    ///
+    /// - `CU_OCCUPANCY_DEFAULT` — default behavior.
+    /// - `CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE` — guarantees that the returned launch configuration
+    ///   is global caching compatible, at a potential cost of occupancy.
+    ///
+    /// # Returns
+    ///
+    /// A tuple of `(min_grid_size, block_size)`.
+    ///
+    /// # Errors
+    ///
+    /// This function may also return error codes from previous, asynchronous launches.
+    ///
+    /// # See Also
+    ///
+    /// [`cudaOccupancyMaxPotentialBlockSizeWithFlags`](https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__HIGHLEVEL.html#group__CUDART__HIGHLEVEL_1gd0524825c5c01bbc9a5e29e890745800)
+    pub fn occupancy_max_potential_block_size_with_flags(
         &self,
-        block_size_to_dynamic_smem_size: extern "C" fn(block_size: std::ffi::c_int) -> usize,
+        block_size_to_dynamic_smem_size: Option<
+            unsafe extern "C" fn(block_size: std::ffi::c_int) -> usize,
+        >,
         dynamic_smem_size: usize,
         block_size_limit: u32,
         flags: Option<sys::CUoccupancy_flags_enum>,
@@ -2372,7 +2409,7 @@ impl CudaFunction {
                 &mut min_grid_size,
                 &mut block_size,
                 self.cu_function,
-                Some(block_size_to_dynamic_smem_size),
+                block_size_to_dynamic_smem_size,
                 dynamic_smem_size,
                 block_size_limit as std::ffi::c_int,
                 flags as std::ffi::c_uint,
@@ -2381,6 +2418,26 @@ impl CudaFunction {
         };
 
         Ok((min_grid_size as u32, block_size as u32))
+    }
+
+    /// This function is **not** consistent with the official nvidia documentation and will be
+    /// removed in the future.
+    /// Please use [CudaFunction::occupancy_max_potential_block_size_with_flags] or the
+    /// `SharedMemoryConfig` wrapper instead.
+    #[deprecated]
+    pub fn occupancy_max_potential_block_size(
+        &self,
+        block_size_to_dynamic_smem_size: unsafe extern "C" fn(block_size: std::ffi::c_int) -> usize,
+        dynamic_smem_size: usize,
+        block_size_limit: u32,
+        flags: Option<sys::CUoccupancy_flags_enum>,
+    ) -> Result<(u32, u32), result::DriverError> {
+        self.occupancy_max_potential_block_size_with_flags(
+            Some(block_size_to_dynamic_smem_size),
+            dynamic_smem_size,
+            block_size_limit,
+            flags,
+        )
     }
 
     #[cfg(not(any(
@@ -2415,6 +2472,18 @@ impl CudaFunction {
         };
 
         Ok(cluster_size as u32)
+    }
+
+    /// Returns the underlying CUDA function object.
+    /// Use at your own risk.
+    ///
+    /// # Warning
+    ///
+    /// The returned handle is only valid as long as the [CudaModule] that loaded
+    /// this function remains loaded. Using the handle after the module is unloaded
+    /// may cause undefined behavior or a driver error.
+    pub fn cu_function(&self) -> sys::CUfunction {
+        self.cu_function
     }
 
     /// Get the value of a specific attribute of this [CudaFunction].
