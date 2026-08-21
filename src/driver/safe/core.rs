@@ -619,6 +619,7 @@ impl CudaEvent {
 /// A wrapper around [sys::CUstream] that you can schedule work on.
 ///
 /// - Create with [CudaContext::new_stream()], [CudaContext::default_stream()], or [CudaStream::fork()].
+/// - Wrap a stream owned by another library with [CudaContext::wrap_borrowed_stream()].
 ///
 /// **Work done on this is asynchronous with respect to the host.**
 ///
@@ -627,17 +628,29 @@ impl CudaEvent {
 /// See [6.6. Event Management](https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__EVENT.html)
 /// See [Out-of-order execution](https://en.wikipedia.org/wiki/Out-of-order_execution)
 /// See [Dependence analysis](https://en.wikipedia.org/wiki/Dependence_analysis)
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug)]
 pub struct CudaStream {
     pub(crate) cu_stream: sys::CUstream,
     pub(crate) ctx: Arc<CudaContext>,
+    pub(crate) owned: bool,
 }
 
 unsafe impl Send for CudaStream {}
 unsafe impl Sync for CudaStream {}
 
+impl PartialEq for CudaStream {
+    fn eq(&self, other: &Self) -> bool {
+        self.cu_stream == other.cu_stream && self.ctx == other.ctx
+    }
+}
+
+impl Eq for CudaStream {}
+
 impl Drop for CudaStream {
     fn drop(&mut self) {
+        if !self.owned {
+            return;
+        }
         self.ctx.record_err(self.ctx.bind_to_thread());
         let cu_stream = std::mem::replace(&mut self.cu_stream, std::ptr::null_mut());
         if !cu_stream.is_null() && cu_stream != (0x2 as _) {
@@ -655,6 +668,7 @@ impl CudaContext {
         Arc::new(CudaStream {
             cu_stream: std::ptr::null_mut(),
             ctx: self.clone(),
+            owned: false,
         })
     }
 
@@ -664,6 +678,29 @@ impl CudaContext {
             // See https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html#group__CUDART__TYPES_1g7b7129befd6f52708309acafd1c46197
             cu_stream: 0x2 as _,
             ctx: self.clone(),
+            owned: false,
+        })
+    }
+
+    /// Wraps a CUDA stream owned by another library.
+    ///
+    /// Dropping the returned wrapper does not destroy the underlying stream.
+    ///
+    /// # Safety
+    ///
+    /// - `cu_stream` must be a valid CUDA stream belonging to this context.
+    /// - The stream's owner must keep it alive while the returned wrapper, or
+    ///   anything retaining it, may be used.
+    /// - The caller is responsible for ordering work submitted through cudarc
+    ///   with work submitted through the stream's owner.
+    pub unsafe fn wrap_borrowed_stream(
+        self: &Arc<Self>,
+        cu_stream: sys::CUstream,
+    ) -> Arc<CudaStream> {
+        Arc::new(CudaStream {
+            cu_stream,
+            ctx: self.clone(),
+            owned: false,
         })
     }
 
@@ -681,6 +718,7 @@ impl CudaContext {
         Ok(Arc::new(CudaStream {
             cu_stream,
             ctx: self.clone(),
+            owned: true,
         }))
     }
 
@@ -708,6 +746,7 @@ impl CudaContext {
         Ok(Arc::new(CudaStream {
             cu_stream,
             ctx: self.clone(),
+            owned: true,
         }))
     }
 }
@@ -721,6 +760,7 @@ impl CudaStream {
         let stream = Arc::new(CudaStream {
             cu_stream,
             ctx: self.ctx.clone(),
+            owned: true,
         });
         stream.join(self)?;
         Ok(stream)
@@ -2598,6 +2638,28 @@ mod tests {
     fn test_post_build_arc_count() {
         let ctx = CudaContext::new(0).unwrap();
         assert_eq!(Arc::strong_count(&ctx), 1);
+    }
+
+    #[test]
+    fn test_borrowed_stream_is_not_destroyed_on_drop() {
+        let ctx = CudaContext::new(0).unwrap();
+        ctx.bind_to_thread().unwrap();
+        let raw = result::stream::create(result::stream::StreamKind::NonBlocking).unwrap();
+
+        {
+            let stream = unsafe { ctx.wrap_borrowed_stream(raw) };
+            assert_eq!(stream.cu_stream(), raw);
+            assert_eq!(stream.context(), &ctx);
+
+            let data = stream.clone_htod(&[1_u32, 2, 3]).unwrap();
+            stream.synchronize().unwrap();
+            drop(data);
+        }
+
+        unsafe {
+            result::stream::synchronize(raw).unwrap();
+            result::stream::destroy(raw).unwrap();
+        }
     }
 
     #[test]
