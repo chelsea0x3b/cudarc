@@ -942,7 +942,7 @@ impl<T> CudaSlice<T> {
     }
 }
 
-impl<T> CudaViewMut<'_, T> {
+impl<'a, T> CudaViewMut<'a, T> {
     /// Number of elements `T` that are in this view.
     pub fn len(&self) -> usize {
         self.len
@@ -953,6 +953,18 @@ impl<T> CudaViewMut<'_, T> {
 
     /// Downgrade this to a `&[T]`
     pub fn as_view<'b>(&'b self) -> CudaView<'b, T> {
+        CudaView {
+            ptr: self.ptr,
+            len: self.len,
+            read: self.read,
+            write: self.write,
+            stream: self.stream,
+            marker: PhantomData,
+        }
+    }
+
+    /// Downgrate this into to a `&[T]`, consuming the current view and keeping the original lifetime 'a
+    pub fn into_view(self) -> CudaView<'a, T> {
         CudaView {
             ptr: self.ptr,
             len: self.len,
