@@ -611,8 +611,23 @@ impl CudaEvent {
     }
 
     /// Returns `true` if all recorded work has been completed, `false` otherwise.
+    ///
+    /// This also returns `false` on CUDA errors. Use [Self::try_is_complete()] to handle errors.
     pub fn is_complete(&self) -> bool {
         unsafe { result::event::query(self.cu_event) }.is_ok()
+    }
+
+    /// Queries whether all recorded work has completed, without waiting.
+    ///
+    /// Returns `Ok(false)` only for [sys::CUresult::CUDA_ERROR_NOT_READY]. Other CUDA errors
+    /// are returned to the caller, including errors from earlier asynchronous launches.
+    /// An event that has not been recorded returns `Ok(true)`.
+    pub fn try_is_complete(&self) -> Result<bool, DriverError> {
+        match unsafe { result::event::query(self.cu_event) } {
+            Ok(()) => Ok(true),
+            Err(DriverError(sys::CUresult::CUDA_ERROR_NOT_READY)) => Ok(false),
+            Err(error) => Err(error),
+        }
     }
 }
 
@@ -2550,6 +2565,69 @@ mod tests {
     use std::time::Instant;
 
     use super::*;
+
+    #[test]
+    fn test_event_try_is_complete() {
+        use std::boxed::Box;
+        use std::sync::mpsc::{channel, Receiver};
+        use std::time::Duration;
+
+        unsafe extern "C" fn wait_for_release(data: *mut std::ffi::c_void) {
+            // The callback owns the receiver and makes no CUDA calls.
+            let receiver = unsafe { Box::from_raw(data.cast::<Receiver<()>>()) };
+            let _ = receiver.recv_timeout(Duration::from_secs(30));
+        }
+
+        let ctx = CudaContext::new(0).unwrap();
+        let stream = ctx.new_stream().unwrap();
+        let event = ctx.new_event(None).unwrap();
+        assert_eq!(event.try_is_complete(), Ok(true));
+
+        let (release, receiver) = channel();
+        let receiver = Box::into_raw(Box::new(receiver));
+        let launch = unsafe {
+            sys::cuLaunchHostFunc(stream.cu_stream(), Some(wait_for_release), receiver.cast())
+                .result()
+        };
+        if let Err(error) = launch {
+            // A failed launch did not transfer ownership to the callback.
+            unsafe { drop(Box::from_raw(receiver)) };
+            panic!("cuLaunchHostFunc failed: {error:?}");
+        }
+        event.record(&stream).unwrap();
+        let pending = event.try_is_complete();
+        let legacy_complete = event.is_complete();
+        release.send(()).unwrap();
+        event.synchronize().unwrap();
+
+        assert_eq!(pending, Ok(false));
+        assert!(!legacy_complete);
+        assert_eq!(event.try_is_complete(), Ok(true));
+        assert!(event.is_complete());
+    }
+
+    #[test]
+    fn test_event_try_is_complete_preserves_capture_error() {
+        let ctx = CudaContext::new(0).unwrap();
+        let stream = ctx.new_stream().unwrap();
+        let event = ctx.new_event(None).unwrap();
+        stream
+            .begin_capture(sys::CUstreamCaptureMode::CU_STREAM_CAPTURE_MODE_THREAD_LOCAL)
+            .unwrap();
+        event.record(&stream).unwrap();
+        let status = event.try_is_complete();
+        let legacy_complete = event.is_complete();
+        // Querying a captured event invalidates capture. End it before asserting.
+        let _ = stream.end_capture(
+            sys::CUgraphInstantiate_flags::CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH,
+        );
+
+        assert_eq!(
+            status,
+            Err(DriverError(sys::CUresult::CUDA_ERROR_CAPTURED_EVENT))
+        );
+        assert!(!legacy_complete);
+    }
 
     #[test]
     fn test_transmutes() {
