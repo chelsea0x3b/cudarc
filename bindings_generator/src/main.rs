@@ -69,7 +69,10 @@ fn create_modules() -> Vec<ModuleConfig> {
                 ..Filters::none()
             },
             libs: vec!["cuda", "nvcuda"],
-            bitflag_enums: vec!["CUmemAllocationHandleType_enum"],
+            bitflag_enums: vec![
+                "CUmemAllocationHandleType_enum",
+                "CUgraphInstantiate_flags_enum",
+            ],
             ..Default::default()
         },
         ModuleConfig {

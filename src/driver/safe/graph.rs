@@ -51,6 +51,7 @@ impl CudaStream {
     /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__STREAM.html#group__CUDA__STREAM_1g03dab8b2ba76b00718955177a929970c)
     ///
     /// `flags` is passed to [cuGraphInstantiate](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__GRAPH.html#group__CUDA__GRAPH_1gb53b435e178cccfa37ac87285d2c3fa1)
+    /// Pass `sys::CUgraphInstantiate_flags(0)` for default behavior, or combine flags with `|`.
     pub fn end_capture(
         self: &Arc<Self>,
         flags: sys::CUgraphInstantiate_flags,
@@ -60,12 +61,13 @@ impl CudaStream {
         if cu_graph.is_null() {
             return Ok(None);
         }
-        let cu_graph_exec = unsafe { result::graph::instantiate(cu_graph, flags) }?;
-        Ok(Some(CudaGraph {
+        let mut graph = CudaGraph {
             cu_graph,
-            cu_graph_exec,
+            cu_graph_exec: std::ptr::null_mut(),
             stream: self.clone(),
-        }))
+        };
+        graph.cu_graph_exec = unsafe { result::graph::instantiate(cu_graph, flags) }?;
+        Ok(Some(graph))
     }
 
     /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__STREAM.html#group__CUDA__STREAM_1g37823c49206e3704ae23c7ad78560bca)
@@ -113,5 +115,76 @@ impl CudaGraph {
     /// owned by the [CudaGraph].
     pub fn cu_graph_exec(&self) -> sys::CUgraphExec {
         self.cu_graph_exec
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::driver::{sys::CUgraphInstantiate_flags as Flags, CudaContext};
+
+    #[test]
+    fn test_end_capture_flags() {
+        let ctx = CudaContext::new(0).unwrap();
+        // All accesses use one stream; avoid waits on events recorded outside capture.
+        unsafe { ctx.disable_event_tracking() };
+        let stream = ctx.new_stream().unwrap();
+        let flags = [
+            Flags(0),
+            Flags::CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH,
+            #[cfg(not(any(
+                feature = "cuda-11040",
+                feature = "cuda-11050",
+                feature = "cuda-11060"
+            )))]
+            {
+                Flags::CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH
+                    | Flags::CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY
+            },
+        ];
+        for flags in flags {
+            let mut data = stream.clone_htod(&[1u32; 4]).unwrap();
+            stream.synchronize().unwrap();
+            stream
+                .begin_capture(sys::CUstreamCaptureMode::CU_STREAM_CAPTURE_MODE_THREAD_LOCAL)
+                .unwrap();
+            stream.memset_zeros(&mut data).unwrap();
+            let graph = stream.end_capture(flags).unwrap().unwrap();
+
+            graph.launch().unwrap();
+            assert_eq!(stream.clone_dtoh(&data).unwrap(), [0; 4]);
+            stream.memcpy_htod(&[2u32; 4], &mut data).unwrap();
+            graph.launch().unwrap();
+            assert_eq!(stream.clone_dtoh(&data).unwrap(), [0; 4]);
+        }
+    }
+
+    #[test]
+    #[cfg(not(any(
+        feature = "cuda-11040",
+        feature = "cuda-11050",
+        feature = "cuda-11060",
+        feature = "cuda-11070",
+        feature = "cuda-11080"
+    )))]
+    fn test_end_capture_invalid_flags() {
+        let ctx = CudaContext::new(0).unwrap();
+        let stream = ctx.new_stream().unwrap();
+        stream
+            .begin_capture(sys::CUstreamCaptureMode::CU_STREAM_CAPTURE_MODE_THREAD_LOCAL)
+            .unwrap();
+        let flags = Flags::CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH
+            | Flags::CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH;
+        assert!(matches!(
+            stream.end_capture(flags),
+            Err(DriverError(sys::CUresult::CUDA_ERROR_INVALID_VALUE))
+        ));
+
+        stream
+            .begin_capture(sys::CUstreamCaptureMode::CU_STREAM_CAPTURE_MODE_THREAD_LOCAL)
+            .unwrap();
+        let graph = stream.end_capture(Flags(0)).unwrap().unwrap();
+        graph.launch().unwrap();
+        stream.synchronize().unwrap();
     }
 }
