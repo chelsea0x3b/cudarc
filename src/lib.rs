@@ -19,7 +19,7 @@
 //! CUDA Versions supported
 //! - 11.4-11.8
 //! - 12.0-12.9
-//! - 13.0
+//! - 13.0-13.4
 //!
 //! CUDNN versions supported:
 //! - 9.12.0

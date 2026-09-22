@@ -825,6 +825,7 @@ const CUDA_VERSIONS: &[Version] = &[
     Version::new(13, 1, 0),
     Version::new(13, 2, 0),
     Version::new(13, 3, 0),
+    Version::new(13, 4, 0),
 ];
 
 fn main() -> Result<()> {

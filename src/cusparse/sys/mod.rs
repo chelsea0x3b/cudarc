@@ -13,13 +13,13 @@ fn load<F: Copy>(name: &str) -> F {
 }
 pub use self::cudaDataType_t as cudaDataType;
 pub use self::libraryPropertyType_t as libraryPropertyType;
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub type FILE = _IO_FILE;
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub type _IO_lock_t = ::core::ffi::c_void;
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub type __off64_t = ::core::ffi::c_long;
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub type __off_t = ::core::ffi::c_long;
 pub type bsric02Info_t = *mut bsric02Info;
 pub type bsrilu02Info_t = *mut bsrilu02Info;
@@ -39,24 +39,24 @@ pub type cuDoubleComplex = double2;
 pub type cuFloatComplex = float2;
 pub type cudaStream_t = *mut CUstream_st;
 pub type cusparseColorInfo_t = *mut cusparseColorInfo;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub type cusparseConstDnMatDescr_t = *const cusparseDnMatDescr;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub type cusparseConstDnVecDescr_t = *const cusparseDnVecDescr;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub type cusparseConstSpMatDescr_t = *const cusparseSpMatDescr;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub type cusparseConstSpVecDescr_t = *const cusparseSpVecDescr;
 pub type cusparseDnMatDescr_t = *mut cusparseDnMatDescr;
 pub type cusparseDnVecDescr_t = *mut cusparseDnVecDescr;
 pub type cusparseHandle_t = *mut cusparseContext;
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub type cusparseLoggerCallback_t = ::core::option::Option<unsafe extern "C" fn(logLevel: ::core::ffi::c_int, functionName: *const ::core::ffi::c_char, message: *const ::core::ffi::c_char)>;
 pub type cusparseMatDescr_t = *mut cusparseMatDescr;
-#[cfg(any(feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
 pub type cusparseSpGEAMDescr_t = *mut cusparseSpGEAMDescr;
 pub type cusparseSpGEMMDescr_t = *mut cusparseSpGEMMDescr;
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub type cusparseSpMMOpPlan_t = *mut cusparseSpMMOpPlan;
 pub type cusparseSpMatDescr_t = *mut cusparseSpMatDescr;
 pub type cusparseSpSMDescr_t = *mut cusparseSpSMDescr;
@@ -170,6 +170,46 @@ pub enum cudaDataType_t {
     CUDA_R_6F_E3M2 = 32,
     CUDA_R_4F_E2M1 = 33,
 }
+#[cfg(any(feature = "cuda-13040"))]
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
+pub enum cudaDataType_t {
+    CUDA_R_16F = 2,
+    CUDA_C_16F = 6,
+    CUDA_R_16BF = 14,
+    CUDA_C_16BF = 15,
+    CUDA_R_32F = 0,
+    CUDA_C_32F = 4,
+    CUDA_R_64F = 1,
+    CUDA_C_64F = 5,
+    CUDA_R_4I = 16,
+    CUDA_C_4I = 17,
+    CUDA_R_4U = 18,
+    CUDA_C_4U = 19,
+    CUDA_R_8I = 3,
+    CUDA_C_8I = 7,
+    CUDA_R_8U = 8,
+    CUDA_C_8U = 9,
+    CUDA_R_16I = 20,
+    CUDA_C_16I = 21,
+    CUDA_R_16U = 22,
+    CUDA_C_16U = 23,
+    CUDA_R_32I = 10,
+    CUDA_C_32I = 11,
+    CUDA_R_32U = 12,
+    CUDA_C_32U = 13,
+    CUDA_R_64I = 24,
+    CUDA_C_64I = 25,
+    CUDA_R_64U = 26,
+    CUDA_C_64U = 27,
+    CUDA_R_8F_E4M3 = 28,
+    CUDA_R_8F_E5M2 = 29,
+    CUDA_R_8F_UE8M0 = 30,
+    CUDA_R_6F_E2M3 = 31,
+    CUDA_R_6F_E3M2 = 32,
+    CUDA_R_4F_E2M1 = 33,
+    CUDA_R_8F_UE5M3 = 34,
+}
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cusparseAction_t {
@@ -195,7 +235,7 @@ pub enum cusparseCsr2CscAlg_t {
     CUSPARSE_CSR2CSC_ALG1 = 1,
     CUSPARSE_CSR2CSC_ALG2 = 2,
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cusparseCsr2CscAlg_t {
@@ -243,7 +283,7 @@ pub enum cusparseFormat_t {
     CUSPARSE_FORMAT_COO = 3,
     CUSPARSE_FORMAT_BLOCKED_ELL = 5,
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cusparseFormat_t {
@@ -312,7 +352,7 @@ pub enum cusparseSolvePolicy_t {
     CUSPARSE_SOLVE_POLICY_NO_LEVEL = 0,
     CUSPARSE_SOLVE_POLICY_USE_LEVEL = 1,
 }
-#[cfg(any(feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cusparseSpGEAMAlg_t {
@@ -327,7 +367,7 @@ pub enum cusparseSpGEMMAlg_t {
     CUSPARSE_SPGEMM_CSR_ALG_DETERMINITIC = 1,
     CUSPARSE_SPGEMM_CSR_ALG_NONDETERMINITIC = 2,
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cusparseSpGEMMAlg_t {
@@ -366,7 +406,7 @@ pub enum cusparseSpMMAlg_t {
     CUSPARSE_SPMM_CSR_ALG3 = 12,
     CUSPARSE_SPMM_BLOCKED_ELL_ALG1 = 13,
 }
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cusparseSpMMAlg_t {
@@ -381,7 +421,7 @@ pub enum cusparseSpMMAlg_t {
     CUSPARSE_SPMM_BLOCKED_ELL_ALG1 = 13,
     CUSPARSE_SPMM_BSR_ALG1 = 14,
 }
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cusparseSpMMOpAlg_t {
@@ -418,7 +458,7 @@ pub enum cusparseSpMVAlg_t {
     CUSPARSE_SPMV_COO_ALG2 = 4,
     CUSPARSE_SPMV_SELL_ALG1 = 5,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cusparseSpMVAlg_t {
@@ -441,7 +481,7 @@ pub enum cusparseSpMatAttribute_t {
 pub enum cusparseSpSMAlg_t {
     CUSPARSE_SPSM_ALG_DEFAULT = 0,
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cusparseSpSMUpdate_t {
@@ -453,7 +493,7 @@ pub enum cusparseSpSMUpdate_t {
 pub enum cusparseSpSVAlg_t {
     CUSPARSE_SPSV_ALG_DEFAULT = 0,
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cusparseSpSVUpdate_t {
@@ -493,7 +533,7 @@ pub enum libraryPropertyType_t {
 pub struct CUstream_st {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct _IO_FILE {
@@ -527,19 +567,19 @@ pub struct _IO_FILE {
     pub _mode: ::core::ffi::c_int,
     pub _unused2: [::core::ffi::c_char; 20usize],
 }
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _IO_codecvt {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _IO_marker {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _IO_wide_data {
@@ -623,7 +663,7 @@ pub struct cusparseDnVecDescr {
 pub struct cusparseMatDescr {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct cusparseSpGEAMDescr {
@@ -634,7 +674,7 @@ pub struct cusparseSpGEAMDescr {
 pub struct cusparseSpGEMMDescr {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct cusparseSpMMOpPlan {
@@ -679,11 +719,11 @@ pub struct float2 {
 pub struct pruneInfo {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 impl cudaDataType_t {
     pub const CUDA_R_8F_UE4M3: cudaDataType_t = cudaDataType_t::CUDA_R_8F_E4M3;
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 impl cusparseCsr2CscAlg_t {
     pub const CUSPARSE_CSR2CSC_ALG1: cusparseCsr2CscAlg_t = cusparseCsr2CscAlg_t::CUSPARSE_CSR2CSC_ALG_DEFAULT;
 }
@@ -740,7 +780,7 @@ pub unsafe fn cusparseAxpby(handle: cusparseHandle_t, alpha: *const ::core::ffi:
         cusparseAxpby(handle, alpha, vecX, beta, vecY)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseAxpby(handle: cusparseHandle_t, alpha: *const ::core::ffi::c_void, vecX: cusparseConstSpVecDescr_t, beta: *const ::core::ffi::c_void, vecY: cusparseDnVecDescr_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -790,7 +830,7 @@ pub unsafe fn cusparseBsrSetStridedBatch(spMatDescr: cusparseSpMatDescr_t, batch
         cusparseBsrSetStridedBatch(spMatDescr, batchCount, offsetsBatchStride, columnsValuesBatchStride, ValuesBatchStride)
     }
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseBsrSetStridedBatch(spMatDescr: cusparseSpMatDescr_t, batchCount: ::core::ffi::c_int, offsetsBatchStride: i64, columnsBatchStride: i64, ValuesBatchStride: i64) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1944,7 +1984,7 @@ pub unsafe fn cusparseCnnz_compress(handle: cusparseHandle_t, m: ::core::ffi::c_
         cusparseCnnz_compress(handle, m, descr, csrSortedValA, csrSortedRowPtrA, nnzPerRow, nnzC, tol)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseConstBlockedEllGet(spMatDescr: cusparseConstSpMatDescr_t, rows: *mut i64, cols: *mut i64, ellBlockSize: *mut i64, ellCols: *mut i64, ellColInd: *mut *const ::core::ffi::c_void, ellValue: *mut *const ::core::ffi::c_void, ellIdxType: *mut cusparseIndexType_t, idxBase: *mut cusparseIndexBase_t, valueType: *mut cudaDataType) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1961,7 +2001,7 @@ pub unsafe fn cusparseConstBlockedEllGet(spMatDescr: cusparseConstSpMatDescr_t, 
         cusparseConstBlockedEllGet(spMatDescr, rows, cols, ellBlockSize, ellCols, ellColInd, ellValue, ellIdxType, idxBase, valueType)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseConstCooGet(spMatDescr: cusparseConstSpMatDescr_t, rows: *mut i64, cols: *mut i64, nnz: *mut i64, cooRowInd: *mut *const ::core::ffi::c_void, cooColInd: *mut *const ::core::ffi::c_void, cooValues: *mut *const ::core::ffi::c_void, idxType: *mut cusparseIndexType_t, idxBase: *mut cusparseIndexBase_t, valueType: *mut cudaDataType) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1978,7 +2018,7 @@ pub unsafe fn cusparseConstCooGet(spMatDescr: cusparseConstSpMatDescr_t, rows: *
         cusparseConstCooGet(spMatDescr, rows, cols, nnz, cooRowInd, cooColInd, cooValues, idxType, idxBase, valueType)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseConstCscGet(spMatDescr: cusparseConstSpMatDescr_t, rows: *mut i64, cols: *mut i64, nnz: *mut i64, cscColOffsets: *mut *const ::core::ffi::c_void, cscRowInd: *mut *const ::core::ffi::c_void, cscValues: *mut *const ::core::ffi::c_void, cscColOffsetsType: *mut cusparseIndexType_t, cscRowIndType: *mut cusparseIndexType_t, idxBase: *mut cusparseIndexBase_t, valueType: *mut cudaDataType) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -1995,7 +2035,7 @@ pub unsafe fn cusparseConstCscGet(spMatDescr: cusparseConstSpMatDescr_t, rows: *
         cusparseConstCscGet(spMatDescr, rows, cols, nnz, cscColOffsets, cscRowInd, cscValues, cscColOffsetsType, cscRowIndType, idxBase, valueType)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseConstCsrGet(spMatDescr: cusparseConstSpMatDescr_t, rows: *mut i64, cols: *mut i64, nnz: *mut i64, csrRowOffsets: *mut *const ::core::ffi::c_void, csrColInd: *mut *const ::core::ffi::c_void, csrValues: *mut *const ::core::ffi::c_void, csrRowOffsetsType: *mut cusparseIndexType_t, csrColIndType: *mut cusparseIndexType_t, idxBase: *mut cusparseIndexBase_t, valueType: *mut cudaDataType) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2012,7 +2052,7 @@ pub unsafe fn cusparseConstCsrGet(spMatDescr: cusparseConstSpMatDescr_t, rows: *
         cusparseConstCsrGet(spMatDescr, rows, cols, nnz, csrRowOffsets, csrColInd, csrValues, csrRowOffsetsType, csrColIndType, idxBase, valueType)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseConstDnMatGet(dnMatDescr: cusparseConstDnMatDescr_t, rows: *mut i64, cols: *mut i64, ld: *mut i64, values: *mut *const ::core::ffi::c_void, type_: *mut cudaDataType, order: *mut cusparseOrder_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2029,7 +2069,7 @@ pub unsafe fn cusparseConstDnMatGet(dnMatDescr: cusparseConstDnMatDescr_t, rows:
         cusparseConstDnMatGet(dnMatDescr, rows, cols, ld, values, type_, order)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseConstDnMatGetValues(dnMatDescr: cusparseConstDnMatDescr_t, values: *mut *const ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2046,7 +2086,7 @@ pub unsafe fn cusparseConstDnMatGetValues(dnMatDescr: cusparseConstDnMatDescr_t,
         cusparseConstDnMatGetValues(dnMatDescr, values)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseConstDnVecGet(dnVecDescr: cusparseConstDnVecDescr_t, size: *mut i64, values: *mut *const ::core::ffi::c_void, valueType: *mut cudaDataType) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2063,7 +2103,7 @@ pub unsafe fn cusparseConstDnVecGet(dnVecDescr: cusparseConstDnVecDescr_t, size:
         cusparseConstDnVecGet(dnVecDescr, size, values, valueType)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseConstDnVecGetValues(dnVecDescr: cusparseConstDnVecDescr_t, values: *mut *const ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2080,7 +2120,7 @@ pub unsafe fn cusparseConstDnVecGetValues(dnVecDescr: cusparseConstDnVecDescr_t,
         cusparseConstDnVecGetValues(dnVecDescr, values)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseConstSpMatGetValues(spMatDescr: cusparseConstSpMatDescr_t, values: *mut *const ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2097,7 +2137,7 @@ pub unsafe fn cusparseConstSpMatGetValues(spMatDescr: cusparseConstSpMatDescr_t,
         cusparseConstSpMatGetValues(spMatDescr, values)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseConstSpVecGet(spVecDescr: cusparseConstSpVecDescr_t, size: *mut i64, nnz: *mut i64, indices: *mut *const ::core::ffi::c_void, values: *mut *const ::core::ffi::c_void, idxType: *mut cusparseIndexType_t, idxBase: *mut cusparseIndexBase_t, valueType: *mut cudaDataType) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2114,7 +2154,7 @@ pub unsafe fn cusparseConstSpVecGet(spVecDescr: cusparseConstSpVecDescr_t, size:
         cusparseConstSpVecGet(spVecDescr, size, nnz, indices, values, idxType, idxBase, valueType)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseConstSpVecGetValues(spVecDescr: cusparseConstSpVecDescr_t, values: *mut *const ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2296,7 +2336,7 @@ pub unsafe fn cusparseCreateBsr(spMatDescr: *mut cusparseSpMatDescr_t, brows: i6
         cusparseCreateBsr(spMatDescr, brows, bcols, bnnz, rowBlockDim, colBlockDim, bsrRowOffsets, bsrColInd, bsrValues, bsrRowOffsetsType, bsrColIndType, idxBase, valueType, order)
     }
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseCreateBsr(spMatDescr: *mut cusparseSpMatDescr_t, brows: i64, bcols: i64, bnnz: i64, rowBlockSize: i64, colBlockSize: i64, bsrRowOffsets: *mut ::core::ffi::c_void, bsrColInd: *mut ::core::ffi::c_void, bsrValues: *mut ::core::ffi::c_void, bsrRowOffsetsType: cusparseIndexType_t, bsrColIndType: cusparseIndexType_t, idxBase: cusparseIndexBase_t, valueType: cudaDataType, order: cusparseOrder_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2393,7 +2433,7 @@ pub unsafe fn cusparseCreateColorInfo(info: *mut cusparseColorInfo_t) -> cuspars
         cusparseCreateColorInfo(info)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseCreateConstBlockedEll(spMatDescr: *mut cusparseConstSpMatDescr_t, rows: i64, cols: i64, ellBlockSize: i64, ellCols: i64, ellColInd: *const ::core::ffi::c_void, ellValue: *const ::core::ffi::c_void, ellIdxType: cusparseIndexType_t, idxBase: cusparseIndexBase_t, valueType: cudaDataType) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2410,7 +2450,7 @@ pub unsafe fn cusparseCreateConstBlockedEll(spMatDescr: *mut cusparseConstSpMatD
         cusparseCreateConstBlockedEll(spMatDescr, rows, cols, ellBlockSize, ellCols, ellColInd, ellValue, ellIdxType, idxBase, valueType)
     }
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseCreateConstBsr(spMatDescr: *mut cusparseConstSpMatDescr_t, brows: i64, bcols: i64, bnnz: i64, rowBlockDim: i64, colBlockDim: i64, bsrRowOffsets: *const ::core::ffi::c_void, bsrColInd: *const ::core::ffi::c_void, bsrValues: *const ::core::ffi::c_void, bsrRowOffsetsType: cusparseIndexType_t, bsrColIndType: cusparseIndexType_t, idxBase: cusparseIndexBase_t, valueType: cudaDataType, order: cusparseOrder_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2427,7 +2467,7 @@ pub unsafe fn cusparseCreateConstBsr(spMatDescr: *mut cusparseConstSpMatDescr_t,
         cusparseCreateConstBsr(spMatDescr, brows, bcols, bnnz, rowBlockDim, colBlockDim, bsrRowOffsets, bsrColInd, bsrValues, bsrRowOffsetsType, bsrColIndType, idxBase, valueType, order)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseCreateConstCoo(spMatDescr: *mut cusparseConstSpMatDescr_t, rows: i64, cols: i64, nnz: i64, cooRowInd: *const ::core::ffi::c_void, cooColInd: *const ::core::ffi::c_void, cooValues: *const ::core::ffi::c_void, cooIdxType: cusparseIndexType_t, idxBase: cusparseIndexBase_t, valueType: cudaDataType) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2444,7 +2484,7 @@ pub unsafe fn cusparseCreateConstCoo(spMatDescr: *mut cusparseConstSpMatDescr_t,
         cusparseCreateConstCoo(spMatDescr, rows, cols, nnz, cooRowInd, cooColInd, cooValues, cooIdxType, idxBase, valueType)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseCreateConstCsc(spMatDescr: *mut cusparseConstSpMatDescr_t, rows: i64, cols: i64, nnz: i64, cscColOffsets: *const ::core::ffi::c_void, cscRowInd: *const ::core::ffi::c_void, cscValues: *const ::core::ffi::c_void, cscColOffsetsType: cusparseIndexType_t, cscRowIndType: cusparseIndexType_t, idxBase: cusparseIndexBase_t, valueType: cudaDataType) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2461,7 +2501,7 @@ pub unsafe fn cusparseCreateConstCsc(spMatDescr: *mut cusparseConstSpMatDescr_t,
         cusparseCreateConstCsc(spMatDescr, rows, cols, nnz, cscColOffsets, cscRowInd, cscValues, cscColOffsetsType, cscRowIndType, idxBase, valueType)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseCreateConstCsr(spMatDescr: *mut cusparseConstSpMatDescr_t, rows: i64, cols: i64, nnz: i64, csrRowOffsets: *const ::core::ffi::c_void, csrColInd: *const ::core::ffi::c_void, csrValues: *const ::core::ffi::c_void, csrRowOffsetsType: cusparseIndexType_t, csrColIndType: cusparseIndexType_t, idxBase: cusparseIndexBase_t, valueType: cudaDataType) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2478,7 +2518,7 @@ pub unsafe fn cusparseCreateConstCsr(spMatDescr: *mut cusparseConstSpMatDescr_t,
         cusparseCreateConstCsr(spMatDescr, rows, cols, nnz, csrRowOffsets, csrColInd, csrValues, csrRowOffsetsType, csrColIndType, idxBase, valueType)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseCreateConstDnMat(dnMatDescr: *mut cusparseConstDnMatDescr_t, rows: i64, cols: i64, ld: i64, values: *const ::core::ffi::c_void, valueType: cudaDataType, order: cusparseOrder_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2495,7 +2535,7 @@ pub unsafe fn cusparseCreateConstDnMat(dnMatDescr: *mut cusparseConstDnMatDescr_
         cusparseCreateConstDnMat(dnMatDescr, rows, cols, ld, values, valueType, order)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseCreateConstDnVec(dnVecDescr: *mut cusparseConstDnVecDescr_t, size: i64, values: *const ::core::ffi::c_void, valueType: cudaDataType) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2512,7 +2552,7 @@ pub unsafe fn cusparseCreateConstDnVec(dnVecDescr: *mut cusparseConstDnVecDescr_
         cusparseCreateConstDnVec(dnVecDescr, size, values, valueType)
     }
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseCreateConstSlicedEll(spMatDescr: *mut cusparseConstSpMatDescr_t, rows: i64, cols: i64, nnz: i64, sellValuesSize: i64, sliceSize: i64, sellSliceOffsets: *const ::core::ffi::c_void, sellColInd: *const ::core::ffi::c_void, sellValues: *const ::core::ffi::c_void, sellSliceOffsetsType: cusparseIndexType_t, sellColIndType: cusparseIndexType_t, idxBase: cusparseIndexBase_t, valueType: cudaDataType) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2529,7 +2569,7 @@ pub unsafe fn cusparseCreateConstSlicedEll(spMatDescr: *mut cusparseConstSpMatDe
         cusparseCreateConstSlicedEll(spMatDescr, rows, cols, nnz, sellValuesSize, sliceSize, sellSliceOffsets, sellColInd, sellValues, sellSliceOffsetsType, sellColIndType, idxBase, valueType)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseCreateConstSpVec(spVecDescr: *mut cusparseConstSpVecDescr_t, size: i64, nnz: i64, indices: *const ::core::ffi::c_void, values: *const ::core::ffi::c_void, idxType: cusparseIndexType_t, idxBase: cusparseIndexBase_t, valueType: cudaDataType) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2790,7 +2830,7 @@ pub unsafe fn cusparseCreatePruneInfo(info: *mut pruneInfo_t) -> cusparseStatus_
         cusparseCreatePruneInfo(info)
     }
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseCreateSlicedEll(spMatDescr: *mut cusparseSpMatDescr_t, rows: i64, cols: i64, nnz: i64, sellValuesSize: i64, sliceSize: i64, sellSliceOffsets: *mut ::core::ffi::c_void, sellColInd: *mut ::core::ffi::c_void, sellValues: *mut ::core::ffi::c_void, sellSliceOffsetsType: cusparseIndexType_t, sellColIndType: cusparseIndexType_t, idxBase: cusparseIndexBase_t, valueType: cudaDataType) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2823,7 +2863,7 @@ pub unsafe fn cusparseCreateSpVec(spVecDescr: *mut cusparseSpVecDescr_t, size: i
         cusparseCreateSpVec(spVecDescr, size, nnz, indices, values, idxType, idxBase, valueType)
     }
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseCscGet(spMatDescr: cusparseSpMatDescr_t, rows: *mut i64, cols: *mut i64, nnz: *mut i64, cscColOffsets: *mut *mut ::core::ffi::c_void, cscRowInd: *mut *mut ::core::ffi::c_void, cscValues: *mut *mut ::core::ffi::c_void, cscColOffsetsType: *mut cusparseIndexType_t, cscRowIndType: *mut cusparseIndexType_t, idxBase: *mut cusparseIndexBase_t, valueType: *mut cudaDataType) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3803,7 +3843,7 @@ pub unsafe fn cusparseDenseToSparse_analysis(handle: cusparseHandle_t, matA: cus
         cusparseDenseToSparse_analysis(handle, matA, matB, alg, externalBuffer)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseDenseToSparse_analysis(handle: cusparseHandle_t, matA: cusparseConstDnMatDescr_t, matB: cusparseSpMatDescr_t, alg: cusparseDenseToSparseAlg_t, externalBuffer: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3837,7 +3877,7 @@ pub unsafe fn cusparseDenseToSparse_bufferSize(handle: cusparseHandle_t, matA: c
         cusparseDenseToSparse_bufferSize(handle, matA, matB, alg, bufferSize)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseDenseToSparse_bufferSize(handle: cusparseHandle_t, matA: cusparseConstDnMatDescr_t, matB: cusparseSpMatDescr_t, alg: cusparseDenseToSparseAlg_t, bufferSize: *mut usize) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3888,7 +3928,7 @@ pub unsafe fn cusparseDenseToSparse_convert(handle: cusparseHandle_t, matA: cusp
         cusparseDenseToSparse_convert(handle, matA, matB, alg, externalBuffer)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseDenseToSparse_convert(handle: cusparseHandle_t, matA: cusparseConstDnMatDescr_t, matB: cusparseSpMatDescr_t, alg: cusparseDenseToSparseAlg_t, externalBuffer: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4117,7 +4157,7 @@ pub unsafe fn cusparseDestroyDnMat(dnMatDescr: cusparseDnMatDescr_t) -> cusparse
         cusparseDestroyDnMat(dnMatDescr)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseDestroyDnMat(dnMatDescr: cusparseConstDnMatDescr_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4151,7 +4191,7 @@ pub unsafe fn cusparseDestroyDnVec(dnVecDescr: cusparseDnVecDescr_t) -> cusparse
         cusparseDestroyDnVec(dnVecDescr)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseDestroyDnVec(dnVecDescr: cusparseConstDnVecDescr_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4217,7 +4257,7 @@ pub unsafe fn cusparseDestroySpMat(spMatDescr: cusparseSpMatDescr_t) -> cusparse
         cusparseDestroySpMat(spMatDescr)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseDestroySpMat(spMatDescr: cusparseConstSpMatDescr_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4251,7 +4291,7 @@ pub unsafe fn cusparseDestroySpVec(spVecDescr: cusparseSpVecDescr_t) -> cusparse
         cusparseDestroySpVec(spVecDescr)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseDestroySpVec(spVecDescr: cusparseConstSpVecDescr_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -4624,7 +4664,7 @@ pub unsafe fn cusparseDnMatGetStridedBatch(dnMatDescr: cusparseDnMatDescr_t, bat
         cusparseDnMatGetStridedBatch(dnMatDescr, batchCount, batchStride)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseDnMatGetStridedBatch(dnMatDescr: cusparseConstDnMatDescr_t, batchCount: *mut ::core::ffi::c_int, batchStride: *mut i64) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5012,7 +5052,7 @@ pub unsafe fn cusparseGather(handle: cusparseHandle_t, vecY: cusparseDnVecDescr_
         cusparseGather(handle, vecY, vecX)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseGather(handle: cusparseHandle_t, vecY: cusparseConstDnVecDescr_t, vecX: cusparseSpVecDescr_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5206,7 +5246,7 @@ pub unsafe fn cusparseGetVersion(handle: cusparseHandle_t, version: *mut ::core:
         cusparseGetVersion(handle, version)
     }
 }
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseLoggerForceDisable() -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5223,7 +5263,7 @@ pub unsafe fn cusparseLoggerForceDisable() -> cusparseStatus_t {
         cusparseLoggerForceDisable()
     }
 }
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseLoggerOpenFile(logFile: *const ::core::ffi::c_char) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5240,7 +5280,7 @@ pub unsafe fn cusparseLoggerOpenFile(logFile: *const ::core::ffi::c_char) -> cus
         cusparseLoggerOpenFile(logFile)
     }
 }
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseLoggerSetCallback(callback: cusparseLoggerCallback_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5257,7 +5297,7 @@ pub unsafe fn cusparseLoggerSetCallback(callback: cusparseLoggerCallback_t) -> c
         cusparseLoggerSetCallback(callback)
     }
 }
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseLoggerSetFile(file: *mut FILE) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5274,7 +5314,7 @@ pub unsafe fn cusparseLoggerSetFile(file: *mut FILE) -> cusparseStatus_t {
         cusparseLoggerSetFile(file)
     }
 }
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseLoggerSetLevel(level: ::core::ffi::c_int) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5291,7 +5331,7 @@ pub unsafe fn cusparseLoggerSetLevel(level: ::core::ffi::c_int) -> cusparseStatu
         cusparseLoggerSetLevel(level)
     }
 }
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseLoggerSetMask(mask: ::core::ffi::c_int) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5341,7 +5381,7 @@ pub unsafe fn cusparseSDDMM(handle: cusparseHandle_t, opA: cusparseOperation_t, 
         cusparseSDDMM(handle, opA, opB, alpha, matA, matB, beta, matC, computeType, alg, externalBuffer)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSDDMM(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstDnMatDescr_t, matB: cusparseConstDnMatDescr_t, beta: *const ::core::ffi::c_void, matC: cusparseSpMatDescr_t, computeType: cudaDataType, alg: cusparseSDDMMAlg_t, externalBuffer: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5375,7 +5415,7 @@ pub unsafe fn cusparseSDDMM_bufferSize(handle: cusparseHandle_t, opA: cusparseOp
         cusparseSDDMM_bufferSize(handle, opA, opB, alpha, matA, matB, beta, matC, computeType, alg, bufferSize)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSDDMM_bufferSize(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstDnMatDescr_t, matB: cusparseConstDnMatDescr_t, beta: *const ::core::ffi::c_void, matC: cusparseSpMatDescr_t, computeType: cudaDataType, alg: cusparseSDDMMAlg_t, bufferSize: *mut usize) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5409,7 +5449,7 @@ pub unsafe fn cusparseSDDMM_preprocess(handle: cusparseHandle_t, opA: cusparseOp
         cusparseSDDMM_preprocess(handle, opA, opB, alpha, matA, matB, beta, matC, computeType, alg, externalBuffer)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSDDMM_preprocess(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstDnMatDescr_t, matB: cusparseConstDnMatDescr_t, beta: *const ::core::ffi::c_void, matC: cusparseSpMatDescr_t, computeType: cudaDataType, alg: cusparseSDDMMAlg_t, externalBuffer: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -5732,7 +5772,7 @@ pub unsafe fn cusparseScatter(handle: cusparseHandle_t, vecX: cusparseSpVecDescr
         cusparseScatter(handle, vecX, vecY)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseScatter(handle: cusparseHandle_t, vecX: cusparseConstSpVecDescr_t, vecY: cusparseDnVecDescr_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6710,7 +6750,7 @@ pub unsafe fn cusparseSnnz_compress(handle: cusparseHandle_t, m: ::core::ffi::c_
         cusparseSnnz_compress(handle, m, descr, csrSortedValA, csrSortedRowPtrA, nnzPerRow, nnzC, tol)
     }
 }
-#[cfg(any(feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpGEAM(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseSpMatDescr_t, beta: *const ::core::ffi::c_void, matB: cusparseSpMatDescr_t, matC: cusparseSpMatDescr_t, computeType: cudaDataType, alg: cusparseSpGEAMAlg_t, spgeamDescr: cusparseSpGEAMDescr_t, externalBuffer: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6727,7 +6767,7 @@ pub unsafe fn cusparseSpGEAM(handle: cusparseHandle_t, opA: cusparseOperation_t,
         cusparseSpGEAM(handle, opA, opB, alpha, matA, beta, matB, matC, computeType, alg, spgeamDescr, externalBuffer)
     }
 }
-#[cfg(any(feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpGEAM_bufferSize(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseSpMatDescr_t, beta: *const ::core::ffi::c_void, matB: cusparseSpMatDescr_t, matC: cusparseSpMatDescr_t, computeType: cudaDataType, alg: cusparseSpGEAMAlg_t, spgeamDescr: cusparseSpGEAMDescr_t, bufferSize: *mut usize) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6744,7 +6784,7 @@ pub unsafe fn cusparseSpGEAM_bufferSize(handle: cusparseHandle_t, opA: cusparseO
         cusparseSpGEAM_bufferSize(handle, opA, opB, alpha, matA, beta, matB, matC, computeType, alg, spgeamDescr, bufferSize)
     }
 }
-#[cfg(any(feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpGEAM_createDescr(descr: *mut cusparseSpGEAMDescr_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6761,7 +6801,7 @@ pub unsafe fn cusparseSpGEAM_createDescr(descr: *mut cusparseSpGEAMDescr_t) -> c
         cusparseSpGEAM_createDescr(descr)
     }
 }
-#[cfg(any(feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpGEAM_destroyDescr(descr: cusparseSpGEAMDescr_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6778,7 +6818,7 @@ pub unsafe fn cusparseSpGEAM_destroyDescr(descr: cusparseSpGEAMDescr_t) -> cuspa
         cusparseSpGEAM_destroyDescr(descr)
     }
 }
-#[cfg(any(feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpGEAM_nnz(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseSpMatDescr_t, beta: *const ::core::ffi::c_void, matB: cusparseSpMatDescr_t, matC: cusparseSpMatDescr_t, computeType: cudaDataType, alg: cusparseSpGEAMAlg_t, spgeamDescr: cusparseSpGEAMDescr_t, externalBuffer: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6812,7 +6852,7 @@ pub unsafe fn cusparseSpGEMM_compute(handle: cusparseHandle_t, opA: cusparseOper
         cusparseSpGEMM_compute(handle, opA, opB, alpha, matA, matB, beta, matC, computeType, alg, spgemmDescr, bufferSize2, externalBuffer2)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpGEMM_compute(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, matB: cusparseConstSpMatDescr_t, beta: *const ::core::ffi::c_void, matC: cusparseSpMatDescr_t, computeType: cudaDataType, alg: cusparseSpGEMMAlg_t, spgemmDescr: cusparseSpGEMMDescr_t, bufferSize2: *mut usize, externalBuffer2: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6846,7 +6886,7 @@ pub unsafe fn cusparseSpGEMM_copy(handle: cusparseHandle_t, opA: cusparseOperati
         cusparseSpGEMM_copy(handle, opA, opB, alpha, matA, matB, beta, matC, computeType, alg, spgemmDescr)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpGEMM_copy(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, matB: cusparseConstSpMatDescr_t, beta: *const ::core::ffi::c_void, matC: cusparseSpMatDescr_t, computeType: cudaDataType, alg: cusparseSpGEMMAlg_t, spgemmDescr: cusparseSpGEMMDescr_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6895,7 +6935,7 @@ pub unsafe fn cusparseSpGEMM_destroyDescr(descr: cusparseSpGEMMDescr_t) -> cuspa
         cusparseSpGEMM_destroyDescr(descr)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpGEMM_estimateMemory(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, matB: cusparseConstSpMatDescr_t, beta: *const ::core::ffi::c_void, matC: cusparseSpMatDescr_t, computeType: cudaDataType, alg: cusparseSpGEMMAlg_t, spgemmDescr: cusparseSpGEMMDescr_t, chunk_fraction: f32, bufferSize3: *mut usize, externalBuffer3: *mut ::core::ffi::c_void, bufferSize2: *mut usize) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6912,7 +6952,7 @@ pub unsafe fn cusparseSpGEMM_estimateMemory(handle: cusparseHandle_t, opA: cuspa
         cusparseSpGEMM_estimateMemory(handle, opA, opB, alpha, matA, matB, beta, matC, computeType, alg, spgemmDescr, chunk_fraction, bufferSize3, externalBuffer3, bufferSize2)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpGEMM_getNumProducts(spgemmDescr: cusparseSpGEMMDescr_t, num_prods: *mut i64) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6946,7 +6986,7 @@ pub unsafe fn cusparseSpGEMM_workEstimation(handle: cusparseHandle_t, opA: cuspa
         cusparseSpGEMM_workEstimation(handle, opA, opB, alpha, matA, matB, beta, matC, computeType, alg, spgemmDescr, bufferSize1, externalBuffer1)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpGEMM_workEstimation(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, matB: cusparseConstSpMatDescr_t, beta: *const ::core::ffi::c_void, matC: cusparseSpMatDescr_t, computeType: cudaDataType, alg: cusparseSpGEMMAlg_t, spgemmDescr: cusparseSpGEMMDescr_t, bufferSize1: *mut usize, externalBuffer1: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -6980,7 +7020,7 @@ pub unsafe fn cusparseSpGEMMreuse_compute(handle: cusparseHandle_t, opA: cuspars
         cusparseSpGEMMreuse_compute(handle, opA, opB, alpha, matA, matB, beta, matC, computeType, alg, spgemmDescr)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpGEMMreuse_compute(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, matB: cusparseConstSpMatDescr_t, beta: *const ::core::ffi::c_void, matC: cusparseSpMatDescr_t, computeType: cudaDataType, alg: cusparseSpGEMMAlg_t, spgemmDescr: cusparseSpGEMMDescr_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7014,7 +7054,7 @@ pub unsafe fn cusparseSpGEMMreuse_copy(handle: cusparseHandle_t, opA: cusparseOp
         cusparseSpGEMMreuse_copy(handle, opA, opB, matA, matB, matC, alg, spgemmDescr, bufferSize5, externalBuffer5)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpGEMMreuse_copy(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, matA: cusparseConstSpMatDescr_t, matB: cusparseConstSpMatDescr_t, matC: cusparseSpMatDescr_t, alg: cusparseSpGEMMAlg_t, spgemmDescr: cusparseSpGEMMDescr_t, bufferSize5: *mut usize, externalBuffer5: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7048,7 +7088,7 @@ pub unsafe fn cusparseSpGEMMreuse_nnz(handle: cusparseHandle_t, opA: cusparseOpe
         cusparseSpGEMMreuse_nnz(handle, opA, opB, matA, matB, matC, alg, spgemmDescr, bufferSize2, externalBuffer2, bufferSize3, externalBuffer3, bufferSize4, externalBuffer4)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpGEMMreuse_nnz(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, matA: cusparseConstSpMatDescr_t, matB: cusparseConstSpMatDescr_t, matC: cusparseSpMatDescr_t, alg: cusparseSpGEMMAlg_t, spgemmDescr: cusparseSpGEMMDescr_t, bufferSize2: *mut usize, externalBuffer2: *mut ::core::ffi::c_void, bufferSize3: *mut usize, externalBuffer3: *mut ::core::ffi::c_void, bufferSize4: *mut usize, externalBuffer4: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7082,7 +7122,7 @@ pub unsafe fn cusparseSpGEMMreuse_workEstimation(handle: cusparseHandle_t, opA: 
         cusparseSpGEMMreuse_workEstimation(handle, opA, opB, matA, matB, matC, alg, spgemmDescr, bufferSize1, externalBuffer1)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpGEMMreuse_workEstimation(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, matA: cusparseConstSpMatDescr_t, matB: cusparseConstSpMatDescr_t, matC: cusparseSpMatDescr_t, alg: cusparseSpGEMMAlg_t, spgemmDescr: cusparseSpGEMMDescr_t, bufferSize1: *mut usize, externalBuffer1: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7116,7 +7156,7 @@ pub unsafe fn cusparseSpMM(handle: cusparseHandle_t, opA: cusparseOperation_t, o
         cusparseSpMM(handle, opA, opB, alpha, matA, matB, beta, matC, computeType, alg, externalBuffer)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpMM(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, matB: cusparseConstDnMatDescr_t, beta: *const ::core::ffi::c_void, matC: cusparseDnMatDescr_t, computeType: cudaDataType, alg: cusparseSpMMAlg_t, externalBuffer: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7133,7 +7173,7 @@ pub unsafe fn cusparseSpMM(handle: cusparseHandle_t, opA: cusparseOperation_t, o
         cusparseSpMM(handle, opA, opB, alpha, matA, matB, beta, matC, computeType, alg, externalBuffer)
     }
 }
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpMMOp(plan: cusparseSpMMOpPlan_t, externalBuffer: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7184,7 +7224,7 @@ pub unsafe fn cusparseSpMMOp_createPlan(handle: cusparseHandle_t, plan: *mut cus
         cusparseSpMMOp_createPlan(handle, plan, opA, opB, matA, matB, matC, computeType, alg, addOperationNvvmBuffer, addOperationBufferSize, mulOperationNvvmBuffer, mulOperationBufferSize, epilogueNvvmBuffer, epilogueBufferSize, SpMMWorkspaceSize)
     }
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpMMOp_createPlan(handle: cusparseHandle_t, plan: *mut cusparseSpMMOpPlan_t, opA: cusparseOperation_t, opB: cusparseOperation_t, matA: cusparseConstSpMatDescr_t, matB: cusparseConstDnMatDescr_t, matC: cusparseDnMatDescr_t, computeType: cudaDataType, alg: cusparseSpMMOpAlg_t, addOperationLtoirBuffer: *const ::core::ffi::c_void, addOperationBufferSize: usize, mulOperationLtoirBuffer: *const ::core::ffi::c_void, mulOperationBufferSize: usize, epilogueLtoirBuffer: *const ::core::ffi::c_void, epilogueBufferSize: usize, SpMMWorkspaceSize: *mut usize) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7201,7 +7241,7 @@ pub unsafe fn cusparseSpMMOp_createPlan(handle: cusparseHandle_t, plan: *mut cus
         cusparseSpMMOp_createPlan(handle, plan, opA, opB, matA, matB, matC, computeType, alg, addOperationLtoirBuffer, addOperationBufferSize, mulOperationLtoirBuffer, mulOperationBufferSize, epilogueLtoirBuffer, epilogueBufferSize, SpMMWorkspaceSize)
     }
 }
-#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpMMOp_destroyPlan(plan: cusparseSpMMOpPlan_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7235,7 +7275,7 @@ pub unsafe fn cusparseSpMM_bufferSize(handle: cusparseHandle_t, opA: cusparseOpe
         cusparseSpMM_bufferSize(handle, opA, opB, alpha, matA, matB, beta, matC, computeType, alg, bufferSize)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpMM_bufferSize(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, matB: cusparseConstDnMatDescr_t, beta: *const ::core::ffi::c_void, matC: cusparseDnMatDescr_t, computeType: cudaDataType, alg: cusparseSpMMAlg_t, bufferSize: *mut usize) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7269,7 +7309,7 @@ pub unsafe fn cusparseSpMM_preprocess(handle: cusparseHandle_t, opA: cusparseOpe
         cusparseSpMM_preprocess(handle, opA, opB, alpha, matA, matB, beta, matC, computeType, alg, externalBuffer)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpMM_preprocess(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, matB: cusparseConstDnMatDescr_t, beta: *const ::core::ffi::c_void, matC: cusparseDnMatDescr_t, computeType: cudaDataType, alg: cusparseSpMMAlg_t, externalBuffer: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7303,7 +7343,7 @@ pub unsafe fn cusparseSpMV(handle: cusparseHandle_t, opA: cusparseOperation_t, a
         cusparseSpMV(handle, opA, alpha, matA, vecX, beta, vecY, computeType, alg, externalBuffer)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpMV(handle: cusparseHandle_t, opA: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, vecX: cusparseConstDnVecDescr_t, beta: *const ::core::ffi::c_void, vecY: cusparseDnVecDescr_t, computeType: cudaDataType, alg: cusparseSpMVAlg_t, externalBuffer: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7337,7 +7377,7 @@ pub unsafe fn cusparseSpMV_bufferSize(handle: cusparseHandle_t, opA: cusparseOpe
         cusparseSpMV_bufferSize(handle, opA, alpha, matA, vecX, beta, vecY, computeType, alg, bufferSize)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpMV_bufferSize(handle: cusparseHandle_t, opA: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, vecX: cusparseConstDnVecDescr_t, beta: *const ::core::ffi::c_void, vecY: cusparseDnVecDescr_t, computeType: cudaDataType, alg: cusparseSpMVAlg_t, bufferSize: *mut usize) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7354,7 +7394,7 @@ pub unsafe fn cusparseSpMV_bufferSize(handle: cusparseHandle_t, opA: cusparseOpe
         cusparseSpMV_bufferSize(handle, opA, alpha, matA, vecX, beta, vecY, computeType, alg, bufferSize)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpMV_preprocess(handle: cusparseHandle_t, opA: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, vecX: cusparseConstDnVecDescr_t, beta: *const ::core::ffi::c_void, vecY: cusparseDnVecDescr_t, computeType: cudaDataType, alg: cusparseSpMVAlg_t, externalBuffer: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7388,7 +7428,7 @@ pub unsafe fn cusparseSpMatGetAttribute(spMatDescr: cusparseSpMatDescr_t, attrib
         cusparseSpMatGetAttribute(spMatDescr, attribute, data, dataSize)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpMatGetAttribute(spMatDescr: cusparseConstSpMatDescr_t, attribute: cusparseSpMatAttribute_t, data: *mut ::core::ffi::c_void, dataSize: usize) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7422,7 +7462,7 @@ pub unsafe fn cusparseSpMatGetFormat(spMatDescr: cusparseSpMatDescr_t, format: *
         cusparseSpMatGetFormat(spMatDescr, format)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpMatGetFormat(spMatDescr: cusparseConstSpMatDescr_t, format: *mut cusparseFormat_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7456,7 +7496,7 @@ pub unsafe fn cusparseSpMatGetIndexBase(spMatDescr: cusparseSpMatDescr_t, idxBas
         cusparseSpMatGetIndexBase(spMatDescr, idxBase)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpMatGetIndexBase(spMatDescr: cusparseConstSpMatDescr_t, idxBase: *mut cusparseIndexBase_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7490,7 +7530,7 @@ pub unsafe fn cusparseSpMatGetSize(spMatDescr: cusparseSpMatDescr_t, rows: *mut 
         cusparseSpMatGetSize(spMatDescr, rows, cols, nnz)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpMatGetSize(spMatDescr: cusparseConstSpMatDescr_t, rows: *mut i64, cols: *mut i64, nnz: *mut i64) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7524,7 +7564,7 @@ pub unsafe fn cusparseSpMatGetStridedBatch(spMatDescr: cusparseSpMatDescr_t, bat
         cusparseSpMatGetStridedBatch(spMatDescr, batchCount)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpMatGetStridedBatch(spMatDescr: cusparseConstSpMatDescr_t, batchCount: *mut ::core::ffi::c_int) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7623,7 +7663,7 @@ pub unsafe fn cusparseSpSM_analysis(handle: cusparseHandle_t, opA: cusparseOpera
         cusparseSpSM_analysis(handle, opA, opB, alpha, matA, matB, matC, computeType, alg, spsmDescr, externalBuffer)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpSM_analysis(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, matB: cusparseConstDnMatDescr_t, matC: cusparseDnMatDescr_t, computeType: cudaDataType, alg: cusparseSpSMAlg_t, spsmDescr: cusparseSpSMDescr_t, externalBuffer: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7657,7 +7697,7 @@ pub unsafe fn cusparseSpSM_bufferSize(handle: cusparseHandle_t, opA: cusparseOpe
         cusparseSpSM_bufferSize(handle, opA, opB, alpha, matA, matB, matC, computeType, alg, spsmDescr, bufferSize)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpSM_bufferSize(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, matB: cusparseConstDnMatDescr_t, matC: cusparseDnMatDescr_t, computeType: cudaDataType, alg: cusparseSpSMAlg_t, spsmDescr: cusparseSpSMDescr_t, bufferSize: *mut usize) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7723,7 +7763,7 @@ pub unsafe fn cusparseSpSM_solve(handle: cusparseHandle_t, opA: cusparseOperatio
         cusparseSpSM_solve(handle, opA, opB, alpha, matA, matB, matC, computeType, alg, spsmDescr)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpSM_solve(handle: cusparseHandle_t, opA: cusparseOperation_t, opB: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, matB: cusparseConstDnMatDescr_t, matC: cusparseDnMatDescr_t, computeType: cudaDataType, alg: cusparseSpSMAlg_t, spsmDescr: cusparseSpSMDescr_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7740,7 +7780,7 @@ pub unsafe fn cusparseSpSM_solve(handle: cusparseHandle_t, opA: cusparseOperatio
         cusparseSpSM_solve(handle, opA, opB, alpha, matA, matB, matC, computeType, alg, spsmDescr)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpSM_updateMatrix(handle: cusparseHandle_t, spsmDescr: cusparseSpSMDescr_t, newValues: *mut ::core::ffi::c_void, updatePart: cusparseSpSMUpdate_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7774,7 +7814,7 @@ pub unsafe fn cusparseSpSV_analysis(handle: cusparseHandle_t, opA: cusparseOpera
         cusparseSpSV_analysis(handle, opA, alpha, matA, vecX, vecY, computeType, alg, spsvDescr, externalBuffer)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpSV_analysis(handle: cusparseHandle_t, opA: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, vecX: cusparseConstDnVecDescr_t, vecY: cusparseDnVecDescr_t, computeType: cudaDataType, alg: cusparseSpSVAlg_t, spsvDescr: cusparseSpSVDescr_t, externalBuffer: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7808,7 +7848,7 @@ pub unsafe fn cusparseSpSV_bufferSize(handle: cusparseHandle_t, opA: cusparseOpe
         cusparseSpSV_bufferSize(handle, opA, alpha, matA, vecX, vecY, computeType, alg, spsvDescr, bufferSize)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpSV_bufferSize(handle: cusparseHandle_t, opA: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, vecX: cusparseConstDnVecDescr_t, vecY: cusparseDnVecDescr_t, computeType: cudaDataType, alg: cusparseSpSVAlg_t, spsvDescr: cusparseSpSVDescr_t, bufferSize: *mut usize) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7874,7 +7914,7 @@ pub unsafe fn cusparseSpSV_solve(handle: cusparseHandle_t, opA: cusparseOperatio
         cusparseSpSV_solve(handle, opA, alpha, matA, vecX, vecY, computeType, alg, spsvDescr)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpSV_solve(handle: cusparseHandle_t, opA: cusparseOperation_t, alpha: *const ::core::ffi::c_void, matA: cusparseConstSpMatDescr_t, vecX: cusparseConstDnVecDescr_t, vecY: cusparseDnVecDescr_t, computeType: cudaDataType, alg: cusparseSpSVAlg_t, spsvDescr: cusparseSpSVDescr_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7891,7 +7931,7 @@ pub unsafe fn cusparseSpSV_solve(handle: cusparseHandle_t, opA: cusparseOperatio
         cusparseSpSV_solve(handle, opA, alpha, matA, vecX, vecY, computeType, alg, spsvDescr)
     }
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpSV_updateMatrix(handle: cusparseHandle_t, spsvDescr: cusparseSpSVDescr_t, newValues: *mut ::core::ffi::c_void, updatePart: cusparseSpSVUpdate_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7925,7 +7965,7 @@ pub unsafe fn cusparseSpVV(handle: cusparseHandle_t, opX: cusparseOperation_t, v
         cusparseSpVV(handle, opX, vecX, vecY, result, computeType, externalBuffer)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpVV(handle: cusparseHandle_t, opX: cusparseOperation_t, vecX: cusparseConstSpVecDescr_t, vecY: cusparseConstDnVecDescr_t, result: *mut ::core::ffi::c_void, computeType: cudaDataType, externalBuffer: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -7959,7 +7999,7 @@ pub unsafe fn cusparseSpVV_bufferSize(handle: cusparseHandle_t, opX: cusparseOpe
         cusparseSpVV_bufferSize(handle, opX, vecX, vecY, result, computeType, bufferSize)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpVV_bufferSize(handle: cusparseHandle_t, opX: cusparseOperation_t, vecX: cusparseConstSpVecDescr_t, vecY: cusparseConstDnVecDescr_t, result: *const ::core::ffi::c_void, computeType: cudaDataType, bufferSize: *mut usize) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8009,7 +8049,7 @@ pub unsafe fn cusparseSpVecGetIndexBase(spVecDescr: cusparseSpVecDescr_t, idxBas
         cusparseSpVecGetIndexBase(spVecDescr, idxBase)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSpVecGetIndexBase(spVecDescr: cusparseConstSpVecDescr_t, idxBase: *mut cusparseIndexBase_t) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8092,7 +8132,7 @@ pub unsafe fn cusparseSparseToDense(handle: cusparseHandle_t, matA: cusparseSpMa
         cusparseSparseToDense(handle, matA, matB, alg, externalBuffer)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSparseToDense(handle: cusparseHandle_t, matA: cusparseConstSpMatDescr_t, matB: cusparseDnMatDescr_t, alg: cusparseSparseToDenseAlg_t, externalBuffer: *mut ::core::ffi::c_void) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8126,7 +8166,7 @@ pub unsafe fn cusparseSparseToDense_bufferSize(handle: cusparseHandle_t, matA: c
         cusparseSparseToDense_bufferSize(handle, matA, matB, alg, bufferSize)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn cusparseSparseToDense_bufferSize(handle: cusparseHandle_t, matA: cusparseConstSpMatDescr_t, matB: cusparseDnMatDescr_t, alg: cusparseSparseToDenseAlg_t, bufferSize: *mut usize) -> cusparseStatus_t {
     #[cfg(feature = "dynamic-loading")]
     {

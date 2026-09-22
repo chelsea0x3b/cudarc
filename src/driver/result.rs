@@ -172,14 +172,16 @@ pub mod device {
                 feature = "cuda-13000",
                 feature = "cuda-13010",
                 feature = "cuda-13020",
-                feature = "cuda-13030"
+                feature = "cuda-13030",
+                feature = "cuda-13040"
             )))]
             sys::cuDeviceGetUuid(uuid.as_mut_ptr(), dev).result()?;
             #[cfg(any(
                 feature = "cuda-13000",
                 feature = "cuda-13010",
                 feature = "cuda-13020",
-                feature = "cuda-13030"
+                feature = "cuda-13030",
+                feature = "cuda-13040"
             ))]
             sys::cuDeviceGetUuid_v2(uuid.as_mut_ptr(), dev).result()?;
             id = uuid.assume_init();
@@ -1253,14 +1255,16 @@ pub mod event {
                 feature = "cuda-13000",
                 feature = "cuda-13010",
                 feature = "cuda-13020",
-                feature = "cuda-13030"
+                feature = "cuda-13030",
+                feature = "cuda-13040"
             )))]
             sys::cuEventElapsedTime((&mut ms) as *mut _, start, end).result()?;
             #[cfg(any(
                 feature = "cuda-13000",
                 feature = "cuda-13010",
                 feature = "cuda-13020",
-                feature = "cuda-13030"
+                feature = "cuda-13030",
+                feature = "cuda-13040"
             ))]
             sys::cuEventElapsedTime_v2((&mut ms) as *mut _, start, end).result()?;
         }

@@ -62,6 +62,7 @@ pub enum cudaDataType_t {
     CUDA_R_6F_E2M3 = 31,
     CUDA_R_6F_E3M2 = 32,
     CUDA_R_4F_E2M1 = 33,
+    CUDA_R_8F_UE5M3 = 34,
 }
 #[repr(i32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]

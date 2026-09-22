@@ -92,7 +92,7 @@ pub enum nvrtcResult {
     NVRTC_ERROR_CANCELLED = 16,
     NVRTC_ERROR_TIME_TRACE_FILE_WRITE_FAILED = 17,
 }
-#[cfg(any(feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum nvrtcResult {
@@ -121,7 +121,7 @@ pub enum nvrtcResult {
 pub struct _nvrtcProgram {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct nvrtcBundledHeadersInfo {
@@ -196,7 +196,7 @@ pub unsafe fn nvrtcDestroyProgram(prog: *mut nvrtcProgram) -> nvrtcResult {
         nvrtcDestroyProgram(prog)
     }
 }
-#[cfg(any(feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn nvrtcGetBundledHeadersInfo(info: *mut nvrtcBundledHeadersInfo, errorLog: *mut *const ::core::ffi::c_char) -> nvrtcResult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -261,7 +261,7 @@ pub unsafe fn nvrtcGetErrorString(result: nvrtcResult) -> *const ::core::ffi::c_
         nvrtcGetErrorString(result)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn nvrtcGetLTOIR(prog: nvrtcProgram, LTOIR: *mut ::core::ffi::c_char) -> nvrtcResult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -278,7 +278,7 @@ pub unsafe fn nvrtcGetLTOIR(prog: nvrtcProgram, LTOIR: *mut ::core::ffi::c_char)
         nvrtcGetLTOIR(prog, LTOIR)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn nvrtcGetLTOIRSize(prog: nvrtcProgram, LTOIRSizeRet: *mut usize) -> nvrtcResult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -327,7 +327,7 @@ pub unsafe fn nvrtcGetNumSupportedArchs(numArchs: *mut ::core::ffi::c_int) -> nv
         nvrtcGetNumSupportedArchs(numArchs)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn nvrtcGetOptiXIR(prog: nvrtcProgram, optixir: *mut ::core::ffi::c_char) -> nvrtcResult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -344,7 +344,7 @@ pub unsafe fn nvrtcGetOptiXIR(prog: nvrtcProgram, optixir: *mut ::core::ffi::c_c
         nvrtcGetOptiXIR(prog, optixir)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn nvrtcGetOptiXIRSize(prog: nvrtcProgram, optixirSizeRet: *mut usize) -> nvrtcResult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -441,7 +441,7 @@ pub unsafe fn nvrtcGetSupportedArchs(supportedArchs: *mut ::core::ffi::c_int) ->
         nvrtcGetSupportedArchs(supportedArchs)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn nvrtcGetTileIR(prog: nvrtcProgram, TileIR: *mut ::core::ffi::c_char) -> nvrtcResult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -458,7 +458,7 @@ pub unsafe fn nvrtcGetTileIR(prog: nvrtcProgram, TileIR: *mut ::core::ffi::c_cha
         nvrtcGetTileIR(prog, TileIR)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn nvrtcGetTileIRSize(prog: nvrtcProgram, TileIRSizeRet: *mut usize) -> nvrtcResult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -475,7 +475,7 @@ pub unsafe fn nvrtcGetTileIRSize(prog: nvrtcProgram, TileIRSizeRet: *mut usize) 
         nvrtcGetTileIRSize(prog, TileIRSizeRet)
     }
 }
-#[cfg(any(feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn nvrtcInstallBundledHeaders(installPath: *const ::core::ffi::c_char, flags: ::core::ffi::c_uint, errorLog: *mut *const ::core::ffi::c_char) -> nvrtcResult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -492,7 +492,7 @@ pub unsafe fn nvrtcInstallBundledHeaders(installPath: *const ::core::ffi::c_char
         nvrtcInstallBundledHeaders(installPath, flags, errorLog)
     }
 }
-#[cfg(any(feature = "cuda-13030"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
 pub unsafe fn nvrtcRemoveBundledHeaders(installPath: *const ::core::ffi::c_char, errorLog: *mut *const ::core::ffi::c_char) -> nvrtcResult {
     #[cfg(feature = "dynamic-loading")]
     {

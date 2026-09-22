@@ -24,7 +24,7 @@ categories = [
 
 [package.metadata.docs.rs]
 features = [
-    "cuda-13030",
+    "cuda-13040",
     "f16",
     "cudnn",
     "nccl",
@@ -72,6 +72,7 @@ cuda-13000 = []
 cuda-13010 = []
 cuda-13020 = []
 cuda-13030 = []
+cuda-13040 = []
 
 fallback-dynamic-loading = []
 dynamic-loading = []
