@@ -1,5 +1,7 @@
 use super::sys;
 use core::mem::MaybeUninit;
+use std::sync::OnceLock;
+use std::vec::Vec;
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub struct CutensorError(pub sys::cutensorStatus_t);
@@ -41,6 +43,71 @@ pub fn create_handle() -> Result<sys::cutensorHandle_t, CutensorError> {
 /// `handle` must not have been freed already.
 pub unsafe fn destroy_handle(handle: sys::cutensorHandle_t) -> Result<(), CutensorError> {
     sys::cutensorDestroy(handle).result()
+}
+
+type CreateComputeDescFn = unsafe extern "C" fn(
+    sys::cutensorHandle_t,
+    *mut sys::cutensorComputeDescriptor_t,
+    sys::cudaDataType_t,
+    u32,
+    *const core::ffi::c_void,
+    usize,
+) -> sys::cutensorStatus_t;
+
+type DestroyComputeDescFn =
+    unsafe extern "C" fn(sys::cutensorComputeDescriptor_t) -> sys::cutensorStatus_t;
+
+fn compute_desc_fns() -> (CreateComputeDescFn, DestroyComputeDescFn) {
+    static FNS: OnceLock<(CreateComputeDescFn, DestroyComputeDescFn)> = OnceLock::new();
+    *FNS.get_or_init(|| unsafe {
+        let lib_names: Vec<_> = crate::get_lib_name_candidates("cutensor");
+        let lib = lib_names
+            .iter()
+            .find_map(|n| libloading::Library::new(n).ok())
+            .expect("failed to load cutensor library");
+        let create: libloading::Symbol<CreateComputeDescFn> =
+            lib.get(b"cutensorCreateComputeDescriptor\0").unwrap();
+        let destroy: libloading::Symbol<DestroyComputeDescFn> =
+            lib.get(b"cutensorDestroyComputeDescriptor\0").unwrap();
+        let fns = (*create, *destroy);
+        std::mem::forget(lib);
+        fns
+    })
+}
+
+/// Creates a compute descriptor from a data type.
+///
+/// # Safety
+///
+/// `handle` must be valid.
+pub unsafe fn create_compute_descriptor(
+    handle: sys::cutensorHandle_t,
+    data_type: sys::cudaDataType_t,
+) -> Result<sys::cutensorComputeDescriptor_t, CutensorError> {
+    let mut desc = MaybeUninit::uninit();
+    let (create_fn, _) = compute_desc_fns();
+    create_fn(
+        handle,
+        desc.as_mut_ptr(),
+        data_type,
+        0,
+        core::ptr::null(),
+        0,
+    )
+    .result()?;
+    Ok(desc.assume_init())
+}
+
+/// Destroys a compute descriptor.
+///
+/// # Safety
+///
+/// `desc` must not have been freed already.
+pub unsafe fn destroy_compute_descriptor(
+    desc: sys::cutensorComputeDescriptor_t,
+) -> Result<(), CutensorError> {
+    let (_, destroy_fn) = compute_desc_fns();
+    destroy_fn(desc).result()
 }
 
 /// Returns the cuTENSOR library version as (major, minor, patch).
@@ -105,6 +172,7 @@ pub unsafe fn destroy_tensor_descriptor(
 ///
 /// - All handles and descriptors must be valid
 /// - Mode arrays must have correct lengths matching the tensor descriptors
+#[allow(clippy::too_many_arguments)]
 pub unsafe fn create_contraction(
     handle: sys::cutensorHandle_t,
     desc_a: sys::cutensorTensorDescriptor_t,
@@ -148,6 +216,7 @@ pub unsafe fn create_contraction(
 ///
 /// - All handles and descriptors must be valid
 /// - Mode arrays must have correct lengths
+#[allow(clippy::too_many_arguments)]
 pub unsafe fn create_reduction(
     handle: sys::cutensorHandle_t,
     desc_a: sys::cutensorTensorDescriptor_t,
@@ -279,6 +348,7 @@ pub unsafe fn destroy_plan(plan: sys::cutensorPlan_t) -> Result<(), CutensorErro
 /// - All handles, plan, and device pointers must be valid
 /// - Workspace must be properly allocated with the required size
 /// - All tensor data must be accessible from the specified stream
+#[allow(clippy::too_many_arguments)]
 pub unsafe fn contract(
     handle: sys::cutensorHandle_t,
     plan: sys::cutensorPlan_t,
@@ -316,6 +386,7 @@ pub unsafe fn contract(
 /// - All handles, plan, and device pointers must be valid
 /// - Workspace must be properly allocated with the required size
 /// - All tensor data must be accessible from the specified stream
+#[allow(clippy::too_many_arguments)]
 pub unsafe fn reduce(
     handle: sys::cutensorHandle_t,
     plan: sys::cutensorPlan_t,
