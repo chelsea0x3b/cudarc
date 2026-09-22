@@ -61,13 +61,19 @@ impl CudaStream {
         if cu_graph.is_null() {
             return Ok(None);
         }
-        let mut graph = CudaGraph {
-            cu_graph,
-            cu_graph_exec: std::ptr::null_mut(),
-            stream: self.clone(),
+        let cu_graph_exec = match unsafe { result::graph::instantiate(cu_graph, flags) } {
+            Ok(exec) => exec,
+            Err(error) => {
+                self.ctx
+                    .record_err(unsafe { result::graph::destroy(cu_graph) });
+                return Err(error);
+            }
         };
-        graph.cu_graph_exec = unsafe { result::graph::instantiate(cu_graph, flags) }?;
-        Ok(Some(graph))
+        Ok(Some(CudaGraph {
+            cu_graph,
+            cu_graph_exec,
+            stream: self.clone(),
+        }))
     }
 
     /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__STREAM.html#group__CUDA__STREAM_1g37823c49206e3704ae23c7ad78560bca)
