@@ -8,6 +8,7 @@ use std::fs;
 use std::ops::Deref;
 use std::path::Path;
 use std::process::Command;
+use syn::visit_mut::{self, VisitMut};
 use syn::{
     FnArg, ForeignItemFn, Item, ItemConst, ItemEnum, ItemImpl, ItemStruct, ItemType, ItemUnion,
     ItemUse, Pat,
@@ -76,6 +77,59 @@ fn build_adapter(
     }
 }
 
+/// Parse `content` and normalize the formatting drift between bindgen's
+/// prettyplease output and the rustfmt'd merged bindings: trailing commas in
+/// signatures, bare-fn types and generic arguments, which prettyplease keeps
+/// and rustfmt strips. Without this, version-equality comparisons would see
+/// identical declarations as different depending on which formatter produced
+/// the file. Macro tokens are left untouched; neither formatter agrees on
+/// them, but they pass through both verbatim.
+pub(crate) fn canonical_file(content: &str) -> syn::Result<syn::File> {
+    let mut file = syn::parse_file(content)?;
+    StripTrailingCommas.visit_file_mut(&mut file);
+    Ok(file)
+}
+
+struct StripTrailingCommas;
+
+fn strip_trailing_punct<T, P>(punctuated: &mut syn::punctuated::Punctuated<T, P>) {
+    if punctuated.trailing_punct()
+        && let Some(pair) = punctuated.pop()
+    {
+        punctuated.push_value(pair.into_value());
+    }
+}
+
+impl VisitMut for StripTrailingCommas {
+    fn visit_signature_mut(&mut self, sig: &mut syn::Signature) {
+        strip_trailing_punct(&mut sig.inputs);
+        visit_mut::visit_signature_mut(self, sig);
+    }
+
+    fn visit_type_bare_fn_mut(&mut self, bare_fn: &mut syn::TypeBareFn) {
+        strip_trailing_punct(&mut bare_fn.inputs);
+        visit_mut::visit_type_bare_fn_mut(self, bare_fn);
+    }
+
+    fn visit_angle_bracketed_generic_arguments_mut(
+        &mut self,
+        args: &mut syn::AngleBracketedGenericArguments,
+    ) {
+        strip_trailing_punct(&mut args.args);
+        visit_mut::visit_angle_bracketed_generic_arguments_mut(self, args);
+    }
+
+    fn visit_expr_call_mut(&mut self, call: &mut syn::ExprCall) {
+        strip_trailing_punct(&mut call.args);
+        visit_mut::visit_expr_call_mut(self, call);
+    }
+
+    fn visit_expr_method_call_mut(&mut self, call: &mut syn::ExprMethodCall) {
+        strip_trailing_punct(&mut call.args);
+        visit_mut::visit_expr_method_call_mut(self, call);
+    }
+}
+
 #[derive(Debug)]
 struct FunctionInfo<T> {
     declarations: BTreeMap<Version, T>,
@@ -124,7 +178,7 @@ impl BindingMerger {
     pub fn process_file(&mut self, path: &Path, version: &Version) -> Result<()> {
         self.n_versions += 1;
         let content = std::fs::read_to_string(path)?;
-        let file = syn::parse_file(&content)?;
+        let file = canonical_file(&content)?;
 
         for item in file.items {
             match item {
