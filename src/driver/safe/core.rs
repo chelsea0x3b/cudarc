@@ -1498,12 +1498,13 @@ impl CudaContext {
             .checked_mul(std::mem::size_of::<T>())
             .expect("Pinned host allocation size overflow");
         assert!(num_bytes < isize::MAX as usize);
+        let event = self.new_event(Some(sys::CUevent_flags::CU_EVENT_BLOCKING_SYNC))?;
         let ptr = result::malloc_host(num_bytes, flags)?;
         let ptr = ptr as *mut T;
+        let allocation = PinnedHostSlice { ptr, len, event };
         assert!(!ptr.is_null());
         assert!(ptr.is_aligned());
-        let event = self.new_event(Some(sys::CUevent_flags::CU_EVENT_BLOCKING_SYNC))?;
-        Ok(PinnedHostSlice { ptr, len, event })
+        Ok(allocation)
     }
 }
 
