@@ -1493,6 +1493,9 @@ pub mod graph {
     use super::*;
 
     /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__GRAPH.html#group__CUDA__GRAPH_1gb53b435e178cccfa37ac87285d2c3fa1)
+    ///
+    /// Pass `sys::CUgraphInstantiate_flags(0)` for default behavior, or combine flags with `|`.
+    ///
     /// # Safety
     /// graph must be valid
     pub unsafe fn instantiate(
@@ -1500,7 +1503,7 @@ pub mod graph {
         flags: sys::CUgraphInstantiate_flags,
     ) -> Result<sys::CUgraphExec, DriverError> {
         let mut graph_exec = MaybeUninit::uninit();
-        sys::cuGraphInstantiateWithFlags(graph_exec.as_mut_ptr(), graph, flags as u32 as u64)
+        sys::cuGraphInstantiateWithFlags(graph_exec.as_mut_ptr(), graph, u64::from(flags.0))
             .result()?;
         Ok(graph_exec.assume_init())
     }

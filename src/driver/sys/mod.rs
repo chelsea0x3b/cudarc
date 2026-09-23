@@ -3621,28 +3621,6 @@ pub enum CUgraphInstantiateResult_enum {
     CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED = 4,
     CUDA_GRAPH_INSTANTIATE_CONDITIONAL_HANDLE_UNUSED = 5,
 }
-#[cfg(any(feature = "cuda-11040", feature = "cuda-11050", feature = "cuda-11060"))]
-#[repr(u32)]
-#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
-pub enum CUgraphInstantiate_flags_enum {
-    CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH = 1,
-}
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080"))]
-#[repr(u32)]
-#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
-pub enum CUgraphInstantiate_flags_enum {
-    CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH = 1,
-    CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY = 8,
-}
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
-#[repr(u32)]
-#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
-pub enum CUgraphInstantiate_flags_enum {
-    CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH = 1,
-    CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD = 2,
-    CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH = 4,
-    CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY = 8,
-}
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUgraphMem_attribute_enum {
@@ -7435,6 +7413,9 @@ pub struct CUgraphExecUpdateResultInfo_st {
 pub struct CUgraphExec_st {
     _unused: [u8; 0],
 }
+#[repr(transparent)]
+#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
+pub struct CUgraphInstantiate_flags_enum(pub ::core::ffi::c_uint);
 #[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -7958,6 +7939,21 @@ impl CUdevice_attribute_enum {
 impl CUdevice_attribute_enum {
     pub const CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED: CUdevice_attribute_enum = CUdevice_attribute_enum::CU_DEVICE_ATTRIBUTE_VIRTUAL_ADDRESS_MANAGEMENT_SUPPORTED;
 }
+impl CUgraphInstantiate_flags_enum {
+    pub const CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH: CUgraphInstantiate_flags_enum = CUgraphInstantiate_flags_enum(1);
+}
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+impl CUgraphInstantiate_flags_enum {
+    pub const CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH: CUgraphInstantiate_flags_enum = CUgraphInstantiate_flags_enum(4);
+}
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+impl CUgraphInstantiate_flags_enum {
+    pub const CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD: CUgraphInstantiate_flags_enum = CUgraphInstantiate_flags_enum(2);
+}
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+impl CUgraphInstantiate_flags_enum {
+    pub const CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY: CUgraphInstantiate_flags_enum = CUgraphInstantiate_flags_enum(8);
+}
 #[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
 impl CUmemAllocationHandleType_enum {
     pub const CU_MEM_HANDLE_TYPE_FABRIC: CUmemAllocationHandleType_enum = CUmemAllocationHandleType_enum(8);
@@ -7981,11 +7977,24 @@ impl CUmemAllocationHandleType_enum {
 impl CUmemLocationType_enum {
     pub const CU_MEM_LOCATION_TYPE_NONE: CUmemLocationType_enum = CUmemLocationType_enum::CU_MEM_LOCATION_TYPE_INVALID;
 }
+impl ::core::ops::BitAnd<CUgraphInstantiate_flags_enum> for CUgraphInstantiate_flags_enum {
+    type Output = Self;
+    #[inline]
+    fn bitand(self, other: Self) -> Self {
+        CUgraphInstantiate_flags_enum(self.0 & other.0)
+    }
+}
 impl ::core::ops::BitAnd<CUmemAllocationHandleType_enum> for CUmemAllocationHandleType_enum {
     type Output = Self;
     #[inline]
     fn bitand(self, other: Self) -> Self {
         CUmemAllocationHandleType_enum(self.0 & other.0)
+    }
+}
+impl ::core::ops::BitAndAssign for CUgraphInstantiate_flags_enum {
+    #[inline]
+    fn bitand_assign(&mut self, rhs: CUgraphInstantiate_flags_enum) {
+        self.0 &= rhs.0;
     }
 }
 impl ::core::ops::BitAndAssign for CUmemAllocationHandleType_enum {
@@ -7994,11 +8003,24 @@ impl ::core::ops::BitAndAssign for CUmemAllocationHandleType_enum {
         self.0 &= rhs.0;
     }
 }
+impl ::core::ops::BitOr<CUgraphInstantiate_flags_enum> for CUgraphInstantiate_flags_enum {
+    type Output = Self;
+    #[inline]
+    fn bitor(self, other: Self) -> Self {
+        CUgraphInstantiate_flags_enum(self.0 | other.0)
+    }
+}
 impl ::core::ops::BitOr<CUmemAllocationHandleType_enum> for CUmemAllocationHandleType_enum {
     type Output = Self;
     #[inline]
     fn bitor(self, other: Self) -> Self {
         CUmemAllocationHandleType_enum(self.0 | other.0)
+    }
+}
+impl ::core::ops::BitOrAssign for CUgraphInstantiate_flags_enum {
+    #[inline]
+    fn bitor_assign(&mut self, rhs: CUgraphInstantiate_flags_enum) {
+        self.0 |= rhs.0;
     }
 }
 impl ::core::ops::BitOrAssign for CUmemAllocationHandleType_enum {
