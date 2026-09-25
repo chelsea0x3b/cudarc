@@ -1,5 +1,5 @@
 use cudarc::{
-    driver::{CudaContext, DriverError},
+    driver::{CudaContext, DriverError, LaunchConfig, SharedMemoryConfig},
     nvrtc::Ptx,
 };
 
@@ -56,16 +56,24 @@ fn main() -> Result<(), DriverError> {
     println!();
 
     // Use occupancy API to get optimal launch configuration
-    extern "C" fn no_dynamic_smem(_block_size: std::ffi::c_int) -> usize {
-        0
-    }
     let (min_grid_size, block_size) =
-        sin_kernel.occupancy_max_potential_block_size(no_dynamic_smem, 0, 0, None)?;
+        sin_kernel.occupancy_max_potential_block_size_with_flags(None, 0, 0, None)?;
 
     println!("=== Optimal Launch Configuration (sin_kernel) ===");
     println!("  Suggested block size:     {}", block_size);
     println!("  Min grid size:            {}", min_grid_size);
     println!("  Total threads per grid:   {}", min_grid_size * block_size);
 
+    // Or use the wrapper to get the suggested launch configuration for n elements
+    let n = 999_999;
+    let launch_config = LaunchConfig::suggested(n, &sin_kernel, None, SharedMemoryConfig::none())?;
+
+    println!(" === Optimal Launch Configuration for {n} elements (sin_kernel) ===");
+    println!("  Suggested block size:     {}", launch_config.block_dim.0);
+    println!("  grid size:                {}", launch_config.grid_dim.0);
+    println!(
+        "  Total threads per grid:   {}",
+        launch_config.block_dim.0 * launch_config.grid_dim.0
+    );
     Ok(())
 }

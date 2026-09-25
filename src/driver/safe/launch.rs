@@ -23,12 +23,50 @@ pub struct LaunchConfig {
     pub shared_mem_bytes: u32,
 }
 
+/// Shared memory configuration for the calculation of the kernel launch configuration.
+/// See [LaunchConfig::suggested] for info.
+///
+/// # Safety
+///
+/// The `Dynamic` variant contains an unsafe `extern "C"` function to calculate the shared memory
+/// size in bytes for a given block size.
+/// This function is passed directly to the CUDA driver.
+/// The caller must guarantee that this function returns valid smem values for all reasonable
+/// block sizes.
+#[derive(Clone, Copy, Debug)]
+pub enum SharedMemoryConfig {
+    Fixed(u32),
+    Dynamic(unsafe extern "C" fn(block_size: std::ffi::c_int) -> usize),
+}
+
+impl SharedMemoryConfig {
+    /// For functions with no shared memory.
+    pub fn none() -> Self {
+        Self::Fixed(0)
+    }
+
+    fn with_block_size(&self, block_size: u32) -> u32 {
+        match self {
+            Self::Fixed(val) => *val,
+            Self::Dynamic(func) => unsafe {
+                let smem = func(block_size as std::ffi::c_int);
+                debug_assert!(
+                    smem <= u32::MAX as usize,
+                    "dynamic shared memory size exceeds u32::MAX"
+                );
+                smem as u32
+            },
+        }
+    }
+}
+
 impl LaunchConfig {
     /// Creates a [LaunchConfig] with:
     /// - block_dim == `1024`
     /// - grid_dim == `(n + 1023) / 1024`
     /// - shared_mem_bytes == `0`
     pub fn for_num_elems(n: u32) -> Self {
+        debug_assert!(n > 0, "n must be greater than 0");
         const NUM_THREADS: u32 = 1024;
         let num_blocks = n.div_ceil(NUM_THREADS);
         Self {
@@ -36,6 +74,69 @@ impl LaunchConfig {
             block_dim: (NUM_THREADS, 1, 1),
             shared_mem_bytes: 0,
         }
+    }
+
+    pub fn for_block_size(n: u32, block_size: u32, smem: SharedMemoryConfig) -> Self {
+        debug_assert!(n > 0, "n must be greater than 0");
+        debug_assert!(block_size > 0, "block size must be greater than 0");
+        let num_blocks = n.div_ceil(block_size);
+        Self {
+            grid_dim: (num_blocks, 1, 1),
+            block_dim: (block_size, 1, 1),
+            shared_mem_bytes: smem.with_block_size(block_size),
+        }
+    }
+
+    /// Calculates a launch configuration that _should_ yield a reasonable occupancy on the GPU.
+    ///
+    /// # Performance Considerations
+    ///
+    /// Note that the values returned by this function are based on calculations done by the
+    /// driver, provided the loadout of the cuda function, the shared memory specifications, and
+    /// current hardware.
+    /// In many cases the configuration provided by this will *not* be the absolute optimum, as
+    /// GPU performance can be very unpredictable, especially if scheduling of multiple concurrent
+    /// kernels becomes important.
+    /// Always benchmark your kernels if you want optimal performance!
+    /// This is more of a 'good enough for most cases' situation.
+    pub fn suggested(
+        n: u32,
+        func: &CudaFunction,
+        block_size_limit: Option<u32>,
+        smem: SharedMemoryConfig,
+    ) -> Result<Self, DriverError> {
+        debug_assert!(n > 0, "n must be greater than 0");
+        let (min_grid_size, block_size, shared_mem_bytes) = match smem {
+            SharedMemoryConfig::Fixed(smem_size) => {
+                let (g, b) = func.occupancy_max_potential_block_size_with_flags(
+                    None,
+                    smem_size as usize,
+                    block_size_limit.unwrap_or(0),
+                    None,
+                )?;
+                (g, b, smem_size)
+            }
+            SharedMemoryConfig::Dynamic(block_size_to_smem_size) => {
+                let (g, b) = func.occupancy_max_potential_block_size_with_flags(
+                    Some(block_size_to_smem_size),
+                    0,
+                    block_size_limit.unwrap_or(0),
+                    None,
+                )?;
+                let smem = unsafe { block_size_to_smem_size(b as std::ffi::c_int) };
+                debug_assert!(
+                    smem <= u32::MAX as usize,
+                    "dynamic shared memory size exceeds u32::MAX"
+                );
+                (g, b, smem as u32)
+            }
+        };
+        let grid_size = u32::max(min_grid_size, n.div_ceil(block_size));
+        Ok(Self {
+            block_dim: (block_size, 1, 1),
+            grid_dim: (grid_size, 1, 1),
+            shared_mem_bytes,
+        })
     }
 }
 
