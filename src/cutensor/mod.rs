@@ -28,11 +28,13 @@
 //! let cutensor = CuTensor::new(stream.clone())?;
 //!
 //! // Check runtime version
-//! let (major, minor) = cutensor.version();
-//! println!("cuTENSOR version: {}.{}", major, minor);
+//! let (major, minor, patch) = cutensor.version();
+//! println!("cuTENSOR version: {major}.{minor}.{patch}");
 //! ```
 
 pub mod result;
+pub mod safe;
+pub use safe::*;
 #[allow(warnings)]
 #[rustfmt::skip]
 pub mod sys;
