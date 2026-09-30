@@ -32,7 +32,20 @@ pub fn to_file(url: &str, dest: &Path, multi_progress: &MultiProgress) -> Result
     }
 
     log::debug!("Downloading url {url}");
-    let mut response = get(url).expect("Downloading error").error_for_status()?;
+    let mut response = {
+        let mut attempt: u64 = 0;
+        loop {
+            match get(url).and_then(|r| r.error_for_status()) {
+                Ok(r) => break r,
+                Err(e) if attempt < 3 => {
+                    attempt += 1;
+                    log::warn!("Download of {url} failed ({e}), retry {attempt}/3");
+                    std::thread::sleep(std::time::Duration::from_secs(2 * attempt));
+                }
+                Err(e) => return Err(e).context(format!("Failed to download {url}")),
+            }
+        }
+    };
 
     // Create parent directories if needed
     log::debug!("Checking parent directories {}", dest.display());
