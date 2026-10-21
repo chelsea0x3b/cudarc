@@ -832,6 +832,25 @@ pub unsafe fn malloc_async(
     Ok(dev_ptr.assume_init())
 }
 
+/// Allocates memory with stream ordered semantics from a specific memory pool.
+///
+/// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MALLOC__ASYNC.html)
+///
+/// # Safety
+/// 1. The stream should be an already created stream.
+/// 2. The pool must be valid and usable from the stream's device.
+/// 3. The memory return by this is unset, which may be invalid for `T`.
+/// 4. All uses of this memory must be on the same stream.
+pub unsafe fn malloc_from_pool_async(
+    stream: sys::CUstream,
+    pool: sys::CUmemoryPool,
+    num_bytes: usize,
+) -> Result<sys::CUdeviceptr, DriverError> {
+    let mut dev_ptr = MaybeUninit::uninit();
+    sys::cuMemAllocFromPoolAsync(dev_ptr.as_mut_ptr(), num_bytes, pool, stream).result()?;
+    Ok(dev_ptr.assume_init())
+}
+
 /// Allocates memory
 ///
 /// See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MEM.html#group__CUDA__MEM_1gb82d2a09844a58dd9e744dc31e8aa467)

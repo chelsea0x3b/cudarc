@@ -8,7 +8,7 @@ use std::{
     marker::PhantomData,
     ops::{Bound, RangeBounds},
     string::String,
-    sync::atomic::{AtomicBool, AtomicU32, AtomicUsize, Ordering},
+    sync::atomic::{AtomicBool, AtomicPtr, AtomicU32, AtomicUsize, Ordering},
     sync::Arc,
     vec::Vec,
 };
@@ -40,6 +40,8 @@ pub struct CudaContext {
     pub(crate) num_streams: AtomicUsize,
     pub(crate) event_tracking: AtomicBool,
     pub(crate) error_state: AtomicU32,
+    /// The pool [CudaStream::alloc()] allocates from, or null for the device's current pool.
+    pub(crate) mem_pool: AtomicPtr<sys::CUmemPoolHandle_st>,
 }
 
 unsafe impl Send for CudaContext {}
@@ -91,6 +93,7 @@ impl CudaContext {
             num_streams: AtomicUsize::new(0),
             event_tracking: AtomicBool::new(true),
             error_state: AtomicU32::new(0),
+            mem_pool: AtomicPtr::new(std::ptr::null_mut()),
         });
         ctx.bind_to_thread()?;
         Ok(ctx)
@@ -163,6 +166,7 @@ impl CudaContext {
             num_streams: AtomicUsize::new(0),
             event_tracking: AtomicBool::new(true),
             error_state: AtomicU32::new(0),
+            mem_pool: AtomicPtr::new(std::ptr::null_mut()),
         });
         ctx.bind_to_thread()?;
         Ok(ctx)
@@ -214,6 +218,7 @@ impl CudaContext {
             num_streams: AtomicUsize::new(0),
             event_tracking: AtomicBool::new(true),
             error_state: AtomicU32::new(0),
+            mem_pool: AtomicPtr::new(std::ptr::null_mut()),
         });
         ctx.bind_to_thread()?;
         Ok(ctx)
@@ -251,6 +256,7 @@ impl CudaContext {
             num_streams: AtomicUsize::new(0),
             event_tracking: AtomicBool::new(true),
             error_state: AtomicU32::new(0),
+            mem_pool: AtomicPtr::new(std::ptr::null_mut()),
         });
         ctx.bind_to_thread()?;
         Ok(ctx)
@@ -492,6 +498,35 @@ impl CudaContext {
     /// - Ensure that a [CudaSlice] is not written two concurrently by multiple streams.
     pub unsafe fn disable_event_tracking(&self) {
         self.event_tracking.store(false, Ordering::Relaxed);
+    }
+
+    /// The memory pool that [CudaStream::alloc()] allocates from, as set by [CudaContext::set_mem_pool()], or
+    /// `None` when allocations come from the device's current pool (the default).
+    pub fn mem_pool(&self) -> Option<sys::CUmemoryPool> {
+        let pool = self.mem_pool.load(Ordering::Acquire);
+        (!pool.is_null()).then_some(pool)
+    }
+
+    /// Makes every [CudaSlice] **allocated after this call** by the streams of this context come from `pool`
+    /// (with [`cuMemAllocFromPoolAsync`]), or with `None`, from the device's current pool again (with
+    /// `cuMemAllocAsync`, the default).
+    ///
+    /// [`cuMemAllocFromPoolAsync`]: https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__MALLOC__ASYNC.html
+    ///
+    /// This is how allocations can come from a pool of another allocation type: `cuMemAllocAsync` only draws
+    /// from the device's current pool of pinned memory, even after a managed pool is made current with
+    /// [result::device::set_mem_pool()]. A managed pool (CUDA 13.0+) lets the driver page memory between the
+    /// GPU and the host, so a program can use more memory than the GPU has.
+    ///
+    /// Only takes effect when [CudaContext::has_async_alloc()] is true, as every allocation otherwise uses
+    /// `cuMemAlloc`. Allocations are freed the same way whichever pool they came from.
+    ///
+    /// # Safety
+    /// `pool` must be a valid memory pool usable from this context's device, and must not be destroyed while
+    /// it is set here.
+    pub unsafe fn set_mem_pool(&self, pool: Option<sys::CUmemoryPool>) {
+        self.mem_pool
+            .store(pool.unwrap_or(std::ptr::null_mut()), Ordering::Release);
     }
 
     /// Checks to see if there have been any calls that stored an Err in a function
@@ -1599,11 +1634,20 @@ impl<T> HostSlice<T> for PinnedHostSlice<T> {
 }
 
 impl CudaStream {
+    /// Stream ordered allocation from the context's memory pool ([CudaContext::set_mem_pool()]), or else the
+    /// device's current pool.
+    unsafe fn malloc_async(&self, num_bytes: usize) -> Result<sys::CUdeviceptr, DriverError> {
+        match self.ctx.mem_pool() {
+            Some(pool) => result::malloc_from_pool_async(self.cu_stream, pool, num_bytes),
+            None => result::malloc_async(self.cu_stream, num_bytes),
+        }
+    }
+
     /// Allocates an empty [CudaSlice] with 0 length.
     pub fn null<T>(self: &Arc<Self>) -> Result<CudaSlice<T>, result::DriverError> {
         self.ctx.bind_to_thread()?;
         let cu_device_ptr = if self.ctx.has_async_alloc {
-            unsafe { result::malloc_async(self.cu_stream, 0) }?
+            unsafe { self.malloc_async(0) }?
         } else {
             unsafe { result::malloc_sync(0) }?
         };
@@ -1626,7 +1670,7 @@ impl CudaStream {
     ) -> Result<CudaSlice<T>, DriverError> {
         self.ctx.bind_to_thread()?;
         let cu_device_ptr = if self.ctx.has_async_alloc {
-            result::malloc_async(self.cu_stream, len * std::mem::size_of::<T>())?
+            self.malloc_async(len * std::mem::size_of::<T>())?
         } else {
             result::malloc_sync(len * std::mem::size_of::<T>())?
         };
@@ -3166,5 +3210,127 @@ mod tests {
             assert_eq!(result, std::vec![4.0f32, 5.0, 6.0]);
         });
         handle.join().unwrap();
+    }
+
+    /// A memory pool of `alloc_type` memory that lives on (or prefers) `ctx`'s device.
+    fn create_pool(ctx: &CudaContext, alloc_type: sys::CUmemAllocationType) -> sys::CUmemoryPool {
+        let mut props: sys::CUmemPoolProps = unsafe { std::mem::zeroed() };
+        props.allocType = alloc_type;
+        props.handleTypes = sys::CUmemAllocationHandleType::CU_MEM_HANDLE_TYPE_NONE;
+        props.location.type_ = sys::CUmemLocationType::CU_MEM_LOCATION_TYPE_DEVICE;
+        #[cfg(not(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040")))]
+        {
+            props.location.id = ctx.ordinal as i32;
+        }
+        #[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+        {
+            props.location.__bindgen_anon_1.id = ctx.ordinal as i32;
+        }
+        unsafe { result::mem_pool::create(&props) }.unwrap()
+    }
+
+    /// The value of pointer attribute `attr` for `slice`, as `T`.
+    fn pointer_attribute<T: Default, S: DevicePtr<u8>>(
+        stream: &CudaStream,
+        slice: &S,
+        attr: sys::CUpointer_attribute,
+    ) -> T {
+        let (ptr, _record) = slice.device_ptr(stream);
+        let mut value = T::default();
+        unsafe { sys::cuPointerGetAttribute((&mut value as *mut T).cast(), attr, ptr) }
+            .result()
+            .unwrap();
+        value
+    }
+
+    #[test]
+    fn test_alloc_from_mem_pool() {
+        let ctx = CudaContext::new(0).unwrap();
+        if !ctx.has_async_alloc() {
+            return;
+        }
+        let stream = ctx.default_stream();
+        let pool = create_pool(
+            &ctx,
+            sys::CUmemAllocationType::CU_MEM_ALLOCATION_TYPE_PINNED,
+        );
+        let device_pool = unsafe { result::device::get_mem_pool(ctx.cu_device()) }.unwrap();
+        assert_ne!(pool, device_pool);
+        let pool_of = |s: &CudaSlice<u8>| -> sys::CUmemoryPool {
+            pointer_attribute(
+                &stream,
+                s,
+                sys::CUpointer_attribute::CU_POINTER_ATTRIBUTE_MEMPOOL_HANDLE,
+            )
+        };
+
+        assert_eq!(ctx.mem_pool(), None);
+        let before = stream.alloc_zeros::<u8>(1024).unwrap();
+        assert_eq!(pool_of(&before), device_pool);
+
+        unsafe { ctx.set_mem_pool(Some(pool)) };
+        assert_eq!(ctx.mem_pool(), Some(pool));
+        let from_pool = stream.clone_htod(&[1u8, 2, 3]).unwrap();
+        assert_eq!(pool_of(&from_pool), pool);
+        assert_eq!(stream.clone_dtoh(&from_pool).unwrap(), [1, 2, 3]);
+
+        unsafe { ctx.set_mem_pool(None) };
+        let after = stream.alloc_zeros::<u8>(1024).unwrap();
+        assert_eq!(pool_of(&after), device_pool);
+
+        drop(from_pool);
+        stream.synchronize().unwrap();
+        unsafe { result::mem_pool::destroy(pool) }.unwrap();
+    }
+
+    /// A managed pool (CUDA 13.0+) gives managed memory.
+    #[cfg(any(
+        feature = "cuda-13000",
+        feature = "cuda-13010",
+        feature = "cuda-13020",
+        feature = "cuda-13030",
+        feature = "cuda-13040"
+    ))]
+    #[test]
+    fn test_alloc_from_managed_mem_pool() {
+        let ctx = CudaContext::new(0).unwrap();
+        let concurrent = unsafe {
+            result::device::get_attribute(
+                ctx.cu_device(),
+                sys::CUdevice_attribute::CU_DEVICE_ATTRIBUTE_CONCURRENT_MANAGED_ACCESS,
+            )
+        }
+        .unwrap();
+        if !ctx.has_async_alloc() || concurrent == 0 {
+            return;
+        }
+        let stream = ctx.default_stream();
+        let is_managed = |s: &CudaSlice<f32>| -> bool {
+            let (ptr, _record) = s.device_ptr(&stream);
+            let mut managed = 0u32;
+            unsafe {
+                sys::cuPointerGetAttribute(
+                    (&mut managed as *mut u32).cast(),
+                    sys::CUpointer_attribute::CU_POINTER_ATTRIBUTE_IS_MANAGED,
+                    ptr,
+                )
+            }
+            .result()
+            .unwrap();
+            managed == 1
+        };
+        let pool = create_pool(
+            &ctx,
+            sys::CUmemAllocationType::CU_MEM_ALLOCATION_TYPE_MANAGED,
+        );
+        assert!(!is_managed(&stream.alloc_zeros::<f32>(256).unwrap()));
+        unsafe { ctx.set_mem_pool(Some(pool)) };
+        let managed = stream.clone_htod(&[0.5f32; 256]).unwrap();
+        assert!(is_managed(&managed));
+        assert_eq!(stream.clone_dtoh(&managed).unwrap(), [0.5f32; 256]);
+        unsafe { ctx.set_mem_pool(None) };
+        drop(managed);
+        stream.synchronize().unwrap();
+        unsafe { result::mem_pool::destroy(pool) }.unwrap();
     }
 }
