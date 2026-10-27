@@ -89,6 +89,25 @@ pub fn init() -> Result<(), DriverError> {
     unsafe { sys::cuInit(0).result() }
 }
 
+pub mod version {
+    //! Version management functions (`cuDriverGetVersion`).
+    //!
+    //! See [cuda docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__VERSION.html)
+
+    /// Returns the latest CUDA version supported by the installed driver, encoded as
+    /// `1000 * major + 10 * minor` (e.g. `13000` for CUDA 13.0).
+    ///
+    /// Unlike most driver functions, this may be called before [super::init()], e.g. to check
+    /// that the driver is new enough before using anything else.
+    ///
+    /// See [cuDriverGetVersion() docs](https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__VERSION.html#group__cuda__version_1ga8b7a10395392e049006e61bcdc8ebe71)
+    pub fn get() -> Result<i32, crate::driver::DriverError> {
+        let mut version = 0;
+        unsafe { crate::driver::sys::cuDriverGetVersion(&mut version).result()? };
+        Ok(version)
+    }
+}
+
 pub mod device {
     //! Device management functions (`cuDevice*`).
     //!
@@ -1639,6 +1658,13 @@ pub mod mem_pool {
 mod tests {
     use super::super::safe::{CudaContext, CudaSlice};
     use super::*;
+
+    #[test]
+    fn driver_version_is_positive() -> Result<(), DriverError> {
+        let version = version::get()?;
+        assert!(version > 0, "{version}");
+        Ok(())
+    }
 
     #[test]
     #[ignore = "must be executed with multiple gpus"]
