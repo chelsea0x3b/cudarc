@@ -85,6 +85,15 @@ impl CudaBlas {
             Ok(mode.assume_init())
         }
     }
+
+    /// Set the handle's math mode.
+    /// ref: <https://docs.nvidia.com/cuda/cublas/#cublassetmathmode>
+    pub fn set_math_mode(&self, math_mode: sys::cublasMath_t) -> Result<(), CublasError> {
+        unsafe {
+            sys::cublasSetMathMode(self.handle, math_mode).result()?;
+        }
+        Ok(())
+    }
 }
 
 impl Drop for CudaBlas {
@@ -121,6 +130,28 @@ mod tests {
             blas.get_pointer_mode().unwrap(),
             sys::cublasPointerMode_t::CUBLAS_POINTER_MODE_DEVICE,
             "We have set the mode to use device pointers"
+        );
+    }
+
+    #[test]
+    fn cublas_math_mode() {
+        let ctx = CudaContext::new(0).unwrap();
+        let stream = ctx.default_stream();
+        let blas = CudaBlas::new(stream.clone()).unwrap();
+        blas.set_math_mode(sys::cublasMath_t::CUBLAS_TF32_TENSOR_OP_MATH)
+            .unwrap();
+        blas.set_math_mode(sys::cublasMath_t::CUBLAS_DEFAULT_MATH)
+            .unwrap();
+
+        // NOTE: use the raw sys function to validate while not safe `get_math_mode` exists.
+        let mut mode = ::core::mem::MaybeUninit::uninit();
+        unsafe { sys::cublasGetMathMode(blas.handle, mode.as_mut_ptr()) }
+            .result()
+            .unwrap();
+        assert_eq!(
+            unsafe { mode.assume_init() },
+            sys::cublasMath_t::CUBLAS_DEFAULT_MATH,
+            "We have set the mode to the default"
         );
     }
 }
