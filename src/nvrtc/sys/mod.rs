@@ -530,7 +530,7 @@ pub unsafe fn is_culib_present() -> bool {
     let lib_names = ["nvrtc"];
     let choices = lib_names.iter().map(|l| crate::get_lib_name_candidates(l)).flatten();
     for choice in choices {
-        if ::libloading::Library::new(choice).is_ok() {
+        if crate::load_lib(&choice, false).is_ok() {
             return true;
         }
     }
@@ -543,7 +543,7 @@ pub unsafe fn culib() -> &'static ::libloading::Library {
         let lib_names = std::vec!["nvrtc"];
         let choices: std::vec::Vec<_> = lib_names.iter().map(|l| crate::get_lib_name_candidates(l)).flatten().collect();
         for choice in choices.iter() {
-            if let Ok(lib) = ::libloading::Library::new(choice) {
+            if let Ok(lib) = crate::load_lib(choice, false) {
                 return lib;
             }
         }
