@@ -1,0 +1,71 @@
+name: GPU tests (simulated)
+
+# Optional, non-required check. The runners have no GPU, so this runs the tests
+# and examples on a simulated NVIDIA H100 (https://github.com/pantheongpu/pantheonsim).
+# A simulator cannot reproduce hardware-specific behaviour or timing, so it
+# complements real-GPU testing and does not replace it.
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+  # cudarc loads libcuda, NVRTC, cuBLAS, ... at runtime (dynamic loading).
+  CUDARC_CUDA_VERSION: "13000"
+
+jobs:
+  gpu-tests:
+    name: cargo test on a simulated H100
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up the simulated GPU and CUDA toolkit
+        uses: pantheongpu/setup-pantheonsim@dda0c8df8d72627c295edbae525354ba2bcb1687 # v0.1.4
+        with:
+          gpu: nvidia/h100
+          cuda-toolkit: "13.0"
+
+      - name: Build
+        run: cargo test --no-run --lib --features cuda-13000,dynamic-loading,cufft
+
+      # Skipped: wall-clock comparisons (pinned vs pageable copy speed, stream
+      # overlap, parallel vs sequential launch) that are meaningless on a
+      # simulator, and test_event_try_is_complete, which queries an event while
+      # another test's stream capture is active and trips the simulator's
+      # capture-invalidation check.
+      # Tests marked #[ignore] need several GPUs or exclusive access to the device.
+      - name: Test
+        run: |
+          vgpu run cargo test --lib --features cuda-13000,dynamic-loading,cufft -- \
+            --skip test_pinned_copy_is_faster \
+            --skip test_default_pinned_host_reads_are_faster_than_write_combined \
+            --skip test_multi_stream_concurrent_reads \
+            --skip test_par_launch \
+            --skip test_event_try_is_complete
+
+      # cufft is left out: its doc example refers to the `cufft` module by an
+      # unresolved path and does not compile.
+      - name: Doc tests
+        run: vgpu run cargo test --doc --features cuda-13000,dynamic-loading
+
+      # 12-context-config is left out: it queries cudaLimitDevRuntimeSyncDepth,
+      # which the simulated H100 reports as an unsupported limit.
+      - name: Examples
+        run: |
+          for ex in 01-allocate 02-copy 03-launch-kernel 04-streams 05-device-repr 06-threading 09-constant-memory 10-function-attributes matmul-kernel nvrtc-compile; do
+            echo "::group::$ex"
+            vgpu run cargo run --example "$ex" --features cuda-13000,dynamic-loading
+            echo "::endgroup::"
+          done
