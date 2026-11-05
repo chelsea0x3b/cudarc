@@ -109,14 +109,20 @@ struct BindingMerger {
     lib_names: Vec<String>,
     n_versions: usize,
     feature_prefix: String,
+    windows_system32_only: bool,
 }
 
 impl BindingMerger {
-    pub fn new(lib_names: Vec<String>, feature_prefix: String) -> Self {
+    pub fn new(
+        lib_names: Vec<String>,
+        feature_prefix: String,
+        windows_system32_only: bool,
+    ) -> Self {
         Self {
             lib_names,
             n_versions: 0,
             feature_prefix,
+            windows_system32_only,
             ..Default::default()
         }
     }
@@ -193,6 +199,7 @@ impl BindingMerger {
         let consts = self.write_to_output(&self.consts).expect("Write to output");
 
         let lib_names = &self.lib_names;
+        let windows_system32_only = self.windows_system32_only;
 
         let adapters = self
             .create_unified_adapters(&self.functions)
@@ -242,7 +249,7 @@ impl BindingMerger {
                     .map(|l| crate::get_lib_name_candidates(l))
                     .flatten();
                 for choice in choices {
-                    if ::libloading::Library::new(choice).is_ok() {
+                    if crate::load_lib(&choice, #windows_system32_only).is_ok() {
                         return true;
                     }
                 }
@@ -260,7 +267,7 @@ impl BindingMerger {
                         .flatten()
                         .collect();
                     for choice in choices.iter() {
-                        if let Ok(lib) = ::libloading::Library::new(choice) {
+                        if let Ok(lib) = crate::load_lib(choice, #windows_system32_only) {
                             return lib;
                         }
                     }
@@ -368,11 +375,13 @@ pub fn merge<P: AsRef<Path>>(
     output_filename: P,
     lib_names: Vec<String>,
     feature_prefix: &str,
+    windows_system32_only: bool,
 ) -> Result<()> {
     let binding_dir = binding_dir.as_ref();
     let entries: Vec<_> = fs::read_dir(binding_dir)?.collect::<std::io::Result<_>>()?;
 
-    let mut merger = BindingMerger::new(lib_names, feature_prefix.to_string());
+    let mut merger =
+        BindingMerger::new(lib_names, feature_prefix.to_string(), windows_system32_only);
     for entry in entries {
         let path = entry.path();
         if path.is_file() {
@@ -412,6 +421,7 @@ pub fn merge_bindings(modules: &[ModuleConfig]) -> Result<()> {
                 format!("../src/{}/sys/mod.rs", config.cudarc_name),
                 config.libs.iter().map(|&s| s.into()).collect(),
                 config.feature_prefix,
+                config.windows_system32_only,
             )?;
             pb.inc(1);
             Ok(())

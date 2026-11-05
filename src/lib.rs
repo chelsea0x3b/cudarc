@@ -200,6 +200,32 @@ pub(crate) fn panic_no_lib_found<S: std::fmt::Debug>(lib_name: &str, choices: &[
     panic!("Unable to dynamically load the \"{lib_name}\" shared library - searched for library names: {choices:?}. Ensure that `LD_LIBRARY_PATH` has the correct path to the installed library. If the shared library is present on the system under a different name than one of those listed above, please open a GitHub issue.");
 }
 
+/// Opens one candidate name for a dynamically loaded library.
+///
+/// With `windows_system32_only`, Windows looks for it in System32 alone. The CUDA driver
+/// (`nvcuda.dll`) is always installed there, and the default search would otherwise check
+/// the current working directory before `PATH`: the driver's candidate names start with
+/// `cuda.dll`, which System32 never has, so a `cuda.dll` planted in the directory a
+/// program runs from would load, and run its code, ahead of the real driver. Other
+/// platforms, and other libraries, use the default search.
+///
+/// # Safety
+/// Loading a library runs its initialisation routines, as with [`libloading::Library::new`].
+#[cfg(feature = "dynamic-loading")]
+pub(crate) unsafe fn load_lib(
+    name: &str,
+    windows_system32_only: bool,
+) -> Result<::libloading::Library, ::libloading::Error> {
+    #[cfg(windows)]
+    if windows_system32_only {
+        use ::libloading::os::windows::{Library, LOAD_LIBRARY_SEARCH_SYSTEM32};
+        return Library::load_with_flags(name, LOAD_LIBRARY_SEARCH_SYSTEM32).map(Into::into);
+    }
+    #[cfg(not(windows))]
+    let _ = windows_system32_only;
+    ::libloading::Library::new(name)
+}
+
 #[cfg(feature = "dynamic-loading")]
 pub fn get_lib_name_candidates(lib_name: &str) -> std::vec::Vec<std::string::String> {
     use std::env::consts::{DLL_PREFIX, DLL_SUFFIX};

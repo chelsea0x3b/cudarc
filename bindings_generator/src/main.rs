@@ -69,6 +69,7 @@ fn create_modules() -> Vec<ModuleConfig> {
                 ..Filters::none()
             },
             libs: vec!["cuda", "nvcuda"],
+            windows_system32_only: true,
             bitflag_enums: vec![
                 "CUmemAllocationHandleType_enum",
                 "CUgraphInstantiate_flags_enum",
@@ -382,6 +383,11 @@ struct ModuleConfig {
     constified_enums: Vec<&'static str>,
     /// Whether to prepend enum names to their variants
     prepend_enum_names: bool,
+    /// On Windows, load this module's library only from System32. The CUDA driver
+    /// (`nvcuda.dll`) is always installed there, while the default DLL search also checks
+    /// the current working directory before `PATH`, where a planted `cuda.dll` (the first
+    /// candidate name) would otherwise load ahead of the real driver.
+    windows_system32_only: bool,
 }
 
 impl Default for ModuleConfig {
@@ -402,6 +408,7 @@ impl Default for ModuleConfig {
             bitflag_enums: vec![],
             constified_enums: vec![],
             prepend_enum_names: true,
+            windows_system32_only: false,
         }
     }
 }
