@@ -12,54 +12,54 @@ fn load<F: Copy>(name: &str) -> F {
     unsafe { *culib().get::<F>(name.as_bytes()).unwrap_or_else(|e| panic!("Missing symbol {name}: {e}")) }
 }
 pub use self::cudaError_enum as CUresult;
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::cufileBatchMode as CUfileBatchMode_t;
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUFILEStatus_enum as CUfileStatus_t;
 pub use self::CUfileDriverControlFlags as CUfileDriverControlFlags_t;
 pub use self::CUfileDriverStatusFlags as CUfileDriverStatusFlags_t;
 pub use self::CUfileFeatureFlags as CUfileFeatureFlags_t;
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUfileOpcode as CUfileOpcode_t;
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUfileP2PFlags as CUfileP2PFlags_t;
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUfileBatchHandle_t = *mut ::core::ffi::c_void;
 pub type CUfileDrvProps_t = CUfileDrvProps;
 pub type CUfileError_t = CUfileError;
 pub type CUfileFSOps_t = CUfileFSOps;
 pub type CUfileHandle_t = *mut ::core::ffi::c_void;
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUfileIOEvents_t = CUfileIOEvents;
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUfileIOParams_t = CUfileIOParams;
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUfileIOVec_t = CUfileIOVec;
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUfileOpCounter_t = CUfileOpCounter;
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUfilePerGpuStats_t = CUfilePerGpuStats;
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUfileStatsLevel1_t = CUfileStatsLevel1;
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUfileStatsLevel2_t = CUfileStatsLevel2;
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUfileStatsLevel3_t = CUfileStatsLevel3;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUstream = *mut CUstream_st;
 pub type __loff_t = __off64_t;
 pub type __off64_t = ::core::ffi::c_long;
 pub type __off_t = ::core::ffi::c_long;
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type __syscall_slong_t = ::core::ffi::c_long;
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type __time_t = ::core::ffi::c_long;
 pub type cufileRDMAInfo_t = cufileRDMAInfo;
 pub type loff_t = __loff_t;
 pub type off_t = __off_t;
 pub type sa_family_t = ::core::ffi::c_ushort;
 pub type sockaddr_t = sockaddr;
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUFILEStatus_enum {
@@ -78,7 +78,7 @@ pub enum CUFileArrayConfigParameter_t {
     CUFILE_PARAM_POSIX_POOL_SLAB_SIZE_KB = 0,
     CUFILE_PARAM_POSIX_POOL_SLAB_COUNT = 1,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUFileArrayConfigParameter_t {
@@ -104,7 +104,7 @@ pub enum CUFileBoolConfigParameter_t {
     CUFILE_PARAM_SKIP_TOPOLOGY_DETECTION = 10,
     CUFILE_PARAM_STREAM_MEMOPS_BYPASS = 11,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUFileBoolConfigParameter_t {
@@ -123,7 +123,7 @@ pub enum CUFileBoolConfigParameter_t {
     CUFILE_PARAM_PROPERTIES_POSIX_IO_MODE = 12,
     CUFILE_PARAM_GDS_FALLBACK_IO = 13,
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUFileSizeTConfigParameter_t {
@@ -148,7 +148,7 @@ pub enum CUFileStringConfigParameter_t {
     CUFILE_PARAM_ENV_LOGFILE_PATH = 1,
     CUFILE_PARAM_LOG_DIR = 2,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUFileStringConfigParameter_t {
@@ -173,7 +173,7 @@ pub enum CUfileDriverControlFlags {
     CU_FILE_POSIX_IO_MODE = 2,
     CU_FILE_FALLBACK_IO_MODE = 4,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUfileDriverControlFlags {
@@ -263,7 +263,7 @@ pub enum CUfileDriverStatusFlags {
     CU_FILE_VIRTIOFS_SUPPORTED = 13,
     CU_FILE_MAX_TARGET_TYPES = 14,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUfileDriverStatusFlags {
@@ -300,7 +300,7 @@ pub enum CUfileFeatureFlags {
     CU_FILE_STREAMS_SUPPORTED = 2,
     CU_FILE_PARALLEL_IO_SUPPORTED = 3,
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUfileFeatureFlags {
@@ -520,7 +520,7 @@ pub enum CUfileOpError {
     CU_FILE_ASYNC_NOT_SUPPORTED = 5038,
     CU_FILE_IO_MAX_ERROR = 5039,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUfileOpError {
@@ -574,14 +574,14 @@ pub enum CUfileOpError {
     CU_FILE_BATCH_NOCOMPAT_ERROR = 5049,
     CU_FILE_IO_MAX_ERROR = 5050,
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUfileOpcode {
     CUFILE_READ = 0,
     CUFILE_WRITE = 1,
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUfileP2PFlags {
@@ -1693,7 +1693,7 @@ pub enum cudaError_enum {
     CUDA_ERROR_GRAPH_RECAPTURE_FAILURE = 918,
     CUDA_ERROR_UNKNOWN = 999,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cudaError_enum {
@@ -1804,7 +1804,7 @@ pub enum cudaError_enum {
     CUDA_ERROR_FABRIC_NOT_READY = 919,
     CUDA_ERROR_UNKNOWN = 999,
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cufileBatchMode {
@@ -1828,7 +1828,7 @@ pub struct CUfileDrvProps {
     pub max_device_pinned_mem_size: ::core::ffi::c_uint,
     pub max_batch_io_timeout_msecs: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUfileDrvProps {
@@ -1866,7 +1866,7 @@ pub struct CUfileFSOps {
     pub read: ::core::option::Option<unsafe extern "C" fn(handle: *mut ::core::ffi::c_void, arg1: *mut ::core::ffi::c_char, arg2: usize, arg3: loff_t, arg4: *mut cufileRDMAInfo_t) -> isize>,
     pub write: ::core::option::Option<unsafe extern "C" fn(handle: *mut ::core::ffi::c_void, arg1: *const ::core::ffi::c_char, arg2: usize, arg3: loff_t, arg4: *mut cufileRDMAInfo_t) -> isize>,
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUfileFSOps {
@@ -1876,7 +1876,7 @@ pub struct CUfileFSOps {
     pub read: ::core::option::Option<unsafe extern "C" fn(handle: *const ::core::ffi::c_void, arg1: *mut ::core::ffi::c_char, arg2: usize, arg3: loff_t, arg4: *const cufileRDMAInfo_t) -> isize>,
     pub write: ::core::option::Option<unsafe extern "C" fn(handle: *const ::core::ffi::c_void, arg1: *const ::core::ffi::c_char, arg2: usize, arg3: loff_t, arg4: *const cufileRDMAInfo_t) -> isize>,
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUfileIOEvents {
@@ -1884,7 +1884,7 @@ pub struct CUfileIOEvents {
     pub status: CUfileStatus_t,
     pub ret: usize,
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUfileIOParams {
@@ -1894,7 +1894,7 @@ pub struct CUfileIOParams {
     pub opcode: CUfileOpcode_t,
     pub cookie: *mut ::core::ffi::c_void,
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUfileIOParams__bindgen_ty_1__bindgen_ty_1 {
@@ -1903,21 +1903,21 @@ pub struct CUfileIOParams__bindgen_ty_1__bindgen_ty_1 {
     pub devPtr_offset: off_t,
     pub size: usize,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUfileIOVec {
     pub base: *mut ::core::ffi::c_void,
     pub len: usize,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUfileOpCounter {
     pub ok: u64,
     pub err: u64,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUfilePerGpuStats {
@@ -2000,7 +2000,7 @@ pub struct CUfileStatsLevel1 {
     pub last_batch_read_bytes: u64,
     pub last_batch_write_bytes: u64,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUfileStatsLevel1 {
@@ -2060,7 +2060,7 @@ pub struct CUfileStatsLevel1 {
     pub readv_lat_sum_us: u64,
     pub writev_lat_sum_us: u64,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUfileStatsLevel2 {
@@ -2068,7 +2068,7 @@ pub struct CUfileStatsLevel2 {
     pub read_size_kb_hist: [u64; 32usize],
     pub write_size_kb_hist: [u64; 32usize],
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUfileStatsLevel3 {
@@ -2076,7 +2076,7 @@ pub struct CUfileStatsLevel3 {
     pub num_gpus: u32,
     pub per_gpu_stats: [CUfilePerGpuStats_t; 16usize],
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct CUstream_st {
@@ -2095,14 +2095,14 @@ pub struct sockaddr {
     pub sa_family: sa_family_t,
     pub sa_data: [::core::ffi::c_char; 14usize],
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct timespec {
     pub tv_sec: __time_t,
     pub tv_nsec: __syscall_slong_t,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 impl CUfileDriverControlFlags {
     pub const CU_FILE_POSIX_IO_MODE: CUfileDriverControlFlags = CUfileDriverControlFlags::CU_FILE_VANILLA_POSIX_IO_MODE;
 }
@@ -2112,13 +2112,13 @@ pub union CUfileDescr_t__bindgen_ty_1 {
     pub fd: ::core::ffi::c_int,
     pub handle: *mut ::core::ffi::c_void,
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union CUfileIOParams__bindgen_ty_1 {
     pub batch: CUfileIOParams__bindgen_ty_1__bindgen_ty_1,
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileBatchIOCancel(batch_idp: CUfileBatchHandle_t) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2135,7 +2135,7 @@ pub unsafe fn cuFileBatchIOCancel(batch_idp: CUfileBatchHandle_t) -> CUfileError
         cuFileBatchIOCancel(batch_idp)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileBatchIODestroy(batch_idp: CUfileBatchHandle_t) {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2152,7 +2152,7 @@ pub unsafe fn cuFileBatchIODestroy(batch_idp: CUfileBatchHandle_t) {
         cuFileBatchIODestroy(batch_idp)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileBatchIOGetStatus(batch_idp: CUfileBatchHandle_t, min_nr: ::core::ffi::c_uint, nr: *mut ::core::ffi::c_uint, iocbp: *mut CUfileIOEvents_t, timeout: *mut timespec) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2169,7 +2169,7 @@ pub unsafe fn cuFileBatchIOGetStatus(batch_idp: CUfileBatchHandle_t, min_nr: ::c
         cuFileBatchIOGetStatus(batch_idp, min_nr, nr, iocbp, timeout)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileBatchIOSetUp(batch_idp: *mut CUfileBatchHandle_t, nr: ::core::ffi::c_uint) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2186,7 +2186,7 @@ pub unsafe fn cuFileBatchIOSetUp(batch_idp: *mut CUfileBatchHandle_t, nr: ::core
         cuFileBatchIOSetUp(batch_idp, nr)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileBatchIOSubmit(batch_idp: CUfileBatchHandle_t, nr: ::core::ffi::c_uint, iocbp: *mut CUfileIOParams_t, flags: ::core::ffi::c_uint) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2220,7 +2220,7 @@ pub unsafe fn cuFileBufDeregister(devPtr_base: *const ::core::ffi::c_void) -> CU
         cuFileBufDeregister(devPtr_base)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileBufDeregister(bufPtr_base: *const ::core::ffi::c_void) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2254,7 +2254,7 @@ pub unsafe fn cuFileBufRegister(devPtr_base: *const ::core::ffi::c_void, length:
         cuFileBufRegister(devPtr_base, length, flags)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileBufRegister(bufPtr_base: *const ::core::ffi::c_void, length: usize, flags: ::core::ffi::c_int) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2287,7 +2287,7 @@ pub unsafe fn cuFileDriverClose() -> CUfileError_t {
         cuFileDriverClose()
     }
 }
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileDriverClose_v2() -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2304,7 +2304,7 @@ pub unsafe fn cuFileDriverClose_v2() -> CUfileError_t {
         cuFileDriverClose_v2()
     }
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileDriverGetP2PFlags(status_flag: CUfileDriverStatusFlags_t, p2p_flags: *mut CUfileP2PFlags_t) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2401,7 +2401,7 @@ pub unsafe fn cuFileDriverSetMaxPinnedMemSize(max_pinned_size: usize) -> CUfileE
         cuFileDriverSetMaxPinnedMemSize(max_pinned_size)
     }
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileDriverSetP2PFlags(status_flag: CUfileDriverStatusFlags_t, p2p_flags: CUfileP2PFlags_t) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2434,7 +2434,7 @@ pub unsafe fn cuFileDriverSetPollMode(poll: bool, poll_threshold_size: usize) ->
         cuFileDriverSetPollMode(poll, poll_threshold_size)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileExportPCIeTopology(filename: *const ::core::ffi::c_char) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2451,7 +2451,7 @@ pub unsafe fn cuFileExportPCIeTopology(filename: *const ::core::ffi::c_char) -> 
         cuFileExportPCIeTopology(filename)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileGetBARSizeInKB(gpuIndex: ::core::ffi::c_int, barSize: *mut usize) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2468,7 +2468,7 @@ pub unsafe fn cuFileGetBARSizeInKB(gpuIndex: ::core::ffi::c_int, barSize: *mut u
         cuFileGetBARSizeInKB(gpuIndex, barSize)
     }
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileGetParameterBool(param: CUFileBoolConfigParameter_t, value: *mut bool) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2485,7 +2485,7 @@ pub unsafe fn cuFileGetParameterBool(param: CUFileBoolConfigParameter_t, value: 
         cuFileGetParameterBool(param, value)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileGetParameterGpuBounceBufferSlabArray(size_values: *mut usize, count_values: *mut usize, len: ::core::ffi::c_int) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2502,7 +2502,7 @@ pub unsafe fn cuFileGetParameterGpuBounceBufferSlabArray(size_values: *mut usize
         cuFileGetParameterGpuBounceBufferSlabArray(size_values, count_values, len)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileGetParameterMinMaxValue(param: CUFileSizeTConfigParameter_t, min_value: *mut usize, max_value: *mut usize) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2519,7 +2519,7 @@ pub unsafe fn cuFileGetParameterMinMaxValue(param: CUFileSizeTConfigParameter_t,
         cuFileGetParameterMinMaxValue(param, min_value, max_value)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileGetParameterPosixPoolSlabArray(size_values: *mut usize, count_values: *mut usize, len: ::core::ffi::c_int) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2536,7 +2536,7 @@ pub unsafe fn cuFileGetParameterPosixPoolSlabArray(size_values: *mut usize, coun
         cuFileGetParameterPosixPoolSlabArray(size_values, count_values, len)
     }
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileGetParameterSizeT(param: CUFileSizeTConfigParameter_t, value: *mut usize) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2553,7 +2553,7 @@ pub unsafe fn cuFileGetParameterSizeT(param: CUFileSizeTConfigParameter_t, value
         cuFileGetParameterSizeT(param, value)
     }
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileGetParameterString(param: CUFileStringConfigParameter_t, desc_str: *mut ::core::ffi::c_char, len: ::core::ffi::c_int) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2570,7 +2570,7 @@ pub unsafe fn cuFileGetParameterString(param: CUFileStringConfigParameter_t, des
         cuFileGetParameterString(param, desc_str, len)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileGetStatsL1(stats: *mut CUfileStatsLevel1_t) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2587,7 +2587,7 @@ pub unsafe fn cuFileGetStatsL1(stats: *mut CUfileStatsLevel1_t) -> CUfileError_t
         cuFileGetStatsL1(stats)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileGetStatsL2(stats: *mut CUfileStatsLevel2_t) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2604,7 +2604,7 @@ pub unsafe fn cuFileGetStatsL2(stats: *mut CUfileStatsLevel2_t) -> CUfileError_t
         cuFileGetStatsL2(stats)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileGetStatsL3(stats: *mut CUfileStatsLevel3_t) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2621,7 +2621,7 @@ pub unsafe fn cuFileGetStatsL3(stats: *mut CUfileStatsLevel3_t) -> CUfileError_t
         cuFileGetStatsL3(stats)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileGetStatsLevel(level: *mut ::core::ffi::c_int) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2638,7 +2638,7 @@ pub unsafe fn cuFileGetStatsLevel(level: *mut ::core::ffi::c_int) -> CUfileError
         cuFileGetStatsLevel(level)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileGetVersion(version: *mut ::core::ffi::c_int) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2704,7 +2704,7 @@ pub unsafe fn cuFileRead(fh: CUfileHandle_t, devPtr_base: *mut ::core::ffi::c_vo
         cuFileRead(fh, devPtr_base, size, file_offset, devPtr_offset)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileRead(fh: CUfileHandle_t, bufPtr_base: *mut ::core::ffi::c_void, size: usize, file_offset: off_t, bufPtr_offset: off_t) -> isize {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2721,7 +2721,7 @@ pub unsafe fn cuFileRead(fh: CUfileHandle_t, bufPtr_base: *mut ::core::ffi::c_vo
         cuFileRead(fh, bufPtr_base, size, file_offset, bufPtr_offset)
     }
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileReadAsync(fh: CUfileHandle_t, bufPtr_base: *mut ::core::ffi::c_void, size_p: *mut usize, file_offset_p: *mut off_t, bufPtr_offset_p: *mut off_t, bytes_read_p: *mut isize, stream: CUstream) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2738,7 +2738,7 @@ pub unsafe fn cuFileReadAsync(fh: CUfileHandle_t, bufPtr_base: *mut ::core::ffi:
         cuFileReadAsync(fh, bufPtr_base, size_p, file_offset_p, bufPtr_offset_p, bytes_read_p, stream)
     }
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileReadv(fh: CUfileHandle_t, iov: *const CUfileIOVec_t, iovcnt: usize, file_offset: off_t, flags: ::core::ffi::c_uint) -> isize {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2755,7 +2755,7 @@ pub unsafe fn cuFileReadv(fh: CUfileHandle_t, iov: *const CUfileIOVec_t, iovcnt:
         cuFileReadv(fh, iov, iovcnt, file_offset, flags)
     }
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileSetParameterBool(param: CUFileBoolConfigParameter_t, value: bool) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2772,7 +2772,7 @@ pub unsafe fn cuFileSetParameterBool(param: CUFileBoolConfigParameter_t, value: 
         cuFileSetParameterBool(param, value)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileSetParameterGpuBounceBufferSlabArray(size_values: *const usize, count_values: *const usize, len: ::core::ffi::c_int) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2789,7 +2789,7 @@ pub unsafe fn cuFileSetParameterGpuBounceBufferSlabArray(size_values: *const usi
         cuFileSetParameterGpuBounceBufferSlabArray(size_values, count_values, len)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileSetParameterPosixPoolSlabArray(size_values: *const usize, count_values: *const usize, len: ::core::ffi::c_int) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2806,7 +2806,7 @@ pub unsafe fn cuFileSetParameterPosixPoolSlabArray(size_values: *const usize, co
         cuFileSetParameterPosixPoolSlabArray(size_values, count_values, len)
     }
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileSetParameterSizeT(param: CUFileSizeTConfigParameter_t, value: usize) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2823,7 +2823,7 @@ pub unsafe fn cuFileSetParameterSizeT(param: CUFileSizeTConfigParameter_t, value
         cuFileSetParameterSizeT(param, value)
     }
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileSetParameterString(param: CUFileStringConfigParameter_t, desc_str: *const ::core::ffi::c_char) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2840,7 +2840,7 @@ pub unsafe fn cuFileSetParameterString(param: CUFileStringConfigParameter_t, des
         cuFileSetParameterString(param, desc_str)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileSetStatsLevel(level: ::core::ffi::c_int) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2857,7 +2857,7 @@ pub unsafe fn cuFileSetStatsLevel(level: ::core::ffi::c_int) -> CUfileError_t {
         cuFileSetStatsLevel(level)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileStatsReset() -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2874,7 +2874,7 @@ pub unsafe fn cuFileStatsReset() -> CUfileError_t {
         cuFileStatsReset()
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileStatsStart() -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2891,7 +2891,7 @@ pub unsafe fn cuFileStatsStart() -> CUfileError_t {
         cuFileStatsStart()
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileStatsStop() -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2908,7 +2908,7 @@ pub unsafe fn cuFileStatsStop() -> CUfileError_t {
         cuFileStatsStop()
     }
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileStreamDeregister(stream: CUstream) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2925,7 +2925,7 @@ pub unsafe fn cuFileStreamDeregister(stream: CUstream) -> CUfileError_t {
         cuFileStreamDeregister(stream)
     }
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileStreamRegister(stream: CUstream, flags: ::core::ffi::c_uint) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2942,7 +2942,7 @@ pub unsafe fn cuFileStreamRegister(stream: CUstream, flags: ::core::ffi::c_uint)
         cuFileStreamRegister(stream, flags)
     }
 }
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileUseCount() -> ::core::ffi::c_long {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2976,7 +2976,7 @@ pub unsafe fn cuFileWrite(fh: CUfileHandle_t, devPtr_base: *const ::core::ffi::c
         cuFileWrite(fh, devPtr_base, size, file_offset, devPtr_offset)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileWrite(fh: CUfileHandle_t, bufPtr_base: *const ::core::ffi::c_void, size: usize, file_offset: off_t, bufPtr_offset: off_t) -> isize {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -2993,7 +2993,7 @@ pub unsafe fn cuFileWrite(fh: CUfileHandle_t, bufPtr_base: *const ::core::ffi::c
         cuFileWrite(fh, bufPtr_base, size, file_offset, bufPtr_offset)
     }
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileWriteAsync(fh: CUfileHandle_t, bufPtr_base: *mut ::core::ffi::c_void, size_p: *mut usize, file_offset_p: *mut off_t, bufPtr_offset_p: *mut off_t, bytes_written_p: *mut isize, stream: CUstream) -> CUfileError_t {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -3010,7 +3010,7 @@ pub unsafe fn cuFileWriteAsync(fh: CUfileHandle_t, bufPtr_base: *mut ::core::ffi
         cuFileWriteAsync(fh, bufPtr_base, size_p, file_offset_p, bufPtr_offset_p, bytes_written_p, stream)
     }
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFileWritev(fh: CUfileHandle_t, iov: *const CUfileIOVec_t, iovcnt: usize, file_offset: off_t, flags: ::core::ffi::c_uint) -> isize {
     #[cfg(feature = "dynamic-loading")]
     {

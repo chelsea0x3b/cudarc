@@ -12,7 +12,7 @@ fn load<F: Copy>(name: &str) -> F {
     unsafe { *culib().get::<F>(name.as_bytes()).unwrap_or_else(|e| panic!("Missing symbol {name}: {e}")) }
 }
 pub use self::cufftCompatibility_t as cufftCompatibility;
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::cufftProperty_t as cufftProperty;
 pub use self::cufftResult_t as cufftResult;
 pub use self::cufftType_t as cufftType;
@@ -44,7 +44,7 @@ pub enum cufftProperty_t {
     NVFFT_PLAN_PROPERTY_INT64_PATIENT_JIT = 1,
     NVFFT_PLAN_PROPERTY_INT64_MAX_NUM_HOST_THREADS = 2,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cufftProperty_t {
@@ -75,7 +75,7 @@ pub enum cufftResult_t {
     CUFFT_LICENSE_ERROR = 15,
     CUFFT_NOT_SUPPORTED = 16,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cufftResult_t {
@@ -326,7 +326,7 @@ pub unsafe fn cufftExecZ2Z(plan: cufftHandle, idata: *mut cufftDoubleComplex, od
         cufftExecZ2Z(plan, idata, odata, direction)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cufftGetPlanPropertyInt64(plan: cufftHandle, property: cufftProperty, returnPtrValue: *mut ::core::ffi::c_longlong) -> cufftResult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -615,7 +615,7 @@ pub unsafe fn cufftPlanMany(plan: *mut cufftHandle, rank: ::core::ffi::c_int, n:
         cufftPlanMany(plan, rank, n, inembed, istride, idist, onembed, ostride, odist, type_, batch)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cufftResetPlanProperty(plan: cufftHandle, property: cufftProperty) -> cufftResult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -648,7 +648,7 @@ pub unsafe fn cufftSetAutoAllocation(plan: cufftHandle, autoAllocate: ::core::ff
         cufftSetAutoAllocation(plan, autoAllocate)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cufftSetPlanPropertyInt64(plan: cufftHandle, property: cufftProperty, inputValueInt: ::core::ffi::c_longlong) -> cufftResult {
     #[cfg(feature = "dynamic-loading")]
     {
