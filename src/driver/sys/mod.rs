@@ -19,63 +19,65 @@ pub use self::CUaddress_mode_enum as CUaddress_mode;
 pub use self::CUarraySparseSubresourceType_enum as CUarraySparseSubresourceType;
 pub use self::CUarray_cubemap_face_enum as CUarray_cubemap_face;
 pub use self::CUarray_format_enum as CUarray_format;
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUasyncNotificationType_enum as CUasyncNotificationType;
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUatomicOperationCapability_enum as CUatomicOperationCapability;
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUatomicOperation_enum as CUatomicOperation;
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUcigDataType_enum as CUcigDataType;
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUcliqueType_enum as CUcliqueType;
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUclusterSchedulingPolicy_enum as CUclusterSchedulingPolicy;
 pub use self::CUcomputemode_enum as CUcomputemode;
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUcoredumpSettings_enum as CUcoredumpSettings;
 pub use self::CUctx_flags_enum as CUctx_flags;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUdeviceNumaConfig_enum as CUdeviceNumaConfig;
 pub use self::CUdevice_P2PAttribute_enum as CUdevice_P2PAttribute;
 pub use self::CUdevice_attribute_enum as CUdevice_attribute;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUdriverProcAddressQueryResult_enum as CUdriverProcAddressQueryResult;
 pub use self::CUdriverProcAddress_flags_enum as CUdriverProcAddress_flags;
 pub use self::CUevent_flags_enum as CUevent_flags;
 pub use self::CUevent_record_flags_enum as CUevent_record_flags;
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUevent_sched_flags_enum as CUevent_sched_flags;
 pub use self::CUevent_wait_flags_enum as CUevent_wait_flags;
 pub use self::CUexecAffinityType_enum as CUexecAffinityType;
 pub use self::CUexternalMemoryHandleType_enum as CUexternalMemoryHandleType;
 pub use self::CUexternalSemaphoreHandleType_enum as CUexternalSemaphoreHandleType;
+#[cfg(any(feature = "cuda-13050"))]
+pub use self::CUfabricCpyOperandType_enum as CUfabricCpyOperandType;
 pub use self::CUfilter_mode_enum as CUfilter_mode;
 pub use self::CUflushGPUDirectRDMAWritesOptions_enum as CUflushGPUDirectRDMAWritesOptions;
 pub use self::CUflushGPUDirectRDMAWritesScope_enum as CUflushGPUDirectRDMAWritesScope;
 pub use self::CUflushGPUDirectRDMAWritesTarget_enum as CUflushGPUDirectRDMAWritesTarget;
 pub use self::CUfunc_cache_enum as CUfunc_cache;
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUfunctionLoadingState_enum as CUfunctionLoadingState;
 pub use self::CUfunction_attribute_enum as CUfunction_attribute;
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUgraphChildGraphNodeOwnership_enum as CUgraphChildGraphNodeOwnership;
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUgraphConditionalNodeType_enum as CUgraphConditionalNodeType;
 pub use self::CUgraphDebugDot_flags_enum as CUgraphDebugDot_flags;
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUgraphDependencyType_enum as CUgraphDependencyType;
 pub use self::CUgraphExecUpdateResult_enum as CUgraphExecUpdateResult;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUgraphInstantiateResult_enum as CUgraphInstantiateResult;
 pub use self::CUgraphInstantiate_flags_enum as CUgraphInstantiate_flags;
 pub use self::CUgraphMem_attribute_enum as CUgraphMem_attribute;
 pub use self::CUgraphNodeType_enum as CUgraphNodeType;
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUgraphRecaptureStatus_enum as CUgraphRecaptureStatus;
 pub use self::CUgraphicsMapResourceFlags_enum as CUgraphicsMapResourceFlags;
 pub use self::CUgraphicsRegisterFlags_enum as CUgraphicsRegisterFlags;
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUhostTaskSyncMode_enum as CUhostTaskSyncMode;
 pub use self::CUipcMem_flags_enum as CUipcMem_flags;
 pub use self::CUjitInputType_enum as CUjitInputType;
@@ -85,26 +87,26 @@ pub use self::CUjit_option_enum as CUjit_option;
 pub use self::CUjit_target_enum as CUjit_target;
 #[cfg(any(feature = "cuda-11040", feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070"))]
 pub use self::CUkernelNodeAttrID_enum as CUkernelNodeAttrID;
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUlaunchAttributeID as CUkernelNodeAttrID;
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUlaunchAttributeID as CUstreamAttrID;
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUlaunchAttributeID_enum as CUlaunchAttributeID;
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUlaunchAttributePortableClusterMode_enum as CUlaunchAttributePortableClusterMode;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUlaunchMemSyncDomain_enum as CUlaunchMemSyncDomain;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUlibraryOption_enum as CUlibraryOption;
 pub use self::CUlimit_enum as CUlimit;
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUlogLevel_enum as CUlogLevel;
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUlogicalEndpointFlag_enum as CUlogicalEndpointFlag;
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUlogicalEndpointIpcHandleType_enum as CUlogicalEndpointIpcHandleType;
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUlogicalEndpointType_enum as CUlogicalEndpointType;
 pub use self::CUmemAccess_flags_enum as CUmemAccess_flags;
 pub use self::CUmemAllocationCompType_enum as CUmemAllocationCompType;
@@ -112,83 +114,85 @@ pub use self::CUmemAllocationGranularity_flags_enum as CUmemAllocationGranularit
 pub use self::CUmemAllocationHandleType_enum as CUmemAllocationHandleType;
 pub use self::CUmemAllocationType_enum as CUmemAllocationType;
 pub use self::CUmemAttach_flags_enum as CUmemAttach_flags;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUmemDecompressAlgorithm_enum as CUmemDecompressAlgorithm;
 pub use self::CUmemHandleType_enum as CUmemHandleType;
 pub use self::CUmemLocationType_enum as CUmemLocationType;
 pub use self::CUmemOperationType_enum as CUmemOperationType;
 pub use self::CUmemPool_attribute_enum as CUmemPool_attribute;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUmemRangeFlags_enum as CUmemRangeFlags;
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUmemRangeHandleType_enum as CUmemRangeHandleType;
 pub use self::CUmem_advise_enum as CUmem_advise;
 pub use self::CUmem_range_attribute_enum as CUmem_range_attribute;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUmemcpy3DOperandType_enum as CUmemcpy3DOperandType;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUmemcpyFlags_enum as CUmemcpyFlags;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUmemcpySrcAccessOrder_enum as CUmemcpySrcAccessOrder;
 pub use self::CUmemorytype_enum as CUmemorytype;
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUmoduleLoadingMode_enum as CUmoduleLoadingMode;
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUmulticastGranularity_flags_enum as CUmulticastGranularity_flags;
 pub use self::CUoccupancy_flags_enum as CUoccupancy_flags;
 pub use self::CUoutput_mode_enum as CUoutput_mode;
 pub use self::CUpointer_attribute_enum as CUpointer_attribute;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUprocessState_enum as CUprocessState;
 pub use self::CUresourceViewFormat_enum as CUresourceViewFormat;
 pub use self::CUresourcetype_enum as CUresourcetype;
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUsharedMemoryMode_enum as CUsharedMemoryMode;
 pub use self::CUshared_carveout_enum as CUshared_carveout;
 pub use self::CUsharedconfig_enum as CUsharedconfig;
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUstreamAtomicReductionDataType_enum as CUstreamAtomicReductionDataType;
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUstreamAtomicReductionOpType_enum as CUstreamAtomicReductionOpType;
 #[cfg(any(feature = "cuda-11040", feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070"))]
 pub use self::CUstreamAttrID_enum as CUstreamAttrID;
 pub use self::CUstreamBatchMemOpType_enum as CUstreamBatchMemOpType;
 pub use self::CUstreamCaptureMode_enum as CUstreamCaptureMode;
 pub use self::CUstreamCaptureStatus_enum as CUstreamCaptureStatus;
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUstreamCigDataType_enum as CUstreamCigDataType;
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUstreamMemoryBarrier_flags_enum as CUstreamMemoryBarrier_flags;
 pub use self::CUstreamUpdateCaptureDependencies_flags_enum as CUstreamUpdateCaptureDependencies_flags;
 pub use self::CUstreamWaitValue_flags_enum as CUstreamWaitValue_flags;
 pub use self::CUstreamWriteValue_flags_enum as CUstreamWriteValue_flags;
 pub use self::CUstream_flags_enum as CUstream_flags;
 pub use self::CUsynchronizationPolicy_enum as CUsynchronizationPolicy;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13050"))]
+pub use self::CUtensorMapAllocClass_enum as CUtensorMapAllocClass;
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUtensorMapDataType_enum as CUtensorMapDataType;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUtensorMapFloatOOBfill_enum as CUtensorMapFloatOOBfill;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUtensorMapIm2ColWideMode_enum as CUtensorMapIm2ColWideMode;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUtensorMapInterleave_enum as CUtensorMapInterleave;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUtensorMapL2promotion_enum as CUtensorMapL2promotion;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub use self::CUtensorMapSwizzle_enum as CUtensorMapSwizzle;
 pub use self::CUuserObjectRetain_flags_enum as CUuserObjectRetain_flags;
 pub use self::CUuserObject_flags_enum as CUuserObject_flags;
 pub const CUDA_ARRAY3D_2DARRAY: u32 = 1;
 pub const CUDA_ARRAY3D_COLOR_ATTACHMENT: u32 = 32;
 pub const CUDA_ARRAY3D_CUBEMAP: u32 = 4;
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CUDA_ARRAY3D_DEFERRED_MAPPING: u32 = 128;
 pub const CUDA_ARRAY3D_DEPTH_TEXTURE: u32 = 16;
 pub const CUDA_ARRAY3D_LAYERED: u32 = 1;
 pub const CUDA_ARRAY3D_SPARSE: u32 = 64;
 pub const CUDA_ARRAY3D_SURFACE_LDST: u32 = 2;
 pub const CUDA_ARRAY3D_TEXTURE_GATHER: u32 = 8;
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CUDA_ARRAY3D_VIDEO_ENCODE_DECODE: u32 = 256;
 pub const CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_POST_LAUNCH_SYNC: u32 = 2;
 pub const CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_PRE_LAUNCH_SYNC: u32 = 1;
@@ -235,27 +239,31 @@ pub const CUDA_VERSION: u32 = 13020;
 pub const CUDA_VERSION: u32 = 13030;
 #[cfg(any(feature = "cuda-13040"))]
 pub const CUDA_VERSION: u32 = 13040;
+#[cfg(any(feature = "cuda-13050"))]
+pub const CUDA_VERSION: u32 = 13050;
 pub const CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL: u32 = 1;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CU_COMPUTE_ACCELERATED_TARGET_BASE: u32 = 65536;
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CU_COMPUTE_FAMILY_TARGET_BASE: u32 = 131072;
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13050"))]
+pub const CU_DEV_SM_RESOURCE_GROUP_LOCALITY_DOMAIN_ID_ANY: i32 = -1;
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CU_GRAPH_COND_ASSIGN_DEFAULT: u32 = 1;
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CU_GRAPH_KERNEL_NODE_PORT_DEFAULT: u32 = 0;
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CU_GRAPH_KERNEL_NODE_PORT_LAUNCH_ORDER: u32 = 2;
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CU_GRAPH_KERNEL_NODE_PORT_PROGRAMMATIC: u32 = 1;
 pub const CU_IPC_HANDLE_SIZE: u32 = 64;
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CU_LAUNCH_KERNEL_REQUIRED_BLOCK_DIM: u32 = 1;
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CU_LAUNCH_PARAM_BUFFER_POINTER_AS_INT: u32 = 1;
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CU_LAUNCH_PARAM_BUFFER_SIZE_AS_INT: u32 = 2;
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CU_LAUNCH_PARAM_END_AS_INT: u32 = 0;
 pub const CU_MEMHOSTALLOC_DEVICEMAP: u32 = 2;
 pub const CU_MEMHOSTALLOC_PORTABLE: u32 = 1;
@@ -264,46 +272,46 @@ pub const CU_MEMHOSTREGISTER_DEVICEMAP: u32 = 2;
 pub const CU_MEMHOSTREGISTER_IOMEMORY: u32 = 4;
 pub const CU_MEMHOSTREGISTER_PORTABLE: u32 = 1;
 pub const CU_MEMHOSTREGISTER_READ_ONLY: u32 = 8;
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CU_MEM_CREATE_USAGE_GPU_DIRECT_RDMA_OVER_PCIE: u32 = 4;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CU_MEM_CREATE_USAGE_HW_DECOMPRESS: u32 = 2;
 pub const CU_MEM_CREATE_USAGE_TILE_POOL: u32 = 1;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CU_MEM_POOL_CREATE_USAGE_HW_DECOMPRESS: u32 = 2;
 pub const CU_PARAM_TR_DEFAULT: i32 = -1;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CU_TENSOR_MAP_NUM_QWORDS: u32 = 16;
 pub const CU_TRSA_OVERRIDE_FORMAT: u32 = 1;
 pub const CU_TRSF_DISABLE_TRILINEAR_OPTIMIZATION: u32 = 32;
 pub const CU_TRSF_NORMALIZED_COORDINATES: u32 = 2;
 pub const CU_TRSF_READ_AS_INTEGER: u32 = 1;
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub const CU_TRSF_SEAMLESS_CUBEMAP: u32 = 64;
 pub const CU_TRSF_SRGB: u32 = 16;
 pub type CUDA_ARRAY3D_DESCRIPTOR = CUDA_ARRAY3D_DESCRIPTOR_v2;
 pub type CUDA_ARRAY3D_DESCRIPTOR_v2 = CUDA_ARRAY3D_DESCRIPTOR_st;
 pub type CUDA_ARRAY_DESCRIPTOR = CUDA_ARRAY_DESCRIPTOR_v2;
 pub type CUDA_ARRAY_DESCRIPTOR_v2 = CUDA_ARRAY_DESCRIPTOR_st;
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_ARRAY_MEMORY_REQUIREMENTS = CUDA_ARRAY_MEMORY_REQUIREMENTS_v1;
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_ARRAY_MEMORY_REQUIREMENTS_v1 = CUDA_ARRAY_MEMORY_REQUIREMENTS_st;
 pub type CUDA_ARRAY_SPARSE_PROPERTIES = CUDA_ARRAY_SPARSE_PROPERTIES_v1;
 pub type CUDA_ARRAY_SPARSE_PROPERTIES_v1 = CUDA_ARRAY_SPARSE_PROPERTIES_st;
 #[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010"))]
 pub type CUDA_BATCH_MEM_OP_NODE_PARAMS = CUDA_BATCH_MEM_OP_NODE_PARAMS_st;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_BATCH_MEM_OP_NODE_PARAMS = CUDA_BATCH_MEM_OP_NODE_PARAMS_v1;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_BATCH_MEM_OP_NODE_PARAMS_v1 = CUDA_BATCH_MEM_OP_NODE_PARAMS_v1_st;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_BATCH_MEM_OP_NODE_PARAMS_v2 = CUDA_BATCH_MEM_OP_NODE_PARAMS_v2_st;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_CHILD_GRAPH_NODE_PARAMS = CUDA_CHILD_GRAPH_NODE_PARAMS_st;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_EVENT_RECORD_NODE_PARAMS = CUDA_EVENT_RECORD_NODE_PARAMS_st;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_EVENT_WAIT_NODE_PARAMS = CUDA_EVENT_WAIT_NODE_PARAMS_st;
 pub type CUDA_EXTERNAL_MEMORY_BUFFER_DESC = CUDA_EXTERNAL_MEMORY_BUFFER_DESC_v1;
 pub type CUDA_EXTERNAL_MEMORY_BUFFER_DESC_v1 = CUDA_EXTERNAL_MEMORY_BUFFER_DESC_st;
@@ -319,54 +327,66 @@ pub type CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS = CUDA_EXTERNAL_SEMAPHORE_WAIT_PARA
 pub type CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_v1 = CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_st;
 pub type CUDA_EXT_SEM_SIGNAL_NODE_PARAMS = CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1;
 pub type CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1 = CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2 = CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st;
 pub type CUDA_EXT_SEM_WAIT_NODE_PARAMS = CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1;
 pub type CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1 = CUDA_EXT_SEM_WAIT_NODE_PARAMS_st;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2 = CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13050"))]
+pub type CUDA_FABRIC_COPY_BATCH_OP = CUDA_FABRIC_COPY_BATCH_OP_v1;
+#[cfg(any(feature = "cuda-13050"))]
+pub type CUDA_FABRIC_COPY_BATCH_OP_v1 = CUDA_FABRIC_COPY_BATCH_OP_st;
+#[cfg(any(feature = "cuda-13050"))]
+pub type CUDA_FABRIC_CPY_BATCH_NODE_PARAMS = CUDA_FABRIC_CPY_BATCH_NODE_PARAMS_V1;
+#[cfg(any(feature = "cuda-13050"))]
+pub type CUDA_FABRIC_CPY_BATCH_NODE_PARAMS_V1 = CUDA_FABRIC_CPY_BATCH_NODE_PARAMS_V1_st;
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_GRAPH_INSTANTIATE_PARAMS = CUDA_GRAPH_INSTANTIATE_PARAMS_st;
 pub type CUDA_HOST_NODE_PARAMS = CUDA_HOST_NODE_PARAMS_v1;
 pub type CUDA_HOST_NODE_PARAMS_v1 = CUDA_HOST_NODE_PARAMS_st;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_HOST_NODE_PARAMS_v2 = CUDA_HOST_NODE_PARAMS_v2_st;
 #[cfg(any(feature = "cuda-11040", feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080"))]
 pub type CUDA_KERNEL_NODE_PARAMS = CUDA_KERNEL_NODE_PARAMS_v1;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_KERNEL_NODE_PARAMS = CUDA_KERNEL_NODE_PARAMS_v2;
 pub type CUDA_KERNEL_NODE_PARAMS_v1 = CUDA_KERNEL_NODE_PARAMS_st;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_KERNEL_NODE_PARAMS_v2 = CUDA_KERNEL_NODE_PARAMS_v2_st;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_KERNEL_NODE_PARAMS_v3 = CUDA_KERNEL_NODE_PARAMS_v3_st;
 pub type CUDA_LAUNCH_PARAMS = CUDA_LAUNCH_PARAMS_v1;
 pub type CUDA_LAUNCH_PARAMS_v1 = CUDA_LAUNCH_PARAMS_st;
 pub type CUDA_MEMCPY2D = CUDA_MEMCPY2D_v2;
 pub type CUDA_MEMCPY2D_v2 = CUDA_MEMCPY2D_st;
 pub type CUDA_MEMCPY3D = CUDA_MEMCPY3D_v2;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_MEMCPY3D_BATCH_OP = CUDA_MEMCPY3D_BATCH_OP_v1;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_MEMCPY3D_BATCH_OP_v1 = CUDA_MEMCPY3D_BATCH_OP_st;
 pub type CUDA_MEMCPY3D_PEER = CUDA_MEMCPY3D_PEER_v1;
 pub type CUDA_MEMCPY3D_PEER_v1 = CUDA_MEMCPY3D_PEER_st;
 pub type CUDA_MEMCPY3D_v2 = CUDA_MEMCPY3D_st;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13050"))]
+pub type CUDA_MEMCPY_BATCH_NODE_PARAMS = CUDA_MEMCPY_BATCH_NODE_PARAMS_V1;
+#[cfg(any(feature = "cuda-13050"))]
+pub type CUDA_MEMCPY_BATCH_NODE_PARAMS_V1 = CUDA_MEMCPY_BATCH_NODE_PARAMS_V1_st;
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_MEMCPY_NODE_PARAMS = CUDA_MEMCPY_NODE_PARAMS_st;
 pub type CUDA_MEMSET_NODE_PARAMS = CUDA_MEMSET_NODE_PARAMS_v1;
 pub type CUDA_MEMSET_NODE_PARAMS_v1 = CUDA_MEMSET_NODE_PARAMS_st;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_MEMSET_NODE_PARAMS_v2 = CUDA_MEMSET_NODE_PARAMS_v2_st;
 #[cfg(any(feature = "cuda-11040", feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010"))]
 pub type CUDA_MEM_ALLOC_NODE_PARAMS = CUDA_MEM_ALLOC_NODE_PARAMS_st;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_MEM_ALLOC_NODE_PARAMS = CUDA_MEM_ALLOC_NODE_PARAMS_v1;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_MEM_ALLOC_NODE_PARAMS_v1 = CUDA_MEM_ALLOC_NODE_PARAMS_v1_st;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_MEM_ALLOC_NODE_PARAMS_v2 = CUDA_MEM_ALLOC_NODE_PARAMS_v2_st;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUDA_MEM_FREE_NODE_PARAMS = CUDA_MEM_FREE_NODE_PARAMS_st;
 pub type CUDA_POINTER_ATTRIBUTE_P2P_TOKENS = CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_v1;
 pub type CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_v1 = CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_st;
@@ -376,57 +396,57 @@ pub type CUDA_RESOURCE_VIEW_DESC = CUDA_RESOURCE_VIEW_DESC_v1;
 pub type CUDA_RESOURCE_VIEW_DESC_v1 = CUDA_RESOURCE_VIEW_DESC_st;
 pub type CUDA_TEXTURE_DESC = CUDA_TEXTURE_DESC_v1;
 pub type CUDA_TEXTURE_DESC_v1 = CUDA_TEXTURE_DESC_st;
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CU_DEV_SM_RESOURCE_GROUP_PARAMS = CU_DEV_SM_RESOURCE_GROUP_PARAMS_st;
 pub type CUaccessPolicyWindow = CUaccessPolicyWindow_v1;
 pub type CUaccessPolicyWindow_v1 = CUaccessPolicyWindow_st;
 pub type CUarray = *mut CUarray_st;
 pub type CUarrayMapInfo = CUarrayMapInfo_v1;
 pub type CUarrayMapInfo_v1 = CUarrayMapInfo_st;
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUasyncCallback = ::core::option::Option<unsafe extern "C" fn(info: *mut CUasyncNotificationInfo, userData: *mut ::core::ffi::c_void, callback: CUasyncCallbackHandle)>;
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUasyncCallbackHandle = *mut CUasyncCallbackEntry_st;
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUasyncNotificationInfo = CUasyncNotificationInfo_st;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUcheckpointCheckpointArgs = CUcheckpointCheckpointArgs_st;
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUcheckpointCustomStorageInfo = CUcheckpointCustomStorageInfo_st;
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUcheckpointCustomStoragePerDeviceData = CUcheckpointCustomStoragePerDeviceData_st;
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUcheckpointGpuPair = CUcheckpointGpuPair_st;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUcheckpointLockArgs = CUcheckpointLockArgs_st;
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUcheckpointOperationHandle = *mut CUIcheckpointOperation_st;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUcheckpointRestoreArgs = CUcheckpointRestoreArgs_st;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUcheckpointUnlockArgs = CUcheckpointUnlockArgs_st;
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUcliqueInfo = CUcliqueInfo_st;
 pub type CUcontext = *mut CUctx_st;
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUcoredumpCallbackHandle = *mut CUcoredumpCallbackEntry_st;
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUcoredumpStatusCallback = ::core::option::Option<unsafe extern "C" fn(userData: *mut ::core::ffi::c_void, pid: ::core::ffi::c_int, dev: CUdevice)>;
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUctxCigParam = CUctxCigParam_st;
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUctxCreateParams = CUctxCreateParams_st;
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUdevResource = CUdevResource_v1;
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUdevResourceDesc = *mut CUdevResourceDesc_st;
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUdevResource_v1 = CUdevResource_st;
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUdevSmResource = CUdevSmResource_st;
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUdevWorkqueueConfigResource = CUdevWorkqueueConfigResource_st;
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUdevWorkqueueResource = CUdevWorkqueueResource_st;
 pub type CUdevice = CUdevice_v1;
 pub type CUdevice_v1 = ::core::ffi::c_int;
@@ -439,79 +459,81 @@ pub type CUexecAffinityParam = CUexecAffinityParam_v1;
 pub type CUexecAffinityParam_v1 = CUexecAffinityParam_st;
 pub type CUexecAffinitySmCount = CUexecAffinitySmCount_v1;
 pub type CUexecAffinitySmCount_v1 = CUexecAffinitySmCount_st;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUextent3D = CUextent3D_v1;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUextent3D_v1 = CUextent3D_st;
 pub type CUexternalMemory = *mut CUextMemory_st;
 pub type CUexternalSemaphore = *mut CUextSemaphore_st;
+#[cfg(any(feature = "cuda-13050"))]
+pub type CUfabricCpyOperand = CUfabricCpyOperand_st;
 pub type CUfunction = *mut CUfunc_st;
 pub type CUgraph = *mut CUgraph_st;
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUgraphConditionalHandle = cuuint64_t;
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUgraphDeviceNode = *mut CUgraphDeviceUpdatableNode_st;
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUgraphEdgeData = CUgraphEdgeData_st;
 pub type CUgraphExec = *mut CUgraphExec_st;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUgraphExecUpdateResultInfo = CUgraphExecUpdateResultInfo_v1;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUgraphExecUpdateResultInfo_v1 = CUgraphExecUpdateResultInfo_st;
 pub type CUgraphNode = *mut CUgraphNode_st;
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUgraphNodeParams = CUgraphNodeParams_st;
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUgraphRecaptureCallback = ::core::option::Option<unsafe extern "C" fn(data: *mut ::core::ffi::c_void, node: CUgraphNode, originalParams: *const CUgraphNodeParams, recaptureParams: *const CUgraphNodeParams, status: CUgraphRecaptureStatus) -> CUresult>;
 pub type CUgraphicsResource = *mut CUgraphicsResource_st;
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUgreenCtx = *mut CUgreenCtx_st;
 pub type CUhostFn = ::core::option::Option<unsafe extern "C" fn(userData: *mut ::core::ffi::c_void)>;
 pub type CUipcEventHandle = CUipcEventHandle_v1;
 pub type CUipcEventHandle_v1 = CUipcEventHandle_st;
 pub type CUipcMemHandle = CUipcMemHandle_v1;
 pub type CUipcMemHandle_v1 = CUipcMemHandle_st;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUkernel = *mut CUkern_st;
 pub type CUkernelNodeAttrValue = CUkernelNodeAttrValue_v1;
 #[cfg(any(feature = "cuda-11040", feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070"))]
 pub type CUkernelNodeAttrValue_v1 = CUkernelNodeAttrValue_union;
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUkernelNodeAttrValue_v1 = CUlaunchAttributeValue;
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUlaunchAttribute = CUlaunchAttribute_st;
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUlaunchAttributeValue = CUlaunchAttributeValue_union;
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUlaunchConfig = CUlaunchConfig_st;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUlaunchMemSyncDomainMap = CUlaunchMemSyncDomainMap_st;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUlibrary = *mut CUlib_st;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUlibraryHostUniversalFunctionAndDataTable = CUlibraryHostUniversalFunctionAndDataTable_st;
 pub type CUlinkState = *mut CUlinkState_st;
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUlogIterator = ::core::ffi::c_uint;
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUlogicalEndpointFabricHandle = CUlogicalEndpointFabricHandle_st;
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUlogicalEndpointId = cuuint32_t;
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUlogicalEndpointProp = CUlogicalEndpointProp_struct;
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUlogsCallback = ::core::option::Option<unsafe extern "C" fn(data: *mut ::core::ffi::c_void, logLevel: CUlogLevel, message: *mut ::core::ffi::c_char, length: usize)>;
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUlogsCallbackHandle = *mut CUlogsCallbackEntry_st;
 pub type CUmemAccessDesc = CUmemAccessDesc_v1;
 pub type CUmemAccessDesc_v1 = CUmemAccessDesc_st;
 pub type CUmemAllocationProp = CUmemAllocationProp_v1;
 pub type CUmemAllocationProp_v1 = CUmemAllocationProp_st;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUmemDecompressParams = CUmemDecompressParams_st;
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUmemFabricHandle = CUmemFabricHandle_v1;
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUmemFabricHandle_v1 = CUmemFabricHandle_st;
 pub type CUmemGenericAllocationHandle = CUmemGenericAllocationHandle_v1;
 pub type CUmemGenericAllocationHandle_v1 = ::core::ffi::c_ulonglong;
@@ -521,43 +543,43 @@ pub type CUmemPoolProps = CUmemPoolProps_v1;
 pub type CUmemPoolProps_v1 = CUmemPoolProps_st;
 pub type CUmemPoolPtrExportData = CUmemPoolPtrExportData_v1;
 pub type CUmemPoolPtrExportData_v1 = CUmemPoolPtrExportData_st;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUmemcpy3DOperand = CUmemcpy3DOperand_v1;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUmemcpy3DOperand_v1 = CUmemcpy3DOperand_st;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUmemcpyAttributes = CUmemcpyAttributes_v1;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUmemcpyAttributes_v1 = CUmemcpyAttributes_st;
 pub type CUmemoryPool = *mut CUmemPoolHandle_st;
 pub type CUmipmappedArray = *mut CUmipmappedArray_st;
 pub type CUmodule = *mut CUmod_st;
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUmulticastObjectProp = CUmulticastObjectProp_v1;
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUmulticastObjectProp_v1 = CUmulticastObjectProp_st;
 pub type CUoccupancyB2DSize = ::core::option::Option<unsafe extern "C" fn(blockSize: ::core::ffi::c_int) -> usize>;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUoffset3D = CUoffset3D_v1;
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUoffset3D_v1 = CUoffset3D_st;
 pub type CUstream = *mut CUstream_st;
 pub type CUstreamAttrValue = CUstreamAttrValue_v1;
 #[cfg(any(feature = "cuda-11040", feature = "cuda-11050", feature = "cuda-11060", feature = "cuda-11070"))]
 pub type CUstreamAttrValue_v1 = CUstreamAttrValue_union;
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUstreamAttrValue_v1 = CUlaunchAttributeValue;
 pub type CUstreamBatchMemOpParams = CUstreamBatchMemOpParams_v1;
 pub type CUstreamBatchMemOpParams_v1 = CUstreamBatchMemOpParams_union;
 pub type CUstreamCallback = ::core::option::Option<unsafe extern "C" fn(hStream: CUstream, status: CUresult, userData: *mut ::core::ffi::c_void)>;
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUstreamCigCaptureParams = CUstreamCigCaptureParams_st;
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUstreamCigParam = CUstreamCigParam_st;
 pub type CUsurfObject = CUsurfObject_v1;
 pub type CUsurfObject_v1 = ::core::ffi::c_ulonglong;
 pub type CUsurfref = *mut CUsurfref_st;
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub type CUtensorMap = CUtensorMap_st;
 pub type CUtexObject = CUtexObject_v1;
 pub type CUtexObject_v1 = ::core::ffi::c_ulonglong;
@@ -621,6 +643,24 @@ pub enum CUCoredumpGenerationFlags {
     CU_COREDUMP_NO_ERRBAR_AT_EXIT = 1073741824,
     CU_COREDUMP_LOG_ONLY = -2147483648,
     CU_COREDUMP_LIGHTWEIGHT_FLAGS = 47,
+}
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(i32)]
+#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
+pub enum CUCoredumpGenerationFlags {
+    CU_COREDUMP_DEFAULT_FLAGS = 0,
+    CU_COREDUMP_SKIP_NONRELOCATED_ELF_IMAGES = 1,
+    CU_COREDUMP_SKIP_GLOBAL_MEMORY = 2,
+    CU_COREDUMP_SKIP_SHARED_MEMORY = 4,
+    CU_COREDUMP_SKIP_LOCAL_MEMORY = 8,
+    CU_COREDUMP_SKIP_ABORT = 16,
+    CU_COREDUMP_SKIP_CONSTBANK_MEMORY = 32,
+    CU_COREDUMP_GZIP_COMPRESS = 64,
+    CU_COREDUMP_FAULTED_CONTEXTS_ONLY = 128,
+    CU_COREDUMP_SKIP_TENSOR_MEMORY = 256,
+    CU_COREDUMP_NO_ERRBAR_AT_EXIT = 1073741824,
+    CU_COREDUMP_LOG_ONLY = -2147483648,
+    CU_COREDUMP_LIGHTWEIGHT_FLAGS = 303,
 }
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
@@ -832,7 +872,7 @@ pub enum CUarray_format_enum {
     CU_AD_FORMAT_UNORM_INT_101010_2 = 80,
     CU_AD_FORMAT_MAX = 2147483647,
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUarray_format_enum {
@@ -903,13 +943,13 @@ pub enum CUarray_format_enum {
     CU_AD_FORMAT_UINT16_PLANAR_444 = 94,
     CU_AD_FORMAT_MAX = 2147483647,
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUasyncNotificationType_enum {
     CU_ASYNC_NOTIFICATION_TYPE_OVER_BUDGET = 1,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUatomicOperationCapability_enum {
@@ -921,7 +961,7 @@ pub enum CUatomicOperationCapability_enum {
     CU_ATOMIC_CAPABILITY_SCALAR_128 = 32,
     CU_ATOMIC_CAPABILITY_VECTOR_32x4 = 64,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUatomicOperation_enum {
@@ -946,14 +986,14 @@ pub enum CUatomicOperation_enum {
 pub enum CUcigDataType_enum {
     CIG_DATA_TYPE_D3D12_COMMAND_QUEUE = 1,
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUcigDataType_enum {
     CIG_DATA_TYPE_D3D12_COMMAND_QUEUE = 1,
     CIG_DATA_TYPE_NV_BLOB = 2,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUcliqueType_enum {
@@ -970,7 +1010,7 @@ pub enum CUclusterSchedulingPolicy_enum {
     CU_CLUSTER_SCHEDULING_POLICY_SPREAD = 1,
     CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING = 2,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUclusterSchedulingPolicy_enum {
@@ -998,7 +1038,7 @@ pub enum CUcoredumpSettings_enum {
     CU_COREDUMP_PIPE = 6,
     CU_COREDUMP_MAX = 7,
 }
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUcoredumpSettings_enum {
@@ -1024,7 +1064,7 @@ pub enum CUctx_flags_enum {
     CU_CTX_LMEM_RESIZE_TO_MAX = 16,
     CU_CTX_FLAGS_MASK = 31,
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUctx_flags_enum {
@@ -1047,7 +1087,7 @@ pub enum CUdevResourceType {
     CU_DEV_RESOURCE_TYPE_INVALID = 0,
     CU_DEV_RESOURCE_TYPE_SM = 1,
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUdevResourceType {
@@ -1071,7 +1111,16 @@ pub enum CUdevSmResourceGroup_flags {
     CU_DEV_SM_RESOURCE_GROUP_BACKFILL = 1,
     CU_DEV_SM_RESOURCE_GROUP_LOCALITY_DOMAIN_ID = 2,
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
+pub enum CUdevSmResourceGroup_flags {
+    CU_DEV_SM_RESOURCE_GROUP_DEFAULT = 0,
+    CU_DEV_SM_RESOURCE_GROUP_BACKFILL = 1,
+    CU_DEV_SM_RESOURCE_GROUP_LOCALITY_DOMAIN_ID = 2,
+    CU_DEV_SM_RESOURCE_GROUP_LOCALITY_DOMAIN_SUPPLEMENTAL_SMS = 4,
+}
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUdevSmResourceSplitByCount_flags {
@@ -1085,14 +1134,14 @@ pub enum CUdevSmResourceSplit_flags {
     CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING = 1,
     CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE = 2,
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUdevWorkqueueConfigScope {
     CU_WORKQUEUE_SCOPE_DEVICE_CTX = 0,
     CU_WORKQUEUE_SCOPE_GREEN_CTX_BALANCED = 1,
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUdeviceNumaConfig_enum {
@@ -1108,7 +1157,7 @@ pub enum CUdevice_P2PAttribute_enum {
     CU_DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED = 3,
     CU_DEVICE_P2P_ATTRIBUTE_ACCESS_ACCESS_SUPPORTED = 4,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUdevice_P2PAttribute_enum {
@@ -3243,7 +3292,174 @@ pub enum CUdevice_attribute_enum {
     CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_LOCALIZED_MEMORY_SUPPORTED = 161,
     CU_DEVICE_ATTRIBUTE_MAX = 162,
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
+pub enum CUdevice_attribute_enum {
+    CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_BLOCK = 1,
+    CU_DEVICE_ATTRIBUTE_MAX_BLOCK_DIM_X = 2,
+    CU_DEVICE_ATTRIBUTE_MAX_BLOCK_DIM_Y = 3,
+    CU_DEVICE_ATTRIBUTE_MAX_BLOCK_DIM_Z = 4,
+    CU_DEVICE_ATTRIBUTE_MAX_GRID_DIM_X = 5,
+    CU_DEVICE_ATTRIBUTE_MAX_GRID_DIM_Y = 6,
+    CU_DEVICE_ATTRIBUTE_MAX_GRID_DIM_Z = 7,
+    CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK = 8,
+    CU_DEVICE_ATTRIBUTE_TOTAL_CONSTANT_MEMORY = 9,
+    CU_DEVICE_ATTRIBUTE_WARP_SIZE = 10,
+    CU_DEVICE_ATTRIBUTE_MAX_PITCH = 11,
+    CU_DEVICE_ATTRIBUTE_MAX_REGISTERS_PER_BLOCK = 12,
+    CU_DEVICE_ATTRIBUTE_CLOCK_RATE = 13,
+    CU_DEVICE_ATTRIBUTE_TEXTURE_ALIGNMENT = 14,
+    CU_DEVICE_ATTRIBUTE_GPU_OVERLAP = 15,
+    CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT = 16,
+    CU_DEVICE_ATTRIBUTE_KERNEL_EXEC_TIMEOUT = 17,
+    CU_DEVICE_ATTRIBUTE_INTEGRATED = 18,
+    CU_DEVICE_ATTRIBUTE_CAN_MAP_HOST_MEMORY = 19,
+    CU_DEVICE_ATTRIBUTE_COMPUTE_MODE = 20,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_WIDTH = 21,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_WIDTH = 22,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_HEIGHT = 23,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_WIDTH = 24,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_HEIGHT = 25,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_DEPTH = 26,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_WIDTH = 27,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_HEIGHT = 28,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_LAYERS = 29,
+    CU_DEVICE_ATTRIBUTE_SURFACE_ALIGNMENT = 30,
+    CU_DEVICE_ATTRIBUTE_CONCURRENT_KERNELS = 31,
+    CU_DEVICE_ATTRIBUTE_ECC_ENABLED = 32,
+    CU_DEVICE_ATTRIBUTE_PCI_BUS_ID = 33,
+    CU_DEVICE_ATTRIBUTE_PCI_DEVICE_ID = 34,
+    CU_DEVICE_ATTRIBUTE_TCC_DRIVER = 35,
+    CU_DEVICE_ATTRIBUTE_MEMORY_CLOCK_RATE = 36,
+    CU_DEVICE_ATTRIBUTE_GLOBAL_MEMORY_BUS_WIDTH = 37,
+    CU_DEVICE_ATTRIBUTE_L2_CACHE_SIZE = 38,
+    CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_MULTIPROCESSOR = 39,
+    CU_DEVICE_ATTRIBUTE_ASYNC_ENGINE_COUNT = 40,
+    CU_DEVICE_ATTRIBUTE_UNIFIED_ADDRESSING = 41,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LAYERED_WIDTH = 42,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LAYERED_LAYERS = 43,
+    CU_DEVICE_ATTRIBUTE_CAN_TEX2D_GATHER = 44,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_GATHER_WIDTH = 45,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_GATHER_HEIGHT = 46,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_WIDTH_ALTERNATE = 47,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_HEIGHT_ALTERNATE = 48,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_DEPTH_ALTERNATE = 49,
+    CU_DEVICE_ATTRIBUTE_PCI_DOMAIN_ID = 50,
+    CU_DEVICE_ATTRIBUTE_TEXTURE_PITCH_ALIGNMENT = 51,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_WIDTH = 52,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_LAYERED_WIDTH = 53,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_LAYERED_LAYERS = 54,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_WIDTH = 55,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_WIDTH = 56,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_HEIGHT = 57,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_WIDTH = 58,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_HEIGHT = 59,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_DEPTH = 60,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_WIDTH = 61,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_LAYERS = 62,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_WIDTH = 63,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_HEIGHT = 64,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_LAYERS = 65,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_WIDTH = 66,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_LAYERED_WIDTH = 67,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_LAYERED_LAYERS = 68,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LINEAR_WIDTH = 69,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_WIDTH = 70,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_HEIGHT = 71,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_PITCH = 72,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_WIDTH = 73,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_HEIGHT = 74,
+    CU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MAJOR = 75,
+    CU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MINOR = 76,
+    CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_MIPMAPPED_WIDTH = 77,
+    CU_DEVICE_ATTRIBUTE_STREAM_PRIORITIES_SUPPORTED = 78,
+    CU_DEVICE_ATTRIBUTE_GLOBAL_L1_CACHE_SUPPORTED = 79,
+    CU_DEVICE_ATTRIBUTE_LOCAL_L1_CACHE_SUPPORTED = 80,
+    CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_MULTIPROCESSOR = 81,
+    CU_DEVICE_ATTRIBUTE_MAX_REGISTERS_PER_MULTIPROCESSOR = 82,
+    CU_DEVICE_ATTRIBUTE_MANAGED_MEMORY = 83,
+    CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD = 84,
+    CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD_GROUP_ID = 85,
+    CU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED = 86,
+    CU_DEVICE_ATTRIBUTE_SINGLE_TO_DOUBLE_PRECISION_PERF_RATIO = 87,
+    CU_DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS = 88,
+    CU_DEVICE_ATTRIBUTE_CONCURRENT_MANAGED_ACCESS = 89,
+    CU_DEVICE_ATTRIBUTE_COMPUTE_PREEMPTION_SUPPORTED = 90,
+    CU_DEVICE_ATTRIBUTE_CAN_USE_HOST_POINTER_FOR_REGISTERED_MEM = 91,
+    CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_MEM_OPS_V1 = 92,
+    CU_DEVICE_ATTRIBUTE_CAN_USE_64_BIT_STREAM_MEM_OPS_V1 = 93,
+    CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_WAIT_VALUE_NOR_V1 = 94,
+    CU_DEVICE_ATTRIBUTE_COOPERATIVE_LAUNCH = 95,
+    CU_DEVICE_ATTRIBUTE_COOPERATIVE_MULTI_DEVICE_LAUNCH = 96,
+    CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK_OPTIN = 97,
+    CU_DEVICE_ATTRIBUTE_CAN_FLUSH_REMOTE_WRITES = 98,
+    CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED = 99,
+    CU_DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS_USES_HOST_PAGE_TABLES = 100,
+    CU_DEVICE_ATTRIBUTE_DIRECT_MANAGED_MEM_ACCESS_FROM_HOST = 101,
+    CU_DEVICE_ATTRIBUTE_VIRTUAL_ADDRESS_MANAGEMENT_SUPPORTED = 102,
+    CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR_SUPPORTED = 103,
+    CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_HANDLE_SUPPORTED = 104,
+    CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_KMT_HANDLE_SUPPORTED = 105,
+    CU_DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR = 106,
+    CU_DEVICE_ATTRIBUTE_GENERIC_COMPRESSION_SUPPORTED = 107,
+    CU_DEVICE_ATTRIBUTE_MAX_PERSISTING_L2_CACHE_SIZE = 108,
+    CU_DEVICE_ATTRIBUTE_MAX_ACCESS_POLICY_WINDOW_SIZE = 109,
+    CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED = 110,
+    CU_DEVICE_ATTRIBUTE_RESERVED_SHARED_MEMORY_PER_BLOCK = 111,
+    CU_DEVICE_ATTRIBUTE_SPARSE_CUDA_ARRAY_SUPPORTED = 112,
+    CU_DEVICE_ATTRIBUTE_READ_ONLY_HOST_REGISTER_SUPPORTED = 113,
+    CU_DEVICE_ATTRIBUTE_TIMELINE_SEMAPHORE_INTEROP_SUPPORTED = 114,
+    CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED = 115,
+    CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED = 116,
+    CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS = 117,
+    CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING = 118,
+    CU_DEVICE_ATTRIBUTE_MEMPOOL_SUPPORTED_HANDLE_TYPES = 119,
+    CU_DEVICE_ATTRIBUTE_CLUSTER_LAUNCH = 120,
+    CU_DEVICE_ATTRIBUTE_DEFERRED_MAPPING_CUDA_ARRAY_SUPPORTED = 121,
+    CU_DEVICE_ATTRIBUTE_CAN_USE_64_BIT_STREAM_MEM_OPS = 122,
+    CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_WAIT_VALUE_NOR = 123,
+    CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED = 124,
+    CU_DEVICE_ATTRIBUTE_IPC_EVENT_SUPPORTED = 125,
+    CU_DEVICE_ATTRIBUTE_MEM_SYNC_DOMAIN_COUNT = 126,
+    CU_DEVICE_ATTRIBUTE_TENSOR_MAP_ACCESS_SUPPORTED = 127,
+    CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED = 128,
+    CU_DEVICE_ATTRIBUTE_UNIFIED_FUNCTION_POINTERS = 129,
+    CU_DEVICE_ATTRIBUTE_NUMA_CONFIG = 130,
+    CU_DEVICE_ATTRIBUTE_NUMA_ID = 131,
+    CU_DEVICE_ATTRIBUTE_MULTICAST_SUPPORTED = 132,
+    CU_DEVICE_ATTRIBUTE_MPS_ENABLED = 133,
+    CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID = 134,
+    CU_DEVICE_ATTRIBUTE_D3D12_CIG_SUPPORTED = 135,
+    CU_DEVICE_ATTRIBUTE_MEM_DECOMPRESS_ALGORITHM_MASK = 136,
+    CU_DEVICE_ATTRIBUTE_MEM_DECOMPRESS_MAXIMUM_LENGTH = 137,
+    CU_DEVICE_ATTRIBUTE_VULKAN_CIG_SUPPORTED = 138,
+    CU_DEVICE_ATTRIBUTE_GPU_PCI_DEVICE_ID = 139,
+    CU_DEVICE_ATTRIBUTE_GPU_PCI_SUBSYSTEM_ID = 140,
+    CU_DEVICE_ATTRIBUTE_HOST_NUMA_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED = 141,
+    CU_DEVICE_ATTRIBUTE_HOST_NUMA_MEMORY_POOLS_SUPPORTED = 142,
+    CU_DEVICE_ATTRIBUTE_HOST_NUMA_MULTINODE_IPC_SUPPORTED = 143,
+    CU_DEVICE_ATTRIBUTE_HOST_MEMORY_POOLS_SUPPORTED = 144,
+    CU_DEVICE_ATTRIBUTE_HOST_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED = 145,
+    CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED = 146,
+    CU_DEVICE_ATTRIBUTE_ONLY_PARTIAL_HOST_NATIVE_ATOMIC_SUPPORTED = 147,
+    CU_DEVICE_ATTRIBUTE_ATOMIC_REDUCTION_SUPPORTED = 148,
+    CU_DEVICE_ATTRIBUTE_LOCALITY_DOMAIN_COUNT = 149,
+    CU_DEVICE_ATTRIBUTE_MAX_OVERSIZED_SHARED_MEMORY_PER_BLOCK = 150,
+    CU_DEVICE_ATTRIBUTE_D3D12_CIG_STREAMS_SUPPORTED = 151,
+    CU_DEVICE_ATTRIBUTE_DMA_BUF_MMAP_SUPPORTED = 152,
+    CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_UNICAST_SUPPORTED = 153,
+    CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_MULTICAST_SUPPORTED = 154,
+    CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_COUNTED_OPS_SUPPORTED = 155,
+    CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_UNICAST_ACCESS_ON_OWNER_DEVICE_SUPPORTED = 156,
+    CU_DEVICE_ATTRIBUTE_LOCALITY_DOMAIN_MULTIPROCESSOR_COUNT = 157,
+    CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_SUPPORTED_HANDLE_TYPES = 158,
+    CU_DEVICE_ATTRIBUTE_VULKAN_CIG_STREAMS_SUPPORTED = 159,
+    CU_DEVICE_ATTRIBUTE_TENSOR_MAP_LARGE_TENSOR_MIN_SIZE = 160,
+    CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_LOCALIZED_MEMORY_SUPPORTED = 161,
+    CU_DEVICE_ATTRIBUTE_MAX = 162,
+}
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUdriverProcAddressQueryResult_enum {
@@ -3272,7 +3488,7 @@ pub enum CUevent_record_flags_enum {
     CU_EVENT_RECORD_DEFAULT = 0,
     CU_EVENT_RECORD_EXTERNAL = 1,
 }
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUevent_sched_flags_enum {
@@ -3306,7 +3522,7 @@ pub enum CUexternalMemoryHandleType_enum {
     CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT = 7,
     CU_EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF = 8,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUexternalMemoryHandleType_enum {
@@ -3333,6 +3549,14 @@ pub enum CUexternalSemaphoreHandleType_enum {
     CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_KEYED_MUTEX_KMT = 8,
     CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_FD = 9,
     CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_WIN32 = 10,
+}
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
+pub enum CUfabricCpyOperandType_enum {
+    CU_FABRIC_COPY_OPERAND_TYPE_POINTER = 1,
+    CU_FABRIC_COPY_OPERAND_TYPE_LOGICAL_ENDPOINT = 2,
+    CU_FABRIC_COPY_OPERAND_TYPE_MAX = 2147483647,
 }
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
@@ -3365,7 +3589,7 @@ pub enum CUfunc_cache_enum {
     CU_FUNC_CACHE_PREFER_L1 = 2,
     CU_FUNC_CACHE_PREFER_EQUAL = 3,
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUfunctionLoadingState_enum {
@@ -3434,7 +3658,7 @@ pub enum CUfunction_attribute_enum {
     CU_FUNC_ATTRIBUTE_DEVICE_NODE_UPDATE_SUPPORTED = 16,
     CU_FUNC_ATTRIBUTE_MAX = 17,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUfunction_attribute_enum {
@@ -3465,7 +3689,7 @@ pub enum CUgraphChildGraphNodeOwnership_enum {
     CU_GRAPH_CHILD_GRAPH_OWNERSHIP_CLONE = 0,
     CU_GRAPH_CHILD_GRAPH_OWNERSHIP_MOVE = 1,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(i32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUgraphChildGraphNodeOwnership_enum {
@@ -3480,7 +3704,7 @@ pub enum CUgraphConditionalNodeType_enum {
     CU_GRAPH_COND_TYPE_IF = 0,
     CU_GRAPH_COND_TYPE_WHILE = 1,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUgraphConditionalNodeType_enum {
@@ -3566,7 +3790,30 @@ pub enum CUgraphDebugDot_flags_enum {
     CU_GRAPH_DEBUG_DOT_FLAGS_EXTRA_TOPO_INFO = 16384,
     CU_GRAPH_DEBUG_DOT_FLAGS_CONDITIONAL_NODE_PARAMS = 32768,
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
+pub enum CUgraphDebugDot_flags_enum {
+    CU_GRAPH_DEBUG_DOT_FLAGS_VERBOSE = 1,
+    CU_GRAPH_DEBUG_DOT_FLAGS_RUNTIME_TYPES = 2,
+    CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_PARAMS = 4,
+    CU_GRAPH_DEBUG_DOT_FLAGS_MEMCPY_NODE_PARAMS = 8,
+    CU_GRAPH_DEBUG_DOT_FLAGS_MEMSET_NODE_PARAMS = 16,
+    CU_GRAPH_DEBUG_DOT_FLAGS_HOST_NODE_PARAMS = 32,
+    CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS = 64,
+    CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS = 128,
+    CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS = 256,
+    CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_ATTRIBUTES = 512,
+    CU_GRAPH_DEBUG_DOT_FLAGS_HANDLES = 1024,
+    CU_GRAPH_DEBUG_DOT_FLAGS_MEM_ALLOC_NODE_PARAMS = 2048,
+    CU_GRAPH_DEBUG_DOT_FLAGS_MEM_FREE_NODE_PARAMS = 4096,
+    CU_GRAPH_DEBUG_DOT_FLAGS_BATCH_MEM_OP_NODE_PARAMS = 8192,
+    CU_GRAPH_DEBUG_DOT_FLAGS_EXTRA_TOPO_INFO = 16384,
+    CU_GRAPH_DEBUG_DOT_FLAGS_CONDITIONAL_NODE_PARAMS = 32768,
+    CU_GRAPH_DEBUG_DOT_FLAGS_MEMCPY_BATCH_NODE_PARAMS = 65536,
+    CU_GRAPH_DEBUG_DOT_FLAGS_FABRIC_CPY_BATCH_NODE_PARAMS = 131072,
+}
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUgraphDependencyType_enum {
@@ -3586,7 +3833,7 @@ pub enum CUgraphExecUpdateResult_enum {
     CU_GRAPH_EXEC_UPDATE_ERROR_NOT_SUPPORTED = 6,
     CU_GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE = 7,
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUgraphExecUpdateResult_enum {
@@ -3610,7 +3857,7 @@ pub enum CUgraphInstantiateResult_enum {
     CUDA_GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED = 3,
     CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED = 4,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUgraphInstantiateResult_enum {
@@ -3703,7 +3950,30 @@ pub enum CUgraphNodeType_enum {
     CU_GRAPH_NODE_TYPE_CONDITIONAL = 13,
     CU_GRAPH_NODE_TYPE_RESERVED_16 = 16,
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
+pub enum CUgraphNodeType_enum {
+    CU_GRAPH_NODE_TYPE_KERNEL = 0,
+    CU_GRAPH_NODE_TYPE_MEMCPY = 1,
+    CU_GRAPH_NODE_TYPE_MEMSET = 2,
+    CU_GRAPH_NODE_TYPE_HOST = 3,
+    CU_GRAPH_NODE_TYPE_GRAPH = 4,
+    CU_GRAPH_NODE_TYPE_EMPTY = 5,
+    CU_GRAPH_NODE_TYPE_WAIT_EVENT = 6,
+    CU_GRAPH_NODE_TYPE_EVENT_RECORD = 7,
+    CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL = 8,
+    CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT = 9,
+    CU_GRAPH_NODE_TYPE_MEM_ALLOC = 10,
+    CU_GRAPH_NODE_TYPE_MEM_FREE = 11,
+    CU_GRAPH_NODE_TYPE_BATCH_MEM_OP = 12,
+    CU_GRAPH_NODE_TYPE_CONDITIONAL = 13,
+    CU_GRAPH_NODE_TYPE_MEMCPY_BATCH = 14,
+    CU_GRAPH_NODE_TYPE_RESERVED_16 = 16,
+    CU_GRAPH_NODE_TYPE_EXTERNAL_ENGINE = 17,
+    CU_GRAPH_NODE_TYPE_FABRIC_CPY_BATCH = 18,
+}
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUgraphRecaptureStatus_enum {
@@ -3733,14 +4003,14 @@ pub enum CUgraphicsRegisterFlags_enum {
 pub enum CUgreenCtxCreate_flags {
     CU_GREEN_CTX_DEFAULT_STREAM = 1,
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUgreenCtxCreate_flags {
     CU_GREEN_CTX_NONE = 0,
     CU_GREEN_CTX_DEFAULT_STREAM = 1,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUhostTaskSyncMode_enum {
@@ -3999,7 +4269,7 @@ pub enum CUjit_option_enum {
     CU_JIT_SPLIT_COMPILE = 34,
     CU_JIT_NUM_OPTIONS = 35,
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUjit_option_enum {
@@ -4243,7 +4513,7 @@ pub enum CUjit_target_enum {
     CU_TARGET_COMPUTE_120F = 131192,
     CU_TARGET_COMPUTE_121F = 131193,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUjit_target_enum {
@@ -4425,7 +4695,7 @@ pub enum CUlaunchAttributeID_enum {
     CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT = 14,
     CU_LAUNCH_ATTRIBUTE_NVLINK_UTIL_CENTRIC_SCHEDULING = 16,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUlaunchAttributeID_enum {
@@ -4448,7 +4718,7 @@ pub enum CUlaunchAttributeID_enum {
     CU_LAUNCH_ATTRIBUTE_PORTABLE_CLUSTER_SIZE_MODE = 17,
     CU_LAUNCH_ATTRIBUTE_SHARED_MEMORY_MODE = 18,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUlaunchAttributePortableClusterMode_enum {
@@ -4456,14 +4726,14 @@ pub enum CUlaunchAttributePortableClusterMode_enum {
     CU_LAUNCH_PORTABLE_CLUSTER_MODE_REQUIRE_PORTABLE = 1,
     CU_LAUNCH_PORTABLE_CLUSTER_MODE_ALLOW_NON_PORTABLE = 2,
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUlaunchMemSyncDomain_enum {
     CU_LAUNCH_MEM_SYNC_DOMAIN_DEFAULT = 0,
     CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE = 1,
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUlibraryOption_enum {
@@ -4500,7 +4770,7 @@ pub enum CUlimit_enum {
     CU_LIMIT_CIG_SHMEM_FALLBACK_ENABLED = 9,
     CU_LIMIT_MAX = 10,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUlimit_enum {
@@ -4517,28 +4787,28 @@ pub enum CUlimit_enum {
     CU_LIMIT_PER_BLOCK_MEMORY_SIZE = 10,
     CU_LIMIT_MAX = 11,
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUlogLevel_enum {
     CU_LOG_LEVEL_ERROR = 0,
     CU_LOG_LEVEL_WARNING = 1,
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUlogicalEndpointFlag_enum {
     CU_LOGICAL_ENDPOINT_FLAG_NONE = 0,
     CU_LOGICAL_ENDPOINT_FLAG_COUNTED_OPS = 1,
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUlogicalEndpointIpcHandleType_enum {
     CU_LOGICAL_ENDPOINT_IPC_HANDLE_TYPE_NONE = 0,
     CU_LOGICAL_ENDPOINT_IPC_HANDLE_TYPE_FABRIC = 1,
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUlogicalEndpointType_enum {
@@ -4574,7 +4844,7 @@ pub enum CUmemAllocationType_enum {
     CU_MEM_ALLOCATION_TYPE_PINNED = 1,
     CU_MEM_ALLOCATION_TYPE_MAX = 2147483647,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUmemAllocationType_enum {
@@ -4598,7 +4868,7 @@ pub enum CUmemDecompressAlgorithm_enum {
     CU_MEM_DECOMPRESS_ALGORITHM_DEFLATE = 1,
     CU_MEM_DECOMPRESS_ALGORITHM_SNAPPY = 2,
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUmemDecompressAlgorithm_enum {
@@ -4643,7 +4913,7 @@ pub enum CUmemLocationType_enum {
     CU_MEM_LOCATION_TYPE_INVISIBLE = 5,
     CU_MEM_LOCATION_TYPE_MAX = 2147483647,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUmemLocationType_enum {
@@ -4694,7 +4964,7 @@ pub enum CUmemPool_attribute_enum {
     CU_MEMPOOL_ATTR_MAX_POOL_SIZE = 13,
     CU_MEMPOOL_ATTR_HW_DECOMPRESS_ENABLED = 14,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUmemPool_attribute_enum {
@@ -4714,13 +4984,13 @@ pub enum CUmemPool_attribute_enum {
     CU_MEMPOOL_ATTR_HW_DECOMPRESS_ENABLED = 14,
     CU_MEMPOOL_ATTR_LOCALITY_DOMAIN_ID = 15,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUmemRangeFlags_enum {
     CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE = 1,
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUmemRangeHandleType_enum {
@@ -4746,7 +5016,7 @@ pub enum CUmem_range_attribute_enum {
     CU_MEM_RANGE_ATTRIBUTE_ACCESSED_BY = 3,
     CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION = 4,
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUmem_range_attribute_enum {
@@ -4759,7 +5029,7 @@ pub enum CUmem_range_attribute_enum {
     CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION_TYPE = 7,
     CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION_ID = 8,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUmemcpy3DOperandType_enum {
@@ -4767,14 +5037,14 @@ pub enum CUmemcpy3DOperandType_enum {
     CU_MEMCPY_OPERAND_TYPE_ARRAY = 2,
     CU_MEMCPY_OPERAND_TYPE_MAX = 2147483647,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUmemcpyFlags_enum {
     CU_MEMCPY_FLAG_DEFAULT = 0,
     CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE = 1,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUmemcpySrcAccessOrder_enum {
@@ -4792,14 +5062,14 @@ pub enum CUmemorytype_enum {
     CU_MEMORYTYPE_ARRAY = 3,
     CU_MEMORYTYPE_UNIFIED = 4,
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUmoduleLoadingMode_enum {
     CU_MODULE_EAGER_LOADING = 1,
     CU_MODULE_LAZY_LOADING = 2,
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUmulticastGranularity_flags_enum {
@@ -4891,7 +5161,7 @@ pub enum CUpointer_attribute_enum {
     CU_POINTER_ATTRIBUTE_MEMORY_BLOCK_ID = 20,
     CU_POINTER_ATTRIBUTE_IS_HW_DECOMPRESS_CAPABLE = 21,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUpointer_attribute_enum {
@@ -4927,7 +5197,7 @@ pub enum CUprocessState_enum {
     CU_PROCESS_STATE_CHECKPOINTED = 2,
     CU_PROCESS_STATE_FAILED = 3,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUprocessState_enum {
@@ -4993,7 +5263,7 @@ pub enum CUsharedMemoryMode_enum {
     CU_SHARED_MEMORY_MODE_REQUIRE_PORTABLE = 1,
     CU_SHARED_MEMORY_MODE_ALLOW_NON_PORTABLE = 2,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUsharedMemoryMode_enum {
@@ -5017,14 +5287,14 @@ pub enum CUsharedconfig_enum {
     CU_SHARED_MEM_CONFIG_FOUR_BYTE_BANK_SIZE = 1,
     CU_SHARED_MEM_CONFIG_EIGHT_BYTE_BANK_SIZE = 2,
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUstreamAtomicReductionDataType_enum {
     CU_STREAM_ATOMIC_REDUCTION_UNSIGNED_32 = 14,
     CU_STREAM_ATOMIC_REDUCTION_UNSIGNED_64 = 22,
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUstreamAtomicReductionOpType_enum {
@@ -5060,7 +5330,7 @@ pub enum CUstreamBatchMemOpType_enum {
     CU_STREAM_MEM_OP_BARRIER = 6,
     CU_STREAM_MEM_OP_FLUSH_REMOTE_WRITES = 3,
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUstreamBatchMemOpType_enum {
@@ -5092,7 +5362,14 @@ pub enum CUstreamCaptureStatus_enum {
 pub enum CUstreamCigDataType_enum {
     STREAM_CIG_DATA_TYPE_D3D12_COMMAND_LIST = 1,
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
+pub enum CUstreamCigDataType_enum {
+    STREAM_CIG_DATA_TYPE_D3D12_COMMAND_LIST = 1,
+    STREAM_CIG_DATA_TYPE_VULKAN_COMMAND_BUFFER_HANDLE_NV = 2,
+}
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUstreamMemoryBarrier_flags_enum {
@@ -5134,6 +5411,14 @@ pub enum CUsynchronizationPolicy_enum {
     CU_SYNC_POLICY_YIELD = 3,
     CU_SYNC_POLICY_BLOCKING_SYNC = 4,
 }
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
+pub enum CUtensorMapAllocClass_enum {
+    CU_TENSOR_MAP_ALLOC_CLASS_AUTO = 0,
+    CU_TENSOR_MAP_ALLOC_CLASS_SMALL = 1,
+    CU_TENSOR_MAP_ALLOC_CLASS_LARGE = 2,
+}
 #[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
@@ -5152,7 +5437,7 @@ pub enum CUtensorMapDataType_enum {
     CU_TENSOR_MAP_DATA_TYPE_TFLOAT32 = 11,
     CU_TENSOR_MAP_DATA_TYPE_TFLOAT32_FTZ = 12,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUtensorMapDataType_enum {
@@ -5173,21 +5458,21 @@ pub enum CUtensorMapDataType_enum {
     CU_TENSOR_MAP_DATA_TYPE_16U4_ALIGN16B = 14,
     CU_TENSOR_MAP_DATA_TYPE_16U6_ALIGN16B = 15,
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUtensorMapFloatOOBfill_enum {
     CU_TENSOR_MAP_FLOAT_OOB_FILL_NONE = 0,
     CU_TENSOR_MAP_FLOAT_OOB_FILL_NAN_REQUEST_ZERO_FMA = 1,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUtensorMapIm2ColWideMode_enum {
     CU_TENSOR_MAP_IM2COL_WIDE_MODE_W = 0,
     CU_TENSOR_MAP_IM2COL_WIDE_MODE_W128 = 1,
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUtensorMapInterleave_enum {
@@ -5195,7 +5480,7 @@ pub enum CUtensorMapInterleave_enum {
     CU_TENSOR_MAP_INTERLEAVE_16B = 1,
     CU_TENSOR_MAP_INTERLEAVE_32B = 2,
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUtensorMapL2promotion_enum {
@@ -5213,7 +5498,7 @@ pub enum CUtensorMapSwizzle_enum {
     CU_TENSOR_MAP_SWIZZLE_64B = 2,
     CU_TENSOR_MAP_SWIZZLE_128B = 3,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum CUtensorMapSwizzle_enum {
@@ -6337,7 +6622,7 @@ pub enum cudaError_enum {
     CUDA_ERROR_GRAPH_RECAPTURE_FAILURE = 918,
     CUDA_ERROR_UNKNOWN = 999,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum cudaError_enum {
@@ -6466,7 +6751,7 @@ pub struct CUDA_ARRAY_DESCRIPTOR_st {
     pub Format: CUarray_format,
     pub NumChannels: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUDA_ARRAY_MEMORY_REQUIREMENTS_st {
@@ -6499,7 +6784,7 @@ pub struct CUDA_BATCH_MEM_OP_NODE_PARAMS_st {
     pub paramArray: *mut CUstreamBatchMemOpParams,
     pub flags: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUDA_BATCH_MEM_OP_NODE_PARAMS_v1_st {
@@ -6508,7 +6793,7 @@ pub struct CUDA_BATCH_MEM_OP_NODE_PARAMS_v1_st {
     pub paramArray: *mut CUstreamBatchMemOpParams,
     pub flags: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUDA_BATCH_MEM_OP_NODE_PARAMS_v2_st {
@@ -6523,14 +6808,14 @@ pub struct CUDA_BATCH_MEM_OP_NODE_PARAMS_v2_st {
 pub struct CUDA_CHILD_GRAPH_NODE_PARAMS_st {
     pub graph: CUgraph,
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUDA_CHILD_GRAPH_NODE_PARAMS_st {
     pub graph: CUgraph,
     pub ownership: CUgraphChildGraphNodeOwnership,
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUDA_CONDITIONAL_NODE_PARAMS {
@@ -6546,14 +6831,14 @@ pub struct CUDA_CONDITIONAL_NODE_PARAMS {
 pub struct CUDA_EVENT_RECORD_NODE_PARAMS_st {
     pub event: CUevent,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUDA_EVENT_RECORD_NODE_PARAMS_st {
     pub event: CUevent,
     pub __bindgen_anon_1: CUDA_EVENT_RECORD_NODE_PARAMS_st__bindgen_ty_1,
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUDA_EVENT_WAIT_NODE_PARAMS_st {
@@ -6670,7 +6955,7 @@ pub struct CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st {
     pub paramsArray: *const CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS,
     pub numExtSems: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st {
@@ -6694,7 +6979,7 @@ pub struct CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st {
     pub paramsArray: *const CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS,
     pub numExtSems: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st {
@@ -6703,7 +6988,25 @@ pub struct CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st {
     pub numExtSems: ::core::ffi::c_uint,
     pub __bindgen_anon_1: CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st__bindgen_ty_1,
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CUDA_FABRIC_COPY_BATCH_OP_st {
+    pub src: CUfabricCpyOperand,
+    pub dst: CUfabricCpyOperand,
+    pub size: usize,
+    pub flags: ::core::ffi::c_uint,
+}
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CUDA_FABRIC_CPY_BATCH_NODE_PARAMS_V1_st {
+    pub numOps: usize,
+    pub opList: *mut CUDA_FABRIC_COPY_BATCH_OP,
+    pub flags: ::core::ffi::c_ulonglong,
+    pub __bindgen_anon_1: CUDA_FABRIC_CPY_BATCH_NODE_PARAMS_V1_st__bindgen_ty_1,
+}
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUDA_GRAPH_INSTANTIATE_PARAMS_st {
@@ -6733,7 +7036,7 @@ pub struct CUDA_HOST_NODE_PARAMS_v2_st {
     pub userData: *mut ::core::ffi::c_void,
     pub syncMode: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUDA_HOST_NODE_PARAMS_v2_st {
@@ -6756,7 +7059,7 @@ pub struct CUDA_KERNEL_NODE_PARAMS_st {
     pub kernelParams: *mut *mut ::core::ffi::c_void,
     pub extra: *mut *mut ::core::ffi::c_void,
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUDA_KERNEL_NODE_PARAMS_v2_st {
@@ -6773,7 +7076,7 @@ pub struct CUDA_KERNEL_NODE_PARAMS_v2_st {
     pub kern: CUkernel,
     pub ctx: CUcontext,
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUDA_KERNEL_NODE_PARAMS_v3_st {
@@ -6824,7 +7127,7 @@ pub struct CUDA_MEMCPY2D_st {
     pub WidthInBytes: usize,
     pub Height: usize,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUDA_MEMCPY3D_BATCH_OP_st {
@@ -6892,7 +7195,20 @@ pub struct CUDA_MEMCPY3D_st {
     pub Height: usize,
     pub Depth: usize,
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CUDA_MEMCPY_BATCH_NODE_PARAMS_V1_st {
+    pub count: usize,
+    pub dsts: *mut CUdeviceptr,
+    pub srcs: *mut CUdeviceptr,
+    pub sizes: *mut usize,
+    pub attrs: *mut CUmemcpyAttributes,
+    pub attrsIdxs: *mut usize,
+    pub numAttrs: usize,
+    pub __bindgen_anon_1: CUDA_MEMCPY_BATCH_NODE_PARAMS_V1_st__bindgen_ty_1,
+}
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUDA_MEMCPY_NODE_PARAMS_st {
@@ -6911,7 +7227,7 @@ pub struct CUDA_MEMSET_NODE_PARAMS_st {
     pub width: usize,
     pub height: usize,
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUDA_MEMSET_NODE_PARAMS_v2_st {
@@ -6943,7 +7259,7 @@ pub struct CUDA_MEM_ALLOC_NODE_PARAMS_v1_st {
     pub bytesize: usize,
     pub dptr: CUdeviceptr,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUDA_MEM_ALLOC_NODE_PARAMS_v1_st {
@@ -6963,7 +7279,7 @@ pub struct CUDA_MEM_ALLOC_NODE_PARAMS_v2_st {
     pub bytesize: usize,
     pub dptr: CUdeviceptr,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUDA_MEM_ALLOC_NODE_PARAMS_v2_st {
@@ -6973,7 +7289,7 @@ pub struct CUDA_MEM_ALLOC_NODE_PARAMS_v2_st {
     pub bytesize: usize,
     pub dptr: CUdeviceptr,
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUDA_MEM_FREE_NODE_PARAMS_st {
@@ -7052,7 +7368,7 @@ pub struct CUDA_TEXTURE_DESC_st {
     pub borderColor: [f32; 4usize],
     pub reserved: [::core::ffi::c_int; 12usize],
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct CUIcheckpointOperation_st {
@@ -7068,7 +7384,7 @@ pub struct CU_DEV_SM_RESOURCE_GROUP_PARAMS_st {
     pub flags: ::core::ffi::c_uint,
     pub reserved: [::core::ffi::c_uint; 12usize],
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CU_DEV_SM_RESOURCE_GROUP_PARAMS_st {
@@ -7127,20 +7443,20 @@ pub struct CUarrayMapInfo_st__bindgen_ty_2__bindgen_ty_2 {
 pub struct CUarray_st {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct CUasyncCallbackEntry_st {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUasyncNotificationInfo_st {
     pub type_: CUasyncNotificationType,
     pub info: CUasyncNotificationInfo_st__bindgen_ty_1,
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUasyncNotificationInfo_st__bindgen_ty_1__bindgen_ty_1 {
@@ -7152,14 +7468,14 @@ pub struct CUasyncNotificationInfo_st__bindgen_ty_1__bindgen_ty_1 {
 pub struct CUcheckpointCheckpointArgs_st {
     pub reserved: [cuuint64_t; 8usize],
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUcheckpointCheckpointArgs_st {
     pub customStorageInfo_out: *mut *mut CUcheckpointCustomStorageInfo,
     pub reserved: [::core::ffi::c_char; 56usize],
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUcheckpointCustomStorageInfo_st {
@@ -7167,7 +7483,7 @@ pub struct CUcheckpointCustomStorageInfo_st {
     pub perDeviceData: *mut CUcheckpointCustomStoragePerDeviceData,
     pub deviceCount: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUcheckpointCustomStoragePerDeviceData_st {
@@ -7175,14 +7491,14 @@ pub struct CUcheckpointCustomStoragePerDeviceData_st {
     pub size: usize,
     pub stream: CUstream,
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUcheckpointGpuPair_st {
     pub oldUuid: CUuuid,
     pub newUuid: CUuuid,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUcheckpointLockArgs_st {
@@ -7213,7 +7529,7 @@ pub struct CUcheckpointRestoreArgs_st {
     pub gpuPairsCount: ::core::ffi::c_uint,
     pub reserved: [::core::ffi::c_char; 52usize],
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUcheckpointRestoreArgs_st {
@@ -7223,33 +7539,33 @@ pub struct CUcheckpointRestoreArgs_st {
     pub customStorageInfo_out: *mut *mut CUcheckpointCustomStorageInfo,
     pub reserved: [::core::ffi::c_char; 40usize],
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUcheckpointUnlockArgs_st {
     pub reserved: [cuuint64_t; 8usize],
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUcliqueInfo_st {
     pub type_: CUcliqueType,
     pub id: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct CUcoredumpCallbackEntry_st {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUctxCigParam_st {
     pub sharedDataType: CUcigDataType,
     pub sharedData: *mut ::core::ffi::c_void,
 }
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUctxCreateParams_st {
@@ -7262,7 +7578,7 @@ pub struct CUctxCreateParams_st {
 pub struct CUctx_st {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct CUdevResourceDesc_st {
@@ -7276,7 +7592,7 @@ pub struct CUdevResource_st {
     pub _internal_padding: [::core::ffi::c_uchar; 92usize],
     pub __bindgen_anon_1: CUdevResource_st__bindgen_ty_1,
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUdevResource_st {
@@ -7308,7 +7624,7 @@ pub struct CUdevSmResource_st {
     pub smCoscheduledAlignment: ::core::ffi::c_uint,
     pub flags: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUdevSmResource_st {
@@ -7318,7 +7634,7 @@ pub struct CUdevSmResource_st {
     pub flags: ::core::ffi::c_uint,
     pub localityDomainId: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUdevWorkqueueConfigResource_st {
@@ -7326,7 +7642,7 @@ pub struct CUdevWorkqueueConfigResource_st {
     pub wqConcurrencyLimit: ::core::ffi::c_uint,
     pub sharingScope: CUdevWorkqueueConfigScope,
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUdevWorkqueueResource_st {
@@ -7372,7 +7688,7 @@ pub struct CUextMemory_st {
 pub struct CUextSemaphore_st {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUextent3D_st {
@@ -7380,18 +7696,39 @@ pub struct CUextent3D_st {
     pub height: usize,
     pub depth: usize,
 }
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CUfabricCpyOperand_st {
+    pub type_: CUfabricCpyOperandType,
+    pub op: CUfabricCpyOperand_st__bindgen_ty_1,
+}
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CUfabricCpyOperand_st__bindgen_ty_1__bindgen_ty_1 {
+    pub ptr: CUdeviceptr,
+    pub locHint: CUmemLocation,
+}
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(C)]
+#[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
+pub struct CUfabricCpyOperand_st__bindgen_ty_1__bindgen_ty_2 {
+    pub id: CUlogicalEndpointId,
+    pub offset: cuuint64_t,
+}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct CUfunc_st {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct CUgraphDeviceUpdatableNode_st {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUgraphEdgeData_st {
@@ -7400,7 +7737,7 @@ pub struct CUgraphEdgeData_st {
     pub type_: ::core::ffi::c_uchar,
     pub reserved: [::core::ffi::c_uchar; 5usize],
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUgraphExecUpdateResultInfo_st {
@@ -7416,7 +7753,7 @@ pub struct CUgraphExec_st {
 #[repr(transparent)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUgraphInstantiate_flags_enum(pub ::core::ffi::c_uint);
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUgraphNodeParams_st {
@@ -7440,7 +7777,7 @@ pub struct CUgraph_st {
 pub struct CUgraphicsResource_st {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct CUgreenCtx_st {
@@ -7456,13 +7793,13 @@ pub struct CUipcEventHandle_st {
 pub struct CUipcMemHandle_st {
     pub reserved: [::core::ffi::c_char; 64usize],
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct CUkern_st {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUlaunchAttributeValue_union__bindgen_ty_1 {
@@ -7470,7 +7807,7 @@ pub struct CUlaunchAttributeValue_union__bindgen_ty_1 {
     pub y: ::core::ffi::c_uint,
     pub z: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUlaunchAttributeValue_union__bindgen_ty_2 {
@@ -7478,7 +7815,7 @@ pub struct CUlaunchAttributeValue_union__bindgen_ty_2 {
     pub flags: ::core::ffi::c_int,
     pub triggerAtBlockStart: ::core::ffi::c_int,
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUlaunchAttributeValue_union__bindgen_ty_3 {
@@ -7492,7 +7829,7 @@ pub struct CUlaunchAttributeValue_union__bindgen_ty_4 {
     pub deviceUpdatable: ::core::ffi::c_int,
     pub devNode: CUgraphDeviceNode,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUlaunchAttributeValue_union__bindgen_ty_4 {
@@ -7500,14 +7837,14 @@ pub struct CUlaunchAttributeValue_union__bindgen_ty_4 {
     pub y: ::core::ffi::c_uint,
     pub z: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUlaunchAttributeValue_union__bindgen_ty_5 {
     pub deviceUpdatable: ::core::ffi::c_int,
     pub devNode: CUgraphDeviceNode,
 }
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUlaunchAttribute_st {
@@ -7515,7 +7852,7 @@ pub struct CUlaunchAttribute_st {
     pub pad: [::core::ffi::c_char; 4usize],
     pub value: CUlaunchAttributeValue,
 }
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUlaunchConfig_st {
@@ -7530,20 +7867,20 @@ pub struct CUlaunchConfig_st {
     pub attrs: *mut CUlaunchAttribute,
     pub numAttrs: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUlaunchMemSyncDomainMap_st {
     pub default_: ::core::ffi::c_uchar,
     pub remote: ::core::ffi::c_uchar,
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct CUlib_st {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUlibraryHostUniversalFunctionAndDataTable_st {
@@ -7557,13 +7894,13 @@ pub struct CUlibraryHostUniversalFunctionAndDataTable_st {
 pub struct CUlinkState_st {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUlogicalEndpointFabricHandle_st {
     pub data: [::core::ffi::c_uchar; 64usize],
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUlogicalEndpointProp_struct {
@@ -7573,19 +7910,19 @@ pub struct CUlogicalEndpointProp_struct {
     pub ipcHandleTypes: ::core::ffi::c_uint,
     pub flags: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUlogicalEndpointProp_struct__bindgen_ty_1__bindgen_ty_1 {
     pub device: CUdevice,
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUlogicalEndpointProp_struct__bindgen_ty_1__bindgen_ty_2 {
     pub numDevices: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct CUlogsCallbackEntry_st {
@@ -7598,7 +7935,7 @@ pub struct CUmemAccessDesc_st {
     pub location: CUmemLocation,
     pub flags: CUmemAccess_flags,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUmemAccessDesc_st {
@@ -7618,7 +7955,7 @@ pub struct CUmemAllocationProp_st {
     pub win32HandleMetaData: *mut ::core::ffi::c_void,
     pub allocFlags: CUmemAllocationProp_st__bindgen_ty_1,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUmemAllocationProp_st {
@@ -7636,7 +7973,7 @@ pub struct CUmemAllocationProp_st__bindgen_ty_1 {
     pub usage: ::core::ffi::c_ushort,
     pub reserved: [::core::ffi::c_uchar; 4usize],
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUmemDecompressParams_st {
@@ -7648,7 +7985,7 @@ pub struct CUmemDecompressParams_st {
     pub algo: CUmemDecompressAlgorithm,
     pub padding: [::core::ffi::c_uchar; 20usize],
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUmemFabricHandle_st {
@@ -7661,14 +7998,14 @@ pub struct CUmemLocation_st {
     pub type_: CUmemLocationType,
     pub id: ::core::ffi::c_int,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUmemLocation_st {
     pub type_: CUmemLocationType,
     pub __bindgen_anon_1: CUmemLocation_st__bindgen_ty_1,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUmemLocation_st__bindgen_ty_1__bindgen_ty_1 {
@@ -7725,7 +8062,7 @@ pub struct CUmemPoolProps_st {
     pub usage: ::core::ffi::c_ushort,
     pub reserved: [::core::ffi::c_uchar; 54usize],
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUmemPoolProps_st {
@@ -7743,7 +8080,7 @@ pub struct CUmemPoolProps_st {
 pub struct CUmemPoolPtrExportData_st {
     pub reserved: [::core::ffi::c_uchar; 64usize],
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUmemcpy3DOperand_st {
@@ -7759,7 +8096,7 @@ pub struct CUmemcpy3DOperand_st__bindgen_ty_1__bindgen_ty_1 {
     pub layerHeight: usize,
     pub locHint: CUmemLocation,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUmemcpy3DOperand_st__bindgen_ty_1__bindgen_ty_1 {
@@ -7768,7 +8105,7 @@ pub struct CUmemcpy3DOperand_st__bindgen_ty_1__bindgen_ty_1 {
     pub layerHeight: usize,
     pub locHint: CUmemLocation,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUmemcpy3DOperand_st__bindgen_ty_1__bindgen_ty_2 {
@@ -7784,7 +8121,7 @@ pub struct CUmemcpyAttributes_st {
     pub dstLocHint: CUmemLocation,
     pub flags: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct CUmemcpyAttributes_st {
@@ -7803,7 +8140,7 @@ pub struct CUmipmappedArray_st {
 pub struct CUmod_st {
     _unused: [u8; 0],
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUmulticastObjectProp_st {
@@ -7812,7 +8149,7 @@ pub struct CUmulticastObjectProp_st {
     pub handleTypes: ::core::ffi::c_ulonglong,
     pub flags: ::core::ffi::c_ulonglong,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUoffset3D_st {
@@ -7820,7 +8157,7 @@ pub struct CUoffset3D_st {
     pub y: usize,
     pub z: usize,
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUstreamBatchMemOpParams_union_CUstreamMemOpAtomicReductionParams_st {
@@ -7838,7 +8175,7 @@ pub struct CUstreamBatchMemOpParams_union_CUstreamMemOpFlushRemoteWritesParams_s
     pub operation: CUstreamBatchMemOpType,
     pub flags: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUstreamBatchMemOpParams_union_CUstreamMemOpMemoryBarrierParams_st {
@@ -7863,13 +8200,13 @@ pub struct CUstreamBatchMemOpParams_union_CUstreamMemOpWriteValueParams_st {
     pub flags: ::core::ffi::c_uint,
     pub alias: CUdeviceptr,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUstreamCigCaptureParams_st {
     pub streamCigParams: *mut CUstreamCigParam,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct CUstreamCigParam_st {
@@ -7893,7 +8230,7 @@ pub struct CUsurfref_st {
 pub struct CUtensorMap_st {
     pub opaque: [cuuint64_t; 16usize],
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[repr(align(128))]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
@@ -7942,19 +8279,19 @@ impl CUdevice_attribute_enum {
 impl CUgraphInstantiate_flags_enum {
     pub const CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH: CUgraphInstantiate_flags_enum = CUgraphInstantiate_flags_enum(1);
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 impl CUgraphInstantiate_flags_enum {
     pub const CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH: CUgraphInstantiate_flags_enum = CUgraphInstantiate_flags_enum(4);
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 impl CUgraphInstantiate_flags_enum {
     pub const CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD: CUgraphInstantiate_flags_enum = CUgraphInstantiate_flags_enum(2);
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 impl CUgraphInstantiate_flags_enum {
     pub const CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY: CUgraphInstantiate_flags_enum = CUgraphInstantiate_flags_enum(8);
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 impl CUmemAllocationHandleType_enum {
     pub const CU_MEM_HANDLE_TYPE_FABRIC: CUmemAllocationHandleType_enum = CUmemAllocationHandleType_enum(8);
 }
@@ -7973,7 +8310,7 @@ impl CUmemAllocationHandleType_enum {
 impl CUmemAllocationHandleType_enum {
     pub const CU_MEM_HANDLE_TYPE_WIN32_KMT: CUmemAllocationHandleType_enum = CUmemAllocationHandleType_enum(4);
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 impl CUmemLocationType_enum {
     pub const CU_MEM_LOCATION_TYPE_NONE: CUmemLocationType_enum = CUmemLocationType_enum::CU_MEM_LOCATION_TYPE_INVALID;
 }
@@ -8029,7 +8366,7 @@ impl ::core::ops::BitOrAssign for CUmemAllocationHandleType_enum {
         self.0 |= rhs.0;
     }
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union CUDA_EVENT_RECORD_NODE_PARAMS_st__bindgen_ty_1 {
@@ -8062,24 +8399,38 @@ pub union CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_st__bindgen_ty_1__bindgen_ty_2 {
     pub fence: *mut ::core::ffi::c_void,
     pub reserved: ::core::ffi::c_ulonglong,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st__bindgen_ty_1 {
     pub ctx: CUcontext,
     pub gCtx: CUgreenCtx,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st__bindgen_ty_1 {
     pub ctx: CUcontext,
     pub gCtx: CUgreenCtx,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union CUDA_FABRIC_CPY_BATCH_NODE_PARAMS_V1_st__bindgen_ty_1 {
+    pub ctx: CUcontext,
+    pub gCtx: CUgreenCtx,
+}
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union CUDA_HOST_NODE_PARAMS_v2_st__bindgen_ty_1 {
+    pub ctx: CUcontext,
+    pub gCtx: CUgreenCtx,
+}
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union CUDA_MEMCPY_BATCH_NODE_PARAMS_V1_st__bindgen_ty_1 {
     pub ctx: CUcontext,
     pub gCtx: CUgreenCtx,
 }
@@ -8109,7 +8460,7 @@ pub union CUarrayMapInfo_st__bindgen_ty_2 {
 pub union CUarrayMapInfo_st__bindgen_ty_3 {
     pub memHandle: CUmemGenericAllocationHandle,
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union CUasyncNotificationInfo_st__bindgen_ty_1 {
@@ -8122,7 +8473,7 @@ pub union CUdevResource_st__bindgen_ty_1 {
     pub sm: CUdevSmResource,
     pub _oversize: [::core::ffi::c_uchar; 48usize],
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union CUdevResource_st__bindgen_ty_1 {
@@ -8135,6 +8486,13 @@ pub union CUdevResource_st__bindgen_ty_1 {
 #[derive(Copy, Clone)]
 pub union CUexecAffinityParam_st__bindgen_ty_1 {
     pub smCount: CUexecAffinitySmCount,
+}
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union CUfabricCpyOperand_st__bindgen_ty_1 {
+    pub ptr: CUfabricCpyOperand_st__bindgen_ty_1__bindgen_ty_1,
+    pub le: CUfabricCpyOperand_st__bindgen_ty_1__bindgen_ty_2,
 }
 #[cfg(any(feature = "cuda-12020"))]
 #[repr(C)]
@@ -8191,6 +8549,28 @@ pub union CUgraphNodeParams_st__bindgen_ty_1 {
     pub free: CUDA_MEM_FREE_NODE_PARAMS,
     pub memOp: CUDA_BATCH_MEM_OP_NODE_PARAMS_v2,
     pub conditional: CUDA_CONDITIONAL_NODE_PARAMS,
+    pub asBytes: [::core::ffi::c_char; 232usize],
+}
+#[cfg(any(feature = "cuda-13050"))]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union CUgraphNodeParams_st__bindgen_ty_1 {
+    pub reserved1: [::core::ffi::c_longlong; 29usize],
+    pub kernel: CUDA_KERNEL_NODE_PARAMS_v3,
+    pub memcpy: CUDA_MEMCPY_NODE_PARAMS,
+    pub memset: CUDA_MEMSET_NODE_PARAMS_v2,
+    pub host: CUDA_HOST_NODE_PARAMS_v2,
+    pub graph: CUDA_CHILD_GRAPH_NODE_PARAMS,
+    pub eventWait: CUDA_EVENT_WAIT_NODE_PARAMS,
+    pub eventRecord: CUDA_EVENT_RECORD_NODE_PARAMS,
+    pub extSemSignal: CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2,
+    pub extSemWait: CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2,
+    pub alloc: CUDA_MEM_ALLOC_NODE_PARAMS_v2,
+    pub free: CUDA_MEM_FREE_NODE_PARAMS,
+    pub memOp: CUDA_BATCH_MEM_OP_NODE_PARAMS_v2,
+    pub conditional: CUDA_CONDITIONAL_NODE_PARAMS,
+    pub memcpyBatch: CUDA_MEMCPY_BATCH_NODE_PARAMS_V1,
+    pub fabricCpyBatch: CUDA_FABRIC_CPY_BATCH_NODE_PARAMS_V1,
     pub asBytes: [::core::ffi::c_char; 232usize],
 }
 #[cfg(any(feature = "cuda-11040", feature = "cuda-11050", feature = "cuda-11060"))]
@@ -8333,7 +8713,7 @@ pub union CUlaunchAttributeValue_union {
     pub sharedMemCarveout: ::core::ffi::c_uint,
     pub nvlinkUtilCentricScheduling: ::core::ffi::c_uint,
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union CUlaunchAttributeValue_union {
@@ -8356,7 +8736,7 @@ pub union CUlaunchAttributeValue_union {
     pub portableClusterSizeMode: CUlaunchAttributePortableClusterMode,
     pub sharedMemoryMode: CUsharedMemoryMode,
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union CUlogicalEndpointProp_struct__bindgen_ty_1 {
@@ -8369,14 +8749,14 @@ pub union CUlogicalEndpointProp_struct__bindgen_ty_1 {
 pub union CUmemLocation_st__bindgen_ty_1 {
     pub id: ::core::ffi::c_int,
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union CUmemLocation_st__bindgen_ty_1 {
     pub id: ::core::ffi::c_int,
     pub localized: CUmemLocation_st__bindgen_ty_1__bindgen_ty_1,
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union CUmemcpy3DOperand_st__bindgen_ty_1 {
@@ -8411,7 +8791,7 @@ pub union CUstreamBatchMemOpParams_union {
     pub memoryBarrier: CUstreamBatchMemOpParams_union_CUstreamMemOpMemoryBarrierParams_st,
     pub pad: [cuuint64_t; 6usize],
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union CUstreamBatchMemOpParams_union {
@@ -8515,7 +8895,7 @@ pub unsafe fn cuArrayGetDescriptor_v2(pArrayDescriptor: *mut CUDA_ARRAY_DESCRIPT
         cuArrayGetDescriptor_v2(pArrayDescriptor, hArray)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuArrayGetMemoryRequirements(memoryRequirements: *mut CUDA_ARRAY_MEMORY_REQUIREMENTS, array: CUarray, device: CUdevice) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8564,7 +8944,7 @@ pub unsafe fn cuArrayGetSparseProperties(sparseProperties: *mut CUDA_ARRAY_SPARS
         cuArrayGetSparseProperties(sparseProperties, array)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCoredumpDeregisterCompleteCallback(callback: CUcoredumpCallbackHandle) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8581,7 +8961,7 @@ pub unsafe fn cuCoredumpDeregisterCompleteCallback(callback: CUcoredumpCallbackH
         cuCoredumpDeregisterCompleteCallback(callback)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCoredumpDeregisterStartCallback(callback: CUcoredumpCallbackHandle) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8598,7 +8978,7 @@ pub unsafe fn cuCoredumpDeregisterStartCallback(callback: CUcoredumpCallbackHand
         cuCoredumpDeregisterStartCallback(callback)
     }
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCoredumpGetAttribute(attrib: CUcoredumpSettings, value: *mut ::core::ffi::c_void, size: *mut usize) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8615,7 +8995,7 @@ pub unsafe fn cuCoredumpGetAttribute(attrib: CUcoredumpSettings, value: *mut ::c
         cuCoredumpGetAttribute(attrib, value, size)
     }
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCoredumpGetAttributeGlobal(attrib: CUcoredumpSettings, value: *mut ::core::ffi::c_void, size: *mut usize) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8632,7 +9012,7 @@ pub unsafe fn cuCoredumpGetAttributeGlobal(attrib: CUcoredumpSettings, value: *m
         cuCoredumpGetAttributeGlobal(attrib, value, size)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCoredumpRegisterCompleteCallback(callback: CUcoredumpStatusCallback, userData: *mut ::core::ffi::c_void, callbackOut: *mut CUcoredumpCallbackHandle) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8649,7 +9029,7 @@ pub unsafe fn cuCoredumpRegisterCompleteCallback(callback: CUcoredumpStatusCallb
         cuCoredumpRegisterCompleteCallback(callback, userData, callbackOut)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCoredumpRegisterStartCallback(callback: CUcoredumpStatusCallback, userData: *mut ::core::ffi::c_void, callbackOut: *mut CUcoredumpCallbackHandle) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8666,7 +9046,7 @@ pub unsafe fn cuCoredumpRegisterStartCallback(callback: CUcoredumpStatusCallback
         cuCoredumpRegisterStartCallback(callback, userData, callbackOut)
     }
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCoredumpSetAttribute(attrib: CUcoredumpSettings, value: *mut ::core::ffi::c_void, size: *mut usize) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8683,7 +9063,7 @@ pub unsafe fn cuCoredumpSetAttribute(attrib: CUcoredumpSettings, value: *mut ::c
         cuCoredumpSetAttribute(attrib, value, size)
     }
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCoredumpSetAttributeGlobal(attrib: CUcoredumpSettings, value: *mut ::core::ffi::c_void, size: *mut usize) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8750,7 +9130,7 @@ pub unsafe fn cuCtxCreate_v3(pctx: *mut CUcontext, paramsArray: *mut CUexecAffin
         cuCtxCreate_v3(pctx, paramsArray, numParams, flags, dev)
     }
 }
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCtxCreate_v4(pctx: *mut CUcontext, ctxCreateParams: *mut CUctxCreateParams, flags: ::core::ffi::c_uint, dev: CUdevice) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8831,7 +9211,7 @@ pub unsafe fn cuCtxEnablePeerAccess(peerContext: CUcontext, Flags: ::core::ffi::
         cuCtxEnablePeerAccess(peerContext, Flags)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCtxFromGreenCtx(pContext: *mut CUcontext, hCtx: CUgreenCtx) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8896,7 +9276,7 @@ pub unsafe fn cuCtxGetCurrent(pctx: *mut CUcontext) -> CUresult {
         cuCtxGetCurrent(pctx)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCtxGetDevResource(hCtx: CUcontext, resource: *mut CUdevResource, type_: CUdevResourceType) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8929,7 +9309,7 @@ pub unsafe fn cuCtxGetDevice(device: *mut CUdevice) -> CUresult {
         cuCtxGetDevice(device)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCtxGetDevice_v2(device: *mut CUdevice, ctx: CUcontext) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -8978,7 +9358,7 @@ pub unsafe fn cuCtxGetFlags(flags: *mut ::core::ffi::c_uint) -> CUresult {
         cuCtxGetFlags(flags)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCtxGetId(ctx: CUcontext, ctxId: *mut ::core::ffi::c_ulonglong) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9075,7 +9455,7 @@ pub unsafe fn cuCtxPushCurrent_v2(ctx: CUcontext) -> CUresult {
         cuCtxPushCurrent_v2(ctx)
     }
 }
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCtxRecordEvent(hCtx: CUcontext, hEvent: CUevent) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9140,7 +9520,7 @@ pub unsafe fn cuCtxSetCurrent(ctx: CUcontext) -> CUresult {
         cuCtxSetCurrent(ctx)
     }
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCtxSetFlags(flags: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9205,7 +9585,7 @@ pub unsafe fn cuCtxSynchronize() -> CUresult {
         cuCtxSynchronize()
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCtxSynchronize_v2(ctx: CUcontext) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9222,7 +9602,7 @@ pub unsafe fn cuCtxSynchronize_v2(ctx: CUcontext) -> CUresult {
         cuCtxSynchronize_v2(ctx)
     }
 }
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuCtxWaitEvent(hCtx: CUcontext, hEvent: CUevent) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9271,7 +9651,7 @@ pub unsafe fn cuDestroyExternalSemaphore(extSem: CUexternalSemaphore) -> CUresul
         cuDestroyExternalSemaphore(extSem)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuDevResourceGenerateDesc(phDesc: *mut CUdevResourceDesc, resources: *mut CUdevResource, nbResources: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9288,7 +9668,7 @@ pub unsafe fn cuDevResourceGenerateDesc(phDesc: *mut CUdevResourceDesc, resource
         cuDevResourceGenerateDesc(phDesc, resources, nbResources)
     }
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuDevSmResourceSplit(result: *mut CUdevResource, nbGroups: ::core::ffi::c_uint, input: *const CUdevResource, remainder: *mut CUdevResource, flags: ::core::ffi::c_uint, groupParams: *mut CU_DEV_SM_RESOURCE_GROUP_PARAMS) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9322,7 +9702,7 @@ pub unsafe fn cuDevSmResourceSplitByCount(result: *mut CUdevResource, nbGroups: 
         cuDevSmResourceSplitByCount(result, nbGroups, input, remaining, useFlags, minCount)
     }
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuDevSmResourceSplitByCount(result: *mut CUdevResource, nbGroups: *mut ::core::ffi::c_uint, input: *const CUdevResource, remainder: *mut CUdevResource, flags: ::core::ffi::c_uint, minCount: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9419,7 +9799,7 @@ pub unsafe fn cuDeviceGetByPCIBusId(dev: *mut CUdevice, pciBusId: *const ::core:
         cuDeviceGetByPCIBusId(dev, pciBusId)
     }
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuDeviceGetCliqueCount(count: *mut usize, dev: CUdevice) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9436,7 +9816,7 @@ pub unsafe fn cuDeviceGetCliqueCount(count: *mut usize, dev: CUdevice) -> CUresu
         cuDeviceGetCliqueCount(count, dev)
     }
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuDeviceGetCliqueInfo(cliqueInfo: *mut CUcliqueInfo, count: *mut usize, dev: CUdevice) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9485,7 +9865,7 @@ pub unsafe fn cuDeviceGetDefaultMemPool(pool_out: *mut CUmemoryPool, dev: CUdevi
         cuDeviceGetDefaultMemPool(pool_out, dev)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuDeviceGetDevResource(device: CUdevice, resource: *mut CUdevResource, type_: CUdevResourceType) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9518,7 +9898,7 @@ pub unsafe fn cuDeviceGetExecAffinitySupport(pi: *mut ::core::ffi::c_int, type_:
         cuDeviceGetExecAffinitySupport(pi, type_, dev)
     }
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuDeviceGetFabricClusterUuid(uuid: *mut CUuuid, dev: CUdevice) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9551,7 +9931,7 @@ pub unsafe fn cuDeviceGetGraphMemAttribute(device: CUdevice, attr: CUgraphMem_at
         cuDeviceGetGraphMemAttribute(device, attr, value)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuDeviceGetHostAtomicCapabilities(capabilities: *mut ::core::ffi::c_uint, operations: *const CUatomicOperation, count: ::core::ffi::c_uint, dev: CUdevice) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9616,7 +9996,7 @@ pub unsafe fn cuDeviceGetName(name: *mut ::core::ffi::c_char, len: ::core::ffi::
         cuDeviceGetName(name, len, dev)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuDeviceGetP2PAtomicCapabilities(capabilities: *mut ::core::ffi::c_uint, operations: *const CUatomicOperation, count: ::core::ffi::c_uint, srcDevice: CUdevice, dstDevice: CUdevice) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9826,7 +10206,7 @@ pub unsafe fn cuDevicePrimaryCtxSetFlags_v2(dev: CUdevice, flags: ::core::ffi::c
         cuDevicePrimaryCtxSetFlags_v2(dev, flags)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuDeviceRegisterAsyncNotification(device: CUdevice, callbackFunc: CUasyncCallback, userData: *mut ::core::ffi::c_void, callback: *mut CUasyncCallbackHandle) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9891,7 +10271,7 @@ pub unsafe fn cuDeviceTotalMem_v2(bytes: *mut usize, dev: CUdevice) -> CUresult 
         cuDeviceTotalMem_v2(bytes, dev)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuDeviceUnregisterAsyncNotification(device: CUdevice, callback: CUasyncCallbackHandle) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -9973,7 +10353,7 @@ pub unsafe fn cuEventElapsedTime(pMilliseconds: *mut f32, hStart: CUevent, hEnd:
         cuEventElapsedTime(pMilliseconds, hStart, hEnd)
     }
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuEventElapsedTime_v2(pMilliseconds: *mut f32, hStart: CUevent, hEnd: CUevent) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10086,6 +10466,23 @@ pub unsafe fn cuExternalMemoryGetMappedMipmappedArray(mipmap: *mut CUmipmappedAr
         cuExternalMemoryGetMappedMipmappedArray(mipmap, extMem, mipmapDesc)
     }
 }
+#[cfg(any(feature = "cuda-13050"))]
+pub unsafe fn cuFabricCpyBatchAsync(numOps: usize, opList: *mut CUDA_FABRIC_COPY_BATCH_OP, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(usize, *mut CUDA_FABRIC_COPY_BATCH_OP, ::core::ffi::c_ulonglong, CUstream) -> CUresult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cuFabricCpyBatchAsync") });
+        _f(numOps, opList, flags, hStream)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" {
+            fn cuFabricCpyBatchAsync(numOps: usize, opList: *mut CUDA_FABRIC_COPY_BATCH_OP, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult;
+        }
+        cuFabricCpyBatchAsync(numOps, opList, flags, hStream)
+    }
+}
 pub unsafe fn cuFlushGPUDirectRDMAWrites(target: CUflushGPUDirectRDMAWritesTarget, scope: CUflushGPUDirectRDMAWritesScope) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10134,7 +10531,7 @@ pub unsafe fn cuFuncGetModule(hmod: *mut CUmodule, hfunc: CUfunction) -> CUresul
         cuFuncGetModule(hmod, hfunc)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFuncGetName(name: *mut *const ::core::ffi::c_char, hfunc: CUfunction) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10151,7 +10548,7 @@ pub unsafe fn cuFuncGetName(name: *mut *const ::core::ffi::c_char, hfunc: CUfunc
         cuFuncGetName(name, hfunc)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFuncGetParamCount(func: CUfunction, paramCount: *mut usize) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10168,7 +10565,7 @@ pub unsafe fn cuFuncGetParamCount(func: CUfunction, paramCount: *mut usize) -> C
         cuFuncGetParamCount(func, paramCount)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFuncGetParamInfo(func: CUfunction, paramIndex: usize, paramOffset: *mut usize, paramSize: *mut usize) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10185,7 +10582,7 @@ pub unsafe fn cuFuncGetParamInfo(func: CUfunction, paramIndex: usize, paramOffse
         cuFuncGetParamInfo(func, paramIndex, paramOffset, paramSize)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFuncIsLoaded(state: *mut CUfunctionLoadingState, function: CUfunction) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10202,7 +10599,7 @@ pub unsafe fn cuFuncIsLoaded(state: *mut CUfunctionLoadingState, function: CUfun
         cuFuncIsLoaded(state, function)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuFuncLoad(function: CUfunction) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10364,7 +10761,7 @@ pub unsafe fn cuGetProcAddress(symbol: *const ::core::ffi::c_char, pfn: *mut *mu
         cuGetProcAddress(symbol, pfn, cudaVersion, flags)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGetProcAddress_v2(symbol: *const ::core::ffi::c_char, pfn: *mut *mut ::core::ffi::c_void, cudaVersion: ::core::ffi::c_int, flags: cuuint64_t, symbolStatus: *mut CUdriverProcAddressQueryResult) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10381,7 +10778,7 @@ pub unsafe fn cuGetProcAddress_v2(symbol: *const ::core::ffi::c_char, pfn: *mut 
         cuGetProcAddress_v2(symbol, pfn, cudaVersion, flags, symbolStatus)
     }
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphAddBatchMemOpNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *const CUDA_BATCH_MEM_OP_NODE_PARAMS) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10431,7 +10828,7 @@ pub unsafe fn cuGraphAddDependencies(hGraph: CUgraph, from: *const CUgraphNode, 
         cuGraphAddDependencies(hGraph, from, to, numDependencies)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphAddDependencies_v2(hGraph: CUgraph, from: *const CUgraphNode, to: *const CUgraphNode, edgeData: *const CUgraphEdgeData, numDependencies: usize) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10561,7 +10958,7 @@ pub unsafe fn cuGraphAddKernelNode(phGraphNode: *mut CUgraphNode, hGraph: CUgrap
         cuGraphAddKernelNode(phGraphNode, hGraph, dependencies, numDependencies, nodeParams)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphAddKernelNode_v2(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, numDependencies: usize, nodeParams: *const CUDA_KERNEL_NODE_PARAMS) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10659,7 +11056,7 @@ pub unsafe fn cuGraphAddNode(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dep
         cuGraphAddNode(phGraphNode, hGraph, dependencies, numDependencies, nodeParams)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphAddNode_v2(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, dependencyData: *const CUgraphEdgeData, numDependencies: usize, nodeParams: *mut CUgraphNodeParams) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10676,7 +11073,7 @@ pub unsafe fn cuGraphAddNode_v2(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, 
         cuGraphAddNode_v2(phGraphNode, hGraph, dependencies, dependencyData, numDependencies, nodeParams)
     }
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphAddNode_v3(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, dependencies: *const CUgraphNode, dependencyData: *const CUgraphEdgeData, numDependencies: usize, nodeParams: *mut CUgraphNodeParams) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10693,7 +11090,7 @@ pub unsafe fn cuGraphAddNode_v3(phGraphNode: *mut CUgraphNode, hGraph: CUgraph, 
         cuGraphAddNode_v3(phGraphNode, hGraph, dependencies, dependencyData, numDependencies, nodeParams)
     }
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphBatchMemOpNodeGetParams(hNode: CUgraphNode, nodeParams_out: *mut CUDA_BATCH_MEM_OP_NODE_PARAMS) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10710,7 +11107,7 @@ pub unsafe fn cuGraphBatchMemOpNodeGetParams(hNode: CUgraphNode, nodeParams_out:
         cuGraphBatchMemOpNodeGetParams(hNode, nodeParams_out)
     }
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphBatchMemOpNodeSetParams(hNode: CUgraphNode, nodeParams: *const CUDA_BATCH_MEM_OP_NODE_PARAMS) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10759,7 +11156,7 @@ pub unsafe fn cuGraphClone(phGraphClone: *mut CUgraph, originalGraph: CUgraph) -
         cuGraphClone(phGraphClone, originalGraph)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphConditionalHandleCreate(pHandle_out: *mut CUgraphConditionalHandle, hGraph: CUgraph, ctx: CUcontext, defaultLaunchValue: ::core::ffi::c_uint, flags: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -10904,7 +11301,7 @@ pub unsafe fn cuGraphEventWaitNodeSetEvent(hNode: CUgraphNode, event: CUevent) -
         cuGraphEventWaitNodeSetEvent(hNode, event)
     }
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphExecBatchMemOpNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *const CUDA_BATCH_MEM_OP_NODE_PARAMS) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11017,7 +11414,7 @@ pub unsafe fn cuGraphExecExternalSemaphoresWaitNodeSetParams(hGraphExec: CUgraph
         cuGraphExecExternalSemaphoresWaitNodeSetParams(hGraphExec, hNode, nodeParams)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphExecGetFlags(hGraphExec: CUgraphExec, flags: *mut cuuint64_t) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11034,7 +11431,7 @@ pub unsafe fn cuGraphExecGetFlags(hGraphExec: CUgraphExec, flags: *mut cuuint64_
         cuGraphExecGetFlags(hGraphExec, flags)
     }
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphExecGetId(hGraphExec: CUgraphExec, graphId: *mut ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11084,7 +11481,7 @@ pub unsafe fn cuGraphExecKernelNodeSetParams(hGraphExec: CUgraphExec, hNode: CUg
         cuGraphExecKernelNodeSetParams(hGraphExec, hNode, nodeParams)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphExecKernelNodeSetParams_v2(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *const CUDA_KERNEL_NODE_PARAMS) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11133,7 +11530,7 @@ pub unsafe fn cuGraphExecMemsetNodeSetParams(hGraphExec: CUgraphExec, hNode: CUg
         cuGraphExecMemsetNodeSetParams(hGraphExec, hNode, memsetParams, ctx)
     }
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphExecNodeSetParams(hGraphExec: CUgraphExec, hNode: CUgraphNode, nodeParams: *mut CUgraphNodeParams) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11167,7 +11564,7 @@ pub unsafe fn cuGraphExecUpdate(hGraphExec: CUgraphExec, hGraph: CUgraph, hError
         cuGraphExecUpdate(hGraphExec, hGraph, hErrorNode_out, updateResult_out)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphExecUpdate_v2(hGraphExec: CUgraphExec, hGraph: CUgraph, resultInfo: *mut CUgraphExecUpdateResultInfo) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11265,7 +11662,7 @@ pub unsafe fn cuGraphGetEdges(hGraph: CUgraph, from: *mut CUgraphNode, to: *mut 
         cuGraphGetEdges(hGraph, from, to, numEdges)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphGetEdges_v2(hGraph: CUgraph, from: *mut CUgraphNode, to: *mut CUgraphNode, edgeData: *mut CUgraphEdgeData, numEdges: *mut usize) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11282,7 +11679,7 @@ pub unsafe fn cuGraphGetEdges_v2(hGraph: CUgraph, from: *mut CUgraphNode, to: *m
         cuGraphGetEdges_v2(hGraph, from, to, edgeData, numEdges)
     }
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphGetId(hGraph: CUgraph, graphId: *mut ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11379,7 +11776,7 @@ pub unsafe fn cuGraphInstantiateWithFlags(phGraphExec: *mut CUgraphExec, hGraph:
         cuGraphInstantiateWithFlags(phGraphExec, hGraph, flags)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphInstantiateWithParams(phGraphExec: *mut CUgraphExec, hGraph: CUgraph, instantiateParams: *mut CUDA_GRAPH_INSTANTIATE_PARAMS) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11462,7 +11859,7 @@ pub unsafe fn cuGraphKernelNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CU
         cuGraphKernelNodeGetParams(hNode, nodeParams)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphKernelNodeGetParams_v2(hNode: CUgraphNode, nodeParams: *mut CUDA_KERNEL_NODE_PARAMS) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11512,7 +11909,7 @@ pub unsafe fn cuGraphKernelNodeSetParams(hNode: CUgraphNode, nodeParams: *const 
         cuGraphKernelNodeSetParams(hNode, nodeParams)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphKernelNodeSetParams_v2(hNode: CUgraphNode, nodeParams: *const CUDA_KERNEL_NODE_PARAMS) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11657,7 +12054,7 @@ pub unsafe fn cuGraphNodeFindInClone(phNode: *mut CUgraphNode, hOriginalNode: CU
         cuGraphNodeFindInClone(phNode, hOriginalNode, hClonedGraph)
     }
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphNodeGetContainingGraph(hNode: CUgraphNode, phGraph: *mut CUgraph) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11691,7 +12088,7 @@ pub unsafe fn cuGraphNodeGetDependencies(hNode: CUgraphNode, dependencies: *mut 
         cuGraphNodeGetDependencies(hNode, dependencies, numDependencies)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphNodeGetDependencies_v2(hNode: CUgraphNode, dependencies: *mut CUgraphNode, edgeData: *mut CUgraphEdgeData, numDependencies: *mut usize) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11725,7 +12122,7 @@ pub unsafe fn cuGraphNodeGetDependentNodes(hNode: CUgraphNode, dependentNodes: *
         cuGraphNodeGetDependentNodes(hNode, dependentNodes, numDependentNodes)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphNodeGetDependentNodes_v2(hNode: CUgraphNode, dependentNodes: *mut CUgraphNode, edgeData: *mut CUgraphEdgeData, numDependentNodes: *mut usize) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11742,7 +12139,7 @@ pub unsafe fn cuGraphNodeGetDependentNodes_v2(hNode: CUgraphNode, dependentNodes
         cuGraphNodeGetDependentNodes_v2(hNode, dependentNodes, edgeData, numDependentNodes)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphNodeGetEnabled(hGraphExec: CUgraphExec, hNode: CUgraphNode, isEnabled: *mut ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11759,7 +12156,7 @@ pub unsafe fn cuGraphNodeGetEnabled(hGraphExec: CUgraphExec, hNode: CUgraphNode,
         cuGraphNodeGetEnabled(hGraphExec, hNode, isEnabled)
     }
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphNodeGetLocalId(hNode: CUgraphNode, nodeId: *mut ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11776,7 +12173,7 @@ pub unsafe fn cuGraphNodeGetLocalId(hNode: CUgraphNode, nodeId: *mut ::core::ffi
         cuGraphNodeGetLocalId(hNode, nodeId)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CUgraphNodeParams) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11793,7 +12190,7 @@ pub unsafe fn cuGraphNodeGetParams(hNode: CUgraphNode, nodeParams: *mut CUgraphN
         cuGraphNodeGetParams(hNode, nodeParams)
     }
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphNodeGetToolsId(hNode: CUgraphNode, toolsNodeId: *mut ::core::ffi::c_ulonglong) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11826,7 +12223,7 @@ pub unsafe fn cuGraphNodeGetType(hNode: CUgraphNode, type_: *mut CUgraphNodeType
         cuGraphNodeGetType(hNode, type_)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphNodeSetEnabled(hGraphExec: CUgraphExec, hNode: CUgraphNode, isEnabled: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11843,7 +12240,7 @@ pub unsafe fn cuGraphNodeSetEnabled(hGraphExec: CUgraphExec, hNode: CUgraphNode,
         cuGraphNodeSetEnabled(hGraphExec, hNode, isEnabled)
     }
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphNodeSetParams(hNode: CUgraphNode, nodeParams: *mut CUgraphNodeParams) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11860,7 +12257,7 @@ pub unsafe fn cuGraphNodeSetParams(hNode: CUgraphNode, nodeParams: *mut CUgraphN
         cuGraphNodeSetParams(hNode, nodeParams)
     }
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphNodeSetParams_v2(hNode: CUgraphNode, nodeParams: *mut CUgraphNodeParams) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -11910,7 +12307,7 @@ pub unsafe fn cuGraphRemoveDependencies(hGraph: CUgraph, from: *const CUgraphNod
         cuGraphRemoveDependencies(hGraph, from, to, numDependencies)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGraphRemoveDependencies_v2(hGraph: CUgraph, from: *const CUgraphNode, to: *const CUgraphNode, edgeData: *const CUgraphEdgeData, numDependencies: usize) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12071,7 +12468,7 @@ pub unsafe fn cuGraphicsUnregisterResource(resource: CUgraphicsResource) -> CUre
         cuGraphicsUnregisterResource(resource)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGreenCtxCreate(phCtx: *mut CUgreenCtx, desc: CUdevResourceDesc, dev: CUdevice, flags: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12088,7 +12485,7 @@ pub unsafe fn cuGreenCtxCreate(phCtx: *mut CUgreenCtx, desc: CUdevResourceDesc, 
         cuGreenCtxCreate(phCtx, desc, dev, flags)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGreenCtxDestroy(hCtx: CUgreenCtx) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12105,7 +12502,7 @@ pub unsafe fn cuGreenCtxDestroy(hCtx: CUgreenCtx) -> CUresult {
         cuGreenCtxDestroy(hCtx)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGreenCtxGetDevResource(hCtx: CUgreenCtx, resource: *mut CUdevResource, type_: CUdevResourceType) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12122,7 +12519,7 @@ pub unsafe fn cuGreenCtxGetDevResource(hCtx: CUgreenCtx, resource: *mut CUdevRes
         cuGreenCtxGetDevResource(hCtx, resource, type_)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGreenCtxGetId(greenCtx: CUgreenCtx, greenCtxId: *mut ::core::ffi::c_ulonglong) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12139,7 +12536,7 @@ pub unsafe fn cuGreenCtxGetId(greenCtx: CUgreenCtx, greenCtxId: *mut ::core::ffi
         cuGreenCtxGetId(greenCtx, greenCtxId)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGreenCtxRecordEvent(hCtx: CUgreenCtx, hEvent: CUevent) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12156,7 +12553,7 @@ pub unsafe fn cuGreenCtxRecordEvent(hCtx: CUgreenCtx, hEvent: CUevent) -> CUresu
         cuGreenCtxRecordEvent(hCtx, hEvent)
     }
 }
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGreenCtxStreamCreate(phStream: *mut CUstream, greenCtx: CUgreenCtx, flags: ::core::ffi::c_uint, priority: ::core::ffi::c_int) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12173,7 +12570,7 @@ pub unsafe fn cuGreenCtxStreamCreate(phStream: *mut CUstream, greenCtx: CUgreenC
         cuGreenCtxStreamCreate(phStream, greenCtx, flags, priority)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuGreenCtxWaitEvent(hCtx: CUgreenCtx, hEvent: CUevent) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12318,7 +12715,7 @@ pub unsafe fn cuIpcOpenMemHandle_v2(pdptr: *mut CUdeviceptr, handle: CUipcMemHan
         cuIpcOpenMemHandle_v2(pdptr, handle, Flags)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuKernelGetAttribute(pi: *mut ::core::ffi::c_int, attrib: CUfunction_attribute, kernel: CUkernel, dev: CUdevice) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12335,7 +12732,7 @@ pub unsafe fn cuKernelGetAttribute(pi: *mut ::core::ffi::c_int, attrib: CUfuncti
         cuKernelGetAttribute(pi, attrib, kernel, dev)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuKernelGetFunction(pFunc: *mut CUfunction, kernel: CUkernel) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12352,7 +12749,7 @@ pub unsafe fn cuKernelGetFunction(pFunc: *mut CUfunction, kernel: CUkernel) -> C
         cuKernelGetFunction(pFunc, kernel)
     }
 }
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuKernelGetLibrary(pLib: *mut CUlibrary, kernel: CUkernel) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12369,7 +12766,7 @@ pub unsafe fn cuKernelGetLibrary(pLib: *mut CUlibrary, kernel: CUkernel) -> CUre
         cuKernelGetLibrary(pLib, kernel)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuKernelGetName(name: *mut *const ::core::ffi::c_char, hfunc: CUkernel) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12386,7 +12783,7 @@ pub unsafe fn cuKernelGetName(name: *mut *const ::core::ffi::c_char, hfunc: CUke
         cuKernelGetName(name, hfunc)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuKernelGetParamCount(kernel: CUkernel, paramCount: *mut usize) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12403,7 +12800,7 @@ pub unsafe fn cuKernelGetParamCount(kernel: CUkernel, paramCount: *mut usize) ->
         cuKernelGetParamCount(kernel, paramCount)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuKernelGetParamInfo(kernel: CUkernel, paramIndex: usize, paramOffset: *mut usize, paramSize: *mut usize) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12420,7 +12817,7 @@ pub unsafe fn cuKernelGetParamInfo(kernel: CUkernel, paramIndex: usize, paramOff
         cuKernelGetParamInfo(kernel, paramIndex, paramOffset, paramSize)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuKernelSetAttribute(attrib: CUfunction_attribute, val: ::core::ffi::c_int, kernel: CUkernel, dev: CUdevice) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12437,7 +12834,7 @@ pub unsafe fn cuKernelSetAttribute(attrib: CUfunction_attribute, val: ::core::ff
         cuKernelSetAttribute(attrib, val, kernel, dev)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuKernelSetCacheConfig(kernel: CUkernel, config: CUfunc_cache, dev: CUdevice) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12550,7 +12947,7 @@ pub unsafe fn cuLaunchHostFunc(hStream: CUstream, fn_: CUhostFn, userData: *mut 
         cuLaunchHostFunc(hStream, fn_, userData)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLaunchHostFunc_v2(hStream: CUstream, fn_: CUhostFn, userData: *mut ::core::ffi::c_void, syncMode: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12583,7 +12980,7 @@ pub unsafe fn cuLaunchKernel(f: CUfunction, gridDimX: ::core::ffi::c_uint, gridD
         cuLaunchKernel(f, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, hStream, kernelParams, extra)
     }
 }
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLaunchKernelEx(config: *const CUlaunchConfig, f: CUfunction, kernelParams: *mut *mut ::core::ffi::c_void, extra: *mut *mut ::core::ffi::c_void) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12600,7 +12997,7 @@ pub unsafe fn cuLaunchKernelEx(config: *const CUlaunchConfig, f: CUfunction, ker
         cuLaunchKernelEx(config, f, kernelParams, extra)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLibraryEnumerateKernels(kernels: *mut CUkernel, numKernels: ::core::ffi::c_uint, lib: CUlibrary) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12617,7 +13014,7 @@ pub unsafe fn cuLibraryEnumerateKernels(kernels: *mut CUkernel, numKernels: ::co
         cuLibraryEnumerateKernels(kernels, numKernels, lib)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLibraryGetGlobal(dptr: *mut CUdeviceptr, bytes: *mut usize, library: CUlibrary, name: *const ::core::ffi::c_char) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12634,7 +13031,7 @@ pub unsafe fn cuLibraryGetGlobal(dptr: *mut CUdeviceptr, bytes: *mut usize, libr
         cuLibraryGetGlobal(dptr, bytes, library, name)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLibraryGetKernel(pKernel: *mut CUkernel, library: CUlibrary, name: *const ::core::ffi::c_char) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12651,7 +13048,7 @@ pub unsafe fn cuLibraryGetKernel(pKernel: *mut CUkernel, library: CUlibrary, nam
         cuLibraryGetKernel(pKernel, library, name)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLibraryGetKernelCount(count: *mut ::core::ffi::c_uint, lib: CUlibrary) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12668,7 +13065,7 @@ pub unsafe fn cuLibraryGetKernelCount(count: *mut ::core::ffi::c_uint, lib: CUli
         cuLibraryGetKernelCount(count, lib)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLibraryGetManaged(dptr: *mut CUdeviceptr, bytes: *mut usize, library: CUlibrary, name: *const ::core::ffi::c_char) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12685,7 +13082,7 @@ pub unsafe fn cuLibraryGetManaged(dptr: *mut CUdeviceptr, bytes: *mut usize, lib
         cuLibraryGetManaged(dptr, bytes, library, name)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLibraryGetModule(pMod: *mut CUmodule, library: CUlibrary) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12702,7 +13099,7 @@ pub unsafe fn cuLibraryGetModule(pMod: *mut CUmodule, library: CUlibrary) -> CUr
         cuLibraryGetModule(pMod, library)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLibraryGetUnifiedFunction(fptr: *mut *mut ::core::ffi::c_void, library: CUlibrary, symbol: *const ::core::ffi::c_char) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12719,7 +13116,7 @@ pub unsafe fn cuLibraryGetUnifiedFunction(fptr: *mut *mut ::core::ffi::c_void, l
         cuLibraryGetUnifiedFunction(fptr, library, symbol)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLibraryLoadData(library: *mut CUlibrary, code: *const ::core::ffi::c_void, jitOptions: *mut CUjit_option, jitOptionsValues: *mut *mut ::core::ffi::c_void, numJitOptions: ::core::ffi::c_uint, libraryOptions: *mut CUlibraryOption, libraryOptionValues: *mut *mut ::core::ffi::c_void, numLibraryOptions: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12736,7 +13133,7 @@ pub unsafe fn cuLibraryLoadData(library: *mut CUlibrary, code: *const ::core::ff
         cuLibraryLoadData(library, code, jitOptions, jitOptionsValues, numJitOptions, libraryOptions, libraryOptionValues, numLibraryOptions)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLibraryLoadFromFile(library: *mut CUlibrary, fileName: *const ::core::ffi::c_char, jitOptions: *mut CUjit_option, jitOptionsValues: *mut *mut ::core::ffi::c_void, numJitOptions: ::core::ffi::c_uint, libraryOptions: *mut CUlibraryOption, libraryOptionValues: *mut *mut ::core::ffi::c_void, numLibraryOptions: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12753,7 +13150,7 @@ pub unsafe fn cuLibraryLoadFromFile(library: *mut CUlibrary, fileName: *const ::
         cuLibraryLoadFromFile(library, fileName, jitOptions, jitOptionsValues, numJitOptions, libraryOptions, libraryOptionValues, numLibraryOptions)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLibraryUnload(library: CUlibrary) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12850,7 +13247,7 @@ pub unsafe fn cuLinkDestroy(state: CUlinkState) -> CUresult {
         cuLinkDestroy(state)
     }
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogicalEndpointAddDevice(leId: CUlogicalEndpointId, dev: CUdevice) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12867,7 +13264,7 @@ pub unsafe fn cuLogicalEndpointAddDevice(leId: CUlogicalEndpointId, dev: CUdevic
         cuLogicalEndpointAddDevice(leId, dev)
     }
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogicalEndpointBindAddr(leId: CUlogicalEndpointId, dev: CUdevice, offset: cuuint64_t, ptr: *mut ::core::ffi::c_void, size: cuuint64_t, flags: ::core::ffi::c_ulonglong) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12884,7 +13281,7 @@ pub unsafe fn cuLogicalEndpointBindAddr(leId: CUlogicalEndpointId, dev: CUdevice
         cuLogicalEndpointBindAddr(leId, dev, offset, ptr, size, flags)
     }
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogicalEndpointBindMem(leId: CUlogicalEndpointId, dev: CUdevice, offset: cuuint64_t, memHandle: CUmemGenericAllocationHandle, memOffset: cuuint64_t, size: cuuint64_t, flags: ::core::ffi::c_ulonglong) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12901,7 +13298,7 @@ pub unsafe fn cuLogicalEndpointBindMem(leId: CUlogicalEndpointId, dev: CUdevice,
         cuLogicalEndpointBindMem(leId, dev, offset, memHandle, memOffset, size, flags)
     }
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogicalEndpointCreate(leId: CUlogicalEndpointId, prop: *const CUlogicalEndpointProp) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12918,7 +13315,7 @@ pub unsafe fn cuLogicalEndpointCreate(leId: CUlogicalEndpointId, prop: *const CU
         cuLogicalEndpointCreate(leId, prop)
     }
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogicalEndpointDestroy(leId: CUlogicalEndpointId) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12935,7 +13332,7 @@ pub unsafe fn cuLogicalEndpointDestroy(leId: CUlogicalEndpointId) -> CUresult {
         cuLogicalEndpointDestroy(leId)
     }
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogicalEndpointExport(handle: *mut ::core::ffi::c_void, leId: CUlogicalEndpointId, handleType: CUlogicalEndpointIpcHandleType) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12952,7 +13349,7 @@ pub unsafe fn cuLogicalEndpointExport(handle: *mut ::core::ffi::c_void, leId: CU
         cuLogicalEndpointExport(handle, leId, handleType)
     }
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogicalEndpointGetLimits(bindAlignment: *mut cuuint64_t, maxSize: *mut cuuint64_t, prop: *const CUlogicalEndpointProp) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12969,7 +13366,7 @@ pub unsafe fn cuLogicalEndpointGetLimits(bindAlignment: *mut cuuint64_t, maxSize
         cuLogicalEndpointGetLimits(bindAlignment, maxSize, prop)
     }
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogicalEndpointIdRelease(baseLeId: CUlogicalEndpointId, count: cuuint32_t) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -12986,7 +13383,7 @@ pub unsafe fn cuLogicalEndpointIdRelease(baseLeId: CUlogicalEndpointId, count: c
         cuLogicalEndpointIdRelease(baseLeId, count)
     }
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogicalEndpointIdReserve(baseLeId: *mut CUlogicalEndpointId, count: cuuint32_t) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13003,7 +13400,7 @@ pub unsafe fn cuLogicalEndpointIdReserve(baseLeId: *mut CUlogicalEndpointId, cou
         cuLogicalEndpointIdReserve(baseLeId, count)
     }
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogicalEndpointImport(leId: CUlogicalEndpointId, handle: *const ::core::ffi::c_void, handleType: CUlogicalEndpointIpcHandleType) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13020,7 +13417,7 @@ pub unsafe fn cuLogicalEndpointImport(leId: CUlogicalEndpointId, handle: *const 
         cuLogicalEndpointImport(leId, handle, handleType)
     }
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogicalEndpointQuery(leId: CUlogicalEndpointId, count: cuuint32_t, queryStatus: *mut ::core::ffi::c_int) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13037,7 +13434,7 @@ pub unsafe fn cuLogicalEndpointQuery(leId: CUlogicalEndpointId, count: cuuint32_
         cuLogicalEndpointQuery(leId, count, queryStatus)
     }
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogicalEndpointUnbind(leId: CUlogicalEndpointId, dev: CUdevice, offset: cuuint64_t, size: cuuint64_t) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13054,7 +13451,7 @@ pub unsafe fn cuLogicalEndpointUnbind(leId: CUlogicalEndpointId, dev: CUdevice, 
         cuLogicalEndpointUnbind(leId, dev, offset, size)
     }
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogsCurrent(iterator_out: *mut CUlogIterator, flags: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13071,7 +13468,7 @@ pub unsafe fn cuLogsCurrent(iterator_out: *mut CUlogIterator, flags: ::core::ffi
         cuLogsCurrent(iterator_out, flags)
     }
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogsDumpToFile(iterator: *mut CUlogIterator, pathToFile: *const ::core::ffi::c_char, flags: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13088,7 +13485,7 @@ pub unsafe fn cuLogsDumpToFile(iterator: *mut CUlogIterator, pathToFile: *const 
         cuLogsDumpToFile(iterator, pathToFile, flags)
     }
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogsDumpToMemory(iterator: *mut CUlogIterator, buffer: *mut ::core::ffi::c_char, size: *mut usize, flags: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13105,7 +13502,7 @@ pub unsafe fn cuLogsDumpToMemory(iterator: *mut CUlogIterator, buffer: *mut ::co
         cuLogsDumpToMemory(iterator, buffer, size, flags)
     }
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogsRegisterCallback(callbackFunc: CUlogsCallback, userData: *mut ::core::ffi::c_void, callback_out: *mut CUlogsCallbackHandle) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13122,7 +13519,7 @@ pub unsafe fn cuLogsRegisterCallback(callbackFunc: CUlogsCallback, userData: *mu
         cuLogsRegisterCallback(callbackFunc, userData, callback_out)
     }
 }
-#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuLogsUnregisterCallback(callback: CUlogsCallbackHandle) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13188,7 +13585,7 @@ pub unsafe fn cuMemAdvise(devPtr: CUdeviceptr, count: usize, advice: CUmem_advis
         cuMemAdvise(devPtr, count, advice, device)
     }
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMemAdvise_v2(devPtr: CUdeviceptr, count: usize, advice: CUmem_advise, location: CUmemLocation) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13301,7 +13698,7 @@ pub unsafe fn cuMemAlloc_v2(dptr: *mut CUdeviceptr, bytesize: usize) -> CUresult
         cuMemAlloc_v2(dptr, bytesize)
     }
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMemBatchDecompressAsync(paramsArray: *mut CUmemDecompressParams, count: usize, flags: ::core::ffi::c_uint, errorIndex: *mut usize, stream: CUstream) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13334,7 +13731,7 @@ pub unsafe fn cuMemCreate(handle: *mut CUmemGenericAllocationHandle, size: usize
         cuMemCreate(handle, size, prop, flags)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMemDiscardAndPrefetchBatchAsync(dptrs: *mut CUdeviceptr, sizes: *mut usize, count: usize, prefetchLocs: *mut CUmemLocation, prefetchLocIdxs: *mut usize, numPrefetchLocs: usize, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13351,7 +13748,7 @@ pub unsafe fn cuMemDiscardAndPrefetchBatchAsync(dptrs: *mut CUdeviceptr, sizes: 
         cuMemDiscardAndPrefetchBatchAsync(dptrs, sizes, count, prefetchLocs, prefetchLocIdxs, numPrefetchLocs, flags, hStream)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMemDiscardBatchAsync(dptrs: *mut CUdeviceptr, sizes: *mut usize, count: usize, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13496,7 +13893,7 @@ pub unsafe fn cuMemGetAllocationPropertiesFromHandle(prop: *mut CUmemAllocationP
         cuMemGetAllocationPropertiesFromHandle(prop, handle)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMemGetDefaultMemPool(pool_out: *mut CUmemoryPool, location: *mut CUmemLocation, type_: CUmemAllocationType) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13513,7 +13910,7 @@ pub unsafe fn cuMemGetDefaultMemPool(pool_out: *mut CUmemoryPool, location: *mut
         cuMemGetDefaultMemPool(pool_out, location, type_)
     }
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMemGetHandleForAddressRange(handle: *mut ::core::ffi::c_void, dptr: CUdeviceptr, size: usize, handleType: CUmemRangeHandleType, flags: ::core::ffi::c_ulonglong) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13546,7 +13943,7 @@ pub unsafe fn cuMemGetInfo_v2(free: *mut usize, total: *mut usize) -> CUresult {
         cuMemGetInfo_v2(free, total)
     }
 }
-#[cfg(any(feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMemGetLocationInfo(ptr: CUdeviceptr, size: usize, summaryGranularity: usize, samplingGranularity: usize, location_out: *mut CUmemLocation) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13563,7 +13960,7 @@ pub unsafe fn cuMemGetLocationInfo(ptr: CUdeviceptr, size: usize, summaryGranula
         cuMemGetLocationInfo(ptr, size, summaryGranularity, samplingGranularity, location_out)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMemGetMemPool(pool: *mut CUmemoryPool, location: *mut CUmemLocation, type_: CUmemAllocationType) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13901,7 +14298,7 @@ pub unsafe fn cuMemPrefetchAsync(devPtr: CUdeviceptr, count: usize, dstDevice: C
         cuMemPrefetchAsync(devPtr, count, dstDevice, hStream)
     }
 }
-#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMemPrefetchAsync_v2(devPtr: CUdeviceptr, count: usize, location: CUmemLocation, flags: ::core::ffi::c_uint, hStream: CUstream) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -13918,7 +14315,7 @@ pub unsafe fn cuMemPrefetchAsync_v2(devPtr: CUdeviceptr, count: usize, location:
         cuMemPrefetchAsync_v2(devPtr, count, location, flags, hStream)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMemPrefetchBatchAsync(dptrs: *mut CUdeviceptr, sizes: *mut usize, count: usize, prefetchLocs: *mut CUmemLocation, prefetchLocIdxs: *mut usize, numPrefetchLocs: usize, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -14015,7 +14412,7 @@ pub unsafe fn cuMemSetAccess(ptr: CUdeviceptr, size: usize, desc: *const CUmemAc
         cuMemSetAccess(ptr, size, desc, count)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMemSetMemPool(location: *mut CUmemLocation, type_: CUmemAllocationType, pool: CUmemoryPool) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -14145,7 +14542,7 @@ pub unsafe fn cuMemcpy3DBatchAsync(numOps: usize, opList: *mut CUDA_MEMCPY3D_BAT
         cuMemcpy3DBatchAsync(numOps, opList, failIdx, flags, hStream)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMemcpy3DBatchAsync_v2(numOps: usize, opList: *mut CUDA_MEMCPY3D_BATCH_OP, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -14194,7 +14591,7 @@ pub unsafe fn cuMemcpy3DPeerAsync(pCopy: *const CUDA_MEMCPY3D_PEER, hStream: CUs
         cuMemcpy3DPeerAsync(pCopy, hStream)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMemcpy3DWithAttributesAsync(op: *mut CUDA_MEMCPY3D_BATCH_OP, flags: ::core::ffi::c_ulonglong, hStream: CUstream) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -14324,7 +14721,7 @@ pub unsafe fn cuMemcpyBatchAsync(dsts: *mut CUdeviceptr, srcs: *mut CUdeviceptr,
         cuMemcpyBatchAsync(dsts, srcs, sizes, count, attrs, attrsIdxs, numAttrs, failIdx, hStream)
     }
 }
-#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMemcpyBatchAsync_v2(dsts: *mut CUdeviceptr, srcs: *mut CUdeviceptr, sizes: *mut usize, count: usize, attrs: *mut CUmemcpyAttributes, attrsIdxs: *mut usize, numAttrs: usize, hStream: CUstream) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -14517,7 +14914,7 @@ pub unsafe fn cuMemcpyPeerAsync(dstDevice: CUdeviceptr, dstContext: CUcontext, s
         cuMemcpyPeerAsync(dstDevice, dstContext, srcDevice, srcContext, ByteCount, hStream)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMemcpyWithAttributesAsync(dst: CUdeviceptr, src: CUdeviceptr, size: usize, attr: *mut CUmemcpyAttributes, hStream: CUstream) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -14774,7 +15171,7 @@ pub unsafe fn cuMipmappedArrayGetLevel(pLevelArray: *mut CUarray, hMipmappedArra
         cuMipmappedArrayGetLevel(pLevelArray, hMipmappedArray, level)
     }
 }
-#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11060", feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMipmappedArrayGetMemoryRequirements(memoryRequirements: *mut CUDA_ARRAY_MEMORY_REQUIREMENTS, mipmap: CUmipmappedArray, device: CUdevice) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -14807,7 +15204,7 @@ pub unsafe fn cuMipmappedArrayGetSparseProperties(sparseProperties: *mut CUDA_AR
         cuMipmappedArrayGetSparseProperties(sparseProperties, mipmap)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuModuleEnumerateFunctions(functions: *mut CUfunction, numFunctions: ::core::ffi::c_uint, mod_: CUmodule) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -14840,7 +15237,7 @@ pub unsafe fn cuModuleGetFunction(hfunc: *mut CUfunction, hmod: CUmodule, name: 
         cuModuleGetFunction(hfunc, hmod, name)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuModuleGetFunctionCount(count: *mut ::core::ffi::c_uint, mod_: CUmodule) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -14873,7 +15270,7 @@ pub unsafe fn cuModuleGetGlobal_v2(dptr: *mut CUdeviceptr, bytes: *mut usize, hm
         cuModuleGetGlobal_v2(dptr, bytes, hmod, name)
     }
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuModuleGetLoadingMode(mode: *mut CUmoduleLoadingMode) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15002,7 +15399,7 @@ pub unsafe fn cuModuleUnload(hmod: CUmodule) -> CUresult {
         cuModuleUnload(hmod)
     }
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMulticastAddDevice(mcHandle: CUmemGenericAllocationHandle, dev: CUdevice) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15019,7 +15416,7 @@ pub unsafe fn cuMulticastAddDevice(mcHandle: CUmemGenericAllocationHandle, dev: 
         cuMulticastAddDevice(mcHandle, dev)
     }
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMulticastBindAddr(mcHandle: CUmemGenericAllocationHandle, mcOffset: usize, memptr: CUdeviceptr, size: usize, flags: ::core::ffi::c_ulonglong) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15036,7 +15433,7 @@ pub unsafe fn cuMulticastBindAddr(mcHandle: CUmemGenericAllocationHandle, mcOffs
         cuMulticastBindAddr(mcHandle, mcOffset, memptr, size, flags)
     }
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMulticastBindAddr_v2(mcHandle: CUmemGenericAllocationHandle, dev: CUdevice, mcOffset: usize, memptr: CUdeviceptr, size: usize, flags: ::core::ffi::c_ulonglong) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15053,7 +15450,7 @@ pub unsafe fn cuMulticastBindAddr_v2(mcHandle: CUmemGenericAllocationHandle, dev
         cuMulticastBindAddr_v2(mcHandle, dev, mcOffset, memptr, size, flags)
     }
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMulticastBindMem(mcHandle: CUmemGenericAllocationHandle, mcOffset: usize, memHandle: CUmemGenericAllocationHandle, memOffset: usize, size: usize, flags: ::core::ffi::c_ulonglong) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15070,7 +15467,7 @@ pub unsafe fn cuMulticastBindMem(mcHandle: CUmemGenericAllocationHandle, mcOffse
         cuMulticastBindMem(mcHandle, mcOffset, memHandle, memOffset, size, flags)
     }
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMulticastBindMem_v2(mcHandle: CUmemGenericAllocationHandle, dev: CUdevice, mcOffset: usize, memHandle: CUmemGenericAllocationHandle, memOffset: usize, size: usize, flags: ::core::ffi::c_ulonglong) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15087,7 +15484,7 @@ pub unsafe fn cuMulticastBindMem_v2(mcHandle: CUmemGenericAllocationHandle, dev:
         cuMulticastBindMem_v2(mcHandle, dev, mcOffset, memHandle, memOffset, size, flags)
     }
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMulticastCreate(mcHandle: *mut CUmemGenericAllocationHandle, prop: *const CUmulticastObjectProp) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15104,7 +15501,7 @@ pub unsafe fn cuMulticastCreate(mcHandle: *mut CUmemGenericAllocationHandle, pro
         cuMulticastCreate(mcHandle, prop)
     }
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMulticastGetGranularity(granularity: *mut usize, prop: *const CUmulticastObjectProp, option: CUmulticastGranularity_flags) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15121,7 +15518,7 @@ pub unsafe fn cuMulticastGetGranularity(granularity: *mut usize, prop: *const CU
         cuMulticastGetGranularity(granularity, prop, option)
     }
 }
-#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuMulticastUnbind(mcHandle: CUmemGenericAllocationHandle, dev: CUdevice, mcOffset: usize, size: usize) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15186,7 +15583,7 @@ pub unsafe fn cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(numBlocks: *m
         cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(numBlocks, func, blockSize, dynamicSMemSize, flags)
     }
 }
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuOccupancyMaxActiveClusters(numClusters: *mut ::core::ffi::c_int, func: CUfunction, config: *const CUlaunchConfig) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15235,7 +15632,7 @@ pub unsafe fn cuOccupancyMaxPotentialBlockSizeWithFlags(minGridSize: *mut ::core
         cuOccupancyMaxPotentialBlockSizeWithFlags(minGridSize, blockSize, func, blockSizeToDynamicSMemSize, dynamicSMemSize, blockSizeLimit, flags)
     }
 }
-#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuOccupancyMaxPotentialClusterSize(clusterSize: *mut ::core::ffi::c_int, func: CUfunction, config: *const CUlaunchConfig) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15493,7 +15890,7 @@ pub unsafe fn cuStreamBatchMemOp(stream: CUstream, count: ::core::ffi::c_uint, p
         cuStreamBatchMemOp(stream, count, paramArray, flags)
     }
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamBatchMemOp_v2(stream: CUstream, count: ::core::ffi::c_uint, paramArray: *mut CUstreamBatchMemOpParams, flags: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15510,7 +15907,7 @@ pub unsafe fn cuStreamBatchMemOp_v2(stream: CUstream, count: ::core::ffi::c_uint
         cuStreamBatchMemOp_v2(stream, count, paramArray, flags)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamBeginCaptureToCig(hStream: CUstream, streamCigCaptureParams: *mut CUstreamCigCaptureParams) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15527,7 +15924,7 @@ pub unsafe fn cuStreamBeginCaptureToCig(hStream: CUstream, streamCigCaptureParam
         cuStreamBeginCaptureToCig(hStream, streamCigCaptureParams)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamBeginCaptureToGraph(hStream: CUstream, hGraph: CUgraph, dependencies: *const CUgraphNode, dependencyData: *const CUgraphEdgeData, numDependencies: usize, mode: CUstreamCaptureMode) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15560,7 +15957,7 @@ pub unsafe fn cuStreamBeginCapture_v2(hStream: CUstream, mode: CUstreamCaptureMo
         cuStreamBeginCapture_v2(hStream, mode)
     }
 }
-#[cfg(any(feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamBeginRecaptureToGraph(hStream: CUstream, mode: CUstreamCaptureMode, hGraph: CUgraph, callbackFunc: CUgraphRecaptureCallback, userData: *mut ::core::ffi::c_void) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15657,7 +16054,7 @@ pub unsafe fn cuStreamEndCapture(hStream: CUstream, phGraph: *mut CUgraph) -> CU
         cuStreamEndCapture(hStream, phGraph)
     }
 }
-#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamEndCaptureToCig(hStream: CUstream) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15724,7 +16121,7 @@ pub unsafe fn cuStreamGetCaptureInfo_v2(hStream: CUstream, captureStatus_out: *m
         cuStreamGetCaptureInfo_v2(hStream, captureStatus_out, id_out, graph_out, dependencies_out, numDependencies_out)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamGetCaptureInfo_v3(hStream: CUstream, captureStatus_out: *mut CUstreamCaptureStatus, id_out: *mut cuuint64_t, graph_out: *mut CUgraph, dependencies_out: *mut *const CUgraphNode, edgeData_out: *mut *const CUgraphEdgeData, numDependencies_out: *mut usize) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15757,7 +16154,7 @@ pub unsafe fn cuStreamGetCtx(hStream: CUstream, pctx: *mut CUcontext) -> CUresul
         cuStreamGetCtx(hStream, pctx)
     }
 }
-#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamGetCtx_v2(hStream: CUstream, pCtx: *mut CUcontext, pGreenCtx: *mut CUgreenCtx) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15774,7 +16171,7 @@ pub unsafe fn cuStreamGetCtx_v2(hStream: CUstream, pCtx: *mut CUcontext, pGreenC
         cuStreamGetCtx_v2(hStream, pCtx, pGreenCtx)
     }
 }
-#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamGetDevResource(hStream: CUstream, resource: *mut CUdevResource, type_: CUdevResourceType) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15791,7 +16188,7 @@ pub unsafe fn cuStreamGetDevResource(hStream: CUstream, resource: *mut CUdevReso
         cuStreamGetDevResource(hStream, resource, type_)
     }
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamGetDevice(hStream: CUstream, device: *mut CUdevice) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15824,7 +16221,7 @@ pub unsafe fn cuStreamGetFlags(hStream: CUstream, flags: *mut ::core::ffi::c_uin
         cuStreamGetFlags(hStream, flags)
     }
 }
-#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamGetGreenCtx(hStream: CUstream, phCtx: *mut CUgreenCtx) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15841,7 +16238,7 @@ pub unsafe fn cuStreamGetGreenCtx(hStream: CUstream, phCtx: *mut CUgreenCtx) -> 
         cuStreamGetGreenCtx(hStream, phCtx)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamGetId(hStream: CUstream, streamId: *mut ::core::ffi::c_ulonglong) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -15955,7 +16352,7 @@ pub unsafe fn cuStreamUpdateCaptureDependencies(hStream: CUstream, dependencies:
         cuStreamUpdateCaptureDependencies(hStream, dependencies, numDependencies, flags)
     }
 }
-#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamUpdateCaptureDependencies_v2(hStream: CUstream, dependencies: *mut CUgraphNode, dependencyData: *const CUgraphEdgeData, numDependencies: usize, flags: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -16005,7 +16402,7 @@ pub unsafe fn cuStreamWaitValue32(stream: CUstream, addr: CUdeviceptr, value: cu
         cuStreamWaitValue32(stream, addr, value, flags)
     }
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamWaitValue32_v2(stream: CUstream, addr: CUdeviceptr, value: cuuint32_t, flags: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -16039,7 +16436,7 @@ pub unsafe fn cuStreamWaitValue64(stream: CUstream, addr: CUdeviceptr, value: cu
         cuStreamWaitValue64(stream, addr, value, flags)
     }
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamWaitValue64_v2(stream: CUstream, addr: CUdeviceptr, value: cuuint64_t, flags: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -16073,7 +16470,7 @@ pub unsafe fn cuStreamWriteValue32(stream: CUstream, addr: CUdeviceptr, value: c
         cuStreamWriteValue32(stream, addr, value, flags)
     }
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamWriteValue32_v2(stream: CUstream, addr: CUdeviceptr, value: cuuint32_t, flags: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -16107,7 +16504,7 @@ pub unsafe fn cuStreamWriteValue64(stream: CUstream, addr: CUdeviceptr, value: c
         cuStreamWriteValue64(stream, addr, value, flags)
     }
 }
-#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-11070", feature = "cuda-11080", feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuStreamWriteValue64_v2(stream: CUstream, addr: CUdeviceptr, value: cuuint64_t, flags: ::core::ffi::c_uint) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -16204,7 +16601,7 @@ pub unsafe fn cuSurfRefSetArray(hSurfRef: CUsurfref, hArray: CUarray, Flags: ::c
         cuSurfRefSetArray(hSurfRef, hArray, Flags)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuTensorMapEncodeIm2col(tensorMap: *mut CUtensorMap, tensorDataType: CUtensorMapDataType, tensorRank: cuuint32_t, globalAddress: *mut ::core::ffi::c_void, globalDim: *const cuuint64_t, globalStrides: *const cuuint64_t, pixelBoxLowerCorner: *const ::core::ffi::c_int, pixelBoxUpperCorner: *const ::core::ffi::c_int, channelsPerPixel: cuuint32_t, pixelsPerColumn: cuuint32_t, elementStrides: *const cuuint32_t, interleave: CUtensorMapInterleave, swizzle: CUtensorMapSwizzle, l2Promotion: CUtensorMapL2promotion, oobFill: CUtensorMapFloatOOBfill) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -16221,7 +16618,7 @@ pub unsafe fn cuTensorMapEncodeIm2col(tensorMap: *mut CUtensorMap, tensorDataTyp
         cuTensorMapEncodeIm2col(tensorMap, tensorDataType, tensorRank, globalAddress, globalDim, globalStrides, pixelBoxLowerCorner, pixelBoxUpperCorner, channelsPerPixel, pixelsPerColumn, elementStrides, interleave, swizzle, l2Promotion, oobFill)
     }
 }
-#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuTensorMapEncodeIm2colWide(tensorMap: *mut CUtensorMap, tensorDataType: CUtensorMapDataType, tensorRank: cuuint32_t, globalAddress: *mut ::core::ffi::c_void, globalDim: *const cuuint64_t, globalStrides: *const cuuint64_t, pixelBoxLowerCornerWidth: ::core::ffi::c_int, pixelBoxUpperCornerWidth: ::core::ffi::c_int, channelsPerPixel: cuuint32_t, pixelsPerColumn: cuuint32_t, elementStrides: *const cuuint32_t, interleave: CUtensorMapInterleave, mode: CUtensorMapIm2ColWideMode, swizzle: CUtensorMapSwizzle, l2Promotion: CUtensorMapL2promotion, oobFill: CUtensorMapFloatOOBfill) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -16238,7 +16635,7 @@ pub unsafe fn cuTensorMapEncodeIm2colWide(tensorMap: *mut CUtensorMap, tensorDat
         cuTensorMapEncodeIm2colWide(tensorMap, tensorDataType, tensorRank, globalAddress, globalDim, globalStrides, pixelBoxLowerCornerWidth, pixelBoxUpperCornerWidth, channelsPerPixel, pixelsPerColumn, elementStrides, interleave, mode, swizzle, l2Promotion, oobFill)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuTensorMapEncodeTiled(tensorMap: *mut CUtensorMap, tensorDataType: CUtensorMapDataType, tensorRank: cuuint32_t, globalAddress: *mut ::core::ffi::c_void, globalDim: *const cuuint64_t, globalStrides: *const cuuint64_t, boxDim: *const cuuint32_t, elementStrides: *const cuuint32_t, interleave: CUtensorMapInterleave, swizzle: CUtensorMapSwizzle, l2Promotion: CUtensorMapL2promotion, oobFill: CUtensorMapFloatOOBfill) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -16255,7 +16652,7 @@ pub unsafe fn cuTensorMapEncodeTiled(tensorMap: *mut CUtensorMap, tensorDataType
         cuTensorMapEncodeTiled(tensorMap, tensorDataType, tensorRank, globalAddress, globalDim, globalStrides, boxDim, elementStrides, interleave, swizzle, l2Promotion, oobFill)
     }
 }
-#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040"))]
+#[cfg(any(feature = "cuda-12000", feature = "cuda-12010", feature = "cuda-12020", feature = "cuda-12030", feature = "cuda-12040", feature = "cuda-12050", feature = "cuda-12060", feature = "cuda-12080", feature = "cuda-12090", feature = "cuda-13000", feature = "cuda-13010", feature = "cuda-13020", feature = "cuda-13030", feature = "cuda-13040", feature = "cuda-13050"))]
 pub unsafe fn cuTensorMapReplaceAddress(tensorMap: *mut CUtensorMap, globalAddress: *mut ::core::ffi::c_void) -> CUresult {
     #[cfg(feature = "dynamic-loading")]
     {
@@ -16270,6 +16667,23 @@ pub unsafe fn cuTensorMapReplaceAddress(tensorMap: *mut CUtensorMap, globalAddre
             fn cuTensorMapReplaceAddress(tensorMap: *mut CUtensorMap, globalAddress: *mut ::core::ffi::c_void) -> CUresult;
         }
         cuTensorMapReplaceAddress(tensorMap, globalAddress)
+    }
+}
+#[cfg(any(feature = "cuda-13050"))]
+pub unsafe fn cuTensorMapSetAllocationClass(tensorMap: *mut CUtensorMap, allocClass: CUtensorMapAllocClass, outAllocClass: *mut CUtensorMapAllocClass) -> CUresult {
+    #[cfg(feature = "dynamic-loading")]
+    {
+        type _F = unsafe extern "C" fn(*mut CUtensorMap, CUtensorMapAllocClass, *mut CUtensorMapAllocClass) -> CUresult;
+        static _S: OnceLock<_F> = OnceLock::new();
+        let _f = _S.get_or_init(|| unsafe { load::<_F>("cuTensorMapSetAllocationClass") });
+        _f(tensorMap, allocClass, outAllocClass)
+    }
+    #[cfg(not(feature = "dynamic-loading"))]
+    {
+        extern "C" {
+            fn cuTensorMapSetAllocationClass(tensorMap: *mut CUtensorMap, allocClass: CUtensorMapAllocClass, outAllocClass: *mut CUtensorMapAllocClass) -> CUresult;
+        }
+        cuTensorMapSetAllocationClass(tensorMap, allocClass, outAllocClass)
     }
 }
 pub unsafe fn cuTexObjectCreate(pTexObject: *mut CUtexObject, pResDesc: *const CUDA_RESOURCE_DESC, pTexDesc: *const CUDA_TEXTURE_DESC, pResViewDesc: *const CUDA_RESOURCE_VIEW_DESC) -> CUresult {

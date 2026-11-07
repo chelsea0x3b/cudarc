@@ -28,6 +28,7 @@ jobs:
           - cuda-13020
           - cuda-13030
           - cuda-13040
+          - cuda-13050
 
     runs-on: ${{ matrix.os }}
 

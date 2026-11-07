@@ -188,13 +188,15 @@ impl<T> UnifiedSlice<T> {
                     #[cfg(not(any(
                         feature = "cuda-13020",
                         feature = "cuda-13030",
-                        feature = "cuda-13040"
+                        feature = "cuda-13040",
+                        feature = "cuda-13050"
                     )))]
                     id: self.stream.ctx.ordinal as i32,
                     #[cfg(any(
                         feature = "cuda-13020",
                         feature = "cuda-13030",
-                        feature = "cuda-13040"
+                        feature = "cuda-13040",
+                        feature = "cuda-13050"
                     ))]
                     __bindgen_anon_1: sys::CUmemLocation_st__bindgen_ty_1 {
                         id: self.stream.ctx.ordinal as i32,
@@ -208,13 +210,15 @@ impl<T> UnifiedSlice<T> {
                     #[cfg(not(any(
                         feature = "cuda-13020",
                         feature = "cuda-13030",
-                        feature = "cuda-13040"
+                        feature = "cuda-13040",
+                        feature = "cuda-13050"
                     )))]
                     id: 0, // NOTE: ignored
                     #[cfg(any(
                         feature = "cuda-13020",
                         feature = "cuda-13030",
-                        feature = "cuda-13040"
+                        feature = "cuda-13040",
+                        feature = "cuda-13050"
                     ))]
                     __bindgen_anon_1: sys::CUmemLocation_st__bindgen_ty_1 { id: 0 },
                 }
