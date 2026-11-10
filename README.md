@@ -126,6 +126,16 @@ where:
 
 *Heavily recommend sticking with safe APIs*
 
+For an example of calling a raw cuSOLVER routine with stream-aware pointer
+guards, see [`examples/cusolver-qr.rs`](examples/cusolver-qr.rs). It factors
+column-major `f64` matrices, checks both the API status and device `info`, and
+reconstructs Q and R from the packed Householder vectors and `tau` to check the
+result. Run it with a matching CUDA toolkit available to the dynamic loader:
+
+```sh
+cargo run --example cusolver-qr --no-default-features --features std,driver,cusolver,dynamic-loading,cuda-13000
+```
+
 # License
 
 Dual-licensed to be compatible with the Rust project.
