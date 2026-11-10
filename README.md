@@ -25,6 +25,7 @@ Safe CUDA wrappers for:
 | [CUPTI](https://docs.nvidia.com/cupti/) | ✅ | ✅ | ✅ |
 | [nvtx](https://nvidia.github.io/NVTX/) | ✅ | ✅ | N/A |
 | [cuFFT](https://docs.nvidia.com/cuda/cufft/index.html) | ✅ | ❌ | ❌ |
+| [OptiX](https://developer.nvidia.com/rtx/ray-tracing/optix) | ✅ | ❌ | ❌ |
 
 CUDA Versions supported (choose with `-F cuda-<version>`, like `cuda-13010`):
 - 11.4-11.8
@@ -117,6 +118,7 @@ use cudarc::cublas::{safe, result, sys};
 use cudarc::cublaslt::{safe, result, sys};
 use cudarc::curand::{safe, result, sys};
 use cudarc::nccl::{safe, result, sys};
+use cudarc::optix::{safe, result, sys};
 ```
 
 where:

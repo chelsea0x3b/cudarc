@@ -41,8 +41,8 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: check
-          args: --all-targets -F ${{ matrix.version }},cudnn,nccl,cusolver,cusolvermg,cusparse,cufile,cupti,nvtx,cufft,cutensor
+          args: --all-targets -F ${{ matrix.version }},cudnn,nccl,cusolver,cusolvermg,cusparse,cufile,cupti,nvtx,cufft,cutensor,optix
       - uses: actions-rs/cargo@v1
         with:
           command: check
-          args: --all-targets --no-default-features -F ${{ matrix.version }},no-std,cudnn,cublas,cublaslt,nvrtc,driver,curand,nccl,cusolver,cusolvermg,cusparse,cufile,cupti,nvtx,cufft,cutensor,dynamic-loading
+          args: --all-targets --no-default-features -F ${{ matrix.version }},no-std,cudnn,cublas,cublaslt,nvrtc,driver,curand,nccl,cusolver,cusolvermg,cusparse,cufile,cupti,nvtx,cufft,cutensor,optix,dynamic-loading

@@ -116,7 +116,12 @@ fn main() {
         (major, minor)
     } else {
         #[cfg(not(feature = "cuda-version-from-build-system"))]
-        panic!("Must specify one of the following features: [cuda-version-from-build-system, cuda-13040, cuda-13030, cuda-13020, cuda-13010, cuda-13000, cuda-12090, cuda-12080, cuda-12060, cuda-12050, cuda-12040, cuda-12030, cuda-12020, cuda-12010, cuda-12000, cuda-11080, cuda-11070, cuda-11060, cuda-11050, cuda-11040]");
+        {
+            let (major, minor) =
+                try_cuda_version_from_build_system().unwrap_or(SUPPORTED_CUDA_VERSIONS[0].0);
+            println!("cargo:rustc-cfg=feature=\"cuda-{major}0{minor}0\"");
+            (major, minor)
+        }
 
         #[cfg(feature = "cuda-version-from-build-system")]
         {
@@ -155,32 +160,54 @@ fn main() {
 }
 
 #[allow(unused)]
+fn try_cuda_version_from_build_system() -> Result<(usize, usize), String> {
+    let output = std::process::Command::new("nvcc")
+        .arg("--version")
+        .output()
+        .map_err(|e| format!("`nvcc --version` failed: {e:?}"))?;
+    if !output.status.success() {
+        return Err(format!("`nvcc --version` failed.\n{output:?}"));
+    }
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    let version_line = stdout
+        .lines()
+        .nth(3)
+        .ok_or_else(|| format!("Could not parse `nvcc --version` output: {stdout}"))?;
+    let release_section = version_line
+        .split(", ")
+        .nth(1)
+        .ok_or_else(|| format!("Could not parse release section in `{version_line}`"))?;
+    let version_number = release_section
+        .split(' ')
+        .nth(1)
+        .ok_or_else(|| format!("Could not parse version number in `{release_section}`"))?;
+    for &((major, minor), _) in SUPPORTED_CUDA_VERSIONS.iter() {
+        if version_number == format!("{major}.{minor}") {
+            return Ok((major, minor));
+        }
+    }
+    Err(format!(
+        "Unsupported cuda toolkit version: `{version_number}`. Please raise a github issue."
+    ))
+}
+
+#[allow(unused)]
 fn cuda_version_from_build_system() -> (usize, usize) {
-    let output = match std::process::Command::new("nvcc").arg("--version").output() {
-        Ok(output) if output.status.success() => output,
-        output_result => {
+    match try_cuda_version_from_build_system() {
+        Ok(v) => v,
+        Err(err) => {
             #[cfg(feature = "fallback-latest")]
             {
                 let latest = SUPPORTED_CUDA_VERSIONS[0].0;
-                println!("cargo:warning=Failed to run `nvcc --version`. Following `-F fallback-latest`; using CUDA {latest:?}.");
-                return latest;
+                println!(
+                    "cargo:warning={err}. Following `-F fallback-latest`; using CUDA {latest:?}."
+                );
+                latest
             }
             #[cfg(not(feature = "fallback-latest"))]
-            panic!("`nvcc --version` failed.\n{output_result:?}");
-        }
-    };
-
-    let stdout = String::from_utf8_lossy(&output.stdout);
-    let version_line = stdout.lines().nth(3).unwrap();
-    let release_section = version_line.split(", ").nth(1).unwrap();
-    let version_number = release_section.split(' ').nth(1).unwrap();
-
-    for &((major, minor), _) in SUPPORTED_CUDA_VERSIONS.iter() {
-        if version_number == format!("{major}.{minor}") {
-            return (major, minor);
+            panic!("{err}");
         }
     }
-    panic!("Unsupported cuda toolkit version: `{version_number}`. Please raise a github issue.")
 }
 
 #[allow(unused)]
