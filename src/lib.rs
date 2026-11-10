@@ -216,6 +216,10 @@ pub fn get_lib_name_candidates(lib_name: &str) -> std::vec::Vec<std::string::Str
     let minor = env!("CUDA_MINOR_VERSION");
 
     [
+        #[cfg(unix)]
+        std::format!("{DLL_PREFIX}{lib_name}{DLL_SUFFIX}.{major}.{minor}"),
+        #[cfg(unix)]
+        std::format!("{DLL_PREFIX}{lib_name}{DLL_SUFFIX}.{major}"),
         std::format!("{DLL_PREFIX}{lib_name}{DLL_SUFFIX}"),
         std::format!("{DLL_PREFIX}{lib_name}{pointer_width}{DLL_SUFFIX}"),
         std::format!("{DLL_PREFIX}{lib_name}{pointer_width}_{major}{DLL_SUFFIX}"),
@@ -231,6 +235,7 @@ pub fn get_lib_name_candidates(lib_name: &str) -> std::vec::Vec<std::string::Str
         // See issue #260
         std::format!("{DLL_PREFIX}{lib_name}{pointer_width}_9{DLL_SUFFIX}"),
         // See issue #274
+        #[cfg(not(unix))]
         std::format!("{DLL_PREFIX}{lib_name}{DLL_SUFFIX}.{major}"),
         std::format!("{DLL_PREFIX}{lib_name}{DLL_SUFFIX}.12"),
         std::format!("{DLL_PREFIX}{lib_name}{DLL_SUFFIX}.11"),
