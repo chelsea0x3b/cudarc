@@ -471,11 +471,11 @@ extern \"C\" __global__ void int_32bit(signed int s_min, int s_max, unsigned int
     assert(u_max == 4294967295);
 }
 
-extern \"C\" __global__ void int_64bit(signed long s_min, long s_max, unsigned long u_min, unsigned long u_max) {
-    assert(s_min == -9223372036854775808);
-    assert(s_max == 9223372036854775807);
+extern \"C\" __global__ void int_64bit(long long s_min, long long s_max, unsigned long long u_min, unsigned long long u_max) {
+    assert(s_min == -9223372036854775807LL - 1);
+    assert(s_max == 9223372036854775807LL);
     assert(u_min == 0);
-    assert(u_max == 18446744073709551615);
+    assert(u_max == 18446744073709551615ULL);
 }
 
 extern \"C\" __global__ void floating(float f, double d) {
