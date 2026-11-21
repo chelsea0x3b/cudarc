@@ -295,7 +295,7 @@ mod tests {
             use_fast_math: Some(true),
             ..Default::default()
         };
-        assert_eq!(opts.build(), vec!["--use_fast_math".to_string()]);
+        assert_eq!(opts.build(), ["--use_fast_math"]);
         assert!(CompileOptions::default().build().is_empty());
     }
 
