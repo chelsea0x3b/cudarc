@@ -262,7 +262,7 @@ impl CompileOptions {
         }
 
         if let Some(true) = self.use_fast_math {
-            options.push("--fmad=true".into());
+            options.push("--use_fast_math".into());
         }
 
         if let Some(count) = self.maxrregcount {
@@ -288,6 +288,16 @@ impl CompileOptions {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_use_fast_math_option() {
+        let opts = CompileOptions {
+            use_fast_math: Some(true),
+            ..Default::default()
+        };
+        assert_eq!(opts.build(), vec!["--use_fast_math".to_string()]);
+        assert!(CompileOptions::default().build().is_empty());
+    }
 
     #[test]
     fn test_compile_no_opts() {
